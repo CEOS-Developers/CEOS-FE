@@ -9,7 +9,7 @@
   "scripts": {
     "admin": "yarn workspace admin dev",
     "ceos": "yarn workspace ceos dev",
-    "build": "turbo run build", 
+    "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
