@@ -1,8 +1,11 @@
+import { Button } from '@ceos-fe/ui';
 
 export default function Home() {
   return (
     <>
-      <div>ceos</div>
+      <div>ceos
+        <Button />
+      </div>
     </>
   )
 }

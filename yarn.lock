@@ -41,6 +41,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ceos-fe/ui@workspace:^, @ceos-fe/ui@workspace:packages/ui":
+  version: 0.0.0-use.local
+  resolution: "@ceos-fe/ui@workspace:packages/ui"
+  dependencies:
+    "@types/react": ^18.0.22
+    eslint: ^7.32.0
+    eslint-config-custom: "*"
+    react: ^18.2.0
+    tsconfig: "*"
+    typescript: ^4.5.2
+  languageName: unknown
+  linkType: soft
+
 "@eslint-community/eslint-utils@npm:^4.2.0":
   version: 4.4.0
   resolution: "@eslint-community/eslint-utils@npm:4.4.0"
@@ -464,6 +477,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "admin@workspace:apps/admin"
   dependencies:
+    "@ceos-fe/ui": "workspace:^"
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
@@ -471,6 +485,7 @@ __metadata:
     eslint: 8.39.0
     eslint-config-next: 13.3.4
     next: 13.3.4
+    next-transpile-modules: ^10.0.0
     react: 18.2.0
     react-dom: 18.2.0
     typescript: 5.0.4
@@ -737,6 +752,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ceos@workspace:apps/ceos"
   dependencies:
+    "@ceos-fe/ui": "workspace:^"
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
@@ -744,6 +760,7 @@ __metadata:
     eslint: 8.39.0
     eslint-config-next: 13.3.4
     next: 13.3.4
+    next-transpile-modules: ^10.0.0
     react: 18.2.0
     react-dom: 18.2.0
     typescript: 5.0.4
@@ -950,6 +967,16 @@ __metadata:
   version: 9.2.2
   resolution: "emoji-regex@npm:9.2.2"
   checksum: 8487182da74aabd810ac6d6f1994111dfc0e331b01271ae01ec1eb0ad7b5ecc2bbbbd2f053c05cb55a1ac30449527d819bbfbf0e3de1023db308cbcb47f86601
+  languageName: node
+  linkType: hard
+
+"enhanced-resolve@npm:^5.10.0":
+  version: 5.13.0
+  resolution: "enhanced-resolve@npm:5.13.0"
+  dependencies:
+    graceful-fs: ^4.2.4
+    tapable: ^2.2.0
+  checksum: 76d6844c4393d76beed5b3ce6cf5a98dee3ad5c84a9887f49ccde1224e3b7af201dfbd5a57ebf2b49f623b74883df262d50ff480d3cc02fc2881fc58b84e1bbe
   languageName: node
   linkType: hard
 
@@ -2478,6 +2505,15 @@ eslint-config-turbo@latest:
   languageName: node
   linkType: hard
 
+"next-transpile-modules@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "next-transpile-modules@npm:10.0.0"
+  dependencies:
+    enhanced-resolve: ^5.10.0
+  checksum: 3300fc7081f63b2c9487588db7cbe718f209dfd2111adec22d9c8af0e3c8ade2d95fd45f91e045546d78d98cafc78a49431de9a623360d33831b5e694bf007c9
+  languageName: node
+  linkType: hard
+
 "next@npm:13.3.4":
   version: 13.3.4
   resolution: "next@npm:13.3.4"
@@ -3441,19 +3477,6 @@ turbo@latest:
   checksum: 5580367025ff7ee1f2a61e5affdbddccfe6e893bc662aa33fefdbf12de7e493173fa7d47475e9e15121828691004c4ed13bcd115e57866baed97b54c60954e1c
   languageName: node
   linkType: hard
-
-"ui@workspace:packages/ui":
-  version: 0.0.0-use.local
-  resolution: "ui@workspace:packages/ui"
-  dependencies:
-    "@types/react": ^18.0.22
-    eslint: ^7.32.0
-    eslint-config-custom: "*"
-    react: ^18.2.0
-    tsconfig: "*"
-    typescript: ^4.5.2
-  languageName: unknown
-  linkType: soft
 
 "unbox-primitive@npm:^1.0.2":
   version: 1.0.2

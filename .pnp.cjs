@@ -32,19 +32,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/tsconfig"\
       },\
       {\
-        "name": "ui",\
+        "name": "@ceos-fe/ui",\
         "reference": "workspace:packages/ui"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
+      ["@ceos-fe/ui", ["workspace:packages/ui"]],\
       ["admin", ["workspace:apps/admin"]],\
       ["ceos", ["workspace:apps/ceos"]],\
       ["ceos-fe", ["workspace:."]],\
       ["eslint-config-custom", ["workspace:packages/eslint-config-custom"]],\
-      ["tsconfig", ["workspace:packages/tsconfig"]],\
-      ["ui", ["workspace:packages/ui"]]\
+      ["tsconfig", ["workspace:packages/tsconfig"]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -101,6 +101,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regenerator-runtime", "npm:0.13.11"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@ceos-fe/ui", [\
+        ["workspace:packages/ui", {\
+          "packageLocation": "./packages/ui/",\
+          "packageDependencies": [\
+            ["@ceos-fe/ui", "workspace:packages/ui"],\
+            ["@types/react", "npm:18.0.32"],\
+            ["eslint", "npm:7.32.0"],\
+            ["eslint-config-custom", "workspace:packages/eslint-config-custom"],\
+            ["react", "npm:18.2.0"],\
+            ["tsconfig", "workspace:packages/tsconfig"],\
+            ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["@eslint-community/eslint-utils", [\
@@ -696,6 +711,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/admin/",\
           "packageDependencies": [\
             ["admin", "workspace:apps/admin"],\
+            ["@ceos-fe/ui", "workspace:packages/ui"],\
             ["@types/eslint", "npm:8.37.0"],\
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.3"],\
@@ -703,6 +719,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-next", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:13.3.4"],\
             ["next", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:13.3.4"],\
+            ["next-transpile-modules", "npm:10.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
@@ -991,6 +1008,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/ceos/",\
           "packageDependencies": [\
             ["ceos", "workspace:apps/ceos"],\
+            ["@ceos-fe/ui", "workspace:packages/ui"],\
             ["@types/eslint", "npm:8.37.0"],\
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.3"],\
@@ -998,6 +1016,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-next", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:13.3.4"],\
             ["next", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:13.3.4"],\
+            ["next-transpile-modules", "npm:10.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
@@ -1270,6 +1289,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/enhanced-resolve-npm-5.12.0-c291ce4ee3-bf3f787fac.zip/node_modules/enhanced-resolve/",\
           "packageDependencies": [\
             ["enhanced-resolve", "npm:5.12.0"],\
+            ["graceful-fs", "npm:4.2.11"],\
+            ["tapable", "npm:2.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.13.0", {\
+          "packageLocation": "./.yarn/cache/enhanced-resolve-npm-5.13.0-81a67f2a17-76d6844c43.zip/node_modules/enhanced-resolve/",\
+          "packageDependencies": [\
+            ["enhanced-resolve", "npm:5.13.0"],\
             ["graceful-fs", "npm:4.2.11"],\
             ["tapable", "npm:2.2.1"]\
           ],\
@@ -3287,6 +3315,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["next-transpile-modules", [\
+        ["npm:10.0.0", {\
+          "packageLocation": "./.yarn/cache/next-transpile-modules-npm-10.0.0-35632e5048-3300fc7081.zip/node_modules/next-transpile-modules/",\
+          "packageDependencies": [\
+            ["next-transpile-modules", "npm:10.0.0"],\
+            ["enhanced-resolve", "npm:5.13.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["object-assign", [\
         ["npm:4.1.1", {\
           "packageLocation": "./.yarn/cache/object-assign-npm-4.1.1-1004ad6dec-fcc6e4ea8c.zip/node_modules/object-assign/",\
@@ -4272,21 +4310,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["ui", [\
-        ["workspace:packages/ui", {\
-          "packageLocation": "./packages/ui/",\
-          "packageDependencies": [\
-            ["ui", "workspace:packages/ui"],\
-            ["@types/react", "npm:18.0.32"],\
-            ["eslint", "npm:7.32.0"],\
-            ["eslint-config-custom", "workspace:packages/eslint-config-custom"],\
-            ["react", "npm:18.2.0"],\
-            ["tsconfig", "workspace:packages/tsconfig"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]],\
       ["unbox-primitive", [\
