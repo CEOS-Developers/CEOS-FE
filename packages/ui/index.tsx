@@ -1,2 +1,3 @@
 import * as React from "react";
-export * from "./Button";
+export * from "./src/components/Button";
+export * from "./src/styles/";

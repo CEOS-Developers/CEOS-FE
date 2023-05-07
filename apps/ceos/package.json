@@ -1,5 +1,5 @@
 {
-  "name": "ceos",
+  "name": "@ceos-fe/ceos",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ceos-fe/ui": "workspace:^",
+    "@ceos-fe/ui": "workspace:packages/ui",
+    "@ceos-fe/utils": "workspace:packages/utils",
     "@types/node": "18.16.3",
     "@types/react": "18.2.3",
     "@types/react-dom": "18.2.3",
@@ -22,6 +23,10 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/eslint": "^8"
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@types/eslint": "^8",
+    "emotion": "^11.0.0",
+    "reset": "^0.1.0"
   }
 }
