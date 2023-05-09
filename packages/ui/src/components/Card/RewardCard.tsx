@@ -1,7 +1,8 @@
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
 import styled from "@emotion/styled";
 import { Column, Row, Text } from "../common";
-import reward from "../../assets/reward.svg";
+import check from "../../assets/reward.svg";
+import { theme } from "../../styles";
 
 export interface IRewardCard {
   generation: string;
@@ -16,7 +17,7 @@ export const RewardCard = (props: {
   const { generation, time, project, detail } = props.rewardCard;
   return (
     <Wrapper>
-      <Box>
+      <Box className="original">
         <TitleWrapper>
           <Text typo="Heading4" color="Black">
             {generation}
@@ -28,11 +29,11 @@ export const RewardCard = (props: {
         <Column>
           {project.map((item) => {
             return (
-              <Row>
-                <Text typo="Label1" color="Blue">
+              <Row style={{ marginBottom: "10px" }}>
+                <Text typo="Label1" color="Blue" style={{ width: "126px" }}>
                   {item.title}
                 </Text>
-                <Text typo="Label1" color="Black">
+                <Text typo="Body2" color="Black">
                   {item.explain}
                 </Text>
               </Row>
@@ -40,10 +41,15 @@ export const RewardCard = (props: {
           })}
         </Column>
       </Box>
-      <Box className={"hover"}>
+
+      <LineWrapper className="extended">
+        <Line />
+      </LineWrapper>
+
+      <Box className="extended">
         {detail?.map((item) => (
-          <Row>
-            <Img src={reward} />
+          <Row style={{ marginBottom: "8px" }}>
+            <Img src={check} />
             <Text typo="Body2" color="Black">
               {item}
             </Text>
@@ -54,15 +60,9 @@ export const RewardCard = (props: {
   );
 };
 const Wrapper = styled.div`
-  .hover: {
-    display: none;
-  }
-
-  :hover {
-    .hover: {
-      display: block;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  width: 572px;
 `;
 
 const Box = styled.div`
@@ -70,16 +70,42 @@ const Box = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 32px 40px;
-  background: #f4f6f9;
+  background-color: ${theme.palette.Gray1};
   border-radius: 20px;
+  margin: -1px 0 -1px 0;
 
-  width: 572px;
+  & ~ .extended {
+    display: none;
+  }
+
+  &.original {
+    :hover {
+      border-radius: 20px 20px 0 0;
+      & ~ .extended {
+        display: block;
+        border-radius: 0 0 20px 20px;
+      }
+    }
+  }
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
   }
   @media (max-width: 767px) {
   }
+`;
+
+const LineWrapper = styled.div`
+  display: flex;
+  padding: 0 40px;
+  background-color: ${theme.palette.Gray1};
+`;
+
+const Line = styled.div`
+  display: flex;
+  width: 492px;
+  height: 2px;
+  background-color: ${theme.palette.Gray3};
 `;
 
 const TitleWrapper = styled.div`
@@ -89,12 +115,8 @@ const TitleWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Img = styled.img`
   width: 20px;
   height: 20px;
+  margin-right: 10px;
 `;
