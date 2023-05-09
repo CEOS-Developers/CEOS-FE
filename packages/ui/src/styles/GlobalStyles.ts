@@ -1,8 +1,11 @@
-import { css } from "@emotion/react";
-import emotionReset from "emotion-reset";
+import { css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 export const globalStyle = css`
   ${emotionReset}
+  body {
+    font-family: 'Pretendard';
+  }
   button {
     background: inherit;
     border: none;
