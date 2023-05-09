@@ -1,4 +1,4 @@
-import { palette } from "./palette";
+import { palette } from './palette';
 
 /* offset-x | offset-y | blur-radius | spread-radius | color */
 export const shadow = {
