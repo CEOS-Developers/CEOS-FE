@@ -5,6 +5,10 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link
+          href="https://fonts.cdnfonts.com/css/gilroy-bold"
+          rel="stylesheet"
+        />
+        <link
           rel="stylesheet"
           as="style"
           crossOrigin="anonymous"

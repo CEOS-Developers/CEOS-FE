@@ -4,8 +4,8 @@ export const calcRem = (px: number) => `${px / 16}rem`;
 
 export const typo = {
   Heading1_Eng: css`
-    font-family: 'Gilroy', 'Apple SD Gothic Neo';
-    font-weight: 800;
+    font-family: 'Gilroy-Bold', 'Apple SD Gothic Neo';
+    /* font-weight: 800; */
     font-size: ${calcRem(40)};
     line-height: 122.5%;
   `,
