@@ -40,6 +40,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@next/font": "^13.4.1",
     "emotion-reset": "^3.0.1",
     "react": "latest",
     "react-dom": "latest"

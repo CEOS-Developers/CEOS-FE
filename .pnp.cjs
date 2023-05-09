@@ -60,6 +60,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
+            ["@next/font", "npm:13.4.1"],\
             ["@types/jest", "npm:29.5.1"],\
             ["@types/node", "npm:20.1.0"],\
             ["@types/react", "npm:18.2.6"],\
@@ -697,6 +698,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@next/eslint-plugin-next", "npm:13.3.4"],\
             ["glob", "npm:7.1.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@next/font", [\
+        ["npm:13.4.1", {\
+          "packageLocation": "./.yarn/cache/@next-font-npm-13.4.1-92cdc18487-7b365d45e3.zip/node_modules/@next/font/",\
+          "packageDependencies": [\
+            ["@next/font", "npm:13.4.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1717,6 +1727,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ceos-fe", "workspace:."],\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
+            ["@next/font", "npm:13.4.1"],\
             ["@types/jest", "npm:29.5.1"],\
             ["@types/node", "npm:20.1.0"],\
             ["@types/react", "npm:18.2.6"],\

@@ -460,6 +460,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/font@npm:^13.4.1":
+  version: 13.4.1
+  resolution: "@next/font@npm:13.4.1"
+  checksum: 7b365d45e38fb1ffda64e12a98679bfd3b00b95085da8ca1b0fb0d4a479edd45faa215f500f37b7180c78dd6cba5d6c3d915cef28420097fbc2a839046ac6994
+  languageName: node
+  linkType: hard
+
 "@next/swc-darwin-arm64@npm:13.3.4":
   version: 13.3.4
   resolution: "@next/swc-darwin-arm64@npm:13.3.4"
@@ -1206,6 +1213,7 @@ __metadata:
   dependencies:
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@next/font": ^13.4.1
     "@types/jest": ^29.5.1
     "@types/node": ^20.1.0
     "@types/react": latest
