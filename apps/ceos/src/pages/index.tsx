@@ -5,9 +5,9 @@ export default function Home() {
   /* check box */
   const [checked, setChecked] = useState<any>([
     { id: 0, checked: false, value: 'id=0' },
-    { id: 1, checked: false, value: 'id=1' },
+    { id: 1, checked: false, value: 'id=11111111111111' },
     { id: 2, checked: false, value: 'id=2' },
-    { id: 3, checked: false, value: 'id=3' },
+    { id: 3, checked: false, value: 'id=33333333333333' },
     { id: 4, checked: false, value: 'id=4' },
   ]);
   const onClick = (index: number) => {

@@ -39,6 +39,8 @@ const StyledCheckBoxContainer = styled.div<{ type?: string }>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  width: fit-content;
+  height: fit-content;
   // gap: 5px;
 `;
 const StyledCheckBox = styled.div<{ ischecked?: boolean }>`
