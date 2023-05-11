@@ -2,13 +2,21 @@ import styled from "@emotion/styled";
 import { theme } from "../../styles";
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
 
+type WidthType = "s" | "m" | "l" | "xl";
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   value?: string;
   label?: string;
   helperText?: { type: "normal" | "important"; text: string }[];
-  width?: "s" | "m" | "l" | "xl";
+  width?: WidthType;
   multiline?: boolean;
 }
+
+const widthMapper = {
+  s: 372,
+  m: 428,
+  l: 772,
+  xl: 1172,
+};
 
 /**
  * @param {string} value: 텍스트 필드 값
@@ -26,7 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {multiline ? (
             <StyledTextArea ref={ref as ForwardedRef<HTMLTextAreaElement>} placeholder={placeholder} spellCheck={false} {...props} />
           ) : (
-            <StyledInput ref={ref as ForwardedRef<HTMLInputElement>} placeholder={placeholder} spellCheck={false} {...props} />
+            <StyledInput ref={ref as ForwardedRef<HTMLInputElement>} placeholder={placeholder} spellCheck={false} width={width} {...props} />
           )}
         </StyledBox>
         {helperText &&
@@ -40,53 +48,70 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   }
 );
 
-const StyledBox = styled.div<{ multiline: boolean; width: string }>`
-  width: ${({ multiline, width }) => (multiline ? "1172px" : width === "s" ? "372px" : width === "m" ? "428px" : width === "l" ? "772px" : "1172px")};
-  padding: ${({ multiline }) => (multiline ? "16px 8px 16px 24px" : "8px 16px")};
+const StyledBox = styled.div<{ multiline: boolean; width: WidthType }>``;
+const StyledInput = styled.input<{ width: WidthType }>`
+  width: ${({ width }) => widthMapper[width]}px;
+  padding: 8px 16px;
 
   box-sizing: border-box;
 
-  background: #f4f6f9;
-  border-radius: 8px;
-`;
-const StyledInput = styled.input`
-  width: 100%;
-
   outline: none;
   border: none;
-  background: transparent;
+  background: #f4f6f9;
 
   color: #232527;
   ${theme.typo.Body2};
 
+  border-radius: 8px;
+
   :focus {
+    border: 1px solid #3e4cf7;
   }
 
   ::placeholder {
     color: #b0b5bd;
   }
+
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 const StyledTextArea = styled.textarea`
-  width: 100%;
+  width: 1172px;
   height: 249px;
+  padding: 16px 8px 16px 24px;
+
+  box-sizing: border-box;
 
   outline: none;
   border: none;
-  background: transparent;
+  background: #f4f6f9;
   resize: none;
 
   color: #232527;
   ${theme.typo.Body2};
 
+  border-radius: 8px;
+
+  :focus {
+    border: 1px solid #3e4cf7;
+  }
+
   ::placeholder {
     color: #b0b5bd;
   }
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 12px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #d6dadf;
-    border-radius: 4px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 1023px) {
+    width: 100%;
   }
 `;
 const StyledLabel = styled.p`
@@ -94,10 +119,18 @@ const StyledLabel = styled.p`
 
   color: #232527;
   ${theme.typo.Label2};
+
+  @media (max-width: 1023px) {
+    margin-bottom: 14px;
+  }
 `;
 const StyledHelperText = styled.p<{ isImportant: boolean }>`
   margin-top: 12px;
 
   color: ${({ isImportant }) => (isImportant ? "#3E4CF7" : "#787E88")};
   ${theme.typo.Body3};
+
+  @media (max-width: 1023px) {
+    margin-top: 14px;
+  }
 `;
