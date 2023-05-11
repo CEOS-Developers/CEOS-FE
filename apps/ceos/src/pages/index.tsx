@@ -6,7 +6,7 @@ export default function Home() {
       <div>
         ceos
         <Button />
-        <TextField multiline />
+        <TextField width="s" />
       </div>
     </>
   );
