@@ -95,6 +95,7 @@ __metadata:
     next-transpile-modules: ^10.0.0
     react: 18.2.0
     react-dom: 18.2.0
+    react-hook-form: ^7.43.9
     typescript: 5.0.4
   languageName: unknown
   linkType: soft
@@ -118,6 +119,7 @@ __metadata:
     next-transpile-modules: ^10.0.0
     react: 18.2.0
     react-dom: 18.2.0
+    react-hook-form: ^7.43.9
     reset: ^0.1.0
     typescript: 5.0.4
   languageName: unknown
@@ -3660,6 +3662,15 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.43.9":
+  version: 7.43.9
+  resolution: "react-hook-form@npm:7.43.9"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 65b94de625f2b7921c4e856bf0abbe142bfe06c052217bd1bcc3a842e2cc37fa3a3e03758119dc038bbcf5edb49e02c29206528b80b201f9a4d601471ef78153
   languageName: node
   linkType: hard
 

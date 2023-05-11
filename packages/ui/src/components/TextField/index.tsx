@@ -4,7 +4,6 @@ import { theme } from '../../styles';
 
 interface TextFieldProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-  value?: string;
   label?: string;
   helperText?: { type: 'normal' | 'important'; text: string }[];
   width?: number;
@@ -12,7 +11,6 @@ interface TextFieldProps
 }
 
 /**
- * @param {string} value: 텍스트 필드 값
  * @param {string} label: 텍스트 필드 상위 레이블
  * @param {{type: string; text: string}[]} helperText: 텍스트 필드 하위 안내 메시지 | important(blue color), normal(gray color)
  * @param {string} width: width size
@@ -21,7 +19,6 @@ interface TextFieldProps
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
-      value,
       label,
       helperText,
       placeholder = '내용을 입력해주세요.',
@@ -81,11 +78,10 @@ const StyledInput = styled.input<{ width: number }>`
   box-sizing: border-box;
 
   background: ${theme.palette.Gray1};
-
-  color: ${theme.palette.Black};
-  ${theme.typo.Web.Body2};
-
   border-radius: 8px;
+
+  ${theme.typo.Web.Body2};
+  color: ${theme.palette.Black};
 
   :focus {
     border: 1px solid ${theme.palette.Blue};
@@ -109,12 +105,11 @@ const StyledTextArea = styled.textarea`
   box-sizing: border-box;
 
   background: ${theme.palette.Gray1};
+  border-radius: 8px;
   resize: none;
 
-  color: ${theme.palette.Black};
   ${theme.typo.Web.Body2};
-
-  border-radius: 8px;
+  color: ${theme.palette.Black};
 
   :focus {
     border: 1px solid ${theme.palette.Blue};
@@ -127,7 +122,7 @@ const StyledTextArea = styled.textarea`
     width: 12px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #d6dadf;
+    background-color: ${theme.palette.Gray3};
     background-clip: padding-box;
     border: 4px solid transparent;
     border-radius: 8px;
@@ -135,6 +130,7 @@ const StyledTextArea = styled.textarea`
 
   @media (max-width: 1023px) {
     width: 100%;
+    height: 400px;
 
     ${theme.typo.Mobile.Body1};
   }
@@ -142,8 +138,8 @@ const StyledTextArea = styled.textarea`
 const StyledLabel = styled.p`
   margin-bottom: 12px;
 
-  color: ${theme.palette.Black};
   ${theme.typo.Web.Label2};
+  color: ${theme.palette.Black};
 
   @media (max-width: 1023px) {
     margin-bottom: 14px;
@@ -152,9 +148,9 @@ const StyledLabel = styled.p`
   }
 `;
 const StyledHelperText = styled.p<{ isImportant: boolean }>`
+  ${theme.typo.Web.Body3};
   color: ${({ isImportant }) =>
     isImportant ? theme.palette.Blue : theme.palette.Gray5};
-  ${theme.typo.Web.Body3};
 
   @media (max-width: 1023px) {
     ${theme.typo.Mobile.Body2};

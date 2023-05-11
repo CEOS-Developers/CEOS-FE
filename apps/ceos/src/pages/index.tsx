@@ -1,12 +1,21 @@
 import { Button, TextField } from '@ceos-fe/ui';
+import { useForm } from 'react-hook-form';
 
 export default function Home() {
+  const { register } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+    },
+  });
+
   return (
     <>
       <div>
         ceos
         <Button />
         <TextField
+          {...register('title')}
           width={372}
           label="제목"
           helperText={[
@@ -14,6 +23,7 @@ export default function Home() {
             { type: 'important', text: '중요 텍스트' },
           ]}
         />
+        <TextField {...register('content')} multiline />
       </div>
     </>
   );
