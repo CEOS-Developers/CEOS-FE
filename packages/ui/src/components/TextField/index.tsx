@@ -29,7 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref,
   ) => {
     return (
-      <div>
+      <Container width={width} multiline={multiline}>
         {label && <StyledLabel>{label}</StyledLabel>}
         {multiline ? (
           <StyledTextArea
@@ -43,7 +43,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             ref={ref as ForwardedRef<HTMLInputElement>}
             placeholder={placeholder}
             spellCheck={false}
-            width={width}
             {...props}
           />
         )}
@@ -59,11 +58,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               </StyledHelperText>
             ))}
         </StyledHelperTextBox>
-      </div>
+      </Container>
     );
   },
 );
 
+const Container = styled.div<{ width: number; multiline: boolean }>`
+  width: ${({ width, multiline }) => (multiline ? 1172 : width)}px;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
+`;
 const StyledHelperTextBox = styled.div`
   margin-top: 12px;
 
@@ -71,8 +77,8 @@ const StyledHelperTextBox = styled.div`
     margin-top: 14px;
   }
 `;
-const StyledInput = styled.input<{ width: number }>`
-  width: ${({ width }) => width}px;
+const StyledInput = styled.input`
+  width: 100%;
   padding: 8px 16px;
 
   box-sizing: border-box;
@@ -92,13 +98,11 @@ const StyledInput = styled.input<{ width: number }>`
   }
 
   @media (max-width: 1023px) {
-    width: 100%;
-
     ${theme.typo.Mobile.Body1};
   }
 `;
 const StyledTextArea = styled.textarea`
-  width: 1172px;
+  width: 100%;
   height: 249px;
   padding: 16px 8px 16px 24px;
 
@@ -129,7 +133,6 @@ const StyledTextArea = styled.textarea`
   }
 
   @media (max-width: 1023px) {
-    width: 100%;
     height: 400px;
 
     ${theme.typo.Mobile.Body1};
