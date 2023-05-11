@@ -17,7 +17,7 @@ export default function Home() {
         <TextField
           {...register('title')}
           width={372}
-          label="제목"
+          label="제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목"
           helperText={[
             { type: 'normal', text: '일반 텍스트' },
             { type: 'important', text: '중요 텍스트' },
