@@ -1,4 +1,4 @@
-import { Button, TextField } from '@ceos-fe/ui';
+import { Button, TextField, FloatingButton } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
@@ -25,6 +25,7 @@ export default function Home() {
         />
         <TextField {...register('content')} multiline />
       </div>
+      <FloatingButton />
     </>
   );
 }
