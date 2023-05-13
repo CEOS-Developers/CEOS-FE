@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { KeyOfPalette, typo } from '../../styles';
 import { Logo } from '../../assets/logo';
+import { MenuBtn } from '../../assets/header/menuBtn';
 import { theme } from '../../styles';
+import styled from '@emotion/styled';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -24,12 +26,13 @@ export const Header = (props: HeaderProps) => {
   }, []);
   return (
     <nav css={navCss({ backColor, isScrolled })}>
-      <Logo color={backColor === 'White' ? 'Blue' : 'White'} />
+      <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
       <div css={contentCss(backColor)}>
-        <div>PROJECT</div>
-        <div>ACTIVITY</div>
-        <div>FAQ</div>
-        <div>RECRUIT</div>
+        <Content className="text">PROJECT</Content>
+        <Content className="text">ACTIVITY</Content>
+        <Content className="text">FAQ</Content>
+        <Content className="text">RECRUIT</Content>
+        <MenuBtn backColor={backColor} />
       </div>
     </nav>
   );
@@ -52,6 +55,18 @@ const navCss = ({
   background-color: ${!isScrolled && backColor === 'Blue'
     ? theme.palette.Opacity[backColor]
     : theme.palette[backColor]};
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 124px;
+    align-items: flex-end;
+    .logo {
+      margin-left: 20px;
+      margin-bottom: 24px;
+      width: 83px;
+      height: 42px;
+    }
+  }
 `;
 
 const contentCss = (backColor: KeyOfPalette) => css`
@@ -60,4 +75,29 @@ const contentCss = (backColor: KeyOfPalette) => css`
   display: flex;
   gap: 61px;
   margin-right: 21.25vw;
+  .menu {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    .text {
+      display: none;
+    }
+    .menu {
+      display: block;
+    }
+    margin-right : 22px;
+    margin-bottom : 27px;
+  }
+  }
+`;
+
+const Content = styled.div`
+  &:hover {
+    cursor: grab;
+    color: ${theme.palette.Green};
+    border: 2px solid ${theme.palette.Green};
+    padding: 4px 14px;
+    gap: 10px;
+  }
 `;

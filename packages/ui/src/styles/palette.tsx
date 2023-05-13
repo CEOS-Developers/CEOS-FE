@@ -10,8 +10,9 @@ export const palette = {
   Gray3: '#9AA2AE',
   Gray4: '#646D7A',
   Gray5: '#3F4852',
-  Gray6: '#B0B5BD',
-  Gray7: '#E9EBEF',
+  Gray6: '#B0B5BD', //헤더 버튼 색
+  Gray7: '#E9EBEF', //헤더 버튼 색
+  Gray8: '#787E88', //메뉴 버튼
   Black: '#0E0E0E',
 
   Shadow: {

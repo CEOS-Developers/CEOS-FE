@@ -1,24 +1,24 @@
 import { css } from '@emotion/react';
 import { KeyOfPalette } from '../../styles';
 
+//props를 color만 남기고 다 뺴도 될 거같은뎀... 헤더에서만 쓰니까... 걍 헤더 안에서 관리...ㅠ
 export const Logo = ({
   width = 82,
   height = 24,
-  color = 'Blue',
-  marginLeft = 19.4791,
+  backColor = 'Blue',
 }: {
   width?: number;
   height?: number;
-  color?: KeyOfPalette;
-  marginLeft?: number;
+  backColor?: KeyOfPalette;
 }) => {
   return (
     <div
+      className="logo"
       css={css`
         width: ${width}px;
         height: ${height}px;
-        color: ${color};
-        margin-left: ${marginLeft}vw;
+        color: ${backColor};
+        margin-left: 19.4791vw;
       `}
     >
       <svg
