@@ -1,6 +1,6 @@
-import { Theme, css } from '@emotion/react';
-import { KeyOfPalette, KeyOfTypo, palette, typo } from '../../styles';
-import { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
+import { KeyOfPalette, typo } from '../../styles';
 import { Logo } from '../../assets/logo';
 import { theme } from '../../styles';
 
@@ -10,8 +10,20 @@ export interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
   const { backColor } = props;
+  const [isScrolled, setIsScrolled] = useState(false);
+  //최상단인지 check
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <nav css={navCss(backColor)}>
+    <nav css={navCss({ backColor, isScrolled })}>
       <Logo color={backColor === 'White' ? 'Blue' : 'White'} />
       <div css={contentCss(backColor)}>
         <div>PROJECT</div>
@@ -23,7 +35,13 @@ export const Header = (props: HeaderProps) => {
   );
 };
 
-const navCss = (backColor: KeyOfPalette) => css`
+const navCss = ({
+  backColor,
+  isScrolled,
+}: {
+  backColor: KeyOfPalette;
+  isScrolled: boolean;
+}) => css`
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -31,10 +49,9 @@ const navCss = (backColor: KeyOfPalette) => css`
   align-items: center;
   width: 100%;
   height: 70px;
-  // background-color: ${backColor === 'Blue'
+  background-color: ${!isScrolled && backColor === 'Blue'
     ? theme.palette.Opacity[backColor]
     : theme.palette[backColor]};
-  background-color: ${theme.palette[backColor]};
 `;
 
 const contentCss = (backColor: KeyOfPalette) => css`
