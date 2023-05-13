@@ -21,12 +21,13 @@ export default function Home() {
         ceos
         <Button />
         {/* checkbox */}
-        {checked.map((id: any, index: number) => {
+        {checked.map((item: any, index: number) => {
           return (
             <CheckBox
-              checked={id.checked}
+              key={item.id}
+              checked={item.checked}
               onClick={() => onClick(index)}
-              value={id.value}
+              value={item.value}
               type="column"
             />
           );
