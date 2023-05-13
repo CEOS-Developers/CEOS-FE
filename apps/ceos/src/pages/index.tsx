@@ -1,9 +1,15 @@
 import { Button, CheckBox } from '@ceos-fe/ui';
 import { useState } from 'react';
 
+export type checkItem = {
+  id: number;
+  checked: boolean;
+  value: string;
+};
+
 export default function Home() {
   /* check box */
-  const [checked, setChecked] = useState<any>([
+  const [checked, setChecked] = useState<checkItem[]>([
     { id: 0, checked: false, value: 'id=0' },
     { id: 1, checked: false, value: 'id=11111111111111' },
     { id: 2, checked: false, value: 'id=2' },
@@ -21,7 +27,7 @@ export default function Home() {
         ceos
         <Button />
         {/* checkbox */}
-        {checked.map((item: any, index: number) => {
+        {checked.map((item, index: number) => {
           return (
             <CheckBox
               key={item.id}

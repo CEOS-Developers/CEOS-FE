@@ -5,7 +5,7 @@ import checkIcon from '../../assets/checkIcon.svg';
 
 interface CheckBox {
   checked: boolean;
-  onClick: any;
+  onClick: () => void;
   value: string;
   type: string;
 }
