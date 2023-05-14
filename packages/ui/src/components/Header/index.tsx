@@ -73,11 +73,12 @@ const contentCss = (backColor: KeyOfPalette) => css`
   typo: ${typo.Web.Label1};
   color: ${backColor === 'White' ? theme.palette.Gray6 : theme.palette.Gray7};
   display: flex;
-  gap: 61px;
+  gap: 33px;
   margin-right: 21.25vw;
   .menu {
     display: none;
   }
+
 
   @media (max-width: 1023px) {
     .text {
@@ -93,11 +94,14 @@ const contentCss = (backColor: KeyOfPalette) => css`
 `;
 
 const Content = styled.div`
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  padding: 4px 14px;
+
   &:hover {
     cursor: grab;
     color: ${theme.palette.Green};
     border: 2px solid ${theme.palette.Green};
     padding: 4px 14px;
-    gap: 10px;
   }
 `;
