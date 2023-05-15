@@ -1,6 +1,19 @@
 import styled from '@emotion/styled';
-import { KeyOfPalette, theme } from '../../styles';
+import { KeyOfPalette, theme } from '../../../../../packages/ui';
 import { css } from '@emotion/react';
+
+// const colors = ['Green', 'Skyblue', 'Yellow'];
+//api로 answer을 받아오고 거기서 줄바꿈을 하고,
+//줄바꿈 한 애들을 중앙 정렬 하려면 받아온 텍스트 사이사이에 <span>태그를 추가해야함
+//api나오면 map돌리면 될듯!
+//사용할 부분에서 colors 선언!
+
+// export const wrapperCss = () => css`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   typo: ${theme.typo.Web.Heading3};
+// `;
 
 export interface FAQProps {
   color?: KeyOfPalette;
@@ -38,5 +51,11 @@ const boxCss = ({
   padding: 18px;
   gap: 10px;
   border-radius: 16px;
-  margin: ${!isAnswer ? '28px 0px 40px 0px' : '0px'};
+  word-break: keep-all;
+  margin: ${!isAnswer ? '40px 0px 28px 0px' : '0px'};
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    typo: ${isAnswer ? theme.typo.Mobile.Body2 : theme.typo.Mobile.Heading4};
+  }
 `;

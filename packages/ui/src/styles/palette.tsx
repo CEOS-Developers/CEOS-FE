@@ -13,6 +13,7 @@ export const palette = {
   Gray6: '#B0B5BD', //헤더 버튼 색
   Gray7: '#E9EBEF', //헤더 버튼 색
   Gray8: '#787E88', //메뉴 버튼
+  Gray9 : '#F4F6F9;', //FAQ A색
   Black: '#0E0E0E',
 
   Shadow: {
