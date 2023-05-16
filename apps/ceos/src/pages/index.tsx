@@ -9,6 +9,7 @@ export default function Home() {
       <div>
         ceos
         <Button />
+        <Header backColor="Blue" />
         <FAQBox color={colors[0]} isAnswer={false}>
           리쿠르팅은 언제인가요?
         </FAQBox>
@@ -23,6 +24,14 @@ export default function Home() {
         <FAQBox isAnswer={true}>
           창업에 열정이 있는 신촌 지역 4개교 (연세대학교, 서강대학교,
           이화여자대학교, 홍익대학교) 재학생 및 졸업생이라면 누구나 가능합니다.
+        </FAQBox>
+        <FAQBox color={colors[2]} isAnswer={false}>
+          창업 관련 프로젝트 경험이 없어도 지원이 가능한가요?
+        </FAQBox>
+        <FAQBox isAnswer={true}>
+          창업 관련 프로젝트 경험이 필수 지원 요건은 아니지만, 창업 외 다른
+          프로젝트라도 본인이 맡았던 부분과 활동을 통해 배운 점에 대해서 말씀해
+          주시면 됩니다.
         </FAQBox>
         <FAQBox color={colors[2]} isAnswer={false}>
           창업 관련 프로젝트 경험이 없어도 지원이 가능한가요?

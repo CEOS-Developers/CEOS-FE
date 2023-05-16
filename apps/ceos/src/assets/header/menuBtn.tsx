@@ -1,4 +1,4 @@
-import { KeyOfPalette, theme } from '../../styles';
+import { KeyOfPalette, theme } from '../../../../../packages/ui';
 import { css } from '@emotion/react';
 
 export const MenuBtn = (backColor: KeyOfPalette) => {
