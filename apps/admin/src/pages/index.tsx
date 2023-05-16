@@ -1,4 +1,4 @@
-import { Button } from "@ceos-fe/ui";
+import { Button } from '@ceos-fe/ui';
 
 export default function Home() {
   return (
