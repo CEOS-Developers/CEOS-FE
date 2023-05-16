@@ -1,16 +1,24 @@
-import styled from "@emotion/styled";
-import { theme } from "../../styles";
-import { KeyOfTypo } from "../../styles";
-import { KeyOfPalette } from "../../styles";
+import styled from '@emotion/styled';
+import { WebOfTypo, MobileOfTypo, theme } from '../../styles';
+import { KeyOfPalette } from '../../styles';
 
-export const Text = styled.div<{
-  typo: KeyOfTypo;
+export const WebText = styled.div<{
+  webTypo: WebOfTypo;
+  color: KeyOfPalette;
+}>`
+  ${({ webTypo }) => theme.typo.Web[webTypo]};
+  color: ${({ color }) => theme.palette[color]};
+  display: flex;
+  align-items: center;
+`;
+
+export const MobileText = styled.div<{
+  mobileTypo: MobileOfTypo;
   color: KeyOfPalette;
   // height: number;
 }>`
-  ${({ typo }) => theme.typo[typo]};
+  ${({ mobileTypo }) => theme.typo.Mobile[mobileTypo]};
   color: ${({ color }) => theme.palette[color]};
-
   display: flex;
   align-items: center;
 `;
