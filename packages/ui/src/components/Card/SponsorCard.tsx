@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { theme } from "../../styles";
-import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
-import { Text } from "../common";
+import styled from '@emotion/styled';
+import { theme } from '../../styles';
+import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import { Text } from '../common';
 
 export interface ISponsorCard {
   img: string;
@@ -14,8 +14,8 @@ export const SponsorCard = (props: {
   const { img, name } = props.sponsorCard;
   return (
     <Wrapper>
-      <Profile />
-      <Text typo="Heading4" color="Black">
+      <Profile src={img} />
+      <Text webTypo="Heading4" mobileTypo="Heading4" color="Black">
         {name}
       </Text>
     </Wrapper>
@@ -26,8 +26,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 136px;
+  justify-content: center;
+
   width: 372px;
+  height: 233px;
   border-radius: 16px;
   background-color: ${theme.palette.Gray1};
 
