@@ -1,2 +1,2 @@
-export * from "./Text";
-export * from "./Wrapper";
+export * from './Text';
+export * from './Wrapper';
