@@ -28,7 +28,7 @@ export const ManagementCard = (props: {
         <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
           {name}
         </Text>
-        <Text className="ll" webTypo="Body3" mobileTypo="Body2" color="Gray5">
+        <Text webTypo="Body3" mobileTypo="Body2" color="Gray5">
           {univ + ' '}
           <br />
           {dept}
@@ -77,6 +77,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 30px 26px;
+  box-sizing: border-box;
   width: 272px;
 
   & > .is-hover {

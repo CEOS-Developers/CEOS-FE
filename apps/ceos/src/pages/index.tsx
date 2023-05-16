@@ -3,9 +3,12 @@ import {
   Column,
   RewardCard,
   MentorCard,
-  ManagementCard,
   SponsorCard,
+  ManagementCard,
+  Row,
+  ProjectCard,
 } from '@ceos-fe/ui';
+import { manage, mentor, project, sponsor } from '@ceos/assets';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
@@ -20,6 +23,10 @@ export default function Home() {
     <Column style={{ alignItems: 'center' }}>
       ceos
       <Button />
+      {/* <ManagementCard managementCard={manage} />
+      <MentorCard mentorCard={mentor} />
+      <SponsorCard sponsorCard={sponsor} /> */}
+      <ProjectCard projectCard={project} />
     </Column>
   );
 }
