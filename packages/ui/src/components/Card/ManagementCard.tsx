@@ -60,7 +60,12 @@ export const MentorCard = (props: {
       {explain ? (
         <Content className="is-hover">
           {explain.map((ex) => (
-            <Text webTypo="Body3" mobileTypo="Body1" color="White">
+            <Text
+              webTypo="Body3"
+              mobileTypo="Body1"
+              color="White"
+              style={{ width: '100%' }}
+            >
               {ex}
             </Text>
           ))}
