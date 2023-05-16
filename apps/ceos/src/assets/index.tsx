@@ -7,20 +7,18 @@ import {
 import reward from '../../../../packages/ui/src/assets/reward.svg';
 import profile from './profile.svg';
 
-export const rewardCards = [
-  {
-    generation: '15기',
-    time: '2022.03 ~ ',
-    project: [
-      { title: 'Finble', explain: '주식 포트폴리오' },
-      { title: 'Finble', explain: '주식 포트폴리오' },
-      { title: 'Finble', explain: '주식 포트폴리오' },
-      { title: 'Finble', explain: '주식 포트폴리오' },
-      { title: 'Finble', explain: '주식 포트폴리오' },
-    ],
-    detail: ['예비창업패키지 어쩌고1', '예비창업패키지 어쩌고2'],
-  },
-] as IRewardCard[];
+export const rewardCards = {
+  generation: '15기',
+  time: '2022.03 ~ ',
+  project: [
+    { title: 'Finble', explain: '주식 포트폴리오' },
+    { title: 'Finble', explain: '주식 포트폴리오' },
+    { title: 'Finble', explain: '주식 포트폴리오' },
+    { title: 'Finble', explain: '주식 포트폴리오' },
+    { title: 'Finble', explain: '주식 포트폴리오' },
+  ],
+  detail: ['예비창업패키지 어쩌고1', '예비창업패키지 어쩌고2'],
+} as IRewardCard;
 
 export const manage = {
   img: profile,

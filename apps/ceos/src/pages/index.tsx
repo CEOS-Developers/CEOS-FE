@@ -5,10 +5,9 @@ import {
   MentorCard,
   SponsorCard,
   ManagementCard,
-  Row,
   ProjectCard,
 } from '@ceos-fe/ui';
-import { manage, mentor, project, sponsor } from '@ceos/assets';
+import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
@@ -25,8 +24,9 @@ export default function Home() {
       <Button />
       {/* <ManagementCard managementCard={manage} />
       <MentorCard mentorCard={mentor} />
-      <SponsorCard sponsorCard={sponsor} /> */}
-      <ProjectCard projectCard={project} />
+      <SponsorCard sponsorCard={sponsor} />
+      <ProjectCard projectCard={project} /> */}
+      <RewardCard rewardCard={rewardCards} />
     </Column>
   );
 }

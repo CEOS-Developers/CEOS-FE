@@ -1,8 +1,8 @@
-import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
-import styled from "@emotion/styled";
-import { Column, Row, Text } from "../common";
-import check from "../../assets/reward.svg";
-import { theme } from "../../styles";
+import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import styled from '@emotion/styled';
+import { Row, Column, Text, WebText } from '../common';
+import check from '../../assets/reward.svg';
+import { theme } from '../../styles';
 
 export interface IRewardCard {
   generation: string;
@@ -16,50 +16,67 @@ export const RewardCard = (props: {
 }): EmotionJSX.Element => {
   const { generation, time, project, detail } = props.rewardCard;
   return (
-    <Wrapper>
-      <Box className="original">
-        <TitleWrapper>
-          <Text typo="Heading4" color="Black">
-            {generation}
-          </Text>
-          <Text typo="Label3" color="Gray5">
-            {time}
-          </Text>
-        </TitleWrapper>
-        <Column>
-          {project.map((item) => {
-            return (
-              <Row style={{ marginBottom: "10px" }}>
-                <Text typo="Label1" color="Blue" style={{ width: "126px" }}>
-                  {item.title}
-                </Text>
-                <Text typo="Body2" color="Black">
-                  {item.explain}
-                </Text>
+    <Container>
+      {/* 웹기준화면 */}
+      <Web className="web">
+        <Box>
+          <TitleWrapper>
+            <WebText webTypo="Heading4" color="Black">
+              {generation}
+            </WebText>
+            <WebText webTypo="Label3" color="Gray5">
+              {time}
+            </WebText>
+          </TitleWrapper>
+          <Column>
+            {project.map((item) => {
+              return (
+                <Row style={{ marginBottom: '10px' }}>
+                  <WebText
+                    webTypo="Label1"
+                    color="Blue"
+                    style={{ width: '126px' }}
+                  >
+                    {item.title}
+                  </WebText>
+                  <WebText webTypo="Body2" color="Black">
+                    {item.explain}
+                  </WebText>
+                </Row>
+              );
+            })}
+          </Column>
+          <div className="extended">
+            <Line />
+            {detail?.map((item) => (
+              <Row style={{ marginBottom: '8px' }}>
+                <Img src={check} />
+                <WebText webTypo="Body2" color="Black">
+                  {item}
+                </WebText>
               </Row>
-            );
-          })}
-        </Column>
-      </Box>
-
-      <LineWrapper className="extended">
-        <Line />
-      </LineWrapper>
-
-      <Box className="extended">
-        {detail?.map((item) => (
-          <Row style={{ marginBottom: "8px" }}>
-            <Img src={check} />
-            <Text typo="Body2" color="Black">
-              {item}
-            </Text>
-          </Row>
-        ))}
-      </Box>
-    </Wrapper>
+            ))}
+          </div>
+        </Box>
+      </Web>
+    </Container>
   );
 };
-const Wrapper = styled.div`
+const Container = styled.div`
+  & > .mobile {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    & > .web {
+      display: none;
+    }
+    & > .mobile {
+      display: block;
+    }
+  }
+`;
+const Web = styled.div`
   display: flex;
   flex-direction: column;
   width: 572px;
@@ -70,42 +87,27 @@ const Box = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 32px 40px;
+  box-sizing: border-box;
   background-color: ${theme.palette.Gray1};
   border-radius: 20px;
-  margin: -1px 0 -1px 0;
 
-  & ~ .extended {
+  > .extended {
     display: none;
   }
 
-  &.original {
-    :hover {
-      border-radius: 20px 20px 0 0;
-      & ~ .extended {
-        display: block;
-        border-radius: 0 0 20px 20px;
-      }
+  :hover {
+    > .extended {
+      display: block;
     }
   }
-
-  /* 브라우저 크기에 따라 가로 크기 변경 */
-  @media (max-width: 1023px) {
-  }
-  @media (max-width: 767px) {
-  }
-`;
-
-const LineWrapper = styled.div`
-  display: flex;
-  padding: 0 40px;
-  background-color: ${theme.palette.Gray1};
 `;
 
 const Line = styled.div`
   display: flex;
   width: 492px;
-  height: 2px;
-  background-color: ${theme.palette.Gray3};
+  height: 0px;
+  border: 1px solid ${theme.palette.Gray3};
+  margin: 1rem 0;
 `;
 
 const TitleWrapper = styled.div`
