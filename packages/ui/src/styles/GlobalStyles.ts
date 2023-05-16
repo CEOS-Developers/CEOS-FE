@@ -24,4 +24,8 @@ export const globalStyle = css`
   textarea:focus {
     outline: none;
   }
+  input,
+  textarea {
+    border: none;
+  }
 `;

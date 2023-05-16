@@ -1,8 +1,15 @@
-import { Button, theme } from '@ceos-fe/ui';
+import { Button, TextField } from '@ceos-fe/ui';
+import { useForm } from 'react-hook-form';
 import { Header } from '@ceos/components/Header';
 import { FAQBox } from '@ceos/components/FAQBox';
 
 export default function Home() {
+  const { register } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+    },
+  });
   const colors = ['Green', 'Skyblue', 'Yellow'];
   return (
     <>
@@ -41,6 +48,16 @@ export default function Home() {
           프로젝트라도 본인이 맡았던 부분과 활동을 통해 배운 점에 대해서 말씀해
           주시면 됩니다.
         </FAQBox>
+        <TextField
+          {...register('title')}
+          width={372}
+          label="제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목"
+          helperText={[
+            { type: 'normal', text: '일반 텍스트' },
+            { type: 'important', text: '중요 텍스트' },
+          ]}
+        />
+        <TextField {...register('content')} multiline />
       </div>
     </>
   );
