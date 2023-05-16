@@ -12,6 +12,10 @@ export const palette = {
   Gray5: '#787E88',
   Black: '#232527',
 
+  Admin: {
+    Navy: '#31314E',
+  },
+
   Shadow: {
     Card: {
       Black: 'rgba(0, 0, 0, 0.15)',

@@ -50,12 +50,28 @@ export const glass = {
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 
-    :hover {
-      background-image: linear-gradient(
-          rgba(255, 255, 255, 0.4),
-          rgba(255, 255, 255, 0.3)
-        ),
-        linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    @media (min-width: 1024px) {
+      :hover {
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.3)
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      }
+    }
+
+    @media (max-width: 1023px) {
+      :active {
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.3)
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      }
+    }
+
+    :disabled {
+      border: none;
     }
   `,
 };
