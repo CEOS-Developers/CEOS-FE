@@ -52,6 +52,7 @@ const boxCss = ({
   gap: 10px;
   border-radius: 16px;
   word-break: keep-all;
+  text-align: center;
   margin: ${!isAnswer ? '40px 0px 28px 0px' : '0px'};
 
   @media (max-width: 1023px) {
