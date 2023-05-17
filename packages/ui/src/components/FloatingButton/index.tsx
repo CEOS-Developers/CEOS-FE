@@ -1,21 +1,17 @@
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
-import Instagram from '../../assets/Instagram.svg';
-import Email from '../../assets/Email.svg';
-
-const Icon = [
-  { item: Instagram, link: 'https://www.instagram.com/ceos.sinchon/' },
-  { item: Email, link: '' },
-];
+import { Email } from '../../assets/Email';
+import { Instagram } from '../../assets/Instagram';
 
 export const FloatingButton = () => {
   return (
     <FloatingBtnContainer>
-      {Icon.map((item, index: number) => (
-        <FloatingBtnCircle key={index} onClick={() => window.open(item.link)}>
-          <img src={item.item} />
-        </FloatingBtnCircle>
-      ))}
+      <FloatingBtnCircle>
+        <Instagram />
+      </FloatingBtnCircle>
+      <FloatingBtnCircle>
+        <Email />
+      </FloatingBtnCircle>
     </FloatingBtnContainer>
   );
 };
@@ -32,8 +28,8 @@ const FloatingBtnContainer = styled.div`
   user-select: none;
 `;
 const FloatingBtnCircle = styled.div`
-  width: 45px;
-  height: 45px;
+  width: 60px;
+  height: 60px;
   background-color: ${theme.palette.Yellow};
   border-radius: 50%;
   box-shadow: ${theme.shadow.Button.Yellow};
@@ -42,4 +38,3 @@ const FloatingBtnCircle = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const FloatingBtnImg = styled.img``;

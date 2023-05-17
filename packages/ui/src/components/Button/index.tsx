@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Button = () => {
   return <StyledButton> pacakges/ui 버튼 </StyledButton>;
