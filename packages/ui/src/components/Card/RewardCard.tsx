@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { Row, Column, Text, WebText, MobileText } from '../common';
+import { Flex, WebText, MobileText } from '../common';
 import check from '../../assets/reward.svg';
 import up from '../../assets/up.svg';
 import down from '../../assets/down.svg';
@@ -32,10 +32,10 @@ export const RewardCard = (props: {
               {time}
             </WebText>
           </TitleWrapper>
-          <Column>
+          <Flex direction="column">
             {project.map((item) => {
               return (
-                <Row style={{ marginBottom: '10px' }}>
+                <Flex style={{ marginBottom: '10px' }}>
                   <WebText
                     webTypo="Label1"
                     color="Blue"
@@ -46,19 +46,19 @@ export const RewardCard = (props: {
                   <WebText webTypo="Body2" color="Black">
                     {item.explain}
                   </WebText>
-                </Row>
+                </Flex>
               );
             })}
-          </Column>
+          </Flex>
           <div className="extended">
             <Line />
             {detail?.map((item) => (
-              <Row style={{ marginBottom: '8px' }}>
+              <Flex style={{ marginBottom: '8px' }}>
                 <Img src={check} />
                 <WebText webTypo="Body2" color="Black">
                   {item}
                 </WebText>
-              </Row>
+              </Flex>
             ))}
           </div>
         </Box>
@@ -89,18 +89,12 @@ export const RewardCard = (props: {
             <>
               <Line />
               {detail?.map((item) => (
-                <Row
-                  style={{
-                    width: '100%',
-                    justifyContent: 'flex-start',
-                    marginBottom: '8px',
-                  }}
-                >
+                <Flex justify="flex-start" margin="0 0 8px 0">
                   <Img src={check} />
                   <MobileText mobileTypo="Body1" color="Black">
                     {item}
                   </MobileText>
-                </Row>
+                </Flex>
               ))}
               <Arrow
                 src={up}
