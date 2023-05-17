@@ -6,10 +6,12 @@ import { Instagram } from '../../assets/Instagram';
 export const FloatingButton = () => {
   return (
     <FloatingBtnContainer>
-      <FloatingBtnCircle>
+      <FloatingBtnCircle
+        onClick={() => window.open('https://www.instagram.com/ceos.sinchon/')}
+      >
         <Instagram />
       </FloatingBtnCircle>
-      <FloatingBtnCircle>
+      <FloatingBtnCircle href="mailto:ceos.sinchon@gmail.com" target="_blank">
         <Email />
       </FloatingBtnCircle>
     </FloatingBtnContainer>
@@ -27,7 +29,7 @@ const FloatingBtnContainer = styled.div`
   -ms-use-select: none;
   user-select: none;
 `;
-const FloatingBtnCircle = styled.div`
+const FloatingBtnCircle = styled.a`
   width: 60px;
   height: 60px;
   background-color: ${theme.palette.Yellow};
