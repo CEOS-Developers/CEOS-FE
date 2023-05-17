@@ -2,6 +2,7 @@ import { Button, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { KeyOfPalette } from '../../../../packages/ui/src/styles/theme';
+import { Shortcut } from '@ceos/components/Shortcut';
 
 export default function Home() {
   const { register } = useForm({
@@ -15,6 +16,7 @@ export default function Home() {
     <>
       <div>
         ceos
+        <Shortcut onClick={() => {}}>instagram</Shortcut>
         <Wrapper color="White">
           <Button variant="default">버튼1</Button>
           <Button variant="default" disabled>
