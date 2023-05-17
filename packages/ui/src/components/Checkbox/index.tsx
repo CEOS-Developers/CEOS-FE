@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { Text } from '../common';
-import checkIcon from '../../assets/checkIcon.svg';
+import { CheckIcon } from '../../assets/CheckIcon';
 
 interface CheckBox {
   checked: boolean;
@@ -14,7 +14,7 @@ export const CheckBox = ({ checked, onClick, value, type }: CheckBox) => {
   return (
     <StyledCheckBoxContainer type={type}>
       <StyledCheckBox ischecked={checked} onClick={onClick}>
-        <CheckIcon src={checkIcon} ischecked={checked} />
+        <CheckIcon />
       </StyledCheckBox>
       <Text typo={'Web'} color={checked ? 'Blue' : 'Gray2'}>
         {value}
@@ -49,7 +49,4 @@ const StyledCheckBox = styled.div<{ ischecked?: boolean }>`
   border-radius: 2px;
   background-color: ${(props) =>
     props.ischecked ? theme.palette.Blue : theme.palette.Gray2};
-`;
-const CheckIcon = styled.img<{ ischecked?: boolean }>`
-  display: ${(props) => (props.ischecked ? 'block' : 'none')};
 `;
