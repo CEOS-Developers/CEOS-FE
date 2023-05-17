@@ -1,4 +1,5 @@
-import { Button, CheckBox } from '@ceos-fe/ui';
+import { Button, CheckBox, FloatingButton, TextField } from '@ceos-fe/ui';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 export type checkItem = {
@@ -20,25 +21,43 @@ export default function Home() {
     checked[index].checked = !checked[index].checked;
     setChecked([...checked]);
   };
+  /* text field*/
+  const { register } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+    },
+  });
 
   return (
     <>
-      <div>
-        ceos
-        <Button />
-        {/* checkbox */}
-        {checked.map((item, index: number) => {
-          return (
-            <CheckBox
-              key={item.id}
-              checked={item.checked}
-              onClick={() => onClick(index)}
-              value={item.value}
-              type="column"
-            />
-          );
-        })}
-      </div>
+      ceos
+      <Button />
+      {/* checkbox */}
+      {checked.map((item, index: number) => {
+        return (
+          <CheckBox
+            key={item.id}
+            checked={item.checked}
+            onClick={() => onClick(index)}
+            value={item.value}
+            type="column"
+          />
+        );
+      })}
+      {/* text field */}
+      <TextField
+        {...register('title')}
+        width={372}
+        label="제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목"
+        helperText={[
+          { type: 'normal', text: '일반 텍스트' },
+          { type: 'important', text: '중요 텍스트' },
+        ]}
+      />
+      <TextField {...register('content')} multiline />
+      {/* floating button */}
+      <FloatingButton />
     </>
   );
 }

@@ -11,10 +11,14 @@ interface CheckBox {
 }
 
 export const CheckBox = ({ checked, onClick, value, type }: CheckBox) => {
+  let display = 'none';
+  if (checked === false) display = 'none';
+  else if (checked === true) display = 'block';
+
   return (
     <StyledCheckBoxContainer type={type}>
       <StyledCheckBox ischecked={checked} onClick={onClick}>
-        <CheckIcon />
+        <CheckIcon display={display} />
       </StyledCheckBox>
       <Text typo={'Web'} color={checked ? 'Blue' : 'Gray2'}>
         {value}
@@ -47,6 +51,5 @@ const StyledCheckBox = styled.div<{ ischecked?: boolean }>`
   height: 24px;
   cursor: pointer;
   border-radius: 2px;
-  background-color: ${(props) =>
-    props.ischecked ? theme.palette.Blue : theme.palette.Gray2};
+  background-color: ${theme.palette.Gray2};
 `;
