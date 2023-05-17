@@ -95,13 +95,9 @@ const contentCss = (backColor: KeyOfPalette) => css`
 
 const Content = styled.div`
   box-sizing: border-box;
-  border: 2px solid transparent;
-  padding: 4px 14px;
 
   &:hover {
     cursor: grab;
     color: ${theme.palette.Green};
-    border: 2px solid ${theme.palette.Green};
-    padding: 4px 14px;
   }
 `;

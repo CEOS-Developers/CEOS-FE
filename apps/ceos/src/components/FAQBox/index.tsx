@@ -49,6 +49,7 @@ const boxCss = ({
   justify-content: center;
   align-items: center;
   padding: 18px;
+  box-sizing: border-box;
   gap: 10px;
   border-radius: 16px;
   word-break: keep-all;
