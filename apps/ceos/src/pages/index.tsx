@@ -22,10 +22,10 @@ export default function Home() {
     <Flex direction="column">
       ceos
       <Button />
-      {/* <ManagementCard managementCard={manage} />
+      <ManagementCard managementCard={manage} />
       <MentorCard mentorCard={mentor} />
       <SponsorCard sponsorCard={sponsor} />
-      <ProjectCard projectCard={project} /> */}
+      <ProjectCard projectCard={project} />
       <RewardCard rewardCard={rewardCards} />
     </Flex>
   );

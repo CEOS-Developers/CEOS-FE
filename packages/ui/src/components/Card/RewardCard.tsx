@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { Flex, WebText, MobileText } from '../common';
+import { Flex, Text } from '../common';
 import check from '../../assets/reward.svg';
 import up from '../../assets/up.svg';
 import down from '../../assets/down.svg';
@@ -25,27 +25,27 @@ export const RewardCard = (props: {
       <Web className="web">
         <Box>
           <TitleWrapper>
-            <WebText webTypo="Heading4" color="Black">
+            <Text webTypo="Heading4" color="Black">
               {generation}
-            </WebText>
-            <WebText webTypo="Label3" color="Gray5">
+            </Text>
+            <Text webTypo="Label3" color="Gray5">
               {time}
-            </WebText>
+            </Text>
           </TitleWrapper>
           <Flex direction="column">
             {project.map((item) => {
               return (
                 <Flex style={{ marginBottom: '10px' }}>
-                  <WebText
+                  <Text
                     webTypo="Label1"
                     color="Blue"
                     style={{ width: '126px' }}
                   >
                     {item.title}
-                  </WebText>
-                  <WebText webTypo="Body2" color="Black">
+                  </Text>
+                  <Text webTypo="Body2" color="Black">
                     {item.explain}
-                  </WebText>
+                  </Text>
                 </Flex>
               );
             })}
@@ -55,9 +55,9 @@ export const RewardCard = (props: {
             {detail?.map((item) => (
               <Flex style={{ marginBottom: '8px' }}>
                 <Img src={check} />
-                <WebText webTypo="Body2" color="Black">
+                <Text webTypo="Body2" color="Black">
                   {item}
-                </WebText>
+                </Text>
               </Flex>
             ))}
           </div>
@@ -68,21 +68,21 @@ export const RewardCard = (props: {
       <Mobile className="mobile">
         <Box>
           <TitleWrapper>
-            <MobileText mobileTypo="Heading4" color="Black">
+            <Text mobileTypo="Heading4" color="Black">
               {generation}
-            </MobileText>
-            <MobileText mobileTypo="Body2" color="Gray5">
+            </Text>
+            <Text mobileTypo="Body2" color="Gray5">
               {time}
-            </MobileText>
+            </Text>
           </TitleWrapper>
           {project.map((pro, idx) => (
             <MColumn>
-              <MobileText mobileTypo="Label1" color="Blue">
+              <Text mobileTypo="Label1" color="Blue">
                 {pro.title}
-              </MobileText>
-              <MobileText mobileTypo="Body1" color="Black">
+              </Text>
+              <Text mobileTypo="Body1" color="Black">
                 {pro.explain}
-              </MobileText>
+              </Text>
             </MColumn>
           ))}
           {isExtend ? (
@@ -91,9 +91,9 @@ export const RewardCard = (props: {
               {detail?.map((item) => (
                 <Flex justify="flex-start" margin="0 0 8px 0">
                   <Img src={check} />
-                  <MobileText mobileTypo="Body1" color="Black">
+                  <Text mobileTypo="Body1" color="Black">
                     {item}
-                  </MobileText>
+                  </Text>
                 </Flex>
               ))}
               <Arrow
