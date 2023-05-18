@@ -3,19 +3,46 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { KeyOfPalette } from '../../../../packages/ui/src/styles/theme';
 import { Shortcut } from '@ceos/components/Shortcut';
+import { SelectButton } from '../components/SelectButton/index';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const { register } = useForm({
+  const { register, watch } = useForm({
     defaultValues: {
       title: '',
       content: '',
+      part: '',
     },
   });
+
+  useEffect(() => {
+    console.log(watch('part'));
+  }, [watch('part')]);
 
   return (
     <>
       <div>
         ceos
+        <Flex gap={8}>
+          <SelectButton
+            value="기획"
+            webWidth={272}
+            mobileWidth={106}
+            {...register('part')}
+          />
+          <SelectButton
+            value="디자인"
+            webWidth={272}
+            mobileWidth={106}
+            {...register('part')}
+          />
+          <SelectButton
+            value="개발"
+            webWidth={272}
+            mobileWidth={106}
+            {...register('part')}
+          />
+        </Flex>
         <Shortcut onClick={() => {}}>instagram</Shortcut>
         <Wrapper color="White">
           <Button variant="default">버튼1</Button>
@@ -54,4 +81,21 @@ const Wrapper = styled.div<{
   display: flex;
   flex-direction: column;
   gap: 8px;
+`;
+
+const Flex = styled.div<{
+  direction?: string;
+  justify?: string;
+  align?: string;
+  gap?: number;
+  width?: number;
+  height?: number;
+}>`
+  display: flex;
+  flex-direction: ${({ direction }) => (direction ? `${direction}` : 'row')};
+  justify-content: ${({ justify }) => (justify ? `${justify}` : 'center')};
+  align-items: ${({ align }) => (align ? `${align}` : 'center')};
+  gap: ${({ gap }) => (gap ? `${gap}px` : '0px')};
+  width: ${({ width }) => (width ? `${width}px` : '100%')};
+  height: ${({ height }) => (height ? `${height}px` : '100%')};
 `;
