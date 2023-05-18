@@ -1,4 +1,12 @@
-import { Button, TextField } from '@ceos-fe/ui';
+import {
+  RewardCard,
+  MentorCard,
+  SponsorCard,
+  ManagementCard,
+  ProjectCard,
+  Flex,
+} from '@ceos-fe/ui';
+import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
@@ -10,21 +18,20 @@ export default function Home() {
   });
 
   return (
-    <>
-      <div>
-        ceos
-        <Button />
-        <TextField
-          {...register('title')}
-          width={372}
-          label="제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목"
-          helperText={[
-            { type: 'normal', text: '일반 텍스트' },
-            { type: 'important', text: '중요 텍스트' },
-          ]}
-        />
-        <TextField {...register('content')} multiline />
-      </div>
-    </>
+    <Flex direction="column">
+      <Flex webGap={20} mobileGap={10} margin="50px 0 200px 0">
+        <MentorCard mentorCard={mentor} />
+      </Flex>
+
+      <Flex webGap={20} mobileGap={10} margin="0 0 100px 0">
+        <ManagementCard managementCard={manage} />
+        <SponsorCard sponsorCard={sponsor} />
+      </Flex>
+
+      <Flex webGap={20} mobileGap={10} align="start">
+        <ProjectCard projectCard={project} />
+        <RewardCard rewardCard={rewardCards} />
+      </Flex>
+    </Flex>
   );
 }
