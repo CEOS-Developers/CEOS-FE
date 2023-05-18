@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { WebOfTypo, MobileOfTypo, theme } from '../../styles';
+import { KeyOfMobileTypo, KeyOfWebTypo, theme } from '../../styles';
 import { KeyOfPalette } from '../../styles';
 
 export const Text = styled.div<{
-  webTypo?: WebOfTypo;
-  mobileTypo?: MobileOfTypo;
+  webTypo?: KeyOfWebTypo;
+  mobileTypo?: KeyOfMobileTypo;
   color: KeyOfPalette;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
