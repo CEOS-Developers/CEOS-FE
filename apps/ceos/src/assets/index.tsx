@@ -4,7 +4,6 @@ import {
   IRewardCard,
   ISponsorCard,
 } from '../../../../packages/ui';
-// import Profile from '../../../../packages/ui/src/assets/image/profile.svg';
 
 const url =
   'https://avatars.githubusercontent.com/u/65931227?s=400&u=04a3d1573e3f03d7b5e8f9bc249ab70c7331e062&v=4';

@@ -1,5 +1,4 @@
 import {
-  Button,
   RewardCard,
   MentorCard,
   SponsorCard,
@@ -20,13 +19,19 @@ export default function Home() {
 
   return (
     <Flex direction="column">
-      ceos
-      <Button />
-      <ManagementCard managementCard={manage} />
-      <MentorCard mentorCard={mentor} />
-      <SponsorCard sponsorCard={sponsor} />
-      <ProjectCard projectCard={project} />
-      <RewardCard rewardCard={rewardCards} />
+      <Flex webGap={20} mobileGap={10} margin="50px 0 200px 0">
+        <MentorCard mentorCard={mentor} />
+      </Flex>
+
+      <Flex webGap={20} mobileGap={10} margin="0 0 100px 0">
+        <ManagementCard managementCard={manage} />
+        <SponsorCard sponsorCard={sponsor} />
+      </Flex>
+
+      <Flex webGap={20} mobileGap={10} align="start">
+        <ProjectCard projectCard={project} />
+        <RewardCard rewardCard={rewardCards} />
+      </Flex>
     </Flex>
   );
 }
