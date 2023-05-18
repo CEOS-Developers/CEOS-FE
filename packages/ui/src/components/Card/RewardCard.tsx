@@ -1,11 +1,10 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { Flex, Text } from '../common';
-import check from '../../assets/reward.svg';
-import up from '../../assets/up.svg';
-import down from '../../assets/down.svg';
 import { theme } from '../../styles';
 import { useState } from 'react';
+import { RewardCheck } from '../../assets/RewardCheck';
+import { Down, Up } from '../../assets/Arrow';
 
 export interface IRewardCard {
   generation: string;
@@ -22,7 +21,7 @@ export const RewardCard = (props: {
   return (
     <Container>
       {/* 웹기준화면 */}
-      <Web className="web">
+      <Flex width={572} className="web">
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -32,10 +31,10 @@ export const RewardCard = (props: {
               {time}
             </Text>
           </TitleWrapper>
-          <Flex direction="column">
-            {project.map((item) => {
+          <Flex direction="column" webGap={10}>
+            {project.map((item, idx) => {
               return (
-                <Flex style={{ marginBottom: '10px' }}>
+                <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
                     color="Blue"
@@ -52,20 +51,22 @@ export const RewardCard = (props: {
           </Flex>
           <div className="extended">
             <Line />
-            {detail?.map((item) => (
-              <Flex style={{ marginBottom: '8px' }}>
-                <Img src={check} />
-                <Text webTypo="Body2" color="Black">
-                  {item}
-                </Text>
-              </Flex>
-            ))}
+            <Flex direction="column" webGap={8}>
+              {detail?.map((item, idx) => (
+                <Flex justify="start" key={idx}>
+                  <RewardCheck />
+                  <Text webTypo="Body2" color="Black">
+                    {item}
+                  </Text>
+                </Flex>
+              ))}
+            </Flex>
           </div>
         </Box>
-      </Web>
+      </Flex>
 
       {/* 모바일기준화면 */}
-      <Mobile className="mobile">
+      <Flex className="mobile" width={346}>
         <Box>
           <TitleWrapper>
             <Text mobileTypo="Heading4" color="Black">
@@ -76,47 +77,56 @@ export const RewardCard = (props: {
             </Text>
           </TitleWrapper>
           {project.map((pro, idx) => (
-            <MColumn>
-              <Text mobileTypo="Label1" color="Blue">
-                {pro.title}
-              </Text>
-              <Text mobileTypo="Body1" color="Black">
-                {pro.explain}
-              </Text>
-            </MColumn>
+            <Flex
+              direction="column"
+              justify="center"
+              align="center"
+              mobileGap={10}
+              key={idx}
+            >
+              <Flex direction="column">
+                <Text mobileTypo="Label1" color="Blue">
+                  {pro.title}
+                </Text>
+                <Text mobileTypo="Body1" color="Black">
+                  {pro.explain}
+                </Text>
+              </Flex>
+            </Flex>
           ))}
           {isExtend ? (
             <>
               <Line />
-              {detail?.map((item) => (
-                <Flex justify="flex-start" margin="0 0 8px 0">
-                  <Img src={check} />
-                  <Text mobileTypo="Body1" color="Black">
-                    {item}
-                  </Text>
-                </Flex>
-              ))}
-              <Arrow
-                src={up}
-                onClick={() => {
-                  setIsExtend(!isExtend);
-                }}
-              />
+              <Flex direction="column" mobileGap={8}>
+                {detail?.map((item, idx) => (
+                  <Flex justify="flex-start" key={idx}>
+                    <RewardCheck />
+                    <Text mobileTypo="Body1" color="Black">
+                      {item}
+                    </Text>
+                  </Flex>
+                ))}
+              </Flex>
+
+              <div onClick={() => setIsExtend(!isExtend)}>
+                <Up />
+              </div>
             </>
           ) : (
-            <Arrow
-              src={down}
-              onClick={() => {
-                setIsExtend(!isExtend);
-              }}
-            />
+            <div onClick={() => setIsExtend(!isExtend)}>
+              <Down />
+            </div>
           )}
         </Box>
-      </Mobile>
+      </Flex>
     </Container>
   );
 };
 const Container = styled.div`
+  & > .web {
+    display: block;
+  }
+
   & > .mobile {
     display: none;
   }
@@ -130,17 +140,6 @@ const Container = styled.div`
     }
   }
 `;
-const Web = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 572px;
-`;
-
-const Mobile = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 346px;
-`;
 
 const Box = styled.div`
   display: flex;
@@ -153,11 +152,14 @@ const Box = styled.div`
 
   > .extended {
     display: none;
+    // max-height: 0px;
+    // transition: max-height 0.5s ease-in;
   }
-
   :hover {
     > .extended {
       display: block;
+      // max-height: 500px;
+      // transition: max-height 0.5s ease-in;
     }
   }
 
@@ -171,9 +173,10 @@ const Line = styled.div`
   width: 492px;
   height: 0px;
   border: 0.5px solid ${theme.palette.Gray3};
-  margin: 1rem 0;
+  margin: 28px 0;
 
   @media (max-width: 1023px) {
+    margin: 20px 0;
     width: 318px;
   }
 `;
@@ -183,24 +186,4 @@ const TitleWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 16px;
-`;
-
-const Img = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-`;
-
-const Arrow = styled.img`
-  height: 16px;
-  width: 30px;
-  margin: 20px 0 0 0;
-`;
-
-const MColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 `;

@@ -14,6 +14,6 @@ export const Text = styled.div<{
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
-    ${({ mobileTypo }) => (mobileTypo ? theme.typo.Web[mobileTypo] : '')};
+    ${({ mobileTypo }) => (mobileTypo ? theme.typo.Mobile[mobileTypo] : '')};
   }
 `;

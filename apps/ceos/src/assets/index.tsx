@@ -4,9 +4,10 @@ import {
   IRewardCard,
   ISponsorCard,
 } from '../../../../packages/ui';
-import reward from '../../../../packages/ui/src/assets/reward.svg';
-import profile from './profile.svg';
+// import Profile from '../../../../packages/ui/src/assets/image/profile.svg';
 
+const url =
+  'https://avatars.githubusercontent.com/u/65931227?s=400&u=04a3d1573e3f03d7b5e8f9bc249ab70c7331e062&v=4';
 export const rewardCards = {
   generation: '15기',
   time: '2022.03 ~ ',
@@ -21,7 +22,7 @@ export const rewardCards = {
 } as IRewardCard;
 
 export const manage = {
-  img: profile,
+  img: url,
   position: '디자인 팀장',
   name: '정예영',
   univ: '홍대',
@@ -37,12 +38,12 @@ export const mentor = {
 } as IManagementCard;
 
 export const sponsor = {
-  img: profile,
+  img: url,
   name: '회사',
 } as ISponsorCard;
 
 export const project = {
-  img: profile,
+  img: url,
   name: 'Finble',
   explain: '주식 어쩌고',
   generation: '16기',

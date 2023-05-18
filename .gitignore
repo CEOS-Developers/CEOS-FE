@@ -32,3 +32,4 @@ yarn-error.log*
 # turbo
 .turbo
 .yarn/install-state.gz
+.yarn/cache

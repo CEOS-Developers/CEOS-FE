@@ -20,6 +20,7 @@ export type KeyOfPalette = keyof typeof palette;
 export type KeyofTheme = keyof typeof theme;
 
 export type TypeOfTypo = typeof typo;
+export type KeyOfTypo = keyof typeof typo;
 export type KeyOfWebTypo = keyof typeof typo.Web;
 export type KeyOfMobileTypo = keyof typeof typo.Mobile;
 
