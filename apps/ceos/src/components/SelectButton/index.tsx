@@ -8,6 +8,12 @@ interface SelectButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
 }
 
+/**
+ * @default input: (input 태그 속성 그대로)
+ * @param webWidth?: web 너비 (default 178px)
+ * @param mobileWidth?: mobile 너비 (default 100%)
+ * @param value: label에 들어갈 값
+ */
 export const SelectButton = forwardRef<HTMLInputElement, SelectButtonProps>(
   ({ webWidth, mobileWidth, value, ...props }, ref) => {
     return (
@@ -52,7 +58,7 @@ const Label = styled.label<{
   cursor: pointer;
 
   @media (max-width: 1023px) {
-    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '166px')};
+    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '100%')};
     height: 44px;
 
     border-radius: 8px;

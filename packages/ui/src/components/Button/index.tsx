@@ -8,7 +8,8 @@ export type ButtonVariant = 'default' | 'glass' | 'white' | 'admin';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
-  width?: number;
+  webWidth?: number;
+  mobileWidth?: number;
 }
 
 const BUTTON_FIGURE = {
@@ -50,12 +51,26 @@ const BUTTON_COLOR = {
 };
 
 /**
+ * @default button: (button 태그 속성 그대로)
+ *
  * @param varient 버튼 종류 'default' | 'glass' | 'white' | 'admin'
- * @param width? 버튼 너비
+ * @param webWidth? web 버튼 너비
+ * @param mobileWidth? mobile 버튼 너비 (default 100%)
  */
-export const Button = ({ children, variant, width, ...props }: ButtonProps) => {
+export const Button = ({
+  children,
+  variant,
+  webWidth,
+  mobileWidth,
+  ...props
+}: ButtonProps) => {
   return (
-    <StyledButton variant={variant} width={width} {...props}>
+    <StyledButton
+      variant={variant}
+      webWidth={webWidth}
+      mobileWidth={mobileWidth}
+      {...props}
+    >
       {children}
     </StyledButton>
   );
@@ -63,10 +78,11 @@ export const Button = ({ children, variant, width, ...props }: ButtonProps) => {
 
 const StyledButton = styled.button<{
   variant: ButtonVariant;
-  width?: number;
+  webWidth?: number;
+  mobileWidth?: number;
 }>`
-  width: ${({ width, variant }) =>
-    width ? `${width}px` : `${BUTTON_FIGURE.width[variant]}px`};
+  width: ${({ webWidth, variant }) =>
+    webWidth ? `${webWidth}px` : `${BUTTON_FIGURE.width[variant]}px`};
   height: ${({ variant }) => `${BUTTON_FIGURE.height[variant]}px`};
 
   color: ${({ variant }) => `${TEXT_COLOR.normal[variant]}`};
@@ -76,7 +92,7 @@ const StyledButton = styled.button<{
     `${BUTTON_FIGURE.border_radius[variant]}px`};
 
   @media (max-width: 1023px) {
-    width: ${({ width }) => (width ? `${width}px` : '100%')};
+    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '100%')};
     height: ${({ variant }) => `${BUTTON_FIGURE.mobile_height[variant]}px`};
 
     ${theme.typo.Mobile.Heading3};

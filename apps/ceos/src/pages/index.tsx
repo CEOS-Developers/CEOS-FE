@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { KeyOfPalette } from '../../../../packages/ui/src/styles/theme';
 import { Shortcut } from '@ceos/components/Shortcut';
 import { SelectButton } from '../components/SelectButton/index';
-import { useEffect } from 'react';
 
 export default function Home() {
   const { register, watch } = useForm({
@@ -15,33 +14,14 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    console.log(watch('part'));
-  }, [watch('part')]);
-
   return (
     <>
       <div>
         ceos
         <Flex gap={8}>
-          <SelectButton
-            value="기획"
-            webWidth={272}
-            mobileWidth={106}
-            {...register('part')}
-          />
-          <SelectButton
-            value="디자인"
-            webWidth={272}
-            mobileWidth={106}
-            {...register('part')}
-          />
-          <SelectButton
-            value="개발"
-            webWidth={272}
-            mobileWidth={106}
-            {...register('part')}
-          />
+          <SelectButton value="기획" webWidth={272} {...register('part')} />
+          <SelectButton value="디자인" webWidth={272} {...register('part')} />
+          <SelectButton value="개발" webWidth={272} {...register('part')} />
         </Flex>
         <Shortcut onClick={() => {}}>instagram</Shortcut>
         <Wrapper color="White">
