@@ -28,8 +28,11 @@ export default function Home() {
   const colors = ['Green', 'Skyblue', 'Yellow'];
   return (
     <Flex direction="column" webGap={20}>
+      {/* user에서 사용할 multiline TextField */}
+      <TextField multiline width={1172} />
+
       {/* 리워드 전용 */}
-      <Flex width={1271}>
+      <Flex webGap={28}>
         <TextField {...register('reward')} />
         <RemovableTextField
           {...register('rewardDescription')}

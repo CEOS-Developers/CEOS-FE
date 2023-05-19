@@ -26,7 +26,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       helperText,
       placeholder = '내용을 입력해주세요.',
       width = 372,
-      height = 249,
+      height,
       multiline = false,
       ...props
     },
@@ -51,9 +51,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {...props}
           />
         )}
-        <StyledHelperTextBox>
-          {helperText &&
-            helperText.map((helper, idx) => (
+        {helperText && (
+          <StyledHelperTextBox>
+            {helperText.map((helper, idx) => (
               <StyledHelperText
                 key={idx}
                 placeholder={placeholder}
@@ -62,7 +62,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 {helper.text}
               </StyledHelperText>
             ))}
-        </StyledHelperTextBox>
+          </StyledHelperTextBox>
+        )}
       </Container>
     );
   },
@@ -70,6 +71,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
 const Container = styled(Flex)<{ width: number }>`
   width: ${({ width }) => width}px;
+
+  flex-direction: column;
+  align-items: flex-start;
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -108,9 +112,9 @@ const StyledInput = styled.input`
     ${theme.typo.Mobile.Body1};
   }
 `;
-const StyledTextArea = styled.textarea<{ height: number }>`
+const StyledTextArea = styled.textarea<{ height?: number }>`
   width: 100%;
-  height: ${({ height }) => height}px;
+  height: ${({ height }) => (height ? height : 249)}px;
   padding: ${({ height }) => (height ? '8px 16px' : '16px 8px 16px 24px')};
 
   box-sizing: border-box;
