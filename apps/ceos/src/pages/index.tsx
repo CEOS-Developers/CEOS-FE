@@ -1,12 +1,4 @@
-import {
-  RewardCard,
-  MentorCard,
-  SponsorCard,
-  ManagementCard,
-  ProjectCard,
-  Flex,
-} from '@ceos-fe/ui';
-import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
+import { Flex, RemovableTextField, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Header } from '@ceos/components/Header';
 import { FAQBox } from '@ceos/components/FAQBox';
@@ -21,19 +13,7 @@ export default function Home() {
   const colors = ['Green', 'Skyblue', 'Yellow'];
   return (
     <Flex direction="column">
-      <Flex webGap={20} mobileGap={10} margin="50px 0 200px 0">
-        <MentorCard mentorCard={mentor} />
-      </Flex>
-
-      <Flex webGap={20} mobileGap={10} margin="0 0 100px 0">
-        <ManagementCard managementCard={manage} />
-        <SponsorCard sponsorCard={sponsor} />
-      </Flex>
-
-      <Flex webGap={20} mobileGap={10} align="start">
-        <ProjectCard projectCard={project} />
-        <RewardCard rewardCard={rewardCards} />
-      </Flex>
+      <RemovableTextField width={1092} />
     </Flex>
   );
 }
