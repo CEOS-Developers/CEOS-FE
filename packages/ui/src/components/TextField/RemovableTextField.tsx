@@ -14,9 +14,11 @@ interface RemovableTextFieldProps
 }
 
 /**
- * @param {number} width: TextField width size
+ * @param {number} width: width size
+ * @param {number} height: height size
  * @param {number} gap: TextField와 버튼 사이 간격
  * @param {boolean} multiline: 여러 줄
+ * @param {Function} handleClick: 버튼 클릭 시 이벤트
  */
 export const RemovableTextField = forwardRef<
   HTMLInputElement,
