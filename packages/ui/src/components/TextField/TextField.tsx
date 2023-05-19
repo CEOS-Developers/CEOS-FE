@@ -33,7 +33,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref,
   ) => {
     return (
-      <Container width={width} multiline={multiline}>
+      <Container width={width}>
         {label && <StyledLabel>{label}</StyledLabel>}
         {multiline ? (
           <StyledTextArea
@@ -68,11 +68,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   },
 );
 
-const Container = styled(Flex)<{
-  width: number;
-  multiline: boolean;
-}>`
-  width: ${({ width, multiline }) => (multiline ? 1172 : width)}px;
+const Container = styled(Flex)<{ width: number }>`
+  width: ${({ width }) => width}px;
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -93,6 +90,8 @@ const StyledInput = styled.input`
 
   background: ${theme.palette.Gray1};
   border-radius: 8px;
+
+  border: 1px solid ${theme.palette.Gray1};
 
   ${theme.typo.Web.Body2};
   color: ${theme.palette.Black};
@@ -119,6 +118,8 @@ const StyledTextArea = styled.textarea<{ height: number }>`
   background: ${theme.palette.Gray1};
   border-radius: 8px;
   resize: none;
+
+  border: 1px solid ${theme.palette.Gray1};
 
   ${theme.typo.Web.Body2};
   color: ${theme.palette.Black};
