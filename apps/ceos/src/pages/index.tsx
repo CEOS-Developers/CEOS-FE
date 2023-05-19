@@ -1,4 +1,9 @@
-import { Flex, RemovableTextField, TextField } from '@ceos-fe/ui';
+import {
+  AdminTextField,
+  Flex,
+  RemovableTextField,
+  TextField,
+} from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Header } from '@ceos/components/Header';
 import { FAQBox } from '@ceos/components/FAQBox';
@@ -16,6 +21,8 @@ export default function Home() {
       submissionSet:
         '이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.',
       submissionSetDescription: '내용을 입력해주세요',
+      id: '',
+      password: '',
     },
   });
   const colors = ['Green', 'Skyblue', 'Yellow'];
@@ -70,6 +77,18 @@ export default function Home() {
           multiline
         />
       </Flex>
+
+      {/* 로그인 텍스트 필드 */}
+      <AdminTextField
+        {...register('id')}
+        label="ID"
+        placeholder="아이디를 입력해주세요"
+      />
+      <AdminTextField
+        {...register('password')}
+        label="PW"
+        placeholder="비밀번호를 입력해주세요"
+      />
     </Flex>
   );
 }
