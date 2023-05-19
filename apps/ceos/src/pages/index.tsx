@@ -8,6 +8,8 @@ import {
 } from '@ceos-fe/ui';
 import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
 import { useForm } from 'react-hook-form';
+import { Header } from '@ceos/components/Header';
+import { FAQBox } from '@ceos/components/FAQBox';
 
 export default function Home() {
   const { register } = useForm({
@@ -16,7 +18,7 @@ export default function Home() {
       content: '',
     },
   });
-
+  const colors = ['Green', 'Skyblue', 'Yellow'];
   return (
     <Flex direction="column">
       <Flex webGap={20} mobileGap={10} margin="50px 0 200px 0">
