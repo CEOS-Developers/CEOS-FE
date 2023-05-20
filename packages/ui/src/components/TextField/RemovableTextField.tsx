@@ -37,7 +37,7 @@ export const RemovableTextField = forwardRef<
     ref,
   ) => {
     return (
-      <Flex webGap={gap} align="flex-start">
+      <Container gap={gap}>
         <TextField
           ref={ref}
           width={width}
@@ -51,16 +51,23 @@ export const RemovableTextField = forwardRef<
             삭제
           </Text>
         </ButtonBox>
-      </Flex>
+      </Container>
     );
   },
 );
 
+const Container = styled(Flex)<{ gap: number }>`
+  width: auto;
+  align-items: flex-start;
+
+  gap: ${({ gap }) => gap}px;
+`;
 const ButtonBox = styled.button`
   padding: 8px 18px;
   border-radius: 8px;
 
   word-break: keep-all;
 
+  border: 1px solid ${theme.palette.Gray4};
   background-color: ${theme.palette.Gray4};
 `;
