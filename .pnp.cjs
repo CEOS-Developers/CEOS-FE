@@ -2563,6 +2563,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/ui/",\
           "packageDependencies": [\
             ["@ceos-fe/ui", "workspace:packages/ui"],\
+            ["@ceos-fe/utils", "workspace:packages/utils"],\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@types/node", "npm:20.1.0"],\

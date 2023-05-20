@@ -21,6 +21,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@ceos-fe/utils": "workspace:^",
     "emotion-reset": "^3.0.1"
   }
 }
