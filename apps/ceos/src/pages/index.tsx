@@ -5,8 +5,6 @@ import {
   TextField,
 } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
-import { Header } from '@ceos/components/Header';
-import { FAQBox } from '@ceos/components/FAQBox';
 
 export default function Home() {
   const { register, getValues } = useForm({
@@ -25,7 +23,7 @@ export default function Home() {
       password: '',
     },
   });
-  const colors = ['Green', 'Skyblue', 'Yellow'];
+
   return (
     <Flex direction="column" webGap={20}>
       {/* user에서 사용할 multiline TextField */}
