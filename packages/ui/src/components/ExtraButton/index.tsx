@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Flex } from '../common';
 import { theme } from '../../styles';
 import { MoreVert } from '../../assets/MoreVert';
 import { useModal } from '@ceos-fe/utils';
@@ -19,10 +18,8 @@ export const ExtraButton = ({ buttonList }: ExtraButtonProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
 
   return (
-    <Container ref={modalRef}>
-      <StyledMoreButton onClick={toggleModal}>
-        <MoreVert />
-      </StyledMoreButton>
+    <Container ref={modalRef} onClick={toggleModal}>
+      <MoreVert />
       {isOpen && (
         <StyledButtonList>
           {buttonList.map((button, idx) => (
@@ -36,21 +33,18 @@ export const ExtraButton = ({ buttonList }: ExtraButtonProps) => {
   );
 };
 
-const Container = styled(Flex)`
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
-const StyledMoreButton = styled.div`
+const Container = styled.div`
   width: 24px;
   height: 24px;
 
   cursor: pointer;
 `;
 const StyledButtonList = styled.ul`
-  display: relative;
+  z-index: 5;
+  position: relative;
   top: 8px;
 
+  width: 164px;
   padding: 8px;
 
   background-color: ${theme.palette.White};
