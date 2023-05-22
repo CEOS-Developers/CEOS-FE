@@ -25,9 +25,7 @@ export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
       <StyledCheckBox onClick={onClick}>
         <CheckIcon display={display} />
       </StyledCheckBox>
-      <Text typo={'Web'} color={checked ? 'Blue' : 'Gray2'}>
-        {value}
-      </Text>
+      <Text color={checked ? 'Blue' : 'Gray2'}>{value}</Text>
     </StyledCheckBoxContainer>
   );
 };
