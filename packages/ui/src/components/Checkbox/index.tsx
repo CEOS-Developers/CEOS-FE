@@ -3,21 +3,26 @@ import { theme } from '../../styles';
 import { Text } from '../common';
 import { CheckIcon } from '../../assets/CheckIcon';
 
-interface CheckBox {
+export const enum DisplayPriorities {
+  BLOCK = 'block',
+  NONE = 'none',
+}
+
+interface CheckBoxProps {
   checked: boolean;
   onClick: () => void;
   value: string;
   type: string;
 }
 
-export const CheckBox = ({ checked, onClick, value, type }: CheckBox) => {
-  let display = 'none';
-  if (checked === false) display = 'none';
-  else if (checked === true) display = 'block';
+export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
+  let display = DisplayPriorities.NONE;
+  if (checked === false) display = DisplayPriorities.NONE;
+  else if (checked === true) display = DisplayPriorities.BLOCK;
 
   return (
     <StyledCheckBoxContainer type={type}>
-      <StyledCheckBox ischecked={checked} onClick={onClick}>
+      <StyledCheckBox onClick={onClick}>
         <CheckIcon display={display} />
       </StyledCheckBox>
       <Text typo={'Web'} color={checked ? 'Blue' : 'Gray2'}>
@@ -43,7 +48,7 @@ const StyledCheckBoxContainer = styled.div<{ type?: string }>`
   -ms-use-select: none;
   user-select: none;
 `;
-const StyledCheckBox = styled.div<{ ischecked?: boolean }>`
+const StyledCheckBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

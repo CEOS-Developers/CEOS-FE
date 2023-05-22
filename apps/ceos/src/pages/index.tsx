@@ -2,7 +2,7 @@ import { Button, CheckBox, FloatingButton, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-export type checkItem = {
+export type CheckItemInterface = {
   id: number;
   checked: boolean;
   value: string;
@@ -10,7 +10,7 @@ export type checkItem = {
 
 export default function Home() {
   /* check box */
-  const [checked, setChecked] = useState<checkItem[]>([
+  const [checked, setChecked] = useState<CheckItemInterface[]>([
     { id: 0, checked: false, value: 'id=0' },
     { id: 1, checked: false, value: 'id=11111111111111' },
     { id: 2, checked: false, value: 'id=2' },
