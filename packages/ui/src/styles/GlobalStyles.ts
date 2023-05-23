@@ -14,9 +14,16 @@ export const globalStyle = css`
     padding: 0;
     overflow: visible;
     cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
   button:focus {
     outline: none;
+  }
+  button:disabled {
+    pointer-events: none;
   }
   input:focus {
     outline: none;
