@@ -1,130 +1,95 @@
 import {
-  RewardCard,
-  MentorCard,
-  SponsorCard,
-  ManagementCard,
-  ProjectCard,
+  AdminTextField,
   Flex,
-  Button,
+  RemovableTextField,
   TextField,
-  FloatingButton,
-  CheckBox,
 } from '@ceos-fe/ui';
-import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
 import { useForm } from 'react-hook-form';
-import styled from '@emotion/styled';
-import { KeyOfPalette } from '../../../../packages/ui/src/styles/theme';
-import { Shortcut } from '@ceos/components/Shortcut';
-import { SelectButton } from '../components/SelectButton/index';
-import { Header } from '@ceos/components/Header';
-import { FAQBox } from '@ceos/components/FAQBox';
-import { useState } from 'react';
-
-export type CheckItemInterface = {
-  id: number;
-  checked: boolean;
-  value: string;
-};
 
 export default function Home() {
-  /* check box */
-  const [checked, setChecked] = useState<CheckItemInterface[]>([
-    { id: 0, checked: false, value: 'id=0' },
-    { id: 1, checked: false, value: 'id=11111111111111' },
-    { id: 2, checked: false, value: 'id=2' },
-    { id: 3, checked: false, value: 'id=33333333333333' },
-    { id: 4, checked: false, value: 'id=4' },
-  ]);
-  const onClick = (index: number) => {
-    checked[index].checked = !checked[index].checked;
-    setChecked([...checked]);
-  };
-  /* text field*/
-  const { register, watch } = useForm({
+  const { register, getValues } = useForm({
     defaultValues: {
-      title: '',
-      content: '',
-      part: '',
+      reward: 'Healthier',
+      rewardDescription: '온라인 감별진단 ・ 건강관리 서비스',
+      submissionSmall: '이름',
+      submissionSmallExtension:
+        '이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.',
+      submissionMedium:
+        '1. CEOS는 다양한 사람들과 파트가 모여 프로젝트를 만들어갑니다. 이처럼 다양한 사람들과의 협업 만족도가 높은 프로덕트를 만들기 위해, UXUI 디자이너로서 본인의 역할은 무엇이라고 생각하는지 서술해주세요. (200자 내외)',
+      submissionSet:
+        '이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.',
+      submissionSetDescription: '내용을 입력해주세요',
+      id: '',
+      password: '',
     },
   });
-  const colors = ['Green', 'Skyblue', 'Yellow'];
 
   return (
-    <>
-      <>
-        <div>
-          ceos
-          <Flex webGap={8} mobileGap={8}>
-            <SelectButton value="기획" webWidth={272} {...register('part')} />
-            <SelectButton value="디자인" webWidth={272} {...register('part')} />
-            <SelectButton value="개발" webWidth={272} {...register('part')} />
-          </Flex>
-          <Shortcut onClick={() => {}}>instagram</Shortcut>
-          <Wrapper color="White">
-            <Button variant="default">버튼1</Button>
-            <Button variant="default" disabled>
-              버튼1 disabled
-            </Button>
-          </Wrapper>
-          <Wrapper color="Blue">
-            <Button variant="glass">버튼2</Button>
-            <Button variant="glass" disabled>
-              버튼2 disabled
-            </Button>
-            <Button variant="white">버튼2</Button>
-            <Button variant="admin">admin</Button>
-          </Wrapper>
-          <TextField
-            {...register('title')}
-            width={372}
-            label="제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목"
-            helperText={[
-              { type: 'normal', text: '일반 텍스트' },
-              { type: 'important', text: '중요 텍스트' },
-            ]}
-          />
-          <TextField {...register('content')} multiline />
-          {/* floating button */}
-          <FloatingButton />
-          {/* checkbox */}
-          {checked.map((item, index: number) => {
-            return (
-              <CheckBox
-                key={item.id}
-                checked={item.checked}
-                onClick={() => onClick(index)}
-                value={item.value}
-                type="column"
-              />
-            );
-          })}
-        </div>
-      </>
-      <Flex direction="column">
-        <Flex webGap={20} mobileGap={10} margin="50px 0 200px 0">
-          <MentorCard mentorCard={mentor} />
-        </Flex>
+    <Flex direction="column" webGap={20}>
+      {/* user에서 사용할 multiline TextField */}
+      <TextField multiline width={1172} />
 
-        <Flex webGap={20} mobileGap={10} margin="0 0 100px 0">
-          <ManagementCard managementCard={manage} />
-          <SponsorCard sponsorCard={sponsor} />
-        </Flex>
-
-        <Flex webGap={20} mobileGap={10} align="start">
-          <ProjectCard projectCard={project} />
-          <RewardCard rewardCard={rewardCards} />
-        </Flex>
+      {/* 리워드 전용 */}
+      <Flex webGap={28}>
+        <TextField {...register('reward')} />
+        <RemovableTextField
+          {...register('rewardDescription')}
+          width={772}
+          gap={28}
+          handleClick={() => console.log(getValues())}
+        />
       </Flex>
-    </>
+
+      {/* 질문지 전용 */}
+      <RemovableTextField
+        {...register('submissionSmall')}
+        width={292}
+        gap={12}
+        handleClick={() => console.log(getValues())}
+      />
+
+      <RemovableTextField
+        {...register('submissionSmallExtension')}
+        width={1092}
+        gap={12}
+        handleClick={() => console.log(getValues())}
+      />
+
+      <RemovableTextField
+        {...register('submissionMedium')}
+        width={1092}
+        height={78}
+        multiline
+        gap={12}
+        handleClick={() => console.log(getValues())}
+      />
+
+      <Flex direction="column" webGap={20}>
+        <RemovableTextField
+          {...register('submissionSet')}
+          width={1092}
+          gap={12}
+          handleClick={() => console.log(getValues())}
+        />
+        <TextField
+          {...register('submissionSetDescription')}
+          width={1171}
+          height={120}
+          multiline
+        />
+      </Flex>
+
+      {/* 로그인 텍스트 필드 */}
+      <AdminTextField
+        {...register('id')}
+        label="ID"
+        placeholder="아이디를 입력해주세요"
+      />
+      <AdminTextField
+        {...register('password')}
+        label="PW"
+        placeholder="비밀번호를 입력해주세요"
+      />
+    </Flex>
   );
 }
-
-const Wrapper = styled.div<{
-  color: KeyOfPalette;
-}>`
-  background-color: ${({ theme, color }) => theme.palette[color]};
-
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
