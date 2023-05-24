@@ -46,8 +46,8 @@ export const AdminProjectCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <AdminContainer width={372} height={331}>
-      <AdminFlex width={372} height={331} direction="column">
+    <AdminContainer width={372} height={311}>
+      <AdminFlex direction="column">
         <ProjectImg src={img} />
         <ExplainBox>
           <Row>
@@ -64,11 +64,9 @@ export const AdminProjectCard = (props: {
         </ExplainBox>
       </AdminFlex>
       <AdminFlex
-        width={372}
-        height={331}
         webGap={24}
         mobileGap={24}
-        borderRadius={20}
+        borderRadius={16}
         className="is-hover"
       >
         <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
@@ -112,7 +110,7 @@ const ExplainBox = styled.div`
   flex-direction: column;
   width: 372px;
   height: 122px;
-  margin-top: -1rem;
+  margin-top: -20px;
   z-index: -1;
   padding: 14px 20px 20px;
   box-sizing: border-box;

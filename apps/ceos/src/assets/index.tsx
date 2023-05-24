@@ -43,6 +43,7 @@ export const sponsor = {
 } as ISponsorCard;
 
 export const project = {
+  id: 1,
   img: url,
   name: 'Finble',
   explain: '주식 어쩌고',
