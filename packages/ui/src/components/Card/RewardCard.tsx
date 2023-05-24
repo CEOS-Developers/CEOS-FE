@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { Flex, Text } from '../common';
+import { AdminContainer, AdminFlex, Flex, Text } from '../common';
 import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
@@ -135,7 +135,7 @@ export const AdminRewardCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <AdminContainer>
+    <AdminContainer width={572} height={314}>
       <AdminFlex width={572}>
         <Box>
           <TitleWrapper>
@@ -166,7 +166,13 @@ export const AdminRewardCard = (props: {
           </Flex>
         </Box>
       </AdminFlex>
-      <AdminFlex width={572} webGap={24} mobileGap={24} className="is-hover">
+      <AdminFlex
+        width={572}
+        webGap={24}
+        mobileGap={24}
+        borderRadius={20}
+        className="is-hover"
+      >
         <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
         <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
       </AdminFlex>
@@ -189,36 +195,6 @@ const Container = styled.div`
     & > .mobile {
       display: block;
     }
-  }
-`;
-
-const AdminContainer = styled.div`
-  width: 572px;
-  height: 314px;
-
-  position: relative;
-  display: flex;
-
-  .is-hover {
-    display: none;
-  }
-  :hover {
-    .is-hover {
-      display: flex;
-    }
-  }
-`;
-
-const AdminFlex = styled(Flex)`
-  width: 572px;
-  height: 314px;
-  position: absolute;
-  border-radius: 20px;
-  top: 0;
-  left: 0;
-
-  &.is-hover {
-    background-color: rgba(0, 0, 0, 0.5);
   }
 `;
 

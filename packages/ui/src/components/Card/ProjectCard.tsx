@@ -1,9 +1,10 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
-import { Text } from '../common';
+import { AdminContainer, AdminFlex, Flex, Text } from '../common';
 
 export interface IProjectCard {
+  id: number;
   img: string;
   name: string;
   explain: string;
@@ -31,6 +32,49 @@ export const ProjectCard = (props: {
         </Text>
       </ExplainBox>
     </Wrapper>
+  );
+};
+
+export const AdminProjectCard = (props: {
+  projectCard: IProjectCard;
+  onClickRemove: (id: number) => void;
+  onClickUpdate: (id: number) => void;
+}): EmotionJSX.Element => {
+  const { id, img, name, explain, generation } = props.projectCard;
+  const [onClickRemove, onClickUpdate] = [
+    props.onClickRemove,
+    props.onClickUpdate,
+  ];
+  return (
+    <AdminContainer width={372} height={331}>
+      <AdminFlex width={372} height={331} direction="column">
+        <ProjectImg src={img} />
+        <ExplainBox>
+          <Row>
+            <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+              {name}
+            </Text>
+            <Text webTypo="Label2" mobileTypo="Label2" color="Gray4">
+              {generation}
+            </Text>
+          </Row>
+          <Text webTypo="Body3" mobileTypo="Body2" color="Black">
+            {explain}
+          </Text>
+        </ExplainBox>
+      </AdminFlex>
+      <AdminFlex
+        width={372}
+        height={331}
+        webGap={24}
+        mobileGap={24}
+        borderRadius={20}
+        className="is-hover"
+      >
+        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
+        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+      </AdminFlex>
+    </AdminContainer>
   );
 };
 
@@ -93,4 +137,12 @@ const Row = styled.div`
   @media (max-width: 1023px) {
     margin-top: 0;
   }
+`;
+
+const Button = styled.button`
+  width: 103px;
+  height: 44px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #31314e;
 `;
