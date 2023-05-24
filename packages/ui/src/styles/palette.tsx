@@ -5,16 +5,20 @@ export const palette = {
   Green: '#01D1A8',
 
   White: '#FFFFFF',
-  Gray1: '#F3F5F8',
-  Gray2: '#BEC3CC',
-  Gray3: '#9AA2AE',
-  Gray4: '#646D7A',
-  Gray5: '#3F4852',
+  Gray1: '#F4F6F9',
+  Gray2: '#E9EBEF',
+  Gray3: '#D6DADF',
+  Gray4: '#B0B5BD',
+  Gray5: '#787E88',
   Gray6: '#B0B5BD', //헤더 버튼 색
   Gray7: '#E9EBEF', //헤더 버튼 색
   Gray8: '#787E88', //메뉴 버튼
-  Gray9 : '#F4F6F9;', //FAQ A색
-  Black: '#0E0E0E',
+  Gray9: '#F4F6F9;', //FAQ A색
+  Black: '#232527',
+
+  Admin: {
+    Navy: '#31314E',
+  },
 
   Shadow: {
     Card: {
