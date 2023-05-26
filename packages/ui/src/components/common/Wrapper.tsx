@@ -36,7 +36,7 @@ export const Flex = styled.div<{
   }
 `;
 
-export const AdminContainer = styled(Flex)`
+export const RelativeContainer = styled(Flex)`
   position: relative;
   .is-hover {
     display: none;
@@ -48,7 +48,7 @@ export const AdminContainer = styled(Flex)`
   }
 `;
 
-export const AdminFlex = styled(Flex)`
+export const AbsoluteFlex = styled(Flex)`
   position: absolute;
   top: 0;
   left: 0;

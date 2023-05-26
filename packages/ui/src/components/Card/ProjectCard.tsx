@@ -1,7 +1,7 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
-import { AdminContainer, AdminFlex, Flex, Text } from '../common';
+import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 
 export interface IProjectCard {
   id: number;
@@ -46,8 +46,8 @@ export const AdminProjectCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <AdminContainer width={372} height={311}>
-      <AdminFlex direction="column">
+    <RelativeContainer width={372} height={311}>
+      <AbsoluteFlex direction="column">
         <ProjectImg src={img} />
         <ExplainBox>
           <Row>
@@ -62,8 +62,8 @@ export const AdminProjectCard = (props: {
             {explain}
           </Text>
         </ExplainBox>
-      </AdminFlex>
-      <AdminFlex
+      </AbsoluteFlex>
+      <AbsoluteFlex
         webGap={24}
         mobileGap={24}
         borderRadius={16}
@@ -71,8 +71,8 @@ export const AdminProjectCard = (props: {
       >
         <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
         <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
-      </AdminFlex>
-    </AdminContainer>
+      </AbsoluteFlex>
+    </RelativeContainer>
   );
 };
 
@@ -141,6 +141,9 @@ const Button = styled.button`
   width: 103px;
   height: 44px;
   border-radius: 8px;
+  // background-color: ${theme.palette.White}
+  // color: ${theme.palette.Navy}
   background-color: #ffffff;
   color: #31314e;
+  font-size: 18px;
 `;

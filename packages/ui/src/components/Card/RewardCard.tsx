@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { AdminContainer, AdminFlex, Flex, Text } from '../common';
+import { RelativeContainer, AbsoluteFlex, Flex, Text } from '../common';
 import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
@@ -135,8 +135,8 @@ export const AdminRewardCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <AdminContainer width={572} height={314}>
-      <AdminFlex width={572}>
+    <RelativeContainer width={572} height={314}>
+      <AbsoluteFlex width={572}>
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -146,13 +146,13 @@ export const AdminRewardCard = (props: {
               {time}
             </Text>
           </TitleWrapper>
-          <Flex direction="column" webGap={10}>
+          <Flex direction="column" webGap={10} mobileGap={10}>
             {project.map((item, idx) => {
               return (
                 <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
-                    colorCode="#31314E"
+                    color="Navy"
                     style={{ width: '126px' }}
                   >
                     {item.title}
@@ -165,8 +165,8 @@ export const AdminRewardCard = (props: {
             })}
           </Flex>
         </Box>
-      </AdminFlex>
-      <AdminFlex
+      </AbsoluteFlex>
+      <AbsoluteFlex
         width={572}
         webGap={24}
         mobileGap={24}
@@ -175,8 +175,8 @@ export const AdminRewardCard = (props: {
       >
         <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
         <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
-      </AdminFlex>
-    </AdminContainer>
+      </AbsoluteFlex>
+    </RelativeContainer>
   );
 };
 const Container = styled.div`
@@ -249,4 +249,5 @@ const Button = styled.button`
   border-radius: 8px;
   background-color: #ffffff;
   color: #31314e;
+  font-size: 18px;
 `;
