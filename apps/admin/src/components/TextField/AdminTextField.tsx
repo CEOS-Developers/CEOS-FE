@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
-import { theme } from '../../styles';
-import { Flex } from '../common';
+import { Flex, theme } from '@ceos-fe/ui';
 
 interface AdminTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
