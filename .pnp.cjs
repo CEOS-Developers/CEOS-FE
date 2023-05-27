@@ -58,6 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@emotion/babel-plugin", "npm:11.11.0"],\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@next/font", "npm:13.4.1"],\
@@ -2538,6 +2539,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ceos-fe/ceos", "workspace:apps/ceos"],\
             ["@ceos-fe/ui", "workspace:packages/ui"],\
             ["@ceos-fe/utils", "workspace:packages/utils"],\
+            ["@emotion/babel-plugin", "npm:11.11.0"],\
             ["@emotion/react", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:11.11.0"],\
             ["@emotion/styled", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:11.11.0"],\
             ["@types/eslint", "npm:8.37.0"],\
@@ -2563,6 +2565,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/ui/",\
           "packageDependencies": [\
             ["@ceos-fe/ui", "workspace:packages/ui"],\
+            ["@ceos-fe/utils", "workspace:packages/utils"],\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@types/node", "npm:20.1.0"],\
@@ -4574,6 +4577,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["ceos-fe", "workspace:."],\
+            ["@emotion/babel-plugin", "npm:11.11.0"],\
             ["@emotion/react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@emotion/styled", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:11.11.0"],\
             ["@next/font", "npm:13.4.1"],\

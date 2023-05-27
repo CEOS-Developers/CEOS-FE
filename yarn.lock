@@ -1432,6 +1432,7 @@ __metadata:
   dependencies:
     "@ceos-fe/ui": "workspace:packages/ui"
     "@ceos-fe/utils": "workspace:packages/utils"
+    "@emotion/babel-plugin": ^11.11.0
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@types/eslint": ^8
@@ -1455,6 +1456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ceos-fe/ui@workspace:packages/ui"
   dependencies:
+    "@ceos-fe/utils": "workspace:^"
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@types/node": ^20.1.0
@@ -1470,7 +1472,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ceos-fe/utils@workspace:packages/utils":
+"@ceos-fe/utils@workspace:^, @ceos-fe/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@ceos-fe/utils@workspace:packages/utils"
   dependencies:
@@ -2838,6 +2840,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ceos-fe@workspace:."
   dependencies:
+    "@emotion/babel-plugin": ^11.11.0
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@next/font": ^13.4.1

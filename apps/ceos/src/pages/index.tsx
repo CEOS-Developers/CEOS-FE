@@ -1,42 +1,15 @@
-import {
-  AdminRewardCard,
-  AdminProjectCard,
-  Flex,
-  AdminSponsorCard,
-  ProjectCard,
-} from '@ceos-fe/ui';
-import { project, rewardCards, sponsor } from '@ceos/assets';
-import { useForm } from 'react-hook-form';
+
+import { ExtraButton, Flex } from '@ceos-fe/ui';
 
 export default function Home() {
-  const { register } = useForm({
-    defaultValues: {
-      title: '',
-      content: '',
-    },
-  });
-
-  const onClickRemove = (id: number) => {};
-  const onClickUpdate = (id: number) => {};
-
   return (
     <Flex direction="column">
-      <Flex webGap={20} mobileGap={10} align="start">
-        <ProjectCard projectCard={project} />
-        <AdminProjectCard
-          projectCard={project}
-          onClickRemove={onClickRemove}
-          onClickUpdate={onClickUpdate}
-        />
-        {/* <AdminRewardCard
-          rewardCard={rewardCards}
-          onClickRemove={onClickRemove}
-          onClickUpdate={onClickUpdate}
-        /> */}
-      </Flex>
-      <Flex webGap={20} mobileGap={10} align="start" margin="20px 0 0 0">
-        <AdminSponsorCard sponsorCard={sponsor} />
-      </Flex>
+      <ExtraButton
+        buttonList={[
+          { label: '수정하기', handleClick: () => console.log('수정') },
+          { label: '삭제하기', handleClick: () => console.log('삭제') },
+        ]}
+      />
     </Flex>
   );
 }
