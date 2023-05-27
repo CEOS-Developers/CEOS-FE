@@ -247,7 +247,7 @@ const Button = styled.button`
   width: 103px;
   height: 44px;
   border-radius: 8px;
-  background-color: #ffffff;
-  color: #31314e;
+  background-color: ${theme.palette.White};
+  color: ${theme.palette.Navy};
   font-size: 18px;
 `;

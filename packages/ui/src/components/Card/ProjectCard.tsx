@@ -17,9 +17,9 @@ export const ProjectCard = (props: {
   const { img, name, explain, generation } = props.projectCard;
   return (
     <Wrapper>
-      <ProjectImg src={img} />
-      <ExplainBox className="is-hover">
-        <Row>
+      <ProjectImg src={img} className="ceos" />
+      <ExplainBox className="ceos-hover">
+        <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
             {name}
           </Text>
@@ -81,12 +81,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   @media (min-width: 1024px) {
-    & > .is-hover {
+    & > .ceos-hover {
       display: none;
     }
 
     &:hover {
-      & > .is-hover {
+      & > .ceos-hover {
         display: block;
       }
     }
@@ -99,9 +99,11 @@ const ProjectImg = styled.img`
   border-radius: 16px;
 
   @media (max-width: 1023px) {
-    width: 346px;
-    height: 194px;
-    border-radius: 10px;
+    &.ceos {
+      width: 346px;
+      height: 194px;
+      border-radius: 10px;
+    }
   }
 `;
 
@@ -120,10 +122,12 @@ const ExplainBox = styled.div`
   box-shadow: ${theme.shadow.Card.Black};
 
   @media (max-width: 1023px) {
-    margin-top: -0.5rem;
-    width: 346px;
-    height: 89px;
-    border-radius: 10px;
+    &.ceos-hover {
+      margin-top: -0.5rem;
+      width: 346px;
+      height: 89px;
+      border-radius: 10px;
+    }
   }
 `;
 
@@ -133,7 +137,9 @@ const Row = styled.div`
   margin-bottom: 10px;
   margin-top: 1rem;
   @media (max-width: 1023px) {
-    margin-top: 0;
+    &.ceos-hover {
+      margin-top: 0;
+    }
   }
 `;
 
@@ -141,9 +147,7 @@ const Button = styled.button`
   width: 103px;
   height: 44px;
   border-radius: 8px;
-  // background-color: ${theme.palette.White}
-  // color: ${theme.palette.Navy}
-  background-color: #ffffff;
-  color: #31314e;
+  background-color: ${theme.palette.White};
+  color: ${theme.palette.Navy};
   font-size: 18px;
 `;
