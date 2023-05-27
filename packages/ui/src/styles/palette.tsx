@@ -19,7 +19,7 @@ export const palette = {
   Admin: {
     Navy: '#31314E',
   },
-
+  
   Shadow: {
     Card: {
       Black: 'rgba(0, 0, 0, 0.15)',

@@ -1,3 +1,4 @@
+
 import { ExtraButton, Flex } from '@ceos-fe/ui';
 
 export default function Home() {
