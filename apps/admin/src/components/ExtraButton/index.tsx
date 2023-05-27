@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { theme } from '@ceos-fe/ui';
 import { MoreVert } from '../../assets/MoreVert';
 import { useModal } from '@ceos-fe/utils';
 
