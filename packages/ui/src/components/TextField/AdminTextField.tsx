@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
-import { Flex, theme } from '@ceos-fe/ui';
+import { theme } from '../../styles';
+import { Flex } from '../common';
 
 interface AdminTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -15,10 +16,10 @@ export const AdminTextField = forwardRef<HTMLInputElement, AdminTextFieldProps>(
       <Container direction="column" align="flex-start">
         {label && <StyledLabel>{label}</StyledLabel>}
         <StyledInput
+          {...props}
           ref={ref as ForwardedRef<HTMLInputElement>}
           placeholder={placeholder}
           spellCheck={false}
-          {...props}
         />
       </Container>
     );

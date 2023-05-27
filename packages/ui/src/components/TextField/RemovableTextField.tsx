@@ -1,5 +1,7 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
-import { theme, Flex, Text, TextField } from '@ceos-fe/ui';
+import { Flex, Text } from '../common';
+import { TextField } from './TextField';
+import { theme } from '../../styles';
 import styled from '@emotion/styled';
 
 interface RemovableTextFieldProps
@@ -37,12 +39,12 @@ export const RemovableTextField = forwardRef<
     return (
       <Container gap={gap}>
         <TextField
+          {...props}
           ref={ref}
           width={width}
           height={height}
           multiline={multiline}
           placeholder={placeholder}
-          {...props}
         />
         <ButtonBox onClick={handleClick}>
           <Text webTypo="Body2" color="Gray5">

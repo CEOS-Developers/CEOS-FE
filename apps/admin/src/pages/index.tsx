@@ -1,10 +1,6 @@
 import { ExtraButton } from '@admin/components/ExtraButton';
-import {
-  AdminTextField,
-  RemovableTextField,
-} from '@admin/components/TextField';
+import { AdminTextField, RemovableTextField } from '@ceos-fe/ui';
 import { Flex } from '@ceos-fe/ui';
-import { useForm } from 'react-hook-form';
 
 export default function Home() {
   return (
@@ -18,6 +14,7 @@ export default function Home() {
       <RemovableTextField
         width={1092}
         gap={12}
+        multiline
         handleClick={() => console.log('admin')}
       />
       <AdminTextField label="ID" placeholder="아이디를 입력해주세요" />
