@@ -1,13 +1,12 @@
-import { PassDropdown } from '@admin/components/PassDropdown';
+import { Dropdown, PassDropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
-  const { register, setValue, watch } = useForm();
+  const { setValue, watch } = useForm();
 
   return (
     <>
       <PassDropdown
-        {...register('passDropdown')}
         label="passDropdown"
         value={watch('passDropdown')}
         setValue={setValue}
@@ -23,6 +22,29 @@ export default function Home() {
             value: 'nonpass',
             color: '#FF6262',
             background: '#FFD6D6',
+          },
+        ]}
+      />
+      <Dropdown
+        label="part"
+        value={watch('part')}
+        setValue={setValue}
+        options={[
+          {
+            label: '기획',
+            value: 'strategy',
+          },
+          {
+            label: '디자인',
+            value: 'design',
+          },
+          {
+            label: '프론트',
+            value: 'frontend',
+          },
+          {
+            label: '백엔드',
+            value: 'backend',
           },
         ]}
       />

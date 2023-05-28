@@ -1,4 +1,4 @@
-import { Arrow } from '@admin/assets/Arrow';
+import { LargeArrow } from '@admin/assets/Arrow';
 import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
@@ -44,7 +44,7 @@ export const PassDropdown = ({
         <DropdownLabel color={value ? value.color : theme.palette.Gray4}>
           {value ? value.label : ''}
         </DropdownLabel>
-        <Arrow color={value ? value.color : theme.palette.Gray4} />
+        <LargeArrow color={value ? value.color : theme.palette.Gray4} />
       </DropdownButton>
 
       {isOpen && (
