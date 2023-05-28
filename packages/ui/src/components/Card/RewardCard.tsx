@@ -248,6 +248,6 @@ const Button = styled.button`
   height: 44px;
   border-radius: 8px;
   background-color: ${theme.palette.White};
-  color: ${theme.palette.Navy};
+  color: ${theme.palette.Admin.Navy};
   font-size: 18px;
 `;
