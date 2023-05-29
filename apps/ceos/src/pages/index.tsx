@@ -1,10 +1,12 @@
 import { ExtraButton, Flex } from '@ceos-fe/ui';
 import { Header } from '@ceos/components/Header';
+import { MenuBar } from '@ceos/components/MenuBar';
 
 export default function Home() {
   return (
     <>
-      <Header backColor="White" />
+      <MenuBar />
+      {/* <Header backColor="White" />
       <Flex direction="column">
         <ExtraButton
           buttonList={[
@@ -12,7 +14,7 @@ export default function Home() {
             { label: '삭제하기', handleClick: () => console.log('삭제') },
           ]}
         />
-      </Flex>
+      </Flex> */}
     </>
   );
 }

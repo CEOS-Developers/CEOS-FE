@@ -4,6 +4,7 @@ import { KeyOfPalette, typo } from '../../../../../packages/ui';
 import { Logo } from '../../assets/logo';
 import { MenuBtn } from '../../assets/header/menuBtn';
 import { theme } from '../../../../../packages/ui';
+import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
 
 export interface HeaderProps {
