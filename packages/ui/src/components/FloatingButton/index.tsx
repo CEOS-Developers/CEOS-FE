@@ -44,4 +44,9 @@ const FloatingBtnCircle = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1023px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
