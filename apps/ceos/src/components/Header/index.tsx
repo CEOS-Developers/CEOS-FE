@@ -70,7 +70,7 @@ const navCss = ({
   }
 `;
 
-const contentCss = (backColor: KeyOfPalette) => css`
+export const contentCss = (backColor: KeyOfPalette) => css`
   typo: ${typo.Web.Label1};
   color: ${backColor === 'White' ? theme.palette.Gray6 : theme.palette.Gray7};
   display: flex;
@@ -94,7 +94,7 @@ const contentCss = (backColor: KeyOfPalette) => css`
   }
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   box-sizing: border-box;
 
   &:hover {
