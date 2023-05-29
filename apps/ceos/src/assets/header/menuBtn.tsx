@@ -1,7 +1,12 @@
 import { KeyOfPalette, theme } from '../../../../../packages/ui';
 import { css } from '@emotion/react';
 
-export const MenuBtn = (backColor: KeyOfPalette) => {
+export interface MenuProps {
+  backColor: KeyOfPalette;
+}
+
+export const MenuBtn = (props: MenuProps) => {
+  const { backColor } = props;
   return (
     <div
       className="menu"
