@@ -4,10 +4,12 @@ import { theme } from '@ceos-fe/ui';
 
 interface TagProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
+  children: string;
 }
 
 /**
- * @param value: label에 들어갈 값
+ * @param value: 해당 tag가 가지는 고유한 value
+ * @param children: label로 들어갈 값
  */
 export const Tag = forwardRef<HTMLInputElement, TagProps>(
   ({ value, children, ...props }, ref) => {
