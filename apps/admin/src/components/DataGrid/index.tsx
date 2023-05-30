@@ -1,24 +1,24 @@
 import styled from '@emotion/styled';
 import { Table } from 'antd';
-import { Flex } from '@ceos-fe/ui';
-import { Pagination } from './Pagination';
+import { Pagination, PageInterface } from './Pagination';
 
 interface ColumnsInterface {
   title: string;
   dataIndex: string;
 }
-interface PageInterface {
-  page: number;
-  pageSize: number;
-  total: number;
-}
 interface DataGridProps {
   pagination: PageInterface;
   columns: ColumnsInterface[];
-  dataSource: any[];
+  dataSource: object[];
   onChangePage: (newPage: number) => void;
 }
 
+/**
+ * @param {{ page: number; pageSize: number; total: number }} pagination: 페이지 정보 객체
+ * @param {{ title: string; dataIndex: string; }[]} columns: Table에 들어갈 column 정보
+ * @param {object[]} dataSource: 현재 페이지의 데이터
+ * @param {Function} onChangePage: 페이지 넘버 수정
+ */
 export const DataGrid = ({
   pagination,
   columns,
@@ -26,19 +26,14 @@ export const DataGrid = ({
   onChangePage,
 }: DataGridProps) => {
   return (
-    <Flex width={1272} direction="column">
+    <>
       <StyledTable
         dataSource={dataSource}
         columns={columns}
         pagination={false}
       />
-      <Pagination
-        total={pagination.total}
-        page={pagination.page}
-        pageSize={pagination.pageSize}
-        onChangePage={onChangePage}
-      />
-    </Flex>
+      <Pagination pagination={pagination} onChangePage={onChangePage} />
+    </>
   );
 };
 

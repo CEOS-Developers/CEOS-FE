@@ -2,29 +2,26 @@ import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
 import { theme, Flex } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 
-interface PaginationProps {
-  total: number;
+export interface PageInterface {
   page: number;
   pageSize: number;
+  total: number;
+}
+interface PaginationProps {
+  pagination: PageInterface;
   onChangePage: (newPage: number) => void;
 }
 
 /**
- * @param {number} total: 전체 데이터 개수
- * @param {number} page: 현재 페이지 넘버
- * @param {number} pageSize: 현재 페이지 크기
+ * @param {{ page: number; pageSize: number; total: number }} pagination: 페이지 정보 객체
  * @param {Function} onChangePage: 페이지 넘버 수정
  */
-export const Pagination = ({
-  total,
-  page,
-  pageSize,
-  onChangePage,
-}: PaginationProps) => {
-  const totalPageCount = Math.ceil(total / pageSize);
+export const Pagination = ({ pagination, onChangePage }: PaginationProps) => {
+  const { total, page } = pagination;
+
   const lastPage = Math.ceil(page / 5) * 5;
   const startPage = lastPage - 4;
-  const endPage = lastPage < totalPageCount ? lastPage : totalPageCount;
+  const endPage = Math.min(lastPage, total);
 
   const handlePrevPage = () => {
     if (startPage === 1) onChangePage(1);
@@ -32,12 +29,12 @@ export const Pagination = ({
   };
 
   const handleNextPage = () => {
-    if (lastPage === endPage) onChangePage(lastPage + 1);
+    if (lastPage === endPage && total !== endPage) onChangePage(lastPage + 1);
     else onChangePage(endPage);
   };
 
   return (
-    <Flex webGap={8}>
+    <Container>
       <ArrowButton onClick={handlePrevPage}>
         <ArrowLeft />
       </ArrowButton>
@@ -56,10 +53,21 @@ export const Pagination = ({
       <ArrowButton onClick={handleNextPage}>
         <ArrowRight />
       </ArrowButton>
-    </Flex>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  position: absolute;
+  bottom: 102px;
+`;
 const Button = styled.button<{ isSelected: boolean }>`
   width: 28px;
   height: 28px;
