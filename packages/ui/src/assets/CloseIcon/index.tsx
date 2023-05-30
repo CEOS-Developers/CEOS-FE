@@ -1,21 +1,27 @@
 import { css } from '@emotion/react';
+import { useModal } from '../../../../utils';
 
-export const CloseIcon = ({
-  width = 21,
-  height = 21,
-  margin = '',
-}: {
+export interface CloseProps {
   width?: number;
   height?: number;
   margin?: string;
-}) => {
+  isOpen: boolean;
+  toggleModal: () => void;
+}
+
+export const CloseIcon = (props: CloseProps) => {
+  const { width, height, margin, isOpen, toggleModal } = props;
   return (
     <div
       css={css`
-        width: ${width}px;
-        hiegh: ${height}px;
-        margin: ${margin};
+        width: ${width || '21'}px;
+        hiegh: ${height || '21'}px;
+        margin: ${margin || ''};
+        :hover {
+          cursor: grab;
+        }
       `}
+      onClick={toggleModal}
     >
       <svg
         width="21"

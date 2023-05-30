@@ -6,6 +6,7 @@ import { MenuBtn } from '../../assets/header/menuBtn';
 import { theme } from '../../../../../packages/ui';
 import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
+import { useModal } from '../../../../../packages/utils';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -14,6 +15,8 @@ export interface HeaderProps {
 export const Header = (props: HeaderProps) => {
   const { backColor } = props;
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isOpen, modalRef, toggleModal } = useModal();
+
   //최상단인지 check
   useEffect(() => {
     const handleScroll = () => {
@@ -33,8 +36,15 @@ export const Header = (props: HeaderProps) => {
         <Content className="text">ACTIVITY</Content>
         <Content className="text">FAQ</Content>
         <Content className="text">RECRUIT</Content>
-        <MenuBtn backColor={backColor} />
+        <MenuBtn backColor={backColor} onClick={toggleModal} />
       </div>
+      {isOpen && (
+        <MenuBar
+          isOpen={isOpen}
+          modalRef={modalRef}
+          toggleModal={toggleModal}
+        />
+      )}
     </nav>
   );
 };

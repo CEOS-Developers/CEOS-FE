@@ -5,8 +5,7 @@ import { MenuBar } from '@ceos/components/MenuBar';
 export default function Home() {
   return (
     <>
-      <MenuBar />
-      {/* <Header backColor="White" />
+      <Header backColor="White" />
       <Flex direction="column">
         <ExtraButton
           buttonList={[
@@ -14,7 +13,7 @@ export default function Home() {
             { label: '삭제하기', handleClick: () => console.log('삭제') },
           ]}
         />
-      </Flex> */}
+      </Flex>
     </>
   );
 }
