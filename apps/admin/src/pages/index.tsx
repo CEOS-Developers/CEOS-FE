@@ -1,23 +1,26 @@
-import { ExtraButton } from '@admin/components/ExtraButton';
-import { AdminTextField, RemovableTextField } from '@ceos-fe/ui';
+import { Pagination } from '@admin/components/DataGrid/Pagination';
 import { Flex } from '@ceos-fe/ui';
+import { useState } from 'react';
 
 export default function Home() {
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pageSize: 10,
+    total: 45,
+  });
+
+  const onChangePage = (page: number) => {
+    setPagination({ ...pagination, page });
+  };
+
   return (
     <Flex direction="column">
-      <ExtraButton
-        buttonList={[
-          { label: '수정하기', handleClick: () => console.log('수정') },
-          { label: '삭제하기', handleClick: () => console.log('삭제') },
-        ]}
+      <Pagination
+        total={pagination.total}
+        page={pagination.page}
+        pageSize={pagination.pageSize}
+        onChangePage={onChangePage}
       />
-      <RemovableTextField
-        width={1092}
-        gap={12}
-        multiline
-        handleClick={() => console.log('admin')}
-      />
-      <AdminTextField label="ID" placeholder="아이디를 입력해주세요" />
     </Flex>
   );
 }
