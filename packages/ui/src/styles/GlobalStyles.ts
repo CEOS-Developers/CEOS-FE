@@ -34,5 +34,6 @@ export const globalStyle = css`
   input,
   textarea {
     border: none;
+    margin: 0;
   }
 `;
