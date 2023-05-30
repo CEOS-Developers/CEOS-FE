@@ -18,7 +18,7 @@ export const CloseIcon = (props: CloseProps) => {
         hiegh: ${height || '21'}px;
         margin: ${margin || ''};
         :hover {
-          cursor: grab;
+          cursor: pointer;
         }
       `}
       onClick={toggleModal}

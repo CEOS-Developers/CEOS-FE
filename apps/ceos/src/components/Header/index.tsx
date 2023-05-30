@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import { KeyOfPalette, typo } from '../../../../../packages/ui';
+import { KeyOfPalette, typo } from '@ceos-fe/ui';
 import { Logo } from '../../assets/logo';
 import { MenuBtn } from '../../assets/header/menuBtn';
-import { theme } from '../../../../../packages/ui';
+import { theme } from '@ceos-fe/ui';
 import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
-import { useModal } from '../../../../../packages/utils';
+import { useModal } from '@ceos-fe/utils';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;

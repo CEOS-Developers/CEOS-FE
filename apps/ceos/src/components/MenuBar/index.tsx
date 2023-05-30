@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Flex, FloatingButton, theme } from '../../../../../packages/ui';
-import { CloseIcon } from '../../../../../packages/ui/src/assets/CloseIcon';
+import { Flex, FloatingButton, theme } from '@ceos-fe/ui';
+import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 
 export interface MenuProps {
   isOpen: boolean;
@@ -25,10 +25,10 @@ export const MenuBar = (props: MenuProps) => {
             toggleModal={toggleModal}
           />
           <div css={contentCss}>
-            <div>PROJECT</div>
-            <div>ACTIVITY</div>
-            <div>FAQ</div>
-            <div>RECRUIT</div>
+            <p>PROJECT</p>
+            <p>ACTIVITY</p>
+            <p>FAQ</p>
+            <p>RECRUIT</p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
             <FloatingButton direction="row" />
@@ -62,12 +62,12 @@ export const contentCss = () => css`
   typo: ${theme.typo.Mobile.Heading1_Kor};
   color: ${theme.palette.Gray6};
 
-  > div {
+  > p {
     margin: 0px 150px 30px 60px;
   }
 
   > :hover {
-    cursor: grab;
+    cursor: pointer;
     color: ${theme.palette.Green};
   }
 `;

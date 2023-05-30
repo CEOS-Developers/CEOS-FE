@@ -1,4 +1,4 @@
-import { KeyOfPalette, theme } from '../../../../../packages/ui';
+import { KeyOfPalette, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
 export interface MenuProps {
