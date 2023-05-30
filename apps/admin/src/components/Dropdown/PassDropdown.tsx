@@ -30,36 +30,36 @@ export const PassDropdown = ({
   setValue,
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
+  const color = value && !isOpen ? value.color : theme.palette.Gray4;
+  const backgroundColor =
+    value && !isOpen ? value.background : theme.palette.Gray1;
 
   return (
     <Container ref={modalRef} onClick={toggleModal}>
-      <DropdownButton
-        background={value ? value.background : theme.palette.Gray1}
-        color={value ? value.color : theme.palette.Gray4}
-        width={91}
-        padding="8px 10px 8px 16px"
-        borderRadius={6}
-        justify="space-between"
-      >
-        <DropdownLabel color={value ? value.color : theme.palette.Gray4}>
-          {value ? value.label : '선택'}
-        </DropdownLabel>
-        {isOpen ? (
-          <LargeArrowUp color={value ? value.color : theme.palette.Gray4} />
-        ) : (
-          <LargeArrowDown color={value ? value.color : theme.palette.Gray4} />
-        )}
-      </DropdownButton>
+      <DropdownList background={backgroundColor} color={color}>
+        <DropdownButton width={91} borderRadius={6} justify="space-between">
+          <DropdownLabel color={color}>
+            {value ? value.label : '선택'}
+          </DropdownLabel>
+          <ArrowContainer>
+            {isOpen ? (
+              <LargeArrowUp color={color} />
+            ) : (
+              <LargeArrowDown color={color} />
+            )}
+          </ArrowContainer>
+        </DropdownButton>
 
-      {isOpen && (
-        <DropdownList>
-          {options.map((opt, idx) => (
-            <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
-              {opt.label}
-            </DropdownItem>
-          ))}
-        </DropdownList>
-      )}
+        {isOpen && (
+          <>
+            {options.map((opt, idx) => (
+              <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
+                {opt.label}
+              </DropdownItem>
+            ))}
+          </>
+        )}
+      </DropdownList>
     </Container>
   );
 };
@@ -68,13 +68,15 @@ const Container = styled.div`
   width: 91px;
   height: 34px;
 `;
-const DropdownButton = styled(Flex)<{ background: string; color: string }>`
+const ArrowContainer = styled.div`
+  position: absolute;
+  right: 26px;
+`;
+const DropdownButton = styled(Flex)`
+  position: relative;
+
   box-sizing: border-box;
-
   cursor: pointer;
-
-  border: 1px solid ${({ color }) => color};
-  background-color: ${({ background }) => background};
 `;
 const DropdownLabel = styled.p<{ color: string }>`
   font-family: 'Pretendard', 'Apple SD Gothic Neo';
@@ -83,7 +85,10 @@ const DropdownLabel = styled.p<{ color: string }>`
   line-height: 18px;
   color: ${({ color }) => color};
 `;
-const DropdownList = styled.ul`
+const DropdownList = styled.ul<{
+  color: string;
+  background: string;
+}>`
   z-index: 5;
   position: relative;
   top: 8px;
@@ -91,24 +96,18 @@ const DropdownList = styled.ul`
   box-sizing: border-box;
 
   width: 91px;
-  padding: 6px 9px 6px 13px;
+  padding: 8px 16px;
 
-  background-color: ${theme.palette.Gray1};
-  border: 1px solid ${theme.palette.Gray4};
+  background-color: ${({ background }) => background};
+  border: 1px solid ${({ color }) => color};
   border-radius: 6px;
 `;
 const DropdownItem = styled.li`
-  text-align: left;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo';
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 170%;
+  margin-top: 6px;
 
+  ${theme.typo.Mobile.Body2}
   color: ${theme.palette.Gray4};
+  text-align: left;
 
   cursor: pointer;
-
-  & + & {
-    margin-top: 6px;
-  }
 `;

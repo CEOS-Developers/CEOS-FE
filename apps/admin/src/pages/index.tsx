@@ -25,29 +25,6 @@ export default function Home() {
           },
         ]}
       />
-      <Dropdown
-        label="part"
-        value={watch('part')}
-        setValue={setValue}
-        options={[
-          {
-            label: '기획',
-            value: 'strategy',
-          },
-          {
-            label: '디자인',
-            value: 'design',
-          },
-          {
-            label: '프론트',
-            value: 'frontend',
-          },
-          {
-            label: '백엔드',
-            value: 'backend',
-          },
-        ]}
-      />
     </>
   );
 }
