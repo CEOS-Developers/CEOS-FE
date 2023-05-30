@@ -152,7 +152,7 @@ export const AdminRewardCard = (props: {
                 <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
-                    color="Navy"
+                    adminColor="Navy"
                     style={{ width: '126px' }}
                   >
                     {item.title}

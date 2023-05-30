@@ -1,16 +1,26 @@
 import styled from '@emotion/styled';
-import { KeyOfMobileTypo, KeyOfWebTypo, theme } from '../../styles';
+import {
+  KeyOfAdminPalette,
+  KeyOfMobileTypo,
+  KeyOfWebTypo,
+  theme,
+} from '../../styles';
 import { KeyOfPalette } from '../../styles';
 
 export const Text = styled.div<{
   webTypo?: KeyOfWebTypo;
   mobileTypo?: KeyOfMobileTypo;
   color?: KeyOfPalette;
+  adminColor?: KeyOfAdminPalette;
   colorCode?: string;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
-  color: ${({ color, colorCode }) =>
-    color ? theme.palette[color] : `${colorCode}`};
+  color: ${({ color, adminColor, colorCode }) =>
+    color
+      ? theme.palette[color]
+      : adminColor
+      ? theme.palette.Admin[adminColor]
+      : `${colorCode}`};
   display: flex;
   align-items: center;
 
