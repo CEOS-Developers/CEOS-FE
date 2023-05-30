@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
-import { theme, Flex } from '@ceos-fe/ui';
+import { theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 
 export interface PageInterface {
@@ -58,7 +58,7 @@ export const Pagination = ({ pagination, onChangePage }: PaginationProps) => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 1272px;
 
   display: flex;
   align-items: center;

@@ -39,4 +39,21 @@ export const DataGrid = ({
 
 const StyledTable = styled(Table)`
   width: 1272px;
+
+  .ant-table-thead .ant-table-cell {
+    background-color: #f3f5f8;
+
+    font-family: 'Pretendard', 'Apple SD Gothic Neo';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  tbody {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+  }
 `;
