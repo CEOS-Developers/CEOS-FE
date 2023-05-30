@@ -16,10 +16,10 @@ export const AdminTextField = forwardRef<HTMLInputElement, AdminTextFieldProps>(
       <Container direction="column" align="flex-start">
         {label && <StyledLabel>{label}</StyledLabel>}
         <StyledInput
+          {...props}
           ref={ref as ForwardedRef<HTMLInputElement>}
           placeholder={placeholder}
           spellCheck={false}
-          {...props}
         />
       </Container>
     );

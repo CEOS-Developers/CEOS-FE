@@ -39,12 +39,12 @@ export const RemovableTextField = forwardRef<
     return (
       <Container gap={gap}>
         <TextField
+          {...props}
           ref={ref}
           width={width}
           height={height}
           multiline={multiline}
           placeholder={placeholder}
-          {...props}
         />
         <ButtonBox onClick={handleClick}>
           <Text webTypo="Body2" color="Gray5">

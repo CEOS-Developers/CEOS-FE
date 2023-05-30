@@ -37,18 +37,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {label && <StyledLabel>{label}</StyledLabel>}
         {multiline ? (
           <StyledTextArea
+            {...props}
             ref={ref as ForwardedRef<HTMLTextAreaElement>}
             placeholder={placeholder}
             spellCheck={false}
             height={height}
-            {...props}
           />
         ) : (
           <StyledInput
+            {...props}
             ref={ref as ForwardedRef<HTMLInputElement>}
             placeholder={placeholder}
             spellCheck={false}
-            {...props}
           />
         )}
         {helperText && (
