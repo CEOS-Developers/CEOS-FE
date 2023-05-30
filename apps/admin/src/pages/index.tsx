@@ -1,4 +1,4 @@
-import { Pagination } from '@admin/components/DataGrid/Pagination';
+import { DataGrid } from '@admin/components/DataGrid';
 import { Flex } from '@ceos-fe/ui';
 import { useState } from 'react';
 
@@ -15,12 +15,7 @@ export default function Home() {
 
   return (
     <Flex direction="column">
-      <Pagination
-        total={pagination.total}
-        page={pagination.page}
-        pageSize={pagination.pageSize}
-        onChangePage={onChangePage}
-      />
+      <DataGrid pagination={pagination} onChangePage={onChangePage} />
     </Flex>
   );
 }
