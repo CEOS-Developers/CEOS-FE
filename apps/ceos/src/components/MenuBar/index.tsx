@@ -10,9 +10,8 @@ export interface MenuProps {
 
 export const MenuBar = (props: MenuProps) => {
   const { isOpen, modalRef, toggleModal } = props;
-
   return (
-    <div css={backCss}>
+    <div css={backCss} className={isOpen ? 'open' : 'close'}>
       <div
         css={positionCss(isOpen)}
         ref={modalRef}
@@ -40,20 +39,27 @@ export const MenuBar = (props: MenuProps) => {
 };
 
 export const backCss = () => css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  &.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 export const positionCss = (isOpen: boolean) => css`
   height: 100%;
-  right: ${isOpen ? '0' : '-70%'};
+  right: -90%;
   top: 0;
   position: fixed;
   background-color: ${theme.palette.White};
+
+  &.open {
+    right: 0;
+    transition: right 0.5s ease;
+  }
 `;
 
 export const contentCss = () => css`
