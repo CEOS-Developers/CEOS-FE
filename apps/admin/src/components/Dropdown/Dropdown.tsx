@@ -27,42 +27,42 @@ export const Dropdown = ({
 
   return (
     <Container ref={modalRef} onClick={toggleModal}>
-      <DropdownButton
-        width={173}
-        height={68}
-        justify="center"
-        align="center"
-        borderRadius={6}
-        webGap={8}
-      >
-        <DropdownLabel>{value ? value.label : '선택'}</DropdownLabel>
-        {isOpen ? <SmallArrowUp /> : <SmallArrowDown />}
-      </DropdownButton>
+      <DropdownList>
+        <DropdownButton borderRadius={8} webGap={8}>
+          <DropdownLabel>{value ? value.label : '선택'}</DropdownLabel>
+          <ArrowContainer>
+            {isOpen ? <SmallArrowUp /> : <SmallArrowDown />}
+          </ArrowContainer>
+        </DropdownButton>
 
-      {isOpen && (
-        <DropdownList>
-          {options.map((opt, idx) => (
-            <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
-              {opt.label}
-            </DropdownItem>
-          ))}
-        </DropdownList>
-      )}
+        {isOpen && (
+          <>
+            {options.map((opt, idx) => (
+              <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
+                {opt.label}
+              </DropdownItem>
+            ))}
+          </>
+        )}
+      </DropdownList>
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 91px;
-  height: 34px;
+  width: 166px;
+  height: 60px;
+`;
+const ArrowContainer = styled.div`
+  position: absolute;
+  right: 16px;
 `;
 const DropdownButton = styled(Flex)`
-  box-sizing: border-box;
+  position: relative;
 
+  box-sizing: border-box;
   cursor: pointer;
 
-  border: 1px solid ${theme.palette.Admin.Navy};
-  background-color: ${theme.palette.White};
   color: ${theme.palette.Admin.Navy};
 `;
 const DropdownLabel = styled.p`
@@ -75,21 +75,18 @@ const DropdownList = styled.ul`
 
   box-sizing: border-box;
 
-  width: 166px;
-  padding: 20px 0;
+  padding: 18px 0;
 
   background-color: ${theme.palette.White};
   border: 1px solid ${theme.palette.Admin.Navy};
   border-radius: 8px;
 `;
 const DropdownItem = styled.li`
+  margin-top: 30px;
+
   ${theme.typo.Web.Label1}
   text-align: center;
   color: ${theme.palette.Admin.Navy};
 
   cursor: pointer;
-
-  & + & {
-    margin-top: 30px;
-  }
 `;
