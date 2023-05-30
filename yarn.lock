@@ -1408,7 +1408,7 @@ __metadata:
   resolution: "@ceos-fe/admin@workspace:apps/admin"
   dependencies:
     "@ceos-fe/ui": "workspace:packages/ui"
-    "@ceos-fe/utils": "workspace:packages/utils"
+    "@ceos-fe/utils": "workspace:^"
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@types/eslint": ^8
