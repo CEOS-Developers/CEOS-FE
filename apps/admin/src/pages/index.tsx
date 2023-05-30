@@ -1,14 +1,6 @@
-import { DataGrid, PageInterface } from '@admin/components/DataGrid';
+import { DataGrid } from '@admin/components/DataGrid';
 import { Flex } from '@ceos-fe/ui';
 import { useState } from 'react';
-
-const dataSource = new Array(45).fill({
-  key: '1',
-  name: '주효정',
-  part: '프론트',
-  email: '2713jhj@naver.com',
-  auth: '일반유저',
-});
 
 const columns = [
   {
@@ -34,13 +26,25 @@ const columns = [
 
 export default function Home() {
   const [pagination, setPagination] = useState({
-    current: 1,
+    page: 1,
     pageSize: 10,
-    total: 45,
+    total: 70,
   });
+  const [dataSource, setDataSource] = useState([] as any[]);
 
-  const onChangePage = (newPage: PageInterface) => {
-    setPagination({ ...pagination, current: newPage.current ?? 1 });
+  const onChangePage = (newPage: number) => {
+    setPagination({ ...pagination, page: newPage });
+    setDataSource(
+      Array.from(new Array(10), (_, i) => {
+        return {
+          key: i,
+          name: `주효정${newPage * 5 + i + 1}`,
+          part: '프론트',
+          email: '2713jhj@naver.com',
+          auth: '일반유저',
+        };
+      }),
+    );
   };
 
   return (

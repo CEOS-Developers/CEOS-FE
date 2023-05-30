@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
-import { Flex, theme } from '@ceos-fe/ui';
+import { theme, Flex } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 
 interface PaginationProps {
@@ -21,14 +21,30 @@ export const Pagination = ({
   pageSize,
   onChangePage,
 }: PaginationProps) => {
-  const pageCount = Math.ceil(total / pageSize);
+  const totalPageCount = Math.ceil(total / pageSize);
+  const lastPage = Math.ceil(page / 5) * 5;
+  const startPage = lastPage - 4;
+  const endPage = lastPage < totalPageCount ? lastPage : totalPageCount;
+
+  const handlePrevPage = () => {
+    if (startPage === 1) onChangePage(1);
+    else onChangePage(startPage - 5);
+  };
+
+  const handleNextPage = () => {
+    if (lastPage === endPage) onChangePage(lastPage + 1);
+    else onChangePage(endPage);
+  };
 
   return (
     <Flex webGap={8}>
-      <ArrowButton>
+      <ArrowButton onClick={handlePrevPage}>
         <ArrowLeft />
       </ArrowButton>
-      {Array.from(new Array(pageCount), (_, i) => i + 1).map((pageNumber) => (
+      {Array.from(
+        new Array(endPage - startPage + 1),
+        (_, i) => startPage + i,
+      ).map((pageNumber) => (
         <Button
           key={pageNumber}
           isSelected={pageNumber === page}
@@ -37,7 +53,7 @@ export const Pagination = ({
           {pageNumber}
         </Button>
       ))}
-      <ArrowButton>
+      <ArrowButton onClick={handleNextPage}>
         <ArrowRight />
       </ArrowButton>
     </Flex>

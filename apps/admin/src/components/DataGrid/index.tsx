@@ -1,21 +1,22 @@
 import styled from '@emotion/styled';
 import { Table } from 'antd';
 import { Flex } from '@ceos-fe/ui';
+import { Pagination } from './Pagination';
 
 interface ColumnsInterface {
   title: string;
   dataIndex: string;
 }
-export interface PageInterface {
-  current?: number;
-  pageSize?: number;
-  total?: number;
+interface PageInterface {
+  page: number;
+  pageSize: number;
+  total: number;
 }
 interface DataGridProps {
   pagination: PageInterface;
   columns: ColumnsInterface[];
   dataSource: any[];
-  onChangePage: (newPage: PageInterface) => void;
+  onChangePage: (newPage: number) => void;
 }
 
 export const DataGrid = ({
@@ -25,12 +26,17 @@ export const DataGrid = ({
   onChangePage,
 }: DataGridProps) => {
   return (
-    <Flex width={1272}>
+    <Flex width={1272} direction="column">
       <StyledTable
         dataSource={dataSource}
         columns={columns}
-        pagination={{ total: pagination.total, pageSize: pagination.pageSize }}
-        onChange={onChangePage}
+        pagination={false}
+      />
+      <Pagination
+        total={pagination.total}
+        page={pagination.page}
+        pageSize={pagination.pageSize}
+        onChangePage={onChangePage}
       />
     </Flex>
   );
