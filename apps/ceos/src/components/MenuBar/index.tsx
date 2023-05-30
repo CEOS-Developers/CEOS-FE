@@ -77,8 +77,3 @@ export const contentCss = () => css`
     color: ${theme.palette.Green};
   }
 `;
-
-/*
-해야할 일
-2. 애니메이션으로 스르륵
-*/

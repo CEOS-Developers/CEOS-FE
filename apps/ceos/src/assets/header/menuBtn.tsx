@@ -15,7 +15,7 @@ export const MenuBtn = (props: MenuProps) => {
       css={css`
         color: ${backColor === 'White' ? theme.palette.Gray8 : 'white'};
         &:hover {
-          cursor: grab;
+          cursor: pointer;
         }
       `}
       onClick={onClick}
