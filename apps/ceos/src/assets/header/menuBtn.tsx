@@ -1,13 +1,24 @@
-import { KeyOfPalette, theme } from '../../../../../packages/ui';
+import { KeyOfPalette, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
-export const MenuBtn = (backColor: KeyOfPalette) => {
+export interface MenuProps {
+  backColor: KeyOfPalette;
+  onClick: () => void;
+}
+
+export const MenuBtn = (props: MenuProps) => {
+  const { backColor, onClick } = props;
+
   return (
     <div
       className="menu"
       css={css`
         color: ${backColor === 'White' ? theme.palette.Gray8 : 'white'};
+        &:hover {
+          cursor: pointer;
+        }
       `}
+      onClick={onClick}
     >
       <svg
         width="30"

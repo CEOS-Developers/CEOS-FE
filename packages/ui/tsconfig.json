@@ -20,5 +20,5 @@
     "declaration": true,
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["src", "custom.d.ts"]
+  "include": ["src/**/*.ts", "custom.d.ts"]
 }
