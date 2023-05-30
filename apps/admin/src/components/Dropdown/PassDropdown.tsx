@@ -1,4 +1,4 @@
-import { LargeArrow } from '@admin/assets/Arrow';
+import { LargeArrowDown, LargeArrowUp } from '@admin/assets/Arrow';
 import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
@@ -42,9 +42,13 @@ export const PassDropdown = ({
         justify="space-between"
       >
         <DropdownLabel color={value ? value.color : theme.palette.Gray4}>
-          {value ? value.label : ''}
+          {value ? value.label : '선택'}
         </DropdownLabel>
-        <LargeArrow color={value ? value.color : theme.palette.Gray4} />
+        {isOpen ? (
+          <LargeArrowUp color={value ? value.color : theme.palette.Gray4} />
+        ) : (
+          <LargeArrowDown color={value ? value.color : theme.palette.Gray4} />
+        )}
       </DropdownButton>
 
       {isOpen && (

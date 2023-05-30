@@ -2,7 +2,7 @@ import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
-import { SmallArrow } from '@admin/assets/Arrow';
+import { SmallArrowDown, SmallArrowUp } from '@admin/assets/Arrow';
 
 interface DropdownProps {
   options: { label: string; value: string }[];
@@ -35,8 +35,8 @@ export const Dropdown = ({
         borderRadius={6}
         webGap={8}
       >
-        <DropdownLabel>{value ? value.label : ''}</DropdownLabel>
-        <SmallArrow />
+        <DropdownLabel>{value ? value.label : '선택'}</DropdownLabel>
+        {isOpen ? <SmallArrowUp /> : <SmallArrowDown />}
       </DropdownButton>
 
       {isOpen && (
@@ -75,12 +75,12 @@ const DropdownList = styled.ul`
 
   box-sizing: border-box;
 
-  width: 173px;
+  width: 166px;
   padding: 20px 0;
 
   background-color: ${theme.palette.White};
   border: 1px solid ${theme.palette.Admin.Navy};
-  border-radius: 6px;
+  border-radius: 8px;
 `;
 const DropdownItem = styled.li`
   ${theme.typo.Web.Label1}
