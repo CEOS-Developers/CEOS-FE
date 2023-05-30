@@ -5,10 +5,12 @@ import { KeyOfPalette } from '../../styles';
 export const Text = styled.div<{
   webTypo?: KeyOfWebTypo;
   mobileTypo?: KeyOfMobileTypo;
-  color: KeyOfPalette;
+  color?: KeyOfPalette;
+  colorCode?: string;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
-  color: ${({ color }) => theme.palette[color]};
+  color: ${({ color, colorCode }) =>
+    color ? theme.palette[color] : `${colorCode}`};
   display: flex;
   align-items: center;
 

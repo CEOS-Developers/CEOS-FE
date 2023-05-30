@@ -1,12 +1,13 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { Flex, Text } from '../common';
+import { RelativeContainer, AbsoluteFlex, Flex, Text } from '../common';
 import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
 
 export interface IRewardCard {
+  id: number;
   generation: string;
   time: string;
   project: { title: string; explain: string }[];
@@ -122,6 +123,62 @@ export const RewardCard = (props: {
     </Container>
   );
 };
+
+export const AdminRewardCard = (props: {
+  rewardCard: IRewardCard;
+  onClickRemove: (id: number) => void;
+  onClickUpdate: (id: number) => void;
+}): EmotionJSX.Element => {
+  const { id, generation, time, project } = props.rewardCard;
+  const [onClickRemove, onClickUpdate] = [
+    props.onClickRemove,
+    props.onClickUpdate,
+  ];
+  return (
+    <RelativeContainer width={572} height={314}>
+      <AbsoluteFlex width={572}>
+        <Box>
+          <TitleWrapper>
+            <Text webTypo="Heading4" color="Black">
+              {generation}
+            </Text>
+            <Text webTypo="Label3" color="Gray5">
+              {time}
+            </Text>
+          </TitleWrapper>
+          <Flex direction="column" webGap={10} mobileGap={10}>
+            {project.map((item, idx) => {
+              return (
+                <Flex justify="start" key={idx}>
+                  <Text
+                    webTypo="Label1"
+                    color="Navy"
+                    style={{ width: '126px' }}
+                  >
+                    {item.title}
+                  </Text>
+                  <Text webTypo="Body2" color="Black">
+                    {item.explain}
+                  </Text>
+                </Flex>
+              );
+            })}
+          </Flex>
+        </Box>
+      </AbsoluteFlex>
+      <AbsoluteFlex
+        width={572}
+        webGap={24}
+        mobileGap={24}
+        borderRadius={20}
+        className="is-hover"
+      >
+        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
+        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+      </AbsoluteFlex>
+    </RelativeContainer>
+  );
+};
 const Container = styled.div`
   & > .web {
     display: block;
@@ -142,6 +199,8 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -152,14 +211,10 @@ const Box = styled.div`
 
   > .extended {
     display: none;
-    // max-height: 0px;
-    // transition: max-height 0.5s ease-in;
   }
   :hover {
     > .extended {
       display: block;
-      // max-height: 500px;
-      // transition: max-height 0.5s ease-in;
     }
   }
 
@@ -186,4 +241,13 @@ const TitleWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 16px;
+`;
+
+const Button = styled.button`
+  width: 103px;
+  height: 44px;
+  border-radius: 8px;
+  background-color: ${theme.palette.White};
+  color: ${theme.palette.Admin.Navy};
+  font-size: 18px;
 `;
