@@ -54,9 +54,6 @@ export const positionCss = (isOpen: boolean) => css`
   top: 0;
   position: fixed;
   background-color: ${theme.palette.White};
-  & .open {
-    transition: right 1s ease;
-  }
 `;
 
 export const contentCss = () => css`
