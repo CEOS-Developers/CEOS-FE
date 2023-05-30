@@ -1,27 +1,41 @@
 import styled from '@emotion/styled';
-import { Pagination } from './Pagination';
+import { Table } from 'antd';
+import { Flex } from '@ceos-fe/ui';
 
+interface ColumnsInterface {
+  title: string;
+  dataIndex: string;
+}
+export interface PageInterface {
+  current?: number;
+  pageSize?: number;
+  total?: number;
+}
 interface DataGridProps {
-  pagination: {
-    page: number;
-    pageSize: number;
-    total: number;
-  };
-  onChangePage: (newPage: number) => void;
+  pagination: PageInterface;
+  columns: ColumnsInterface[];
+  dataSource: any[];
+  onChangePage: (newPage: PageInterface) => void;
 }
 
-export const DataGrid = ({ pagination, onChangePage }: DataGridProps) => {
+export const DataGrid = ({
+  pagination,
+  columns,
+  dataSource,
+  onChangePage,
+}: DataGridProps) => {
   return (
-    <Container>
-      data grid
-      <Pagination
-        total={pagination.total}
-        page={pagination.page}
-        pageSize={pagination.pageSize}
-        onChangePage={onChangePage}
+    <Flex width={1272}>
+      <StyledTable
+        dataSource={dataSource}
+        columns={columns}
+        pagination={{ total: pagination.total, pageSize: pagination.pageSize }}
+        onChange={onChangePage}
       />
-    </Container>
+    </Flex>
   );
 };
 
-const Container = styled.div``;
+const StyledTable = styled(Table)`
+  width: 1272px;
+`;

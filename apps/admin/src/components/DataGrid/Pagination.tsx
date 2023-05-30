@@ -1,4 +1,5 @@
-import { Flex } from '@ceos-fe/ui';
+import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
+import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 
 interface PaginationProps {
@@ -24,6 +25,9 @@ export const Pagination = ({
 
   return (
     <Flex webGap={8}>
+      <ArrowButton>
+        <ArrowLeft />
+      </ArrowButton>
       {Array.from(new Array(pageCount), (_, i) => i + 1).map((pageNumber) => (
         <Button
           key={pageNumber}
@@ -33,6 +37,9 @@ export const Pagination = ({
           {pageNumber}
         </Button>
       ))}
+      <ArrowButton>
+        <ArrowRight />
+      </ArrowButton>
     </Flex>
   );
 };
@@ -45,6 +52,22 @@ const Button = styled.button<{ isSelected: boolean }>`
 
   border-radius: 4px;
   border: ${({ isSelected }) =>
-    isSelected ? '1px solid #212135' : '1px solid #e2e2e2'};
-  color: ${({ isSelected }) => (isSelected ? '#212135' : '#e2e2e2')};
+    isSelected
+      ? `1px solid ${theme.palette.Admin.DeepNavy}`
+      : '1px solid #e2e2e2'};
+  background-color: ${theme.palette.White};
+  color: ${({ isSelected }) =>
+    isSelected ? theme.palette.Admin.DeepNavy : '#e2e2e2'};
+`;
+const ArrowButton = styled.button`
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  border-radius: 4px;
+  background-color: ${theme.palette.Admin.DeepNavy};
 `;
