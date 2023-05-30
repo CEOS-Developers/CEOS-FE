@@ -47,6 +47,9 @@ const StyledTable = styled(Table)`
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+
+    border-start-start-radius: 0 !important;
+    border-start-end-radius: 0 !important;
   }
 
   tbody {
