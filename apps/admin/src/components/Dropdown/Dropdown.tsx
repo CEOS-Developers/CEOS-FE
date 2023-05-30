@@ -36,13 +36,13 @@ export const Dropdown = ({
         </DropdownButton>
 
         {isOpen && (
-          <>
+          <Flex direction="column" webGap={30} margin="32px 0 14px 0">
             {options.map((opt, idx) => (
               <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
                 {opt.label}
               </DropdownItem>
             ))}
-          </>
+          </Flex>
         )}
       </DropdownList>
     </Container>
@@ -50,6 +50,8 @@ export const Dropdown = ({
 };
 
 const Container = styled.div`
+  z-index: 5;
+
   width: 166px;
   height: 60px;
 `;
@@ -69,10 +71,6 @@ const DropdownLabel = styled.p`
   ${theme.typo.Web.Label1}
 `;
 const DropdownList = styled.ul`
-  z-index: 5;
-  position: relative;
-  top: 8px;
-
   box-sizing: border-box;
 
   padding: 18px 0;
@@ -82,8 +80,6 @@ const DropdownList = styled.ul`
   border-radius: 8px;
 `;
 const DropdownItem = styled.li`
-  margin-top: 30px;
-
   ${theme.typo.Web.Label1}
   text-align: center;
   color: ${theme.palette.Admin.Navy};

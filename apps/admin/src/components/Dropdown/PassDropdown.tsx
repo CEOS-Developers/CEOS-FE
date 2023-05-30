@@ -65,6 +65,8 @@ export const PassDropdown = ({
 };
 
 const Container = styled.div`
+  z-index: 5;
+
   width: 91px;
   height: 34px;
 `;
@@ -89,10 +91,6 @@ const DropdownList = styled.ul<{
   color: string;
   background: string;
 }>`
-  z-index: 5;
-  position: relative;
-  top: 8px;
-
   box-sizing: border-box;
 
   width: 91px;
