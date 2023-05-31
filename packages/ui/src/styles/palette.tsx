@@ -18,8 +18,9 @@ export const palette = {
 
   Admin: {
     Navy: '#31314E',
+    DeepNavy: '#212135',
   },
-  
+
   Shadow: {
     Card: {
       Black: 'rgba(0, 0, 0, 0.15)',
