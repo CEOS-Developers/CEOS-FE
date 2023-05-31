@@ -12,6 +12,11 @@ export const Email = ({
       css={css`
         width: ${width}px;
         height: ${height}px;
+
+        @media (max-width: 1023px) {
+          width: 25px;
+          height: 25px;
+        }
       `}
     >
       <svg
