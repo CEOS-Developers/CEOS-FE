@@ -25,7 +25,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       helperText,
       placeholder = '내용을 입력해주세요.',
-      width = 372,
+      width = 328,
       height,
       multiline = false,
       ...props
@@ -80,7 +80,7 @@ const Container = styled(Flex)<{ width: number }>`
   }
 `;
 const StyledHelperTextBox = styled.div`
-  margin-top: 12px;
+  margin-top: 8px;
 
   @media (max-width: 1023px) {
     margin-top: 14px;
@@ -97,7 +97,7 @@ const StyledInput = styled.input`
 
   border: 1px solid ${theme.palette.Gray1};
 
-  ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body3};
   color: ${theme.palette.Black};
 
   :focus {
@@ -114,8 +114,8 @@ const StyledInput = styled.input`
 `;
 const StyledTextArea = styled.textarea<{ height?: number }>`
   width: 100%;
-  height: ${({ height }) => (height ? height : 249)}px;
-  padding: ${({ height }) => (height ? '8px 16px' : '16px 8px 16px 24px')};
+  height: ${({ height }) => (height ? height : 240)}px;
+  padding: ${({ height }) => (height ? '8px 16px' : '12px 8px 12px 16px')};
 
   box-sizing: border-box;
 
@@ -125,7 +125,7 @@ const StyledTextArea = styled.textarea<{ height?: number }>`
 
   border: 1px solid ${theme.palette.Gray1};
 
-  ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body3};
   color: ${theme.palette.Black};
 
   :focus {
@@ -152,15 +152,15 @@ const StyledTextArea = styled.textarea<{ height?: number }>`
   }
 `;
 const StyledLabel = styled.p`
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 
-  ${theme.typo.Web.Label2};
+  ${theme.typo.Web.Label3};
   color: ${theme.palette.Black};
 
   @media (max-width: 1023px) {
     margin-bottom: 14px;
 
-    ${theme.typo.Mobile.Heading4};
+    ${theme.typo.Mobile.Label1};
   }
 `;
 const StyledHelperText = styled.p<{ isImportant: boolean }>`
