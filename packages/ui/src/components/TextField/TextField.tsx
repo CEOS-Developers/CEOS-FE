@@ -19,7 +19,10 @@ interface TextFieldProps
  * @param {number} height: height size
  * @param {boolean} multiline: 여러 줄
  */
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+export const TextField = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  TextFieldProps
+>(
   (
     {
       label,
@@ -56,7 +59,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {helperText.map((helper, idx) => (
               <StyledHelperText
                 key={idx}
-                placeholder={placeholder}
                 isImportant={helper.type === 'important'}
               >
                 {helper.text}

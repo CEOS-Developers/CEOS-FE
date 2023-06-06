@@ -21,7 +21,7 @@ interface RemovableTextFieldProps
  * @param {Function} handleClick: 버튼 클릭 시 이벤트
  */
 export const RemovableTextField = forwardRef<
-  HTMLInputElement,
+  HTMLInputElement | HTMLTextAreaElement,
   RemovableTextFieldProps
 >(
   (
