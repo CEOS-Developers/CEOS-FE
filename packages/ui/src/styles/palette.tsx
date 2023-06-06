@@ -19,6 +19,10 @@ export const palette = {
   Admin: {
     Navy: '#31314E',
     DeepNavy: '#212135',
+    Green1: '#01D1A8',
+    Green2: '#D4FFF7',
+    Red1: '#FF6262',
+    Red2: '#FFE7E7',
   },
 
   Shadow: {
