@@ -58,19 +58,19 @@ export const Pagination = ({ pagination, onChangePage }: PaginationProps) => {
 };
 
 const Container = styled.div`
-  width: 1272px;
+  width: 1032px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 
   position: absolute;
   bottom: 102px;
 `;
 const Button = styled.button<{ isSelected: boolean }>`
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
 
   box-sizing: border-box;
 
@@ -82,10 +82,12 @@ const Button = styled.button<{ isSelected: boolean }>`
   background-color: ${theme.palette.White};
   color: ${({ isSelected }) =>
     isSelected ? theme.palette.Admin.DeepNavy : '#e2e2e2'};
+
+  ${theme.typo.Web.Body3}
 `;
 const ArrowButton = styled.button`
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
 
   display: flex;
   justify-content: center;
