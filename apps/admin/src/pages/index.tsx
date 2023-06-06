@@ -27,6 +27,31 @@ export default function Home() {
         value={watch('passDropdown')}
         placeholder="선택"
       />
+      <Dropdown
+        options={[
+          {
+            label: '기획',
+            value: 'strategy',
+          },
+          {
+            label: '디자인',
+            value: 'design',
+          },
+          {
+            label: '프론트엔드',
+            value: 'frontend',
+          },
+          {
+            label: '백엔드',
+            value: 'backend',
+          },
+        ]}
+        label="partDropdown"
+        setValue={setValue}
+        value={watch('partDropdown')}
+        placeholder="파트 선택"
+        width={152}
+      />
     </>
   );
 }

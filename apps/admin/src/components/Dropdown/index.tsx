@@ -10,12 +10,12 @@ interface DropdownProps {
   label: string;
   value: DropdownItemInterface;
   setValue: UseFormSetValue<FieldValues>;
-  placeholder: string;
+  placeholder?: string;
   width?: number;
 }
 
 /**
- * @param {{ label: string; value: string; color?: string; background?: string; }[]} options: dropdown option 목록
+ * @param {{ label: string; value: string; color: string; background: string; }[]} options: dropdown option 목록
  * @param {string} label: dropdown 고유 label
  * @param { label: string; value: string; color: string; background: string; } value: 현재 선택된 값
  * @param { UseFormSetValue } setValue: dropdown 값 변경을 위한 함수
@@ -27,7 +27,7 @@ export const Dropdown = ({
   label,
   value,
   setValue,
-  placeholder,
+  placeholder = '선택',
   width = 89,
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
@@ -57,7 +57,11 @@ export const Dropdown = ({
         {isOpen && (
           <>
             {options.map((opt, idx) => (
-              <DropdownItem key={idx} onClick={() => setValue(label, opt)}>
+              <DropdownItem
+                key={idx}
+                onClick={() => setValue(label, opt)}
+                isSelected={value ? value.value === opt.value : false}
+              >
                 {opt.label}
               </DropdownItem>
             ))}
@@ -101,11 +105,12 @@ const DropdownList = styled.ul<{
   border: 1px solid ${({ color }) => color};
   border-radius: 8px;
 `;
-const DropdownItem = styled.li`
+const DropdownItem = styled.li<{ isSelected: boolean }>`
   margin-top: 8px;
 
   ${theme.typo.Web.Body3}
-  color: ${theme.palette.Gray4};
+  color: ${({ isSelected }) =>
+    isSelected ? theme.palette.Admin.DeepNavy : theme.palette.Gray4};
   text-align: left;
 
   cursor: pointer;
