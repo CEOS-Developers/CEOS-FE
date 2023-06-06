@@ -3,13 +3,8 @@ import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { DropdownItemInterface, setColor } from '@admin/utils/dropdown';
 
-interface DropdownItemInterface {
-  label: string;
-  value: string;
-  color?: string;
-  background?: string;
-}
 interface DropdownProps {
   options: DropdownItemInterface[];
   label: string;
@@ -36,8 +31,8 @@ export const Dropdown = ({
   width = 89,
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
-  const color =
-    value && value.color && !isOpen ? value.color : theme.palette.Admin.Navy;
+  const color = setColor(value, isOpen);
+
   const backgroundColor =
     value && value.background && !isOpen
       ? value.background
@@ -46,7 +41,7 @@ export const Dropdown = ({
   return (
     <Container ref={modalRef} onClick={toggleModal} width={width}>
       <DropdownList background={backgroundColor} color={color}>
-        <DropdownButton width={width} borderRadius={6} justify="space-between">
+        <DropdownButton width={width} borderRadius={8} justify="space-between">
           <DropdownLabel color={color}>
             {value && !isOpen ? value.label : placeholder}
           </DropdownLabel>
@@ -81,7 +76,7 @@ const Container = styled.div<{ width: number }>`
 `;
 const ArrowContainer = styled.div`
   position: absolute;
-  right: 26px;
+  right: 32px;
 `;
 const DropdownButton = styled(Flex)`
   position: relative;
@@ -90,10 +85,7 @@ const DropdownButton = styled(Flex)`
   cursor: pointer;
 `;
 const DropdownLabel = styled.p<{ color: string }>`
-  font-family: 'Pretendard', 'Apple SD Gothic Neo';
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
+  ${theme.typo.Web.Label3}
   color: ${({ color }) => color};
 `;
 const DropdownList = styled.ul<{
@@ -103,16 +95,16 @@ const DropdownList = styled.ul<{
   box-sizing: border-box;
 
   width: 100%;
-  padding: 8px 16px;
+  padding: 6px 16px;
 
   background-color: ${({ background }) => background};
   border: 1px solid ${({ color }) => color};
-  border-radius: 6px;
+  border-radius: 8px;
 `;
 const DropdownItem = styled.li`
-  margin-top: 6px;
+  margin-top: 8px;
 
-  ${theme.typo.Mobile.Body2}
+  ${theme.typo.Web.Body3}
   color: ${theme.palette.Gray4};
   text-align: left;
 
