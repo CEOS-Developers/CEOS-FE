@@ -3,7 +3,11 @@ import { Flex, theme } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
-import { DropdownItemInterface, setColor } from '@admin/utils/dropdown';
+import {
+  DropdownItemInterface,
+  setBackgroundColor,
+  setColor,
+} from '@admin/utils/dropdown';
 
 interface DropdownProps {
   options: DropdownItemInterface[];
@@ -32,11 +36,7 @@ export const Dropdown = ({
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
   const color = setColor(value, isOpen);
-
-  const backgroundColor =
-    value && value.background && !isOpen
-      ? value.background
-      : theme.palette.White;
+  const backgroundColor = setBackgroundColor(value, isOpen);
 
   return (
     <Container ref={modalRef} onClick={toggleModal} width={width}>

@@ -18,3 +18,13 @@ export const setColor = (
   }
   return theme.palette.Admin.DeepNavy;
 };
+
+export const setBackgroundColor = (
+  value: DropdownItemInterface,
+  isOpen: boolean,
+): string => {
+  if (value && value.background && !isOpen) {
+    return value.background;
+  }
+  return theme.palette.White;
+};
