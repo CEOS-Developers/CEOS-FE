@@ -2,7 +2,6 @@ import { DataGrid } from '@admin/components/DataGrid';
 import { useState } from 'react';
 import { PageInterface } from '@admin/components/DataGrid/Pagination';
 import styled from '@emotion/styled';
-import { Flex } from '@ceos-fe/ui';
 
 export default function Home() {
   const [pagination, setPagination] = useState<PageInterface>({
@@ -26,21 +25,28 @@ export default function Home() {
     {
       title: '이름',
       dataIndex: 'name',
-      width: '271px',
+      width: '176px',
     },
     {
-      title: '직군',
+      title: '파트',
       dataIndex: 'part',
-      width: '301px',
+      width: '176px',
     },
     {
       title: '이메일',
       dataIndex: 'email',
+      width: '471px',
     },
     {
       title: '권한',
       dataIndex: 'auth',
-      width: '300px',
+      width: '120px',
+    },
+    {
+      title: '관리',
+      dataIndex: 'setting',
+      width: '89px',
+      render: () => <p>삭제하기</p>,
     },
   ];
 

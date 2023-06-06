@@ -38,7 +38,7 @@ export const DataGrid = ({
 };
 
 const StyledTable = styled(Table)`
-  width: 1272px;
+  width: 1032px;
 
   .ant-table-thead .ant-table-cell {
     background-color: #f3f5f8;
