@@ -39,7 +39,12 @@ export const Dropdown = ({
   const backgroundColor = setBackgroundColor(value, isOpen);
 
   return (
-    <Container ref={modalRef} onClick={toggleModal} width={width}>
+    <Container
+      ref={modalRef}
+      onClick={toggleModal}
+      width={width}
+      isOpen={isOpen}
+    >
       <DropdownList background={backgroundColor} color={color}>
         <DropdownButton width={width} borderRadius={8} justify="space-between">
           <DropdownLabel color={color}>
@@ -72,8 +77,9 @@ export const Dropdown = ({
   );
 };
 
-const Container = styled.div<{ width: number }>`
-  z-index: 5;
+const Container = styled.div<{ width: number; isOpen: boolean }>`
+  position: relative;
+  z-index: ${({ isOpen }) => (isOpen ? 10 : 5)};
 
   width: ${({ width }) => width}px;
   height: 34px;
