@@ -1,4 +1,4 @@
-import { Flex, TextField } from '@ceos-fe/ui';
+import { Flex, TextField, theme } from '@ceos-fe/ui';
 
 export default function Home() {
   return (
@@ -30,6 +30,13 @@ export default function Home() {
       />
       <TextField isAdmin />
       <TextField isAdmin width={680} label="개발" />
+      <TextField isAdmin isSubTextField height={112} width={923} multiline />
+      <TextField
+        isAdmin
+        isSubTextField
+        width={923}
+        fontColor={theme.palette.Blue}
+      />
     </Flex>
   );
 }

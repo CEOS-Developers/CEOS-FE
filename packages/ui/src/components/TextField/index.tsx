@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import { theme } from '../../styles';
+import { SubTextFieldIcon } from '../../assets/SubTextFieldIcon';
 import { Flex } from '../common';
 
 interface TextFieldProps
@@ -11,6 +12,8 @@ interface TextFieldProps
   height?: number;
   multiline?: boolean;
   isAdmin?: boolean;
+  isSubTextField?: boolean;
+  fontColor?: string;
 }
 
 /**
@@ -19,6 +22,9 @@ interface TextFieldProps
  * @param {number} width: width size
  * @param {number} height: height size
  * @param {boolean} multiline: 여러 줄
+ * @param {boolean} isAdmin: 어드민용 TextField 여부
+ * @param {boolean} isSubTextField: 하위 TextField 여부
+ * @param {boolean} fontColor: TextField 내부 폰트 색상
  */
 export const TextField = forwardRef<
   HTMLInputElement | HTMLTextAreaElement,
@@ -33,6 +39,8 @@ export const TextField = forwardRef<
       height,
       multiline = false,
       isAdmin = false,
+      isSubTextField = false,
+      fontColor = theme.palette.Black,
       ...props
     },
     ref,
@@ -40,23 +48,29 @@ export const TextField = forwardRef<
     return (
       <Container width={width}>
         {label && <StyledLabel>{label}</StyledLabel>}
-        {multiline ? (
-          <StyledTextArea
-            {...props}
-            ref={ref as ForwardedRef<HTMLTextAreaElement>}
-            placeholder={placeholder}
-            spellCheck={false}
-            height={height}
-          />
-        ) : (
-          <StyledInput
-            {...props}
-            ref={ref as ForwardedRef<HTMLInputElement>}
-            placeholder={placeholder}
-            spellCheck={false}
-            isAdmin={isAdmin}
-          />
-        )}
+        <Flex align="flex-start">
+          {isSubTextField && <SubTextFieldIcon />}
+          {multiline ? (
+            <StyledTextArea
+              {...props}
+              ref={ref as ForwardedRef<HTMLTextAreaElement>}
+              placeholder={placeholder}
+              spellCheck={false}
+              height={height}
+              isAdmin={isAdmin}
+              fontColor={fontColor}
+            />
+          ) : (
+            <StyledInput
+              {...props}
+              ref={ref as ForwardedRef<HTMLInputElement>}
+              placeholder={placeholder}
+              spellCheck={false}
+              isAdmin={isAdmin}
+              fontColor={fontColor}
+            />
+          )}
+        </Flex>
         {helperText && (
           <StyledHelperTextBox>
             {helperText.map((helper, idx) => (
@@ -91,7 +105,7 @@ const StyledHelperTextBox = styled.div`
     margin-top: 14px;
   }
 `;
-const StyledInput = styled.input<{ isAdmin: boolean }>`
+const StyledInput = styled.input<{ isAdmin: boolean; fontColor: string }>`
   width: 100%;
   padding: 8px 16px;
 
@@ -103,7 +117,7 @@ const StyledInput = styled.input<{ isAdmin: boolean }>`
   border: 1px solid ${theme.palette.Gray1};
 
   ${theme.typo.Web.Body3};
-  color: ${theme.palette.Black};
+  color: ${({ fontColor }) => fontColor};
 
   :focus {
     border: 1px solid
@@ -119,7 +133,11 @@ const StyledInput = styled.input<{ isAdmin: boolean }>`
     ${theme.typo.Mobile.Body1};
   }
 `;
-const StyledTextArea = styled.textarea<{ height?: number }>`
+const StyledTextArea = styled.textarea<{
+  isAdmin: boolean;
+  height?: number;
+  fontColor: string;
+}>`
   width: 100%;
   height: ${({ height }) => (height ? height : 240)}px;
   padding: ${({ height }) => (height ? '8px 16px' : '12px 8px 12px 16px')};
@@ -133,10 +151,12 @@ const StyledTextArea = styled.textarea<{ height?: number }>`
   border: 1px solid ${theme.palette.Gray1};
 
   ${theme.typo.Web.Body3};
-  color: ${theme.palette.Black};
+  color: ${({ fontColor }) => fontColor};
 
   :focus {
-    border: 1px solid ${theme.palette.Blue};
+    border: 1px solid
+      ${({ isAdmin }) =>
+        isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
   }
 
   ::placeholder {
