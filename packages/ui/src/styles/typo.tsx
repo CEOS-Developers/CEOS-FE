@@ -6,6 +6,7 @@ export const typo = {
   Web: {
     Heading1_Eng: css`
       font-family: 'Gilroy-Bold', 'Apple SD Gothic Neo';
+      font-weight: 800;
       font-size: ${calcRem(36)};
       line-height: 122.5%;
     `,
