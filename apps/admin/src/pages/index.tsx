@@ -28,6 +28,7 @@ export default function Home() {
         width={856}
         label="1. CEOS에 지원한 동기와 얻을 것으로 기대하는 점을 서술해 주세요. (300자 이상)"
       />
+      <TextField isAdmin />
     </Flex>
   );
 }

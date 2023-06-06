@@ -10,6 +10,7 @@ interface TextFieldProps
   width?: number;
   height?: number;
   multiline?: boolean;
+  isAdmin?: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ export const TextField = forwardRef<
       width = 328,
       height,
       multiline = false,
+      isAdmin = false,
       ...props
     },
     ref,
@@ -52,6 +54,7 @@ export const TextField = forwardRef<
             ref={ref as ForwardedRef<HTMLInputElement>}
             placeholder={placeholder}
             spellCheck={false}
+            isAdmin={isAdmin}
           />
         )}
         {helperText && (
@@ -88,7 +91,7 @@ const StyledHelperTextBox = styled.div`
     margin-top: 14px;
   }
 `;
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ isAdmin: boolean }>`
   width: 100%;
   padding: 8px 16px;
 
@@ -103,7 +106,9 @@ const StyledInput = styled.input`
   color: ${theme.palette.Black};
 
   :focus {
-    border: 1px solid ${theme.palette.Blue};
+    border: 1px solid
+      ${({ isAdmin }) =>
+        isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
   }
 
   ::placeholder {
