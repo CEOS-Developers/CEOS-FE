@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { PageInterface } from '@admin/components/DataGrid/Pagination';
 import styled from '@emotion/styled';
 import { Flex } from '@ceos-fe/ui';
-import { ExtraButton } from '@admin/components/ExtraButton';
 
 export default function Home() {
   const [pagination, setPagination] = useState<PageInterface>({
@@ -42,17 +41,6 @@ export default function Home() {
       title: '권한',
       dataIndex: 'auth',
       width: '300px',
-      render: () => (
-        <Flex justify="space-between">
-          <p>일반유저</p>
-          <ExtraButton
-            buttonList={[
-              { label: '수정하기', handleClick: () => console.log('수정') },
-              { label: '삭제하기', handleClick: () => console.log('삭제') },
-            ]}
-          />
-        </Flex>
-      ),
     },
   ];
 
