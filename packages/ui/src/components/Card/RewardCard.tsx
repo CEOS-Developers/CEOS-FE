@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
 
-export interface IRewardCard {
+export interface RewardCardProps {
   id: number;
   generation: string;
   time: string;
@@ -15,7 +15,7 @@ export interface IRewardCard {
 }
 
 export const RewardCard = (props: {
-  rewardCard: IRewardCard;
+  rewardCard: RewardCardProps;
 }): EmotionJSX.Element => {
   const { generation, time, project, detail } = props.rewardCard;
   const [isExtend, setIsExtend] = useState(false);
@@ -125,7 +125,7 @@ export const RewardCard = (props: {
 };
 
 export const AdminRewardCard = (props: {
-  rewardCard: IRewardCard;
+  rewardCard: RewardCardProps;
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {

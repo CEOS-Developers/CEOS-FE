@@ -4,7 +4,7 @@ import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { useState } from 'react';
 
-export interface IManagementCard {
+export interface ManagementCardProps {
   img?: string;
   position: string;
   name: string;
@@ -14,7 +14,7 @@ export interface IManagementCard {
 }
 
 export const ManagementCard = (props: {
-  managementCard: IManagementCard;
+  managementCard: ManagementCardProps;
 }): EmotionJSX.Element => {
   const { img, position, name, univ, dept } = props.managementCard;
 
@@ -39,7 +39,7 @@ export const ManagementCard = (props: {
 };
 
 export const MentorCard = (props: {
-  mentorCard: IManagementCard;
+  mentorCard: ManagementCardProps;
 }): EmotionJSX.Element => {
   const { img, position, name, univ, dept, explain } = props.mentorCard;
   return (

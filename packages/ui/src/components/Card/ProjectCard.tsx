@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 
-export interface IProjectCard {
+export interface ProjectCardProps {
   id: number;
   img: string;
   name: string;
@@ -12,7 +12,7 @@ export interface IProjectCard {
 }
 
 export const ProjectCard = (props: {
-  projectCard: IProjectCard;
+  projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
   const { img, name, explain, generation } = props.projectCard;
   return (
@@ -36,7 +36,7 @@ export const ProjectCard = (props: {
 };
 
 export const AdminProjectCard = (props: {
-  projectCard: IProjectCard;
+  projectCard: ProjectCardProps;
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {

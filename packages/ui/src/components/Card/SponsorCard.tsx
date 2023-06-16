@@ -3,13 +3,13 @@ import { theme } from '../../styles';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { Flex, Text } from '../common';
 
-export interface ISponsorCard {
+export interface SponsorCardProps {
   img: string;
   name: string;
 }
 
 export const SponsorCard = (props: {
-  sponsorCard: ISponsorCard;
+  sponsorCard: SponsorCardProps;
 }): EmotionJSX.Element => {
   const { img, name } = props.sponsorCard;
   return (
@@ -23,7 +23,7 @@ export const SponsorCard = (props: {
 };
 
 export const AdminSponsorCard = (props: {
-  sponsorCard: ISponsorCard;
+  sponsorCard: SponsorCardProps;
 }): EmotionJSX.Element => {
   const { img, name } = props.sponsorCard;
   return (
