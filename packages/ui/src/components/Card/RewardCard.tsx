@@ -22,7 +22,7 @@ export const RewardCard = (props: {
   return (
     <Container>
       {/* 웹기준화면 */}
-      <Flex width={572} className="web">
+      <Flex width={504} className="web">
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -135,8 +135,8 @@ export const AdminRewardCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <RelativeContainer width={572} height={314}>
-      <AbsoluteFlex width={572}>
+    <RelativeContainer width={504} height={298}>
+      <AbsoluteFlex width={504}>
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -167,7 +167,7 @@ export const AdminRewardCard = (props: {
         </Box>
       </AbsoluteFlex>
       <AbsoluteFlex
-        width={572}
+        width={504}
         webGap={24}
         mobileGap={24}
         borderRadius={20}
@@ -204,7 +204,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 32px 40px;
+  padding: 24px 30px;
   box-sizing: border-box;
   background-color: ${theme.palette.Gray1};
   border-radius: 20px;
@@ -219,6 +219,7 @@ const Box = styled.div`
   }
 
   @media (max-width: 1023px) {
+    gap: 4px;
     align-items: center;
   }
 `;
