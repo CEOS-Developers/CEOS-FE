@@ -168,8 +168,8 @@ export const AdminRewardCard = (props: {
       </AbsoluteFlex>
       <AbsoluteFlex
         width={504}
-        webGap={24}
-        mobileGap={24}
+        webGap={8}
+        mobileGap={8}
         borderRadius={20}
         className="is-hover"
       >
@@ -245,10 +245,11 @@ const TitleWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 103px;
-  height: 44px;
+  width: 81px;
+  height: 33px;
   border-radius: 8px;
   background-color: ${theme.palette.White};
   color: ${theme.palette.Admin.Navy};
-  font-size: 18px;
+  border: 1px solid ${theme.palette.Admin.Navy};
+  font-size: 14px;
 `;
