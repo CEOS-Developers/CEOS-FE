@@ -46,7 +46,7 @@ export const AdminProjectCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <RelativeContainer width={372} height={311}>
+    <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
         <ProjectImg src={img} />
         <ExplainBox>
@@ -94,8 +94,8 @@ const Wrapper = styled.div`
 `;
 
 const ProjectImg = styled.img`
-  width: 372px;
-  height: 209px;
+  width: 328px;
+  height: 184px;
   border-radius: 16px;
 
   @media (max-width: 1023px) {
@@ -110,7 +110,7 @@ const ProjectImg = styled.img`
 const ExplainBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 372px;
+  width: 328px;
   height: 122px;
   margin-top: -20px;
   z-index: -1;
