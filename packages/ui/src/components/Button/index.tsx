@@ -84,6 +84,25 @@ const BUTTON_COLOR = {
   },
 };
 
+const BUTTON_TYPO = {
+  web: {
+    default: theme.typo.Web.Label1,
+    glass: theme.typo.Web.Label1,
+    white: theme.typo.Web.Label1,
+    admin: theme.typo.Web.Label1,
+    admin_stroke: theme.typo.Web.Label3,
+    admin_navy: theme.typo.Web.Label3,
+  },
+  mobile: {
+    default: theme.typo.Mobile.Heading3,
+    glass: theme.typo.Mobile.Heading3,
+    white: theme.typo.Mobile.Heading3,
+    admin: theme.typo.Web.Label1,
+    admin_stroke: theme.typo.Web.Label3,
+    admin_navy: theme.typo.Web.Label3,
+  },
+};
+
 /**
  * @default button: (button 태그 속성 그대로)
  *
@@ -120,9 +139,10 @@ const StyledButton = styled.button<{
   height: ${({ variant }) => `${BUTTON_FIGURE.height[variant]}px`};
 
   color: ${({ variant }) => `${TEXT_COLOR.normal[variant]}`};
-  ${theme.typo.Web.Label1};
 
   border-radius: ${`${BUTTON_FIGURE.border_radius}px`};
+
+  ${({ variant }) => BUTTON_TYPO.web[variant]};
 
   @media (max-width: 1023px) {
     width: ${({ mobileWidth, variant }) =>
@@ -133,7 +153,7 @@ const StyledButton = styled.button<{
         : ''};
     height: ${({ variant }) => `${BUTTON_FIGURE.mobile_height[variant]}px`};
 
-    ${theme.typo.Mobile.Heading3};
+    ${({ variant }) => BUTTON_TYPO.mobile[variant]};
   }
 
   ${({ variant }) =>
@@ -144,13 +164,6 @@ const StyledButton = styled.button<{
       : css`
           background-color: ${BUTTON_COLOR.normal[variant]};
         `};
-
-  ${({ variant }) =>
-    variant === 'admin'
-      ? css`
-          ${theme.typo.Web.Label2};
-        `
-      : ''};
 
   ${({ variant }) =>
     variant === 'admin_stroke'
