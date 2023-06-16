@@ -54,7 +54,6 @@ const navCss = ({
 }) => css`
   display: flex;
   justify-content: space-between;
-
   position: fixed;
   top: 0;
   align-items: center;
