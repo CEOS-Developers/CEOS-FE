@@ -71,8 +71,6 @@ const navCss = ({
     .logo {
       margin-left: 20px;
       margin-bottom: 24px;
-      width: 83px;
-      height: 42px;
     }
   }
 `;
@@ -81,7 +79,7 @@ export const contentCss = (backColor: KeyOfPalette) => css`
   typo: ${typo.Web.Label1};
   color: ${backColor === 'White' ? theme.palette.Gray6 : theme.palette.Gray7};
   display: flex;
-  gap: 33px;
+  gap: 70px;
   margin-right: 21.25vw;
   .menu {
     display: none;

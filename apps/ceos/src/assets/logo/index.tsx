@@ -3,8 +3,8 @@ import { KeyOfPalette } from '../../styles';
 
 //props를 color만 남기고 다 뺴도 될 거같은뎀... 헤더에서만 쓰니까... 걍 헤더 안에서 관리...ㅠ
 export const Logo = ({
-  width = 82,
-  height = 24,
+  width = 83,
+  height = 42,
   backColor = 'Blue',
 }: {
   width?: number;
