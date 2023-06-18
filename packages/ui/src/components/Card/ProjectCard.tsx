@@ -2,7 +2,6 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
-import React from 'react';
 
 export interface ProjectCardProps {
   id: number;

@@ -5,7 +5,6 @@ import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
-import React from 'react';
 
 export interface RewardCardProps {
   id: number;

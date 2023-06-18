@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import { useState } from 'react';
-import React from 'react';
 
 export interface ManagementCardProps {
   img?: string;

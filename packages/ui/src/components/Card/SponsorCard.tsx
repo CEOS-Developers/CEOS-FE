@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { AbsoluteFlex, Flex, RelativeContainer, Text } from '../common';
-import React from 'react';
 
 export interface SponsorCardProps {
   id: number;
