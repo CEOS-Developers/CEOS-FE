@@ -3,6 +3,7 @@ import { theme } from '../../styles';
 import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { useState } from 'react';
+import React from 'react';
 
 export interface ManagementCardProps {
   img?: string;
@@ -22,13 +23,13 @@ export const ManagementCard = (props: {
     <ManageWapper>
       {img ? <Profile src={img} /> : <></>}
       <Content>
-        <Text webTypo="Label3" mobileTypo="Label2" color="Gray5">
+        <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
           {position}
         </Text>
-        <Text webTypo="Heading3" mobileTypo="Heading3" color="Black">
+        <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
           {name}
         </Text>
-        <Text webTypo="Body3" mobileTypo="Body2" color="Gray5">
+        <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
           {univ + ' '}
           <br />
           {dept}
@@ -48,13 +49,13 @@ export const MentorCard = (props: {
     <MentorContainer>
       <Wrapper className={cName}>
         <Content className={cName}>
-          <Text webTypo="Label3" mobileTypo="Label2" color="Gray5">
+          <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
             {position}
           </Text>
-          <Text webTypo="Heading3" mobileTypo="Heading3" color="Black">
+          <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
             {name}
           </Text>
-          <Text webTypo="Body3" mobileTypo="Body2" color="Gray5">
+          <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
             {univ + ' '}
             <br />
             {dept}
@@ -65,7 +66,7 @@ export const MentorCard = (props: {
         <Wrapper className="extra-info">
           <Content className="extra-info">
             {explain.map((ex) => (
-              <Text webTypo="Body3" mobileTypo="Body1" color="White">
+              <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
                 {ex}
               </Text>
             ))}

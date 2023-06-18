@@ -5,6 +5,7 @@ import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
+import React from 'react';
 
 export interface RewardCardProps {
   id: number;
@@ -25,10 +26,10 @@ export const RewardCard = (props: {
       <Flex width={504} className="web">
         <Box>
           <TitleWrapper>
-            <Text webTypo="Heading4" color="Black">
+            <Text webTypo="Heading4" paletteColor="Black">
               {generation}
             </Text>
-            <Text webTypo="Label3" color="Gray5">
+            <Text webTypo="Label3" paletteColor="Gray5">
               {time}
             </Text>
           </TitleWrapper>
@@ -38,12 +39,12 @@ export const RewardCard = (props: {
                 <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
-                    color="Blue"
+                    paletteColor="Blue"
                     style={{ width: '126px' }}
                   >
                     {item.title}
                   </Text>
-                  <Text webTypo="Body2" color="Black">
+                  <Text webTypo="Body2" paletteColor="Black">
                     {item.explain}
                   </Text>
                 </Flex>
@@ -56,7 +57,7 @@ export const RewardCard = (props: {
               {detail?.map((item, idx) => (
                 <Flex justify="start" key={idx}>
                   <RewardCheck />
-                  <Text webTypo="Body2" color="Black">
+                  <Text webTypo="Body2" paletteColor="Black">
                     {item}
                   </Text>
                 </Flex>
@@ -70,10 +71,10 @@ export const RewardCard = (props: {
       <Flex className="mobile" width={346}>
         <Box>
           <TitleWrapper>
-            <Text mobileTypo="Heading4" color="Black">
+            <Text mobileTypo="Heading4" paletteColor="Black">
               {generation}
             </Text>
-            <Text mobileTypo="Body2" color="Gray5">
+            <Text mobileTypo="Body2" paletteColor="Gray5">
               {time}
             </Text>
           </TitleWrapper>
@@ -86,10 +87,10 @@ export const RewardCard = (props: {
               key={idx}
             >
               <Flex direction="column">
-                <Text mobileTypo="Label1" color="Blue">
+                <Text mobileTypo="Label1" paletteColor="Blue">
                   {pro.title}
                 </Text>
-                <Text mobileTypo="Body1" color="Black">
+                <Text mobileTypo="Body1" paletteColor="Black">
                   {pro.explain}
                 </Text>
               </Flex>
@@ -102,7 +103,7 @@ export const RewardCard = (props: {
                 {detail?.map((item, idx) => (
                   <Flex justify="flex-start" key={idx}>
                     <RewardCheck />
-                    <Text mobileTypo="Body1" color="Black">
+                    <Text mobileTypo="Body1" paletteColor="Black">
                       {item}
                     </Text>
                   </Flex>
@@ -139,10 +140,10 @@ export const AdminRewardCard = (props: {
       <AbsoluteFlex width={504}>
         <Box>
           <TitleWrapper>
-            <Text webTypo="Heading4" color="Black">
+            <Text webTypo="Heading4" paletteColor="Black">
               {generation}
             </Text>
-            <Text webTypo="Label3" color="Gray5">
+            <Text webTypo="Label3" paletteColor="Gray5">
               {time}
             </Text>
           </TitleWrapper>
@@ -152,12 +153,12 @@ export const AdminRewardCard = (props: {
                 <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
-                    adminColor="Navy"
+                    paletteColor="Navy"
                     style={{ width: '126px' }}
                   >
                     {item.title}
                   </Text>
-                  <Text webTypo="Body2" color="Black">
+                  <Text webTypo="Body2" paletteColor="Black">
                     {item.explain}
                   </Text>
                 </Flex>

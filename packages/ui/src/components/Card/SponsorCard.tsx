@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { AbsoluteFlex, Flex, RelativeContainer, Text } from '../common';
+import React from 'react';
 
 export interface SponsorCardProps {
   id: number;
@@ -16,7 +17,7 @@ export const SponsorCard = (props: {
   return (
     <Wrapper>
       <Profile src={img} />
-      <Text webTypo="Heading4" mobileTypo="Heading4" color="Black">
+      <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
         {name}
       </Text>
     </Wrapper>
@@ -38,7 +39,7 @@ export const AdminSponsorCard = (props: {
       <AbsoluteFlex width={240}>
         <Wrapper>
           <Profile src={img} admin={true} />
-          <Text webTypo="Heading4" mobileTypo="Heading4" color="Black">
+          <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
             {name}
           </Text>
         </Wrapper>

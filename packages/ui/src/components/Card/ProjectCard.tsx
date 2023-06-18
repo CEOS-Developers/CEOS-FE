@@ -2,6 +2,7 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
+import React from 'react';
 
 export interface ProjectCardProps {
   id: number;
@@ -20,14 +21,14 @@ export const ProjectCard = (props: {
       <ProjectImg src={img} className="ceos" />
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
-          <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+          <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
           </Text>
-          <Text webTypo="Label2" mobileTypo="Label2" color="Gray4">
+          <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
             {generation}
           </Text>
         </Row>
-        <Text webTypo="Body3" mobileTypo="Body2" color="Black">
+        <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
           {explain}
         </Text>
       </ExplainBox>
@@ -51,14 +52,14 @@ export const AdminProjectCard = (props: {
         <ProjectImg src={img} />
         <ExplainBox>
           <Row>
-            <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+            <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
               {name}
             </Text>
-            <Text webTypo="Label2" mobileTypo="Label2" color="Gray4">
+            <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
               {generation}
             </Text>
           </Row>
-          <Text webTypo="Body3" mobileTypo="Body2" color="Black">
+          <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
             {explain}
           </Text>
         </ExplainBox>
