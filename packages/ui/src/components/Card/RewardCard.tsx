@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
 
-export interface IRewardCard {
+export interface RewardCardProps {
   id: number;
   generation: string;
   time: string;
@@ -15,14 +15,14 @@ export interface IRewardCard {
 }
 
 export const RewardCard = (props: {
-  rewardCard: IRewardCard;
+  rewardCard: RewardCardProps;
 }): EmotionJSX.Element => {
   const { generation, time, project, detail } = props.rewardCard;
   const [isExtend, setIsExtend] = useState(false);
   return (
     <Container>
       {/* 웹기준화면 */}
-      <Flex width={572} className="web">
+      <Flex width={504} className="web">
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -125,7 +125,7 @@ export const RewardCard = (props: {
 };
 
 export const AdminRewardCard = (props: {
-  rewardCard: IRewardCard;
+  rewardCard: RewardCardProps;
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {
@@ -135,8 +135,8 @@ export const AdminRewardCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <RelativeContainer width={572} height={314}>
-      <AbsoluteFlex width={572}>
+    <RelativeContainer width={504} height={298}>
+      <AbsoluteFlex width={504}>
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" color="Black">
@@ -152,7 +152,7 @@ export const AdminRewardCard = (props: {
                 <Flex justify="start" key={idx}>
                   <Text
                     webTypo="Label1"
-                    color="Navy"
+                    adminColor="Navy"
                     style={{ width: '126px' }}
                   >
                     {item.title}
@@ -167,9 +167,9 @@ export const AdminRewardCard = (props: {
         </Box>
       </AbsoluteFlex>
       <AbsoluteFlex
-        width={572}
-        webGap={24}
-        mobileGap={24}
+        width={504}
+        webGap={8}
+        mobileGap={8}
         borderRadius={20}
         className="is-hover"
       >
@@ -204,7 +204,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 32px 40px;
+  padding: 24px 30px;
   box-sizing: border-box;
   background-color: ${theme.palette.Gray1};
   border-radius: 20px;
@@ -219,6 +219,7 @@ const Box = styled.div`
   }
 
   @media (max-width: 1023px) {
+    gap: 4px;
     align-items: center;
   }
 `;
@@ -244,10 +245,11 @@ const TitleWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 103px;
-  height: 44px;
+  width: 81px;
+  height: 33px;
   border-radius: 8px;
   background-color: ${theme.palette.White};
   color: ${theme.palette.Admin.Navy};
-  font-size: 18px;
+  border: 1px solid ${theme.palette.Admin.Navy};
+  font-size: 14px;
 `;

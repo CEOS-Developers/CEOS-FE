@@ -20,6 +20,9 @@ export const theme: TypeOfTheme = {
 export type TypeOfPalette = typeof palette;
 export type KeyOfPalette = keyof typeof palette;
 
+export type TypeOfAdminPalette = typeof palette.Admin;
+export type KeyOfAdminPalette = keyof typeof palette.Admin;
+
 export type KeyofTheme = keyof typeof theme;
 
 export type TypeOfTypo = typeof typo;

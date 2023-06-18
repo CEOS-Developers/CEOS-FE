@@ -4,7 +4,7 @@ import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { useState } from 'react';
 
-export interface IManagementCard {
+export interface ManagementCardProps {
   img?: string;
   position: string;
   name: string;
@@ -14,7 +14,7 @@ export interface IManagementCard {
 }
 
 export const ManagementCard = (props: {
-  managementCard: IManagementCard;
+  managementCard: ManagementCardProps;
 }): EmotionJSX.Element => {
   const { img, position, name, univ, dept } = props.managementCard;
 
@@ -25,7 +25,7 @@ export const ManagementCard = (props: {
         <Text webTypo="Label3" mobileTypo="Label2" color="Gray5">
           {position}
         </Text>
-        <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+        <Text webTypo="Heading3" mobileTypo="Heading3" color="Black">
           {name}
         </Text>
         <Text webTypo="Body3" mobileTypo="Body2" color="Gray5">
@@ -39,17 +39,19 @@ export const ManagementCard = (props: {
 };
 
 export const MentorCard = (props: {
-  mentorCard: IManagementCard;
+  mentorCard: ManagementCardProps;
 }): EmotionJSX.Element => {
   const { img, position, name, univ, dept, explain } = props.mentorCard;
+  const cName = explain ? 'origin-info' : 'mentor';
+
   return (
-    <Container>
-      <Wrapper className={explain ? 'origin-info' : 'mentor'}>
-        <Content className={explain ? 'origin-info' : 'mentor'}>
+    <MentorContainer>
+      <Wrapper className={cName}>
+        <Content className={cName}>
           <Text webTypo="Label3" mobileTypo="Label2" color="Gray5">
             {position}
           </Text>
-          <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+          <Text webTypo="Heading3" mobileTypo="Heading3" color="Black">
             {name}
           </Text>
           <Text webTypo="Body3" mobileTypo="Body2" color="Gray5">
@@ -72,11 +74,11 @@ export const MentorCard = (props: {
       ) : (
         <></>
       )}
-    </Container>
+    </MentorContainer>
   );
 };
 
-const Container = styled.div`
+const MentorContainer = styled.div`
   position: relative;
   > .extra-info {
     display: none;
@@ -90,6 +92,7 @@ const Container = styled.div`
       display: flex;
       background-color: #3e4cf7;
       opacity: 0.8;
+      gap: 0;
     }
   }
 `;
@@ -98,12 +101,13 @@ const ManageWapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 26px;
+  padding: 24px 0;
   box-sizing: border-box;
-  width: 272px;
+  width: 240px;
 
   background-color: ${theme.palette.Gray1};
   border-radius: 16px;
+  gap: 12px;
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
@@ -149,9 +153,14 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   height: 102px;
+  gap: 8px;
 
   & > * > br {
     display: none;
+  }
+
+  &.extra-info {
+    gap: 0;
   }
 
   @media (max-width: 1023px) {
@@ -163,9 +172,9 @@ const Content = styled.div`
 `;
 
 const Profile = styled.img`
-  width: 150px;
-  height: 150px;
-  margin-bottom: 20px;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 12px;
   @media (max-width: 1023px) {
     margin-bottom: 14px;
     width: 90px;
