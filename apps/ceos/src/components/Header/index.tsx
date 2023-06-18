@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import { KeyOfPalette, typo } from '../../../../../packages/ui';
+import { KeyOfPalette, typo } from '@ceos-fe/ui';
 import { Logo } from '../../assets/logo';
 import { MenuBtn } from '../../assets/header/menuBtn';
-import { theme } from '../../../../../packages/ui';
+import { theme } from '@ceos-fe/ui';
+import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
+import { useModal } from '@ceos-fe/utils';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -13,6 +15,8 @@ export interface HeaderProps {
 export const Header = (props: HeaderProps) => {
   const { backColor } = props;
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isOpen, modalRef, toggleModal } = useModal();
+
   //최상단인지 check
   useEffect(() => {
     const handleScroll = () => {
@@ -25,16 +29,19 @@ export const Header = (props: HeaderProps) => {
     };
   }, []);
   return (
-    <nav css={navCss({ backColor, isScrolled })}>
-      <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
-      <div css={contentCss(backColor)}>
-        <Content className="text">PROJECT</Content>
-        <Content className="text">ACTIVITY</Content>
-        <Content className="text">FAQ</Content>
-        <Content className="text">RECRUIT</Content>
-        <MenuBtn backColor={backColor} />
-      </div>
-    </nav>
+    <>
+      <nav css={navCss({ backColor, isScrolled })}>
+        <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+        <div css={contentCss(backColor)}>
+          <Content className="text">PROJECT</Content>
+          <Content className="text">ACTIVITY</Content>
+          <Content className="text">FAQ</Content>
+          <Content className="text">RECRUIT</Content>
+          <MenuBtn backColor={backColor} onClick={toggleModal} />
+        </div>
+      </nav>
+      <MenuBar isOpen={isOpen} modalRef={modalRef} toggleModal={toggleModal} />
+    </>
   );
 };
 
@@ -63,17 +70,15 @@ const navCss = ({
     .logo {
       margin-left: 20px;
       margin-bottom: 24px;
-      width: 83px;
-      height: 42px;
     }
   }
 `;
 
-const contentCss = (backColor: KeyOfPalette) => css`
+export const contentCss = (backColor: KeyOfPalette) => css`
   typo: ${typo.Web.Label1};
   color: ${backColor === 'White' ? theme.palette.Gray6 : theme.palette.Gray7};
   display: flex;
-  gap: 33px;
+  gap: 70px;
   margin-right: 21.25vw;
   .menu {
     display: none;
@@ -93,7 +98,7 @@ const contentCss = (backColor: KeyOfPalette) => css`
   }
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   box-sizing: border-box;
 
   &:hover {

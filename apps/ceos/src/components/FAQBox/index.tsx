@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import { KeyOfPalette, theme } from '../../../../../packages/ui';
+import { KeyOfPalette, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
 // const colors = ['Green', 'Skyblue', 'Yellow'];
@@ -43,18 +42,17 @@ const boxCss = ({
 }) => css`
   background-color: ${isAnswer ? theme.palette.Gray9 : theme.palette[color]};
   typo: ${isAnswer ? theme.typo.Web.Body2 : theme.typo.Web.Heading4};
-  width: 772px;
+  width: 680px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 18px;
   box-sizing: border-box;
-  gap: 10px;
   border-radius: 16px;
   word-break: keep-all;
   text-align: center;
-  margin: ${!isAnswer ? '40px 0px 28px 0px' : '0px'};
+  margin: ${!isAnswer ? '36px 0px 20px 0px' : '0px'};
 
   @media (max-width: 1023px) {
     width: 100%;

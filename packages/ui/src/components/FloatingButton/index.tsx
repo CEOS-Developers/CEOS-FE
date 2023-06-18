@@ -3,9 +3,14 @@ import { theme } from '../../styles';
 import { Email } from '../../assets/Email';
 import { Instagram } from '../../assets/Instagram';
 
-export const FloatingButton = () => {
+export interface FloatingProps {
+  direction?: string;
+}
+
+export const FloatingButton = (props: FloatingProps) => {
+  const { direction } = props;
   return (
-    <FloatingBtnContainer>
+    <FloatingBtnContainer direction={direction}>
       <FloatingBtnCircle
         onClick={() => window.open('https://www.instagram.com/ceos.sinchon/')}
       >
@@ -18,9 +23,9 @@ export const FloatingButton = () => {
   );
 };
 
-const FloatingBtnContainer = styled.div`
+const FloatingBtnContainer = styled.div<{ direction?: string }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ direction }) => (direction ? `${direction}` : 'column')};
   gap: 16px;
 
   // 이미지 및 텍스트 드래그 방지
@@ -39,4 +44,9 @@ const FloatingBtnCircle = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1023px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
