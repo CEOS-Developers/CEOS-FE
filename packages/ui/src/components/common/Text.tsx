@@ -10,17 +10,19 @@ import { KeyOfPalette } from '../../styles';
 export const Text = styled.div<{
   webTypo?: KeyOfWebTypo;
   mobileTypo?: KeyOfMobileTypo;
-  color?: KeyOfPalette;
-  adminColor?: KeyOfAdminPalette;
+  paletteColor?: KeyOfPalette | KeyOfAdminPalette;
   colorCode?: string;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
-  color: ${({ color, adminColor, colorCode }) =>
-    color
-      ? theme.palette[color]
-      : adminColor
-      ? theme.palette.Admin[adminColor]
-      : `${colorCode}`};
+  color: ${({ paletteColor, colorCode }) => {
+    if (theme.palette[paletteColor as KeyOfPalette]) {
+      return theme.palette[paletteColor as KeyOfPalette];
+    } else if (theme.palette.Admin[paletteColor as KeyOfAdminPalette]) {
+      return theme.palette.Admin[paletteColor as KeyOfAdminPalette];
+    } else {
+      return `${colorCode}`;
+    }
+  }};
   display: flex;
   align-items: center;
 
