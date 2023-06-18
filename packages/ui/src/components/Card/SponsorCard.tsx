@@ -16,7 +16,7 @@ export const SponsorCard = (props: {
   return (
     <Wrapper>
       <Profile src={img} />
-      <Text webTypo="Heading4" mobileTypo="Heading4" color="Black">
+      <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
         {name}
       </Text>
     </Wrapper>
@@ -38,7 +38,7 @@ export const AdminSponsorCard = (props: {
       <AbsoluteFlex width={240}>
         <Wrapper>
           <Profile src={img} admin={true} />
-          <Text webTypo="Heading4" mobileTypo="Heading4" color="Black">
+          <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
             {name}
           </Text>
         </Wrapper>
