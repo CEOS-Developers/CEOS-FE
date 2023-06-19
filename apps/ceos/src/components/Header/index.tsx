@@ -28,15 +28,31 @@ export const Header = (props: HeaderProps) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const movePage = (path: string) => {
+    window.location.href = `${window.location.origin}/${path}`;
+  };
+
   return (
     <>
       <nav css={navCss({ backColor, isScrolled })}>
-        <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+        <Content onClick={() => movePage('')}>
+          <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+        </Content>
+
         <div css={contentCss(backColor)}>
-          <Content className="text">PROJECT</Content>
-          <Content className="text">ACTIVITY</Content>
-          <Content className="text">FAQ</Content>
-          <Content className="text">RECRUIT</Content>
+          <Content className="text" onClick={() => movePage('project')}>
+            PROJECT
+          </Content>
+          <Content className="text" onClick={() => movePage('activity')}>
+            ACTIVITY
+          </Content>
+          <Content className="text" onClick={() => movePage('FAQ')}>
+            FAQ
+          </Content>
+          <Content className="text" onClick={() => movePage('recruit')}>
+            RECRUIT
+          </Content>
           <MenuBtn backColor={backColor} onClick={toggleModal} />
         </div>
       </nav>
