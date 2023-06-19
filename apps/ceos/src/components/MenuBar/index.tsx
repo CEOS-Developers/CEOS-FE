@@ -10,6 +10,11 @@ export interface MenuProps {
 
 export const MenuBar = (props: MenuProps) => {
   const { isOpen, modalRef, toggleModal } = props;
+
+  const movePage = (path: string) => {
+    window.location.href = `${window.location.origin}/${path}`;
+  };
+
   return (
     <div css={backCss} className={isOpen ? 'open' : 'close'}>
       <div
@@ -24,10 +29,10 @@ export const MenuBar = (props: MenuProps) => {
             toggleModal={toggleModal}
           />
           <div css={contentCss}>
-            <p>PROJECT</p>
-            <p>ACTIVITY</p>
-            <p>FAQ</p>
-            <p>RECRUIT</p>
+            <p onClick={() => movePage('project')}>PROJECT</p>
+            <p onClick={() => movePage('activity')}>ACTIVITY</p>
+            <p onClick={() => movePage('FAQ')}>FAQ</p>
+            <p onClick={() => movePage('recruit')}>RECRUIT</p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
             <FloatingButton direction="row" />
