@@ -4,7 +4,13 @@ import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../styles';
 import { css } from '@emotion/react';
 
-export type ButtonVariant = 'default' | 'glass' | 'white' | 'admin';
+export type ButtonVariant =
+  | 'default'
+  | 'glass'
+  | 'white'
+  | 'admin'
+  | 'admin_stroke'
+  | 'admin_navy';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
@@ -13,11 +19,31 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const BUTTON_FIGURE = {
-  border_radius: { default: 10, glass: 10, white: 10, admin: 8 },
-  mobile_border_radius: { default: 8, glass: 8, white: 8, admin: 8 },
-  width: { default: 272, glass: 192, white: 232, admin: 172 },
-  height: { default: 48, glass: 48, white: 48, admin: 44 },
-  mobile_height: { default: 59, glass: 59, white: 59, admin: 44 },
+  border_radius: 8,
+  width: {
+    default: 376,
+    glass: 181,
+    white: 218,
+    admin: 328,
+    admin_stroke: 84,
+    admin_navy: 57,
+  },
+  height: {
+    default: 46,
+    glass: 46,
+    white: 46,
+    admin: 46,
+    admin_stroke: 33,
+    admin_navy: 33,
+  },
+  mobile_height: {
+    default: 59,
+    glass: 59,
+    white: 59,
+    admin: 46,
+    admin_stroke: 33,
+    admin_navy: 33,
+  },
 };
 
 const TEXT_COLOR = {
@@ -26,12 +52,16 @@ const TEXT_COLOR = {
     glass: `${theme.palette.White}`,
     white: `${theme.palette.Blue}`,
     admin: `${theme.palette.White}`,
+    admin_stroke: `${theme.palette.Admin.DeepNavy}`,
+    admin_navy: `${theme.palette.White}`,
   },
   disabled: {
-    default: `${theme.palette.Gray2}`,
+    default: `${theme.palette.White}`,
     glass: `${theme.palette.White}`,
     white: `${theme.palette.Blue}`,
-    admin: `${theme.palette.White}`,
+    admin: `${theme.palette.Gray2}`,
+    admin_stroke: `${theme.palette.White}`,
+    admin_navy: `${theme.palette.White}`,
   },
 };
 
@@ -41,19 +71,42 @@ const BUTTON_COLOR = {
     glass: `${theme.glass.Border}`,
     white: `${theme.palette.White}`,
     admin: `${theme.palette.Admin.Navy}`,
+    admin_stroke: `${theme.palette.Gray1}`,
+    admin_navy: `${theme.palette.Admin.Navy}`,
   },
   disabled: {
     default: `${theme.palette.Gray3}`,
     glass: `${theme.palette.Gray4}`,
     white: `${theme.palette.Gray4}`,
-    admin: `${theme.palette.Admin.Navy}`,
+    admin: `${theme.palette.Gray3}`,
+    admin_stroke: `${theme.palette.Gray2}`,
+    admin_navy: `${theme.palette.Gray2}`,
+  },
+};
+
+const BUTTON_TYPO = {
+  web: {
+    default: theme.typo.Web.Label1,
+    glass: theme.typo.Web.Label1,
+    white: theme.typo.Web.Label1,
+    admin: theme.typo.Web.Label1,
+    admin_stroke: theme.typo.Web.Label3,
+    admin_navy: theme.typo.Web.Label3,
+  },
+  mobile: {
+    default: theme.typo.Mobile.Heading3,
+    glass: theme.typo.Mobile.Heading3,
+    white: theme.typo.Mobile.Heading3,
+    admin: theme.typo.Web.Label1,
+    admin_stroke: theme.typo.Web.Label3,
+    admin_navy: theme.typo.Web.Label3,
   },
 };
 
 /**
  * @default button: (button 태그 속성 그대로)
  *
- * @param varient 버튼 종류 'default' | 'glass' | 'white' | 'admin'
+ * @param varient 버튼 종류 'default' | 'glass' | 'white' | 'admin' | 'admin_stroke' | 'admin_navy'
  * @param webWidth? web 버튼 너비
  * @param mobileWidth? mobile 버튼 너비 (default 100%)
  */
@@ -86,19 +139,21 @@ const StyledButton = styled.button<{
   height: ${({ variant }) => `${BUTTON_FIGURE.height[variant]}px`};
 
   color: ${({ variant }) => `${TEXT_COLOR.normal[variant]}`};
-  ${theme.typo.Web.Label1};
 
-  border-radius: ${({ variant }) =>
-    `${BUTTON_FIGURE.border_radius[variant]}px`};
+  border-radius: ${`${BUTTON_FIGURE.border_radius}px`};
+
+  ${({ variant }) => BUTTON_TYPO.web[variant]};
 
   @media (max-width: 1023px) {
-    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '100%')};
+    width: ${({ mobileWidth, variant }) =>
+      mobileWidth
+        ? `${mobileWidth}px`
+        : !variant.includes('admin')
+        ? '100%'
+        : ''};
     height: ${({ variant }) => `${BUTTON_FIGURE.mobile_height[variant]}px`};
 
-    ${theme.typo.Mobile.Heading3};
-
-    border-radius: ${({ variant }) =>
-      `${BUTTON_FIGURE.mobile_border_radius[variant]}px`};
+    ${({ variant }) => BUTTON_TYPO.mobile[variant]};
   }
 
   ${({ variant }) =>
@@ -111,9 +166,9 @@ const StyledButton = styled.button<{
         `};
 
   ${({ variant }) =>
-    variant === 'admin'
+    variant === 'admin_stroke'
       ? css`
-          ${theme.typo.Web.Label2};
+          border: 1px solid ${theme.palette.Admin.DeepNavy};
         `
       : ''};
 
