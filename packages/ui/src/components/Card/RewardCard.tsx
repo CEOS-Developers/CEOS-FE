@@ -226,7 +226,7 @@ const Box = styled.div`
 
 const Line = styled.div`
   display: flex;
-  width: 492px;
+  width: 444px;
   height: 0px;
   border: 0.5px solid ${theme.palette.Gray3};
   margin: 28px 0;
