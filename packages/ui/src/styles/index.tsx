@@ -5,3 +5,4 @@ export * from './typo';
 export * from './glass';
 
 export * from './GlobalStyles';
+export * from './mediaQuery';
