@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import { theme } from '@ceos-fe/ui';
+import React from 'react';
+import { css } from '@emotion/react';
+
+export type SelectButtonVariant = 'ceos' | 'admin';
 
 interface SelectButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+  variant: SelectButtonVariant;
   webWidth?: number;
   mobileWidth?: number;
   value: string;
@@ -10,6 +15,7 @@ interface SelectButtonProps extends InputHTMLAttributes<HTMLInputElement> {
 
 /**
  * @default input: (input 태그 속성 그대로)
+ * @param variant: 버튼의 종류 'ceos' | 'admin'
  * @param webWidth?: web 너비 (default 178px)
  * @param mobileWidth?: mobile 너비 (default 100%)
  * @param value: label에 들어갈 값
@@ -38,8 +44,8 @@ const Label = styled.label<{
   webWidth?: number;
   mobileWidth?: number;
 }>`
-  width: ${({ webWidth }) => (webWidth ? `${webWidth}px` : '178px')};
-  height: 48px;
+  width: ${({ webWidth }) => (webWidth ? `${webWidth}px` : '158px')};
+  height: 40px;
 
   display: flex;
   justify-content: center;
@@ -72,14 +78,24 @@ const Label = styled.label<{
   -ms-user-select: none;
 `;
 
-const Radio = styled.input`
+const Radio = styled.input<{
+  variant: SelectButtonVariant;
+}>`
   position: absolute;
   opacity: 0;
   width: 0;
 
   &:checked + label {
-    background: ${theme.palette.Blue};
-    color: ${theme.palette.White};
-    box-shadow: ${theme.shadow.Button.Blue};
+    ${({ variant }) =>
+      variant === 'ceos'
+        ? css`
+            background: ${theme.palette.Blue};
+            color: ${theme.palette.White};
+            box-shadow: ${theme.shadow.Button.Blue};
+          `
+        : css`
+            background: ${theme.palette.Admin.DeepNavy};
+            color: ${theme.palette.White};
+          `};
   }
 `;
