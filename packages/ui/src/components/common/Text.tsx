@@ -1,16 +1,28 @@
 import styled from '@emotion/styled';
-import { KeyOfMobileTypo, KeyOfWebTypo, theme } from '../../styles';
+import {
+  KeyOfAdminPalette,
+  KeyOfMobileTypo,
+  KeyOfWebTypo,
+  theme,
+} from '../../styles';
 import { KeyOfPalette } from '../../styles';
 
 export const Text = styled.div<{
   webTypo?: KeyOfWebTypo;
   mobileTypo?: KeyOfMobileTypo;
-  color?: KeyOfPalette;
+  paletteColor?: KeyOfPalette | KeyOfAdminPalette;
   colorCode?: string;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
-  color: ${({ color, colorCode }) =>
-    color ? theme.palette[color] : `${colorCode}`};
+  color: ${({ paletteColor, colorCode }) => {
+    if (theme.palette[paletteColor as KeyOfPalette]) {
+      return theme.palette[paletteColor as KeyOfPalette];
+    } else if (theme.palette.Admin[paletteColor as KeyOfAdminPalette]) {
+      return theme.palette.Admin[paletteColor as KeyOfAdminPalette];
+    } else {
+      return `${colorCode}`;
+    }
+  }};
   display: flex;
   align-items: center;
 

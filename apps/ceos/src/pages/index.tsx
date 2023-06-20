@@ -1,5 +1,4 @@
 import { Flex } from '@ceos-fe/ui';
-
 export default function Home() {
-  return <Flex direction="column"></Flex>;
+  return <Flex direction="row"></Flex>;
 }

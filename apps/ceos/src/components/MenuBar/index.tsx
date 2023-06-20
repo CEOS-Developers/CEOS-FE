@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { Flex, FloatingButton, theme } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
+import Link from 'next/link';
+import styled from '@emotion/styled';
 
 export interface MenuProps {
   isOpen: boolean;
@@ -10,6 +12,7 @@ export interface MenuProps {
 
 export const MenuBar = (props: MenuProps) => {
   const { isOpen, modalRef, toggleModal } = props;
+
   return (
     <div css={backCss} className={isOpen ? 'open' : 'close'}>
       <div
@@ -24,10 +27,18 @@ export const MenuBar = (props: MenuProps) => {
             toggleModal={toggleModal}
           />
           <div css={contentCss}>
-            <p>PROJECT</p>
-            <p>ACTIVITY</p>
-            <p>FAQ</p>
-            <p>RECRUIT</p>
+            <p>
+              <CustomLink href="/project">PROJECT</CustomLink>
+            </p>
+            <p>
+              <CustomLink href="/activity">ACTIVITY</CustomLink>
+            </p>
+            <p>
+              <CustomLink href="/FAQ">FAQ</CustomLink>
+            </p>
+            <p>
+              <CustomLink href="/recruit">RECRUIT</CustomLink>
+            </p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
             <FloatingButton direction="row" />
@@ -76,4 +87,9 @@ export const contentCss = () => css`
     cursor: pointer;
     color: ${theme.palette.Green};
   }
+`;
+
+export const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 
-export interface IProjectCard {
+export interface ProjectCardProps {
   id: number;
   img: string;
   name: string;
@@ -12,7 +12,7 @@ export interface IProjectCard {
 }
 
 export const ProjectCard = (props: {
-  projectCard: IProjectCard;
+  projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
   const { img, name, explain, generation } = props.projectCard;
   return (
@@ -20,14 +20,14 @@ export const ProjectCard = (props: {
       <ProjectImg src={img} className="ceos" />
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
-          <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+          <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
           </Text>
-          <Text webTypo="Label2" mobileTypo="Label2" color="Gray4">
+          <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
             {generation}
           </Text>
         </Row>
-        <Text webTypo="Body3" mobileTypo="Body2" color="Black">
+        <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
           {explain}
         </Text>
       </ExplainBox>
@@ -36,7 +36,7 @@ export const ProjectCard = (props: {
 };
 
 export const AdminProjectCard = (props: {
-  projectCard: IProjectCard;
+  projectCard: ProjectCardProps;
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {
@@ -46,26 +46,26 @@ export const AdminProjectCard = (props: {
     props.onClickUpdate,
   ];
   return (
-    <RelativeContainer width={372} height={311}>
+    <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
         <ProjectImg src={img} />
         <ExplainBox>
           <Row>
-            <Text webTypo="Heading4" mobileTypo="Heading3" color="Black">
+            <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
               {name}
             </Text>
-            <Text webTypo="Label2" mobileTypo="Label2" color="Gray4">
+            <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
               {generation}
             </Text>
           </Row>
-          <Text webTypo="Body3" mobileTypo="Body2" color="Black">
+          <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
             {explain}
           </Text>
         </ExplainBox>
       </AbsoluteFlex>
       <AbsoluteFlex
-        webGap={24}
-        mobileGap={24}
+        webGap={8}
+        mobileGap={8}
         borderRadius={16}
         className="is-hover"
       >
@@ -94,8 +94,8 @@ const Wrapper = styled.div`
 `;
 
 const ProjectImg = styled.img`
-  width: 372px;
-  height: 209px;
+  width: 328px;
+  height: 184px;
   border-radius: 16px;
 
   @media (max-width: 1023px) {
@@ -110,7 +110,7 @@ const ProjectImg = styled.img`
 const ExplainBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 372px;
+  width: 328px;
   height: 122px;
   margin-top: -20px;
   z-index: -1;
@@ -144,10 +144,11 @@ const Row = styled.div`
 `;
 
 const Button = styled.button`
-  width: 103px;
-  height: 44px;
+  width: 81px;
+  height: 33px;
   border-radius: 8px;
   background-color: ${theme.palette.White};
   color: ${theme.palette.Admin.Navy};
-  font-size: 18px;
+  border: 1px solid ${theme.palette.Admin.Navy};
+  font-size: 14px;
 `;
