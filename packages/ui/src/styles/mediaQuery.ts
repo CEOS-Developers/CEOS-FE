@@ -1,13 +1,15 @@
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-export const desktop = css`
+export const Desktop = styled.div`
+  display: flex;
   @media (max-width: 1023px) {
     display: none;
   }
 `;
 
-export const mobile = css`
-  @media (min-width: 1024px) {
-    display: none;
+export const Mobile = styled.div`
+  display: none;
+  @media (max-width: 1023px) {
+    display: flex;
   }
 `;

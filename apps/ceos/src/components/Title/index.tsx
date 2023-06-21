@@ -1,4 +1,4 @@
-import { Flex, Text, desktop, mobile } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 export const Title = ({
   title,
   explain,
@@ -14,6 +14,7 @@ export const Title = ({
       webString += ex;
     }
   });
+
   return (
     <Flex direction="column" margin="80px 0" webGap={12} mobileGap={10}>
       <Text
@@ -23,14 +24,18 @@ export const Title = ({
       >
         {title}
       </Text>
-      <Flex direction="row" css={desktop}>
-        <Text webTypo="Body1">{webString}</Text>
-      </Flex>
-      <Flex direction="column" css={mobile}>
-        {explain.map((ex) => {
-          return <Text mobileTypo="Body1">{ex}</Text>;
-        })}
-      </Flex>
+      <Desktop>
+        <Flex direction="row">
+          <Text webTypo="Body1">{webString}</Text>
+        </Flex>
+      </Desktop>
+      <Mobile>
+        <Flex direction="column">
+          {explain.map((ex) => {
+            return <Text mobileTypo="Body1">{ex}</Text>;
+          })}
+        </Flex>
+      </Mobile>
     </Flex>
   );
 };
