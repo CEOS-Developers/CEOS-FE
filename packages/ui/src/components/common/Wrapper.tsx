@@ -34,13 +34,6 @@ export const Flex = styled.div<{
   @media (max-width: 1023px) {
     gap: ${({ mobileGap }) => (mobileGap ? `${mobileGap}px` : '0px')};
   }
-
-  &.header-padding {
-    padding-top: 70px;
-    @media (max-width: 1023px) {
-      padding-top: 124px;
-    }
-  }
 `;
 
 export const RelativeContainer = styled(Flex)`
