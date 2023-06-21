@@ -1,70 +1,22 @@
 import styled from '@emotion/styled';
 import { theme, Text } from '../../../../../packages/ui';
 import { CEOS } from '@admin/assets/CEOS';
-import {
-  SidebarApply,
-  SidebarArrow,
-  SidebarPageEdit,
-  SidebarRecruiting,
-  SidebarUser,
-} from '@admin/assets/Sidebar';
+import { SidebarArrow } from '@admin/assets/Sidebar';
 import Link from 'next/link';
 import { useState } from 'react';
+import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 
 export type subMenuListInterface = {
   subMenuName: string;
   path: string;
 };
-export type sidebarSubmenuInterface = [boolean, subMenuListInterface[]];
 export type sidebarInterface = {
   icon: JSX.Element;
   menu: string;
   path: string;
-  submenu: sidebarSubmenuInterface;
+  submenuOpen: boolean;
+  submenu: subMenuListInterface[];
 };
-
-const SidebarMenuList: sidebarInterface[] = [
-  {
-    icon: <SidebarApply />,
-    menu: '지원현황',
-    path: '/',
-    submenu: [false, []],
-  },
-  {
-    icon: <SidebarPageEdit />,
-    menu: '페이지 수정',
-    path: '/',
-    submenu: [
-      false,
-      [
-        { subMenuName: 'PROJECT', path: '/' },
-        { subMenuName: 'REWARD', path: '/' },
-        { subMenuName: 'ACTIVITY', path: '/' },
-        { subMenuName: 'MANAGEMENT', path: '/' },
-        { subMenuName: 'SPONSORED BY', path: '/' },
-      ],
-    ],
-  },
-  {
-    icon: <SidebarRecruiting />,
-    menu: '리쿠르팅',
-    path: '/',
-    submenu: [
-      false,
-      [
-        { subMenuName: 'RECRUIT', path: '/' },
-        { subMenuName: '지원서 제출', path: '/' },
-        { subMenuName: 'FAQ', path: '/' },
-      ],
-    ],
-  },
-  {
-    icon: <SidebarUser />,
-    menu: '유저관리',
-    path: '/',
-    submenu: [false, []],
-  },
-];
 
 const Sidebar = () => {
   const [clickMenuNum, setClickMenuNum] = useState(100);
@@ -77,37 +29,37 @@ const Sidebar = () => {
           ADMIN
         </Text>
       </SidebarTitle>
-      {SidebarMenuList.map((i: sidebarInterface, index: number) => (
+      {SidebarMenuList.map((sidebarMenu: sidebarInterface, index: number) => (
         <>
           <SidebarMenuContainer
             key={index}
-            href={{ pathname: i.path }}
+            href={{ pathname: sidebarMenu.path }}
             onClick={() => setClickMenuNum(index)}
             click={index === clickMenuNum ? true : false}
-            submenuOpen={i.submenu[0]}
+            submenuOpen={sidebarMenu.submenuOpen}
           >
             <div className="left-menu">
-              {i.icon}
+              {sidebarMenu.icon}
               <Text paletteColor="White" webTypo="Label2">
-                {i.menu}
+                {sidebarMenu.menu}
               </Text>
             </div>
             <div
               onClick={() => {
-                i.submenu[0] = !i.submenu[0];
+                sidebarMenu.submenuOpen = !sidebarMenu.submenuOpen;
               }}
             >
-              {i.submenu[1].length != 0 ? (
-                <SidebarArrow click={i.submenu[0]} />
+              {sidebarMenu.submenu.length != 0 ? (
+                <SidebarArrow click={sidebarMenu.submenuOpen} />
               ) : (
                 <></>
               )}
             </div>
           </SidebarMenuContainer>
           {/* 하위 메뉴 */}
-          <SidebarSubMenuContainer subMenuOpen={i.submenu[0]}>
-            {i.submenu[1].length != 0 ? (
-              i.submenu[1].map(
+          <SidebarSubMenuContainer subMenuOpen={sidebarMenu.submenuOpen}>
+            {sidebarMenu.submenu.length != 0 ? (
+              sidebarMenu.submenu.map(
                 (submenu: subMenuListInterface, index: number) => (
                   <SidebarSubMenu href={{ pathname: submenu.path }} key={index}>
                     <Text paletteColor="White" webTypo="Body3">
