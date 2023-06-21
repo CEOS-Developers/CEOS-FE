@@ -7,6 +7,7 @@ import { theme } from '@ceos-fe/ui';
 import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
+import Link from 'next/link';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -28,15 +29,30 @@ export const Header = (props: HeaderProps) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <>
       <nav css={navCss({ backColor, isScrolled })}>
-        <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+        <CustomLink href="/">
+          <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+        </CustomLink>
+
         <div css={contentCss(backColor)}>
-          <Content className="text">PROJECT</Content>
-          <Content className="text">ACTIVITY</Content>
-          <Content className="text">FAQ</Content>
-          <Content className="text">RECRUIT</Content>
+          <CustomLink href="/project" style={{}}>
+            <Content className="text">PROJECT</Content>
+          </CustomLink>
+
+          <CustomLink href="/activity">
+            <Content className="text">ACTIVITY</Content>
+          </CustomLink>
+
+          <CustomLink href="/FAQ">
+            <Content className="text">FAQ</Content>
+          </CustomLink>
+
+          <CustomLink href="/recruit">
+            <Content className="text">RECRUIT</Content>
+          </CustomLink>
           <MenuBtn backColor={backColor} onClick={toggleModal} />
         </div>
       </nav>
@@ -105,4 +121,9 @@ export const Content = styled.div`
     cursor: grab;
     color: ${theme.palette.Green};
   }
+`;
+
+export const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;

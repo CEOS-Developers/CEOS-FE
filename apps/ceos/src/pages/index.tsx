@@ -1,31 +1,34 @@
-import {
-  AdminProjectCard,
-  AdminRewardCard,
-  Flex,
-  ProjectCard,
-  AdminSponsorCard,
-  SponsorCard,
-  ManagementCard,
-  MentorCard,
-} from '@ceos-fe/ui';
-import { manage, mentor, project, rewardCards, sponsor } from '@ceos/assets';
-import { RewardCard } from '../../../../packages/ui/src/components/Card/RewardCard';
-
+import { Flex } from '@ceos-fe/ui';
+import { SelectButton } from '../../../../packages/ui/src/components/SelectButton/index';
+import { useForm } from 'react-hook-form';
 export default function Home() {
-  const onClickRemove = () => {};
-  const onClickUpdate = () => {};
+  const { register, watch } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+      part: '',
+    },
+  });
   return (
     <Flex direction="row">
-      <Flex direction="column">
-        <RewardCard rewardCard={rewardCards} />
-      </Flex>
-      <Flex direction="column">
-        <AdminRewardCard
-          rewardCard={rewardCards}
-          onClickRemove={onClickRemove}
-          onClickUpdate={onClickUpdate}
-        />
-      </Flex>
+      <SelectButton
+        variant="admin"
+        value="기획"
+        webWidth={240}
+        {...register('part')}
+      />
+      <SelectButton
+        variant="admin"
+        value="디자인"
+        webWidth={240}
+        {...register('part')}
+      />
+      <SelectButton
+        variant="admin"
+        value="개발"
+        webWidth={240}
+        {...register('part')}
+      />
     </Flex>
   );
 }
