@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { theme, Text } from '../../../../../packages/ui';
 import { CEOS } from '@admin/assets/CEOS';
 import { SidebarArrow } from '@admin/assets/Sidebar';
+import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
+import { Text, theme } from '@ceos-fe/ui';
 import Link from 'next/link';
 import { useState } from 'react';
-import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 
 export type subMenuListInterface = {
   subMenuName: string;
