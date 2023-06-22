@@ -1,6 +1,7 @@
 import { Flex } from '@ceos-fe/ui';
 import { SelectButton } from '../../../../packages/ui/src/components/SelectButton/index';
 import { useForm } from 'react-hook-form';
+import { BigShortcut1, BigShortcut2 } from '@ceos/components/Shortcut';
 export default function Home() {
   const { register, watch } = useForm({
     defaultValues: {
@@ -29,6 +30,8 @@ export default function Home() {
         webWidth={240}
         {...register('part')}
       />
+      <BigShortcut1 />
+      <BigShortcut2 />
     </Flex>
   );
 }
