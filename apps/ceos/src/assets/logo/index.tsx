@@ -6,10 +6,12 @@ export const Logo = ({
   width = 83,
   height = 42,
   backColor = 'Blue',
+  marginLeft = 0,
 }: {
   width?: number;
   height?: number;
   backColor?: KeyOfPalette;
+  marginLeft?: number;
 }) => {
   return (
     <div
@@ -18,7 +20,7 @@ export const Logo = ({
         width: ${width}px;
         height: ${height}px;
         color: ${backColor};
-        margin-left: 19.4791vw;
+        margin-left: ${marginLeft}vw;
       `}
     >
       <svg

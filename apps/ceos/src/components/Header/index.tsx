@@ -34,7 +34,10 @@ export const Header = (props: HeaderProps) => {
     <>
       <nav css={navCss({ backColor, isScrolled })}>
         <CustomLink href="/">
-          <Logo backColor={backColor === 'White' ? 'Blue' : 'White'} />
+          <Logo
+            backColor={backColor === 'White' ? 'Blue' : 'White'}
+            marginLeft={19.4791}
+          />
         </CustomLink>
 
         <div css={contentCss(backColor)}>
@@ -75,6 +78,7 @@ const navCss = ({
   align-items: center;
   width: 100%;
   height: 70px;
+  z-index: 2;
   background-color: ${!isScrolled && backColor === 'Blue'
     ? theme.palette.Opacity[backColor]
     : theme.palette[backColor]};

@@ -29,16 +29,16 @@ export const Email = ({
         <path
           d="M24.3333 6H5.66667C4.19391 6 3 7.15127 3 8.57143V21.4286C3 22.8487 4.19391 24 5.66667 24H24.3333C25.8061 24 27 22.8487 27 21.4286V8.57143C27 7.15127 25.8061 6 24.3333 6Z"
           stroke="#FFFFFF"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M3 9L15 16L27 9"
           stroke="#FFFFFF"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>
