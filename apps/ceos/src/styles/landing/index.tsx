@@ -18,3 +18,10 @@ export const BgText = css`
   left: 50%;
   transform: translateX(-50%);
 `;
+
+export const FloatingCss = css`
+  position: fixed;
+  z-index: 1000;
+  top: 66.66667%;
+  left: 83.5%;
+`;
