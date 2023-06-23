@@ -98,4 +98,19 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
   .shortcut2-diamond-text {
     ${theme.typo.Web.Heading3}
   }
+
+  @media (max-width: 1023px) {
+    width: 346px;
+    height: ${(props) => (props.typeNum == 1 ? '69px' : '101px')};
+    border-radius: 10px;
+
+    .text-container {
+      gap: 8px;
+      ${theme.typo.Mobile.Body2};
+    }
+    .shortcut1-diamond-text,
+    .shortcut2-diamond-text {
+      ${theme.typo.Web.Label3}
+    }
+  }
 `;

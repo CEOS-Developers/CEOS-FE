@@ -12,6 +12,11 @@ export const Diamond = ({
       css={css`
         width: ${width}px;
         height: ${height}px;
+
+        @media (max-width: 1023px) {
+          width: 14px;
+          height: 14px;
+        }
       `}
     >
       <svg
