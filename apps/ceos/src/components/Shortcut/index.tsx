@@ -22,35 +22,37 @@ export const Shortcut = ({
   );
 };
 
-export const BigShortcut1 = () => {
+export const GlassShortcut1 = ({
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <BigStyledButton>
+    <GlassStyledButton {...props} typeNum={1}>
       <Flex webGap={12} mobileGap={8} className="shortcut1-diamond-text">
         <Diamond />
-        프로젝트 바로가기
+        {children}
         <Diamond />
       </Flex>
-    </BigStyledButton>
+    </GlassStyledButton>
   );
 };
 
-export const BigShortcut2 = () => {
+export const GlassShortcut2 = ({
+  children,
+  title,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <BigStyledButton>
-      <Flex webGap={8} direction="column" height={95}>
-        더 궁금한 점이 있다면?
-        <Flex
-          webGap={16}
-          mobileGap={8}
-          height={60}
-          className="shortcut2-diamond-text"
-        >
+    <GlassStyledButton {...props}>
+      <div className="text-container">
+        {title}
+        <Flex webGap={16} mobileGap={8} className="shortcut2-diamond-text">
           <Diamond />
-          자주 묻는 질문 <br /> 보러가기
+          {children}
           <Diamond />
         </Flex>
-      </Flex>
-    </BigStyledButton>
+      </div>
+    </GlassStyledButton>
   );
 };
 
@@ -75,15 +77,21 @@ const StyledButton = styled.button`
   }
 `;
 
-const BigStyledButton = styled.button`
+const GlassStyledButton = styled.button<{ typeNum?: number }>`
   width: 328px;
   height: 159px;
   border-radius: 16px;
-  background-color: ${theme.palette.Blue};
   color: ${theme.palette.White};
-  ${theme.typo.Web.Body2};
-  ${theme.glass.Glass3};
+  ${theme.glass.Border};
 
+  .text-container {
+    ${theme.typo.Web.Body2};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
   .shortcut1-diamond-text {
     ${theme.typo.Web.Heading4}
   }

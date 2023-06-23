@@ -41,28 +41,6 @@ export const glass = {
       );
     }
   `,
-  Glass3: css`
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.3445) 0%,
-      rgba(255, 255, 255, 0.106) 0.01%,
-      rgba(255, 255, 255, 0.212) 100%
-    );
-    background-origin: border-box;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    :hover {
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(255, 255, 255, 0.3) 100%
-      );
-      backdrop-filter: blur(15px);
-    }
-  `,
   Border: css`
     border: 0.1rem solid rgba(255, 255, 255, 0.3);
     background-image: linear-gradient(
