@@ -77,6 +77,7 @@ export const TextField = forwardRef<
                 spellCheck={false}
                 isAdmin={isAdmin}
                 fontColor={fontColor}
+                isRight={Boolean(right)}
               />
               {right && <StyledIcon>{right}</StyledIcon>}
             </InputContainer>
@@ -120,9 +121,13 @@ const InputContainer = styled.div`
   position: relative;
   width: 100%;
 `;
-const StyledInput = styled.input<{ isAdmin: boolean; fontColor: string }>`
+const StyledInput = styled.input<{
+  isAdmin: boolean;
+  fontColor: string;
+  isRight: boolean;
+}>`
   width: 100%;
-  padding: 8px 16px;
+  padding: ${({ isRight }) => (isRight ? '8px 50px 8px 16px' : '8px 16px')};
 
   box-sizing: border-box;
 
