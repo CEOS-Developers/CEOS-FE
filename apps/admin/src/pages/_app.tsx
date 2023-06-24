@@ -1,4 +1,4 @@
-import { Layout } from '@admin/components/layout';
+import { Layout } from '@admin/components/Layout';
 import '@admin/styles/globals.css';
 import { globalStyle, theme } from '@ceos-fe/ui';
 import { Global, ThemeProvider } from '@emotion/react';

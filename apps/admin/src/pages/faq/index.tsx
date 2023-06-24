@@ -15,7 +15,6 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { SelectButton } from '../../../../../packages/ui/src/components/SelectButton/index';
-import Layout from '@admin/components/layout';
 import { AxiosError } from 'axios';
 
 type FaqCategoryKorType =
@@ -104,7 +103,7 @@ export default function Faq() {
   };
 
   return (
-    <Layout>
+    <Flex direction="column" width={1032} padding="88px 0">
       <Flex direction="column" align="start">
         <Text webTypo="Heading2" color="Black">
           FAQ
@@ -184,7 +183,7 @@ export default function Faq() {
           </Flex>
         </Button>
       </Flex>
-    </Layout>
+    </Flex>
   );
 }
 
