@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 import { Dropdown } from '@admin/components/Dropdown';
 import { DropdownItemInterface } from '../../utils/dropdown';
 import { SelectButton } from '../../../../../packages/ui/src/components/SelectButton/index';
+import Layout from '@admin/components/layout';
+import { Plus } from '@admin/assets/Plus';
 
 const applicationList = {
   commonQuestions: [
@@ -243,13 +245,15 @@ export default function Application() {
   };
 
   return (
-    <Flex direction="column" align="flex-start">
-      <Text webTypo="Heading2" color="Black">
-        지원서 제출
-      </Text>
-      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
-        지원서 질문을 관리하는 페이지입니다.
-      </Text>
+    <Layout>
+      <Flex direction="column" align="flex-start">
+        <Text webTypo="Heading2" color="Black">
+          지원서 제출
+        </Text>
+        <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+          지원서 질문을 관리하는 페이지입니다.
+        </Text>
+      </Flex>
 
       <Flex direction="column" webGap={48} style={{ marginTop: '48px' }}>
         <Flex direction="column" webGap={24} align="flex-start">
@@ -309,7 +313,10 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendCommonQuestion}
           >
-            <Flex webGap={4}>질문 추가하기</Flex>
+            <Flex webGap={4}>
+              <Plus />
+              질문 추가하기
+            </Flex>
           </Button>
         </Flex>
 
@@ -391,7 +398,10 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendPartQuestion}
           >
-            <Flex webGap={4}>질문 추가하기</Flex>
+            <Flex webGap={4}>
+              <Plus />
+              질문 추가하기
+            </Flex>
           </Button>
         </Flex>
 
@@ -434,7 +444,10 @@ export default function Application() {
               style={{ alignSelf: 'center' }}
               onClick={handleAppendCommonQuestion}
             >
-              <Flex webGap={4}>시간 추가하기</Flex>
+              <Flex webGap={4}>
+                <Plus />
+                시간 추가하기
+              </Flex>
             </Button>
           </Flex>
 
@@ -470,14 +483,17 @@ export default function Application() {
               style={{ alignSelf: 'center' }}
               onClick={handleAppendCommonQuestion}
             >
-              <Flex webGap={4}>시간 추가하기</Flex>
+              <Flex webGap={4}>
+                <Plus />
+                시간 추가하기
+              </Flex>
             </Button>
           </Flex>
         </Flex>
 
         <Button variant="admin">저장하기</Button>
       </Flex>
-    </Flex>
+    </Layout>
   );
 }
 
