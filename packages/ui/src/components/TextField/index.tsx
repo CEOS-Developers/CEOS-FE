@@ -153,6 +153,10 @@ const StyledIcon = styled.div`
   top: 50%;
   right: 16px;
   transform: translate(0, -50%);
+
+  @media (max-width: 1023px) {
+    right: 12px;
+  }
 `;
 const StyledTextArea = styled.textarea<{
   isAdmin: boolean;
