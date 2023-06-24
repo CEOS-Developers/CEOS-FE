@@ -2,14 +2,15 @@ import { Flex } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
+import { ResponseInterface } from '@ceos-fe/utils';
+
+// TODO: interface 재정의
+interface ActivityItemInterface {}
 
 const Activity = () => {
-  const { data, isLoading, isSuccess } = useQuery(
-    ['ceos', 'activity'],
-    activityApi.GET_ACTIVITY,
-  );
-
-  console.log(data);
+  const { data, isLoading, isSuccess } = useQuery<
+    ResponseInterface<ActivityItemInterface>
+  >(['ceos', 'activity'], activityApi.GET_ACTIVITY);
 
   return (
     <Flex direction="column">
