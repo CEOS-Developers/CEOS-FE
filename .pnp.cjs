@@ -2642,6 +2642,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.3"],\
             ["@types/react-dom", "npm:18.2.3"],\
             ["antd", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:5.5.2"],\
+            ["axios", "npm:1.4.0"],\
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
             ["next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
@@ -2669,6 +2670,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.3"],\
             ["@types/react-dom", "npm:18.2.3"],\
+            ["axios", "npm:1.4.0"],\
             ["emotion", "npm:11.0.0"],\
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
