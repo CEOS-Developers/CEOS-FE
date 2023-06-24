@@ -1,13 +1,25 @@
 import { Flex } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { useEffect } from 'react';
 import { projectApi } from '@ceos-fe/utils';
+import {
+  QueryClient,
+  dehydrate,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 
 // any : data Interface 미정
-const Project = ({ data }: { data: any }) => {
-  useEffect(() => {
-    console.log('project 페이지 내 data : ', data);
-  }, [data]);
+const Project = () => {
+  const { data, isLoading, isSuccess } = useInfiniteQuery(
+    ['ceos', 'project'],
+    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+    {
+      getNextPageParam: (lastPage) => {
+        return true;
+      },
+    },
+  );
+
+  console.log(data);
 
   return (
     <Flex direction="column">
@@ -24,10 +36,16 @@ const Project = ({ data }: { data: any }) => {
 
 export const getStaticProps = async () => {
   try {
-    const data = await projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 });
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchInfiniteQuery(['ceos', 'project'], () =>
+      projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+    );
 
     return {
-      props: { data },
+      props: {
+        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
     };
   } catch (err) {
     console.error(err);
