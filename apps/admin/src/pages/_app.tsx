@@ -4,6 +4,7 @@ import { globalStyle, theme } from '@ceos-fe/ui';
 import { Global, ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
+import { Layout } from '../components/Layout/index';
 import {
   Hydrate,
   QueryClient,
