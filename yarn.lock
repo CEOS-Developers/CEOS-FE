@@ -1485,6 +1485,7 @@ __metadata:
     "@ceos-fe/utils": "workspace:^"
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@tanstack/react-query": ^4.29.15
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
@@ -1511,6 +1512,7 @@ __metadata:
     "@emotion/babel-plugin": ^11.11.0
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@tanstack/react-query": ^4.29.15
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
