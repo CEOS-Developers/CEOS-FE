@@ -1,15 +1,28 @@
 import { Flex } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { projectApi } from '@ceos-fe/utils';
+import { ResponseInterface } from '@ceos-fe/utils';
 import {
   QueryClient,
   dehydrate,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 
-// any : data Interface 미정
+// TODO: interface 재정의
+interface ProjectItemInterface {
+  projectBriefInfoVos: any[];
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
+  };
+}
+
 const Project = () => {
-  const { data, isLoading, isSuccess } = useInfiniteQuery(
+  const { data, isLoading, isSuccess } = useInfiniteQuery<
+    ResponseInterface<ProjectItemInterface>
+  >(
     ['ceos', 'project'],
     ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
     {
@@ -18,8 +31,6 @@ const Project = () => {
       },
     },
   );
-
-  console.log(data);
 
   return (
     <Flex direction="column">
