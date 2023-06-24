@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-query';
 
 // TODO: interface 재정의
-interface ProjectItemInterface {
+interface ProjectResponse {
   projectBriefInfoVos: any[];
   pageInfo: {
     pageNum: number;
@@ -21,7 +21,7 @@ interface ProjectItemInterface {
 
 const Project = () => {
   const { data, isLoading, isSuccess } = useInfiniteQuery<
-    ResponseInterface<ProjectItemInterface>
+    ResponseInterface<ProjectResponse>
   >(
     ['ceos', 'project'],
     ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
