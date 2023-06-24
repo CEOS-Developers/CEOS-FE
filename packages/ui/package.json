@@ -12,6 +12,7 @@
     "@emotion/styled": "^11.11.0",
     "@types/node": "^20.1.0",
     "@types/react": "^18.2.6",
+    "@types/react-datepicker": "^4",
     "@types/react-dom": "^18.2.4",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
@@ -22,6 +23,8 @@
   },
   "dependencies": {
     "@ceos-fe/utils": "workspace:^",
-    "emotion-reset": "^3.0.1"
+    "date-fns": "^2.30.0",
+    "emotion-reset": "^3.0.1",
+    "react-datepicker": "^4.14.1"
   }
 }
