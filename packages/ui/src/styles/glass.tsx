@@ -4,16 +4,18 @@ import { theme } from './theme';
 
 export const glass = {
   Glass: css`
-    background: linear-gradient(
+    background-image: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.2) 100%
     );
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    background-origin: border-box;
+    background-clip: border-box, content-box;
 
     :hover {
-      background: linear-gradient(
+      background-image: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.4) 0%,
         rgba(255, 255, 255, 0.3) 100%
@@ -21,16 +23,18 @@ export const glass = {
     }
   `,
   Glass2: css`
-    background: linear-gradient(
+    background-image: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.2) 100%
     );
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    background-origin: border-box;
+    background-clip: border-box, content-box;
 
     :hover {
-      background: linear-gradient(
+      background-image: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.4) 0%,
         rgba(255, 255, 255, 0.3) 100%
