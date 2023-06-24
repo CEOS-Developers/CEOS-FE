@@ -4,7 +4,7 @@ import { SidebarArrow } from '@admin/assets/Sidebar';
 import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 import { Text, theme } from '@ceos-fe/ui';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 export type subMenuListInterface = {
   subMenuName: string;
@@ -30,9 +30,8 @@ const Sidebar = () => {
         </Text>
       </SidebarTitle>
       {SidebarMenuList.map((sidebarMenu: sidebarInterface, index: number) => (
-        <>
+        <Fragment key={index}>
           <SidebarMenuContainer
-            key={index}
             href={{ pathname: sidebarMenu.path }}
             onClick={() => setClickMenuNum(index)}
             click={index === clickMenuNum ? true : false}
@@ -72,7 +71,7 @@ const Sidebar = () => {
               <></>
             )}
           </SidebarSubMenuContainer>
-        </>
+        </Fragment>
       ))}
     </Container>
   );
