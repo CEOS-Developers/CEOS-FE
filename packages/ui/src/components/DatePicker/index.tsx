@@ -133,6 +133,9 @@ const DatePickerStyles = styled.div`
     height: 18px !important;
     margin: 0 !important;
 
+    text-align: center;
+    line-height: 18px !important;
+
     color: ${theme.palette.Blue} !important;
   }
 
