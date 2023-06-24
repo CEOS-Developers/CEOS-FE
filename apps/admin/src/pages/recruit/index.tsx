@@ -44,13 +44,15 @@ export default function Recruit() {
   };
 
   return (
-    <Flex direction="column" align="flex-start">
-      <Text webTypo="Heading2" color="Black">
-        RECRUIT
-      </Text>
-      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
-        리쿠르팅 정보를 관리합니다.
-      </Text>
+    <Flex direction="column" width={1032} padding="88px 0">
+      <Flex direction="column" align="start">
+        <Text webTypo="Heading2" color="Black">
+          RECRUIT
+        </Text>
+        <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+          리쿠르팅 정보를 관리합니다.
+        </Text>
+      </Flex>
 
       <Flex
         direction="column"
@@ -139,7 +141,7 @@ export default function Recruit() {
         />
       </Flex>
 
-      <Button variant="admin" style={{ alignSelf: 'center' }}>
+      <Button variant="admin" style={{ marginTop: '48px' }}>
         저장하기
       </Button>
     </Flex>
