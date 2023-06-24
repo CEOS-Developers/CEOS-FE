@@ -26,8 +26,8 @@ export const faqApi = {
 
     return response.data;
   },
-  DELETE_FAQ: async (faqId: number) => {
-    const response = await adminInstance.delete(`/faq/${faqId}`);
+  DELETE_FAQ: async (question: FaqListItemInterface) => {
+    const response = await adminInstance.delete(`/faq/${question.id}`);
 
     return response.data;
   },

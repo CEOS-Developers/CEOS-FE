@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { SelectButton } from '../../../../../packages/ui/src/components/SelectButton/index';
 import Layout from '@admin/components/layout';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 type FaqCategoryKorType =
   | '리크루팅 관련 질문'
@@ -50,13 +50,26 @@ export default function Faq() {
   });
 
   const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<FaqResponse>
+    ResponseInterface<FaqResponse>,
+    AxiosError
   >(['admin', 'faq', watch('category')], () =>
     faqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
   );
-  const { mutate: postFaqMutation } = useMutation(faqApi.POST_FAQ);
-  const { mutate: patchFaqMutation } = useMutation(faqApi.PATCH_FAQ);
-  const { mutate: deleteFaqMutation } = useMutation(faqApi.DELETE_FAQ);
+  const { mutate: postFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.POST_FAQ);
+  const { mutate: patchFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.PATCH_FAQ);
+  const { mutate: deleteFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.DELETE_FAQ);
 
   useEffect(() => {
     if (!isFetching && isSuccess) {
@@ -85,7 +98,7 @@ export default function Faq() {
   const handleRemoveQuestion = (idx: number) => {
     const question = watch(`faqList.${idx}`);
     if (question.id !== -1) {
-      deleteFaqMutation(question.id);
+      deleteFaqMutation(question);
     }
     remove(idx);
   };
@@ -179,8 +192,6 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    axios.defaults.headers.common['Authorization'] =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODc1ODMwNzMsImV4cCI6MTY4NzYwNDY3M30.4Q6pDzoae_JG38s9Z7qYgSP1gQ98BRhfYfDY1MlrlCSB5YX_F6uqhoojkwR4OGbgMxA9Fq2-4QpxYtbsPst17A';
     await queryClient.prefetchQuery(['admin', 'faq'], () =>
       faqApi.GET_FAQ('RECRUIT'),
     );
