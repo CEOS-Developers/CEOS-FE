@@ -172,10 +172,13 @@ const StyledIcon = styled.div`
   top: 50%;
   right: 16px;
   transform: translate(0, -50%);
+<<<<<<< HEAD
 
   @media (max-width: 1023px) {
     right: 12px;
   }
+=======
+>>>>>>> 001d1bd (refactor: right 추가)
 `;
 const StyledTextArea = styled.textarea<{
   isAdmin: boolean;
