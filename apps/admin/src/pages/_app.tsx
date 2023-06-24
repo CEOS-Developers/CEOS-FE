@@ -1,3 +1,4 @@
+import { Layout } from '@admin/components/layout';
 import '@admin/styles/globals.css';
 import { globalStyle, theme } from '@ceos-fe/ui';
 import { Global, ThemeProvider } from '@emotion/react';
@@ -15,10 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <Global styles={globalStyle} />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <Layout>
+          <ThemeProvider theme={theme}>
+            <Global styles={globalStyle} />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Layout>
       </Hydrate>
     </QueryClientProvider>
   );
