@@ -192,7 +192,7 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['admin', 'faq'], () =>
+    await queryClient.prefetchQuery(['admin', 'faq', 'RECRUIT'], () =>
       faqApi.GET_FAQ('RECRUIT'),
     );
 
