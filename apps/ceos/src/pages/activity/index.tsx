@@ -5,11 +5,11 @@ import { activityApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
 
 // TODO: interface 재정의
-interface ActivityItemInterface {}
+interface ActivityResponse {}
 
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<
-    ResponseInterface<ActivityItemInterface>
+    ResponseInterface<ActivityResponse>
   >(['ceos', 'activity'], activityApi.GET_ACTIVITY);
 
   return (

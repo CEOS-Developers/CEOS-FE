@@ -1,11 +1,20 @@
 import { Flex } from '@ceos-fe/ui';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { faqApi } from '@ceos-fe/utils';
+import { CategoryType, ResponseInterface, faqApi } from '@ceos-fe/utils';
+
+interface FaqResponse {
+  categoryFaqList: {
+    id: number;
+    category: CategoryType;
+    question: string;
+    answer: string;
+  };
+}
 
 const Faq = () => {
-  const { data, isLoading, isSuccess } = useQuery(['admin', 'faq'], () =>
-    faqApi.GET_FAQ('RECRUIT'),
-  );
+  const { data, isLoading, isSuccess } = useQuery<
+    ResponseInterface<FaqResponse>
+  >(['admin', 'faq'], () => faqApi.GET_FAQ('RECRUIT'));
 
   console.log(data);
 
