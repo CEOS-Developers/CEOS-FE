@@ -6,7 +6,7 @@ export default function Home() {
   const { setValue, watch } = useForm();
 
   return (
-    <Flex direction="column">
+    <>
       <Dropdown
         options={[
           {
@@ -52,6 +52,6 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
-    </Flex>
+    </>
   );
 }

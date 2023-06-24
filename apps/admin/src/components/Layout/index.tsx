@@ -12,4 +12,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
 const ChildrenContainer = styled.div`
   margin-left: 16.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

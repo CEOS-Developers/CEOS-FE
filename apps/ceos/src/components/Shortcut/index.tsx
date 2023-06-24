@@ -22,7 +22,7 @@ export const Shortcut = ({
   );
 };
 
-export const GlassShortcut1 = ({
+export const GlassShortcut = ({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
@@ -37,7 +37,7 @@ export const GlassShortcut1 = ({
   );
 };
 
-export const GlassShortcut2 = ({
+export const GlassShortcutwithTitle = ({
   children,
   title,
   ...props
