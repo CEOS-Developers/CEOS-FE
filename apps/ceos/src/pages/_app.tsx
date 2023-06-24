@@ -3,7 +3,11 @@ import { globalStyle, theme } from '@ceos-fe/ui';
 import { Global, ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import { Layout } from '../components/Layout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { useState } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -12,10 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <Global styles={globalStyle} />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider theme={theme}>
+            <Global styles={globalStyle} />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Hydrate>
       </QueryClientProvider>
     </Layout>
   );
