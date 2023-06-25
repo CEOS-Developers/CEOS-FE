@@ -141,7 +141,10 @@ export default function Recruit() {
         />
       </Flex>
 
-      <Button variant="admin" style={{ marginTop: '48px' }}>
+      <Button
+        variant="admin"
+        style={{ marginTop: '48px', transform: 'translate(-50%, 0)' }}
+      >
         저장하기
       </Button>
     </Flex>
