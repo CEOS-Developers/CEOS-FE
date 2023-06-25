@@ -10,11 +10,10 @@ import {
   ResponseInterface,
   faqApi,
 } from '@ceos-fe/utils';
-import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
+import { Button, Flex, Text, TextField, SelectButton } from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
-import { SelectButton } from '../../../../../packages/ui/src/components/SelectButton/index';
 import { AxiosError } from 'axios';
 
 type FaqCategoryKorType =
@@ -103,7 +102,7 @@ export default function Faq() {
   };
 
   return (
-    <Flex direction="column" width={1032} padding="88px 0">
+    <>
       <Flex direction="column" align="start">
         <Text webTypo="Heading2" color="Black">
           FAQ
@@ -183,7 +182,7 @@ export default function Faq() {
           </Flex>
         </Button>
       </Flex>
-    </Flex>
+    </>
   );
 }
 
