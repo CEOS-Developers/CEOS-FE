@@ -1,5 +1,5 @@
 import { imageApi } from './../../../../packages/utils/src/apis/admin/imageApi';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 export type imageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
 
@@ -8,9 +8,17 @@ const usePresignedUrl = (apiType: imageApiType) => {
     [apiType],
     imageApi[`GET_${apiType}_IMAGE`],
   );
+  const uploadImageMutation = useMutation(imageApi.PUT_IMAGE);
+
+  const uploadImage = ({ url, file }: any) => {
+    if (file && url) {
+      uploadImageMutation.mutate({ url: url, file: file });
+    }
+  };
 
   return {
     presignedUrl: data || null,
+    uploadImage,
     error,
   };
 };

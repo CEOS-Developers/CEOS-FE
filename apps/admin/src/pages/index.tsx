@@ -3,9 +3,14 @@ import { useForm } from 'react-hook-form';
 import { Flex, theme } from '@ceos-fe/ui';
 import { ImageUploader } from '../components/ImageUploader/index';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { setValue, watch, getValues, register } = useForm();
+
+  useEffect(() => {
+    console.log('흠', watch('activity'));
+  }, [watch('activity')]);
 
   return (
     <>
@@ -54,7 +59,11 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
-      <ImageUploader {...register('file')} imageApiType="ACTIVITY" />
+      <ImageUploader
+        value={watch('activity')}
+        setValue={(url: string) => setValue('activity', url)}
+        imageApiType="ACTIVITY"
+      />
     </>
   );
 }

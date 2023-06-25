@@ -16,4 +16,10 @@ export const imageApi = {
 
     return response.data.data.url;
   },
+  PUT_IMAGE: async ({ url, file }: any) => {
+    console.log('ddd', url, file);
+    const response = await adminInstance.put(url, file);
+    console.log('response', response);
+    return response.status;
+  },
 };

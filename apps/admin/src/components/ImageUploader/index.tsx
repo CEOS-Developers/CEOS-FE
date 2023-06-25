@@ -17,35 +17,28 @@ export interface ImageUploaderProps
   extends InputHTMLAttributes<HTMLInputElement> {
   height?: number;
   imageApiType: imageApiType;
+  value: string;
+  setValue: any;
 }
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
-  ({ value, height = 184, imageApiType, ...props }, ref) => {
-    const { presignedUrl } = usePresignedUrl(imageApiType);
-
-    useEffect(() => {
-      console.log(presignedUrl);
-    }, [presignedUrl]);
+  ({ value, height = 184, imageApiType, setValue, ...props }, ref) => {
+    const { presignedUrl, uploadImage } = usePresignedUrl(imageApiType);
 
     const handleImageChange = async (e: any) => {
-      if (e.target.files) {
-        const data = e.target.files[0];
-      }
-    };
-
-    const handleImageDelete = () => {
-      //   setValue();
-    };
-
-    const handleDragOver = (e: any) => {
       e.preventDefault();
+      if (e.target.files) {
+        const file = e.target.files[0];
+        uploadImage({ file: file, url: presignedUrl });
+        setValue(presignedUrl);
+      }
     };
 
     const handleDrop = async (e: any) => {
       e.preventDefault();
       const file = e.dataTransfer.files[0];
-      const data = file;
-      //   setValue(data);
+      uploadImage({ file: file, url: presignedUrl });
+      setValue(presignedUrl);
     };
 
     return (
@@ -53,14 +46,19 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
         <Flex direction="column" webGap={30}>
           {value && (
             <>
-              <DeleteCover>
-                <Deletetag onClick={handleImageDelete}>삭제</Deletetag>
+              <DeleteCover
+                onClick={() => setValue(undefined)}
+                direction="column"
+                webGap={8}
+              >
+                <CardImage width={24} height={24} />
+                <Text webTypo="Body3">이미지를 수정하려면 클릭하세요.</Text>
               </DeleteCover>
-              <Img src={'value'} height={height} />
+              <Img src={value || ''} height={height} />
             </>
           )}
           <Label
-            onDragOver={handleDragOver}
+            onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
             height={height}
           >
@@ -95,7 +93,6 @@ const Img = styled.img<{
   background-size: cover;
   background-position: center;
   background-color: ${theme.palette.Gray3};
-  border: 1px dashed ${theme.palette.Black};
 
   height: ${({ height }) => (height ? `${height}px` : '184px')};
   width: 328px;
@@ -127,28 +124,17 @@ const Label = styled.label<{
 `;
 
 const DeleteCover = styled(Flex)`
-  height: 180px;
-  width: 180px;
-  border-radius: 100%;
-  opacity: 0;
+  height: ${({ height }) => (height ? `${height}px` : '184px')};
+  width: 328px;
+  border-radius: 8px;
+
+  opacity: 1;
+
+  background: rgba(35, 37, 39, 0.3);
+  color: ${theme.palette.White};
 
   position: absolute;
   z-index: 3;
 
-  &:hover {
-    background: rgba(12, 12, 12, 0.6);
-    opacity: 1;
-  }
-`;
-
-const Deletetag = styled.button`
-  width: 80px;
-  height: 32px;
-
-  border-radius: 8px;
-
-  background-color: ${theme.palette.Black};
-  color: ${theme.palette.Black};
-
-  ${theme.typo.Web.Body1}
+  cursor: pointer;
 `;
