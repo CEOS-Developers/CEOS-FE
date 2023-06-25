@@ -63,8 +63,13 @@ export const MentorCard = (props: {
       {explain ? (
         <Wrapper className="extra-info">
           <Content className="extra-info">
-            {explain.map((ex) => (
-              <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
+            {explain.map((ex, idx) => (
+              <Text
+                key={idx}
+                webTypo="Body3"
+                mobileTypo="Body1"
+                paletteColor="White"
+              >
                 {ex}
               </Text>
             ))}
