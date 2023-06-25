@@ -1,4 +1,5 @@
 import '@admin/styles/globals.css';
+import { Layout } from '@admin/components/Layout';
 import { globalStyle, theme } from '@ceos-fe/ui';
 import { Global, ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
@@ -16,10 +17,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <Global styles={globalStyle} />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <Layout>
+          <ThemeProvider theme={theme}>
+            <Global styles={globalStyle} />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Layout>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
