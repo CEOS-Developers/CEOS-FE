@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Planner from './Planner';
 import Designer from './Designer';
 import Developer from './Developer';
-import { SelectButton } from '@ceos/components/SelectButton';
+import { SelectButton } from '../../../../../../../packages/ui/src/components/SelectButton/index';
 
 const Part = () => {
   const { register, handleSubmit, watch } = useForm({
@@ -37,14 +37,30 @@ const Part = () => {
       </Flex>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex webGap={20}>
-          <SelectButton value="기획" webWidth={205} {...register('part')} />
-          <SelectButton value="디자인" webWidth={205} {...register('part')} />
           <SelectButton
+            variant="ceos"
+            value="기획"
+            webWidth={205}
+            {...register('part')}
+          />
+          <SelectButton
+            variant="ceos"
+            value="디자인"
+            webWidth={205}
+            {...register('part')}
+          />
+          <SelectButton
+            variant="ceos"
             value="프론트엔드"
             webWidth={205}
             {...register('part')}
           />
-          <SelectButton value="백엔드" webWidth={205} {...register('part')} />
+          <SelectButton
+            variant="ceos"
+            value="백엔드"
+            webWidth={205}
+            {...register('part')}
+          />
         </Flex>
       </form>
 

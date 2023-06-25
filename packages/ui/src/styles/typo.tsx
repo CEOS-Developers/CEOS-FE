@@ -41,7 +41,7 @@ export const typo = {
       line-height: 170%;
     `,
     Body2: css`
-      font-family: 'Pretendar', 'Apple SD Gothic Neo';
+      font-family: 'Pretendard', 'Apple SD Gothic Neo';
       font-weight: 500;
       font-size: ${calcRem(16)};
       line-height: 170%;
