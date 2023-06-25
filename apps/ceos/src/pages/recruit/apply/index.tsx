@@ -1,6 +1,6 @@
 import { Flex, TextField, Text } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { SelectButton } from '../../../../../../packages/ui/src/components/SelectButton/index';
+import { SelectButton } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 
 const Apply = () => {
