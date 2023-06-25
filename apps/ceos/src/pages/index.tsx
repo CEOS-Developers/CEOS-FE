@@ -15,8 +15,8 @@ export default function Home() {
     },
   });
   return (
-    <>
+    <main>
       <SubHeader />
-    </>
+    </main>
   );
 }
