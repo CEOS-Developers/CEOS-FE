@@ -79,7 +79,7 @@ export const TextField = forwardRef<
                 fontColor={fontColor}
                 isRight={Boolean(right)}
               />
-              {right && <StyledIcon>{right}</StyledIcon>}
+              {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
           )}
         </Flex>
@@ -139,7 +139,15 @@ const StyledInput = styled.input<{
   ${theme.typo.Web.Body3};
   color: ${({ fontColor }) => fontColor};
 
+  & + div {
+    color: ${theme.palette.Gray4};
+  }
+
   :focus {
+    & + div {
+      color: ${({ isAdmin }) =>
+        isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
+    }
     border: 1px solid
       ${({ isAdmin }) =>
         isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
