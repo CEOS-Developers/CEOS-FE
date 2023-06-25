@@ -38,14 +38,15 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
     };
 
     return (
-      <Flex direction="column" align="flex-start" webGap={36}>
-        <Flex direction="column" webGap={30}>
+      <Flex direction="column" align="flex-start" webGap={36} mobileGap={36}>
+        <Flex direction="column" webGap={30} mobileGap={30}>
           {value && (
             <>
               <DeleteCover
                 onClick={() => setValue(null)}
                 direction="column"
                 webGap={8}
+                mobileGap={8}
               >
                 <CardImage width={24} height={24} />
                 <Text webTypo="Body3">이미지를 수정하려면 클릭하세요.</Text>
@@ -114,7 +115,7 @@ const Label = styled.label<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   cursor: pointer;
 `;
