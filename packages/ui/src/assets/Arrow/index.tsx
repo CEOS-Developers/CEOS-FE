@@ -24,13 +24,13 @@ export const Up = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_620_7223)">
+        <g clipPath="url(#clip0_620_7223)">
           <path
             d="M22 11L15 4L8 11"
             stroke="#787E88"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </g>
         <defs>
@@ -76,9 +76,9 @@ export const Down = ({
           <path
             d="M8 5L15 12L22 5"
             stroke="#787E88"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </g>
         <defs>

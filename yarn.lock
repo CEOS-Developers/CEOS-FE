@@ -1485,11 +1485,13 @@ __metadata:
     "@ceos-fe/utils": "workspace:^"
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@tanstack/react-query": ^4.29.15
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
     "@types/react-dom": 18.2.3
     antd: ^5.5.2
+    axios: ^1.4.0
     eslint: 8.39.0
     eslint-config-next: 13.3.4
     next: 13.3.4
@@ -1510,11 +1512,13 @@ __metadata:
     "@emotion/babel-plugin": ^11.11.0
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
+    "@tanstack/react-query": ^4.29.15
     "@types/eslint": ^8
     "@types/node": 18.16.3
     "@types/react": 18.2.3
     "@types/react-dom": 18.2.3
     date-fns: ^2.30.0
+    axios: ^1.4.0
     emotion: ^11.0.0
     eslint: 8.39.0
     eslint-config-next: 13.3.4

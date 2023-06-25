@@ -1,13 +1,36 @@
 import { Flex } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { useEffect } from 'react';
 import { projectApi } from '@ceos-fe/utils';
+import { ResponseInterface } from '@ceos-fe/utils';
+import {
+  QueryClient,
+  dehydrate,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 
-// any : data Interface 미정
-const Project = ({ data }: { data: any }) => {
-  useEffect(() => {
-    console.log('project 페이지 내 data : ', data);
-  }, [data]);
+// TODO: interface 재정의
+interface ProjectResponse {
+  projectBriefInfoVos: any[];
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
+  };
+}
+
+const Project = () => {
+  const { data, isLoading, isSuccess } = useInfiniteQuery<
+    ResponseInterface<ProjectResponse>
+  >(
+    ['ceos', 'project'],
+    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+    {
+      getNextPageParam: (lastPage) => {
+        return true;
+      },
+    },
+  );
 
   return (
     <Flex direction="column">
@@ -24,10 +47,16 @@ const Project = ({ data }: { data: any }) => {
 
 export const getStaticProps = async () => {
   try {
-    const data = await projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 });
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchInfiniteQuery(['ceos', 'project'], () =>
+      projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+    );
 
     return {
-      props: { data },
+      props: {
+        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
     };
   } catch (err) {
     console.error(err);
