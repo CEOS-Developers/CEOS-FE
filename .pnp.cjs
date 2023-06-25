@@ -2512,7 +2512,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }],\
         ["virtual:3771606f35eaccf6735eb3228677c4c9348b5f9299c39a13a1bc8534c86dc49523f2ee758db9cba6a1ff1326f0377d3e1e987d769801e334a35b2800ef0aeb4e#npm:7.18.6", {\
           "packageLocation": "./.yarn/__virtual__/@babel-preset-react-virtual-684c5425d1/0/cache/@babel-preset-react-npm-7.18.6-d1cea43c32-540d9cf0a0.zip/node_modules/@babel/preset-react/",\
-          "packageDependencies": [\g
+          "packageDependencies": [\
             ["@babel/preset-react", "virtual:3771606f35eaccf6735eb3228677c4c9348b5f9299c39a13a1bc8534c86dc49523f2ee758db9cba6a1ff1326f0377d3e1e987d769801e334a35b2800ef0aeb4e#npm:7.18.6"],\
             ["@babel/core", "npm:7.21.8"],\
             ["@babel/helper-plugin-utils", "npm:7.21.5"],\
@@ -2670,8 +2670,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.3"],\
             ["@types/react-dom", "npm:18.2.3"],\
-            ["date-fns", "npm:2.30.0"],\
             ["axios", "npm:1.4.0"],\
+            ["date-fns", "npm:2.30.0"],\
             ["emotion", "npm:11.0.0"],\
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\

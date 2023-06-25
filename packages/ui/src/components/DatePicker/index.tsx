@@ -12,7 +12,7 @@ import { Calendar } from '../../assets/Calender/index';
 export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
-  onChange: any;
+  onChange: (date: string) => void;
   initialValue?: Date | null;
   isAdmin?: boolean;
 }
@@ -39,7 +39,7 @@ export const DatePicker = (props: DatePickerProps) => {
     <DatePickerStyles isAdmin={props.isAdmin}>
       <ReactDatePicker
         selected={startDate}
-        onChange={(date: any) => setStartDate(date)}
+        onChange={(date: Date) => setStartDate(date)}
         disabledKeyboardNavigation
         dateFormat="yyyy년 MM월 dd일"
         placeholderText={props.placeholder}
