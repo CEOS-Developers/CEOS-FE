@@ -125,6 +125,7 @@ const StyledInput = styled.input<{
   isAdmin: boolean;
   fontColor: string;
   isRight: boolean;
+  value?: string | number | readonly string[] | undefined;
 }>`
   width: 100%;
   padding: ${({ isRight }) => (isRight ? '8px 50px 8px 16px' : '8px 16px')};
@@ -140,7 +141,12 @@ const StyledInput = styled.input<{
   color: ${({ fontColor }) => fontColor};
 
   & + div {
-    color: ${theme.palette.Gray4};
+    color: ${({ isAdmin, value }) =>
+      isAdmin && value
+        ? theme.palette.Admin.Navy
+        : value
+        ? theme.palette.Blue
+        : theme.palette.Gray4};
   }
 
   :focus {
