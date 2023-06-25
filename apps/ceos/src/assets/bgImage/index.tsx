@@ -15,8 +15,7 @@ export const BgImage = (props: BgProps) => {
       `}
     >
       <svg
-        width="1660"
-        height="720"
+        width="100vw"
         viewBox="0 0 1660 720"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +46,7 @@ export const BgImage = (props: BgProps) => {
             height="136"
             rx="19"
             stroke="url(#paint1_linear_2200_13139)"
-            stroke-width="2"
+            strokeWidth="2"
           />
         </g>
         <g filter="url(#filter1_b_2200_13139)">
@@ -74,7 +73,7 @@ export const BgImage = (props: BgProps) => {
             height="136"
             rx="19"
             stroke="url(#paint3_linear_2200_13139)"
-            stroke-width="2"
+            strokeWidth="2"
           />
         </g>
         <g filter="url(#filter2_b_2200_13139)">
@@ -101,7 +100,7 @@ export const BgImage = (props: BgProps) => {
             height="136"
             rx="19"
             stroke="url(#paint5_linear_2200_13139)"
-            stroke-width="2"
+            strokeWidth="2"
           />
         </g>
         <g filter="url(#filter3_b_2200_13139)">
@@ -128,7 +127,7 @@ export const BgImage = (props: BgProps) => {
             height="136"
             rx="19"
             stroke="url(#paint7_linear_2200_13139)"
-            stroke-width="2"
+            strokeWidth="2"
           />
         </g>
         <defs>
@@ -150,9 +149,9 @@ export const BgImage = (props: BgProps) => {
             width="300"
             height="198"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImageFix" stdDeviation="15" />
             <feComposite
               in2="SourceAlpha"
@@ -173,9 +172,9 @@ export const BgImage = (props: BgProps) => {
             width="300"
             height="198"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImageFix" stdDeviation="15" />
             <feComposite
               in2="SourceAlpha"
@@ -196,9 +195,9 @@ export const BgImage = (props: BgProps) => {
             width="300"
             height="198"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImageFix" stdDeviation="15" />
             <feComposite
               in2="SourceAlpha"
@@ -219,9 +218,9 @@ export const BgImage = (props: BgProps) => {
             width="300"
             height="198"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImageFix" stdDeviation="15" />
             <feComposite
               in2="SourceAlpha"
@@ -243,9 +242,9 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.65" />
-            <stop offset="0.0001" stop-color="white" stop-opacity="0.1" />
-            <stop offset="1" stop-color="white" stop-opacity="0.2" />
+            <stop stopColor="white" stopOpacity="0.65" />
+            <stop offset="0.0001" stopColor="white" stopOpacity="0.1" />
+            <stop offset="1" stopColor="white" stopOpacity="0.2" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_2200_13139"
@@ -255,8 +254,8 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.5" />
-            <stop offset="1" stop-color="white" stop-opacity="0.1" />
+            <stop stopColor="white" stopOpacity="0.5" />
+            <stop offset="1" stopColor="white" stopOpacity="0.1" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_2200_13139"
@@ -266,9 +265,9 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.65" />
-            <stop offset="0.0001" stop-color="white" stop-opacity="0.1" />
-            <stop offset="1" stop-color="white" stop-opacity="0.2" />
+            <stop stopColor="white" stopOpacity="0.65" />
+            <stop offset="0.0001" stopColor="white" stopOpacity="0.1" />
+            <stop offset="1" stopColor="white" stopOpacity="0.2" />
           </linearGradient>
           <linearGradient
             id="paint3_linear_2200_13139"
@@ -278,8 +277,8 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.5" />
-            <stop offset="1" stop-color="white" stop-opacity="0.1" />
+            <stop stopColor="white" stopOpacity="0.5" />
+            <stop offset="1" stopColor="white" stopOpacity="0.1" />
           </linearGradient>
           <linearGradient
             id="paint4_linear_2200_13139"
@@ -289,9 +288,9 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.65" />
-            <stop offset="0.0001" stop-color="white" stop-opacity="0.1" />
-            <stop offset="1" stop-color="white" stop-opacity="0.2" />
+            <stop stopColor="white" stopOpacity="0.65" />
+            <stop offset="0.0001" stopColor="white" stopOpacity="0.1" />
+            <stop offset="1" stopColor="white" stopOpacity="0.2" />
           </linearGradient>
           <linearGradient
             id="paint5_linear_2200_13139"
@@ -301,8 +300,8 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.5" />
-            <stop offset="1" stop-color="white" stop-opacity="0.1" />
+            <stop stopColor="white" stopOpacity="0.5" />
+            <stop offset="1" stopColor="white" stopOpacity="0.1" />
           </linearGradient>
           <linearGradient
             id="paint6_linear_2200_13139"
@@ -312,9 +311,9 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.65" />
-            <stop offset="0.0001" stop-color="white" stop-opacity="0.1" />
-            <stop offset="1" stop-color="white" stop-opacity="0.2" />
+            <stop stopColor="white" stopOpacity="0.65" />
+            <stop offset="0.0001" stopColor="white" stopOpacity="0.1" />
+            <stop offset="1" stopColor="white" stopOpacity="0.2" />
           </linearGradient>
           <linearGradient
             id="paint7_linear_2200_13139"
@@ -324,8 +323,8 @@ export const BgImage = (props: BgProps) => {
             y2="608"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="white" stop-opacity="0.5" />
-            <stop offset="1" stop-color="white" stop-opacity="0.1" />
+            <stop stopColor="white" stopOpacity="0.5" />
+            <stop offset="1" stopColor="white" stopOpacity="0.1" />
           </linearGradient>
           <image
             id="image0_2200_13139"

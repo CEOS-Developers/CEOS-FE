@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Flex direction="column" align="center">
-      <Header backColor="White" />
+      <Header backColor="Blue" />
       {/* <CustomFlex direction="column" className="header-padding"> */}
       {children}
       {/* </CustomFlex> */}
