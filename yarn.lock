@@ -1495,6 +1495,7 @@ __metadata:
     next: 13.3.4
     next-transpile-modules: ^10.0.0
     react: 18.2.0
+    react-bootstrap-icons: ^1.10.3
     react-dom: 18.2.0
     react-hook-form: ^7.43.9
     typescript: 5.0.4
@@ -5973,7 +5974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -6572,6 +6573,17 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: d0ea5bc20bd54751220422442c6ff9c670fbe412b200a7739ac635212d3f0fd74863c85ed0532a9d65cf0e0e09a752c3ee65ed7233327529ac502aca118375a2
+  languageName: node
+  linkType: hard
+
+"react-bootstrap-icons@npm:^1.10.3":
+  version: 1.10.3
+  resolution: "react-bootstrap-icons@npm:1.10.3"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16.8.6"
+  checksum: afc9a4a558217c9e4abf77734d902fa658be38f61eb99a0c6dd574eaf8289517ff17fe1e2cd62735901975a8da8f2dc363d3f964a322377726b4d825a09febfa
   languageName: node
   linkType: hard
 
