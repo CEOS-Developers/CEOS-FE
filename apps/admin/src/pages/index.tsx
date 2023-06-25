@@ -1,9 +1,10 @@
 import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
 import { Flex, theme } from '@ceos-fe/ui';
+import { ImageUploader } from '../components/ImageUploader/index';
 
 export default function Home() {
-  const { setValue, watch } = useForm();
+  const { setValue, watch, getValues, register } = useForm();
 
   return (
     <>
@@ -52,6 +53,7 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
+      <ImageUploader {...register('file')} />
     </>
   );
 }

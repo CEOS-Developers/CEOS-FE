@@ -1,74 +1,82 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  InputHTMLAttributes,
+  forwardRef,
+  useEffect,
+  useState,
+} from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../../../../packages/ui';
 import { Flex, Text } from '../../../../../packages/ui';
 import { CardImage } from 'react-bootstrap-icons';
 import { css } from '@emotion/react';
 
-export interface ImageUploaderProps {
-  value: any;
-  setValue: any;
+export interface ImageUploaderProps
+  extends InputHTMLAttributes<HTMLInputElement> {
+  height?: number;
+  value?: any;
+  setValue?: any;
 }
 
-export const ImageUploader = ({
-  value,
-  setValue,
-  ...props
-}: ImageUploaderProps) => {
-  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      // console.log(e.target.files);
-      const data = await encodeFileToBase64(e.target.files[0]);
+export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
+  ({ value, setValue, ...props }, ref) => {
+    const handleImageChange = async (e: any) => {
+      if (e.target.files) {
+        const data = e.target.files[0];
+      }
+    };
+
+    const handleImageDelete = () => {
+      setValue();
+    };
+
+    const handleDragOver = (e: any) => {
+      e.preventDefault();
+    };
+
+    const handleDrop = async (e: any) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      const data = file;
       setValue(data);
-    }
-  };
+    };
 
-  const handleImageDelete = () => {
-    setValue('');
-  };
-
-  const handleDragOver = (e: any) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = async (e: any) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    const data = await encodeFileToBase64(file);
-    setValue(data);
-  };
-
-  return (
-    <Flex direction="column" align="flex-start" gap={36}>
-      <Flex direction="column" webGap={30}>
-        {value && (
-          <>
-            <DeleteCover>
-              <Deletetag onClick={handleImageDelete}>삭제</Deletetag>
-            </DeleteCover>
-            <Img src={value} />
-          </>
-        )}
-        <Label onDragOver={handleDragOver} onDrop={handleDrop}>
-          <input
-            type="file"
-            id="profileImage"
-            style={{ display: 'none' }}
-            onChange={handleImageChange}
-            accept="image/x-png, image/gif, image/jpeg"
-          />
-          <CardImage />
-          <Text webTypo="Body1" color="White">
-            이미지 업로드
-          </Text>
-        </Label>
+    return (
+      <Flex direction="column" align="flex-start" webGap={36}>
+        <Flex direction="column" webGap={30}>
+          {value && (
+            <>
+              <DeleteCover>
+                <Deletetag onClick={handleImageDelete}>삭제</Deletetag>
+              </DeleteCover>
+              <Img src={value} height={props.height} />
+            </>
+          )}
+          <Label
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            height={props.height}
+          >
+            <input
+              type="file"
+              id="profileImage"
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
+              accept="image/x-png, image/gif, image/jpeg"
+              {...props}
+            />
+            <CardImage width={24} height={24} />
+            <Text webTypo="Body3">이미지를 업로드해주세요.</Text>
+          </Label>
+        </Flex>
       </Flex>
-    </Flex>
-  );
-};
+    );
+  },
+);
 
 const Img = styled.img<{
   src: string;
+  height?: number;
 }>`
   ${({ src }) =>
     css`
@@ -80,27 +88,27 @@ const Img = styled.img<{
   background-size: cover;
   background-position: center;
   background-color: ${theme.palette.Gray3};
-  border: 1px dashed ${theme.palette.White};
+  border: 1px dashed ${theme.palette.Black};
 
-  height: 180px;
-  width: 180px;
-  border-radius: 100%;
+  height: ${({ height }) => (height ? `${height}px` : '184px')};
+  width: 328px;
+  border-radius: 8px;
 
   position: absolute;
   z-index: 2;
 `;
 
-const Label = styled.label`
-  color: white;
-  background-color: transparent;
+const Label = styled.label<{
+  height?: number;
+}>`
+  color: ${theme.palette.Gray4};
+  background-color: ${theme.palette.Gray1};
 
-  border: 1px dashed ${theme.palette.White};
   box-sizing: border-box;
 
-  height: 180px;
-  width: 180px;
-
-  border-radius: 100%;
+  height: ${({ height }) => (height ? `${height}px` : '184px')};
+  width: 328px;
+  border-radius: 8px;
 
   display: flex;
   flex-direction: column;
@@ -133,7 +141,7 @@ const Deletetag = styled.button`
   border-radius: 8px;
 
   background-color: ${theme.palette.Black};
-  color: ${theme.palette.White};
+  color: ${theme.palette.Black};
 
   ${theme.typo.Web.Body1}
 `;
