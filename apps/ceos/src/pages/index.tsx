@@ -1,34 +1,26 @@
-import { Flex } from '@ceos-fe/ui';
-import { SelectButton } from '../../../../packages/ui/src/components/SelectButton/index';
+import { DatePicker, Flex, TextField } from '@ceos-fe/ui';
+import { Instagram } from '../../../../packages/ui/src/assets/FloatingButton/Instagram';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const { register, watch } = useForm({
+  const { register, watch, setValue } = useForm({
     defaultValues: {
-      title: '',
-      content: '',
-      part: '',
+      date: '',
+      adminDate: '',
     },
   });
+
+  useEffect(() => {
+    console.log(watch('date'));
+  }, [watch('date')]);
+
   return (
     <Flex direction="row">
-      <SelectButton
-        variant="admin"
-        value="기획"
-        webWidth={240}
-        {...register('part')}
-      />
-      <SelectButton
-        variant="admin"
-        value="디자인"
-        webWidth={240}
-        {...register('part')}
-      />
-      <SelectButton
-        variant="admin"
-        value="개발"
-        webWidth={240}
-        {...register('part')}
+      <DatePicker onChange={(date: string) => setValue('date', date)} />
+      <DatePicker
+        isAdmin
+        onChange={(date: string) => setValue('adminDate', date)}
       />
     </Flex>
   );

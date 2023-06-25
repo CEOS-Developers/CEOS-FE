@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import {
+  ForwardedRef,
+  InputHTMLAttributes,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import { theme } from '../../styles';
 import { SubTextFieldIcon } from '../../assets/SubTextFieldIcon';
 import { Flex } from '../common';
@@ -14,6 +19,7 @@ interface TextFieldProps
   isAdmin?: boolean;
   isSubTextField?: boolean;
   fontColor?: string;
+  right?: ReactNode;
 }
 
 /**
@@ -25,6 +31,7 @@ interface TextFieldProps
  * @param {boolean} isAdmin: 어드민용 TextField 여부
  * @param {boolean} isSubTextField: 하위 TextField 여부
  * @param {boolean} fontColor: TextField 내부 폰트 색상
+ * @param {ReactNode} right: 우측 아이콘
  */
 export const TextField = forwardRef<
   HTMLInputElement | HTMLTextAreaElement,
@@ -41,6 +48,7 @@ export const TextField = forwardRef<
       isAdmin = false,
       isSubTextField = false,
       fontColor = theme.palette.Black,
+      right,
       ...props
     },
     ref,
@@ -61,14 +69,18 @@ export const TextField = forwardRef<
               fontColor={fontColor}
             />
           ) : (
-            <StyledInput
-              {...props}
-              ref={ref as ForwardedRef<HTMLInputElement>}
-              placeholder={placeholder}
-              spellCheck={false}
-              isAdmin={isAdmin}
-              fontColor={fontColor}
-            />
+            <InputContainer>
+              <StyledInput
+                {...props}
+                ref={ref as ForwardedRef<HTMLInputElement>}
+                placeholder={placeholder}
+                spellCheck={false}
+                isAdmin={isAdmin}
+                fontColor={fontColor}
+                isRight={Boolean(right)}
+              />
+              {right && <StyledIcon className="icon">{right}</StyledIcon>}
+            </InputContainer>
           )}
         </Flex>
         {helperText && (
@@ -105,9 +117,18 @@ const StyledHelperTextBox = styled.div`
     margin-top: 14px;
   }
 `;
-const StyledInput = styled.input<{ isAdmin: boolean; fontColor: string }>`
+const InputContainer = styled.div`
+  position: relative;
   width: 100%;
-  padding: 8px 16px;
+`;
+const StyledInput = styled.input<{
+  isAdmin: boolean;
+  fontColor: string;
+  isRight: boolean;
+  value?: string | number | readonly string[] | undefined;
+}>`
+  width: 100%;
+  padding: ${({ isRight }) => (isRight ? '8px 50px 8px 16px' : '8px 16px')};
 
   box-sizing: border-box;
 
@@ -119,7 +140,20 @@ const StyledInput = styled.input<{ isAdmin: boolean; fontColor: string }>`
   ${theme.typo.Web.Body3};
   color: ${({ fontColor }) => fontColor};
 
+  & + div {
+    color: ${({ isAdmin, value }) =>
+      isAdmin && value
+        ? theme.palette.Admin.Navy
+        : value
+        ? theme.palette.Blue
+        : theme.palette.Gray4};
+  }
+
   :focus {
+    & + div {
+      color: ${({ isAdmin }) =>
+        isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
+    }
     border: 1px solid
       ${({ isAdmin }) =>
         isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue};
@@ -131,6 +165,16 @@ const StyledInput = styled.input<{ isAdmin: boolean; fontColor: string }>`
 
   @media (max-width: 1023px) {
     ${theme.typo.Mobile.Body1};
+  }
+`;
+const StyledIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translate(0, -50%);
+
+  @media (max-width: 1023px) {
+    right: 12px;
   }
 `;
 const StyledTextArea = styled.textarea<{
