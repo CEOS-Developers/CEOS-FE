@@ -1,5 +1,10 @@
 import { adminInstance } from '../axiosConfig';
 
+export interface uploadImageProps {
+  url: string;
+  file: Blob | File;
+}
+
 export const imageApi = {
   GET_ACTIVITY_IMAGE: async () => {
     const response = await adminInstance.get(`/activities/image`);
@@ -16,7 +21,7 @@ export const imageApi = {
 
     return response.data.data.url;
   },
-  PUT_IMAGE: async ({ url, file }: any) => {
+  PUT_IMAGE: async ({ url, file }: uploadImageProps) => {
     console.log('ddd', url, file);
     const response = await adminInstance.put(url, file);
     console.log('response', response);

@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  InputHTMLAttributes,
-  forwardRef,
-  useEffect,
-  useState,
-} from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../../../../packages/ui';
 import { Flex, Text } from '../../../../../packages/ui';
@@ -18,14 +12,16 @@ export interface ImageUploaderProps
   height?: number;
   imageApiType: imageApiType;
   value: string;
-  setValue: any;
+  setValue: (arg: string | null) => void;
 }
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
   ({ value, height = 184, imageApiType, setValue, ...props }, ref) => {
     const { presignedUrl, uploadImage } = usePresignedUrl(imageApiType);
 
-    const handleImageChange = async (e: any) => {
+    const handleImageChange = async (
+      e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
       e.preventDefault();
       if (e.target.files) {
         const file = e.target.files[0];
@@ -34,7 +30,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       }
     };
 
-    const handleDrop = async (e: any) => {
+    const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
       e.preventDefault();
       const file = e.dataTransfer.files[0];
       uploadImage({ file: file, url: presignedUrl });
@@ -47,7 +43,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
           {value && (
             <>
               <DeleteCover
-                onClick={() => setValue(undefined)}
+                onClick={() => setValue(null)}
                 direction="column"
                 webGap={8}
               >
