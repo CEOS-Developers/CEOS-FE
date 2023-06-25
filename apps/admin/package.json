@@ -12,6 +12,7 @@
     "@ceos-fe/ui": "workspace:packages/ui",
     "@ceos-fe/utils": "workspace:^",
     "@tanstack/react-query": "^4.29.15",
+    "@tanstack/react-query-devtools": "^4.29.15",
     "@types/node": "18.16.3",
     "@types/react": "18.2.3",
     "@types/react-dom": "18.2.3",
@@ -22,6 +23,7 @@
     "next": "13.3.4",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
+    "react-bootstrap-icons": "^1.10.3",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "typescript": "5.0.4"
