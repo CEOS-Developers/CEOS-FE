@@ -4,6 +4,7 @@ import { Flex, theme } from '@ceos-fe/ui';
 import { ImageUploader } from '../components/ImageUploader/index';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { theme } from '@ceos-fe/ui';
 
 export default function Home() {
   const { setValue, watch, getValues, register } = useForm();
