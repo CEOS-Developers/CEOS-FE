@@ -7,17 +7,20 @@ import { theme } from '../../styles';
 import ReactDatePicker from 'react-datepicker';
 import React from 'react';
 import { TextField } from '../TextField/index';
+import { Calendar } from '../../assets/Calender/index';
 
 export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
   onChange: (date: string) => void;
   initialValue?: Date | null;
+  isAdmin?: boolean;
 }
 
 /**
- * @param width: number (기본값: 100%)
- * @param placeholder: string
+ * @param width?: number (기본값: 100%)
+ * @param placeholder?: string (기본값: 내용을 입력해주세요)
+ * @param isAdmin: boolean
  */
 
 export const DatePicker = (props: DatePickerProps) => {
@@ -33,20 +36,20 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [startDate]);
 
   return (
-    <DatePickerStyles>
+    <DatePickerStyles isAdmin={props.isAdmin}>
       <ReactDatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
         disabledKeyboardNavigation
         dateFormat="yyyy년 MM월 dd일"
         placeholderText={props.placeholder}
-        customInput={<TextField />}
+        customInput={<TextField isAdmin={props.isAdmin} right={<Calendar />} />}
       />
     </DatePickerStyles>
   );
 };
 
-const DatePickerStyles = styled.div`
+const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
   .react-datepicker {
     background-color: ${theme.glass.Glass};
 
@@ -136,7 +139,8 @@ const DatePickerStyles = styled.div`
     text-align: center;
     line-height: 18px !important;
 
-    color: ${theme.palette.Blue} !important;
+    color: ${({ isAdmin }) =>
+      isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue} !important;
   }
 
   .react-datepicker__month {
@@ -188,7 +192,8 @@ const DatePickerStyles = styled.div`
   .react-datepicker__year-text:hover {
     border-radius: 4px;
     /* padding: 2px; */
-    background-color: ${theme.palette.Blue} !important;
+    background-color: ${({ isAdmin }) =>
+      isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue} !important;
     color: ${theme.palette.White};
   }
 
@@ -205,7 +210,8 @@ const DatePickerStyles = styled.div`
   .react-datepicker__year-text--in-selecting-range,
   .react-datepicker__year-text--in-range {
     border-radius: 4px;
-    background-color: ${theme.palette.Blue} !important;
+    background-color: ${({ isAdmin }) =>
+      isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue} !important;
     color: ${theme.palette.White}!important;
   }
 
