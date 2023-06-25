@@ -1,11 +1,9 @@
-import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
+import { Button, Flex, Text, TextField, DatePicker, theme } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
+import styled from '@emotion/styled';
 
 const recruitInfo = {
   generation: 18,
-  prodImg: '',
-  designImg: '',
-  devImg: '',
   prodStudyUrl: '',
   designStudyUrl: '',
   devStudyUrl: '',
@@ -17,6 +15,7 @@ const recruitInfo = {
   resultDateFinal: '2023-06-18',
   otDate: '2023-06-18',
   demodayDate: '2023-06-18',
+  openChattingUrl: 'url',
 };
 
 interface RecruitInterface {
@@ -32,6 +31,7 @@ interface RecruitInterface {
   resultDateFinal: string;
   otDate: string;
   demodayDate: string;
+  openChattingUrl: string;
 }
 
 export default function Recruit() {
@@ -44,7 +44,7 @@ export default function Recruit() {
   };
 
   return (
-    <Flex direction="column" width={1032} padding="88px 0">
+    <>
       <Flex direction="column" align="start">
         <Text webTypo="Heading2" color="Black">
           RECRUIT
@@ -67,53 +67,82 @@ export default function Recruit() {
           isAdmin
         />
 
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <TextField
-            {...register('startDateDoc')}
-            label="서류 접수"
-            width={328}
-            isAdmin
-          />
-          <TextField {...register('endDateDoc')} width={328} isAdmin />
+        <Flex
+          direction="column"
+          align="flex-start"
+          justify="flex-end"
+          webGap={8}
+        >
+          <Text webTypo="Label3">서류 접수</Text>
+          <Flex justify="flex-start" webGap={8}>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('startDateDoc', date)}
+            />
+            <Line />
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('endDateDoc', date)}
+            />
+          </Flex>
+        </Flex>
+
+        <Flex
+          direction="column"
+          align="flex-start"
+          justify="flex-end"
+          webGap={8}
+        >
+          <Text webTypo="Label3">면접 일자</Text>
+          <Flex justify="flex-start" webGap={8}>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('startDateInterview', date)}
+            />
+            <Line />
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('endDateInterview', date)}
+            />
+          </Flex>
         </Flex>
 
         <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <TextField
-            {...register('startDateInterview')}
-            label="면접 일자"
-            width={328}
-            isAdmin
-          />
-          <TextField {...register('endDateInterview')} width={328} isAdmin />
+          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+            <Text webTypo="Label3">서류 발표</Text>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('resultDateDoc', date)}
+            />
+          </Flex>
+          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+            <Text webTypo="Label3">합격 발표</Text>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('resultDateFinal', date)}
+            />
+          </Flex>
         </Flex>
 
         <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <TextField
-            {...register('resultDateDoc')}
-            label="서류 발표"
-            width={328}
-            isAdmin
-          />
-          <TextField
-            {...register('resultDateFinal')}
-            label="합격 발표"
-            width={328}
-            isAdmin
-          />
-        </Flex>
-
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <TextField {...register('otDate')} label="OT" width={328} isAdmin />
-          <TextField
-            {...register('demodayDate')}
-            label="데모데이"
-            width={328}
-            isAdmin
-          />
+          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+            <Text webTypo="Label3">OT</Text>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('otDate', date)}
+            />
+          </Flex>
+          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+            <Text webTypo="Label3">데모데이</Text>
+            <DatePicker
+              isAdmin
+              onChange={(date: string) => setValue('demodayDate', date)}
+            />
+          </Flex>
         </Flex>
 
         <TextField
-          {...register('demodayDate')}
+          {...register('openChattingUrl')}
           label="오픈 채팅방 링크"
           width={680}
           isAdmin
@@ -147,6 +176,12 @@ export default function Recruit() {
       >
         저장하기
       </Button>
-    </Flex>
+    </>
   );
 }
+
+const Line = styled.div`
+  width: 8px;
+  height: 2px;
+  background-color: ${theme.palette.Gray3};
+`;
