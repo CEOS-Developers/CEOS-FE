@@ -1,8 +1,8 @@
 import { Flex, TextField, Text } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { SelectButton } from '@ceos/components/SelectButton';
-
+// import { SelectButton } from '@ceos/components/SelectButton';
+import { SelectButton } from '../../../../../../packages/ui/src/components/SelectButton';
 const Information = () => {
   const { register, watch } = useForm({
     defaultValues: {
