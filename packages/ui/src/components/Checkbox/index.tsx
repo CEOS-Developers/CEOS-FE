@@ -9,10 +9,10 @@ export const enum DisplayPriorities {
 }
 
 interface CheckBoxProps {
-  checked: boolean;
-  onClick: () => void;
-  value: string;
-  type: string;
+  checked: boolean; //check 되어있는지 여부
+  onClick: () => void; // useState 이용하여 setChecked(prev=>!prev)
+  value: string; // text
+  type: string; //'column' or 'row'
 }
 
 export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
@@ -25,7 +25,13 @@ export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
       <StyledCheckBox onClick={onClick}>
         <CheckIcon display={display} />
       </StyledCheckBox>
-      <Text color={checked ? 'Blue' : 'Gray2'}>{value}</Text>
+      <Text
+        paletteColor={checked ? 'Blue' : 'Gray2'}
+        webTypo="Label3"
+        mobileTypo="Label2"
+      >
+        {value}
+      </Text>
     </StyledCheckBoxContainer>
   );
 };
@@ -50,9 +56,9 @@ const StyledCheckBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
   background-color: ${theme.palette.Gray2};
 `;
