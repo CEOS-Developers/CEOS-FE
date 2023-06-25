@@ -10,16 +10,23 @@ import { theme } from '../../../../../packages/ui';
 import { Flex, Text } from '../../../../../packages/ui';
 import { CardImage } from 'react-bootstrap-icons';
 import { css } from '@emotion/react';
+import usePresignedUrl from '../../hooks/usePresignedUrl';
+import { imageApiType } from '../../hooks/usePresignedUrl';
 
 export interface ImageUploaderProps
   extends InputHTMLAttributes<HTMLInputElement> {
   height?: number;
-  value?: any;
-  setValue?: any;
+  imageApiType: imageApiType;
 }
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
-  ({ value, setValue, ...props }, ref) => {
+  ({ value, height = 184, imageApiType, ...props }, ref) => {
+    const { presignedUrl } = usePresignedUrl(imageApiType);
+
+    useEffect(() => {
+      console.log(presignedUrl);
+    }, [presignedUrl]);
+
     const handleImageChange = async (e: any) => {
       if (e.target.files) {
         const data = e.target.files[0];
@@ -27,7 +34,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
     };
 
     const handleImageDelete = () => {
-      setValue();
+      //   setValue();
     };
 
     const handleDragOver = (e: any) => {
@@ -38,7 +45,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       e.preventDefault();
       const file = e.dataTransfer.files[0];
       const data = file;
-      setValue(data);
+      //   setValue(data);
     };
 
     return (
@@ -49,13 +56,13 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
               <DeleteCover>
                 <Deletetag onClick={handleImageDelete}>삭제</Deletetag>
               </DeleteCover>
-              <Img src={value} height={props.height} />
+              <Img src={'value'} height={height} />
             </>
           )}
           <Label
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            height={props.height}
+            height={height}
           >
             <input
               type="file"
