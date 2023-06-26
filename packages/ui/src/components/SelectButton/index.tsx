@@ -23,7 +23,7 @@ interface SelectButtonProps extends InputHTMLAttributes<HTMLInputElement> {
 export const SelectButton = forwardRef<HTMLInputElement, SelectButtonProps>(
   ({ webWidth, mobileWidth, value, ...props }, ref) => {
     return (
-      <>
+      <Wrapper variant={props.variant}>
         <Radio
           ref={ref}
           type="radio"
@@ -32,17 +32,34 @@ export const SelectButton = forwardRef<HTMLInputElement, SelectButtonProps>(
           name={props.name}
           {...props}
         />
-        <Label htmlFor={value} webWidth={webWidth} mobileWidth={mobileWidth}>
+        <Label
+          htmlFor={value}
+          webWidth={webWidth}
+          mobileWidth={mobileWidth}
+          variant={props.variant}
+        >
           {value}
         </Label>
-      </>
+      </Wrapper>
     );
   },
 );
 
+const Wrapper = styled.div<{ variant: SelectButtonVariant }>`
+  @media (max-width: 1023px) {
+    ${({ variant }) =>
+      variant === 'ceos'
+        ? css`
+            width: 100%;
+          `
+        : css``}
+  }
+`;
+
 const Label = styled.label<{
   webWidth?: number;
   mobileWidth?: number;
+  variant: SelectButtonVariant;
 }>`
   width: ${({ webWidth }) => (webWidth ? `${webWidth}px` : '158px')};
   height: 40px;
@@ -56,7 +73,7 @@ const Label = styled.label<{
   background-color: ${theme.palette.Gray1};
   color: ${theme.palette.Black};
 
-  ${theme.typo.Web.Label2};
+  ${theme.typo.Web.Label3};
 
   transition: border-color 0.15s ease-out, color 0.25s ease-out,
     background-color 0.3s ease-out, box-shadow 0.15s ease-out;
@@ -64,12 +81,15 @@ const Label = styled.label<{
   cursor: pointer;
 
   @media (max-width: 1023px) {
-    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '100%')};
-    height: 44px;
-
-    border-radius: 8px;
-
-    ${theme.typo.Mobile.Body1};
+    ${({ variant, mobileWidth }) =>
+      variant === 'ceos'
+        ? css`
+            width: ${mobileWidth ? `${mobileWidth}px` : '100%'};
+            height: 44px;
+            border-radius: 8px;
+            ${theme.typo.Mobile.Label1};
+          `
+        : css``}
   }
 
   user-select: none;

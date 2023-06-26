@@ -31,9 +31,11 @@ export const Title = ({
       </Desktop>
       <Mobile>
         <Flex direction="column">
-          {explain.map((ex) => {
-            return <Text mobileTypo="Body1">{ex}</Text>;
-          })}
+          {explain.map((ex, idx) => (
+            <Text key={idx} mobileTypo="Body1">
+              {ex}
+            </Text>
+          ))}
         </Flex>
       </Mobile>
     </Flex>
