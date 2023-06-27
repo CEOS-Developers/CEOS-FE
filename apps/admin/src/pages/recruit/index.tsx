@@ -2,7 +2,7 @@ import { Button, Flex, Text, TextField, DatePicker, theme } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
-import { formatting } from '../../utils/date';
+import { getFormattedDate } from '../../utils/date';
 import {
   RecruitBaseInterface,
   RecruitInterface,
@@ -58,14 +58,14 @@ export default function Recruit() {
   const handleSave = () => {
     const recruitData = {
       ...getValues(),
-      startDateDoc: formatting(getValues().startDateDoc),
-      endDateDoc: formatting(getValues().endDateDoc),
-      resultDateDoc: formatting(getValues().resultDateDoc),
-      startDateInterview: formatting(getValues().startDateInterview),
-      endDateInterview: formatting(getValues().endDateInterview),
-      resultDateFinal: formatting(getValues().resultDateFinal),
-      otDate: formatting(getValues().otDate),
-      demodayDate: formatting(getValues().demodayDate),
+      startDateDoc: getFormattedDate(getValues().startDateDoc),
+      endDateDoc: getFormattedDate(getValues().endDateDoc),
+      resultDateDoc: getFormattedDate(getValues().resultDateDoc),
+      startDateInterview: getFormattedDate(getValues().startDateInterview),
+      endDateInterview: getFormattedDate(getValues().endDateInterview),
+      resultDateFinal: getFormattedDate(getValues().resultDateFinal),
+      otDate: getFormattedDate(getValues().otDate),
+      demodayDate: getFormattedDate(getValues().demodayDate),
     };
     postRecruitments(recruitData);
   };
