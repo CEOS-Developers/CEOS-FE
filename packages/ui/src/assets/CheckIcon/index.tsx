@@ -24,7 +24,7 @@ export const CheckIcon = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_2084_13111)">
+        <g clipPath="url(#clip0_2084_13111)">
           <path
             fillRule="evenodd"
             clipRule="evenodd"

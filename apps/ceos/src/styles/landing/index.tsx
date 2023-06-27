@@ -43,3 +43,22 @@ export const CardFlex = styled(Flex)`
   padding: 60px;
   text-align: center;
 `;
+
+export const BgCss = css`
+  width: 100vw;
+  height: 30.27vh;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7.6vh;
+`;
+
+export const BtnCss = css`
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  gap: 24px;
+  margin: auto;
+`;

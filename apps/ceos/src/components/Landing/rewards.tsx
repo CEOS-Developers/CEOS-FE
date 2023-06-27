@@ -71,8 +71,8 @@ export const Rewards = () => {
 
         <Flex
           css={css`
-            flex-wrap: wrap;
             gap: 24px;
+            flex-wrap: wrap;
             align-items: flex-start;
           `}
         >
