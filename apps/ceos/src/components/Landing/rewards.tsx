@@ -1,9 +1,24 @@
-import { Flex, RewardCard } from '../../../../../packages/ui';
+import { Flex, RewardCard, RewardCardProps, Text } from '@ceos-fe/ui';
 import { HomeFlex, CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
-import { Text } from '../../../../../packages/ui';
+import { useEffect, useState } from 'react';
+import { awardApi } from '@ceos-fe/utils';
 
 export const Rewards = () => {
+  // const [activities, setActivities] = useState([]);
+
+  // useEffect(() => {
+  //   console.log(awardApi.GET_AWARD());
+  // });
+  const rewardCard: RewardCardProps = {
+    id: 1,
+    generation: '15기',
+    time: '2023.03',
+    project: [
+      { title: 'test', explain: 'text' },
+      { title: 'test', explain: 'text' },
+    ],
+  };
   return (
     <Flex margin="0 0 80px 0" direction="column">
       <div
@@ -37,7 +52,7 @@ export const Rewards = () => {
         <Text webTypo="Heading1_Eng" paletteColor="Blue">
           REWARDS
         </Text>
-        <Flex margin="12px 0 0 0">
+        <Flex margin="12px 0 32px 0">
           <Text webTypo="Body1">
             CEOS 프로젝트들의 수상 내역을 확인해보세요!
           </Text>
@@ -52,6 +67,19 @@ export const Rewards = () => {
           >
             전체 보기
           </Text>
+        </Flex>
+
+        <Flex
+          css={css`
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: flex-start;
+          `}
+        >
+          <RewardCard rewardCard={rewardCard} />
+          <RewardCard rewardCard={rewardCard} />
+          <RewardCard rewardCard={rewardCard} />
+          <RewardCard rewardCard={rewardCard} />
         </Flex>
       </div>
     </Flex>

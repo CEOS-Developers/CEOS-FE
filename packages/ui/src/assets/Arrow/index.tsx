@@ -24,7 +24,7 @@ export const Up = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_620_7223)">
+        <g clipPath="url(#clip0_620_7223)">
           <path
             d="M22 11L15 4L8 11"
             stroke="#787E88"
