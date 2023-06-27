@@ -1,46 +1,73 @@
 import { Button, Flex, Text, TextField, DatePicker, theme } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { formatting } from '../../utils/date';
+import {
+  RecruitBaseInterface,
+  RecruitInterface,
+  recruitApi,
+  ResponseInterface,
+} from '@ceos-fe/utils';
+import {
+  QueryClient,
+  dehydrate,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
 
-const recruitInfo = {
-  generation: 18,
-  prodStudyUrl: '',
-  designStudyUrl: '',
-  devStudyUrl: '',
-  startDateDoc: '2023-06-18',
-  endDateDoc: '2023-06-18',
-  resultDateDoc: '2023-06-18',
-  startDateInterview: '2023-06-18',
-  endDateInterview: '2023-06-18',
-  resultDateFinal: '2023-06-18',
-  otDate: '2023-06-18',
-  demodayDate: '2023-06-18',
-  openChattingUrl: 'url',
-};
-
-interface RecruitInterface {
-  generation: number;
-  prodStudyUrl: string;
-  designStudyUrl: string;
-  devStudyUrl: string;
-  startDateDoc: string;
-  endDateDoc: string;
-  resultDateDoc: string;
-  startDateInterview: string;
-  endDateInterview: string;
-  resultDateFinal: string;
-  otDate: string;
-  demodayDate: string;
-  openChattingUrl: string;
+interface RecruitDateInterface extends RecruitBaseInterface {
+  startDateDoc: Date;
+  endDateDoc: Date;
+  resultDateDoc: Date;
+  startDateInterview: Date;
+  endDateInterview: Date;
+  resultDateFinal: Date;
+  otDate: Date;
+  demodayDate: Date;
 }
 
 export default function Recruit() {
-  const { control, watch, setValue, register } = useForm<RecruitInterface>({
-    defaultValues: {},
-  });
+  const { data, isFetching, isSuccess } = useQuery<
+    ResponseInterface<RecruitInterface>
+  >(['admin', 'recruit'], recruitApi.GET_RECRUIT);
+  const { mutate: postRecruitments } = useMutation(recruitApi.POST_RECRUIT);
+
+  const { getValues, setValue, reset, register } =
+    useForm<RecruitDateInterface>({
+      defaultValues: {},
+    });
+
+  useEffect(() => {
+    if (!isFetching && isSuccess) {
+      const recruitData = {
+        ...data.data,
+        startDateDoc: new Date(data.data.startDateDoc),
+        endDateDoc: new Date(data.data.endDateDoc),
+        resultDateDoc: new Date(data.data.resultDateDoc),
+        startDateInterview: new Date(data.data.startDateInterview),
+        endDateInterview: new Date(data.data.endDateInterview),
+        resultDateFinal: new Date(data.data.resultDateFinal),
+        otDate: new Date(data.data.otDate),
+        demodayDate: new Date(data.data.demodayDate),
+      };
+      reset(recruitData);
+    }
+  }, [isFetching, isSuccess]);
 
   const handleSave = () => {
-    // TODO: API 연동
+    const recruitData = {
+      ...getValues(),
+      startDateDoc: formatting(getValues().startDateDoc),
+      endDateDoc: formatting(getValues().endDateDoc),
+      resultDateDoc: formatting(getValues().resultDateDoc),
+      startDateInterview: formatting(getValues().startDateInterview),
+      endDateInterview: formatting(getValues().endDateInterview),
+      resultDateFinal: formatting(getValues().resultDateFinal),
+      otDate: formatting(getValues().otDate),
+      demodayDate: formatting(getValues().demodayDate),
+    };
+    postRecruitments(recruitData);
   };
 
   return (
@@ -77,12 +104,18 @@ export default function Recruit() {
           <Flex justify="flex-start" webGap={8}>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('startDateDoc', date)}
+              initialValue={getValues('startDateDoc')}
+              onChange={(date: string) =>
+                setValue('startDateDoc', new Date(date))
+              }
             />
             <Line />
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('endDateDoc', date)}
+              initialValue={getValues('endDateDoc')}
+              onChange={(date: string) =>
+                setValue('endDateDoc', new Date(date))
+              }
             />
           </Flex>
         </Flex>
@@ -97,12 +130,18 @@ export default function Recruit() {
           <Flex justify="flex-start" webGap={8}>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('startDateInterview', date)}
+              initialValue={getValues('startDateInterview')}
+              onChange={(date: string) =>
+                setValue('startDateInterview', new Date(date))
+              }
             />
             <Line />
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('endDateInterview', date)}
+              initialValue={getValues('endDateInterview')}
+              onChange={(date: string) =>
+                setValue('endDateInterview', new Date(date))
+              }
             />
           </Flex>
         </Flex>
@@ -112,14 +151,20 @@ export default function Recruit() {
             <Text webTypo="Label3">서류 발표</Text>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('resultDateDoc', date)}
+              initialValue={getValues('resultDateDoc')}
+              onChange={(date: string) =>
+                setValue('resultDateDoc', new Date(date))
+              }
             />
           </Flex>
           <Flex direction="column" align="flex-start" webGap={8} width={328}>
             <Text webTypo="Label3">합격 발표</Text>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('resultDateFinal', date)}
+              initialValue={getValues('resultDateFinal')}
+              onChange={(date: string) =>
+                setValue('resultDateFinal', new Date(date))
+              }
             />
           </Flex>
         </Flex>
@@ -129,20 +174,24 @@ export default function Recruit() {
             <Text webTypo="Label3">OT</Text>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('otDate', date)}
+              initialValue={getValues('otDate')}
+              onChange={(date: string) => setValue('otDate', new Date(date))}
             />
           </Flex>
           <Flex direction="column" align="flex-start" webGap={8} width={328}>
             <Text webTypo="Label3">데모데이</Text>
             <DatePicker
               isAdmin
-              onChange={(date: string) => setValue('demodayDate', date)}
+              initialValue={getValues('demodayDate')}
+              onChange={(date: string) =>
+                setValue('demodayDate', new Date(date))
+              }
             />
           </Flex>
         </Flex>
 
         <TextField
-          {...register('openChattingUrl')}
+          {...register('openChatUrl')}
           label="오픈 채팅방 링크"
           width={680}
           isAdmin
@@ -173,6 +222,7 @@ export default function Recruit() {
       <Button
         variant="admin"
         style={{ marginTop: '48px', transform: 'translate(-50%, 0)' }}
+        onClick={handleSave}
       >
         저장하기
       </Button>
@@ -185,3 +235,22 @@ const Line = styled.div`
   height: 2px;
   background-color: ${theme.palette.Gray3};
 `;
+
+export const getStaticProps = async () => {
+  try {
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery(
+      ['admin', 'recruit'],
+      recruitApi.GET_RECRUIT,
+    );
+
+    return {
+      props: {
+        dehydratedProps: dehydrate(queryClient),
+      },
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
