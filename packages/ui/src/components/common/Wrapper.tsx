@@ -20,7 +20,7 @@ export const Flex = styled.div<{
   align-items: ${({ align }) => (align ? `${align}` : 'center')};
   gap: ${({ webGap }) => (webGap ? `${webGap}px` : '0px')};
   width: ${({ width }) => (width ? `${width}px` : '')};
-  height: ${({ height }) => (height ? `${height}px` : '100%')};
+  height: ${({ height }) => (height ? `${height}px` : '')};
   margin: ${({ margin }) => (margin ? margin : '0')};
   padding: ${({ padding }) => (padding ? padding : '0')};
   box-sizing: border-box;
