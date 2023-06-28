@@ -1,6 +1,6 @@
 import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
-import { Flex, theme } from '@ceos-fe/ui';
+import { theme } from '@ceos-fe/ui';
 
 export default function Home() {
   const { setValue, watch } = useForm();

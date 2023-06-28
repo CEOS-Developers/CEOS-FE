@@ -35,7 +35,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     submenu: [
       { subMenuName: 'RECRUIT', path: '/' },
       { subMenuName: '지원서 제출', path: '/' },
-      { subMenuName: 'FAQ', path: '/' },
+      { subMenuName: 'FAQ', path: '/faq' },
     ],
   },
   {
