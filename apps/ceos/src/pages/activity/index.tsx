@@ -1,9 +1,12 @@
-import { Desktop, Flex, Mobile } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
 import { ActivityCard } from '../../../../../packages/ui/src/components/Card/ActivityCard';
+import styled from '@emotion/styled';
+import { GlassShortcutwithTitle } from '@ceos/components/Shortcut';
+import Link from 'next/link';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -30,48 +33,82 @@ const Activity = () => {
   const acitivityList = data?.activityData.data.activities;
 
   return (
-    <Flex direction="column">
-      <Title
-        title="Activity"
-        explain={[
-          'ceos에서는 it 창업과 관련된',
-          '다양한 활동을 진행하고 있습니다.',
-        ]}
-      />
+    <>
       <Desktop>
         <Flex direction="column">
-          {acitivityList?.map((_, idx) => {
-            return idx % 3 === 0 ? (
-              <Flex
-                key={`row_${idx}`}
-                justify="start"
-                width={1032}
-                margin="0 0 32px 0"
-                webGap={24}
-              >
-                {acitivityList.slice(idx, idx + 3).map((activity, subIdx) => (
-                  <ActivityCard
-                    key={`activity_${idx}_${subIdx}`}
-                    activityCard={activity}
-                  />
-                ))}
+          <Flex direction="column">
+            <Title
+              title="Activity"
+              explain={[
+                'ceos에서는 it 창업과 관련된',
+                '다양한 활동을 진행하고 있습니다.',
+              ]}
+            />
+            {acitivityList?.map((_, idx) => {
+              return idx % 3 === 0 ? (
+                <Flex
+                  key={`row_${idx}`}
+                  justify="start"
+                  width={1032}
+                  margin="0 0 32px 0"
+                  webGap={24}
+                >
+                  {acitivityList.slice(idx, idx + 3).map((activity, subIdx) => (
+                    <ActivityCard
+                      key={`activity_${idx}_${subIdx}`}
+                      activityCard={activity}
+                    />
+                  ))}
+                </Flex>
+              ) : (
+                <></>
+              );
+            })}
+          </Flex>
+
+          <RelativeContainer>
+            <Background src="/shortcuts.svg" />
+            <GlassFlex direction="column" webGap={80}>
+              <Flex webGap={24}>
+                <CustomLink href="/FAQ">
+                  <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
+                    자주 묻는 질문 <br /> 보러가기
+                  </GlassShortcutwithTitle>
+                </CustomLink>
+
+                <CustomLink href="/recruit">
+                  <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
+                    CEOS 18기 <br /> 지원하기
+                  </GlassShortcutwithTitle>
+                </CustomLink>
               </Flex>
-            ) : (
-              <></>
-            );
-          })}
+              <Text paletteColor="White" webTypo="Label3">
+                © 2016-2023 CEOS ALL RIGHTS RESERVED.
+              </Text>
+            </GlassFlex>
+          </RelativeContainer>
         </Flex>
       </Desktop>
+
       <Mobile>
-        <Flex direction="column" mobileGap={20}>
-          {acitivityList?.map((activity, idx) => {
-            return (
-              <ActivityCard key={`activity_${idx}`} activityCard={activity} />
-            );
-          })}
+        <Flex direction="column">
+          <Title
+            title="Activity"
+            explain={[
+              'ceos에서는 it 창업과 관련된',
+              '다양한 활동을 진행하고 있습니다.',
+            ]}
+          />
+          <Flex direction="column" mobileGap={20}>
+            {acitivityList?.map((activity, idx) => {
+              return (
+                <ActivityCard key={`activity_${idx}`} activityCard={activity} />
+              );
+            })}
+          </Flex>
         </Flex>
       </Mobile>
-    </Flex>
+    </>
   );
 };
 
@@ -94,3 +131,21 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
+
+const FullHeight = styled.div`
+  height: 100vh;
+`;
+const GlassFlex = styled(Flex)`
+  position: absolute;
+  bottom: 80px;
+  z-index: 99;
+`;
+
+const Background = styled.img`
+  width: 100vw;
+`;
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
