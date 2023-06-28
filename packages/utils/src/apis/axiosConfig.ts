@@ -17,6 +17,6 @@ export const adminInstance = axios.create({
 });
 
 adminInstance.defaults.headers.common['Authorization'] =
-  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODc3MDk5NTAsImV4cCI6MTY4NzczMTU1MH0.5zMvRYQdUgzWOJk6HAou9XN1qcX1WB8uggrE6k9IW4gjI-eMxGEiyvOb4nsqcacYschA2R1lq7Ooy7uPI7pM7Q';
+  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODc5NzQ4MTksImV4cCI6MTY4Nzk5NjQxOX0.k8uy1_q8dMqUAzSsXT_CHJDVIsGhR9erCV39LhNwsGbAd9vJ0nHkiaPs6vwx_kuRzn3K4CjSnVhu9tTLDhKGtA';
 
 // adminInstance 인터럽트 로직 추가 필요

@@ -1,5 +1,5 @@
 import usePresignedUrl, { imageApiType } from '@admin/hooks/usePresignedUrl';
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef, useEffect } from 'react';
 import { Flex, Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -15,7 +15,11 @@ export interface ImageUploaderProps
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
   ({ value, height = 184, imageApiType, setValue, ...props }, ref) => {
-    const { presignedUrl, uploadImage } = usePresignedUrl(imageApiType);
+    const { presignedUrl, image, setImage } = usePresignedUrl(imageApiType);
+
+    useEffect(() => {
+      console.log('presignedUrl', presignedUrl);
+    }, [presignedUrl]);
 
     const handleImageChange = async (
       e: React.ChangeEvent<HTMLInputElement>,
@@ -23,16 +27,17 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       e.preventDefault();
       if (e.target.files) {
         const file = e.target.files[0];
-        uploadImage({ file: file, url: presignedUrl });
-        setValue(presignedUrl);
+        setImage(file);
       }
     };
 
     const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
       e.preventDefault();
-      const file = e.dataTransfer.files[0];
-      uploadImage({ file: file, url: presignedUrl });
-      setValue(presignedUrl);
+      if (e.dataTransfer.files) {
+        const file = e.dataTransfer.files[0];
+        setImage(file);
+      }
+      // setValue(presignedUrl.slice(0, presignedUrl.indexOf('?x-amz')));
     };
 
     return (
@@ -49,7 +54,12 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
                 <CardImage width={24} height={24} />
                 <Text webTypo="Body3">이미지를 수정하려면 클릭하세요.</Text>
               </DeleteCover>
-              <Img src={value || ''} height={height} />
+              <Img
+                src={
+                  presignedUrl.slice(0, presignedUrl.indexOf('?x-amz')) || ''
+                }
+                height={height}
+              />
             </>
           )}
           <Label
