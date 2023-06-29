@@ -15,6 +15,7 @@ export type ButtonVariant =
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
   webWidth?: number;
+  webHeight?: number;
   mobileWidth?: number;
 }
 
@@ -114,6 +115,7 @@ export const Button = ({
   children,
   variant,
   webWidth,
+  webHeight,
   mobileWidth,
   ...props
 }: ButtonProps) => {
@@ -121,6 +123,7 @@ export const Button = ({
     <StyledButton
       variant={variant}
       webWidth={webWidth}
+      webHeight={webHeight}
       mobileWidth={mobileWidth}
       {...props}
     >
@@ -132,11 +135,13 @@ export const Button = ({
 const StyledButton = styled.button<{
   variant: ButtonVariant;
   webWidth?: number;
+  webHeight?: number;
   mobileWidth?: number;
 }>`
   width: ${({ webWidth, variant }) =>
     webWidth ? `${webWidth}px` : `${BUTTON_FIGURE.width[variant]}px`};
-  height: ${({ variant }) => `${BUTTON_FIGURE.height[variant]}px`};
+  height: ${({ webHeight, variant }) =>
+    webHeight ? `${webHeight}px` : `${BUTTON_FIGURE.height[variant]}px`};
 
   color: ${({ variant }) => `${TEXT_COLOR.normal[variant]}`};
 
