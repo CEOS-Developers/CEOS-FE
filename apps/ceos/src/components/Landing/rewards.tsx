@@ -69,10 +69,11 @@ export const Rewards = () => {
           </Text>
         </Flex>
 
-        <Flex
+        <div
           css={css`
-            gap: 24px;
+            display: flex;
             flex-wrap: wrap;
+            gap: 24px;
             align-items: flex-start;
           `}
         >
@@ -80,7 +81,7 @@ export const Rewards = () => {
           <RewardCard rewardCard={rewardCard} />
           <RewardCard rewardCard={rewardCard} />
           <RewardCard rewardCard={rewardCard} />
-        </Flex>
+        </div>
       </div>
     </Flex>
   );

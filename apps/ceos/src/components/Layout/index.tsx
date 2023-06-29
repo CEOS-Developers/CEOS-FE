@@ -6,9 +6,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Flex direction="column" align="center">
       <Header backColor="Blue" />
-      {/* <CustomFlex direction="column" className="header-padding"> */}
       {children}
-      {/* </CustomFlex> */}
     </Flex>
   );
 };

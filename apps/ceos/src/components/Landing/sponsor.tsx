@@ -1,19 +1,38 @@
 import { Text, Flex, SponsorCard, SponsorCardProps } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import { sponsorApi } from '@ceos-fe/utils';
+import { ResponseInterface, sponsorApi } from '@ceos-fe/utils';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+
+interface SponsorInterface {
+  id: number;
+  name: string;
+  imageUrl: string;
+}
+
+interface SponsorResponse {
+  sponsors: SponsorInterface[];
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
+  };
+}
 
 export const Sponsors = () => {
-  useEffect(() => {
-    sponsorApi.GET_SPONSORS({ pageNum: 1, limit: 10 }).then((res) => {
-      console.log(res);
-    });
+  const queryClient = useQueryClient();
+
+  const { data } = useQuery<{
+    sponsorData: ResponseInterface<SponsorResponse>;
+  }>(['ceos', 'sponsor'], async () => {
+    const sponsorData = await sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
+
+    return sponsorData;
   });
-  const sponsorCard: SponsorCardProps = {
-    id: 1,
-    img: 'https://ceos.snu.ac.kr/static/media/ceos_logo.5b9b9b5e.png',
-    name: '서울대학교',
-  };
+
+  const sponsorList = data?.sponsors;
+
   return (
     <div
       className="rewards"
@@ -33,16 +52,18 @@ export const Sponsors = () => {
       >
         CEOS 활동에 도움을 주시는 공식 파트너 단체입니다.
       </Text>
-      <Flex
+      <div
         css={css`
+          display: flex;
           gap: 24px;
           margin-bottom: 80px;
         `}
       >
-        <SponsorCard sponsorCard={sponsorCard} />
-        <SponsorCard sponsorCard={sponsorCard} />
-        <SponsorCard sponsorCard={sponsorCard} />
-      </Flex>
+        {sponsorList &&
+          sponsorList
+            .slice(0, 3)
+            .map((s) => <SponsorCard key={s.id} sponsorCard={s} />)}
+      </div>
     </div>
   );
 };

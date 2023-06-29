@@ -16,7 +16,7 @@ export default function Home() {
     <main>
       <SubHeader />
       {/* section1 => blue */}
-      <HomeFlex margin="0 auto 0 auto">
+      <HomeFlex margin="0 auto 0 auto" className="section2">
         <Rewards />
       </HomeFlex>
       {/* section2 => white */}
@@ -37,6 +37,7 @@ export default function Home() {
       >
         © 2016-2023 CEOS ALL RIGHTS RESERVED.
       </Text>
+      {/*section 5 */}
     </main>
   );
 }
