@@ -8,6 +8,7 @@ import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
 import { useModal } from '@ceos-fe/utils';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -17,6 +18,7 @@ export const Header = (props: HeaderProps) => {
   const { backColor } = props;
   const [isScrolled, setIsScrolled] = useState(false);
   const { isOpen, modalRef, toggleModal } = useModal();
+  const router = useRouter();
 
   //최상단인지 check
   useEffect(() => {
@@ -41,19 +43,31 @@ export const Header = (props: HeaderProps) => {
         </CustomLink>
 
         <div css={contentCss(backColor)}>
-          <CustomLink href="/project" style={{}}>
+          <CustomLink
+            href="/project"
+            className={router.pathname === '/project' ? 'active' : ''}
+          >
             <Content className="text">PROJECT</Content>
           </CustomLink>
 
-          <CustomLink href="/activity">
+          <CustomLink
+            href="/activity"
+            className={router.pathname === '/activity' ? 'active' : ''}
+          >
             <Content className="text">ACTIVITY</Content>
           </CustomLink>
 
-          <CustomLink href="/FAQ">
+          <CustomLink
+            href="/FAQ"
+            className={router.pathname === '/FAQ' ? 'active' : ''}
+          >
             <Content className="text">FAQ</Content>
           </CustomLink>
 
-          <CustomLink href="/recruit">
+          <CustomLink
+            href="/recruit"
+            className={router.pathname === '/recruit' ? 'active' : ''}
+          >
             <Content className="text">RECRUIT</Content>
           </CustomLink>
           <MenuBtn backColor={backColor} onClick={toggleModal} />
@@ -130,4 +144,8 @@ export const Content = styled.div`
 export const CustomLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+
+  &.active {
+    color: ${theme.palette.Green};
+  }
 `;
