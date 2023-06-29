@@ -1,9 +1,15 @@
-import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
+import {
+  Desktop,
+  Flex,
+  Mobile,
+  RelativeContainer,
+  Text,
+  ActivityCard,
+} from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
-import { ActivityCard } from '../../../../../packages/ui/src/components/Card/ActivityCard';
 import styled from '@emotion/styled';
 import { GlassShortcutwithTitle } from '@ceos/components/Shortcut';
 import Link from 'next/link';
