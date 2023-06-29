@@ -1,17 +1,12 @@
-import { imageApi, uploadImageProps } from '@ceos-fe/utils';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { imageApi } from '@ceos-fe/utils';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 export type imageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
 
 const usePresignedUrl = (apiType: imageApiType) => {
   const [image, setImage] = useState<File>();
-  const queryClient = useQueryClient();
-  const uploadImageMutation = useMutation(imageApi.PUT_IMAGE);
-  // const { data, error } = useQuery<string, Error>(
-  //   [apiType],
-  //   imageApi[`GET_${apiType}_IMAGE`],
-  // );
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     if (image) {
@@ -24,6 +19,7 @@ const usePresignedUrl = (apiType: imageApiType) => {
     {
       onSuccess: async (data: string) => {
         uploadImageMutation.mutate({ url: data, file: image! });
+        setUrl(data.slice(0, data.indexOf('?X-Amz')));
       },
       onError: (error: any) => {
         console.log(error);
@@ -31,14 +27,18 @@ const usePresignedUrl = (apiType: imageApiType) => {
     },
   );
 
-  // const uploadImage = ({ url, file }: uploadImageProps) => {
-  //   if (file && url) {
-  //     uploadImageMutation.mutate({ url: url, file: file });
-  //     queryClient.invalidateQueries([apiType]); // 이미지 URL을 변경하기 위해 해당 쿼리를 무효화
-  //   }
-  // };
+  const uploadImageMutation = useMutation(imageApi.PUT_IMAGE, {
+    onSuccess: async (data: any) => {
+      console.log('성공', data);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
+
   return {
-    presignedUrl: getPresignedUrlMutation.data || '',
+    presignedUrl: url,
+    setUrl,
     image,
     setImage,
   };

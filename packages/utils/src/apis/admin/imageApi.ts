@@ -1,4 +1,4 @@
-import { adminInstance } from '../axiosConfig';
+import { adminInstance, publicInstance } from '../axiosConfig';
 
 export interface uploadImageProps {
   url: string;
@@ -23,7 +23,12 @@ export const imageApi = {
   },
   PUT_IMAGE: async ({ url, file }: uploadImageProps) => {
     console.log('PUT_IMAGE', url, file);
-    const response = await adminInstance.put(url, file);
+    const response = await publicInstance.put(url, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+      baseURL: '',
+    });
     return response.status;
   },
 };

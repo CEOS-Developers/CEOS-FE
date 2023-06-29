@@ -4,6 +4,7 @@ import { Flex, Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { CardImage } from 'react-bootstrap-icons';
+import Image from 'next/image';
 
 export interface ImageUploaderProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,10 +16,10 @@ export interface ImageUploaderProps
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
   ({ value, height = 184, imageApiType, setValue, ...props }, ref) => {
-    const { presignedUrl, image, setImage } = usePresignedUrl(imageApiType);
+    const { presignedUrl, setUrl, setImage } = usePresignedUrl(imageApiType);
 
     useEffect(() => {
-      console.log('presignedUrl', presignedUrl);
+      setValue(presignedUrl);
     }, [presignedUrl]);
 
     const handleImageChange = async (
@@ -37,16 +38,18 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
         const file = e.dataTransfer.files[0];
         setImage(file);
       }
-      // setValue(presignedUrl.slice(0, presignedUrl.indexOf('?x-amz')));
     };
 
     return (
       <Flex direction="column" align="flex-start" webGap={36} mobileGap={36}>
         <Flex direction="column" webGap={30} mobileGap={30}>
-          {value && (
+          {presignedUrl && (
             <>
               <DeleteCover
-                onClick={() => setValue(null)}
+                onClick={() => {
+                  setImage(undefined);
+                  setUrl('');
+                }}
                 direction="column"
                 webGap={8}
                 mobileGap={8}
@@ -54,12 +57,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
                 <CardImage width={24} height={24} />
                 <Text webTypo="Body3">이미지를 수정하려면 클릭하세요.</Text>
               </DeleteCover>
-              <Img
-                src={
-                  presignedUrl.slice(0, presignedUrl.indexOf('?x-amz')) || ''
-                }
-                height={height}
-              />
+              <Img alt="" src={presignedUrl} width={328} height={height} />
             </>
           )}
           <Label
@@ -84,7 +82,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
   },
 );
 
-const Img = styled.img<{
+const Img = styled(Image)<{
   src: string;
   height?: number;
 }>`
