@@ -41,7 +41,7 @@ const Activity = () => {
   return (
     <>
       <Desktop>
-        <Flex direction="column" justify="space-between">
+        <Flex direction="column">
           <Flex direction="column">
             <Title
               title="Activity"
@@ -112,7 +112,7 @@ const Activity = () => {
               );
             })}
           </Flex>
-          <RelativeContainer align="start" height={550}>
+          <RelativeContainer align="start" height={500}>
             <Background src="/mobileShortcuts.svg" />
             <GlassFlex direction="column" mobileGap={63}>
               <Flex mobileGap={17} direction="column">
@@ -169,7 +169,7 @@ const GlassFlex = styled(Flex)`
 `;
 
 const Background = styled.img`
-  width: 100vw;
+  width: 100%;
   z-index: -99;
   max-height: 500px;
 
@@ -177,7 +177,7 @@ const Background = styled.img`
     position: absolute;
     bottom: 0;
     width: 100vw;
-    max-height: 550px;
+    max-height: 500px;
   }
 `;
 
