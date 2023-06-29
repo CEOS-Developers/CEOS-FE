@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 interface SponsorInterface {
   id: number;
   name: string;
-  imageUrl: string;
+  img: string;
 }
 
 interface SponsorResponse {
@@ -21,8 +21,6 @@ interface SponsorResponse {
 }
 
 export const Sponsors = () => {
-  const queryClient = useQueryClient();
-
   const { data } = useQuery<{
     sponsorData: ResponseInterface<SponsorResponse>;
   }>(['ceos', 'sponsor'], async () => {
@@ -62,7 +60,9 @@ export const Sponsors = () => {
         {sponsorList &&
           sponsorList
             .slice(0, 3)
-            .map((s) => <SponsorCard key={s.id} sponsorCard={s} />)}
+            .map((s: SponsorInterface) => (
+              <SponsorCard key={s.id} sponsorCard={s} />
+            ))}
       </div>
     </div>
   );
