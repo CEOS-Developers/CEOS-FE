@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
 
-import { Flex, FloatingButton } from '@ceos-fe/ui';
-import { useForm } from 'react-hook-form';
-import { Logo } from '@ceos/assets/logo';
-import { BgImage } from '@ceos/assets/bgImage';
 import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
 import { HomeFlex } from '@ceos/styles/landing';
