@@ -22,7 +22,6 @@ export const imageApi = {
     return response.data.data.url;
   },
   PUT_IMAGE: async ({ url, file }: uploadImageProps) => {
-    console.log('PUT_IMAGE', url, file);
     const response = await publicInstance.put(url, file, {
       headers: {
         'Content-Type': file.type,

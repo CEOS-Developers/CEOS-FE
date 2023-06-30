@@ -2,9 +2,9 @@ import { imageApi } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-export type imageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
+export type ImageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
 
-const usePresignedUrl = (apiType: imageApiType) => {
+const usePresignedUrl = (apiType: ImageApiType) => {
   const [image, setImage] = useState<File>();
   const [url, setUrl] = useState('');
 
@@ -28,9 +28,7 @@ const usePresignedUrl = (apiType: imageApiType) => {
   );
 
   const uploadImageMutation = useMutation(imageApi.PUT_IMAGE, {
-    onSuccess: async (data: any) => {
-      console.log('성공', data);
-    },
+    onSuccess: async (data: any) => {},
     onError: (error: any) => {
       console.log(error);
     },

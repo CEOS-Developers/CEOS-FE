@@ -1,4 +1,4 @@
-import usePresignedUrl, { imageApiType } from '@admin/hooks/usePresignedUrl';
+import usePresignedUrl, { ImageApiType } from '@admin/hooks/usePresignedUrl';
 import { InputHTMLAttributes, forwardRef, useEffect } from 'react';
 import { Flex, Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
@@ -9,7 +9,7 @@ import Image from 'next/image';
 export interface ImageUploaderProps
   extends InputHTMLAttributes<HTMLInputElement> {
   height?: number;
-  imageApiType: imageApiType;
+  imageApiType: ImageApiType;
   value: string;
   setValue: (arg: string | null) => void;
 }

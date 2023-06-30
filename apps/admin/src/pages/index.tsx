@@ -7,10 +7,6 @@ import { useEffect } from 'react';
 export default function Home() {
   const { setValue, watch, getValues, register } = useForm();
 
-  useEffect(() => {
-    console.log('흠', watch('activity'));
-  }, [watch('activity')]);
-
   return (
     <>
       <Dropdown
