@@ -20,11 +20,11 @@ export const SidebarMenuList: sidebarInterface[] = [
     path: '/',
     submenuOpen: false,
     submenu: [
-      { subMenuName: 'PROJECT', path: '/' },
-      { subMenuName: 'REWARD', path: '/' },
-      { subMenuName: 'ACTIVITY', path: '/' },
-      { subMenuName: 'MANAGEMENT', path: '/' },
-      { subMenuName: 'SPONSORED BY', path: '/' },
+      { subMenuName: 'PROJECT', path: '/project' },
+      { subMenuName: 'REWARD', path: '/reward' },
+      { subMenuName: 'ACTIVITY', path: '/activity' },
+      { subMenuName: 'MANAGEMENT', path: '/management' },
+      { subMenuName: 'SPONSORED BY', path: '/sponsoredby' },
     ],
   },
   {
