@@ -1,24 +1,49 @@
 import { Flex, RewardCard, RewardCardProps, Text } from '@ceos-fe/ui';
 import { HomeFlex, CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
-import { awardApi } from '@ceos-fe/utils';
+import { awardApi, ResponseInterface } from '@ceos-fe/utils';
+import { useQuery } from '@tanstack/react-query';
+
+interface AwardInterface {
+  generation: number;
+  content: string;
+  startDate: string;
+}
+
+interface ProjectInterface {
+  name: string;
+  description: string;
+}
+
+interface AwardCardInterface {
+  generation: number;
+  awards: AwardInterface[];
+  projects: ProjectInterface[];
+}
+
+interface AwardResponse {
+  generation: number;
+  awards: AwardInterface[];
+  projects: ProjectInterface[];
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
+  };
+}
 
 export const Rewards = () => {
-  // const [activities, setActivities] = useState([]);
+  const { data } = useQuery<{
+    awardData: ResponseInterface<AwardResponse>;
+  }>(['ceos', 'award'], async () => {
+    const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 16 });
+    return awardData;
+  });
 
-  // useEffect(() => {
-  //   console.log(awardApi.GET_AWARD());
-  // });
-  const rewardCard: RewardCardProps = {
-    id: 1,
-    generation: '15기',
-    time: '2023.03',
-    project: [
-      { title: 'test', explain: 'text' },
-      { title: 'test', explain: 'text' },
-    ],
-  };
+  const awardList = data?.generationAwards;
+  console.log(awardList);
+
   return (
     <Flex margin="0 0 80px 0" direction="column">
       <div
@@ -77,10 +102,12 @@ export const Rewards = () => {
             align-items: flex-start;
           `}
         >
-          <RewardCard rewardCard={rewardCard} />
-          <RewardCard rewardCard={rewardCard} />
-          <RewardCard rewardCard={rewardCard} />
-          <RewardCard rewardCard={rewardCard} />
+          {awardList &&
+            awardList
+              .slice(0, 4)
+              .map((a: AwardCardInterface) => (
+                <RewardCard key={a.generation} rewardCard={a} />
+              ))}
         </div>
       </div>
     </Flex>

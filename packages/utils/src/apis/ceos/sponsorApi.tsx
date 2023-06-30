@@ -8,7 +8,6 @@ export const sponsorApi = {
     pageNum: number;
     limit: number;
   }) => {
-    // const response = await ceosInstance.get(`/sponsors`);
     const response = await ceosInstance
       .get(`/sponsors`, {
         params: { pageNum, limit },
