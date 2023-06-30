@@ -1,8 +1,8 @@
-import { Dropdown } from '@admin/components/Dropdown';
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
+import { Dropdown } from '@admin/components/Dropdown';
 
-export const SignUp = () => {
+export default function SignUp() {
   const { setValue, watch } = useForm();
 
   return (
@@ -36,12 +36,12 @@ export const SignUp = () => {
       <Flex direction="column" webGap={24} padding="0 0 12px 0">
         <TextField label="이름" isAdmin />
         <TextField label="이메일" isAdmin />
-        <TextField label="ID" isAdmin right={true} />
+        <TextField label="ID" isAdmin />
         <TextField label="PW" isAdmin />
       </Flex>
-      <Button variant="admin_navy" webWidth={324} webHeight={46}>
+      <Button variant="admin" webWidth={324} webHeight={64}>
         로그인하기
       </Button>
     </Flex>
   );
-};
+}
