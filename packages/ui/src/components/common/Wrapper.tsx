@@ -64,3 +64,11 @@ export const AbsoluteFlex = styled(Flex)`
     background-color: rgba(0, 0, 0, 0.5);
   }
 `;
+
+export const Space = styled.div<{
+  height?: number;
+  width?: number;
+}>`
+  height: ${({ height }) => `${height}px`};
+  width: ${({ width }) => `${width}px`};
+`;
