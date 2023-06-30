@@ -5,7 +5,7 @@ import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
-
+import { css } from '@emotion/react';
 interface AwardsInterface {
   generation: number;
   content: string;
@@ -32,7 +32,7 @@ export const RewardCard = (props: {
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" paletteColor="Black">
-              {generation}
+              {generation}기
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
               {/* {time} */}
@@ -41,7 +41,13 @@ export const RewardCard = (props: {
           <Flex direction="column" webGap={10}>
             {projects?.map((item, idx) => {
               return (
-                <Flex justify="start" key={idx}>
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <Text
                     webTypo="Label1"
                     paletteColor="Blue"
@@ -60,7 +66,13 @@ export const RewardCard = (props: {
             <Line />
             <Flex direction="column" webGap={8}>
               {awards?.map((item, idx) => (
-                <Flex justify="start" key={idx}>
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <RewardCheck />
                   <Text webTypo="Body2" paletteColor="Black">
                     {item.content}
@@ -106,7 +118,13 @@ export const RewardCard = (props: {
               <Line />
               <Flex direction="column" mobileGap={8}>
                 {awards?.map((item, idx) => (
-                  <Flex justify="flex-start" key={idx}>
+                  <Flex
+                    key={idx}
+                    css={css`
+                      width: 100%;
+                      justify-content: flex-start;
+                    `}
+                  >
                     <RewardCheck />
                     <Text mobileTypo="Body1" paletteColor="Black">
                       {item.content}
@@ -155,7 +173,13 @@ export const AdminRewardCard = (props: {
           <Flex direction="column" webGap={10} mobileGap={10}>
             {projects?.map((item, idx) => {
               return (
-                <Flex justify="start" key={idx}>
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <Text
                     webTypo="Label1"
                     paletteColor="Navy"
