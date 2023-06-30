@@ -42,7 +42,6 @@ export const Rewards = () => {
   });
 
   const awardList = data?.generationAwards;
-  console.log(awardList);
 
   return (
     <Flex margin="0 0 80px 0" direction="column">
