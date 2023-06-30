@@ -11,6 +11,8 @@ import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
+import styled from '@emotion/styled';
+import Link from 'next/link';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -126,3 +128,30 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
+
+const GlassFlex = styled(Flex)`
+  position: absolute;
+  bottom: 80px;
+  z-index: 99;
+  @media (max-width: 1023px) {
+    bottom: 30px;
+  }
+`;
+
+const Background = styled.img`
+  width: 100%;
+  z-index: -99;
+  max-height: 500px;
+
+  @media (max-width: 1023px) {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    max-height: 500px;
+  }
+`;
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;

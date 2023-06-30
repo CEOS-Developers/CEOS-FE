@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import Sidebar from '../Sidebar';
 import { Flex } from '@ceos-fe/ui';
+import React from 'react';
+import Sidebar from '../Sidebar/index';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,7 +17,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 };
 
 const ChildrenContainer = styled.div`
-  margin-left: 16.5%;
+  margin-left: max(16.5%, 200px);
   display: flex;
   flex-direction: column;
   align-items: center;

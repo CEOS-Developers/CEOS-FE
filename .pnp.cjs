@@ -2648,6 +2648,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
             ["next-transpile-modules", "npm:10.0.0"],\
             ["react", "npm:18.2.0"],\
+            ["react-bootstrap-icons", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:1.10.3"],\
             ["react-dom", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:18.2.0"],\
             ["react-hook-form", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:7.43.9"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
@@ -9971,6 +9972,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["react", "npm:18.2.0"],\
             ["loose-envify", "npm:1.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-bootstrap-icons", [\
+        ["npm:1.10.3", {\
+          "packageLocation": "./.yarn/cache/react-bootstrap-icons-npm-1.10.3-fb4622c96d-afc9a4a558.zip/node_modules/react-bootstrap-icons/",\
+          "packageDependencies": [\
+            ["react-bootstrap-icons", "npm:1.10.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:1.10.3", {\
+          "packageLocation": "./.yarn/__virtual__/react-bootstrap-icons-virtual-7e38530d61/0/cache/react-bootstrap-icons-npm-1.10.3-fb4622c96d-afc9a4a558.zip/node_modules/react-bootstrap-icons/",\
+          "packageDependencies": [\
+            ["react-bootstrap-icons", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:1.10.3"],\
+            ["@types/react", "npm:18.2.3"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

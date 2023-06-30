@@ -10,10 +10,6 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    console.log(watch('date'));
-  }, [watch('date')]);
-
   return (
     <Flex direction="row">
       <DatePicker onChange={(date: string) => setValue('date', date)} />
