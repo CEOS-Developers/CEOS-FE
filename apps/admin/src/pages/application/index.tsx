@@ -10,7 +10,6 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Dropdown } from '@admin/components/Dropdown';
-import { DropdownItemInterface } from '../../utils/dropdown';
 import { Plus } from '@admin/assets/Plus';
 import {
   ApplicationInterface,
@@ -22,7 +21,12 @@ import {
   applicationApi,
 } from '@ceos-fe/utils';
 import { AxiosError } from 'axios';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import {
+  QueryClient,
+  dehydrate,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
 
 interface ApplicationFormInterface {
   commonQuestions: ApplicationListItemInterface[];
@@ -49,6 +53,9 @@ export default function Application() {
     ResponseInterface<ApplicationInterface>,
     AxiosError
   >(['admin', 'application'], applicationApi.GET_APPLICATION);
+  const { mutate: putApplication } = useMutation(
+    applicationApi.PUT_APPLICATION,
+  );
 
   const [allPartQuestions, setAllPartQuestions] = useState<
     PartQuestionsInterface & { selectedPart: SelectedPartType }
@@ -107,7 +114,7 @@ export default function Application() {
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
-      [allPartQuestions.selectedPart]: [...partQuestions],
+      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
       selectedPart: watch('selectedPart'),
     });
     replacePartQuestions(allPartQuestions[PART_MAP[watch('selectedPart')]]);
@@ -128,8 +135,78 @@ export default function Application() {
     removeCommonQuestions(idx);
   };
 
-  const handleSaveApplication = (idx: number) => {
-    // TODO: 질문 추가 API 연동
+  const handleRemovePartQuestion = (idx: number) => {
+    removePartQuestions(idx);
+  };
+
+  const handleAppendDetailCommon = (idx: number) => {
+    replaceCommonQuestions(
+      commonQuestions.map((question, questionIndex) => {
+        if (questionIndex !== idx) return question;
+        return {
+          ...question,
+          questionDetail: [
+            ...question.questionDetail,
+            { explaination: '', color: 'gray' },
+          ],
+        };
+      }),
+    );
+  };
+
+  const handleAppendDetailPart = (idx: number) => {
+    replacePartQuestions(
+      partQuestions.map((question, questionIndex) => {
+        if (questionIndex !== idx) return question;
+        return {
+          ...question,
+          questionDetail: [
+            ...question.questionDetail,
+            { explaination: '', color: 'gray' },
+          ],
+        };
+      }),
+    );
+  };
+
+  const handleRemoveDetailCommon = (idx: number, detailIdx: number) => {
+    replaceCommonQuestions(
+      commonQuestions.map((question, questionIndex) => {
+        if (questionIndex !== idx) return question;
+        return {
+          ...question,
+          questionDetail: question.questionDetail.filter(
+            (_, detail) => detail !== detailIdx,
+          ),
+        };
+      }),
+    );
+  };
+
+  const handleRemoveDetailPart = (idx: number, detailIdx: number) => {
+    replacePartQuestions(
+      partQuestions.map((question, questionIndex) => {
+        if (questionIndex !== idx) return question;
+        return {
+          ...question,
+          questionDetail: question.questionDetail.filter(
+            (_, detail) => detail !== detailIdx,
+          ),
+        };
+      }),
+    );
+  };
+
+  const handleSaveApplication = () => {
+    putApplication({
+      commonQuestions: watch('commonQuestions'),
+      productQuestions: allPartQuestions.productQuestions,
+      designQuestions: allPartQuestions.designQuestions,
+      frontendQuestions: allPartQuestions.frontendQuestions,
+      backendQuestions: allPartQuestions.backendQuestions,
+      date1: watch('date1'),
+      date2: watch('date2'),
+    });
   };
 
   const handleAppendPartQuestion = () => {
@@ -191,7 +268,12 @@ export default function Application() {
                   width={875}
                   isAdmin
                 />
-                <Button variant="admin_stroke">설명 추가</Button>
+                <Button
+                  variant="admin_stroke"
+                  onClick={() => handleAppendDetailCommon(idx)}
+                >
+                  설명 추가
+                </Button>
                 <Button
                   variant="admin_navy"
                   onClick={() => handleRemoveCommonQuestion(idx)}
@@ -199,10 +281,23 @@ export default function Application() {
                   삭제
                 </Button>
               </Flex>
-              <Flex justify="flex-start" webGap={8}>
-                <TextField isSubTextField width={968} />
-                <Button variant="admin_navy">삭제</Button>
-              </Flex>
+              {question.questionDetail.map((questionDetail, detailIdx) => (
+                <Flex justify="flex-start" webGap={8}>
+                  <TextField
+                    {...register(
+                      `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
+                    )}
+                    isSubTextField
+                    width={968}
+                  />
+                  <Button
+                    variant="admin_navy"
+                    onClick={() => handleRemoveDetailCommon(idx, detailIdx)}
+                  >
+                    삭제
+                  </Button>
+                </Flex>
+              ))}
             </Flex>
           ))}
           <Button
@@ -269,7 +364,10 @@ export default function Application() {
                   ]}
                   label={`partQuestions.${idx}.textfieldSize`}
                   setValue={(_, val) =>
-                    setValue(`partQuestions.${idx}.multiline`, val === 'large')
+                    setValue(
+                      `partQuestions.${idx}.multiline`,
+                      val.value === 'large',
+                    )
                   }
                   value={
                     watch(`partQuestions.${idx}.multiline`)
@@ -285,14 +383,37 @@ export default function Application() {
                   width={152}
                   placeholder="입력창 크기 선택"
                 />
-                <Button variant="admin_stroke">설명 추가</Button>
-                <Button variant="admin_navy">삭제</Button>
+                <Button
+                  variant="admin_stroke"
+                  onClick={() => handleAppendDetailPart(idx)}
+                >
+                  설명 추가
+                </Button>
+                <Button
+                  variant="admin_navy"
+                  onClick={() => handleRemovePartQuestion(idx)}
+                >
+                  삭제
+                </Button>
               </Flex>
 
-              <Flex justify="flex-start" webGap={8}>
-                <TextField isSubTextField width={968} />
-                <Button variant="admin_navy">삭제</Button>
-              </Flex>
+              {question.questionDetail.map((questionDetail, detailIdx) => (
+                <Flex justify="flex-start" webGap={8}>
+                  <TextField
+                    {...register(
+                      `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
+                    )}
+                    isSubTextField
+                    width={968}
+                  />
+                  <Button
+                    variant="admin_navy"
+                    onClick={() => handleRemoveDetailPart(idx, detailIdx)}
+                  >
+                    삭제
+                  </Button>
+                </Flex>
+              ))}
             </Flex>
           ))}
 
@@ -395,7 +516,9 @@ export default function Application() {
           </Flex>
         </Flex>
 
-        <Button variant="admin">저장하기</Button>
+        <Button variant="admin" onClick={handleSaveApplication}>
+          저장하기
+        </Button>
       </Flex>
     </>
   );
