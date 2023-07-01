@@ -277,14 +277,12 @@ export default function Application() {
 
   return (
     <>
-      <Flex direction="column" align="flex-start">
-        <Text webTypo="Heading2" color="Black">
-          지원서 제출
-        </Text>
-        <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
-          지원서 질문을 관리하는 페이지입니다.
-        </Text>
-      </Flex>
+      <Text webTypo="Heading2" color="Black">
+        지원서 제출
+      </Text>
+      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+        지원서 질문을 관리하는 페이지입니다.
+      </Text>
 
       <Flex direction="column" webGap={48} style={{ marginTop: '48px' }}>
         <Flex direction="column" webGap={24} align="flex-start">
@@ -338,13 +336,19 @@ export default function Application() {
                 </Button>
               </Flex>
               {question.questionDetail.map((_, detailIdx) => (
-                <Flex justify="flex-start" webGap={8}>
+                <Flex
+                  justify="flex-start"
+                  width={1032}
+                  webGap={8}
+                  margin="0 0 0 16px"
+                >
                   <TextField
                     {...register(
                       `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
                     )}
                     isSubTextField
-                    width={968}
+                    isAdmin
+                    width={923}
                   />
                   <Button
                     variant="admin_navy"
@@ -454,13 +458,14 @@ export default function Application() {
               </Flex>
 
               {question.questionDetail.map((_, detailIdx) => (
-                <Flex justify="flex-start" webGap={8}>
+                <Flex justify="flex-start" webGap={8} margin="0 0 0 8px">
                   <TextField
                     {...register(
                       `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
                     )}
                     isSubTextField
-                    width={968}
+                    isAdmin
+                    width={923}
                   />
                   <Button
                     variant="admin_navy"
