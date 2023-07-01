@@ -69,14 +69,14 @@ export default function Application() {
     selectedPart: '기획',
   });
 
-  const { control, watch, setValue, register } =
+  const { control, watch, setValue, getValues, register } =
     useForm<ApplicationFormInterface>({
       defaultValues: {
         commonQuestions: [],
         partQuestions: [],
         selectedPart: '기획',
-        date1: { date: new Date().toString(), time: [] },
-        date2: { date: new Date().toString(), time: [] },
+        date1: { date: '', time: [] },
+        date2: { date: '', time: [] },
       },
     });
   const {
@@ -99,34 +99,34 @@ export default function Application() {
   });
 
   useEffect(() => {
-    if (!isFetching && isSuccess) {
-      const applicationData = data.data;
-      replaceCommonQuestions(data.data.commonQuestions);
+    if (isFetching || !isSuccess) return;
 
-      setValue(`date1`, {
-        date: '2023-07-01',
-        time: [
-          '13:00 - 13:30',
-          '14:00 - 14:30',
-          '15:00 - 15:30',
-          '16:00 - 16:30',
-        ],
-      });
-      setValue(`date2`, {
-        date: '2023-07-03',
-        time: ['13:00 - 13:30', '14:00 - 14:30', '15:00 - 15:30'],
-      });
+    const applicationData = data.data;
+    replaceCommonQuestions(data.data.commonQuestions);
 
-      setAllPartQuestions({
-        productQuestions: applicationData.productQuestions,
-        designQuestions: applicationData.designQuestions,
-        frontendQuestions: applicationData.frontendQuestions,
-        backendQuestions: applicationData.backendQuestions,
-        selectedPart: '기획',
-      });
-      replacePartQuestions(applicationData[PART_MAP[watch('selectedPart')]]);
-    }
-  }, [isFetching, isSuccess, setAllPartQuestions]);
+    setValue(`date1`, {
+      date: '2023-07-01',
+      time: [
+        '13:00 - 13:30',
+        '14:00 - 14:30',
+        '15:00 - 15:30',
+        '16:00 - 16:30',
+      ],
+    });
+    setValue(`date2`, {
+      date: '2023-07-03',
+      time: ['13:00 - 13:30', '14:00 - 14:30', '15:00 - 15:30'],
+    });
+
+    setAllPartQuestions({
+      productQuestions: applicationData.productQuestions,
+      designQuestions: applicationData.designQuestions,
+      frontendQuestions: applicationData.frontendQuestions,
+      backendQuestions: applicationData.backendQuestions,
+      selectedPart: '기획',
+    });
+    replacePartQuestions(applicationData[PART_MAP[watch('selectedPart')]]);
+  }, [isFetching, isSuccess]);
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
@@ -337,6 +337,7 @@ export default function Application() {
               </Flex>
               {question.questionDetail.map((_, detailIdx) => (
                 <Flex
+                  key={detailIdx}
                   justify="flex-start"
                   width={1032}
                   webGap={8}
@@ -458,7 +459,12 @@ export default function Application() {
               </Flex>
 
               {question.questionDetail.map((_, detailIdx) => (
-                <Flex justify="flex-start" webGap={8} margin="0 0 0 8px">
+                <Flex
+                  key={detailIdx}
+                  justify="flex-start"
+                  webGap={8}
+                  margin="0 0 0 8px"
+                >
                   <TextField
                     {...register(
                       `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
@@ -497,13 +503,15 @@ export default function Application() {
           <Flex webGap={16} direction="column" align="flex-start">
             <Flex direction="column" align="flex-start" webGap={8} width={328}>
               <Text webTypo="Label3">날짜 1</Text>
-              <DatePicker
-                isAdmin
-                initialValue={new Date(watch(`date1.date`))}
-                onChange={(date: string) =>
-                  setValue('date1.date', getFormattedDate(new Date(date)))
-                }
-              />
+              {getValues('date1.date') && (
+                <DatePicker
+                  isAdmin
+                  initialValue={new Date(getValues(`date1.date`))}
+                  onChange={(date: string) =>
+                    setValue('date1.date', getFormattedDate(new Date(date)))
+                  }
+                />
+              )}
             </Flex>
 
             <GridContainer>
@@ -549,13 +557,15 @@ export default function Application() {
           <Flex webGap={16} direction="column" align="flex-start">
             <Flex direction="column" align="flex-start" webGap={8} width={328}>
               <Text webTypo="Label3">날짜 2</Text>
-              <DatePicker
-                isAdmin
-                initialValue={new Date(watch(`date2.date`))}
-                onChange={(date: string) =>
-                  setValue('date2.date', getFormattedDate(new Date(date)))
-                }
-              />
+              {getValues('date2.date') && (
+                <DatePicker
+                  isAdmin
+                  initialValue={new Date(getValues(`date2.date`))}
+                  onChange={(date: string) =>
+                    setValue('date2.date', getFormattedDate(new Date(date)))
+                  }
+                />
+              )}
             </Flex>
 
             <GridContainer>
