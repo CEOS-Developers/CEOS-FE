@@ -1,7 +1,7 @@
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { Dropdown } from '@admin/components/Dropdown';
+import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 필요
 
 export default function SignUp() {
   const { setValue, watch } = useForm();
