@@ -11,9 +11,11 @@ export default function SignIn() {
           <TextField label="ID" isAdmin />
           <TextField label="PW" isAdmin />
         </Flex>
-        <Button variant="admin" webWidth={324}>
-          로그인하기
-        </Button>
+        <div>
+          <Button variant="admin" webWidth={324}>
+            로그인하기
+          </Button>
+        </div>
       </Flex>
 
       <Text webTypo="Label3" paletteColor="Gray5">

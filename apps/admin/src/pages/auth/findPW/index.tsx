@@ -34,15 +34,17 @@ export default function findPW() {
         placeholder="파트 선택"
         width={152}
       />
-      <Flex webGap={24} direction="column" padding="31px 0 28px 0">
+      <Flex webGap={24} direction="column" padding="0 0 28px 0">
         <TextField label="이름" isAdmin />
         <TextField label="이메일" isAdmin />
         <TextField label="ID" isAdmin />
       </Flex>
 
-      <Button variant="admin" webWidth={324} webHeight={80}>
-        비밀번호 재설정
-      </Button>
+      <div>
+        <Button variant="admin" webWidth={324}>
+          비밀번호 재설정
+        </Button>
+      </div>
     </Flex>
   );
 }

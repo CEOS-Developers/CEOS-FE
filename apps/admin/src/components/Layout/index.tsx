@@ -36,5 +36,6 @@ const ChildrenContainer = styled.div<{ path?: string }>`
 const FlexBox = styled.div<{ path?: string }>`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: ${(props) => (props.path?.includes('/auth') ? '0px' : '88px 0')};
 `;

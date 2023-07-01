@@ -39,9 +39,11 @@ export default function findID() {
         <TextField label="이메일" isAdmin />
       </Flex>
 
-      <Button variant="admin" webWidth={324} webHeight={80}>
-        확인하기
-      </Button>
+      <div>
+        <Button variant="admin" webWidth={324}>
+          확인하기
+        </Button>
+      </div>
     </Flex>
   );
 }
