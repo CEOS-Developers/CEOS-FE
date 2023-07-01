@@ -1,10 +1,11 @@
-import { Flex, TextField, Text } from '@ceos-fe/ui';
+import { Flex, TextField, Text, DatePicker } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 // import { SelectButton } from '@ceos/components/SelectButton';
 import { SelectButton } from '../../../../../../packages/ui/src/components/SelectButton';
+import { useEffect } from 'react';
 const Information = () => {
-  const { register, watch } = useForm({
+  const { register, watch, setValue } = useForm({
     defaultValues: {
       name: '',
       gender: '',
@@ -12,8 +13,15 @@ const Information = () => {
       email: '',
       tel: '',
       activity: '',
+      otDate: '',
+      demoDate: '',
     },
   });
+
+  useEffect(() => {
+    console.log(watch('otDate'));
+  }, [watch('otDate'), watch('demoDate')]);
+
   return (
     <Flex direction="column">
       <Flex direction="column" webGap={36}>
@@ -61,12 +69,14 @@ const Information = () => {
           <Flex direction="column" align="start" webGap={8}>
             <Text webTypo="Label3">CEOS OT 날짜는?</Text>
             {/* 데이트 피커 자리 */}
-            <Text webTypo="Label3">데이트피커자리</Text>
+            <DatePicker onChange={(date: string) => setValue('otDate', date)} />
           </Flex>
           <Flex direction="column" align="start" webGap={8}>
             <Text webTypo="Label3">CEOS 데모데이 날짜는?</Text>
             {/* 데이트 피커 자리 */}
-            <Text webTypo="Label3">데이트피커자리</Text>
+            <DatePicker
+              onChange={(date: string) => setValue('demoDate', date)}
+            />
           </Flex>
         </Flex>
         <Flex width={680} webGap={32}>
