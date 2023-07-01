@@ -1,170 +1,75 @@
-import { Button, Flex, Text, TextField, theme } from '@ceos-fe/ui';
+import {
+  Button,
+  Flex,
+  Text,
+  TextField,
+  theme,
+  SelectButton,
+} from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Dropdown } from '@admin/components/Dropdown';
 import { DropdownItemInterface } from '../../utils/dropdown';
-import { SelectButton } from '../../../../../packages/ui/src/components/SelectButton/index';
-import Layout from '@admin/components/layout';
 import { Plus } from '@admin/assets/Plus';
+import {
+  ApplicationInterface,
+  ApplicationListItemInterface,
+  ResponseInterface,
+  SelectedPartType,
+  SelectedQuestionsType,
+  PartQuestionsInterface,
+  applicationApi,
+} from '@ceos-fe/utils';
+import { AxiosError } from 'axios';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 
-const applicationList = {
-  commonQuestions: [
-    {
-      questionIndex: 1,
-      question:
-        '1. CEOS에 지원한 동기와 얻을 것으로 기대하는 점을 서술해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 2,
-      question: '2. 하고 싶은 창업 아이템에 대해 서술해 주세요. (300자 내외)*',
-    },
-    {
-      questionIndex: 3,
-      question:
-        '3. 프로젝트 등 협업을 하며 겪은 어려움과 이를 해결하며 느끼고 배운 점을 중심으로 서술해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 4,
-      question:
-        '4. CEOS는 기획, 개발, 디자인으로 구성된 팀으로 활동합니다. 팀 내에서 본인이 기여할 수 있는 부분이 무엇인지 적어 주세요. (300자 이상)*',
-    },
-  ],
-  productQuestions: [
-    {
-      questionIndex: 1,
-      question: '1. 유망하다고 생각하는 시장과 그 이유에 대해 서술해주세요.',
-    },
-    {
-      questionIndex: 2,
-      question:
-        "2. 공통 질문에 적어주신 ‘하고 싶은 창업 아이템'의 시장성을 평가해주세요.",
-    },
-    {
-      questionIndex: 3,
-      question:
-        '3. 창업 및 스타트업에 대한 자신의 관심을 자유롭게 서술해주세요.',
-    },
-    {
-      questionIndex: 4,
-      question:
-        '4. IT창업에 있어서 중요하다고 생각하는 부분을 자유롭게 서술해주세요.',
-    },
-  ],
-  designQuestions: [
-    {
-      questionIndex: 1,
-      question:
-        '1. CEOS는 다양한 사람들과 파트가 모여 프로젝트를 만들어갑니다. 이처럼 다양한 사람들과의 협업 만족도가 높은 프로덕트를 만들기 위해, UXUI 디자이너로서 본인의 역할은 무엇이라고 생각하는지 서술해주세요. (200자 내외)',
-    },
-    {
-      questionIndex: 2,
-      question:
-        '2. 팀 내의 갈등이 생긴다면 어떻게 해결할 것인지 서술해주세요. 갈등 상황은 1) 기획과 디자이너, 2) 디자이너와 디자이너, 3) 개발자와 디자이너 중 자유롭게 구성해주세요. 갈등을 해결했던 자신만의 방법과 경험을 함께 서술해주세요. (200자 내외)',
-    },
-    {
-      questionIndex: 3,
-      question:
-        '3. 다른 디자이너와 차별화되는 자신만의 강점을 프로젝트 또는 경험과 함께 서술해주세요. (200자 내외)',
-    },
-    {
-      questionIndex: 4,
-      question:
-        '4. 포트폴리오 사이트 또는 PDF가 첨부된 구글 드라이브 링크를 입력해주세요.',
-    },
-  ],
-  frontendQuestions: [
-    {
-      questionIndex: 1,
-      question: '1. 주로 사용하는 기술 스택과 숙련도를 작성해 주세요.*',
-    },
-    {
-      questionIndex: 2,
-      question:
-        '2. 본인이 진행했던 프로젝트를 어떤 언어로, 어떤 기술을 사용했는지 본인의 기여 사항을 중심으로 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 3,
-      question:
-        '3. 프로젝트를 진행하면서 기술적인 어려움이 있었다면 이를 어떻게 해결했는지 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 4,
-      question:
-        '4. 기존에 프로젝트를 진행하면서 가장 기억에 남았던 부분 또는 가장 배웠다고 느꼈던 부분이 있다면 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 5,
-      question:
-        '5. GitHub 링크를 포함하여 개발 경험이나 역량을 보여줄 수 있는 링크를 첨부해 주세요. (GitHub 필수, 대표 프로젝트 Repository 선택)*',
-    },
-  ],
-  backendQuestions: [
-    {
-      questionIndex: 1,
-      question: '1. 주로 사용하는 기술 스택과 숙련도를 작성해 주세요.*',
-    },
-    {
-      questionIndex: 2,
-      question:
-        '2. 본인이 진행했던 프로젝트를 어떤 언어로, 어떤 기술을 사용했는지 본인의 기여 사항을 중심으로 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 3,
-      question:
-        '3. 프로젝트를 진행하면서 기술적인 어려움이 있었다면 이를 어떻게 해결했는지 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 4,
-      question:
-        '4. 기존에 프로젝트를 진행하면서 가장 기억에 남았던 부분 또는 가장 배웠다고 느꼈던 부분이 있다면 자세히 설명해 주세요. (300자 이상)*',
-    },
-    {
-      questionIndex: 5,
-      question:
-        '5. GitHub 링크를 포함하여 개발 경험이나 역량을 보여줄 수 있는 링크를 첨부해 주세요. (GitHub 필수, 대표 프로젝트 Repository 선택)*',
-    },
-  ],
-};
-
-type SelectedPartKorType = '기획' | '디자인' | '프론트엔드' | '백엔드';
-type SelectedPartType = 'PRODUCT' | 'DESIGN' | 'FRONTEND' | 'BACKEND';
-
-const PART_MAP: Record<string, SelectedPartType> = {
-  기획: 'PRODUCT',
-  디자인: 'DESIGN',
-  프론트엔드: 'FRONTEND',
-  백엔드: 'BACKEND',
-};
-
-interface ApplicationListItemInterface {
-  questionIndex: number;
-  question: string;
-  textfieldSize?: DropdownItemInterface;
-  part?: SelectedPartType;
-}
-interface ApplicationInterface {
+interface ApplicationFormInterface {
   commonQuestions: ApplicationListItemInterface[];
   partQuestions: ApplicationListItemInterface[];
-  selectedPart: SelectedPartKorType;
-  dates: string[];
-  times: string[];
+  selectedPart: SelectedPartType;
+  date1: {
+    date: string;
+    time: string[];
+  };
+  date2: {
+    date: string;
+    time: string[];
+  };
 }
+const PART_MAP: Record<SelectedPartType, SelectedQuestionsType> = {
+  기획: 'productQuestions',
+  디자인: 'designQuestions',
+  프론트엔드: 'frontendQuestions',
+  백엔드: 'backendQuestions',
+};
 
 export default function Application() {
-  const [allPartQuestions, setAllPartQuestions] = useState<
-    ApplicationListItemInterface[]
-  >([]);
+  const { data, isFetching, isSuccess } = useQuery<
+    ResponseInterface<ApplicationInterface>,
+    AxiosError
+  >(['admin', 'application'], applicationApi.GET_APPLICATION);
 
-  const { control, watch, setValue, register } = useForm<ApplicationInterface>({
-    defaultValues: {
-      commonQuestions: [],
-      partQuestions: [],
-      selectedPart: '기획',
-      dates: [],
-      times: [],
-    },
+  const [allPartQuestions, setAllPartQuestions] = useState<
+    PartQuestionsInterface & { selectedPart: SelectedPartType }
+  >({
+    productQuestions: [],
+    designQuestions: [],
+    frontendQuestions: [],
+    backendQuestions: [],
+    selectedPart: '기획',
   });
+
+  const { control, watch, setValue, register } =
+    useForm<ApplicationFormInterface>({
+      defaultValues: {
+        commonQuestions: [],
+        partQuestions: [],
+        selectedPart: '기획',
+        date1: {},
+        date2: {},
+      },
+    });
   const {
     fields: commonQuestions,
     replace: replaceCommonQuestions,
@@ -185,39 +90,27 @@ export default function Application() {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      replaceCommonQuestions(applicationList.commonQuestions);
+    if (!isFetching && isSuccess) {
+      const applicationData = data.data;
+      replaceCommonQuestions(data.data.commonQuestions);
 
-      const questions = [] as ApplicationListItemInterface[];
-      applicationList.productQuestions.forEach((question) => {
-        questions.push({ ...question, part: 'PRODUCT' });
+      setAllPartQuestions({
+        productQuestions: applicationData.productQuestions,
+        designQuestions: applicationData.designQuestions,
+        frontendQuestions: applicationData.frontendQuestions,
+        backendQuestions: applicationData.backendQuestions,
+        selectedPart: '기획',
       });
-      applicationList.designQuestions.forEach((question) => {
-        questions.push({ ...question, part: 'DESIGN' });
-      });
-      applicationList.frontendQuestions.forEach((question) => {
-        questions.push({ ...question, part: 'FRONTEND' });
-      });
-      applicationList.backendQuestions.forEach((question) => {
-        questions.push({ ...question, part: 'BACKEND' });
-      });
-
-      setAllPartQuestions(questions);
-      replacePartQuestions(
-        questions.filter(
-          (question) => question.part === PART_MAP[watch('selectedPart')],
-        ),
-      );
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+      replacePartQuestions(applicationData[PART_MAP[watch('selectedPart')]]);
+    }
+  }, [isFetching, isSuccess]);
   useEffect(() => {
-    replacePartQuestions(
-      allPartQuestions.filter(
-        (question) => question.part === PART_MAP[watch('selectedPart')],
-      ),
-    );
+    setAllPartQuestions({
+      ...allPartQuestions,
+      [allPartQuestions.selectedPart]: [...partQuestions],
+      selectedPart: watch('selectedPart'),
+    });
+    replacePartQuestions(allPartQuestions[PART_MAP[watch('selectedPart')]]);
   }, [watch('selectedPart')]);
 
   const handleAppendCommonQuestion = () => {
@@ -225,6 +118,9 @@ export default function Application() {
       questionIndex:
         commonQuestions[commonQuestions.length - 1].questionIndex + 1,
       question: '',
+      multiline: false,
+      questionDetail: [],
+      questionId: -1,
     });
   };
 
@@ -240,12 +136,14 @@ export default function Application() {
     appendPartQuestions({
       questionIndex: partQuestions[partQuestions.length - 1].questionIndex + 1,
       question: '',
-      part: PART_MAP[watch('selectedPart')],
+      multiline: false,
+      questionDetail: [],
+      questionId: -1,
     });
   };
 
   return (
-    <Layout>
+    <>
       <Flex direction="column" align="flex-start">
         <Text webTypo="Heading2" color="Black">
           지원서 제출
@@ -286,8 +184,8 @@ export default function Application() {
         <Flex direction="column" webGap={24} align="flex-start">
           <Text webTypo="Heading4">공통 질문</Text>
           {commonQuestions.map((question, idx) => (
-            <Flex direction="column" webGap={16}>
-              <Flex key={question.id} webGap={8} justify="flex-start">
+            <Flex key={question.id} direction="column" webGap={16}>
+              <Flex webGap={8} justify="flex-start">
                 <TextField
                   {...register(`commonQuestions.${idx}.question`)}
                   width={875}
@@ -351,8 +249,8 @@ export default function Application() {
           </Flex>
 
           {partQuestions.map((question, idx) => (
-            <Flex direction="column" webGap={16}>
-              <Flex key={question.id} webGap={8} justify="flex-start">
+            <Flex key={question.id} direction="column" webGap={16}>
+              <Flex webGap={8} justify="flex-start">
                 <TextField
                   {...register(`partQuestions.${idx}.question`)}
                   width={715}
@@ -371,12 +269,18 @@ export default function Application() {
                   ]}
                   label={`partQuestions.${idx}.textfieldSize`}
                   setValue={(_, val) =>
-                    setValue(`partQuestions.${idx}.textfieldSize`, val)
+                    setValue(`partQuestions.${idx}.multiline`, val === 'large')
                   }
                   value={
-                    watch(
-                      `partQuestions.${idx}.textfieldSize`,
-                    ) as DropdownItemInterface
+                    watch(`partQuestions.${idx}.multiline`)
+                      ? {
+                          label: '대형',
+                          value: 'large',
+                        }
+                      : {
+                          label: '중형',
+                          value: 'medium',
+                        }
                   }
                   width={152}
                   placeholder="입력창 크기 선택"
@@ -493,9 +397,28 @@ export default function Application() {
 
         <Button variant="admin">저장하기</Button>
       </Flex>
-    </Layout>
+    </>
   );
 }
+
+export const getStaticProps = async () => {
+  try {
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery(
+      ['admin', 'application'],
+      applicationApi.GET_APPLICATION,
+    );
+
+    return {
+      props: {
+        dehydratedProps: dehydrate(queryClient),
+      },
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const Line = styled.div`
   width: 1032px;
