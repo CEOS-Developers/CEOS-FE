@@ -72,7 +72,7 @@ export const Down = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_620_7221)">
+        <g clipPath="url(#clip0_620_7221)">
           <path
             d="M8 5L15 12L22 5"
             stroke="#787E88"

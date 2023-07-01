@@ -53,9 +53,21 @@ export default function Faq() {
   >(['admin', 'faq', watch('category')], () =>
     faqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
   );
-  const { mutate: postFaqMutation } = useMutation(faqApi.POST_FAQ);
-  const { mutate: patchFaqMutation } = useMutation(faqApi.PATCH_FAQ);
-  const { mutate: deleteFaqMutation } = useMutation(faqApi.DELETE_FAQ);
+  const { mutate: postFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.POST_FAQ);
+  const { mutate: patchFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.PATCH_FAQ);
+  const { mutate: deleteFaqMutation } = useMutation<
+    ResponseInterface<FaqListItemInterface>,
+    AxiosError,
+    FaqListItemInterface
+  >(faqApi.DELETE_FAQ);
 
   useEffect(() => {
     if (!isFetching && isSuccess) {

@@ -16,8 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
+    "baseUrl": "./",
     "paths": {
-      "@ceos-fe/ui/*": ["./ui/src/*"]
+      "@ceos-fe/ui": ["./packages/ui/src/*"],
+      "@ceos-fe/utils/*": ["./packages/utils/src/*"]
     }
   },
   "references": [
