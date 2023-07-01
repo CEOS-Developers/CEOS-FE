@@ -10,7 +10,9 @@ export const Flex = styled.div<{
   webGap?: number;
   mobileGap?: number;
   width?: number;
+  widthPer?: number;
   height?: number;
+  heightPer?: number;
   borderRadius?: number;
   backgroundColor?: KeyOfPalette;
 }>`
@@ -19,8 +21,10 @@ export const Flex = styled.div<{
   justify-content: ${({ justify }) => (justify ? `${justify}` : 'center')};
   align-items: ${({ align }) => (align ? `${align}` : 'center')};
   gap: ${({ webGap }) => (webGap ? `${webGap}px` : '0px')};
-  width: ${({ width }) => (width ? `${width}px` : '')};
-  height: ${({ height }) => (height ? `${height}px` : '')};
+  width: ${({ width, widthPer }) =>
+    width ? `${width}px` : widthPer ? `${widthPer}%` : '100%'};
+  height: ${({ height, heightPer }) =>
+    height ? `${height}px` : heightPer ? `${heightPer}%` : '100%'};
   margin: ${({ margin }) => (margin ? margin : '0')};
   padding: ${({ padding }) => (padding ? padding : '0')};
   box-sizing: border-box;
