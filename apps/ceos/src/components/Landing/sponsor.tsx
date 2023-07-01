@@ -2,7 +2,7 @@ import { Text, Flex, SponsorCard, SponsorCardProps } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { ResponseInterface, sponsorApi } from '@ceos-fe/utils';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 interface SponsorInterface {
   id: number;
