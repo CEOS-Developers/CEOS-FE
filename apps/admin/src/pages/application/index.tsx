@@ -198,12 +198,20 @@ export default function Application() {
   };
 
   const handleSaveApplication = () => {
+    setAllPartQuestions({
+      ...allPartQuestions,
+      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
+      selectedPart: watch('selectedPart'),
+    });
+    replacePartQuestions(allPartQuestions[PART_MAP[watch('selectedPart')]]);
+
     console.log({
       commonQuestions: watch('commonQuestions'),
       productQuestions: allPartQuestions.productQuestions,
       designQuestions: allPartQuestions.designQuestions,
       frontendQuestions: allPartQuestions.frontendQuestions,
       backendQuestions: allPartQuestions.backendQuestions,
+      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
       date1: watch('date1'),
       date2: watch('date2'),
     });
@@ -213,6 +221,7 @@ export default function Application() {
     //   designQuestions: allPartQuestions.designQuestions,
     //   frontendQuestions: allPartQuestions.frontendQuestions,
     //   backendQuestions: allPartQuestions.backendQuestions,
+    //   [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
     //   date1: watch('date1'),
     //   date2: watch('date2'),
     // });
@@ -290,7 +299,7 @@ export default function Application() {
                   삭제
                 </Button>
               </Flex>
-              {question.questionDetail.map((questionDetail, detailIdx) => (
+              {question.questionDetail.map((_, detailIdx) => (
                 <Flex justify="flex-start" webGap={8}>
                   <TextField
                     {...register(
@@ -406,7 +415,7 @@ export default function Application() {
                 </Button>
               </Flex>
 
-              {question.questionDetail.map((questionDetail, detailIdx) => (
+              {question.questionDetail.map((_, detailIdx) => (
                 <Flex justify="flex-start" webGap={8}>
                   <TextField
                     {...register(
