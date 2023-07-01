@@ -5,6 +5,7 @@ import {
   TextField,
   theme,
   SelectButton,
+  DatePicker,
 } from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ import {
   useMutation,
   useQuery,
 } from '@tanstack/react-query';
+import { getFormattedDate } from '@admin/utils/date';
 
 interface ApplicationFormInterface {
   commonQuestions: ApplicationListItemInterface[];
@@ -73,8 +75,8 @@ export default function Application() {
         commonQuestions: [],
         partQuestions: [],
         selectedPart: '기획',
-        date1: {},
-        date2: {},
+        date1: { date: new Date().toString(), time: [] },
+        date2: { date: new Date().toString(), time: [] },
       },
     });
   const {
@@ -101,6 +103,20 @@ export default function Application() {
       const applicationData = data.data;
       replaceCommonQuestions(data.data.commonQuestions);
 
+      setValue(`date1`, {
+        date: '2023-07-01',
+        time: [
+          '13:00 - 13:30',
+          '14:00 - 14:30',
+          '15:00 - 15:30',
+          '16:00 - 16:30',
+        ],
+      });
+      setValue(`date2`, {
+        date: '2023-07-03',
+        time: ['13:00 - 13:30', '14:00 - 14:30', '15:00 - 15:30'],
+      });
+
       setAllPartQuestions({
         productQuestions: applicationData.productQuestions,
         designQuestions: applicationData.designQuestions,
@@ -110,7 +126,7 @@ export default function Application() {
       });
       replacePartQuestions(applicationData[PART_MAP[watch('selectedPart')]]);
     }
-  }, [isFetching, isSuccess]);
+  }, [isFetching, isSuccess, setAllPartQuestions]);
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
@@ -124,6 +140,16 @@ export default function Application() {
     appendCommonQuestions({
       questionIndex:
         commonQuestions[commonQuestions.length - 1].questionIndex + 1,
+      question: '',
+      multiline: false,
+      questionDetail: [],
+      questionId: -1,
+    });
+  };
+
+  const handleAppendPartQuestion = () => {
+    appendPartQuestions({
+      questionIndex: partQuestions[partQuestions.length - 1].questionIndex + 1,
       question: '',
       multiline: false,
       questionDetail: [],
@@ -169,6 +195,14 @@ export default function Application() {
     );
   };
 
+  const handleAppendDate1 = () => {
+    setValue(`date1.time`, [...watch(`date1.time`), '']);
+  };
+
+  const handleAppendDate2 = () => {
+    setValue(`date2.time`, [...watch(`date2.time`), '']);
+  };
+
   const handleRemoveDetailCommon = (idx: number, detailIdx: number) => {
     replaceCommonQuestions(
       watch('commonQuestions').map((question, questionIndex) => {
@@ -194,6 +228,20 @@ export default function Application() {
           ),
         };
       }),
+    );
+  };
+
+  const handleRemoveDate1 = (idx: number) => {
+    setValue(
+      `date1.time`,
+      watch(`date1.time`).filter((_, timeIdx) => timeIdx !== idx),
+    );
+  };
+
+  const handleRemoveDate2 = (idx: number) => {
+    setValue(
+      `date2.time`,
+      watch(`date2.time`).filter((_, timeIdx) => timeIdx !== idx),
     );
   };
 
@@ -225,16 +273,6 @@ export default function Application() {
     //   date1: watch('date1'),
     //   date2: watch('date2'),
     // });
-  };
-
-  const handleAppendPartQuestion = () => {
-    appendPartQuestions({
-      questionIndex: partQuestions[partQuestions.length - 1].questionIndex + 1,
-      question: '',
-      multiline: false,
-      questionDetail: [],
-      questionId: -1,
-    });
   };
 
   return (
@@ -452,40 +490,47 @@ export default function Application() {
           <Text webTypo="Heading4">면접 날짜</Text>
 
           <Flex webGap={16} direction="column" align="flex-start">
-            <TextField label="날짜 1" isAdmin />
+            <Flex direction="column" align="flex-start" webGap={8} width={328}>
+              <Text webTypo="Label3">날짜 1</Text>
+              <DatePicker
+                isAdmin
+                initialValue={new Date(watch(`date1.date`))}
+                onChange={(date: string) =>
+                  setValue('date1.date', getFormattedDate(new Date(date)))
+                }
+              />
+            </Flex>
 
             <GridContainer>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
+              {watch('date1.time').map((_, idx) => (
+                <Flex
+                  key={idx}
+                  webGap={8}
+                  align="flex-end"
+                  justify="flex-start"
+                >
+                  <TextField
+                    {...register(`date1.time.${idx}`)}
+                    label="시간"
+                    width={263}
+                    isAdmin
+                  />
+                  <Button
+                    variant="admin_navy"
+                    style={{ marginBottom: '4px' }}
+                    onClick={() => handleRemoveDate1(idx)}
+                  >
+                    삭제
+                  </Button>
+                </Flex>
+              ))}
             </GridContainer>
 
             <Button
               variant="admin_stroke"
               webWidth={128}
               style={{ alignSelf: 'center' }}
-              onClick={handleAppendCommonQuestion}
+              onClick={handleAppendDate1}
             >
               <Flex webGap={4}>
                 <Plus />
@@ -497,34 +542,47 @@ export default function Application() {
           <Line />
 
           <Flex webGap={16} direction="column" align="flex-start">
-            <TextField label="날짜 2" isAdmin />
+            <Flex direction="column" align="flex-start" webGap={8} width={328}>
+              <Text webTypo="Label3">날짜 2</Text>
+              <DatePicker
+                isAdmin
+                initialValue={new Date(watch(`date2.date`))}
+                onChange={(date: string) =>
+                  setValue('date2.date', getFormattedDate(new Date(date)))
+                }
+              />
+            </Flex>
 
             <GridContainer>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
-              <Flex webGap={8} align="flex-end" justify="flex-start">
-                <TextField label="시간" width={263} isAdmin />
-                <Button variant="admin_navy" style={{ marginBottom: '4px' }}>
-                  삭제
-                </Button>
-              </Flex>
+              {watch('date2.time').map((_, idx) => (
+                <Flex
+                  key={idx}
+                  webGap={8}
+                  align="flex-end"
+                  justify="flex-start"
+                >
+                  <TextField
+                    {...register(`date2.time.${idx}`)}
+                    label="시간"
+                    width={263}
+                    isAdmin
+                  />
+                  <Button
+                    variant="admin_navy"
+                    style={{ marginBottom: '4px' }}
+                    onClick={() => handleRemoveDate2(idx)}
+                  >
+                    삭제
+                  </Button>
+                </Flex>
+              ))}
             </GridContainer>
 
             <Button
               variant="admin_stroke"
               webWidth={128}
               style={{ alignSelf: 'center' }}
-              onClick={handleAppendCommonQuestion}
+              onClick={handleAppendDate2}
             >
               <Flex webGap={4}>
                 <Plus />
