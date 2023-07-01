@@ -16,7 +16,7 @@ export const Title = ({
   });
 
   return (
-    <Flex direction="column" margin="80px 0" webGap={12} mobileGap={10}>
+    <Flex direction="column" margin="80px 0 0 0" webGap={12} mobileGap={10}>
       <Text
         webTypo="Heading1_Eng"
         mobileTypo="Heading1_Eng"
