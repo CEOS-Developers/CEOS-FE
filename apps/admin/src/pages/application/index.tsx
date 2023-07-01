@@ -347,8 +347,32 @@ export default function Application() {
                     {...register(
                       `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
                     )}
+                    onChange={(e) => {
+                      setValue(
+                        `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
+                        e.target.value,
+                      );
+                      if (e.target.value.startsWith('*')) {
+                        setValue(
+                          `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                          'blue',
+                        );
+                      } else {
+                        setValue(
+                          `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                          'gray',
+                        );
+                      }
+                    }}
                     isSubTextField
                     isAdmin
+                    fontColor={
+                      watch(
+                        `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                      ) === 'gray'
+                        ? theme.palette.Black
+                        : theme.palette.Blue
+                    }
                     width={923}
                   />
                   <Button
@@ -471,6 +495,30 @@ export default function Application() {
                     )}
                     isSubTextField
                     isAdmin
+                    onChange={(e) => {
+                      setValue(
+                        `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
+                        e.target.value,
+                      );
+                      if (e.target.value.startsWith('*')) {
+                        setValue(
+                          `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                          'blue',
+                        );
+                      } else {
+                        setValue(
+                          `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                          'gray',
+                        );
+                      }
+                    }}
+                    fontColor={
+                      watch(
+                        `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                      ) === 'gray'
+                        ? theme.palette.Black
+                        : theme.palette.Blue
+                    }
                     width={923}
                   />
                   <Button
