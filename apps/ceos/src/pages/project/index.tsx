@@ -24,7 +24,7 @@ const Project = () => {
     ResponseInterface<ProjectResponse>
   >(
     ['ceos', 'project'],
-    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 0, limit: 10000 }),
     {
       getNextPageParam: (lastPage) => {
         return true;
@@ -50,7 +50,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchInfiniteQuery(['ceos', 'project'], () =>
-      projectApi.GET_PROJECT({ pageNum: 1, limit: 1000 }),
+      projectApi.GET_PROJECT({ pageNum: 0, limit: 10000 }),
     );
 
     return {

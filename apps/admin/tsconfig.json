@@ -16,7 +16,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@admin/*": ["./src/*"]
+      "@admin/*": ["./apps/admin/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],
