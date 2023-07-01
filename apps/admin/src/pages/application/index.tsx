@@ -141,7 +141,7 @@ export default function Application() {
 
   const handleAppendDetailCommon = (idx: number) => {
     replaceCommonQuestions(
-      commonQuestions.map((question, questionIndex) => {
+      watch('commonQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -156,7 +156,7 @@ export default function Application() {
 
   const handleAppendDetailPart = (idx: number) => {
     replacePartQuestions(
-      partQuestions.map((question, questionIndex) => {
+      watch('partQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -171,7 +171,7 @@ export default function Application() {
 
   const handleRemoveDetailCommon = (idx: number, detailIdx: number) => {
     replaceCommonQuestions(
-      commonQuestions.map((question, questionIndex) => {
+      watch('commonQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -185,7 +185,7 @@ export default function Application() {
 
   const handleRemoveDetailPart = (idx: number, detailIdx: number) => {
     replacePartQuestions(
-      partQuestions.map((question, questionIndex) => {
+      watch('partQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -198,7 +198,7 @@ export default function Application() {
   };
 
   const handleSaveApplication = () => {
-    putApplication({
+    console.log({
       commonQuestions: watch('commonQuestions'),
       productQuestions: allPartQuestions.productQuestions,
       designQuestions: allPartQuestions.designQuestions,
@@ -207,6 +207,15 @@ export default function Application() {
       date1: watch('date1'),
       date2: watch('date2'),
     });
+    // putApplication({
+    //   commonQuestions: watch('commonQuestions'),
+    //   productQuestions: allPartQuestions.productQuestions,
+    //   designQuestions: allPartQuestions.designQuestions,
+    //   frontendQuestions: allPartQuestions.frontendQuestions,
+    //   backendQuestions: allPartQuestions.backendQuestions,
+    //   date1: watch('date1'),
+    //   date2: watch('date2'),
+    // });
   };
 
   const handleAppendPartQuestion = () => {
