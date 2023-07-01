@@ -1,4 +1,5 @@
 import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
+import React from 'react';
 export const Title = ({
   title,
   explain,

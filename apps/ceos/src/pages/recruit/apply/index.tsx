@@ -6,7 +6,6 @@ import {
   TextField,
   SelectButton,
 } from '@ceos-fe/ui';
-import { Title } from '@ceos/components/Title';
 import Information from './Information';
 import Schedule from './Schedule';
 import styled from '@emotion/styled';
@@ -18,6 +17,8 @@ import {
 import { recruitApi } from '../../../../../../packages/utils/src/apis/ceos/recruitApi';
 import { ResponseInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
+import React from 'react';
+import { Title } from '../../../components/Title';
 
 interface QuestionProps {
   questionId: number;

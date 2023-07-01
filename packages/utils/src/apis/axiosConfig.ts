@@ -16,4 +16,8 @@ export const adminInstance = axios.create({
   baseURL: BASE_URL,
 });
 
+export const publicInstance = axios.create({
+  baseURL: BASE_URL,
+});
+
 // adminInstance 인터럽트 로직 추가 필요
