@@ -1,6 +1,23 @@
 import { adminInstance } from '../axiosConfig';
 
-export const loginApi = {
+export interface signUpInterface {
+  name: string; //이름
+  email: string;
+  username: string; //id
+  password: string;
+  part: string;
+}
+
+export const authApi = {
+  SIGN_UP: async (data: signUpInterface) => {
+    try {
+      const response = await adminInstance.post(`/admin/signup`, data);
+      //console.log('data: ', response.data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   SIGN_IN: async ({
     username,
     password,
