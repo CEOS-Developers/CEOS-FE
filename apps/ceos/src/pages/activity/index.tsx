@@ -13,6 +13,7 @@ import { ResponseInterface } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { TopMargin } from '../FAQ/index';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -61,11 +62,12 @@ const Activity = () => {
                 '다양한 활동을 진행하고 있습니다.',
               ]}
             />
+            <TopMargin />
             {acitivityList?.map((_, idx) => {
               return idx % 3 === 0 ? (
                 <Flex
                   key={`row_${idx}`}
-                  justify="start"
+                  justify="flex-start"
                   width={1032}
                   margin="0 0 32px 0"
                   webGap={24}
@@ -95,6 +97,7 @@ const Activity = () => {
               '다양한 활동을 진행하고 있습니다.',
             ]}
           />
+          <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
             {acitivityList?.map((activity, idx) => {
               return (

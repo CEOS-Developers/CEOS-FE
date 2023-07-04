@@ -14,6 +14,7 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
+import { TopMargin } from '../FAQ/index';
 
 interface ProjectResponse {
   projectBriefInfoVos: ProjectCardProps[];
@@ -62,12 +63,14 @@ const Project = () => {
               '활동 프로젝트를 소개합니다.',
             ]}
           />
+          <TopMargin />
           <Flex webGap={24}>
             <Flex
               direction="column"
               justify="start"
               webGap={47}
               height={(291 * Number(projectList?.length)) / 3}
+              width="auto"
             >
               {projectList?.map((project, idx) =>
                 idx % 3 === 0 ? <ProjectCard projectCard={project} /> : <></>,
@@ -78,6 +81,7 @@ const Project = () => {
               justify="start"
               webGap={47}
               height={(291 * Number(projectList?.length)) / 3}
+              width="auto"
             >
               {projectList?.map((project, idx) =>
                 idx % 3 === 1 ? <ProjectCard projectCard={project} /> : <></>,
@@ -88,6 +92,7 @@ const Project = () => {
               justify="start"
               webGap={47}
               height={(291 * Number(projectList?.length)) / 3}
+              width="auto"
             >
               {projectList?.map((project, idx) =>
                 idx % 3 === 2 ? <ProjectCard projectCard={project} /> : <></>,
@@ -106,6 +111,7 @@ const Project = () => {
               '활동 프로젝트를 소개합니다.',
             ]}
           />
+          <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
             {projectList?.map((project, idx) => (
               <ProjectCard projectCard={project} />
