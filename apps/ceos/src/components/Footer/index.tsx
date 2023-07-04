@@ -27,7 +27,7 @@ const Footer = ({
       <Desktop>
         <RelativeContainer height={500}>
           <Background src="/shortcuts.svg" />
-          <GlassFlex direction="column" webGap={80}>
+          <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
