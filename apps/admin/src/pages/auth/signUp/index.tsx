@@ -5,11 +5,32 @@ import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 
 import styled from '@emotion/styled';
 import { authApi, signUpInterface } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function SignUp() {
+  const router = useRouter();
+  const [checkId, setCheckId] = useState<boolean>(false);
   const { setValue, watch, register, handleSubmit } = useForm();
-  const { mutate: postSignUpMutation } = useMutation(authApi.SIGN_UP);
 
+  const { mutate: postSignUpMutation } = useMutation(authApi.SIGN_UP, {
+    onSuccess: () => {
+      alert('회원가입 완료');
+      router.push('/auth');
+    },
+  });
+  const { mutate: postUserIDMutation } = useMutation(authApi.CHECK_ID, {
+    onSuccess: () => {
+      setCheckId(true);
+      alert('사용 가능한 아이디입니다.');
+    },
+    onError: () => {
+      setCheckId(false);
+      alert('이미 사용중인 아이디입니다.');
+    },
+  });
+
+  // 회원가입
   const onSubmit = (data: any) => {
     const dataForm: signUpInterface = {
       name: data.name,
@@ -18,7 +39,16 @@ export default function SignUp() {
       password: data.password,
       part: data.partDropdown.label,
     };
-    postSignUpMutation(dataForm);
+    if (checkId) {
+      postSignUpMutation(dataForm);
+    } else {
+      alert('아이디를 다시 확인해주세요'); //텍스트 수정 필요
+    }
+  };
+  // 아이디 중복 확인
+  const CheckID = (data: any) => {
+    const userID = data.username;
+    postUserIDMutation(userID);
   };
 
   return (
@@ -55,11 +85,16 @@ export default function SignUp() {
         <TextField label="이메일" isAdmin {...register('email')} />
         <Flex webGap={8} align="flex-end">
           <TextField label="ID" isAdmin width={236} {...register('username')} />
-          <Flex height={40} width={84}>
+          <Flex height={40} width={84} onClick={handleSubmit(CheckID)}>
             <Button variant="admin_stroke">중복 확인</Button>
           </Flex>
         </Flex>
-        <TextField label="PW" isAdmin {...register('password')} />
+        <TextField
+          type="password"
+          label="PW"
+          isAdmin
+          {...register('password')}
+        />
 
         <div className="button-container">
           <Button variant="admin" webWidth={324} type="submit">

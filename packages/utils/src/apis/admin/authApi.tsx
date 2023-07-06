@@ -10,13 +10,8 @@ export interface signUpInterface {
 
 export const authApi = {
   SIGN_UP: async (data: signUpInterface) => {
-    try {
-      const response = await adminInstance.post(`/admin/signup`, data);
-      //console.log('data: ', response.data);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await adminInstance.post(`/admin/signup`, data);
+    return response.data;
   },
   SIGN_IN: async ({
     username,
@@ -25,16 +20,17 @@ export const authApi = {
     username: string;
     password: string;
   }) => {
-    try {
-      const response = await adminInstance.post(`/admin/signin`, {
-        username: username,
-        password: password,
-      });
-      console.log('data: ', response.data.data);
-      return response.data.data;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await adminInstance.post(`/admin/signin`, {
+      username: username,
+      password: password,
+    });
+    return response.data.data;
+  },
+  CHECK_ID: async (userid: string) => {
+    const response = await adminInstance.post(`/admin/username`, {
+      username: userid,
+    });
+    return response.data;
   },
 };
 
