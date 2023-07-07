@@ -11,14 +11,14 @@ export const SidebarMenuList: sidebarInterface[] = [
     icon: <SidebarApply />,
     menu: '지원현황',
     path: '/',
-    submenuOpen: false,
+    submenuopen: false,
     submenu: [],
   },
   {
     icon: <SidebarPageEdit />,
     menu: '페이지 수정',
     path: '/',
-    submenuOpen: false,
+    submenuopen: false,
     submenu: [
       { subMenuName: 'PROJECT', path: '/' },
       { subMenuName: 'REWARD', path: '/' },
@@ -31,7 +31,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     icon: <SidebarRecruiting />,
     menu: '리쿠르팅',
     path: '/',
-    submenuOpen: false,
+    submenuopen: false,
     submenu: [
       { subMenuName: 'RECRUIT', path: '/' },
       { subMenuName: '지원서 제출', path: '/' },
@@ -42,7 +42,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     icon: <SidebarUser />,
     menu: '유저관리',
     path: '/',
-    submenuOpen: false,
+    submenuopen: false,
     submenu: [],
   },
 ];

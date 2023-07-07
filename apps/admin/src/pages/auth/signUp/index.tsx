@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 필요
-import styled from '@emotion/styled';
 import { authApi, signUpInterface } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SignUp() {
@@ -82,7 +81,7 @@ export default function SignUp() {
         />
 
         <TextField label="이름" isAdmin {...register('name')} />
-        <TextField label="이메일" isAdmin {...register('email')} />
+        <TextField type="email" label="이메일" isAdmin {...register('email')} />
         <Flex webGap={8} align="flex-end">
           <TextField label="ID" isAdmin width={236} {...register('username')} />
           <Flex height={40} width={84} onClick={handleSubmit(CheckID)}>

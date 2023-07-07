@@ -14,7 +14,7 @@ export type sidebarInterface = {
   icon: JSX.Element;
   menu: string;
   path: string;
-  submenuOpen: boolean;
+  submenuopen: boolean;
   submenu: subMenuListInterface[];
 };
 
@@ -35,7 +35,7 @@ const Sidebar = () => {
             href={{ pathname: sidebarMenu.path }}
             onClick={() => setClickMenuNum(index)}
             click={index === clickMenuNum ? true : false}
-            submenuOpen={sidebarMenu.submenuOpen}
+            submenuopen={sidebarMenu.submenuopen}
           >
             <div className="left-menu">
               {sidebarMenu.icon}
@@ -45,18 +45,18 @@ const Sidebar = () => {
             </div>
             <div
               onClick={() => {
-                sidebarMenu.submenuOpen = !sidebarMenu.submenuOpen;
+                sidebarMenu.submenuopen = !sidebarMenu.submenuopen;
               }}
             >
               {sidebarMenu.submenu.length != 0 ? (
-                <SidebarArrow click={sidebarMenu.submenuOpen} />
+                <SidebarArrow click={sidebarMenu.submenuopen} />
               ) : (
                 <></>
               )}
             </div>
           </SidebarMenuContainer>
           {/* 하위 메뉴 */}
-          <SidebarSubMenuContainer subMenuOpen={sidebarMenu.submenuOpen}>
+          <SidebarSubMenuContainer submenuopen={sidebarMenu.submenuopen}>
             {sidebarMenu.submenu.length != 0 ? (
               sidebarMenu.submenu.map(
                 (submenu: subMenuListInterface, index: number) => (
@@ -99,7 +99,7 @@ const SidebarTitle = styled.div`
 `;
 const SidebarMenuContainer = styled(Link)<{
   click?: boolean;
-  submenuOpen?: boolean;
+  submenuopen?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -111,7 +111,7 @@ const SidebarMenuContainer = styled(Link)<{
   color: ${theme.palette.White};
   padding: 0 30px 0 32px;
   background: ${(props) =>
-    props.click || props.submenuOpen
+    props.click || props.submenuopen
       ? theme.palette.Admin.Navy
       : theme.palette.Admin.DeepNavy};
 
@@ -126,9 +126,9 @@ const SidebarMenuContainer = styled(Link)<{
   }
 `;
 
-const SidebarSubMenuContainer = styled.div<{ subMenuOpen: boolean }>`
+const SidebarSubMenuContainer = styled.div<{ submenuopen: boolean }>`
   max-height: 300px;
-  max-height: ${(props) => (props.subMenuOpen ? 'auto' : '0px')};
+  max-height: ${(props) => (props.submenuopen ? 'auto' : '0px')};
   overflow: hidden;
   transition: max-height ease-out 0.5s;
 `;
