@@ -1,15 +1,21 @@
 import { adminInstance } from '../axiosConfig';
 
-export interface signUpInterface {
-  name: string; //이름
-  email: string;
-  username: string; //id
-  password: string;
+export interface CommonInterface {
+  name: string;
   part: string;
+  email: string;
+}
+export interface signUpInterface extends CommonInterface {
+  username: string;
+  password: string;
 }
 export interface signInInterface {
   username: string;
   password: string;
+}
+export interface findIdInterface extends CommonInterface {}
+export interface findPwInterface extends CommonInterface {
+  username: string;
 }
 
 export const authApi = {
@@ -19,13 +25,20 @@ export const authApi = {
   },
   SIGN_IN: async (signInData: signInInterface) => {
     const response = await adminInstance.post(`/admin/signin`, signInData);
-    console.log(response.data.data);
     return response.data.data;
   },
   CHECK_ID: async (userid: string) => {
     const response = await adminInstance.post(`/admin/username`, {
       username: userid,
     });
+    return response.data;
+  },
+  FIND_ID: async (findIDdata: findIdInterface) => {
+    const response = await adminInstance.post(`/admin/id`, findIDdata);
+    return response.data;
+  },
+  FIND_PW: async (findPWdata: findPwInterface) => {
+    const response = await adminInstance.post(`/admin/password`, findPWdata);
     return response.data;
   },
 };
