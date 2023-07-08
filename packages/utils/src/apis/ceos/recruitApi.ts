@@ -18,7 +18,7 @@ export interface RecruitApplyValuesInterface {
 
   part: string;
   commonAnswers: { questionId: number; answer: string }[];
-  partAnswers: { questionId: number; answer: string }[];
+  partAnswers: { questionId: number; answer: string }[][]; // 기획, 디자인, 프론트엔드, 백엔드 순
 
   unableTimes: string[];
 }
