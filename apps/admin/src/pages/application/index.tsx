@@ -593,7 +593,7 @@ const Line = styled.div`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 24px;
   row-gap: 16px;
 `;
