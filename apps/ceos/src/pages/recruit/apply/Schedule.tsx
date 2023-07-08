@@ -7,10 +7,25 @@ const Schedule = ({
   setValue,
   handleSubmit,
   questionList,
-  onClickCheck,
-}: RecruitApplyFormInterface & {
-  onClickCheck: () => void;
-}) => {
+}: RecruitApplyFormInterface) => {
+  const isUnavailable = (timeIdx: number) => {
+    const isPossible = watch('unableTimes')[timeIdx].includes(1); // 하나라도 가능한 게 있는가?
+    return !isPossible;
+  };
+
+  const onClickNone = (timeIdx: number) => {
+    let newCheck = watch('unableTimes');
+
+    newCheck[timeIdx] = new Array(newCheck[timeIdx].length).fill(0);
+    setValue('unableTimes', newCheck);
+  };
+
+  const onClickCheck = (timeIdx: number, durIdx: number) => {
+    let newCheck = watch('unableTimes');
+    newCheck[timeIdx][durIdx] = Number(!newCheck[timeIdx][durIdx]);
+    setValue('unableTimes', newCheck);
+  };
+
   return (
     <Flex
       direction="column"
@@ -34,26 +49,26 @@ const Schedule = ({
         </Text>
       </div>
 
-      {questionList?.times.map((time, idx) => (
-        <Flex justify="start" webGap={20} key={`time_${idx}`}>
+      {questionList?.times.map((time, timeIdx) => (
+        <Flex justify="start" webGap={20} key={`time_${timeIdx}`}>
           <Text webTypo="Heading4">{time.date}</Text>
           <ColumnLine />
           <CheckBox
-            checked={false}
-            onClick={onClickCheck}
+            checked={isUnavailable(timeIdx)}
+            onClick={() => onClickNone(timeIdx)}
             value={['불가능한 시간', '없음']}
             type="column"
           />
           <ColumnLine />
-          {time.durations.map((duration, idx) => {
+          {time.durations.map((duration, durIdx) => {
             const [start, end] = duration.split('-');
             return (
               <CheckBox
-                checked={false}
-                onClick={onClickCheck}
+                checked={watch('unableTimes')[timeIdx][durIdx] === 1}
+                onClick={() => onClickCheck(timeIdx, durIdx)}
                 value={[start, `~ ${end}`]}
                 type="column"
-                key={`duration_${idx}`}
+                key={`duration_${durIdx}`}
               />
             );
           })}

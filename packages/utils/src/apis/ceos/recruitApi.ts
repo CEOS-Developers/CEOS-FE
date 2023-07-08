@@ -1,6 +1,6 @@
 import { ceosInstance } from '../axiosConfig';
 
-export interface RecruitApplyValuesInterface {
+interface RecruitApplyInterface {
   name: string;
   gender: string;
   birth: string;
@@ -18,8 +18,15 @@ export interface RecruitApplyValuesInterface {
 
   part: string;
   commonAnswers: { questionId: number; answer: string }[];
+  // partAnswers, unableTimes 는 지원서 내 data & POST 시 data 양식 다름
+}
+export interface RecruitApplyValuesInterface extends RecruitApplyInterface {
   partAnswers: { questionId: number; answer: string }[][]; // 기획, 디자인, 프론트엔드, 백엔드 순
+  unableTimes: number[][];
+}
 
+export interface PostApplyValuesInterface extends RecruitApplyInterface {
+  partAnswers: { questionId: number; answer: string }[];
   unableTimes: string[];
 }
 
@@ -29,8 +36,45 @@ export const recruitApi = {
 
     return response.data;
   },
-  POST_APPLY: async (body: RecruitApplyValuesInterface) => {
-    const response = await ceosInstance.post(`/applications`, body);
+  POST_APPLY: async (
+    times: { date: string; durations: string[] }[],
+    body: RecruitApplyValuesInterface,
+  ) => {
+    type PartMap = { [key: string]: number };
+    let partMap = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as PartMap;
+    // 파트 선택 따른 data 재구성
+    let newPartAnswer = body.partAnswers[partMap[body.part]] as {
+      questionId: number;
+      answer: string;
+    }[];
+    let newUnableTimes = [] as string[];
+
+    // 시간 0, 1 플래그 따른 data 재구성
+
+    const changeTime = (timeIdx: number, durIdx: number) => {
+      newUnableTimes.push(
+        `${times[timeIdx].date} ${times[timeIdx].durations[durIdx]}`,
+      );
+    };
+
+    body.unableTimes.forEach((time, timeIdx) => {
+      time.forEach((dur, durIdx) => {
+        if (body.unableTimes[timeIdx][durIdx]) {
+          changeTime(timeIdx, durIdx);
+        }
+      });
+    });
+
+    let newBody = {
+      ...body,
+      partAnswers: newPartAnswer,
+      unableTimes: newUnableTimes,
+      semestersLeftNumber: Number(body.semestersLeftNumber),
+    };
+
+    console.log(newBody);
+
+    const response = await ceosInstance.post(`/applications`, newBody);
 
     return response;
   },
