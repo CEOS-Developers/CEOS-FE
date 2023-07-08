@@ -23,6 +23,7 @@ import { Title } from '../../../components/Title';
 import Common from './Common';
 import Part from './Part';
 import Schedule from './Schedule';
+import { useEffect, useState } from 'react';
 
 export interface QuestionProps {
   questionId: number;
@@ -30,6 +31,10 @@ export interface QuestionProps {
   question: string;
   multiline: boolean;
   questionDetail: { explaination: string; color: string }[];
+}
+export interface AnswerInterface {
+  questionId: number;
+  answer: string;
 }
 export interface RecruitApplyResponse {
   commonQuestions: QuestionProps[];
@@ -47,6 +52,12 @@ export interface RecruitApplyFormInterface {
   handleSubmit: UseFormHandleSubmit<RecruitApplyValuesInterface>;
   questionList?: RecruitApplyResponse;
 }
+
+export type PartName =
+  | 'productQuestions'
+  | 'designQuestions'
+  | 'frontendQuestions'
+  | 'backendQuestions';
 
 const Apply = () => {
   const { register, watch, setValue, handleSubmit } = useForm({
@@ -78,15 +89,47 @@ const Apply = () => {
     ResponseInterface<RecruitApplyResponse>
   >(['ceos', 'recuit', 'apply'], () => recruitApi.GET_QUESTION());
 
-  const onSubmit = (data: { part: string }) => {
-    console.log(data.part); // 현재 선택된 "part" 값 출력
-  };
+  const [questionList, setQuestionList] = useState<
+    RecruitApplyResponse | undefined
+  >(undefined);
 
-  const questionList = data?.pages[0].data;
+  useEffect(() => {
+    setQuestionList(data?.pages[0].data);
 
-  console.log(questionList);
+    // 공통 질문 수만큼 초기화 값 세팅
+    const commons = data?.pages[0].data?.commonQuestions.map((common) => ({
+      questionId: common.questionId,
+      answer: '',
+    }));
+    if (commons) setValue('commonAnswers', commons);
+
+    // 각 파트 질문수만큼 초기화 값 세팅
+    const partNameList: PartName[] = [
+      'productQuestions',
+      'designQuestions',
+      'frontendQuestions',
+      'backendQuestions',
+    ];
+    setValue('partAnswers', []);
+    for (const PartName of partNameList) {
+      const productObj = data?.pages[0].data?.[PartName].map((product) => ({
+        questionId: product.questionId,
+        answer: '',
+      }));
+
+      productObj
+        ? setValue('partAnswers', [...watch('partAnswers'), productObj])
+        : setValue('partAnswers', [...watch('partAnswers'), []]);
+    }
+
+    console.log(watch('partAnswers'));
+  }, [data]);
 
   const onClickCheck = () => {};
+
+  const submitForm = () => {
+    console.log(watch());
+  };
 
   return (
     <Flex direction="column">
@@ -129,7 +172,9 @@ const Apply = () => {
             questionList={questionList}
             onClickCheck={onClickCheck}
           />
-          <Button variant="default">제출하기</Button>
+          <Button variant="default" onClick={submitForm}>
+            제출하기
+          </Button>
           <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
             © 2016-2023 Ceos ALL RIGHTS RESERVED.
           </Text>
