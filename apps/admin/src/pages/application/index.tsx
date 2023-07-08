@@ -8,17 +8,17 @@ import {
   DatePicker,
 } from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Dropdown } from '@admin/components/Dropdown';
 import { Plus } from '@admin/assets/Plus';
 import {
-  ApplicationInterface,
-  ApplicationListItemInterface,
+  AdminApplicationInterface,
+  AdminApplicationListItemInterface,
   ResponseInterface,
-  SelectedPartType,
-  SelectedQuestionsType,
-  PartQuestionsInterface,
+  AdminSelectedPartType,
+  AdminSelectedQuestionsType,
+  AdminPartQuestionsInterface,
   adminApplicationApi,
 } from '@ceos-fe/utils';
 import { AxiosError } from 'axios';
@@ -31,15 +31,15 @@ import {
 import { getFormattedDate } from '@admin/utils/date';
 
 interface ApplicationFormInterface {
-  commonQuestions: ApplicationListItemInterface[];
-  partQuestions: ApplicationListItemInterface[];
-  selectedPart: SelectedPartType;
+  commonQuestions: AdminApplicationListItemInterface[];
+  partQuestions: AdminApplicationListItemInterface[];
+  selectedPart: AdminSelectedPartType;
   times: {
     date: string;
     durations: string[];
   }[];
 }
-const PART_MAP: Record<SelectedPartType, SelectedQuestionsType> = {
+const PART_MAP: Record<AdminSelectedPartType, AdminSelectedQuestionsType> = {
   기획: 'productQuestions',
   디자인: 'designQuestions',
   프론트엔드: 'frontendQuestions',
@@ -48,7 +48,7 @@ const PART_MAP: Record<SelectedPartType, SelectedQuestionsType> = {
 
 export default function Application() {
   const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<ApplicationInterface>,
+    ResponseInterface<AdminApplicationInterface>,
     AxiosError
   >(['admin', 'application'], adminApplicationApi.GET_APPLICATION);
   const { mutate: putApplication } = useMutation(
@@ -56,7 +56,7 @@ export default function Application() {
   );
 
   const [allPartQuestions, setAllPartQuestions] = useState<
-    PartQuestionsInterface & { selectedPart: SelectedPartType }
+    AdminPartQuestionsInterface & { selectedPart: AdminSelectedPartType }
   >({
     productQuestions: [],
     designQuestions: [],
@@ -486,7 +486,7 @@ export default function Application() {
         </Flex>
 
         {getValues('times').map((_, dateIdx) => (
-          <>
+          <Fragment key={dateIdx}>
             <Flex direction="column" webGap={24} align="flex-start">
               <Text webTypo="Heading4">면접 날짜</Text>
               <Flex webGap={16} direction="column" align="flex-start">
@@ -553,7 +553,7 @@ export default function Application() {
             </Flex>
 
             {dateIdx === 0 && <Line />}
-          </>
+          </Fragment>
         ))}
 
         <Button variant="admin" onClick={handleSaveApplication}>

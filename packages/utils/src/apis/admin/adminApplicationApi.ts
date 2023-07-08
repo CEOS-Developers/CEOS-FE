@@ -1,12 +1,12 @@
 import { adminInstance } from '../axiosConfig';
 
-export type SelectedPartType = '기획' | '디자인' | '프론트엔드' | '백엔드';
-export type SelectedQuestionsType =
+export type AdminSelectedPartType = '기획' | '디자인' | '프론트엔드' | '백엔드';
+export type AdminSelectedQuestionsType =
   | 'productQuestions'
   | 'designQuestions'
   | 'frontendQuestions'
   | 'backendQuestions';
-export interface ApplicationListItemInterface {
+export interface AdminApplicationListItemInterface {
   questionIndex: number;
   question: string;
   multiline: boolean;
@@ -16,14 +16,14 @@ export interface ApplicationListItemInterface {
   }[];
   questionId: number;
 }
-export interface PartQuestionsInterface {
-  productQuestions: ApplicationListItemInterface[];
-  designQuestions: ApplicationListItemInterface[];
-  frontendQuestions: ApplicationListItemInterface[];
-  backendQuestions: ApplicationListItemInterface[];
+export interface AdminPartQuestionsInterface {
+  productQuestions: AdminApplicationListItemInterface[];
+  designQuestions: AdminApplicationListItemInterface[];
+  frontendQuestions: AdminApplicationListItemInterface[];
+  backendQuestions: AdminApplicationListItemInterface[];
 }
-export interface ApplicationInterface extends PartQuestionsInterface {
-  commonQuestions: ApplicationListItemInterface[];
+export interface AdminApplicationInterface extends AdminPartQuestionsInterface {
+  commonQuestions: AdminApplicationListItemInterface[];
   times: {
     date: string;
     durations: string[];
@@ -36,7 +36,7 @@ export const adminApplicationApi = {
 
     return response.data;
   },
-  PUT_APPLICATION: async (question: ApplicationInterface) => {
+  PUT_APPLICATION: async (question: AdminApplicationInterface) => {
     const response = await adminInstance.put(
       `/applications/question`,
       question,
