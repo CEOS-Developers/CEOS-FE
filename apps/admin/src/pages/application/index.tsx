@@ -34,14 +34,10 @@ interface ApplicationFormInterface {
   commonQuestions: ApplicationListItemInterface[];
   partQuestions: ApplicationListItemInterface[];
   selectedPart: SelectedPartType;
-  date1: {
+  times: {
     date: string;
-    time: string[];
-  };
-  date2: {
-    date: string;
-    time: string[];
-  };
+    durations: string[];
+  }[];
 }
 const PART_MAP: Record<SelectedPartType, SelectedQuestionsType> = {
   기획: 'productQuestions',
@@ -75,8 +71,7 @@ export default function Application() {
         commonQuestions: [],
         partQuestions: [],
         selectedPart: '기획',
-        date1: { date: '', time: [] },
-        date2: { date: '', time: [] },
+        times: [],
       },
     });
   const {
@@ -104,19 +99,7 @@ export default function Application() {
     const applicationData = data.data;
     replaceCommonQuestions(data.data.commonQuestions);
 
-    setValue(`date1`, {
-      date: '2023-07-01',
-      time: [
-        '13:00 - 13:30',
-        '14:00 - 14:30',
-        '15:00 - 15:30',
-        '16:00 - 16:30',
-      ],
-    });
-    setValue(`date2`, {
-      date: '2023-07-03',
-      time: ['13:00 - 13:30', '14:00 - 14:30', '15:00 - 15:30'],
-    });
+    setValue('times', applicationData.times);
 
     setAllPartQuestions({
       productQuestions: applicationData.productQuestions,
@@ -125,15 +108,17 @@ export default function Application() {
       backendQuestions: applicationData.backendQuestions,
       selectedPart: '기획',
     });
-    replacePartQuestions(applicationData[PART_MAP[watch('selectedPart')]]);
+    replacePartQuestions(applicationData[PART_MAP[getValues('selectedPart')]]);
   }, [isFetching, isSuccess]);
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
-      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
-      selectedPart: watch('selectedPart'),
+      [PART_MAP[allPartQuestions.selectedPart]]: [
+        ...getValues('partQuestions'),
+      ],
+      selectedPart: getValues('selectedPart'),
     });
-    replacePartQuestions(allPartQuestions[PART_MAP[watch('selectedPart')]]);
+    replacePartQuestions(allPartQuestions[PART_MAP[getValues('selectedPart')]]);
   }, [watch('selectedPart')]);
 
   const handleAppendCommonQuestion = () => {
@@ -157,17 +142,9 @@ export default function Application() {
     });
   };
 
-  const handleRemoveCommonQuestion = (idx: number) => {
-    removeCommonQuestions(idx);
-  };
-
-  const handleRemovePartQuestion = (idx: number) => {
-    removePartQuestions(idx);
-  };
-
   const handleAppendDetailCommon = (idx: number) => {
     replaceCommonQuestions(
-      watch('commonQuestions').map((question, questionIndex) => {
+      getValues('commonQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -182,7 +159,7 @@ export default function Application() {
 
   const handleAppendDetailPart = (idx: number) => {
     replacePartQuestions(
-      watch('partQuestions').map((question, questionIndex) => {
+      getValues('partQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -195,17 +172,16 @@ export default function Application() {
     );
   };
 
-  const handleAppendDate1 = () => {
-    setValue(`date1.time`, [...watch(`date1.time`), '']);
-  };
-
-  const handleAppendDate2 = () => {
-    setValue(`date2.time`, [...watch(`date2.time`), '']);
+  const handleAppendDate = (dateIdx: number) => {
+    setValue(`times.${dateIdx}.durations`, [
+      ...getValues(`times.${dateIdx}.durations`),
+      '',
+    ]);
   };
 
   const handleRemoveDetailCommon = (idx: number, detailIdx: number) => {
     replaceCommonQuestions(
-      watch('commonQuestions').map((question, questionIndex) => {
+      getValues('commonQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -219,7 +195,7 @@ export default function Application() {
 
   const handleRemoveDetailPart = (idx: number, detailIdx: number) => {
     replacePartQuestions(
-      watch('partQuestions').map((question, questionIndex) => {
+      getValues('partQuestions').map((question, questionIndex) => {
         if (questionIndex !== idx) return question;
         return {
           ...question,
@@ -231,48 +207,27 @@ export default function Application() {
     );
   };
 
-  const handleRemoveDate1 = (idx: number) => {
+  const handleRemoveDate = (dateIdx: number, idx: number) => {
     setValue(
-      `date1.time`,
-      watch(`date1.time`).filter((_, timeIdx) => timeIdx !== idx),
-    );
-  };
-
-  const handleRemoveDate2 = (idx: number) => {
-    setValue(
-      `date2.time`,
-      watch(`date2.time`).filter((_, timeIdx) => timeIdx !== idx),
+      `times.${dateIdx}.durations`,
+      getValues(`times.${dateIdx}.durations`).filter(
+        (_, timeIdx) => timeIdx !== idx,
+      ),
     );
   };
 
   const handleSaveApplication = () => {
-    setAllPartQuestions({
-      ...allPartQuestions,
-      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
-      selectedPart: watch('selectedPart'),
-    });
-    replacePartQuestions(allPartQuestions[PART_MAP[watch('selectedPart')]]);
-
-    console.log({
-      commonQuestions: watch('commonQuestions'),
+    putApplication({
+      commonQuestions: getValues('commonQuestions'),
       productQuestions: allPartQuestions.productQuestions,
       designQuestions: allPartQuestions.designQuestions,
       frontendQuestions: allPartQuestions.frontendQuestions,
       backendQuestions: allPartQuestions.backendQuestions,
-      [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
-      date1: watch('date1'),
-      date2: watch('date2'),
+      [PART_MAP[allPartQuestions.selectedPart]]: [
+        ...getValues('partQuestions'),
+      ],
+      times: getValues('times'),
     });
-    // putApplication({
-    //   commonQuestions: watch('commonQuestions'),
-    //   productQuestions: allPartQuestions.productQuestions,
-    //   designQuestions: allPartQuestions.designQuestions,
-    //   frontendQuestions: allPartQuestions.frontendQuestions,
-    //   backendQuestions: allPartQuestions.backendQuestions,
-    //   [PART_MAP[allPartQuestions.selectedPart]]: [...watch('partQuestions')],
-    //   date1: watch('date1'),
-    //   date2: watch('date2'),
-    // });
   };
 
   return (
@@ -330,7 +285,7 @@ export default function Application() {
                 </Button>
                 <Button
                   variant="admin_navy"
-                  onClick={() => handleRemoveCommonQuestion(idx)}
+                  onClick={() => removeCommonQuestions(idx)}
                 >
                   삭제
                 </Button>
@@ -339,9 +294,8 @@ export default function Application() {
                 <Flex
                   key={detailIdx}
                   justify="flex-start"
-                  width={1032}
                   webGap={8}
-                  margin="0 0 0 16px"
+                  margin="0 0 0 8px"
                 >
                   <TextField
                     {...register(
@@ -352,17 +306,10 @@ export default function Application() {
                         `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
                         e.target.value,
                       );
-                      if (e.target.value.startsWith('*')) {
-                        setValue(
-                          `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                          'blue',
-                        );
-                      } else {
-                        setValue(
-                          `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                          'gray',
-                        );
-                      }
+                      setValue(
+                        `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                        e.target.value.startsWith('*') ? 'blue' : 'gray',
+                      );
                     }}
                     isSubTextField
                     isAdmin
@@ -476,7 +423,7 @@ export default function Application() {
                 </Button>
                 <Button
                   variant="admin_navy"
-                  onClick={() => handleRemovePartQuestion(idx)}
+                  onClick={() => removePartQuestions(idx)}
                 >
                   삭제
                 </Button>
@@ -500,17 +447,10 @@ export default function Application() {
                         `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
                         e.target.value,
                       );
-                      if (e.target.value.startsWith('*')) {
-                        setValue(
-                          `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                          'blue',
-                        );
-                      } else {
-                        setValue(
-                          `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                          'gray',
-                        );
-                      }
+                      setValue(
+                        `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
+                        e.target.value.startsWith('*') ? 'blue' : 'gray',
+                      );
                     }}
                     fontColor={
                       watch(
@@ -545,115 +485,76 @@ export default function Application() {
           </Button>
         </Flex>
 
-        <Flex direction="column" webGap={24} align="flex-start">
-          <Text webTypo="Heading4">면접 날짜</Text>
+        {getValues('times').map((_, dateIdx) => (
+          <>
+            <Flex direction="column" webGap={24} align="flex-start">
+              <Text webTypo="Heading4">면접 날짜</Text>
+              <Flex webGap={16} direction="column" align="flex-start">
+                <Flex
+                  direction="column"
+                  align="flex-start"
+                  webGap={8}
+                  width={328}
+                >
+                  <Text webTypo="Label3">날짜 {dateIdx + 1}</Text>
+                  {getValues(`times.${dateIdx}.date`) && (
+                    <DatePicker
+                      isAdmin
+                      initialValue={
+                        new Date(getValues(`times.${dateIdx}.date`))
+                      }
+                      onChange={(date: string) =>
+                        setValue(
+                          `times.${dateIdx}.date`,
+                          getFormattedDate(new Date(date)),
+                        )
+                      }
+                    />
+                  )}
+                </Flex>
 
-          <Flex webGap={16} direction="column" align="flex-start">
-            <Flex direction="column" align="flex-start" webGap={8} width={328}>
-              <Text webTypo="Label3">날짜 1</Text>
-              {getValues('date1.date') && (
-                <DatePicker
-                  isAdmin
-                  initialValue={new Date(getValues(`date1.date`))}
-                  onChange={(date: string) =>
-                    setValue('date1.date', getFormattedDate(new Date(date)))
-                  }
-                />
-              )}
+                <GridContainer>
+                  {watch(`times.${dateIdx}.durations`).map((_, idx) => (
+                    <Flex
+                      key={idx}
+                      webGap={8}
+                      align="flex-end"
+                      justify="flex-start"
+                    >
+                      <TextField
+                        {...register(`times.${dateIdx}.durations.${idx}`)}
+                        label="시간"
+                        width={263}
+                        isAdmin
+                      />
+                      <Button
+                        variant="admin_navy"
+                        style={{ marginBottom: '4px' }}
+                        onClick={() => handleRemoveDate(dateIdx, idx)}
+                      >
+                        삭제
+                      </Button>
+                    </Flex>
+                  ))}
+                </GridContainer>
+
+                <Button
+                  variant="admin_stroke"
+                  webWidth={128}
+                  style={{ alignSelf: 'center' }}
+                  onClick={() => handleAppendDate(dateIdx)}
+                >
+                  <Flex webGap={4}>
+                    <Plus />
+                    시간 추가하기
+                  </Flex>
+                </Button>
+              </Flex>
             </Flex>
 
-            <GridContainer>
-              {watch('date1.time').map((_, idx) => (
-                <Flex
-                  key={idx}
-                  webGap={8}
-                  align="flex-end"
-                  justify="flex-start"
-                >
-                  <TextField
-                    {...register(`date1.time.${idx}`)}
-                    label="시간"
-                    width={263}
-                    isAdmin
-                  />
-                  <Button
-                    variant="admin_navy"
-                    style={{ marginBottom: '4px' }}
-                    onClick={() => handleRemoveDate1(idx)}
-                  >
-                    삭제
-                  </Button>
-                </Flex>
-              ))}
-            </GridContainer>
-
-            <Button
-              variant="admin_stroke"
-              webWidth={128}
-              style={{ alignSelf: 'center' }}
-              onClick={handleAppendDate1}
-            >
-              <Flex webGap={4}>
-                <Plus />
-                시간 추가하기
-              </Flex>
-            </Button>
-          </Flex>
-
-          <Line />
-
-          <Flex webGap={16} direction="column" align="flex-start">
-            <Flex direction="column" align="flex-start" webGap={8} width={328}>
-              <Text webTypo="Label3">날짜 2</Text>
-              {getValues('date2.date') && (
-                <DatePicker
-                  isAdmin
-                  initialValue={new Date(getValues(`date2.date`))}
-                  onChange={(date: string) =>
-                    setValue('date2.date', getFormattedDate(new Date(date)))
-                  }
-                />
-              )}
-            </Flex>
-
-            <GridContainer>
-              {watch('date2.time').map((_, idx) => (
-                <Flex
-                  key={idx}
-                  webGap={8}
-                  align="flex-end"
-                  justify="flex-start"
-                >
-                  <TextField
-                    {...register(`date2.time.${idx}`)}
-                    label="시간"
-                    width={263}
-                    isAdmin
-                  />
-                  <Button
-                    variant="admin_navy"
-                    style={{ marginBottom: '4px' }}
-                    onClick={() => handleRemoveDate2(idx)}
-                  >
-                    삭제
-                  </Button>
-                </Flex>
-              ))}
-            </GridContainer>
-
-            <Button
-              variant="admin_stroke"
-              webWidth={128}
-              style={{ alignSelf: 'center' }}
-              onClick={handleAppendDate2}
-            >
-              <Flex webGap={4}>
-                <Plus />
-                시간 추가하기
-              </Flex>
-            </Button>
-          </Flex>
-        </Flex>
+            {dateIdx === 0 && <Line />}
+          </>
+        ))}
 
         <Button variant="admin" onClick={handleSaveApplication}>
           저장하기

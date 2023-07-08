@@ -24,14 +24,10 @@ export interface PartQuestionsInterface {
 }
 export interface ApplicationInterface extends PartQuestionsInterface {
   commonQuestions: ApplicationListItemInterface[];
-  date1: {
+  times: {
     date: string;
-    time: string[];
-  };
-  date2: {
-    date: string;
-    time: string[];
-  };
+    durations: string[];
+  }[];
 }
 
 export const applicationApi = {
@@ -41,7 +37,10 @@ export const applicationApi = {
     return response.data;
   },
   PUT_APPLICATION: async (question: ApplicationInterface) => {
-    const response = await adminInstance.put(`/faq`, question);
+    const response = await adminInstance.put(
+      `/applications/question`,
+      question,
+    );
 
     return response.data;
   },
