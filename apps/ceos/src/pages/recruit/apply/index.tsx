@@ -71,7 +71,7 @@ const Apply = () => {
       university: '',
       major: '',
       semestersLeftNumber: null,
-      generation: 0,
+      generation: 18,
 
       otDate: '',
       demoDate: '',
@@ -122,13 +122,22 @@ const Apply = () => {
         : setValue('partAnswers', [...watch('partAnswers'), []]);
     }
 
-    console.log(watch('partAnswers'));
+    const times = data?.pages[0].data?.times;
+    let setTimes = [] as number[][];
+
+    times?.forEach((time) => {
+      let temp = [] as number[];
+      time.durations.forEach((dur) => {
+        temp.push(0);
+      });
+      setTimes.push(temp);
+    });
+
+    setValue('unableTimes', setTimes);
   }, [data]);
 
-  const onClickCheck = () => {};
-
   const submitForm = () => {
-    console.log(watch());
+    if (questionList) recruitApi.POST_APPLY(questionList?.times, watch());
   };
 
   return (
@@ -138,48 +147,45 @@ const Apply = () => {
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
       ></Title>
       <TopMargin />
-      <Desktop>
-        <Flex direction="column">
-          {/* 인적사항 질문 */}
-          <Information
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            handleSubmit={handleSubmit}
-          />
-          {/* 공통 질문 */}
-          <Common
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            handleSubmit={handleSubmit}
-            questionList={questionList}
-          />
-          {/* 파트별 질문 */}
-          <Part
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            handleSubmit={handleSubmit}
-            questionList={questionList}
-          />
-          {/* 면접 날짜 */}
-          <Schedule
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            handleSubmit={handleSubmit}
-            questionList={questionList}
-            onClickCheck={onClickCheck}
-          />
-          <Button variant="default" onClick={submitForm}>
-            제출하기
-          </Button>
-          <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-            © 2016-2023 Ceos ALL RIGHTS RESERVED.
-          </Text>
-        </Flex>
-      </Desktop>
+      <Flex direction="column">
+        {/* 인적사항 질문 */}
+        <Information
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+        />
+        {/* 공통 질문 */}
+        <Common
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          questionList={questionList}
+        />
+        {/* 파트별 질문 */}
+        <Part
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          questionList={questionList}
+        />
+        {/* 면접 날짜 */}
+        <Schedule
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          questionList={questionList}
+        />
+        <Button variant="default" onClick={submitForm}>
+          제출하기
+        </Button>
+        <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
+          © 2016-2023 Ceos ALL RIGHTS RESERVED.
+        </Text>
+      </Flex>
     </Flex>
   );
 };

@@ -10,9 +10,6 @@ const Part = ({
   questionList,
 }: RecruitApplyFormInterface) => {
   const selectedPart = watch('part');
-  const onSubmit = (data: { part: string }) => {
-    console.log(data.part); // 현재 선택된 "part" 값 출력
-  };
 
   return (
     <Section>
@@ -24,34 +21,32 @@ const Part = ({
           *지원하고자 하는 파트를 선택하여 답변을 작성해주세요.
         </Text>
       </Flex>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Flex webGap={20}>
-          <SelectButton
-            variant="ceos"
-            value="기획"
-            webWidth={205}
-            {...register('part')}
-          />
-          <SelectButton
-            variant="ceos"
-            value="디자인"
-            webWidth={205}
-            {...register('part')}
-          />
-          <SelectButton
-            variant="ceos"
-            value="프론트엔드"
-            webWidth={205}
-            {...register('part')}
-          />
-          <SelectButton
-            variant="ceos"
-            value="백엔드"
-            webWidth={205}
-            {...register('part')}
-          />
-        </Flex>
-      </form>
+      <Flex webGap={20}>
+        <SelectButton
+          variant="ceos"
+          value="기획"
+          webWidth={205}
+          {...register('part')}
+        />
+        <SelectButton
+          variant="ceos"
+          value="디자인"
+          webWidth={205}
+          {...register('part')}
+        />
+        <SelectButton
+          variant="ceos"
+          value="프론트엔드"
+          webWidth={205}
+          {...register('part')}
+        />
+        <SelectButton
+          variant="ceos"
+          value="백엔드"
+          webWidth={205}
+          {...register('part')}
+        />
+      </Flex>
 
       <Section>
         {selectedPart === '기획' ? (

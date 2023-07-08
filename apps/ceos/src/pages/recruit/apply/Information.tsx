@@ -10,19 +10,12 @@ const Information = ({
   setValue,
   handleSubmit,
 }: RecruitApplyFormInterface) => {
-  useEffect(() => {
-    console.log(watch('otDate'));
-  }, [watch('otDate'), watch('demoDate')]);
-
-  const onSubmit = (data: { part: string }) => {
-    console.log(data.part); // 현재 선택된 "part" 값 출력
-  };
-
   const changeDate = (date: string) => {
     let newDate = new Date(date);
-    return `${newDate.getFullYear()}/${
-      newDate.getMonth() + 1
-    }/${newDate.getDate()}`;
+    return `${newDate.getFullYear()}.${String(newDate.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}.${newDate.getDate()}`;
   };
 
   return (
@@ -71,34 +64,32 @@ const Information = ({
         <Flex direction="column" width={680} webGap={32}>
           <Flex direction="column" align="flex-start" width={680} webGap={8}>
             <Text webTypo="Label3">재학 중인 학교</Text>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Flex webGap={12}>
-                <SelectButton
-                  variant="ceos"
-                  value="연세대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="서강대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="이화여자대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="홍익대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-              </Flex>
-            </form>
+            <Flex webGap={12}>
+              <SelectButton
+                variant="ceos"
+                value="연세대학교"
+                webWidth={161}
+                {...register('university')}
+              />
+              <SelectButton
+                variant="ceos"
+                value="서강대학교"
+                webWidth={161}
+                {...register('university')}
+              />
+              <SelectButton
+                variant="ceos"
+                value="이화여자대학교"
+                webWidth={161}
+                {...register('university')}
+              />
+              <SelectButton
+                variant="ceos"
+                value="홍익대학교"
+                webWidth={161}
+                {...register('university')}
+              />
+            </Flex>
             <Text webTypo="Body3" paletteColor="Gray5">
               *학부생, 대학원생, 휴학생 모두 해당
             </Text>
