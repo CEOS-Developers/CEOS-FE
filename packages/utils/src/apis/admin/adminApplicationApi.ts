@@ -30,7 +30,7 @@ export interface ApplicationInterface extends PartQuestionsInterface {
   }[];
 }
 
-export const applicationApi = {
+export const adminApplicationApi = {
   GET_APPLICATION: async () => {
     const response = await adminInstance.get(`/applications/question`);
 

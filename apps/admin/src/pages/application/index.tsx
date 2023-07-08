@@ -19,7 +19,7 @@ import {
   SelectedPartType,
   SelectedQuestionsType,
   PartQuestionsInterface,
-  applicationApi,
+  adminApplicationApi,
 } from '@ceos-fe/utils';
 import { AxiosError } from 'axios';
 import {
@@ -50,9 +50,9 @@ export default function Application() {
   const { data, isFetching, isSuccess } = useQuery<
     ResponseInterface<ApplicationInterface>,
     AxiosError
-  >(['admin', 'application'], applicationApi.GET_APPLICATION);
+  >(['admin', 'application'], adminApplicationApi.GET_APPLICATION);
   const { mutate: putApplication } = useMutation(
-    applicationApi.PUT_APPLICATION,
+    adminApplicationApi.PUT_APPLICATION,
   );
 
   const [allPartQuestions, setAllPartQuestions] = useState<
@@ -570,7 +570,7 @@ export const getStaticProps = async () => {
 
     await queryClient.prefetchQuery(
       ['admin', 'application'],
-      applicationApi.GET_APPLICATION,
+      adminApplicationApi.GET_APPLICATION,
     );
 
     return {
