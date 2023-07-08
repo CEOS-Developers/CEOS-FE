@@ -18,6 +18,13 @@ const Information = ({
     console.log(data.part); // 현재 선택된 "part" 값 출력
   };
 
+  const changeDate = (date: string) => {
+    let newDate = new Date(date);
+    return `${newDate.getFullYear()}/${
+      newDate.getMonth() + 1
+    }/${newDate.getDate()}`;
+  };
+
   return (
     <Flex direction="column">
       <Flex direction="column" webGap={36}>
@@ -121,12 +128,16 @@ const Information = ({
         <Flex direction="row" justify="space-between" width={680} webGap={32}>
           <Flex direction="column" align="start" webGap={8}>
             <Text webTypo="Label3">CEOS OT 날짜는?</Text>
-            <DatePicker onChange={(date: string) => setValue('otDate', date)} />
+            <DatePicker
+              onChange={(date: string) => setValue('otDate', changeDate(date))}
+            />
           </Flex>
           <Flex direction="column" align="start" webGap={8}>
             <Text webTypo="Label3">CEOS 데모데이 날짜는?</Text>
             <DatePicker
-              onChange={(date: string) => setValue('demoDate', date)}
+              onChange={(date: string) =>
+                setValue('demoDate', changeDate(date))
+              }
             />
           </Flex>
         </Flex>
