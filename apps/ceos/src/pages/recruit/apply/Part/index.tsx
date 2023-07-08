@@ -57,25 +57,45 @@ const Part = ({
         {selectedPart === '기획' ? (
           <>
             {questionList && (
-              <SelectedPart questionList={questionList} partIdx={0} />
+              <SelectedPart
+                questionList={questionList}
+                partIdx={0}
+                watch={watch}
+                setValue={setValue}
+              />
             )}
           </>
         ) : selectedPart === '디자인' ? (
           <>
             {questionList && (
-              <SelectedPart questionList={questionList} partIdx={1} />
+              <SelectedPart
+                questionList={questionList}
+                partIdx={1}
+                watch={watch}
+                setValue={setValue}
+              />
             )}
           </>
         ) : selectedPart === '프론트엔드' ? (
           <>
             {questionList && (
-              <SelectedPart questionList={questionList} partIdx={2} />
+              <SelectedPart
+                questionList={questionList}
+                partIdx={2}
+                watch={watch}
+                setValue={setValue}
+              />
             )}
           </>
         ) : selectedPart === '백엔드' ? (
           <>
             {questionList && (
-              <SelectedPart questionList={questionList} partIdx={3} />
+              <SelectedPart
+                questionList={questionList}
+                partIdx={3}
+                watch={watch}
+                setValue={setValue}
+              />
             )}
           </>
         ) : (
