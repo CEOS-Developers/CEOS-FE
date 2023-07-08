@@ -5,41 +5,80 @@ import {
   Desktop,
   TextField,
   SelectButton,
+  theme,
+  CheckBox,
 } from '@ceos-fe/ui';
 import Information from './Information';
-import Schedule from './Schedule';
 import styled from '@emotion/styled';
 import {
   QueryClient,
   dehydrate,
   useInfiniteQuery,
 } from '@tanstack/react-query';
-import { recruitApi } from '../../../../../../packages/utils/src/apis/ceos/recruitApi';
-import { ResponseInterface } from '@ceos-fe/utils';
-import { useForm } from 'react-hook-form';
-import React from 'react';
+
+import {
+  recruitApi,
+  RecruitApplyValuesInterface,
+  ResponseInterface,
+} from '@ceos-fe/utils';
+import {
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+  useForm,
+} from 'react-hook-form';
 import { Title } from '../../../components/Title';
 
-interface QuestionProps {
+export interface QuestionProps {
   questionId: number;
   questionIndex: number;
   question: string;
   multiline: boolean;
   questionDetail: { explaination: string; color: string }[];
 }
+export interface RecruitApplyResponse {
+  commonQuestions: QuestionProps[];
+  productQuestions: QuestionProps[];
+  designQuestions: QuestionProps[];
+  frontendQuestions: QuestionProps[];
+  backendQuestions: QuestionProps[];
+  times: { date: string; durations: string[] }[];
+}
 
-interface RecruitApplyResponse {
-  data: {
-    commonQuestions: QuestionProps[];
-    productQuestions: QuestionProps[];
-    designQuestions: QuestionProps[];
-    frontendQuestions: QuestionProps[];
-    backendQuestions: QuestionProps[];
-    times: string[];
-  };
+export interface RecruitApplyFormInterface {
+  register: UseFormRegister<RecruitApplyValuesInterface>;
+  watch: UseFormWatch<RecruitApplyValuesInterface>;
+  setValue: UseFormSetValue<RecruitApplyValuesInterface>;
+  handleSubmit: UseFormHandleSubmit<RecruitApplyValuesInterface>;
 }
 
 const Apply = () => {
+  const { register, watch, setValue, handleSubmit } = useForm({
+    defaultValues: {
+      name: '',
+      gender: '',
+      birth: '',
+      email: '',
+      phoneNumber: '',
+
+      university: '',
+      major: '',
+      semestersLeftNumber: null,
+      generation: 0,
+
+      otDate: '',
+      demoDate: '',
+      otherActivities: '',
+
+      part: '기획',
+      commonAnswers: [],
+      partAnswers: [],
+
+      unableTimes: [],
+    } as RecruitApplyValuesInterface,
+  }) as RecruitApplyFormInterface;
+
   const { data, isLoading, isSuccess } = useInfiniteQuery<
     ResponseInterface<RecruitApplyResponse>
   >(['ceos', 'recuit', 'apply'], () => recruitApi.GET_QUESTION());
@@ -48,16 +87,13 @@ const Apply = () => {
     console.log(data.part); // 현재 선택된 "part" 값 출력
   };
 
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: {
-      part: '',
-    },
-  });
   const selectedPart = watch('part');
 
-  const questionList = data?.pages[0].data.data;
+  const questionList = data?.pages[0].data;
 
   console.log(questionList);
+
+  const onClickCheck = () => {};
 
   return (
     <Flex direction="column">
@@ -69,7 +105,12 @@ const Apply = () => {
       <Desktop>
         <Flex direction="column">
           {/* 인적사항 질문 */}
-          <Information />
+          <Information
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            handleSubmit={handleSubmit}
+          />
           {/* 공통 질문 */}
           <Section>
             <Text webTypo="Heading3" paletteColor="Blue">
@@ -82,16 +123,24 @@ const Apply = () => {
                 webGap={12}
                 key={ques.questionId}
               >
-                <Text webTypo="Label3">{ques.question}</Text>
+                <Text webTypo="Label3">{`${idx + 1}. ${ques.question}`}</Text>
                 <TextField width={856} multiline={ques.multiline} />
                 <Flex direction="column" align="start">
                   {ques.questionDetail.map((detail, idx) =>
                     detail.color === 'gray' ? (
-                      <Text webTypo="Body3" paletteColor="Gray5">
+                      <Text
+                        webTypo="Body3"
+                        paletteColor="Gray5"
+                        key={`detail_${idx}`}
+                      >
                         {detail.explaination}
                       </Text>
                     ) : (
-                      <Text webTypo="Body3" paletteColor="Blue">
+                      <Text
+                        webTypo="Body3"
+                        paletteColor="Blue"
+                        key={`detail_${idx}`}
+                      >
                         {detail.explaination}
                       </Text>
                     ),
@@ -99,7 +148,7 @@ const Apply = () => {
                 </Flex>
               </Flex>
             ))}
-            <Line />
+            <RowLine />
           </Section>
           {/* 파트별 질문 */}
           <Section>
@@ -150,16 +199,26 @@ const Apply = () => {
                       webGap={12}
                       key={ques.questionId}
                     >
-                      <Text webTypo="Label3">{ques.question}</Text>
+                      <Text webTypo="Label3">{`${idx + 1}. ${
+                        ques.question
+                      }`}</Text>
                       <TextField width={856} multiline={ques.multiline} />
                       <Flex direction="column" align="start">
                         {ques.questionDetail.map((detail, idx) =>
                           detail.color === 'gray' ? (
-                            <Text webTypo="Body3" paletteColor="Gray5">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Gray5"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ) : (
-                            <Text webTypo="Body3" paletteColor="Blue">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Blue"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ),
@@ -177,16 +236,26 @@ const Apply = () => {
                       webGap={12}
                       key={ques.questionId}
                     >
-                      <Text webTypo="Label3">{ques.question}</Text>
+                      <Text webTypo="Label3">{`${idx + 1}. ${
+                        ques.question
+                      }`}</Text>
                       <TextField width={856} multiline={ques.multiline} />
                       <Flex direction="column" align="start">
                         {ques.questionDetail.map((detail, idx) =>
                           detail.color === 'gray' ? (
-                            <Text webTypo="Body3" paletteColor="Gray5">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Gray5"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ) : (
-                            <Text webTypo="Body3" paletteColor="Blue">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Blue"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ),
@@ -204,16 +273,26 @@ const Apply = () => {
                       webGap={12}
                       key={ques.questionId}
                     >
-                      <Text webTypo="Label3">{ques.question}</Text>
+                      <Text webTypo="Label3">{`${idx + 1}. ${
+                        ques.question
+                      }`}</Text>
                       <TextField width={856} multiline={ques.multiline} />
                       <Flex direction="column" align="start">
                         {ques.questionDetail.map((detail, idx) =>
                           detail.color === 'gray' ? (
-                            <Text webTypo="Body3" paletteColor="Gray5">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Gray5"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ) : (
-                            <Text webTypo="Body3" paletteColor="Blue">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Blue"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ),
@@ -231,16 +310,26 @@ const Apply = () => {
                       webGap={12}
                       key={ques.questionId}
                     >
-                      <Text webTypo="Label3">{ques.question}</Text>
+                      <Text webTypo="Label3">{`${idx + 1}. ${
+                        ques.question
+                      }`}</Text>
                       <TextField width={856} multiline={ques.multiline} />
                       <Flex direction="column" align="start">
                         {ques.questionDetail.map((detail, idx) =>
                           detail.color === 'gray' ? (
-                            <Text webTypo="Body3" paletteColor="Gray5">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Gray5"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ) : (
-                            <Text webTypo="Body3" paletteColor="Blue">
+                            <Text
+                              webTypo="Body3"
+                              paletteColor="Blue"
+                              key={`detail_${idx}`}
+                            >
                               {detail.explaination}
                             </Text>
                           ),
@@ -253,9 +342,56 @@ const Apply = () => {
                 <></>
               )}
             </Section>
-            <Line />
+            <RowLine />
           </Section>
-          <Schedule />
+          <Flex
+            direction="column"
+            align="start"
+            width={856}
+            webGap={36}
+            margin={'24px 0 100px 0'}
+          >
+            <div>
+              <Text webTypo="Heading3" paletteColor="Blue">
+                면접 날짜
+              </Text>
+
+              <Text webTypo="Body3" paletteColor="Gray5" margin="8px 0 0 0">
+                *불가능한 날짜와 시간에 체크해주세요. 가능한 날짜가 아니라,
+                불가능한 날짜입니다.
+              </Text>
+              <Text webTypo="Body3" paletteColor="Gray5">
+                *모든 면접은 화상(ZOOM)으로 이루어지며, 면접 시작 10분 전에
+                대기실 참가 안내를 드리니 이를 고려하여 선택 부탁드립니다.
+              </Text>
+            </div>
+
+            {questionList?.times.map((time, idx) => (
+              <Flex justify="start" webGap={20} key={`time_${idx}`}>
+                <Text webTypo="Heading4">{time.date}</Text>
+                <ColumnLine />
+                <CheckBox
+                  checked={false}
+                  onClick={onClickCheck}
+                  value={['불가능한 시간', '없음']}
+                  type="column"
+                />
+                <ColumnLine />
+                {time.durations.map((duration, idx) => {
+                  const [start, end] = duration.split('-');
+                  return (
+                    <CheckBox
+                      checked={false}
+                      onClick={onClickCheck}
+                      value={[start, `~ ${end}`]}
+                      type="column"
+                      key={`duration_${idx}`}
+                    />
+                  );
+                })}
+              </Flex>
+            ))}
+          </Flex>
           <Button variant="default">제출하기</Button>
           <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
             © 2016-2023 Ceos ALL RIGHTS RESERVED.
@@ -271,7 +407,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recuit', 'apply'], () => {
-      recruitApi.GET_QUESTION();
+      recruitApi.GET_QUESTION;
     });
 
     return {
@@ -293,11 +429,17 @@ const TopMargin = styled.div`
   }
 `;
 
-const Line = styled.div`
+const RowLine = styled.div`
   width: 856px;
   height: 2px;
   background: #e9ebef;
   margin: 24px 0;
+`;
+
+const ColumnLine = styled.div`
+  width: 2px;
+  height: 70px;
+  background-color: ${theme.palette.Gray2};
 `;
 
 const Section = styled(Flex)`

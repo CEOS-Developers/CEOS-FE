@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
-import { Text } from '../common';
+import { Flex, Text } from '../common';
 import { CheckIcon } from '../../assets/CheckIcon';
 
 export const enum DisplayPriorities {
@@ -11,7 +11,7 @@ export const enum DisplayPriorities {
 interface CheckBoxProps {
   checked: boolean; //check 되어있는지 여부
   onClick: () => void; // useState 이용하여 setChecked(prev=>!prev)
-  value: string; // text
+  value: string[]; // text
   type: string; //'column' or 'row'
 }
 
@@ -25,13 +25,17 @@ export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
       <StyledCheckBox onClick={onClick}>
         <CheckIcon display={display} />
       </StyledCheckBox>
-      <Text
-        paletteColor={checked ? 'Blue' : 'Gray2'}
-        webTypo="Label3"
-        mobileTypo="Label2"
-      >
-        {value}
-      </Text>
+      <Flex direction="column" align="center">
+        {value.map((text) => (
+          <Text
+            paletteColor={checked ? 'Blue' : 'Gray2'}
+            webTypo="Label3"
+            mobileTypo="Label2"
+          >
+            {text}
+          </Text>
+        ))}
+      </Flex>
     </StyledCheckBoxContainer>
   );
 };
