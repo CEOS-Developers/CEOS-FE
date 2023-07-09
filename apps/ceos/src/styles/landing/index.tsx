@@ -62,3 +62,11 @@ export const BtnCss = css`
   gap: 24px;
   margin: auto;
 `;
+
+export const ListCss = css`
+  width: 1032px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+`;

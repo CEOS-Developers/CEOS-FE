@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { managementApi, ResponseInterface } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { ListCss } from '@ceos/styles/landing';
 
 export interface ManagerInterface {
   id: number;
@@ -53,13 +54,15 @@ const Management = () => {
       pageNum: 0,
       limit: 1000,
     });
+
     return manageData;
   });
 
-  const managers = data?.managers.filter((m: ManagerInterface) => {
+  const managers = data?.managers?.filter((m: ManagerInterface) => {
     return m.role === '운영진';
   });
-  const mentors = data?.managers.filter((m: ManagerInterface) => {
+
+  const mentors = data?.managers?.filter((m: ManagerInterface) => {
     return m.role === '멘토';
   });
 
@@ -75,29 +78,13 @@ const Management = () => {
         title="MANAGEMENT"
         explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
       />
-      <div
-        css={css`
-          width: 1032px;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 24px;
-          align-items: flex-start;
-        `}
-      >
+      <div css={ListCss}>
         {managers?.map((manager: ManagerInterface) => (
           <ManagementCard key={manager.id} managementCard={manager} />
         ))}
       </div>
       <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-      <div
-        css={css`
-          width: 1032px;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 24px;
-          align-items: flex-start;
-        `}
-      >
+      <div css={ListCss}>
         {mentors?.map((manager: ManagerInterface) => (
           <MentorCard key={manager.id} mentorCard={manager} />
         ))}
