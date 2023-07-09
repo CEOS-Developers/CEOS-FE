@@ -1,4 +1,4 @@
-import { Flex, Text, TextField } from 'packages/ui';
+import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
 import { PartName, QuestionProps, RecruitApplyResponse } from '..';
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { RecruitApplyValuesInterface } from 'packages/utils';
@@ -34,27 +34,46 @@ const SelectedPart = ({
           direction="column"
           align="start"
           webGap={12}
+          mobileGap={14}
           key={ques.questionId}
         >
-          <Text webTypo="Label3">{`${idx + 1}. ${ques.question}`}</Text>
-          <TextField
-            width={856}
-            multiline={ques.multiline}
-            value={watch('partAnswers')[partIdx][idx].answer}
-            onChange={(e) => setPartValue(idx, e.target.value)}
-          />
+          <Text webTypo="Label3" mobileTypo="Heading4">{`${idx + 1}. ${
+            ques.question
+          }`}</Text>
+          <Desktop>
+            <TextField
+              width={856}
+              multiline={ques.multiline}
+              value={watch('partAnswers')[partIdx][idx].answer}
+              onChange={(e) => setPartValue(idx, e.target.value)}
+            />
+          </Desktop>
+          <Mobile>
+            <TextField
+              multiline={true}
+              value={watch('partAnswers')[partIdx][idx].answer}
+              onChange={(e) => setPartValue(idx, e.target.value)}
+            />
+          </Mobile>
+
           <Flex direction="column" align="start">
             {ques.questionDetail.map((detail, idx) =>
               detail.color === 'gray' ? (
                 <Text
                   webTypo="Body3"
+                  mobileTypo="Body2"
                   paletteColor="Gray5"
                   key={`detail_${idx}`}
                 >
                   {detail.explaination}
                 </Text>
               ) : (
-                <Text webTypo="Body3" paletteColor="Blue" key={`detail_${idx}`}>
+                <Text
+                  webTypo="Body3"
+                  mobileTypo="Body2"
+                  paletteColor="Blue"
+                  key={`detail_${idx}`}
+                >
                   {detail.explaination}
                 </Text>
               ),
