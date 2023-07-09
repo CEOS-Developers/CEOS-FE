@@ -5,7 +5,7 @@ import { ImageUploader } from '@admin/components/ImageUploader';
 import { useEffect } from 'react';
 
 export default function Home() {
-  const { setValue, watch, getValues, register } = useForm();
+  const { setValue, watch } = useForm();
 
   return (
     <>

@@ -10,7 +10,7 @@ export const SidebarMenuList: sidebarInterface[] = [
   {
     icon: <SidebarApply />,
     menu: '지원현황',
-    path: '/',
+    path: '/applyStatement',
     submenuOpen: false,
     submenu: [],
   },
