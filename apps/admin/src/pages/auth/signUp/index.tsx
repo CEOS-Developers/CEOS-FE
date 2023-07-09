@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 필요
-import { authApi, signUpInterface } from '@ceos-fe/utils';
+import {
+  authApi,
+  // authDataFormInterface,
+  signUpInterface,
+} from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { StyledForm } from '@admin/styles/common';
@@ -12,6 +16,14 @@ export default function SignUp() {
   const router = useRouter();
   const [checkId, setCheckId] = useState<boolean>(false);
   const { setValue, watch, register, handleSubmit } = useForm();
+  // const { handleSubmit } = useForm<authDataFormInterface>();
+  // defaultValues: {
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   partDropdown: { label: '', value: '' },
+  //   username: '',
+  // },
 
   const { mutate: postSignUpMutation } = useMutation(authApi.SIGN_UP, {
     onSuccess: () => {
@@ -45,6 +57,7 @@ export default function SignUp() {
       password: data.password,
       part: data.partDropdown?.label,
     };
+
     if (
       checkId &&
       dataForm.name != '' &&

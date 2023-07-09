@@ -25,9 +25,8 @@ export default function findID() {
         status: number;
         data: { username: React.SetStateAction<string> };
       }) => (res.status == 201 ? setId(res.data.username) : setId('')),
-      onError: (err: { response: { data: { reason: string } } }) => {
-        alert(err.response.data.reason);
-      },
+      onError: (err: { response: { data: { reason: string } } }) =>
+        alert(err.response.data.reason),
     });
   };
 

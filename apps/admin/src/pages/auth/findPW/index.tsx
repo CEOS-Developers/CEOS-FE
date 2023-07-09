@@ -25,9 +25,8 @@ export default function findPW() {
       onSuccess: (res: { status: number }) => {
         res.status == 201 ? setSentEmail(true) : setSentEmail(false);
       },
-      onError: (err: { response: { data: { reason: string } } }) => {
-        alert(err.response.data.reason);
-      },
+      onError: (err: { response: { data: { reason: string } } }) =>
+        alert(err.response.data.reason),
     });
   };
 

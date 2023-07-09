@@ -17,6 +17,13 @@ export interface findIdInterface extends CommonInterface {}
 export interface findPwInterface extends CommonInterface {
   username: string;
 }
+// export interface authDataFormInterface {
+//   name: string;
+//   email: string;
+//   username: string;
+//   password: string;
+//   partDropdown: { label: string; value: string };
+// }
 
 export const authApi = {
   SIGN_UP: async (signUpData: signUpInterface) => {
