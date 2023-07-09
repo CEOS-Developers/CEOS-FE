@@ -17,12 +17,15 @@ export default function findPW() {
       name: data.name,
       email: data.email,
       username: data.username,
-      part: data.partDropdown.label,
+      part: data.partDropdown?.label,
     };
 
     findPwMutation(findPwdata, {
-      onSuccess: (res) => {
+      onSuccess: (res: { status: number }) => {
         res.status == 201 ? setSentEmail(true) : setSentEmail(false);
+      },
+      onError: (err: { response: { data: { reason: string } } }) => {
+        alert(err.response.data.reason);
       },
     });
   };

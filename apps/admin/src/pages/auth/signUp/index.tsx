@@ -17,6 +17,12 @@ export default function SignUp() {
       alert('회원가입 완료');
       router.push('/auth');
     },
+    //회원가입시 파트를 선택하지않아 오류 발생
+    onError: (err: { response: { status: number } }) => {
+      if (err.response.status == 500) {
+        alert('파트를 선택해주세요');
+      }
+    },
   });
   const { mutate: postUserIDMutation } = useMutation(authApi.CHECK_ID, {
     onSuccess: () => {
@@ -36,12 +42,21 @@ export default function SignUp() {
       email: data.email,
       username: data.username,
       password: data.password,
-      part: data.partDropdown.label,
+      part: data.partDropdown?.label,
     };
-    if (checkId) {
+    if (
+      checkId &&
+      dataForm.name != '' &&
+      dataForm.email != '' &&
+      dataForm.part != '' &&
+      dataForm.password != '' &&
+      dataForm.username != null
+    ) {
       postSignUpMutation(dataForm);
+    } else if (!checkId) {
+      alert('아이디 중복 여부를 다시 확인해주세요'); //텍스트 수정 필요
     } else {
-      alert('아이디를 다시 확인해주세요'); //텍스트 수정 필요
+      alert('회원정보를 다시 확인해주세요');
     }
   };
   // 아이디 중복 확인

@@ -16,12 +16,17 @@ export default function findID() {
     const findIDdata: findIdInterface = {
       name: data.name,
       email: data.email,
-      part: data.partDropdown.label,
+      part: data.partDropdown?.label,
     };
 
     findIdMutation(findIDdata, {
-      onSuccess: (res) =>
-        res.status == 201 ? setId(res.data.username) : setId(''),
+      onSuccess: (res: {
+        status: number;
+        data: { username: React.SetStateAction<string> };
+      }) => (res.status == 201 ? setId(res.data.username) : setId('')),
+      onError: (err: { response: { data: { reason: string } } }) => {
+        alert(err.response.data.reason);
+      },
     });
   };
 
@@ -30,7 +35,6 @@ export default function findID() {
       <Text webTypo="Heading2">ADMIN 아이디 찾기</Text>
       {id === '' ? (
         <>
-          {' '}
           <Dropdown
             options={[
               {
