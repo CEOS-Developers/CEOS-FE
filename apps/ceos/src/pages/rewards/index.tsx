@@ -16,7 +16,7 @@ export default function Rewards() {
     return awardData;
   });
 
-  const awardList = data?.awardData?.data.generationAwards;
+  const awardList = data?.generationAwards;
 
   return (
     <Flex
