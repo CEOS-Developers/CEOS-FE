@@ -8,9 +8,9 @@ export const projectApi = {
     pageNum: number;
     limit: number;
   }) => {
-    const response = await ceosInstance.get(
-      `/projects/?pageNum=${pageNum}&limit=${limit}`,
-    );
+    const response = await ceosInstance.get(`/projects`, {
+      params: { pageNum, limit },
+    });
 
     return response.data;
   },

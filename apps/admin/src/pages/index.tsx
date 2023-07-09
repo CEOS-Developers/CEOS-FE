@@ -1,9 +1,11 @@
 import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
 import { theme } from '@ceos-fe/ui';
+import { ImageUploader } from '@admin/components/ImageUploader';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const { setValue, watch } = useForm();
+  const { setValue, watch, getValues, register } = useForm();
 
   return (
     <>
@@ -51,6 +53,11 @@ export default function Home() {
         value={watch('partDropdown')}
         placeholder="파트 선택"
         width={152}
+      />
+      <ImageUploader
+        value={watch('activity')}
+        setValue={(url: string | null) => setValue('activity', url)}
+        imageApiType="ACTIVITY"
       />
     </>
   );

@@ -10,9 +10,10 @@ import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
+import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
-import { GlassShortcutwithTitle } from '@ceos/components/Shortcut';
 import Link from 'next/link';
+import { TopMargin } from '../FAQ/index';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -38,6 +39,17 @@ const Activity = () => {
 
   const acitivityList = data?.activityData.data.activities;
 
+  const leftBtn = {
+    title: '더 궁금한 것이 있다면',
+    content: ['자주 묻는 질문', '보러가기'],
+    link: '/FAQ',
+  };
+  const rightBtn = {
+    title: 'CEOS에 참여하고 싶다면',
+    content: ['CEOS 18기', '지원하기'],
+    link: '/recruit',
+  };
+
   return (
     <>
       <Desktop>
@@ -50,11 +62,12 @@ const Activity = () => {
                 '다양한 활동을 진행하고 있습니다.',
               ]}
             />
+            <TopMargin />
             {acitivityList?.map((_, idx) => {
               return idx % 3 === 0 ? (
                 <Flex
                   key={`row_${idx}`}
-                  justify="start"
+                  justify="flex-start"
                   width={1032}
                   margin="0 0 32px 0"
                   webGap={24}
@@ -71,28 +84,7 @@ const Activity = () => {
               );
             })}
           </Flex>
-
-          <RelativeContainer height={500}>
-            <Background src="/shortcuts.svg" />
-            <GlassFlex direction="column" webGap={80}>
-              <Flex webGap={24}>
-                <CustomLink href="/FAQ">
-                  <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
-                    자주 묻는 질문 <br /> 보러가기
-                  </GlassShortcutwithTitle>
-                </CustomLink>
-
-                <CustomLink href="/recruit">
-                  <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
-                    CEOS 18기 <br /> 지원하기
-                  </GlassShortcutwithTitle>
-                </CustomLink>
-              </Flex>
-              <Text paletteColor="White" webTypo="Label3">
-                © 2016-2023 CEOS ALL RIGHTS RESERVED.
-              </Text>
-            </GlassFlex>
-          </RelativeContainer>
+          <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Desktop>
 
@@ -105,6 +97,7 @@ const Activity = () => {
               '다양한 활동을 진행하고 있습니다.',
             ]}
           />
+          <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
             {acitivityList?.map((activity, idx) => {
               return (
@@ -112,27 +105,7 @@ const Activity = () => {
               );
             })}
           </Flex>
-          <RelativeContainer align="start" height={500}>
-            <Background src="/mobileShortcuts.svg" />
-            <GlassFlex direction="column" mobileGap={63}>
-              <Flex mobileGap={17} direction="column">
-                <CustomLink href="/FAQ">
-                  <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
-                    자주 묻는 질문 <br /> 보러가기
-                  </GlassShortcutwithTitle>
-                </CustomLink>
-
-                <CustomLink href="/recruit">
-                  <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
-                    CEOS 18기 <br /> 지원하기
-                  </GlassShortcutwithTitle>
-                </CustomLink>
-              </Flex>
-              <Text paletteColor="White" webTypo="Label3">
-                © 2016-2023 CEOS ALL RIGHTS RESERVED.
-              </Text>
-            </GlassFlex>
-          </RelativeContainer>
+          <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Mobile>
     </>

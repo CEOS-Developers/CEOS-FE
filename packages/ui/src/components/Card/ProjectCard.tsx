@@ -2,22 +2,37 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
+import Image from 'next/image';
 
+export interface ProjectImageProps {
+  category: string;
+  id: number;
+  created_at: string;
+  updated_at: string;
+  imageUrl: string;
+}
 export interface ProjectCardProps {
   id: number;
-  img: string;
   name: string;
-  explain: string;
-  generation: string;
+  description: string;
+  generation: number;
+  previewImage: ProjectImageProps;
 }
 
 export const ProjectCard = (props: {
   projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
-  const { img, name, explain, generation } = props.projectCard;
+  const { id, name, description, generation, previewImage } = props.projectCard;
   return (
     <Wrapper>
-      <ProjectImg src={img} className="ceos" />
+      {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
+      <ProjectImg
+        src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
+        className="ceos"
+        width={328}
+        height={184}
+      />
+
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -28,7 +43,7 @@ export const ProjectCard = (props: {
           </Text>
         </Row>
         <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
-          {explain}
+          {description}
         </Text>
       </ExplainBox>
     </Wrapper>
@@ -40,7 +55,7 @@ export const AdminProjectCard = (props: {
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {
-  const { id, img, name, explain, generation } = props.projectCard;
+  const { id, name, description, generation, previewImage } = props.projectCard;
   const [onClickRemove, onClickUpdate] = [
     props.onClickRemove,
     props.onClickUpdate,
@@ -48,7 +63,7 @@ export const AdminProjectCard = (props: {
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={img} />
+        <ProjectImg src={previewImage.imageUrl} width={328} height={184} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -59,7 +74,7 @@ export const AdminProjectCard = (props: {
             </Text>
           </Row>
           <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
-            {explain}
+            {description}
           </Text>
         </ExplainBox>
       </AbsoluteFlex>
@@ -93,9 +108,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProjectImg = styled.img`
-  width: 328px;
-  height: 184px;
+const ProjectImg = styled(Image)`
+  // width: 328px;
+  // height: 184px;
   border-radius: 16px;
 
   @media (max-width: 1023px) {
