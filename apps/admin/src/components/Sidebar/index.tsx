@@ -84,6 +84,7 @@ const Container = styled.div`
   width: 16.5%;
   background: ${theme.palette.Admin.DeepNavy};
   position: fixed;
+  min-width: 200px;
 
   // 이미지 및 텍스트 드래그 방지
   -webkit-user-select: none;

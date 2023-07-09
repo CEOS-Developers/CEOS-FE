@@ -12,6 +12,7 @@ export const Text = styled.div<{
   mobileTypo?: KeyOfMobileTypo;
   paletteColor?: KeyOfPalette | KeyOfAdminPalette;
   colorCode?: string;
+  margin?: string;
 }>`
   ${({ webTypo }) => (webTypo ? theme.typo.Web[webTypo] : '')};
   color: ${({ paletteColor, colorCode }) => {
@@ -25,6 +26,7 @@ export const Text = styled.div<{
   }};
   display: flex;
   align-items: center;
+  margin: ${({ margin }) => (margin ? margin : '0')};
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {

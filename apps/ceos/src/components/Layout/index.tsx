@@ -15,6 +15,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
 const CustomFlex = styled(Flex)`
   @media (max-width: 1023px) {
-    width: 346px;
+    padding: 14px;
   }
 `;

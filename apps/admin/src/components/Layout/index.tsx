@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import Sidebar from '../Sidebar';
-import { Flex } from '@ceos-fe/ui';
 import { useRouter } from 'next/router';
+import React from 'react';
+import Sidebar from '../Sidebar/index';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Container = styled.div<{ path?: string }>`
 `;
 
 const ChildrenContainer = styled.div<{ path?: string }>`
-  margin-left: ${(props) => (props.path?.includes('/auth') ? '0px' : '16.5%')};
+  margin-left: max(16.5%, 200px);
   display: flex;
   flex-direction: column;
   align-items: center;

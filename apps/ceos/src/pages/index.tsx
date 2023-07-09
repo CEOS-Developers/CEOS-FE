@@ -1,5 +1,4 @@
 import { DatePicker, Flex, TextField } from '@ceos-fe/ui';
-import { Instagram } from '../../../../packages/ui/src/assets/FloatingButton/Instagram';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
@@ -10,10 +9,6 @@ export default function Home() {
       adminDate: '',
     },
   });
-
-  useEffect(() => {
-    console.log(watch('date'));
-  }, [watch('date')]);
 
   return (
     <Flex direction="row">

@@ -1,16 +1,17 @@
 import { ceosInstance } from '../axiosConfig';
 
-export const projectApi = {
-  GET_PROJECT: async ({
+export const activityApi = {
+  GET_ACTIVITY: async ({
     pageNum,
     limit,
   }: {
     pageNum: number;
     limit: number;
   }) => {
-    const response = await ceosInstance.get(
-      `/projects/?pageNum=${pageNum}&limit=${limit}`,
-    );
+const response = await ceosInstance.get(
+      `/activities`,{
+        params: { pageNum, limit },
+      });
 
     return response.data;
   },
