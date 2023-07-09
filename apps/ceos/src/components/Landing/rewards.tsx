@@ -3,28 +3,27 @@ import { HomeFlex, CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
 import { awardApi, ResponseInterface } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
+import { CustomLink } from '../Header';
 
-interface AwardInterface {
+export interface AwardInterface {
   generation: number;
   content: string;
   startDate: string;
 }
 
-interface ProjectInterface {
+export interface ProjectInterface {
   name: string;
   description: string;
 }
 
-interface AwardCardInterface {
+export interface AwardCardInterface {
   generation: number;
   awards: AwardInterface[];
   projects: ProjectInterface[];
 }
 
-interface AwardResponse {
-  generation: number;
-  awards: AwardInterface[];
-  projects: ProjectInterface[];
+export interface AwardResponse {
+  generationAwards: AwardCardInterface[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -41,7 +40,7 @@ export const Rewards = () => {
     return awardData;
   });
 
-  const awardList = data?.generationAwards;
+  const awardList = data?.awardData?.data.generationAwards;
 
   return (
     <Flex margin="0 0 80px 0" direction="column">
@@ -89,10 +88,9 @@ export const Rewards = () => {
               margin-left: auto;
             `}
           >
-            전체 보기
+            <CustomLink href={'/rewards'}>전체 보기</CustomLink>
           </Text>
         </Flex>
-
         <div
           css={css`
             display: flex;
