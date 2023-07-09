@@ -11,7 +11,7 @@ export const Buttons = () => {
         <Link href={'/project'}>
           <GlassShortcut>프로젝트 확인하기</GlassShortcut>
         </Link>
-        <Link href={'/member'}>
+        <Link href={'/management'}>
           <GlassShortcut>운영진 보러가기</GlassShortcut>
         </Link>
         <Link href={'/recruit'}>
