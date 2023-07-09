@@ -1,11 +1,12 @@
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
-import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
 import { authApi, findPwInterface } from '../../../../../../packages/utils';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { StyledForm } from '@admin/styles/common';
+import { PartDropdownList } from '@admin/assets/data/dropDownList';
 
 export default function findPW() {
   const [sentEmail, setSentEmail] = useState(false);
@@ -36,24 +37,7 @@ export default function findPW() {
       {!sentEmail ? (
         <>
           <Dropdown
-            options={[
-              {
-                label: '기획',
-                value: 'strategy',
-              },
-              {
-                label: '디자인',
-                value: 'design',
-              },
-              {
-                label: '프론트엔드',
-                value: 'frontend',
-              },
-              {
-                label: '백엔드',
-                value: 'backend',
-              },
-            ]}
+            options={PartDropdownList}
             label="partDropdown"
             setValue={setValue}
             value={watch('partDropdown')}
@@ -92,10 +76,3 @@ export default function findPW() {
     </StyledForm>
   );
 }
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  align-items: center;
-`;

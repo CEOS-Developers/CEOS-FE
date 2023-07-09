@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
 import { useMutation } from '@tanstack/react-query';
 import { authApi, findIdInterface } from '../../../../../../packages/utils'; //절대경로 수정필요
-import styled from '@emotion/styled';
 import Link from 'next/link';
+import { StyledForm } from '@admin/styles/common';
+import { PartDropdownList } from '@admin/assets/data/dropDownList';
 
 export default function findID() {
   const [id, setId] = useState<string>('');
@@ -36,24 +37,7 @@ export default function findID() {
       {id === '' ? (
         <>
           <Dropdown
-            options={[
-              {
-                label: '기획',
-                value: 'strategy',
-              },
-              {
-                label: '디자인',
-                value: 'design',
-              },
-              {
-                label: '프론트엔드',
-                value: 'frontend',
-              },
-              {
-                label: '백엔드',
-                value: 'backend',
-              },
-            ]}
+            options={PartDropdownList}
             label="partDropdown"
             setValue={setValue}
             value={watch('partDropdown')}
@@ -93,10 +77,3 @@ export default function findID() {
     </StyledForm>
   );
 }
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  align-items: center;
-`;

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import styled from '@emotion/styled';
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 필요
 import { authApi, signUpInterface } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { StyledForm } from '@admin/styles/common';
+import { PartDropdownList } from '@admin/assets/data/dropDownList';
 
 export default function SignUp() {
   const router = useRouter();
@@ -68,26 +69,9 @@ export default function SignUp() {
   return (
     <Flex direction="column" webGap={36}>
       <Text webTypo="Heading2">ADMIN 회원가입</Text>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} webGap={24}>
         <Dropdown
-          options={[
-            {
-              label: '기획',
-              value: 'strategy',
-            },
-            {
-              label: '디자인',
-              value: 'design',
-            },
-            {
-              label: '프론트엔드',
-              value: 'frontend',
-            },
-            {
-              label: '백엔드',
-              value: 'backend',
-            },
-          ]}
+          options={PartDropdownList}
           label="partDropdown"
           setValue={setValue}
           value={watch('partDropdown')}
@@ -119,14 +103,3 @@ export default function SignUp() {
     </Flex>
   );
 }
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-
-  .button-container {
-    padding: 24px 0 0 0;
-  }
-`;

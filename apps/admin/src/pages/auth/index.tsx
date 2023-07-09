@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { accessToken } from '@admin/store/recoil';
+import { StyledForm } from '@admin/styles/common';
 
 export default function SignIn() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function SignIn() {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
         <Flex direction="column" webGap={24}>
           <TextField label="ID" isAdmin {...register('username')} />
@@ -65,11 +66,4 @@ export default function SignIn() {
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${theme.palette.Gray5};
-`;
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  padding: 0 0 24px 0;
-  align-items: center;
 `;
