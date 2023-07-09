@@ -35,7 +35,7 @@ export default function Home() {
     <main>
       <SubHeader />
       {/* section1 => blue */}
-      <HomeFlex margin="0 auto 0 auto" className="section2">
+      <HomeFlex margin="0 auto 0 auto">
         <Rewards />
       </HomeFlex>
       {/* section2 => white */}

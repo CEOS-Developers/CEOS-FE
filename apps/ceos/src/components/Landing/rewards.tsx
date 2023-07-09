@@ -40,7 +40,7 @@ export const Rewards = () => {
     return awardData;
   });
 
-  const awardList = data?.awardData?.data.generationAwards;
+  const awardList = data?.generationAwards;
 
   return (
     <Flex margin="0 0 80px 0" direction="column">
