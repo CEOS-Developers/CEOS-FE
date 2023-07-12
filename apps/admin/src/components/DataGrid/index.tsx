@@ -32,6 +32,7 @@ export const DataGrid = ({
         dataSource={dataSource}
         columns={columns}
         pagination={false}
+        //rowKey={'uuid'}
       />
       <Pagination pagination={pagination} onChangePage={onChangePage} />
     </>
