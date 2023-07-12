@@ -1,4 +1,16 @@
 import { ceosInstance } from '../axiosConfig';
+export interface InformationInterface {
+  name: string;
+  gender: string;
+  birth: string;
+  email: string;
+  phoneNumber: string;
+
+  university: string;
+  major: string;
+  semestersLeftNumber: number | null;
+  generation: number;
+}
 
 interface RecruitApplyInterface {
   name: string;
@@ -13,7 +25,7 @@ interface RecruitApplyInterface {
   generation: number;
 
   otDate: string;
-  demoDate: string;
+  demodayDate: string;
   otherActivities: string;
 
   part: string;
@@ -27,7 +39,7 @@ export interface RecruitApplyValuesInterface extends RecruitApplyInterface {
 
 export interface PostApplyValuesInterface extends RecruitApplyInterface {
   partAnswers: { questionId: number; answer: string }[];
-  unableTimes: string[];
+  unableTimes: { date: string; durations: string[] }[];
 }
 
 export const recruitApi = {
@@ -47,18 +59,20 @@ export const recruitApi = {
       questionId: number;
       answer: string;
     }[];
-    let newUnableTimes = [] as string[];
+
+    let newUnableTimes = times.map((time) => ({
+      date: time.date,
+      durations: [],
+    })) as { date: string; durations: string[] }[];
 
     // 시간 0, 1 플래그 따른 data 재구성
 
     const changeTime = (timeIdx: number, durIdx: number) => {
-      newUnableTimes.push(
-        `${times[timeIdx].date} ${times[timeIdx].durations[durIdx]}`,
-      );
+      newUnableTimes[timeIdx].durations.push(times[timeIdx].durations[durIdx]);
     };
 
     body.unableTimes.forEach((time, timeIdx) => {
-      time.forEach((dur, durIdx) => {
+      time.forEach((_, durIdx) => {
         if (body.unableTimes[timeIdx][durIdx]) {
           changeTime(timeIdx, durIdx);
         }

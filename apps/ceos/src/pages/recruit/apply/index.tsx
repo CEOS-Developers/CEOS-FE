@@ -12,52 +12,17 @@ import {
   RecruitApplyValuesInterface,
   ResponseInterface,
 } from '@ceos-fe/utils';
-import {
-  UseFormHandleSubmit,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-  useForm,
-} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Title } from '../../../components/Title';
 import Common from './Common';
 import Part from './Part';
 import Schedule from './Schedule';
 import { useEffect, useState } from 'react';
-
-export interface QuestionProps {
-  questionId: number;
-  questionIndex: number;
-  question: string;
-  multiline: boolean;
-  questionDetail: { explaination: string; color: string }[];
-}
-export interface AnswerInterface {
-  questionId: number;
-  answer: string;
-}
-export interface RecruitApplyResponse {
-  commonQuestions: QuestionProps[];
-  productQuestions: QuestionProps[];
-  designQuestions: QuestionProps[];
-  frontendQuestions: QuestionProps[];
-  backendQuestions: QuestionProps[];
-  times: { date: string; durations: string[] }[];
-}
-
-export interface RecruitApplyFormInterface {
-  register: UseFormRegister<RecruitApplyValuesInterface>;
-  watch: UseFormWatch<RecruitApplyValuesInterface>;
-  setValue: UseFormSetValue<RecruitApplyValuesInterface>;
-  handleSubmit: UseFormHandleSubmit<RecruitApplyValuesInterface>;
-  questionList?: RecruitApplyResponse;
-}
-
-export type PartName =
-  | 'productQuestions'
-  | 'designQuestions'
-  | 'frontendQuestions'
-  | 'backendQuestions';
+import {
+  PartName,
+  RecruitApplyFormInterface,
+  RecruitApplyResponse,
+} from './interface';
 
 const Apply = () => {
   const { register, watch, setValue, handleSubmit } = useForm({
@@ -71,10 +36,10 @@ const Apply = () => {
       university: '',
       major: '',
       semestersLeftNumber: null,
-      generation: 18,
+      generation: 17,
 
       otDate: '',
-      demoDate: '',
+      demodayDate: '',
       otherActivities: '',
 
       part: '기획',
@@ -120,6 +85,8 @@ const Apply = () => {
       productObj
         ? setValue('partAnswers', [...watch('partAnswers'), productObj])
         : setValue('partAnswers', [...watch('partAnswers'), []]);
+
+      console.log(watch('partAnswers'));
     }
 
     const times = data?.pages[0].data?.times;
@@ -137,7 +104,9 @@ const Apply = () => {
   }, [data]);
 
   const submitForm = () => {
-    if (questionList) recruitApi.POST_APPLY(questionList?.times, watch());
+    const body = watch();
+    console.log(body);
+    if (questionList) recruitApi.POST_APPLY(questionList?.times, body);
   };
 
   return (
@@ -222,6 +191,10 @@ export const RowLine = styled.div`
   height: 2px;
   background: #e9ebef;
   margin: 24px 0;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 
 export const ColumnLine = styled.div`
@@ -236,4 +209,9 @@ export const Section = styled(Flex)`
   width: 856px;
   gap: 36px;
   margin: 24px 0 0 0;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    gap: 28px;
+  }
 `;
