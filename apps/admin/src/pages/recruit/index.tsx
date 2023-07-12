@@ -8,6 +8,7 @@ import {
   RecruitInterface,
   recruitApi,
   ResponseInterface,
+  adminRecruitApi,
 } from '@ceos-fe/utils';
 import {
   QueryClient,
@@ -30,8 +31,10 @@ interface RecruitDateInterface extends RecruitBaseInterface {
 export default function Recruit() {
   const { data, isFetching, isSuccess } = useQuery<
     ResponseInterface<RecruitInterface>
-  >(['admin', 'recruit'], recruitApi.GET_RECRUIT);
-  const { mutate: postRecruitments } = useMutation(recruitApi.POST_RECRUIT);
+  >(['admin', 'recruit'], adminRecruitApi.GET_RECRUIT);
+  const { mutate: postRecruitments } = useMutation(
+    adminRecruitApi.POST_RECRUIT,
+  );
 
   const { getValues, setValue, reset, register } =
     useForm<RecruitDateInterface>({
@@ -242,7 +245,7 @@ export const getStaticProps = async () => {
 
     await queryClient.prefetchQuery(
       ['admin', 'recruit'],
-      recruitApi.GET_RECRUIT,
+      adminRecruitApi.GET_RECRUIT,
     );
 
     return {
