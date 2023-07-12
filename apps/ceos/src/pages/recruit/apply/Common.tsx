@@ -1,5 +1,6 @@
 import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
-import { RecruitApplyFormInterface, RowLine, Section } from '.';
+import { RowLine, Section } from '.';
+import { RecruitApplyFormInterface } from './interface';
 
 const Common = ({
   register,
@@ -8,12 +9,6 @@ const Common = ({
   handleSubmit,
   questionList,
 }: RecruitApplyFormInterface) => {
-  const setAnswer = (idx: number, answer: string) => {
-    let newAnswer = watch('commonAnswers');
-    newAnswer[idx].answer = answer;
-    setValue('commonAnswers', newAnswer);
-  };
-
   return (
     <>
       <Desktop>
@@ -32,8 +27,7 @@ const Common = ({
               <TextField
                 width={856}
                 multiline={ques.multiline}
-                value={watch('commonAnswers')[idx].answer}
-                onChange={(e) => setAnswer(idx, e.target.value)}
+                {...register(`commonAnswers.${idx}.answer`)}
               />
               <Flex direction="column" align="start">
                 {ques.questionDetail.map((detail, idx) =>
@@ -77,8 +71,7 @@ const Common = ({
               }`}</Text>
               <TextField
                 multiline={true}
-                value={watch('commonAnswers')[idx].answer}
-                onChange={(e) => setAnswer(idx, e.target.value)}
+                {...register(`commonAnswers.${idx}.answer`)}
               />
               <Flex direction="column" align="start">
                 {ques.questionDetail.map((detail, idx) =>

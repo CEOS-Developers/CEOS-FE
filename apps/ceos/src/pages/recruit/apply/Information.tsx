@@ -8,7 +8,7 @@ import {
   Mobile,
 } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
-import { RecruitApplyFormInterface } from '.';
+import { RecruitApplyFormInterface } from './interface';
 
 const Information = ({
   register,
