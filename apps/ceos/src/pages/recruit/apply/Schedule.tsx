@@ -1,7 +1,8 @@
 import { CheckBox, Desktop, Flex, Mobile, Text, theme } from 'packages/ui';
-import { ColumnLine, RecruitApplyFormInterface } from '.';
+import { ColumnLine } from '.';
 import styled from '@emotion/styled';
 import css from 'styled-jsx/css';
+import { RecruitApplyFormInterface } from './interface';
 
 const Schedule = ({
   register,

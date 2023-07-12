@@ -86,8 +86,6 @@ export const recruitApi = {
       semestersLeftNumber: Number(body.semestersLeftNumber),
     };
 
-    console.log(newBody);
-
     const response = await ceosInstance.post(`/applications`, newBody);
 
     return response;

@@ -85,8 +85,6 @@ const Apply = () => {
       productObj
         ? setValue('partAnswers', [...watch('partAnswers'), productObj])
         : setValue('partAnswers', [...watch('partAnswers'), []]);
-
-      console.log(watch('partAnswers'));
     }
 
     const times = data?.pages[0].data?.times;
@@ -105,7 +103,6 @@ const Apply = () => {
 
   const submitForm = () => {
     const body = watch();
-    console.log(body);
     if (questionList) recruitApi.POST_APPLY(questionList?.times, body);
   };
 
