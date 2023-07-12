@@ -54,7 +54,7 @@ export const TextField = forwardRef<
     ref,
   ) => {
     return (
-      <Container width={width}>
+      <Container width={isSubTextField ? width + 37 : width}>
         {label && <StyledLabel>{label}</StyledLabel>}
         <Flex align="flex-start">
           {isSubTextField && <SubTextFieldIcon />}
@@ -67,6 +67,7 @@ export const TextField = forwardRef<
               height={height}
               isAdmin={isAdmin}
               fontColor={fontColor}
+              width={width}
             />
           ) : (
             <InputContainer>
@@ -78,6 +79,7 @@ export const TextField = forwardRef<
                 isAdmin={isAdmin}
                 fontColor={fontColor}
                 isRight={Boolean(right)}
+                width={width}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -126,8 +128,9 @@ const StyledInput = styled.input<{
   fontColor: string;
   isRight: boolean;
   value?: string | number | readonly string[] | undefined;
+  width: number;
 }>`
-  width: 100%;
+  width: ${({ width }) => width}px;
   padding: ${({ isRight }) => (isRight ? '8px 50px 8px 16px' : '8px 16px')};
 
   box-sizing: border-box;
@@ -181,8 +184,9 @@ const StyledTextArea = styled.textarea<{
   isAdmin: boolean;
   height?: number;
   fontColor: string;
+  width: number;
 }>`
-  width: 100%;
+  width: ${({ width }) => width}px;
   height: ${({ height }) => (height ? height : 240)}px;
   padding: ${({ height }) => (height ? '8px 16px' : '12px 8px 12px 16px')};
 
