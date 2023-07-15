@@ -1,7 +1,25 @@
-import { Button, Flex, Text } from '@ceos-fe/ui';
-import { QueryClient } from '@tanstack/react-query';
+import { AdminProjectCard, Button, Flex, Text } from '@ceos-fe/ui';
+import {
+  QueryClient,
+  dehydrate,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
+import { ProjectListInterface, adminProjectApi } from '@ceos-fe/utils';
+import styled from '@emotion/styled';
 
 export default function Project() {
+  const { data, isFetching, isSuccess } =
+    useInfiniteQuery<ProjectListInterface>(
+      ['ceos', 'project'],
+      ({ pageParam = 0 }) =>
+        adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 10000 }),
+      {
+        getNextPageParam: (lastPage) => {
+          return true;
+        },
+      },
+    );
+
   return (
     <>
       <Flex direction="column" align="start">
@@ -25,6 +43,45 @@ export default function Project() {
           </Button>
         </Flex>
       </Flex>
+
+      <GridContainer>
+        {!isFetching &&
+          isSuccess &&
+          data.pages[0].projectBriefInfoVos.map((project) => (
+            <AdminProjectCard
+              projectCard={{ ...project, previewImage: project.thumbnailImage }}
+              onClickRemove={() => console.log('remove')}
+              onClickUpdate={() => console.log('update')}
+            />
+          ))}
+      </GridContainer>
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  try {
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchInfiniteQuery(['admin', 'projects'], () =>
+      adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 10000 }),
+    );
+
+    return {
+      props: {
+        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  row-gap: 24px;
+
+  margin-top: 48px;
+`;
