@@ -232,10 +232,10 @@ export default function Application() {
 
   return (
     <>
-      <Text webTypo="Heading2" color="Black">
+      <Text webTypo="Heading2" paletteColor="Black">
         지원서 제출
       </Text>
-      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+      <Text webTypo="Body3" paletteColor="Gray5" style={{ marginTop: '12px' }}>
         지원서 질문을 관리하는 페이지입니다.
       </Text>
 

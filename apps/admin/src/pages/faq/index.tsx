@@ -104,10 +104,14 @@ export default function Faq() {
   return (
     <>
       <Flex direction="column" align="start">
-        <Text webTypo="Heading2" color="Black">
+        <Text webTypo="Heading2" paletteColor="Black">
           FAQ
         </Text>
-        <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+        <Text
+          webTypo="Body3"
+          paletteColor="Gray5"
+          style={{ marginTop: '12px' }}
+        >
           페이지에 게재되는 질의응답 내용을 관리합니다.
         </Text>
       </Flex>
