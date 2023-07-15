@@ -12,6 +12,7 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { ImageUploader } from '@admin/components/ImageUploader';
 
 const UrlCategoryMap = {
   서비스: 'Service Link',
@@ -48,7 +49,16 @@ export default function ProjectDetail() {
             linkUrl: '',
           },
         ],
-        projectImages: [],
+        projectImages: [
+          {
+            category: '썸네일',
+            imageUrl: '',
+          },
+          {
+            category: '상세',
+            imageUrl: '',
+          },
+        ],
         participants: [],
       },
     });
@@ -277,11 +287,27 @@ export default function ProjectDetail() {
             <Text webTypo="Label3" paletteColor="Black">
               썸네일 이미지
             </Text>
+            <ImageUploader
+              imageApiType="PROJECTS"
+              value={watch('projectImages.0.imageUrl')}
+              setValue={(url: string | null) => {
+                if (!url) return;
+                setValue('projectImages.0.imageUrl', url);
+              }}
+            />
           </Flex>
           <Flex webGap={8} direction="column" align="flex-start">
             <Text webTypo="Label3" paletteColor="Black">
               상세 이미지
             </Text>
+            <ImageUploader
+              imageApiType="PROJECTS"
+              value={watch('projectImages.1.imageUrl')}
+              setValue={(url: string | null) => {
+                if (!url) return;
+                setValue('projectImages.1.imageUrl', url);
+              }}
+            />
           </Flex>
         </Flex>
       </Flex>
