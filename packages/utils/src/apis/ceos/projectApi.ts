@@ -12,6 +12,6 @@ export const projectApi = {
       params: { pageNum, limit },
     });
 
-    return response.data;
+    return response.data.data;
   },
 };

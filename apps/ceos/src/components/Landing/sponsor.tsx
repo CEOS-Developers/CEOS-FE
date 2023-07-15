@@ -1,7 +1,6 @@
-import { Text, Flex, SponsorCard, SponsorCardProps } from '@ceos-fe/ui';
+import { Text, SponsorCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { useEffect } from 'react';
-import { ResponseInterface, sponsorApi } from '@ceos-fe/utils';
+import { sponsorApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 
 interface SponsorInterface {
@@ -21,13 +20,14 @@ interface SponsorResponse {
 }
 
 export const Sponsors = () => {
-  const { data } = useQuery<{
-    sponsorData: ResponseInterface<SponsorResponse>;
-  }>(['ceos', 'sponsor'], async () => {
-    const sponsorData = await sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
-
-    return sponsorData;
-  });
+  const { data } = useQuery<SponsorResponse>(
+    ['ceos', 'sponsor'],
+    async () =>
+      await sponsorApi.GET_SPONSORS({
+        pageNum: 0,
+        limit: 4,
+      }),
+  );
 
   const sponsorList = data?.sponsors;
 

@@ -31,16 +31,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home() {
-<<<<<<< HEAD
-=======
-  const { register, watch, setValue } = useForm({
-    defaultValues: {
-      date: '',
-      adminDate: '',
-    },
-  });
-
->>>>>>> 8dd8f1c11336641d4e1d441225606050408b4f93
   return (
     <main>
       <SubHeader />
