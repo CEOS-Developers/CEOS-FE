@@ -8,7 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['ceos-web-17.s3.ap-northeast-2.amazonaws.com'],
+    domains: ['ceos-web-17.s3.ap-northeast-2.amazonaws.com', 'github.com'],
   },
 };
 
