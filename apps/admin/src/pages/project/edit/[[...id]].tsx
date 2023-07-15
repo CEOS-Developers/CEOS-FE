@@ -24,17 +24,17 @@ const UrlCategoryMap = {
 export default function ProjectDetail() {
   const router = useRouter();
 
+  const isEditMode = router.query.id ? true : false;
+
   const { data, isFetching, isSuccess } = useQuery<ProjectItemInterface>(
     ['admin', 'project', router.query.id],
     () => adminProjectApi.GET_PROJECT(Number(router.query.id)),
     {
-      enabled: router.query.id ? true : false,
+      enabled: isEditMode,
     },
   );
   const { mutate: mutateProject } = useMutation(
-    router.query.id
-      ? adminProjectApi.PATCH_PROJECT
-      : adminProjectApi.POST_PROJECT,
+    isEditMode ? adminProjectApi.PATCH_PROJECT : adminProjectApi.POST_PROJECT,
   );
 
   const { control, getValues, setValue, reset, watch, register } =
@@ -128,7 +128,7 @@ export default function ProjectDetail() {
           <BackArrow />
         </div>
         <Text webTypo="Heading3" paletteColor="Black">
-          프로젝트 {router.query.id ? '수정' : '추가'}
+          프로젝트 {isEditMode ? '수정' : '추가'}
         </Text>
       </Flex>
 
