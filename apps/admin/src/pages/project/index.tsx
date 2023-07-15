@@ -6,8 +6,11 @@ import {
 } from '@tanstack/react-query';
 import { ProjectListInterface, adminProjectApi } from '@ceos-fe/utils';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 export default function Project() {
+  const router = useRouter();
+
   const { data, isFetching, isSuccess } =
     useInfiniteQuery<ProjectListInterface>(
       ['ceos', 'project'],
@@ -22,7 +25,7 @@ export default function Project() {
 
   return (
     <>
-      <Flex direction="column" align="start">
+      <Flex direction="column" align="flex-start">
         <Text webTypo="Heading2" paletteColor="Black">
           PROJECT
         </Text>
@@ -51,7 +54,7 @@ export default function Project() {
             <AdminProjectCard
               projectCard={{ ...project, previewImage: project.thumbnailImage }}
               onClickRemove={() => console.log('remove')}
-              onClickUpdate={() => console.log('update')}
+              onClickUpdate={() => router.push(`/project/edit/${project.id}`)}
             />
           ))}
       </GridContainer>
