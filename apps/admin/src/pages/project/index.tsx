@@ -13,7 +13,7 @@ export default function Project() {
 
   const { data, isFetching, isSuccess } =
     useInfiniteQuery<ProjectListInterface>(
-      ['ceos', 'project'],
+      ['admin', 'projects'],
       ({ pageParam = 0 }) =>
         adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 10000 }),
       {

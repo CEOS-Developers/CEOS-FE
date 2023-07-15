@@ -1,18 +1,115 @@
 import { useRouter } from 'next/router';
 import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { BackArrow } from '@admin/assets/Arrow';
-import { useForm } from 'react-hook-form';
-import { ProjectItemInterface } from '@ceos-fe/utils';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { ProjectItemInterface, adminProjectApi } from '@ceos-fe/utils';
 import { Plus } from '@admin/assets/Plus';
 import { Dropdown } from '@admin/components/Dropdown';
+import {
+  QueryClient,
+  dehydrate,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
+import { useEffect } from 'react';
+
+const UrlCategoryMap = {
+  서비스: 'Service Link',
+  깃허브: 'Github',
+  비핸스: 'Behance',
+  인스타: 'Instagram',
+};
 
 export default function ProjectDetail() {
   const router = useRouter();
 
-  const { getValues, setValue, reset, register } =
+  const { data, isFetching, isSuccess } = useQuery<ProjectItemInterface>(
+    ['admin', 'project', router.query.id],
+    () => adminProjectApi.GET_PROJECT(Number(router.query.id)),
+    {
+      enabled: router.query.id ? true : false,
+    },
+  );
+  const { mutate: mutateProject } = useMutation(
+    router.query.id
+      ? adminProjectApi.PATCH_PROJECT
+      : adminProjectApi.POST_PROJECT,
+  );
+
+  const { control, getValues, setValue, reset, watch, register } =
     useForm<ProjectItemInterface>({
-      defaultValues: {},
+      defaultValues: {
+        name: '',
+        description: '',
+        generation: 0,
+        projectUrls: [
+          {
+            category: '서비스',
+            linkUrl: '',
+          },
+        ],
+        projectImages: [],
+        participants: [],
+      },
     });
+  const {
+    fields: projectUrls,
+    append: appendProjectUrls,
+    remove: removeProjectUrls,
+  } = useFieldArray({
+    control,
+    name: 'projectUrls',
+  });
+
+  useEffect(() => {
+    if (isFetching || !isSuccess) return;
+
+    reset(data);
+  }, [isFetching, isSuccess]);
+
+  const handleAppendUrl = () => {
+    appendProjectUrls({
+      category: '서비스',
+      linkUrl: '',
+    });
+  };
+
+  const handleSaveProject = () => {
+    mutateProject({
+      name: getValues('name'),
+      description: getValues('description'),
+      generation: getValues('generation'),
+      participants: getValues('participants').map((participant, idx) => {
+        switch (idx) {
+          case 0:
+          case 1:
+            return {
+              part: '기획',
+              name: participant.name,
+            };
+          case 2:
+          case 3:
+            return {
+              part: '디자인',
+              name: participant.name,
+            };
+          case 4:
+          case 5:
+            return {
+              part: '프론트엔드',
+              name: participant.name,
+            };
+          default:
+            return {
+              part: '백엔드',
+              name: participant.name,
+            };
+        }
+      }),
+      projectImages: getValues('projectImages'),
+      projectUrls: getValues('projectUrls'),
+    });
+  };
 
   return (
     <>
@@ -31,7 +128,7 @@ export default function ProjectDetail() {
           </Flex>
 
           <TextField
-            {...register('name')}
+            {...register('description')}
             width={680}
             label="한줄 소개"
             isAdmin
@@ -39,24 +136,28 @@ export default function ProjectDetail() {
 
           <Flex webGap={24}>
             <TextField
+              {...register('participants.0.name')}
               label="기획 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.1.name')}
               label="기획 팀원2"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.2.name')}
               label="디자인 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.3.name')}
               label="디자인 팀원2"
               width={152}
               isAdmin
@@ -66,24 +167,28 @@ export default function ProjectDetail() {
 
           <Flex webGap={24}>
             <TextField
+              {...register('participants.4.name')}
               label="프론트 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.5.name')}
               label="프론트 팀원2"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.6.name')}
               label="백엔드 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
+              {...register('participants.7.name')}
               label="백엔드 팀원2"
               width={152}
               isAdmin
@@ -92,27 +197,65 @@ export default function ProjectDetail() {
           </Flex>
 
           <Flex webGap={16} direction="column">
-            <Flex webGap={16} align="flex-end" width={680} justify="flex-start">
+            {projectUrls.map((_, idx) => (
               <Flex
-                webGap={11}
-                direction="column"
-                align="flex-start"
-                width={152}
+                key={idx}
+                webGap={16}
+                align="flex-end"
+                width={680}
+                justify="flex-start"
               >
-                <Text webTypo="Label3">링크 추가</Text>
-                <Dropdown width={152} />
+                <Dropdown
+                  width={152}
+                  label={`projectUrls.${idx}.category`}
+                  value={{
+                    label: UrlCategoryMap[watch(`projectUrls.${idx}.category`)],
+                    value: watch(`projectUrls.${idx}.category`),
+                  }}
+                  options={[
+                    {
+                      label: 'Service Link',
+                      value: '서비스',
+                    },
+                    {
+                      label: 'Github',
+                      value: '깃허브',
+                    },
+                    {
+                      label: 'Behance',
+                      value: '비핸스',
+                    },
+                    {
+                      label: 'Instagram',
+                      value: '인스타',
+                    },
+                  ]}
+                  setValue={(_, val) =>
+                    setValue(`projectUrls.${idx}.category`, val.value)
+                  }
+                />
+                <TextField
+                  {...register(`projectUrls.${idx}.linkUrl`)}
+                  isAdmin
+                  placeholder="링크를 입력하세요."
+                  width={441}
+                />
+                <Button
+                  variant="admin_navy"
+                  webWidth={57}
+                  style={{ marginBottom: '4px' }}
+                  onClick={() => removeProjectUrls(idx)}
+                >
+                  삭제
+                </Button>
               </Flex>
-              <TextField isAdmin placeholder="링크를 입력하세요." width={441} />
-              <Button
-                variant="admin_navy"
-                webWidth={57}
-                style={{ marginBottom: '4px' }}
-              >
-                삭제
-              </Button>
-            </Flex>
+            ))}
 
-            <Button variant="admin_stroke" webWidth={128}>
+            <Button
+              variant="admin_stroke"
+              webWidth={128}
+              onClick={handleAppendUrl}
+            >
               <Flex webGap={4}>
                 <Plus />
                 링크 추가하기
@@ -138,9 +281,45 @@ export default function ProjectDetail() {
       <Button
         variant="admin"
         style={{ marginTop: '80px', alignSelf: 'center' }}
+        onClick={handleSaveProject}
       >
         저장하기
       </Button>
     </>
   );
 }
+
+export const getStaticPaths = async () => {
+  try {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getStaticProps = async ({ params }: { params: any }) => {
+  try {
+    if (!params.id)
+      return {
+        props: {},
+      };
+
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchInfiniteQuery(
+      ['admin', 'project', params.id],
+      () => adminProjectApi.GET_PROJECT(params.id),
+    );
+
+    return {
+      props: {
+        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
