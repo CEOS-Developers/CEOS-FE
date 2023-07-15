@@ -3,6 +3,7 @@ import {
   QueryClient,
   dehydrate,
   useInfiniteQuery,
+  useMutation,
 } from '@tanstack/react-query';
 import { ProjectListInterface, adminProjectApi } from '@ceos-fe/utils';
 import styled from '@emotion/styled';
@@ -22,6 +23,9 @@ export default function Project() {
         },
       },
     );
+  const { mutate: deleteProject } = useMutation((id: number) =>
+    adminProjectApi.DELETE_PROJECT(id),
+  );
 
   return (
     <>
@@ -53,7 +57,7 @@ export default function Project() {
           data.pages[0].projectBriefInfoVos.map((project) => (
             <AdminProjectCard
               projectCard={{ ...project, previewImage: project.thumbnailImage }}
-              onClickRemove={() => console.log('remove')}
+              onClickRemove={() => deleteProject(project.id)}
               onClickUpdate={() => router.push(`/project/edit/${project.id}`)}
             />
           ))}

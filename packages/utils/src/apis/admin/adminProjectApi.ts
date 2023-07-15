@@ -68,7 +68,7 @@ export const adminProjectApi = {
     return response.data.data;
   },
   GET_PROJECT: async (projectId: number) => {
-    const response = await adminInstance.delete(`/projects/${projectId}`);
+    const response = await adminInstance.get(`/projects/${projectId}`);
 
     return response.data.data;
   },

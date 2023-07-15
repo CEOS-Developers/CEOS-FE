@@ -198,71 +198,77 @@ export default function ProjectDetail() {
             />
           </Flex>
 
-          <Flex webGap={16} direction="column">
-            {projectUrls.map((_, idx) => (
-              <Flex
-                key={idx}
-                webGap={16}
-                align="flex-end"
-                width={680}
-                justify="flex-start"
-              >
-                <Dropdown
-                  width={152}
-                  label={`projectUrls.${idx}.category`}
-                  value={{
-                    label: UrlCategoryMap[watch(`projectUrls.${idx}.category`)],
-                    value: watch(`projectUrls.${idx}.category`),
-                  }}
-                  options={[
-                    {
-                      label: 'Service Link',
-                      value: '서비스',
-                    },
-                    {
-                      label: 'Github',
-                      value: '깃허브',
-                    },
-                    {
-                      label: 'Behance',
-                      value: '비핸스',
-                    },
-                    {
-                      label: 'Instagram',
-                      value: '인스타',
-                    },
-                  ]}
-                  setValue={(_, val) =>
-                    setValue(`projectUrls.${idx}.category`, val.value)
-                  }
-                />
-                <TextField
-                  {...register(`projectUrls.${idx}.linkUrl`)}
-                  isAdmin
-                  placeholder="링크를 입력하세요."
-                  width={441}
-                />
-                <Button
-                  variant="admin_navy"
-                  webWidth={57}
-                  style={{ marginBottom: '4px' }}
-                  onClick={() => removeProjectUrls(idx)}
+          <Flex webGap={6} direction="column" align="flex-start">
+            <Text webTypo="Label3" paletteColor="Black">
+              링크 추가
+            </Text>
+            <Flex webGap={16} direction="column">
+              {projectUrls.map((_, idx) => (
+                <Flex
+                  key={idx}
+                  webGap={16}
+                  align="flex-end"
+                  width={680}
+                  justify="flex-start"
                 >
-                  삭제
-                </Button>
-              </Flex>
-            ))}
+                  <Dropdown
+                    width={152}
+                    label={`projectUrls.${idx}.category`}
+                    value={{
+                      label:
+                        UrlCategoryMap[watch(`projectUrls.${idx}.category`)],
+                      value: watch(`projectUrls.${idx}.category`),
+                    }}
+                    options={[
+                      {
+                        label: 'Service Link',
+                        value: '서비스',
+                      },
+                      {
+                        label: 'Github',
+                        value: '깃허브',
+                      },
+                      {
+                        label: 'Behance',
+                        value: '비핸스',
+                      },
+                      {
+                        label: 'Instagram',
+                        value: '인스타',
+                      },
+                    ]}
+                    setValue={(_, val) =>
+                      setValue(`projectUrls.${idx}.category`, val.value)
+                    }
+                  />
+                  <TextField
+                    {...register(`projectUrls.${idx}.linkUrl`)}
+                    isAdmin
+                    placeholder="링크를 입력하세요."
+                    width={441}
+                  />
+                  <Button
+                    variant="admin_navy"
+                    webWidth={57}
+                    style={{ marginBottom: '4px' }}
+                    onClick={() => removeProjectUrls(idx)}
+                  >
+                    삭제
+                  </Button>
+                </Flex>
+              ))}
 
-            <Button
-              variant="admin_stroke"
-              webWidth={128}
-              onClick={handleAppendUrl}
-            >
-              <Flex webGap={4}>
-                <Plus />
-                링크 추가하기
-              </Flex>
-            </Button>
+              <Button
+                variant="admin_stroke"
+                webWidth={128}
+                onClick={handleAppendUrl}
+              >
+                <Flex webGap={4}>
+                  <Plus />
+                  링크 추가하기
+                </Flex>
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
 
