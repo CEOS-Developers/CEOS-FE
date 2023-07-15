@@ -94,6 +94,7 @@ export const AdminProjectCard = (props: {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {

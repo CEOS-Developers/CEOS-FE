@@ -131,30 +131,3 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
-
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 99;
-  @media (max-width: 1023px) {
-    bottom: 30px;
-  }
-`;
-
-const Background = styled.img`
-  width: 100%;
-  z-index: -99;
-  max-height: 500px;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    max-height: 500px;
-  }
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;

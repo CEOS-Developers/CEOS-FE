@@ -1,11 +1,5 @@
 import styled from '@emotion/styled';
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-} from '../../../../../packages/ui';
+import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
 import Image from 'next/image';
@@ -81,7 +75,7 @@ export default Footer;
 const GlassFlex = styled(Flex)`
   position: absolute;
   bottom: 80px;
-  z-index: 99;
+  z-index: -1;
   @media (max-width: 1023px) {
     bottom: 30px;
   }

@@ -6,7 +6,7 @@ import {
   ProjectCardProps,
 } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { projectApi } from '@ceos-fe/utils';
+import { projectApi, useModal } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
 import {
   QueryClient,
@@ -15,6 +15,9 @@ import {
 } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
 import { TopMargin } from '../FAQ/index';
+import { useState } from 'react';
+import styled from '@emotion/styled';
+import DetailModal from './DetailModal';
 
 interface ProjectResponse {
   projectBriefInfoVos: ProjectCardProps[];
@@ -27,11 +30,14 @@ interface ProjectResponse {
 }
 
 const Project = () => {
+  const { isOpen, modalRef, toggleModal } = useModal();
+
   const { data, isLoading, isSuccess } = useInfiniteQuery<
     ResponseInterface<ProjectResponse>
   >(
     ['ceos', 'project'],
-    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 0, limit: 10000 }),
+    ({ pageParam = 0 }) =>
+      projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 10000 }),
     {
       getNextPageParam: (lastPage) => {
         return true;
@@ -52,8 +58,10 @@ const Project = () => {
     link: '/recruit',
   };
 
+  const [modalNumber, setModalNumber] = useState(-1);
+
   return (
-    <>
+    <Container>
       <Desktop>
         <Flex direction="column">
           <Title
@@ -65,39 +73,29 @@ const Project = () => {
           />
           <TopMargin />
           <Flex webGap={24}>
-            <Flex
-              direction="column"
-              justify="start"
-              webGap={47}
-              height={(291 * Number(projectList?.length)) / 3}
-              width="auto"
-            >
-              {projectList?.map((project, idx) =>
-                idx % 3 === 0 ? <ProjectCard projectCard={project} /> : <></>,
-              )}
-            </Flex>
-            <Flex
-              direction="column"
-              justify="start"
-              webGap={47}
-              height={(291 * Number(projectList?.length)) / 3}
-              width="auto"
-            >
-              {projectList?.map((project, idx) =>
-                idx % 3 === 1 ? <ProjectCard projectCard={project} /> : <></>,
-              )}
-            </Flex>
-            <Flex
-              direction="column"
-              justify="start"
-              webGap={47}
-              height={(291 * Number(projectList?.length)) / 3}
-              width="auto"
-            >
-              {projectList?.map((project, idx) =>
-                idx % 3 === 2 ? <ProjectCard projectCard={project} /> : <></>,
-              )}
-            </Flex>
+            {[0, 1, 2].map((columnNum) => (
+              <Flex
+                direction="column"
+                justify="start"
+                webGap={47}
+                height={(291 * Number(projectList?.length)) / 3}
+                width="auto"
+                key={columnNum}
+              >
+                {projectList?.map((project, idx) =>
+                  idx % 3 === columnNum ? (
+                    <div onClick={() => setModalNumber(project.id)}>
+                      <ProjectCard
+                        projectCard={project}
+                        key={`project_card${idx}`}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  ),
+                )}
+              </Flex>
+            ))}
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
@@ -120,7 +118,15 @@ const Project = () => {
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Mobile>
-    </>
+      {modalNumber !== -1 && (
+        <DetailModal
+          id={modalNumber}
+          isOpen={isOpen}
+          modalRef={modalRef}
+          toggleModal={toggleModal}
+        />
+      )}
+    </Container>
   );
 };
 
@@ -129,7 +135,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchInfiniteQuery(['ceos', 'project'], () =>
-      projectApi.GET_PROJECT({ pageNum: 0, limit: 10000 }),
+      projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 10000 }),
     );
 
     return {
@@ -143,3 +149,7 @@ export const getStaticProps = async () => {
 };
 
 export default Project;
+
+const Container = styled.div`
+  position: relative;
+`;
