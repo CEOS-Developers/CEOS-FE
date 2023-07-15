@@ -12,8 +12,14 @@ import {
   PassDropdownList,
 } from '@admin/assets/data/dropDownList';
 import { useQuery } from '@tanstack/react-query';
-import { applyStatementApi } from '@ceos-fe/utils/src/apis/admin/applyStatementApi';
+import {
+  applicationInfoInterface,
+  applyStatementApi,
+} from '@ceos-fe/utils/src/apis/admin/applyStatementApi';
 import { ResponseInterface } from '@ceos-fe/utils';
+import ReactModal from 'react-modal';
+import { ApplicationModal } from './applicationModal';
+import { CloseBtn } from '@admin/assets/CloseBtn';
 
 interface DropdownInterface {
   option: DropdownItemInterface[];
@@ -37,25 +43,9 @@ const DropdownList: DropdownInterface[] = [
     placeholder: '최종 합격 여부',
   },
 ];
-interface applicationBriefInfoVos {
-  birth?: string;
-  documentPass: string;
-  email: string;
-  finalPass: string;
-  gender?: string;
-  id?: number;
-  interviewTime: string;
-  major?: string;
-  name: string;
-  phoneNumber: string;
-  semestersLeftNumber?: number;
-  university?: string;
-  uuid: string;
-  part?: string;
-}
 interface ApplicantResponse {
-  pageInfo: string;
-  applicationBriefInfoVos: applicationBriefInfoVos[];
+  pageInfo: PageInterface;
+  applicationBriefInfoVos: applicationInfoInterface[];
 }
 
 export default function ApplyStatement() {
@@ -65,14 +55,17 @@ export default function ApplyStatement() {
     pageSize: 7, // 한 페이지에 들어가는 데이터 개수
     total: 10, // 전체 페이지 개수
   });
+  //지원자 목록 가져오기
   const { data, isSuccess, isFetching, isError, isLoading } = useQuery<
     ResponseInterface<ApplicantResponse>
   >(['applicantData', pagination.page], () =>
     applyStatementApi.GET_APPLYCANT(pagination.page - 1, pagination.pageSize),
   );
+  // 지원자 목록 초기 데이터
   const [dataSource, setDataSource] = useState<object[]>(
     Array.from(new Array(pagination.pageSize), (_, i) => {
       return {
+        id: data?.data.applicationBriefInfoVos[i]?.id,
         uuid: data?.data.applicationBriefInfoVos[i]?.uuid.slice(0, 2),
         name: data?.data.applicationBriefInfoVos[i]?.name,
         part: '파트',
@@ -86,13 +79,18 @@ export default function ApplyStatement() {
       };
     }),
   );
+  // 모달창 open 여부
+  const [modalOpen, setModalOpen] = useState(false);
+  const [applicantId, setApplicantId] = useState(0);
 
+  // 페이지네이션 지원자 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
       if (data.data.applicationBriefInfoVos.length != 0) {
         setDataSource(
           Array.from(new Array(pagination.pageSize), (_, i) => {
             return {
+              id: data?.data.applicationBriefInfoVos[i]?.id,
               uuid: data?.data.applicationBriefInfoVos[i]?.uuid.slice(0, 4),
               name: data?.data.applicationBriefInfoVos[i]?.name,
               part: '프론트',
@@ -116,10 +114,8 @@ export default function ApplyStatement() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (isError) {
-    return <div>Error fetching data</div>;
-  }
 
+  // 페이지 변경
   const onChangePage = (newPage: number) => {
     setPagination({ ...pagination, page: newPage });
   };
@@ -195,8 +191,15 @@ export default function ApplyStatement() {
       title: '지원서',
       dataIndex: 'cv',
       width: '61px',
-      render: () => (
-        <Button variant="admin_stroke" webWidth={57}>
+      render: (_text: string, record: any) => (
+        <Button
+          variant="admin_stroke"
+          webWidth={57}
+          onClick={() => {
+            setModalOpen(true);
+            setApplicantId(record.id);
+          }}
+        >
           보기
         </Button>
       ),
@@ -244,6 +247,42 @@ export default function ApplyStatement() {
         columns={columns}
         onChangePage={onChangePage}
       />
+
+      {/* 지원서 보기 모달창 */}
+      <ReactModal
+        ariaHideApp={false}
+        isOpen={modalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        style={{
+          overlay: {
+            position: 'fixed',
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1000,
+          },
+          content: {
+            margin: 'auto',
+            marginLeft: '20%',
+            width: '1032px',
+            height: '80%',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: '20px',
+            overflow: 'hidden',
+          },
+        }}
+      >
+        <Flex
+          justify="flex-end"
+          height={26}
+          onClick={() => setModalOpen(false)}
+        >
+          <CloseBtn />
+        </Flex>
+        <ApplicationModal idx={applicantId} />
+      </ReactModal>
     </Container>
   );
 }
