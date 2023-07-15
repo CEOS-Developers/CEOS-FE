@@ -39,7 +39,7 @@ export default function Project() {
           </Text>
           <Button
             variant="admin_navy"
-            onClick={() => console.log('add')}
+            onClick={() => router.push(`/project/edit`)}
             webWidth={108}
           >
             프로젝트 추가

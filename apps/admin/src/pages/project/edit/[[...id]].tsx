@@ -78,7 +78,7 @@ export default function ProjectDetail() {
     mutateProject({
       name: getValues('name'),
       description: getValues('description'),
-      generation: getValues('generation'),
+      generation: Number(getValues('generation')),
       participants: getValues('participants').map((participant, idx) => {
         switch (idx) {
           case 0:
@@ -114,7 +114,9 @@ export default function ProjectDetail() {
   return (
     <>
       <Flex webGap={14} justify="flex-start">
-        <BackArrow />
+        <div onClick={() => router.back()} style={{ cursor: 'pointer' }}>
+          <BackArrow />
+        </div>
         <Text webTypo="Heading3" paletteColor="Black">
           프로젝트 {router.query.id ? '수정' : '추가'}
         </Text>
