@@ -207,7 +207,7 @@ export default function ApplyStatement() {
   ];
 
   return (
-    <Container>
+    <Container modalOpen={modalOpen}>
       <div className="title">
         <Text webTypo="Heading2">지원현황</Text>
         <Text webTypo="Body3">세오스 전체 지원자 현황입니다.</Text>
@@ -287,7 +287,8 @@ export default function ApplyStatement() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ modalOpen?: boolean }>`
+  position: ${({ modalOpen }) => (modalOpen ? 'fixed' : 'auto')};
   width: 1032px;
   display: flex;
   flex-direction: column;
