@@ -10,12 +10,12 @@ import {
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
 
-const Information = ({
-  register,
-  watch,
-  setValue,
-  handleSubmit,
-}: RecruitApplyFormInterface) => {
+interface InformationProps {
+  register: RecruitApplyFormInterface['register'];
+  setValue: RecruitApplyFormInterface['setValue'];
+}
+
+const Information = ({ register, setValue }: InformationProps) => {
   const changeDate = (date: string) => {
     let newDate = new Date(date);
     return `${newDate.getFullYear()}.${String(newDate.getMonth() + 1).padStart(
@@ -32,7 +32,10 @@ const Information = ({
           <Flex direction="row" justify="space-between" width={680} webGap={32}>
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">이름</Text>
-              <TextField width={328} {...register('name')} />
+              <TextField
+                width={328}
+                onChange={(e) => setValue('name', e.target.value)}
+              />
             </Flex>
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">성별</Text>
@@ -55,17 +58,26 @@ const Information = ({
           <Flex direction="row" justify="space-between" width={680} webGap={32}>
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">생년월일</Text>
-              <TextField width={328} {...register('birth')} />
+              <TextField
+                width={328}
+                onChange={(e) => setValue('birth', e.target.value)}
+              />
             </Flex>
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">이메일</Text>
-              <TextField width={328} {...register('email')} />
+              <TextField
+                width={328}
+                onChange={(e) => setValue('email', e.target.value)}
+              />
             </Flex>
           </Flex>
           <Flex justify="start" width={680} webGap={32}>
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">전화번호</Text>
-              <TextField width={328} {...register('phoneNumber')} />
+              <TextField
+                width={328}
+                onChange={(e) => setValue('phoneNumber', e.target.value)}
+              />
             </Flex>
           </Flex>
           <Line />
@@ -226,7 +238,7 @@ const Information = ({
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">전공(학과)</Text>
-            <TextField {...register('major')} />
+            <TextField onChange={(e) => setValue('major', e.target.value)} />
             <Flex direction="column" align="flex-start">
               <Text mobileTypo="Body2" paletteColor="Gray5">
                 *복수전공 및 부전공까지 포함하여 입력
@@ -238,7 +250,9 @@ const Information = ({
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">졸업까지 남은 학기 수</Text>
-            <TextField {...register('semestersLeftNumber')} />
+            <TextField
+              onChange={(e) => setValue('semestersLeftNumber', +e.target.value)}
+            />
             <Text mobileTypo="Body2" paletteColor="Gray5">
               *ex. 2학기
             </Text>
@@ -263,7 +277,9 @@ const Information = ({
             <Text mobileTypo="Heading4">
               이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
             </Text>
-            <TextField {...register('otherActivities')} />
+            <TextField
+              onChange={(e) => setValue('otherActivities', e.target.value)}
+            />
             <Text mobileTypo="Body2" paletteColor="Gray5">
               *다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등
             </Text>

@@ -1,15 +1,17 @@
-import { Desktop, Flex, Mobile, SelectButton, Text } from 'packages/ui';
+import { Flex, SelectButton, Text } from 'packages/ui';
 import { RowLine, Section } from '../';
 import SelectedPart from './SelectedPart';
 import { RecruitApplyFormInterface } from '../interface';
 
-const Part = ({
-  register,
-  watch,
-  setValue,
-  handleSubmit,
-  questionList,
-}: RecruitApplyFormInterface) => {
+interface PartProps {
+  register: RecruitApplyFormInterface['register'];
+  watch: RecruitApplyFormInterface['watch'];
+  setValue: RecruitApplyFormInterface['setValue'];
+  getValues: RecruitApplyFormInterface['getValues'];
+  questionList?: RecruitApplyFormInterface['questionList'];
+}
+
+const Part = ({ register, watch, setValue, questionList }: PartProps) => {
   const selectedPart = watch('part');
   const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
     [key: string]: number;
@@ -28,6 +30,7 @@ const Part = ({
       <Flex webGap={20} mobileGap={14}>
         {Object.keys(partInfo).map((key) => (
           <SelectButton
+            key={key}
             variant="ceos"
             value={key}
             webWidth={205}
@@ -42,8 +45,7 @@ const Part = ({
             <SelectedPart
               questionList={questionList}
               partIdx={partInfo[selectedPart]}
-              watch={watch}
-              register={register}
+              setValue={setValue}
             />
           )}
         </>

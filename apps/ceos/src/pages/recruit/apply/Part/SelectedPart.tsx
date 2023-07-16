@@ -1,20 +1,21 @@
 import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
-import { UseFormRegister, UseFormWatch } from 'react-hook-form';
-import { RecruitApplyValuesInterface } from 'packages/utils';
-import { PartName, RecruitApplyResponse } from '../interface';
-import styled from '@emotion/styled';
+import {
+  PartName,
+  RecruitApplyFormInterface,
+  RecruitApplyResponse,
+} from '../interface';
+
+interface SelectedPartProps {
+  partIdx: number;
+  questionList: RecruitApplyFormInterface['questionList'];
+  setValue: RecruitApplyFormInterface['setValue'];
+}
 
 const SelectedPart = ({
-  questionList,
   partIdx,
-  watch,
-  register,
-}: {
-  questionList: RecruitApplyResponse;
-  partIdx: number;
-  watch: UseFormWatch<RecruitApplyValuesInterface>;
-  register: UseFormRegister<RecruitApplyValuesInterface>;
-}) => {
+  questionList,
+  setValue,
+}: SelectedPartProps) => {
   const partNameList: PartName[] = [
     'productQuestions',
     'designQuestions',
@@ -35,21 +36,25 @@ const SelectedPart = ({
           <Text webTypo="Label3" mobileTypo="Heading4">{`${idx + 1}. ${
             ques.question
           }`}</Text>
-          {/* <Mobile> */}
-          <TextField
-            width={856}
-            multiline={true}
-            {...register(`partAnswers.${partIdx}.${idx}.answer`)}
-          />
-          {/* </Mobile> */}
-          {/* <Desktop>
+
+          <Desktop>
             <TextField
               width={856}
               multiline={ques.multiline}
-              value={watch(`partAnswers.${partIdx}.${idx}.answer`)}
-              {...register(`partAnswers.${partIdx}.${idx}.answer`)}
+              onChange={(e) =>
+                setValue(`partAnswers.${partIdx}.${idx}.answer`, e.target.value)
+              }
             />
-          </Desktop> */}
+          </Desktop>
+          <Mobile>
+            <TextField
+              width={856}
+              multiline={true}
+              onChange={(e) =>
+                setValue(`partAnswers.${partIdx}.${idx}.answer`, e.target.value)
+              }
+            />
+          </Mobile>
 
           <Flex direction="column" align="start">
             {ques.questionDetail.map((detail, idx) =>

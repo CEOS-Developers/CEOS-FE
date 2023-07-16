@@ -2,13 +2,12 @@ import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
 import { RowLine, Section } from '.';
 import { RecruitApplyFormInterface } from './interface';
 
-const Common = ({
-  register,
-  watch,
-  setValue,
-  handleSubmit,
-  questionList,
-}: RecruitApplyFormInterface) => {
+interface CommonProps {
+  setValue: RecruitApplyFormInterface['setValue'];
+  questionList?: RecruitApplyFormInterface['questionList'];
+}
+
+const Common = ({ setValue, questionList }: CommonProps) => {
   return (
     <>
       <Desktop>
@@ -27,7 +26,9 @@ const Common = ({
               <TextField
                 width={856}
                 multiline={ques.multiline}
-                {...register(`commonAnswers.${idx}.answer`)}
+                onChange={(e) =>
+                  setValue(`commonAnswers.${idx}.answer`, e.target.value)
+                }
               />
               <Flex direction="column" align="start">
                 {ques.questionDetail.map((detail, idx) =>
@@ -71,7 +72,9 @@ const Common = ({
               }`}</Text>
               <TextField
                 multiline={true}
-                {...register(`commonAnswers.${idx}.answer`)}
+                onChange={(e) =>
+                  setValue(`commonAnswers.${idx}.answer`, e.target.value)
+                }
               />
               <Flex direction="column" align="start">
                 {ques.questionDetail.map((detail, idx) =>

@@ -79,12 +79,20 @@ export const recruitApi = {
       });
     });
 
+    newUnableTimes.forEach((newTime, idx) => {
+      if (newTime.durations.length === 0) {
+        newUnableTimes.splice(idx);
+      }
+    });
+
     let newBody = {
       ...body,
       partAnswers: newPartAnswer,
       unableTimes: newUnableTimes,
       semestersLeftNumber: Number(body.semestersLeftNumber),
     };
+
+    console.log('newBody', newBody);
 
     const response = await ceosInstance.post(`/applications`, newBody);
 

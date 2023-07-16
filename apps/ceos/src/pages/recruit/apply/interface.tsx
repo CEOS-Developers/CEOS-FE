@@ -1,12 +1,11 @@
 import { RecruitApplyValuesInterface } from 'packages/utils';
 import {
+  UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
-
-export interface informationInterface {}
 
 export interface QuestionProps {
   questionId: number;
@@ -32,6 +31,7 @@ export interface RecruitApplyFormInterface {
   register: UseFormRegister<RecruitApplyValuesInterface>;
   watch: UseFormWatch<RecruitApplyValuesInterface>;
   setValue: UseFormSetValue<RecruitApplyValuesInterface>;
+  getValues: UseFormGetValues<RecruitApplyValuesInterface>;
   handleSubmit: UseFormHandleSubmit<RecruitApplyValuesInterface>;
   questionList?: RecruitApplyResponse;
 }

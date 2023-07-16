@@ -1,4 +1,4 @@
-import { Flex, Text, Button, theme, TextField } from '@ceos-fe/ui';
+import { Flex, Text, Button, theme } from '@ceos-fe/ui';
 import Information from './Information';
 import styled from '@emotion/styled';
 import {
@@ -25,7 +25,7 @@ import {
 } from './interface';
 
 const Apply = () => {
-  const { register, watch, setValue, handleSubmit } = useForm({
+  const { register, watch, setValue, getValues, handleSubmit } = useForm({
     defaultValues: {
       name: '',
       gender: '',
@@ -83,8 +83,8 @@ const Apply = () => {
       }));
 
       productObj
-        ? setValue('partAnswers', [...watch('partAnswers'), productObj])
-        : setValue('partAnswers', [...watch('partAnswers'), []]);
+        ? setValue('partAnswers', [...getValues('partAnswers'), productObj])
+        : setValue('partAnswers', [...getValues('partAnswers'), []]);
     }
 
     const times = data?.pages[0].data?.times;
@@ -102,8 +102,17 @@ const Apply = () => {
   }, [data]);
 
   const submitForm = () => {
-    const body = watch();
+    const body = getValues();
+    console.log(body, getValues('name'));
     if (questionList) recruitApi.POST_APPLY(questionList?.times, body);
+  };
+
+  const changeDate = (date: string) => {
+    let newDate = new Date(date);
+    return `${newDate.getFullYear()}.${String(newDate.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}.${String(newDate.getDate()).padStart(2, '0')}`;
   };
 
   return (
@@ -115,34 +124,22 @@ const Apply = () => {
       <TopMargin />
       <Flex direction="column">
         {/* 인적사항 질문 */}
-        <Information
-          register={register}
-          watch={watch}
-          setValue={setValue}
-          handleSubmit={handleSubmit}
-        />
+        <Information register={register} setValue={setValue} />
         {/* 공통 질문 */}
-        <Common
-          register={register}
-          watch={watch}
-          setValue={setValue}
-          handleSubmit={handleSubmit}
-          questionList={questionList}
-        />
+        <Common setValue={setValue} questionList={questionList} />
         {/* 파트별 질문 */}
         <Part
           register={register}
           watch={watch}
           setValue={setValue}
-          handleSubmit={handleSubmit}
+          getValues={getValues}
           questionList={questionList}
         />
         {/* 면접 날짜 */}
         <Schedule
-          register={register}
           watch={watch}
           setValue={setValue}
-          handleSubmit={handleSubmit}
+          getValues={getValues}
           questionList={questionList}
         />
         <Button variant="default" onClick={submitForm}>

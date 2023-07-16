@@ -1,18 +1,23 @@
 import { CheckBox, Desktop, Flex, Mobile, Text, theme } from 'packages/ui';
 import { ColumnLine } from '.';
 import styled from '@emotion/styled';
-import css from 'styled-jsx/css';
 import { RecruitApplyFormInterface } from './interface';
 
+interface ScheduleProps {
+  watch: RecruitApplyFormInterface['watch'];
+  setValue: RecruitApplyFormInterface['setValue'];
+  getValues: RecruitApplyFormInterface['getValues'];
+  questionList?: RecruitApplyFormInterface['questionList'];
+}
+
 const Schedule = ({
-  register,
   watch,
   setValue,
-  handleSubmit,
+  getValues,
   questionList,
-}: RecruitApplyFormInterface) => {
+}: ScheduleProps) => {
   const isUnavailable = (timeIdx: number) => {
-    const isPossible = watch('unableTimes')[timeIdx].includes(1); // 하나라도 가능한 게 있는가?
+    const isPossible = watch(`unableTimes.${timeIdx}`).includes(1);
     return !isPossible;
   };
 
@@ -69,7 +74,7 @@ const Schedule = ({
                 const [start, end] = duration.split('-');
                 return (
                   <CheckBox
-                    checked={watch('unableTimes')[timeIdx][durIdx] === 1}
+                    checked={watch(`unableTimes.${timeIdx}.${durIdx}`) === 1}
                     onClick={() => onClickCheck(timeIdx, durIdx)}
                     value={[start, `~ ${end}`]}
                     type="column"
@@ -122,7 +127,9 @@ const Schedule = ({
                   const [start, end] = duration.split('-');
                   return (
                     <CheckBox
-                      checked={watch('unableTimes')[timeIdx][durIdx] === 1}
+                      checked={
+                        getValues(`unableTimes.${timeIdx}.${durIdx}`) === 1
+                      }
                       onClick={() => onClickCheck(timeIdx, durIdx)}
                       value={[`${start} ~ ${end}`]}
                       type="row"
