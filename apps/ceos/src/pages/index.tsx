@@ -8,6 +8,7 @@ import { Text } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
+import { FooterText } from '@ceos/components/FooterText';
 
 export const getStaticProps = async () => {
   try {
@@ -47,21 +48,7 @@ export default function Home() {
         <Sponsors />
       </HomeFlex>
       {/* section4 => white */}
-      <Text
-        webTypo="Label3"
-        paletteColor="Gray4"
-        css={css`
-          display: flex;
-          justify-content: center;
-          margin-bottom: 80px;
-
-          @media (max-width: 1023px) {
-            margin-bottom: 30px;
-          }
-        `}
-      >
-        © 2016-2023 CEOS ALL RIGHTS RESERVED.
-      </Text>
+      <FooterText />
       {/*section 5 */}
     </main>
   );

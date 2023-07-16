@@ -24,6 +24,10 @@ export default function Rewards() {
       css={css`
         width: 1032px;
         margin: 80px 0 100px 0px;
+
+        @media (max-width: 1023px) {
+          width: 100%;
+        }
       `}
     >
       <Title
@@ -36,6 +40,7 @@ export default function Rewards() {
           flex-wrap: wrap;
           gap: 24px;
           align-items: flex-start;
+          margin-top: 80px;
         `}
       >
         {awardList &&

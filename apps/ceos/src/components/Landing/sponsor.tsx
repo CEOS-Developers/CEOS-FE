@@ -43,16 +43,17 @@ export const Sponsors = () => {
       className="rewards"
       css={css`
         width: 100vw;
+        margin-bottom: 80px;
 
         @media (max-width: 1023px) {
+          margin-bottom: 60px;
           width: 716px;
         }
 
         @media (max-width: 390px) {
+          margin-bottom: 60px;
           width: 346px;
         }
-
-        margin-bottom: 60px;
       `}
     >
       <Text
@@ -72,23 +73,11 @@ export const Sponsors = () => {
       >
         CEOS 활동에 도움을 주시는 공식 파트너 단체입니다.
       </Text>
-      {/* <div
-        css={css`
-          gap: 24px;
-          display: flex;
-          margin-bottom: 80px;
 
-          @media (max-width: 390px) {
-            width: 346px;
-            word-wrap: break-word;
-          }
-        `}
-      > */}
       <Desktop
         css={css`
           gap: 24px;
           display: flex;
-          margin-bottom: 80px;
         `}
       >
         {sponsorList &&
@@ -114,7 +103,6 @@ export const Sponsors = () => {
               <SponsorCard key={s.id} sponsorCard={s} />
             ))}
       </Mobile>
-      {/* </div> */}
     </div>
   );
 };
