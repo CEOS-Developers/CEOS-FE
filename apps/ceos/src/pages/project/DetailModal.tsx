@@ -1,51 +1,27 @@
 import styled from '@emotion/styled';
 import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { ResponseInterface, projectApi } from 'packages/utils';
+import { useQuery } from '@tanstack/react-query';
+import {
+  DetailPrejectInterface,
+  ResponseInterface,
+  projectApi,
+} from 'packages/utils';
 import Image from 'next/image';
 import { Shortcut } from '@ceos/components/Shortcut';
-import { CloseIcon } from 'packages/ui/src/assets/CloseIcon';
-
-interface DetailPrejectInterface {
-  projectId: number;
-  name: string;
-  description: string;
-  generation: number;
-  projectUrls: {
-    id: number;
-    category: string;
-    linkUrl: string;
-  }[];
-  projectImages: {
-    created_at: string;
-    updated_at: string;
-    id: number;
-    category: string;
-    imageUrl: string;
-  }[];
-  participants: {
-    created_at: string;
-    updated_at: string;
-    id: number;
-    part: string;
-    name: string;
-  }[];
-}
+import { useRef } from 'react';
+import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
 
 interface ModalProps {
-  isOpen: boolean;
   id: number;
-  modalRef: React.RefObject<HTMLDivElement>;
-  toggleModal: () => void;
+  setClose: () => void;
 }
 
-const DetailModal = ({ id }: ModalProps) => {
+const DetailModal = ({ id, setClose }: ModalProps) => {
   const { data, isLoading, isSuccess } = useQuery<
     ResponseInterface<DetailPrejectInterface>
   >(['ceos', 'project', 'modal'], () => projectApi.GET_A_PROJECT({ id: id }));
 
-  console.log(id, data);
   const projectInfo = data?.data;
 
   type PartKey = '기획' | '디자인' | '프론트엔드' | '백엔드';
@@ -60,19 +36,24 @@ const DetailModal = ({ id }: ModalProps) => {
     const key = person.part as PartKey;
     Part[key].name = [...Part[key].name, person.name];
   });
+  const modalRef = useRef(null);
 
   return (
-    <div css={backCss}>
-      <CloseIcon />
+    <div css={backCss} onClick={setClose} ref={modalRef}>
+      <Desktop css={iconCss} onClick={setClose}>
+        <WhiteCloseIcon />
+      </Desktop>
       <Container>
+        <Mobile css={iconCss} onClick={setClose} style={{ width: 'auto' }}>
+          <WhiteCloseIcon fillColor="#232527" />
+        </Mobile>
+
         <MainImage
           alt="mainImage"
-          // src={projectInfo?.projectImages[0].imageUrl}
           src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
           width={0}
           height={0}
         />
-
         <Desktop style={{ width: '100%' }}>
           <Flex justify="space-between" padding="40px 64px">
             <Flex direction="column" align="start">
@@ -185,7 +166,20 @@ export const backCss = () => css`
   }
 `;
 
+const iconCss = () => css`
+  position: relative;
+  right: -1070px;
+
+  @media (max-width: 1023px) {
+    position: fixed;
+    top: 79px;
+    right: 32px;
+  }
+`;
+
 const Container = styled(Flex)`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -198,7 +192,7 @@ const Container = styled(Flex)`
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
 
   z-index: 99;
-  overflow: auto;
+  overflow-x: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
 
   ::-webkit-scrollbar {
     display: none;
@@ -238,3 +232,13 @@ const TeamWrapper = styled.div`
     background: var(--1, #f4f6f9);
   }
 `;
+
+// const IconContainer = styled.div`
+//   position: absolute;
+//   right: -42px;
+
+//   @media (max-width: 1023px) {
+//     top: 16px;
+//     right: 16px;
+//   }
+// `;

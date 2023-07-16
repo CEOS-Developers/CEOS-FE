@@ -30,10 +30,6 @@ const FAQ = () => {
     return { recruitData, activityData, partData };
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
 
   return (

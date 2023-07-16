@@ -1,5 +1,31 @@
 import { ceosInstance } from '../axiosConfig';
 
+export interface DetailPrejectInterface {
+  projectId: number;
+  name: string;
+  description: string;
+  generation: number;
+  projectUrls: {
+    id: number;
+    category: string;
+    linkUrl: string;
+  }[];
+  projectImages: {
+    created_at: string;
+    updated_at: string;
+    id: number;
+    category: string;
+    imageUrl: string;
+  }[];
+  participants: {
+    created_at: string;
+    updated_at: string;
+    id: number;
+    part: string;
+    name: string;
+  }[];
+}
+
 export const projectApi = {
   GET_ALL_PROJECTS: async ({
     pageNum,
@@ -16,8 +42,6 @@ export const projectApi = {
   },
   GET_A_PROJECT: async ({ id }: { id: number }) => {
     const response = await ceosInstance.get(`/projects/${id}`);
-
-    console.log(id, response);
 
     return response.data;
   },

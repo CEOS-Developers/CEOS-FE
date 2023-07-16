@@ -6,7 +6,7 @@ import {
   ProjectCardProps,
 } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { projectApi, useModal } from '@ceos-fe/utils';
+import { projectApi } from '@ceos-fe/utils';
 import { ResponseInterface } from '@ceos-fe/utils';
 import {
   QueryClient,
@@ -30,8 +30,6 @@ interface ProjectResponse {
 }
 
 const Project = () => {
-  const { isOpen, modalRef, toggleModal } = useModal();
-
   const { data, isLoading, isSuccess } = useInfiniteQuery<
     ResponseInterface<ProjectResponse>
   >(
@@ -59,6 +57,9 @@ const Project = () => {
   };
 
   const [modalNumber, setModalNumber] = useState(-1);
+  const setClose = () => {
+    setModalNumber(-1);
+  };
 
   return (
     <Container>
@@ -112,19 +113,19 @@ const Project = () => {
           <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
             {projectList?.map((project, idx) => (
-              <ProjectCard projectCard={project} />
+              <div
+                onClick={() => setModalNumber(project.id)}
+                key={`project_mobile_${idx}`}
+              >
+                <ProjectCard projectCard={project} />
+              </div>
             ))}
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Mobile>
       {modalNumber !== -1 && (
-        <DetailModal
-          id={modalNumber}
-          isOpen={isOpen}
-          modalRef={modalRef}
-          toggleModal={toggleModal}
-        />
+        <DetailModal id={modalNumber} setClose={setClose} />
       )}
     </Container>
   );
