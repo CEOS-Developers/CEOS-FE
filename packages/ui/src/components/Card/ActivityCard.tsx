@@ -16,7 +16,7 @@ export const ActivityCard = (props: {
 }): EmotionJSX.Element => {
   const { imageUrl, name, content } = props.activityCard;
   return (
-    <Flex direction="column">
+    <Flex direction="column" width="auto">
       {/* <ActivityImg src={imageUrl} /> */}
       <ActivityImg
         src={'https://avatars.githubusercontent.com/u/65931227?v=4'}

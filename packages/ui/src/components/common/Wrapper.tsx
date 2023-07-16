@@ -9,10 +9,10 @@ export const Flex = styled.div<{
   padding?: string;
   webGap?: number;
   mobileGap?: number;
-  width?: number;
   widthPer?: number;
-  height?: number;
   heightPer?: number;
+  width?: number | string;
+  height?: number | string;
   borderRadius?: number;
   backgroundColor?: KeyOfPalette;
 }>`
@@ -37,13 +37,6 @@ export const Flex = styled.div<{
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
     gap: ${({ mobileGap }) => (mobileGap ? `${mobileGap}px` : '0px')};
-  }
-
-  &.header-padding {
-    padding-top: 70px;
-    @media (max-width: 1023px) {
-      padding-top: 124px;
-    }
   }
 `;
 

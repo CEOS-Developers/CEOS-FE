@@ -164,7 +164,7 @@ const CustomFlex = styled(Flex)`
   }
 `;
 
-const TopMargin = styled.div`
+export const TopMargin = styled.div`
   height: 80px;
   @media (max-width: 1023px) {
     height: 36px;
