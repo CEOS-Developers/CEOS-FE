@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Table } from 'antd';
 import { Pagination, PageInterface } from './Pagination';
+import { Space } from '@ceos-fe/ui';
 
 interface ColumnsInterface {
   title: string;
@@ -32,6 +33,7 @@ export const DataGrid = ({
         columns={columns}
         pagination={false}
       />
+      <Space height={48} />
       <Pagination pagination={pagination} onChangePage={onChangePage} />
     </>
   );
