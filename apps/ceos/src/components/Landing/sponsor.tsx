@@ -1,4 +1,11 @@
-import { Text, Flex, SponsorCard, SponsorCardProps } from '@ceos-fe/ui';
+import {
+  Text,
+  Flex,
+  SponsorCard,
+  SponsorCardProps,
+  Desktop,
+  Mobile,
+} from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { ResponseInterface, sponsorApi } from '@ceos-fe/utils';
@@ -35,14 +42,29 @@ export const Sponsors = () => {
     <div
       className="rewards"
       css={css`
-        width: 100%;
+        width: 100vw;
+
+        @media (max-width: 1023px) {
+          width: 716px;
+        }
+
+        @media (max-width: 390px) {
+          width: 346px;
+        }
+
+        margin-bottom: 60px;
       `}
     >
-      <Text webTypo="Heading1_Eng" paletteColor="Blue">
+      <Text
+        webTypo="Heading1_Eng"
+        mobileTypo="Heading1_Eng"
+        paletteColor="Blue"
+      >
         Sponsored by
       </Text>
       <Text
         webTypo="Body1"
+        mobileTypo="Body1"
         css={css`
           margin-top: 12px;
           margin-bottom: 32px;
@@ -50,10 +72,22 @@ export const Sponsors = () => {
       >
         CEOS 활동에 도움을 주시는 공식 파트너 단체입니다.
       </Text>
-      <div
+      {/* <div
         css={css`
-          display: flex;
           gap: 24px;
+          display: flex;
+          margin-bottom: 80px;
+
+          @media (max-width: 390px) {
+            width: 346px;
+            word-wrap: break-word;
+          }
+        `}
+      > */}
+      <Desktop
+        css={css`
+          gap: 24px;
+          display: flex;
           margin-bottom: 80px;
         `}
       >
@@ -63,7 +97,24 @@ export const Sponsors = () => {
             .map((s: SponsorInterface) => (
               <SponsorCard key={s.id} sponsorCard={s} />
             ))}
-      </div>
+      </Desktop>
+      <Mobile
+        css={css`
+          width: 346px;
+          flex-wrap: wrap;
+          gap: 14px;
+          margin-left: auto;
+          margin-right: auto;
+        `}
+      >
+        {sponsorList &&
+          sponsorList
+            .slice(0, 4)
+            .map((s: SponsorInterface) => (
+              <SponsorCard key={s.id} sponsorCard={s} />
+            ))}
+      </Mobile>
+      {/* </div> */}
     </div>
   );
 };

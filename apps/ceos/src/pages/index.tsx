@@ -31,16 +31,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home() {
-<<<<<<< HEAD
-=======
-  const { register, watch, setValue } = useForm({
-    defaultValues: {
-      date: '',
-      adminDate: '',
-    },
-  });
-
->>>>>>> 8dd8f1c11336641d4e1d441225606050408b4f93
   return (
     <main>
       <SubHeader />
@@ -49,8 +39,10 @@ export default function Home() {
         <Rewards />
       </HomeFlex>
       {/* section2 => white */}
+
       <Buttons />
       {/* section3 => blue */}
+
       <HomeFlex margin="0 auto 0 auto">
         <Sponsors />
       </HomeFlex>
@@ -62,6 +54,10 @@ export default function Home() {
           display: flex;
           justify-content: center;
           margin-bottom: 80px;
+
+          @media (max-width: 1023px) {
+            margin-bottom: 30px;
+          }
         `}
       >
         © 2016-2023 CEOS ALL RIGHTS RESERVED.

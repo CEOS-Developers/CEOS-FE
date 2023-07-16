@@ -11,16 +11,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-<<<<<<< HEAD
-// const CustomFlex = styled(Flex)`
-//   @media (max-width: 1023px) {
-//     width: 346px;
-//   }
-// `;
-=======
 const CustomFlex = styled(Flex)`
   @media (max-width: 1023px) {
     padding: 14px;
   }
 `;
->>>>>>> 8dd8f1c11336641d4e1d441225606050408b4f93

@@ -89,7 +89,7 @@ export const RewardCard = (props: {
         <Box>
           <TitleWrapper>
             <Text mobileTypo="Heading4" paletteColor="Black">
-              {generation}
+              {generation}기
             </Text>
             <Text mobileTypo="Body2" paletteColor="Gray5">
               {/* {time} */}
@@ -164,7 +164,7 @@ export const AdminRewardCard = (props: {
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" paletteColor="Black">
-              {generation}
+              {generation}기
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
               {/* {time} */}

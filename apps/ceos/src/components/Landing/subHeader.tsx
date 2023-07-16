@@ -11,7 +11,13 @@ export const SubHeader = () => {
         <Text webTypo="Heading2" mobileTypo="Heading1_Kor" paletteColor="White">
           신촌 연합 IT 창업동아리
         </Text>
-        <Logo backColor="White" width={310} height={120} marginLeft={0} />
+        <Logo
+          backColor="White"
+          width={310}
+          height={120}
+          marginLeft={0}
+          className="small"
+        />
       </div>
     </div>
   );

@@ -7,20 +7,29 @@ export const Logo = ({
   height = 42,
   backColor = 'Blue',
   marginLeft = 0,
+  className = '',
 }: {
   width?: number;
   height?: number;
   backColor?: KeyOfPalette;
   marginLeft?: number;
+  className?: string;
 }) => {
   return (
     <div
-      className="logo"
+      className={`logo || ${className}`}
       css={css`
         width: ${width}px;
         height: ${height}px;
         color: ${backColor};
         margin-left: ${marginLeft}vw;
+
+        &.small {
+          @media (max-width: 1023px) {
+            width: 180px;
+            height: 52px;
+          }
+        }
       `}
     >
       <svg

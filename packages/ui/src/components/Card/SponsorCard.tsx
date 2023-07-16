@@ -70,6 +70,8 @@ const Wrapper = styled.div`
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
+    width: 166px;
+    height: 171px;
   }
   @media (max-width: 767px) {
   }
@@ -81,6 +83,11 @@ const Profile = styled.img<{ admin?: boolean }>`
   background-color: ${theme.palette.Gray5}
   border-radius: 12px;
   margin-bottom: ${({ admin }) => (admin ? '16px' : '24px;')};
+
+  @media (max-width: 1023px) {
+    height: 90px;
+    width: 90px;
+  }
 `;
 
 const Button = styled.button`
