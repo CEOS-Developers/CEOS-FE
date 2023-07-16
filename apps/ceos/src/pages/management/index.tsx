@@ -1,5 +1,5 @@
 import { Title } from '@ceos/components/Title';
-import { Flex, MentorCard, ManagementCard } from '@ceos-fe/ui';
+import { Flex, MentorCard, ManagementCard, EmptyCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { managementApi, ResponseInterface } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -33,9 +33,14 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'management'], () => {
-      managementApi.GET_MANAGE({ pageNum: 0, limit: 1000 });
+    await queryClient.prefetchQuery(['ceos', 'mentor'], () => {
+      managementApi.GET_MENTOR({ pageNum: 0, limit: 1000 });
     });
+
+    await queryClient.prefetchQuery(['ceos', 'manager'], () => {
+      managementApi.GET_MANAGER();
+    });
+
     return {
       props: {
         dehydratedProps: dehydrate(queryClient),
@@ -47,24 +52,21 @@ export const getStaticProps = async () => {
 };
 
 const Management = () => {
-  const { data } = useQuery<{
-    manageData: ResponseInterface<ManageResponse>;
-  }>(['ceos', 'management'], async () => {
-    const manageData = await managementApi.GET_MANAGE({
+  const { data } = useQuery(['ceos', 'mentor'], async () => {
+    const manageData = await managementApi.GET_MENTOR({
       pageNum: 0,
       limit: 1000,
     });
+    const partManagerData = await managementApi.GET_MANAGER();
 
-    return manageData;
+    return { manageData, partManagerData };
   });
 
-  const managers = data?.managers?.filter((m: ManagerInterface) => {
-    return m.role === '운영진';
-  });
-
-  const mentors = data?.managers?.filter((m: ManagerInterface) => {
+  const mentors = data?.manageData?.managers.filter((m: ManagerInterface) => {
     return m.role === '멘토';
   });
+
+  const managers = data?.partManagerData;
 
   return (
     <Flex
@@ -72,6 +74,10 @@ const Management = () => {
       css={css`
         width: 1032px;
         margin: 80px 0 100px 0px;
+
+        @media (max-width: 1023px) {
+          width: 717px;
+        }
       `}
     >
       <Title
@@ -79,7 +85,17 @@ const Management = () => {
         explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
       />
       <div css={ListCss}>
-        {managers?.map((manager: ManagerInterface) => (
+        {managers?.presidency.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        <EmptyCard />
+        {managers?.generalAffairs.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        {managers?.partLeaders.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        {managers?.managers.map((manager: ManagerInterface) => (
           <ManagementCard key={manager.id} managementCard={manager} />
         ))}
       </div>

@@ -68,16 +68,20 @@ export const Sponsors = () => {
         mobileTypo="Body1"
         css={css`
           margin-top: 12px;
-          margin-bottom: 32px;
         `}
       >
         CEOS 활동에 도움을 주시는 공식 파트너 단체입니다.
       </Text>
 
-      <Desktop
+      <div
         css={css`
+          display: flex;
+          @media (max-width: 1023px) {
+            display: none;
+          }
           gap: 24px;
           display: flex;
+          margin-top: 32px;
         `}
       >
         {sponsorList &&
@@ -86,7 +90,7 @@ export const Sponsors = () => {
             .map((s: SponsorInterface) => (
               <SponsorCard key={s.id} sponsorCard={s} />
             ))}
-      </Desktop>
+      </div>
       <Mobile
         css={css`
           width: 346px;
@@ -94,6 +98,7 @@ export const Sponsors = () => {
           gap: 14px;
           margin-left: auto;
           margin-right: auto;
+          margin-top: 32px;
         `}
       >
         {sponsorList &&

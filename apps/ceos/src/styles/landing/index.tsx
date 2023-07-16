@@ -107,4 +107,9 @@ export const ListCss = css`
   flex-wrap: wrap;
   gap: 24px;
   align-items: flex-start;
+  margin-top: 80px;
+
+  @media (max-width: 1023px) {
+    width: 750px;
+  }
 `;
