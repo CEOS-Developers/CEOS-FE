@@ -33,9 +33,7 @@ export interface AwardResponse {
 }
 
 export const Rewards = () => {
-  const { data } = useQuery<{
-    awardData: ResponseInterface<AwardResponse>;
-  }>(['ceos', 'award'], async () => {
+  const { data } = useQuery(['ceos', 'award'], async () => {
     const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 16 });
     return awardData;
   });

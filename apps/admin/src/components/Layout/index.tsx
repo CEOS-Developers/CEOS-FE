@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { Flex } from '@ceos-fe/ui';
-import React from 'react';
 import Sidebar from '../Sidebar/index';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -8,7 +7,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Sidebar />
       <ChildrenContainer>
-        <Flex direction="column" width={1032} padding="88px 0">
+        <Flex
+          direction="column"
+          width={1032}
+          padding="88px 0"
+          align="flex-start"
+          justify="flex-start"
+        >
           {children}
         </Flex>
       </ChildrenContainer>

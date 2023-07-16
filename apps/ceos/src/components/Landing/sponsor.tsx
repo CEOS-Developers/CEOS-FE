@@ -28,9 +28,7 @@ interface SponsorResponse {
 }
 
 export const Sponsors = () => {
-  const { data } = useQuery<{
-    sponsorData: ResponseInterface<SponsorResponse>;
-  }>(['ceos', 'sponsor'], async () => {
+  const { data } = useQuery(['ceos', 'sponsor'], async () => {
     const sponsorData = await sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
 
     return sponsorData;

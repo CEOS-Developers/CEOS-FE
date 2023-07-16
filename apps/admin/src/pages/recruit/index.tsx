@@ -221,7 +221,11 @@ export default function Recruit() {
 
       <Button
         variant="admin"
-        style={{ marginTop: '48px', transform: 'translate(-50%, 0)' }}
+        style={{
+          marginTop: '48px',
+          transform: 'translate(-50%, 0)',
+          alignSelf: 'center',
+        }}
         onClick={handleSave}
       >
         저장하기

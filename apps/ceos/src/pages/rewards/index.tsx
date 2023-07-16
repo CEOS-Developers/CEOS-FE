@@ -10,9 +10,7 @@ import {
 import { FooterText } from '@ceos/components/FooterText';
 
 export default function Rewards() {
-  const { data } = useQuery<{
-    awardData: ResponseInterface<AwardResponse>;
-  }>(['ceos', 'award'], async () => {
+  const { data } = useQuery(['ceos', 'award'], async () => {
     const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 20 });
     return awardData;
   });
@@ -60,6 +58,12 @@ export default function Rewards() {
       >
         <FooterText />
       </div>
+      {/* <Mobile
+        css={css`
+          margin-top: 36px;
+          justify-content: center;
+        `}
+      ></Mobile> */}
     </Flex>
   );
 }
