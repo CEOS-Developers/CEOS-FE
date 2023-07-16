@@ -1,9 +1,5 @@
 import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
-import {
-  PartName,
-  RecruitApplyFormInterface,
-  RecruitApplyResponse,
-} from '../interface';
+import { PartName, RecruitApplyFormInterface } from '../interface';
 
 interface SelectedPartProps {
   partIdx: number;
@@ -48,7 +44,7 @@ const SelectedPart = ({
           </Desktop>
           <Mobile>
             <TextField
-              width={856}
+              width={1000}
               multiline={true}
               onChange={(e) =>
                 setValue(`partAnswers.${partIdx}.${idx}.answer`, e.target.value)

@@ -71,6 +71,7 @@ const Common = ({ setValue, questionList }: CommonProps) => {
                 ques.question
               }`}</Text>
               <TextField
+                width={1000}
                 multiline={true}
                 onChange={(e) =>
                   setValue(`commonAnswers.${idx}.answer`, e.target.value)

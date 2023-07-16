@@ -116,7 +116,7 @@ const Apply = () => {
   };
 
   return (
-    <Flex direction="column">
+    <Wrapper direction="column">
       <Title
         title="CEOS 18기 리크루팅"
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
@@ -149,7 +149,7 @@ const Apply = () => {
           © 2016-2023 Ceos ALL RIGHTS RESERVED.
         </Text>
       </Flex>
-    </Flex>
+    </Wrapper>
   );
 };
 
@@ -177,6 +177,12 @@ const TopMargin = styled.div`
   height: 80px;
   @media (max-width: 1023px) {
     height: 36px;
+  }
+`;
+
+const Wrapper = styled(Flex)`
+  @media (max-width: 1023px) {
+    padding: 23px;
   }
 `;
 

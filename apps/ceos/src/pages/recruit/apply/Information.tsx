@@ -24,6 +24,8 @@ const Information = ({ register, setValue }: InformationProps) => {
     )}.${String(newDate.getDate()).padStart(2, '0')}`;
   };
 
+  const univ = ['연세대학교', '서강대학교', '이화여자대학교', '홍익대학교'];
+
   return (
     <Flex direction="column">
       {/* 데스크탑 뷰 */}
@@ -85,30 +87,14 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Flex direction="column" align="flex-start" width={680} webGap={8}>
               <Text webTypo="Label3">재학 중인 학교</Text>
               <Flex webGap={12}>
-                <SelectButton
-                  variant="ceos"
-                  value="연세대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="서강대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="이화여자대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="홍익대학교"
-                  webWidth={161}
-                  {...register('university')}
-                />
+                {univ.map((uni) => (
+                  <SelectButton
+                    variant="ceos"
+                    value={uni}
+                    webWidth={161}
+                    {...register('university')}
+                  />
+                ))}
               </Flex>
               <Text webTypo="Body3" paletteColor="Gray5">
                 *학부생, 대학원생, 휴학생 모두 해당
@@ -174,36 +160,34 @@ const Information = ({ register, setValue }: InformationProps) => {
         <Flex direction="column" mobileGap={28}>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">이름</Text>
-            <TextField {...register('name')} />
+            <CustomTextField {...register('name')} />
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">성별</Text>
             <Flex mobileGap={14}>
               <SelectButton
                 variant="ceos"
-                value="남성"
-                webWidth={158}
+                value="남성 "
                 {...register('gender')}
               />
               <SelectButton
                 variant="ceos"
-                value="여성"
-                webWidth={158}
+                value="여성 "
                 {...register('gender')}
               />
             </Flex>
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">생년월일</Text>
-            <TextField {...register('birth')} />
+            <CustomTextField {...register('birth')} />
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">이메일</Text>
-            <TextField {...register('email')} />
+            <CustomTextField {...register('email')} />
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">전화번호</Text>
-            <TextField {...register('phoneNumber')} />
+            <CustomTextField {...register('phoneNumber')} />
           </Flex>
           <Line />
           <Flex direction="column" align="flex-start" mobileGap={14}>
@@ -211,24 +195,24 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Flex mobileGap={14}>
               <SelectButton
                 variant="ceos"
-                value="연세대학교"
+                value="연세대학교 "
                 {...register('university')}
               />
               <SelectButton
                 variant="ceos"
-                value="서강대학교"
+                value="서강대학교 "
                 {...register('university')}
               />
             </Flex>
             <Flex mobileGap={14}>
               <SelectButton
                 variant="ceos"
-                value="이화여자대학교"
+                value="이화여자대학교 "
                 {...register('university')}
               />
               <SelectButton
                 variant="ceos"
-                value="홍익대학교"
+                value="홍익대학교 "
                 {...register('university')}
               />
             </Flex>
@@ -238,7 +222,9 @@ const Information = ({ register, setValue }: InformationProps) => {
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">전공(학과)</Text>
-            <TextField onChange={(e) => setValue('major', e.target.value)} />
+            <CustomTextField
+              onChange={(e) => setValue('major', e.target.value)}
+            />
             <Flex direction="column" align="flex-start">
               <Text mobileTypo="Body2" paletteColor="Gray5">
                 *복수전공 및 부전공까지 포함하여 입력
@@ -250,7 +236,7 @@ const Information = ({ register, setValue }: InformationProps) => {
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">졸업까지 남은 학기 수</Text>
-            <TextField
+            <CustomTextField
               onChange={(e) => setValue('semestersLeftNumber', +e.target.value)}
             />
             <Text mobileTypo="Body2" paletteColor="Gray5">
@@ -277,7 +263,7 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Text mobileTypo="Heading4">
               이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
             </Text>
-            <TextField
+            <CustomTextField
               onChange={(e) => setValue('otherActivities', e.target.value)}
             />
             <Text mobileTypo="Body2" paletteColor="Gray5">
@@ -302,4 +288,8 @@ const Line = styled.div`
   @media (max-width: 1023px) {
     width: 100%;
   }
+`;
+
+export const CustomTextField = styled(TextField)`
+  width: 100%;
 `;

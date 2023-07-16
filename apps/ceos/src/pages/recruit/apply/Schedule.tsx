@@ -90,7 +90,6 @@ const Schedule = ({
         <Flex
           direction="column"
           align="start"
-          width={856}
           mobileGap={36}
           margin={'24px 0 36px 0'}
         >
