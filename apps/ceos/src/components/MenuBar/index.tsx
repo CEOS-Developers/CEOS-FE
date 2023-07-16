@@ -50,6 +50,7 @@ export const MenuBar = (props: MenuProps) => {
 };
 
 export const backCss = () => css`
+  z-index: 10;
   &.open {
     position: fixed;
     top: 0;
