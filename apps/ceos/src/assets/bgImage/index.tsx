@@ -22,6 +22,7 @@ export const BgImage = () => {
     <div
       css={css`
         position: absolute;
+        display: block;
         z-index: 1;
         width: 100vw;
       `}
@@ -732,6 +733,7 @@ export const MiniBgImg = () => {
       css={css`
         position: absolute;
         z-index: 1;
+        display: block;
         width: 100vw;
       `}
     >
