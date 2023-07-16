@@ -148,12 +148,12 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 30px 26px;
   box-sizing: border-box;
-  width: 272px;
+  width: 240px;
 
   background-color: ${theme.palette.Gray1};
   border-radius: 16px;
 
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
 

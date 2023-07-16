@@ -112,4 +112,8 @@ export const ListCss = css`
   @media (max-width: 1023px) {
     width: 750px;
   }
+  @media (max-width: 390px) {
+    width: 346px;
+    gap: 14px;
+  }
 `;

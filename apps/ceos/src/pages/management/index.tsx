@@ -76,7 +76,11 @@ const Management = () => {
         margin: 80px 0 100px 0px;
 
         @media (max-width: 1023px) {
-          width: 717px;
+          width: 750px;
+        }
+        @media (max-width: 390px) {
+          width: 346px;
+          margin-top: 36px;
         }
       `}
     >
@@ -101,8 +105,8 @@ const Management = () => {
       </div>
       <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
       <div css={ListCss}>
-        {mentors?.map((manager: ManagerInterface) => (
-          <MentorCard key={manager.id} mentorCard={manager} />
+        {mentors?.map((mentor: ManagerInterface) => (
+          <MentorCard key={mentor.id} mentorCard={mentor} />
         ))}
       </div>
     </Flex>
