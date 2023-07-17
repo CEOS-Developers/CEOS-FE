@@ -1,7 +1,7 @@
 import { adminInstance } from '../axiosConfig';
 
 const accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk0NTc0ODYsImV4cCI6MTY4OTU0Mzg4Nn0.bYk9Yi6JRKBGt2Gpd_Ewt_T9N7B5dYDXzbByvY2vmijIZQBbVKvCt7AKZ5A7KNJVKEx8-cgB3ygXTPio2-qaPQ';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk1NDUzODQsImV4cCI6MTY4OTYzMTc4NH0.hrs6xO4owd5KVBxYWB1CPJ8U8xtILkNvtshDl2ikrw5Tu8QyW1pIlOJEqm0vK7O-kmBz3gUhP62q_Vt3U9952A';
 
 export interface applicationInfoInterface {
   birth?: string;
@@ -33,6 +33,23 @@ export const applyStatementApi = {
       },
     });
 
+    return response.data;
+  },
+  GET_APPLICANTEXCEL: async () => {
+    const response = await adminInstance.get('/applications/file/download', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log(response);
+    return response;
+  },
+  CREATE_APPLICANTEXCEL: async () => {
+    const response = await adminInstance.get('/applications/file/create', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     return response.data;
   },
 };
