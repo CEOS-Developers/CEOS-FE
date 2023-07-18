@@ -29,6 +29,7 @@ export const BgText = css`
   left: 50%;
   transform: translateX(-50%);
   text-wrap: nowrap;
+  color: white;
 
   @media (max-width: 1023px) {
     typo: ${theme.typo.Mobile.Heading1_Kor};
