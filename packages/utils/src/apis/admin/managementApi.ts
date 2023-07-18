@@ -50,7 +50,7 @@ export const managementApi = {
     payload,
   }: {
     payload: ManagementDTO;
-  }): Promise<any> => {
+  }): Promise<undefined> => {
     const response = await adminInstance.post(`/mangements`, payload);
     return response.data.data;
   },
@@ -61,12 +61,12 @@ export const managementApi = {
   }: {
     payload: ManagementDTO;
     id: number;
-  }): Promise<any> => {
+  }): Promise<undefined> => {
     const response = await adminInstance.patch(`/mangements/${id}`, payload);
     return response.data.data;
   },
 
-  DELETE_MANAGEMENT: async (id: number): Promise<any> => {
+  DELETE_MANAGEMENT: async (id: number): Promise<undefined> => {
     const response = await adminInstance.delete(`/mangements/${id}`);
     return response.data.data;
   },

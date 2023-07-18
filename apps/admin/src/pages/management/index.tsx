@@ -4,13 +4,14 @@ import { Button, Flex, Space } from '@ceos-fe/ui';
 import { managementApi } from '@ceos-fe/utils';
 import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
 import { ManagementResponse } from '../../../../../packages/utils/src/apis/admin/managementApi';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Management() {
   const router = useRouter();
   const [page, setPage] = useState<number>(0);
+  const queryClient = useQueryClient();
   const { data } = useQuery<ManagementResponse>(['management', page], () =>
     managementApi.GET_MANAGEMENT({ pageNum: page, limit: 12 }),
   );
@@ -19,9 +20,9 @@ export default function Management() {
   const managementDeleteMutation = useMutation(
     managementApi.DELETE_MANAGEMENT,
     {
-      onSuccess: async (data: any) => {
-        alert('삭제되었습니다.');
-        // invalidate
+      onSuccess: async () => {
+        alert('삭제 완료');
+        queryClient.invalidateQueries(['management']);
       },
     },
   );

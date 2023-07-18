@@ -40,7 +40,40 @@ const UNIVERSITY: Record<string, string> = {
 
 export default function AddManagement() {
   const router = useRouter();
+  const {
+    register,
+    watch,
+    setValue,
+    getValues,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm();
+  const [valid, setValid] = useState(
+    isValid &&
+      getValues('role') &&
+      getValues('part') &&
+      getValues('university') &&
+      getValues('imageUrl'),
+  );
 
+  // 드롭다운 포함 유효성 확인
+  useEffect(() => {
+    setValid(
+      isValid &&
+        getValues('role') &&
+        getValues('part') &&
+        getValues('university') &&
+        getValues('imageUrl'),
+    );
+  }, [
+    isValid,
+    watch('role'),
+    watch('part'),
+    watch('university'),
+    watch('imageUrl'),
+  ]);
+
+  // 수정 시 정보 가져오기 api
   const getManagementMutation = useMutation(managementApi.GET_ONE_MANAGEMENT, {
     onSuccess: async (data: ManagementDTO) => {
       console.log(data);
@@ -68,49 +101,18 @@ export default function AddManagement() {
     },
   });
 
+  // 수정 시 value set
   useEffect(() => {
     if (router.query.id) {
       getManagementMutation.mutate(Number(router.query.id));
     }
   }, [router.query.id]);
 
-  const {
-    register,
-    watch,
-    setValue,
-    getValues,
-    handleSubmit,
-    formState: { isValid },
-  } = useForm();
-  const [valid, setValid] = useState(
-    isValid &&
-      getValues('role') &&
-      getValues('part') &&
-      getValues('university') &&
-      getValues('imageUrl'),
-  );
-
-  useEffect(() => {
-    setValid(
-      isValid &&
-        getValues('role') &&
-        getValues('part') &&
-        getValues('university') &&
-        getValues('imageUrl'),
-    );
-  }, [
-    isValid,
-    watch('role'),
-    watch('part'),
-    watch('university'),
-    watch('imageUrl'),
-  ]);
-
   // 운영진 생성 api
   const postManagementCreateMutation = useMutation(
     managementApi.POST_MANAGEMENT,
     {
-      onSuccess: (data: any) => {
+      onSuccess: () => {
         alert('추가 완료');
         router.push('/management');
       },
@@ -121,7 +123,7 @@ export default function AddManagement() {
   const patchManagementCreateMutation = useMutation(
     managementApi.PATCH_MANAGEMENT,
     {
-      onSuccess: (data: any) => {
+      onSuccess: () => {
         alert('수정 완료');
         router.push('/management');
       },
