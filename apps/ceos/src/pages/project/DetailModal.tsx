@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { Flex } from '../../../../../packages/ui';
 import { css } from '@emotion/react';
 import { MenuProps } from '@ceos/components/MenuBar';

@@ -12,7 +12,7 @@ interface PartProps {
 }
 
 const Part = ({ register, watch, setValue, questionList }: PartProps) => {
-  const selectedPart = watch('part');
+  const selectedPart = watch().part;
   const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
     [key: string]: number;
   };

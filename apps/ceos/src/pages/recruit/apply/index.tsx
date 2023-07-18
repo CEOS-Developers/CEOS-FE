@@ -23,6 +23,7 @@ import {
   RecruitApplyFormInterface,
   RecruitApplyResponse,
 } from './interface';
+import { Modal } from './Modal';
 
 const Apply = () => {
   const { register, watch, setValue, getValues, handleSubmit } = useForm({
@@ -36,8 +37,6 @@ const Apply = () => {
       university: '',
       major: '',
       semestersLeftNumber: null,
-      generation: 17,
-
       otDate: '',
       demodayDate: '',
       otherActivities: '',
@@ -101,18 +100,14 @@ const Apply = () => {
     setValue('unableTimes', setTimes);
   }, [data]);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const submitForm = () => {
     const body = getValues();
-    console.log(body, getValues('name'));
-    if (questionList) recruitApi.POST_APPLY(questionList?.times, body);
-  };
-
-  const changeDate = (date: string) => {
-    let newDate = new Date(date);
-    return `${newDate.getFullYear()}.${String(newDate.getMonth() + 1).padStart(
-      2,
-      '0',
-    )}.${String(newDate.getDate()).padStart(2, '0')}`;
+    if (questionList) {
+      recruitApi.POST_APPLY(questionList?.times, body);
+    }
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -142,13 +137,14 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
-        <Button variant="default" onClick={submitForm}>
+        <Button variant="default" onClick={() => setIsOpen(true)}>
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
           © 2016-2023 Ceos ALL RIGHTS RESERVED.
         </Text>
       </Flex>
+      {isOpen && <Modal submitForm={submitForm} />}
     </Wrapper>
   );
 };
@@ -181,6 +177,7 @@ const TopMargin = styled.div`
 `;
 
 const Wrapper = styled(Flex)`
+  position: relative;
   @media (max-width: 1023px) {
     padding: 23px;
   }

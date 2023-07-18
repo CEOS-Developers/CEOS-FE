@@ -9,10 +9,9 @@ export interface InformationInterface {
   university: string;
   major: string;
   semestersLeftNumber: number | null;
-  generation: number;
 }
 
-interface RecruitApplyInterface {
+export interface RecruitApplyInterface {
   name: string;
   gender: string;
   birth: string;
@@ -22,7 +21,6 @@ interface RecruitApplyInterface {
   university: string;
   major: string;
   semestersLeftNumber: number | null;
-  generation: number;
 
   otDate: string;
   demodayDate: string;
@@ -92,10 +90,14 @@ export const recruitApi = {
       semestersLeftNumber: Number(body.semestersLeftNumber),
     };
 
-    console.log('newBody', newBody);
-
-    const response = await ceosInstance.post(`/applications`, newBody);
-
-    return response;
+    try {
+      const response = await ceosInstance.post(`/applications`, newBody);
+      alert('지원해주셔서 감사합니다. 메일을 확인해주세요.');
+      window.location.href = '/recruit';
+      return response;
+    } catch (error: any) {
+      console.error(error);
+      alert(error.response.data.reason);
+    }
   },
 };
