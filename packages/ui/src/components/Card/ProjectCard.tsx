@@ -2,7 +2,6 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
-import Image from 'next/image';
 
 export interface ProjectImageProps {
   category: string;
@@ -108,7 +107,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProjectImg = styled(Image)`
+const ProjectImg = styled.img`
   // width: 328px;
   // height: 184px;
   border-radius: 16px;

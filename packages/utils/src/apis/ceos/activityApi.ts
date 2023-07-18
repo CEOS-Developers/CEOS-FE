@@ -8,11 +8,10 @@ export const activityApi = {
     pageNum: number;
     limit: number;
   }) => {
-const response = await ceosInstance.get(
-      `/activities`,{
-        params: { pageNum, limit },
-      });
+    const response = await ceosInstance.get(`/activities`, {
+      params: { pageNum, limit },
+    });
 
-    return response.data;
+    return response.data.data;
   },
 };

@@ -27,7 +27,12 @@ const Footer = ({
     <Flex direction="column">
       <Desktop>
         <RelativeContainer height={500}>
-          <Background src="/shortcuts.svg" width={0} height={0} />
+          <Background
+            alt="background"
+            src="/shortcuts.svg"
+            width={0}
+            height={0}
+          />
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>
@@ -51,7 +56,12 @@ const Footer = ({
 
       <Mobile>
         <RelativeContainer align="start" height={500}>
-          <Background src="/mobileShortcuts.svg" width={0} height={0} />
+          <Background
+            alt="background"
+            src="/mobileShortcuts.svg"
+            width={0}
+            height={0}
+          />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href="/FAQ">

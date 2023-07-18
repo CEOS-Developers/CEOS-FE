@@ -6,8 +6,7 @@ import { getFormattedDate } from '../../utils/date';
 import {
   RecruitBaseInterface,
   RecruitInterface,
-  recruitApi,
-  ResponseInterface,
+  adminRecruitApi,
 } from '@ceos-fe/utils';
 import {
   QueryClient,
@@ -28,10 +27,13 @@ interface RecruitDateInterface extends RecruitBaseInterface {
 }
 
 export default function Recruit() {
-  const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<RecruitInterface>
-  >(['admin', 'recruit'], recruitApi.GET_RECRUIT);
-  const { mutate: postRecruitments } = useMutation(recruitApi.POST_RECRUIT);
+  const { data, isFetching, isSuccess } = useQuery<RecruitInterface>(
+    ['admin', 'recruit'],
+    async () => await adminRecruitApi.GET_RECRUIT(),
+  );
+  const { mutate: postRecruitments } = useMutation(
+    adminRecruitApi.POST_RECRUIT,
+  );
 
   const { getValues, setValue, reset, register } =
     useForm<RecruitDateInterface>({
@@ -41,15 +43,15 @@ export default function Recruit() {
   useEffect(() => {
     if (!isFetching && isSuccess) {
       const recruitData = {
-        ...data.data,
-        startDateDoc: new Date(data.data.startDateDoc),
-        endDateDoc: new Date(data.data.endDateDoc),
-        resultDateDoc: new Date(data.data.resultDateDoc),
-        startDateInterview: new Date(data.data.startDateInterview),
-        endDateInterview: new Date(data.data.endDateInterview),
-        resultDateFinal: new Date(data.data.resultDateFinal),
-        otDate: new Date(data.data.otDate),
-        demodayDate: new Date(data.data.demodayDate),
+        ...data,
+        startDateDoc: new Date(data.startDateDoc),
+        endDateDoc: new Date(data.endDateDoc),
+        resultDateDoc: new Date(data.resultDateDoc),
+        startDateInterview: new Date(data.startDateInterview),
+        endDateInterview: new Date(data.endDateInterview),
+        resultDateFinal: new Date(data.resultDateFinal),
+        otDate: new Date(data.otDate),
+        demodayDate: new Date(data.demodayDate),
       };
       reset(recruitData);
     }
@@ -105,17 +107,19 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('startDateDoc')}
-              onChange={(date: string) =>
-                setValue('startDateDoc', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('startDateDoc', date);
+              }}
             />
             <Line />
             <DatePicker
               isAdmin
               initialValue={getValues('endDateDoc')}
-              onChange={(date: string) =>
-                setValue('endDateDoc', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('endDateDoc', date);
+              }}
             />
           </Flex>
         </Flex>
@@ -131,17 +135,19 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('startDateInterview')}
-              onChange={(date: string) =>
-                setValue('startDateInterview', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('startDateInterview', date);
+              }}
             />
             <Line />
             <DatePicker
               isAdmin
               initialValue={getValues('endDateInterview')}
-              onChange={(date: string) =>
-                setValue('endDateInterview', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('endDateInterview', date);
+              }}
             />
           </Flex>
         </Flex>
@@ -152,9 +158,10 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('resultDateDoc')}
-              onChange={(date: string) =>
-                setValue('resultDateDoc', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('resultDateDoc', date);
+              }}
             />
           </Flex>
           <Flex direction="column" align="flex-start" webGap={8} width={328}>
@@ -162,9 +169,10 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('resultDateFinal')}
-              onChange={(date: string) =>
-                setValue('resultDateFinal', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('resultDateFinal', new Date(date));
+              }}
             />
           </Flex>
         </Flex>
@@ -175,7 +183,10 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('otDate')}
-              onChange={(date: string) => setValue('otDate', new Date(date))}
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('otDate', date);
+              }}
             />
           </Flex>
           <Flex direction="column" align="flex-start" webGap={8} width={328}>
@@ -183,9 +194,10 @@ export default function Recruit() {
             <DatePicker
               isAdmin
               initialValue={getValues('demodayDate')}
-              onChange={(date: string) =>
-                setValue('demodayDate', new Date(date))
-              }
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('demodayDate', date);
+              }}
             />
           </Flex>
         </Flex>
@@ -246,7 +258,7 @@ export const getStaticProps = async () => {
 
     await queryClient.prefetchQuery(
       ['admin', 'recruit'],
-      recruitApi.GET_RECRUIT,
+      adminRecruitApi.GET_RECRUIT,
     );
 
     return {
