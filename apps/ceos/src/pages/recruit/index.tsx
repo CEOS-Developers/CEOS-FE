@@ -14,6 +14,7 @@ import {
 } from '@ceos/components/Recruit/recruitBtn';
 import { css } from '@emotion/react';
 import { FooterText } from '@ceos/components/FooterText';
+import { CheckModal } from '@ceos/components/Recruit/checkModal';
 
 const Recruit = () => {
   return (
@@ -83,6 +84,7 @@ const Recruit = () => {
       >
         <FooterText />
       </div>
+      <CheckModal step="서류" />
     </Flex>
   );
 };

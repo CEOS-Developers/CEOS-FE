@@ -20,4 +20,9 @@ export const shadow = {
       0px 10px 30px 0px ${palette.Shadow.Date.Blue};
     `,
   },
+  PopUp: {
+    Gray: `
+    0px 12px 20px 0px rgba(0, 0, 0, 0.10);
+`,
+  },
 };

@@ -96,7 +96,13 @@ export const PMBtn = (props: BtnProps) => {
           </defs>
         </svg>
       )}
-      <p>{props.text}</p>
+      <p
+        css={css`
+          margin-left: 8px;
+        `}
+      >
+        {props.text}
+      </p>
     </div>
   );
 };
@@ -186,7 +192,13 @@ export const DesginBtn = (props: BtnProps) => {
           </defs>
         </svg>
       )}
-      <p>{props.text}</p>
+      <p
+        css={css`
+          margin-left: 8px;
+        `}
+      >
+        {props.text}
+      </p>
     </div>
   );
 };
@@ -275,7 +287,13 @@ export const DevBtn = (props: BtnProps) => {
           </defs>
         </svg>
       )}
-      <p>{props.text}</p>
+      <p
+        css={css`
+          margin-left: 8px;
+        `}
+      >
+        {props.text}
+      </p>
     </div>
   );
 };
