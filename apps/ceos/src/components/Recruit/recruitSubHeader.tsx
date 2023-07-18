@@ -23,14 +23,20 @@ export const RecruitSubHeader = () => {
         <Button
           variant="glass"
           webWidth={182}
-          mobileWidth={346}
           css={css`
             height: 46px;
             margin-top: 40px;
             block-sizing: border-box;
 
+            @media (max-width: 1023px) {
+              margin-top: 12px;
+              height: 40px;
+            }
+
             @media (max-width: 390px) {
-              margin-top: 108px;
+              margin-top: 90px;
+              width: 346px;
+              height: 59px;
             }
           `}
         >

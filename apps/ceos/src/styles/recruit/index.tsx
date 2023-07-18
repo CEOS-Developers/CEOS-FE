@@ -61,6 +61,11 @@ export const RecruitTextCss = css`
   @media (max-width: 1023px) {
     font-size: 2.5rem;
     line-height: 130%;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 390px) {
+    margin-bottom: 24px;
   }
 `;
 export const RecruitMainCss = css`
