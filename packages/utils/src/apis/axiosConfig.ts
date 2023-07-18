@@ -19,6 +19,3 @@ export const adminInstance = axios.create({
 export const publicInstance = axios.create({
   baseURL: BASE_URL,
 });
-
-adminInstance.defaults.headers.common['Authorization'] =
-  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODgzMDg0NTUsImV4cCI6MTY4ODMzMDA1NX0.3wI8nrkgLgf0uP52kwan0iK-z-KoltayOyeDNEdBHR6F8pjT-zgXlu9OgWAHCUyj3o8ztr6PKECJCwbLYiktqQ';

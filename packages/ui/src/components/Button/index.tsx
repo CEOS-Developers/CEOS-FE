@@ -16,6 +16,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
   webWidth?: number;
   mobileWidth?: number;
+  webHeight?: number;
+  mobileHeight?: number;
 }
 
 const BUTTON_FIGURE = {
@@ -115,13 +117,17 @@ export const Button = ({
   variant,
   webWidth,
   mobileWidth,
+  webHeight,
+  mobileHeight,
   ...props
 }: ButtonProps) => {
   return (
     <StyledButton
       variant={variant}
       webWidth={webWidth}
+      webHeight={webHeight}
       mobileWidth={mobileWidth}
+      mobileHeight={mobileHeight}
       {...props}
     >
       {children}
@@ -132,11 +138,14 @@ export const Button = ({
 const StyledButton = styled.button<{
   variant: ButtonVariant;
   webWidth?: number;
+  webHeight?: number;
   mobileWidth?: number;
+  mobileHeight?: number;
 }>`
   width: ${({ webWidth, variant }) =>
     webWidth ? `${webWidth}px` : `${BUTTON_FIGURE.width[variant]}px`};
-  height: ${({ variant }) => `${BUTTON_FIGURE.height[variant]}px`};
+  height: ${({ webHeight, variant }) =>
+    webHeight ? `${webHeight}px` : `${BUTTON_FIGURE.height[variant]}px`};
 
   color: ${({ variant }) => `${TEXT_COLOR.normal[variant]}`};
 
@@ -151,7 +160,10 @@ const StyledButton = styled.button<{
         : !variant.includes('admin')
         ? '100%'
         : ''};
-    height: ${({ variant }) => `${BUTTON_FIGURE.mobile_height[variant]}px`};
+    height: ${({ mobileHeight, variant }) =>
+      mobileHeight
+        ? `${mobileHeight}px`
+        : `${BUTTON_FIGURE.mobile_height[variant]}px`};
 
     ${({ variant }) => BUTTON_TYPO.mobile[variant]};
   }

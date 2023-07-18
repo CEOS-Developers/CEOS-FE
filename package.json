@@ -30,8 +30,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8",
-    "turbo": "latest",
-    "typescript": "^5.0.3"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -49,6 +48,7 @@
     "emotion-reset": "^3.0.1",
     "next-images": "^1.8.5",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "typescript": "5.0.4"
   }
 }
