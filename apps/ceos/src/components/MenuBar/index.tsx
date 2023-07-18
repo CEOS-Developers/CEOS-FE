@@ -28,16 +28,44 @@ export const MenuBar = (props: MenuProps) => {
           />
           <div css={contentCss}>
             <p>
-              <CustomLink href="/project">PROJECT</CustomLink>
+              <CustomLink
+                href="/project"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                PROJECT
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/activity">ACTIVITY</CustomLink>
+              <CustomLink
+                href="/activity"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                ACTIVITY
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/FAQ">FAQ</CustomLink>
+              <CustomLink
+                href="/FAQ"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                FAQ
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/recruit">RECRUIT</CustomLink>
+              <CustomLink
+                href="/recruit"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                RECRUIT
+              </CustomLink>
             </p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
