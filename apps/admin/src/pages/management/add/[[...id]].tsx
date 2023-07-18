@@ -76,7 +76,6 @@ export default function AddManagement() {
   // 수정 시 정보 가져오기 api
   const getManagementMutation = useMutation(managementApi.GET_ONE_MANAGEMENT, {
     onSuccess: async (data: ManagementDTO) => {
-      console.log(data);
       setValue('category', data.role === '멘토' ? '멘토' : '운영진');
       setValue('name', data.name);
       setValue('generation', data.generation);

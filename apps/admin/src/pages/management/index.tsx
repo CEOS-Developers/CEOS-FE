@@ -27,19 +27,13 @@ export default function Management() {
     },
   );
 
-  console.log('data', data);
   const columns = [
     {
       title: '분류',
       dataIndex: 'category',
       width: '176px',
       render: (_: any, record: any) => (
-        <>
-          {
-            (console.log('role', record.role),
-            record.role === '멘토' ? '멘토' : '운영진')
-          }
-        </>
+        <>{record.role === '멘토' ? '멘토' : '운영진'}</>
       ),
     },
     {

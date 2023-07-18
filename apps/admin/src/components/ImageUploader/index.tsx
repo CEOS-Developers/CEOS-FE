@@ -27,7 +27,6 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
     }, [value]);
 
     useEffect(() => {
-      console.log('pre', presignedUrl);
       setValue(label, presignedUrl);
     }, [presignedUrl]);
 
