@@ -16,12 +16,22 @@ export const RecruitSubHeader = () => {
         <p css={RecruitTextCss}>
           CEOS 18th <br /> Recruit
         </p>
-        <Text webTypo="Heading4">CEOS와 함께 성장할 18기를 모집합니다.</Text>
+        <Text webTypo="Heading4" className="subText">
+          CEOS와 함께 성장할
+          <br className="mobile" /> 18기를 모집합니다!
+        </Text>
         <Button
           variant="glass"
           webWidth={182}
+          mobileWidth={346}
           css={css`
-            margin-top: 80px;
+            height: 46px;
+            margin-top: 40px;
+            block-sizing: border-box;
+
+            @media (max-width: 390px) {
+              margin-top: 108px;
+            }
           `}
         >
           18기 지원하기

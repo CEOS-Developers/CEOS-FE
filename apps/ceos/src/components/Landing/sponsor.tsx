@@ -7,8 +7,7 @@ import {
   Mobile,
 } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { useEffect } from 'react';
-import { ResponseInterface, sponsorApi } from '@ceos-fe/utils';
+import { sponsorApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 
 interface SponsorInterface {
