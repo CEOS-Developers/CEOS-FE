@@ -2,7 +2,7 @@ import { imageApi } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-export type ImageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
+export type ImageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT' | 'PROJECTS';
 
 const usePresignedUrl = (apiType: ImageApiType) => {
   const [image, setImage] = useState<File>();

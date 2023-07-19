@@ -43,8 +43,7 @@ export interface PostApplyValuesInterface extends RecruitApplyInterface {
 export const recruitApi = {
   GET_QUESTION: async () => {
     const response = await ceosInstance.get(`/applications/question`);
-
-    return response.data;
+    return response.data.data;
   },
   POST_APPLY: async (
     times: { date: string; durations: string[] }[],

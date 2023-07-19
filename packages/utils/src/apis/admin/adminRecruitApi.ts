@@ -22,11 +22,11 @@ export const adminRecruitApi = {
   GET_RECRUIT: async () => {
     const response = await adminInstance.get(`/recruitments`);
 
-    return response.data;
+    return response.data.data;
   },
   POST_RECRUIT: async (recruit: RecruitInterface) => {
     const response = await adminInstance.put(`/recruitments`, recruit);
 
-    return response.data;
+    return response.data.data;
   },
 };

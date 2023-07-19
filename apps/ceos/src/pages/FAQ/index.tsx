@@ -3,7 +3,6 @@ import { Title } from '@ceos/components/Title';
 import { faqApi } from '../../../../../packages/utils/src/apis/ceos/faqApi';
 import { useEffect } from 'react';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { ResponseInterface } from '@ceos-fe/utils';
 import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
 import styled from '@emotion/styled';
@@ -19,9 +18,9 @@ interface ActivityResponse {
 
 const FAQ = () => {
   const { data, isLoading, isSuccess } = useQuery<{
-    recruitData: ResponseInterface<ActivityResponse>;
-    activityData: ResponseInterface<ActivityResponse>;
-    partData: ResponseInterface<ActivityResponse>;
+    recruitData: ActivityResponse;
+    activityData: ActivityResponse;
+    partData: ActivityResponse;
   }>(['ceos', 'faq'], async () => {
     const recruitData = await faqApi.GET_FAQ({ category: 'RECRUIT' });
     const activityData = await faqApi.GET_FAQ({ category: 'ACTIVITY' });
@@ -47,7 +46,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.recruitData.data.categoryFaqList.map((faq, idx) => {
+        {data?.recruitData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -71,7 +70,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.activityData.data.categoryFaqList.map((faq, idx) => {
+        {data?.activityData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -82,7 +81,7 @@ const FAQ = () => {
               <FAQBox
                 color={
                   questionColor[
-                    (data?.recruitData.data.categoryFaqList.length + idx) % 3
+                    (data?.recruitData.categoryFaqList.length + idx) % 3
                   ]
                 }
                 isAnswer={false}
@@ -102,7 +101,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.partData.data.categoryFaqList.map((faq, idx) => {
+        {data?.partData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -113,8 +112,8 @@ const FAQ = () => {
               <FAQBox
                 color={
                   questionColor[
-                    (data?.recruitData.data.categoryFaqList.length +
-                      data?.activityData.data.categoryFaqList.length +
+                    (data?.recruitData.categoryFaqList.length +
+                      data?.activityData.categoryFaqList.length +
                       idx) %
                       3
                   ]

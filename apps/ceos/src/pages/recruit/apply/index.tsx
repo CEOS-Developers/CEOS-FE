@@ -1,29 +1,26 @@
-import { Flex, Text, Button, theme } from '@ceos-fe/ui';
-import Information from './Information';
-import styled from '@emotion/styled';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
-
-import {
-  recruitApi,
-  RecruitApplyValuesInterface,
-  ResponseInterface,
-} from '@ceos-fe/utils';
+import { Flex, TextField, Text, theme, Button } from '@ceos-fe/ui';
+import { Title } from '@ceos/components/Title';
+import { SelectButton } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
-import { Title } from '../../../components/Title';
-import Common from './Common';
-import Part from './Part';
-import Schedule from './Schedule';
-import { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
+import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
 import {
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
 } from './interface';
+import { useEffect, useState } from 'react';
+import Information from './Information';
+import Common from './Common';
+import Part from './Part';
+import Schedule from './Schedule';
 import { Modal } from './Modal';
+import {
+  QueryClient,
+  dehydrate,
+  useInfiniteQuery,
+  useQuery,
+} from '@tanstack/react-query';
 
 const Apply = () => {
   const { register, watch, setValue, getValues, handleSubmit } = useForm({
@@ -49,19 +46,20 @@ const Apply = () => {
     } as RecruitApplyValuesInterface,
   }) as RecruitApplyFormInterface;
 
-  const { data, isLoading, isSuccess } = useInfiniteQuery<
-    ResponseInterface<RecruitApplyResponse>
-  >(['ceos', 'recuit', 'apply'], () => recruitApi.GET_QUESTION());
+  const { data, isLoading, isSuccess } = useQuery<RecruitApplyResponse>(
+    ['ceos', 'recuit', 'apply'],
+    () => recruitApi.GET_QUESTION(),
+  );
 
   const [questionList, setQuestionList] = useState<
     RecruitApplyResponse | undefined
   >(undefined);
 
   useEffect(() => {
-    setQuestionList(data?.pages[0].data);
+    setQuestionList(data);
 
     // 공통 질문 수만큼 초기화 값 세팅
-    const commons = data?.pages[0].data?.commonQuestions.map((common) => ({
+    const commons = data?.commonQuestions.map((common) => ({
       questionId: common.questionId,
       answer: '',
     }));
@@ -76,7 +74,7 @@ const Apply = () => {
     ];
     setValue('partAnswers', []);
     for (const PartName of partNameList) {
-      const productObj = data?.pages[0].data?.[PartName].map((product) => ({
+      const productObj = data?.[PartName].map((product) => ({
         questionId: product.questionId,
         answer: '',
       }));
@@ -86,7 +84,7 @@ const Apply = () => {
         : setValue('partAnswers', [...getValues('partAnswers'), []]);
     }
 
-    const times = data?.pages[0].data?.times;
+    const times = data?.times;
     let setTimes = [] as number[][];
 
     times?.forEach((time) => {
@@ -164,6 +162,11 @@ export const getStaticProps = async () => {
     };
   } catch (err) {
     console.error(err);
+    return {
+      props: {
+        error: err,
+      },
+    };
   }
 };
 

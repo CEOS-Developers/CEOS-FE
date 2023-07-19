@@ -15,7 +15,6 @@ import { Plus } from '@admin/assets/Plus';
 import {
   AdminApplicationInterface,
   AdminApplicationListItemInterface,
-  ResponseInterface,
   AdminSelectedPartType,
   AdminSelectedQuestionsType,
   AdminPartQuestionsInterface,
@@ -48,7 +47,7 @@ const PART_MAP: Record<AdminSelectedPartType, AdminSelectedQuestionsType> = {
 
 export default function Application() {
   const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<AdminApplicationInterface>,
+    AdminApplicationInterface,
     AxiosError
   >(['admin', 'application'], adminApplicationApi.GET_APPLICATION);
   const { mutate: putApplication } = useMutation(
@@ -96,19 +95,18 @@ export default function Application() {
   useEffect(() => {
     if (isFetching || !isSuccess) return;
 
-    const applicationData = data.data;
-    replaceCommonQuestions(data.data.commonQuestions);
+    replaceCommonQuestions(data.commonQuestions);
 
-    setValue('times', applicationData.times);
+    setValue('times', data.times);
 
     setAllPartQuestions({
-      productQuestions: applicationData.productQuestions,
-      designQuestions: applicationData.designQuestions,
-      frontendQuestions: applicationData.frontendQuestions,
-      backendQuestions: applicationData.backendQuestions,
+      productQuestions: data.productQuestions,
+      designQuestions: data.designQuestions,
+      frontendQuestions: data.frontendQuestions,
+      backendQuestions: data.backendQuestions,
       selectedPart: '기획',
     });
-    replacePartQuestions(applicationData[PART_MAP[getValues('selectedPart')]]);
+    replacePartQuestions(data[PART_MAP[getValues('selectedPart')]]);
   }, [isFetching, isSuccess]);
   useEffect(() => {
     setAllPartQuestions({
@@ -232,10 +230,10 @@ export default function Application() {
 
   return (
     <>
-      <Text webTypo="Heading2" color="Black">
+      <Text webTypo="Heading2" paletteColor="Black">
         지원서 제출
       </Text>
-      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+      <Text webTypo="Body3" paletteColor="Gray5" style={{ marginTop: '12px' }}>
         지원서 질문을 관리하는 페이지입니다.
       </Text>
 
@@ -503,12 +501,13 @@ export default function Application() {
                       initialValue={
                         new Date(getValues(`times.${dateIdx}.date`))
                       }
-                      onChange={(date: string) =>
+                      onChange={(date: Date | null) => {
+                        if (date === null) return;
                         setValue(
                           `times.${dateIdx}.date`,
-                          getFormattedDate(new Date(date)),
-                        )
-                      }
+                          getFormattedDate(date),
+                        );
+                      }}
                     />
                   )}
                 </Flex>

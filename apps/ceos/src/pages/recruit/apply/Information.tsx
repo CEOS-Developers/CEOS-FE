@@ -16,12 +16,13 @@ interface InformationProps {
 }
 
 const Information = ({ register, setValue }: InformationProps) => {
-  const changeDate = (date: string) => {
-    let newDate = new Date(date);
-    return `${newDate.getFullYear()}.${String(newDate.getMonth() + 1).padStart(
-      2,
-      '0',
-    )}.${String(newDate.getDate()).padStart(2, '0')}`;
+  const changeDate = (date: Date | null) => {
+    if (date)
+      return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
+        2,
+        '0',
+      )}.${String(date.getDate()).padStart(2, '0')}`;
+    else return '';
   };
 
   const univ = ['연세대학교', '서강대학교', '이화여자대학교', '홍익대학교'];
@@ -126,7 +127,7 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">CEOS OT 날짜는?</Text>
               <DatePicker
-                onChange={(date: string) =>
+                onChange={(date: Date | null) =>
                   setValue('otDate', changeDate(date))
                 }
               />
@@ -134,7 +135,7 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Flex direction="column" align="start" webGap={8}>
               <Text webTypo="Label3">CEOS 데모데이 날짜는?</Text>
               <DatePicker
-                onChange={(date: string) =>
+                onChange={(date: Date | null) =>
                   setValue('demodayDate', changeDate(date))
                 }
               />
@@ -248,13 +249,15 @@ const Information = ({ register, setValue }: InformationProps) => {
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">CEOS OT 날짜는?</Text>
             <DatePicker
-              onChange={(date: string) => setValue('otDate', changeDate(date))}
+              onChange={(date: Date | null) =>
+                setValue('otDate', changeDate(date))
+              }
             />
           </Flex>
           <Flex direction="column" align="start" mobileGap={14}>
             <Text mobileTypo="Heading4">CEOS 데모데이 날짜는?</Text>
             <DatePicker
-              onChange={(date: string) =>
+              onChange={(date: Date | null) =>
                 setValue('demodayDate', changeDate(date))
               }
             />
