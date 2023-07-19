@@ -34,7 +34,7 @@ export const adminApplicationApi = {
   GET_APPLICATION: async () => {
     const response = await adminInstance.get(`/applications/question`);
 
-    return response.data;
+    return response.data.data;
   },
   PUT_APPLICATION: async (question: AdminApplicationInterface) => {
     const response = await adminInstance.put(
@@ -42,6 +42,6 @@ export const adminApplicationApi = {
       question,
     );
 
-    return response.data;
+    return response.data.data;
   },
 };

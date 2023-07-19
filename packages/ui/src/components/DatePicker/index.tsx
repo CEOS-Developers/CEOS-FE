@@ -1,18 +1,16 @@
 import styled from '@emotion/styled';
-import { InputHTMLAttributes, useState } from 'react';
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect } from 'react';
-import { css } from '@emotion/react';
 import { theme } from '../../styles';
 import ReactDatePicker from 'react-datepicker';
-import React from 'react';
 import { TextField } from '../TextField/index';
 import { Calendar } from '../../assets/Calender/index';
 
-export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface DatePickerProps {
   width?: number;
   placeholder?: string;
-  onChange: (date: string) => void;
+  onChange: (date: Date | null) => void;
   initialValue?: Date | null;
   isAdmin?: boolean;
 }

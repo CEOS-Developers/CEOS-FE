@@ -7,8 +7,7 @@ import {
 import {
   CategoryType,
   FaqListItemInterface,
-  ResponseInterface,
-  faqApi,
+  adminFaqApi,
 } from '@ceos-fe/utils';
 import { Button, Flex, Text, TextField, SelectButton } from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -47,31 +46,29 @@ export default function Faq() {
     name: 'faqList',
   });
 
-  const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<FaqResponse>,
-    AxiosError
-  >(['admin', 'faq', watch('category')], () =>
-    faqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
+  const { data, isFetching, isSuccess } = useQuery<FaqResponse, AxiosError>(
+    ['admin', 'faq', watch('category')],
+    () => adminFaqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
   );
   const { mutate: postFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.POST_FAQ);
+  >(adminFaqApi.POST_FAQ);
   const { mutate: patchFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.PATCH_FAQ);
+  >(adminFaqApi.PATCH_FAQ);
   const { mutate: deleteFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.DELETE_FAQ);
+  >(adminFaqApi.DELETE_FAQ);
 
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      replace(data.data.categoryFaqList);
+      replace(data.categoryFaqList);
     }
   }, [isFetching, isSuccess]);
 
@@ -195,7 +192,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['admin', 'faq', 'RECRUIT'], () =>
-      faqApi.GET_FAQ('RECRUIT'),
+      adminFaqApi.GET_FAQ('RECRUIT'),
     );
 
     return {
