@@ -7,6 +7,7 @@ import { ResponseInterface } from '@ceos-fe/utils';
 import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
 import styled from '@emotion/styled';
+import Footer from '@ceos/components/Footer';
 
 interface ActivityResponse {
   categoryFaqList: {
@@ -31,6 +32,17 @@ const FAQ = () => {
   });
 
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
+
+  const leftBtn = {
+    title: '이전 활동들이 궁금하다면',
+    content: ['CEOS 프로젝트', '보러가기'],
+    link: '/project',
+  };
+  const rightBtn = {
+    title: 'CEOS에 참여하고 싶다면',
+    content: ['CEOS 18기', '지원하기'],
+    link: '/recruit',
+  };
 
   return (
     <Flex direction="column">
@@ -127,13 +139,13 @@ const FAQ = () => {
             </CustomFlex>
           );
         })}
-        <Desktop></Desktop>
-        <Mobile>
-          <Text webTypo="Label3" paletteColor="Gray3" margin="36px 0 30px 0">
-            © 2016-2023 Ceos ALL RIGHTS RESERVED.
-          </Text>
-        </Mobile>
       </CustomFlex>
+      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
+      <Mobile>
+        <Text webTypo="Label3" paletteColor="Gray3" margin="36px 0 30px 0">
+          © 2016-2023 Ceos ALL RIGHTS RESERVED.
+        </Text>
+      </Mobile>
     </Flex>
   );
 };
