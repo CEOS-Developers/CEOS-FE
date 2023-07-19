@@ -4,33 +4,33 @@ import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 
 export interface ManagementCardProps {
-  img?: string;
-  position: string;
+  imageUrl?: string;
+  part: string;
   name: string;
-  univ: string;
-  dept: string;
+  university: string;
+  major: string;
   explain?: string[];
 }
 
 export const ManagementCard = (props: {
   managementCard: ManagementCardProps;
 }): EmotionJSX.Element => {
-  const { img, position, name, univ, dept } = props.managementCard;
+  const { imageUrl, part, name, university, major } = props.managementCard;
 
   return (
     <ManageWapper>
-      {img ? <Profile src={img} /> : <></>}
+      {imageUrl ? <Profile src={imageUrl} /> : <></>}
       <Content>
         <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-          {position}
+          {part}
         </Text>
         <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
           {name}
         </Text>
         <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
-          {univ + ' '}
+          {university + ' '}
           <br />
-          {dept}
+          {major}
         </Text>
       </Content>
     </ManageWapper>
@@ -40,7 +40,7 @@ export const ManagementCard = (props: {
 export const MentorCard = (props: {
   mentorCard: ManagementCardProps;
 }): EmotionJSX.Element => {
-  const { img, position, name, univ, dept, explain } = props.mentorCard;
+  const { imageUrl, part, name, university, major, explain } = props.mentorCard;
   const cName = explain ? 'origin-info' : 'mentor';
 
   return (
@@ -48,15 +48,15 @@ export const MentorCard = (props: {
       <Wrapper className={cName}>
         <Content className={cName}>
           <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-            {position}
+            {part}
           </Text>
           <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
             {name}
           </Text>
           <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
-            {univ + ' '}
+            {university + ' '}
             <br />
-            {dept}
+            {major}
           </Text>
         </Content>
       </Wrapper>

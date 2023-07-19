@@ -72,6 +72,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["axios", "npm:1.4.0"],\
             ["babel-plugin-emotion", "npm:11.0.0"],\
+            ["date-fns", "npm:2.30.0"],\
             ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-custom", "workspace:packages/eslint-config-custom"],\
@@ -2722,8 +2723,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.4"],\
             ["axios", "npm:1.4.0"],\
             ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:18.2.0"],\
-            ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
+            ["react-dom", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:18.2.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -5134,6 +5134,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["axios", "npm:1.4.0"],\
             ["babel-plugin-emotion", "npm:11.0.0"],\
+            ["date-fns", "npm:2.30.0"],\
             ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-custom", "workspace:packages/eslint-config-custom"],\

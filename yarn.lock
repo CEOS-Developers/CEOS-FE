@@ -1566,7 +1566,6 @@ __metadata:
     axios: ^1.4.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    typescript: ^5.0.4
   languageName: unknown
   linkType: soft
 
@@ -3195,6 +3194,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.59.2
     axios: ^1.4.0
     babel-plugin-emotion: ^11.0.0
+    date-fns: ^2.30.0
     emotion-reset: ^3.0.1
     eslint: ^8.40.0
     eslint-config-custom: "*"

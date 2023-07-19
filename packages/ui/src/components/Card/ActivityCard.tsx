@@ -2,7 +2,6 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { Text, Flex } from '../common';
-import Image from 'next/image';
 
 export interface ActivityCardProps {
   id: number;
@@ -36,7 +35,7 @@ export const ActivityCard = (props: {
   );
 };
 
-const ActivityImg = styled(Image)`
+const ActivityImg = styled.img`
   border-radius: 16px;
 
   @media (max-width: 1023px) {

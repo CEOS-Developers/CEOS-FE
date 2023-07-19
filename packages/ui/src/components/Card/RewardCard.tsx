@@ -5,19 +5,25 @@ import { theme } from '../../styles';
 import { useState } from 'react';
 import { RewardCheck } from '../../assets/RewardCheck';
 import { Down, Up } from '../../assets/Arrow';
+import { css } from '@emotion/react';
+interface AwardsInterface {
+  generation: number;
+  content: string;
+  startDate: string;
+}
 
 export interface RewardCardProps {
-  id: number;
-  generation: string;
-  time: string;
-  project: { title: string; explain: string }[];
-  detail?: string[];
+  id?: number;
+  generation: number;
+  time?: string;
+  projects: { name: string; description: string }[];
+  awards?: AwardsInterface[];
 }
 
 export const RewardCard = (props: {
   rewardCard: RewardCardProps;
 }): EmotionJSX.Element => {
-  const { generation, time, project, detail } = props.rewardCard;
+  const { generation, time, projects, awards } = props.rewardCard;
   const [isExtend, setIsExtend] = useState(false);
   return (
     <Container>
@@ -26,25 +32,31 @@ export const RewardCard = (props: {
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" paletteColor="Black">
-              {generation}
+              {generation}기
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
-              {time}
+              {/* {time} */}
             </Text>
           </TitleWrapper>
           <Flex direction="column" webGap={10}>
-            {project.map((item, idx) => {
+            {projects?.map((item, idx) => {
               return (
-                <Flex justify="start" key={idx}>
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <Text
                     webTypo="Label1"
                     paletteColor="Blue"
                     style={{ width: '126px' }}
                   >
-                    {item.title}
+                    {item.name}
                   </Text>
                   <Text webTypo="Body2" paletteColor="Black">
-                    {item.explain}
+                    {item.description}
                   </Text>
                 </Flex>
               );
@@ -53,11 +65,17 @@ export const RewardCard = (props: {
           <div className="extended">
             <Line />
             <Flex direction="column" webGap={8}>
-              {detail?.map((item, idx) => (
-                <Flex justify="start" key={idx}>
+              {awards?.map((item, idx) => (
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <RewardCheck />
                   <Text webTypo="Body2" paletteColor="Black">
-                    {item}
+                    {item.content}
                   </Text>
                 </Flex>
               ))}
@@ -74,10 +92,10 @@ export const RewardCard = (props: {
               {generation}
             </Text>
             <Text mobileTypo="Body2" paletteColor="Gray5">
-              {time}
+              {/* {time} */}
             </Text>
           </TitleWrapper>
-          {project.map((pro, idx) => (
+          {projects?.map((pro, idx) => (
             <Flex
               direction="column"
               justify="center"
@@ -87,10 +105,10 @@ export const RewardCard = (props: {
             >
               <Flex direction="column">
                 <Text mobileTypo="Label1" paletteColor="Blue">
-                  {pro.title}
+                  {pro.name}
                 </Text>
                 <Text mobileTypo="Body1" paletteColor="Black">
-                  {pro.explain}
+                  {pro.description}
                 </Text>
               </Flex>
             </Flex>
@@ -99,11 +117,17 @@ export const RewardCard = (props: {
             <>
               <Line />
               <Flex direction="column" mobileGap={8}>
-                {detail?.map((item, idx) => (
-                  <Flex justify="flex-start" key={idx}>
+                {awards?.map((item, idx) => (
+                  <Flex
+                    key={idx}
+                    css={css`
+                      width: 100%;
+                      justify-content: flex-start;
+                    `}
+                  >
                     <RewardCheck />
                     <Text mobileTypo="Body1" paletteColor="Black">
-                      {item}
+                      {item.content}
                     </Text>
                   </Flex>
                 ))}
@@ -129,7 +153,7 @@ export const AdminRewardCard = (props: {
   onClickRemove: (id: number) => void;
   onClickUpdate: (id: number) => void;
 }): EmotionJSX.Element => {
-  const { id, generation, time, project } = props.rewardCard;
+  const { id, generation, time, projects } = props.rewardCard;
   const [onClickRemove, onClickUpdate] = [
     props.onClickRemove,
     props.onClickUpdate,
@@ -143,22 +167,28 @@ export const AdminRewardCard = (props: {
               {generation}
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
-              {time}
+              {/* {time} */}
             </Text>
           </TitleWrapper>
           <Flex direction="column" webGap={10} mobileGap={10}>
-            {project.map((item, idx) => {
+            {projects?.map((item, idx) => {
               return (
-                <Flex justify="start" key={idx}>
+                <Flex
+                  key={idx}
+                  css={css`
+                    width: 100%;
+                    justify-content: flex-start;
+                  `}
+                >
                   <Text
                     webTypo="Label1"
                     paletteColor="Navy"
                     style={{ width: '126px' }}
                   >
-                    {item.title}
+                    {item.name}
                   </Text>
                   <Text webTypo="Body2" paletteColor="Black">
-                    {item.explain}
+                    {item.description}
                   </Text>
                 </Flex>
               );
@@ -173,8 +203,8 @@ export const AdminRewardCard = (props: {
         borderRadius={20}
         className="is-hover"
       >
-        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+        {/* <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
+        <Button onClick={() => onClickUpdate(id)}>수정하기</Button> */}
       </AbsoluteFlex>
     </RelativeContainer>
   );

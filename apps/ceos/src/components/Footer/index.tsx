@@ -27,7 +27,6 @@ const Footer = ({
             width={0}
             height={0}
           />
-
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>

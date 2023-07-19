@@ -38,7 +38,7 @@ export const projectApi = {
       params: { pageNum, limit },
     });
 
-    return response.data;
+    return response.data.data;
   },
   GET_A_PROJECT: async ({ id }: { id: number }) => {
     const response = await ceosInstance.get(`/projects/${id}`);

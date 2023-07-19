@@ -7,7 +7,6 @@ import {
 } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { projectApi } from '@ceos-fe/utils';
-import { ResponseInterface } from '@ceos-fe/utils';
 import {
   QueryClient,
   dehydrate,
@@ -30,9 +29,7 @@ interface ProjectResponse {
 }
 
 const Project = () => {
-  const { data, isLoading, isSuccess } = useInfiniteQuery<
-    ResponseInterface<ProjectResponse>
-  >(
+  const { data, isLoading, isSuccess } = useInfiniteQuery<ProjectResponse>(
     ['ceos', 'project'],
     ({ pageParam = 0 }) =>
       projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 10000 }),
@@ -43,7 +40,7 @@ const Project = () => {
     },
   );
 
-  const projectList = data?.pages[0].data.projectBriefInfoVos;
+  const projectList = data?.pages[0].projectBriefInfoVos;
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
