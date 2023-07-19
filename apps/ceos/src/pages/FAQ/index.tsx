@@ -140,12 +140,8 @@ const FAQ = () => {
           );
         })}
       </CustomFlex>
+      <BottomMargin />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
-      <Mobile>
-        <Text webTypo="Label3" paletteColor="Gray3" margin="36px 0 30px 0">
-          © 2016-2023 Ceos ALL RIGHTS RESERVED.
-        </Text>
-      </Mobile>
     </Flex>
   );
 };
@@ -181,6 +177,10 @@ export const TopMargin = styled.div`
   @media (max-width: 1023px) {
     height: 36px;
   }
+`;
+
+export const BottomMargin = styled.div`
+  height: 100px;
 `;
 
 export default FAQ;

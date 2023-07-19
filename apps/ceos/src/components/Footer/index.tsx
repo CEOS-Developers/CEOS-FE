@@ -19,14 +19,15 @@ const Footer = ({
 }) => {
   return (
     <Flex direction="column">
-      <Desktop>
-        <RelativeContainer height={500}>
+      <Desktop style={{ width: '100%' }}>
+        <BackgroundWrapper>
           <Background
             alt="background"
             src="/shortcuts.svg"
             width={0}
             height={0}
           />
+
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>
@@ -45,11 +46,11 @@ const Footer = ({
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
           </GlassFlex>
-        </RelativeContainer>
+        </BackgroundWrapper>
       </Desktop>
 
-      <Mobile>
-        <RelativeContainer align="start" height={500}>
+      <Mobile style={{ width: '100%' }}>
+        <BackgroundWrapper align="start">
           <Background
             alt="background"
             src="/mobileShortcuts.svg"
@@ -74,7 +75,7 @@ const Footer = ({
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
           </GlassFlex>
-        </RelativeContainer>
+        </BackgroundWrapper>
       </Mobile>
     </Flex>
   );
@@ -94,8 +95,8 @@ const GlassFlex = styled(Flex)`
 const Background = styled(Image)`
   width: 100%;
   height: auto;
+  max-height: 100%;
   z-index: -99;
-  max-height: 500px;
 
   @media (max-width: 1023px) {
     position: absolute;
@@ -104,4 +105,9 @@ const Background = styled(Image)`
     height: auto;
     max-height: 500px;
   }
+`;
+
+const BackgroundWrapper = styled(RelativeContainer)`
+  width: 100%;
+  height: 500px;
 `;
