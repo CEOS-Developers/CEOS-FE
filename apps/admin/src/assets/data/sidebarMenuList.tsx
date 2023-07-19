@@ -20,7 +20,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     path: '/',
     submenuOpen: false,
     submenu: [
-      { subMenuName: 'PROJECT', path: '/' },
+      { subMenuName: 'PROJECT', path: '/project' },
       { subMenuName: 'REWARD', path: '/' },
       { subMenuName: 'ACTIVITY', path: '/' },
       { subMenuName: 'MANAGEMENT', path: '/' },

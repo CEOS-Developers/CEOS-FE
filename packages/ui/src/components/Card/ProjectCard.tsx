@@ -6,8 +6,6 @@ import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 export interface ProjectImageProps {
   category: string;
   id: number;
-  created_at: string;
-  updated_at: string;
   imageUrl: string;
 }
 export interface ProjectCardProps {
@@ -69,7 +67,7 @@ export const AdminProjectCard = (props: {
               {name}
             </Text>
             <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
-              {generation}
+              {generation}기
             </Text>
           </Row>
           <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
