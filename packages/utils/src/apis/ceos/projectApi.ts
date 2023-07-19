@@ -43,6 +43,6 @@ export const projectApi = {
   GET_A_PROJECT: async ({ id }: { id: number }) => {
     const response = await ceosInstance.get(`/projects/${id}`);
 
-    return response.data;
+    return response.data.data;
   },
 };

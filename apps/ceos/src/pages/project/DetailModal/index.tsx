@@ -33,6 +33,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
     const key = person.part as PartKey;
     Part[key].name = [...Part[key].name, person.name];
   });
+
   const modalRef = useRef(null);
 
   return (
@@ -150,6 +151,7 @@ export const backCss = () => css`
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: 20;
 
   display: flex;
   justify-content: center;
@@ -188,7 +190,6 @@ const Container = styled(Flex)`
   /* 팝업창그림자 */
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
 
-  z-index: 99;
   overflow-x: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
 
   ::-webkit-scrollbar {
@@ -229,13 +230,3 @@ const TeamWrapper = styled.div`
     background: var(--1, #f4f6f9);
   }
 `;
-
-// const IconContainer = styled.div`
-//   position: absolute;
-//   right: -42px;
-
-//   @media (max-width: 1023px) {
-//     top: 16px;
-//     right: 16px;
-//   }
-// `;
