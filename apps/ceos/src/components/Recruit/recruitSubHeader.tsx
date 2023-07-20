@@ -7,9 +7,14 @@ import {
 import { Button, Text } from '@ceos-fe/ui';
 import { RecruitBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
-import { CheckModal } from './checkModal';
+import { useModal } from '@ceos-fe/utils';
+import { CheckModal } from '@ceos/components/Recruit/checkModal';
+import { ModalPortal } from '@ceos-fe/utils/';
+import { useState } from 'react';
 
 export const RecruitSubHeader = () => {
+  const { isOpen, toggleModal } = useModal();
+  const [step, setStep] = useState('');
   return (
     <div css={RecruitCss}>
       <RecruitBgImg />
@@ -27,13 +32,29 @@ export const RecruitSubHeader = () => {
         {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
         </Button> */}
-        <Button variant="glass" webWidth={249} css={BtnCss}>
+        <Button
+          variant="glass"
+          webWidth={249}
+          css={BtnCss}
+          onClick={() => {
+            toggleModal();
+            setStep('서류');
+          }}
+        >
           서류 합격 여부 확인하기
         </Button>
-        {/* <Button variant="glass" webWidth={249} css={BtnCss}>
+        {/* <Button variant="glass" webWidth={249} css={BtnCss} onClick={() => {
+            toggleModal();
+            setStep('최종');
+          }}>
           최종 합격 여부 확인하기
         </Button> */}
       </div>
+      {isOpen && (
+        <ModalPortal>
+          <CheckModal step={step} isOpen={isOpen} toggleModal={toggleModal} />
+        </ModalPortal>
+      )}
     </div>
   );
 };

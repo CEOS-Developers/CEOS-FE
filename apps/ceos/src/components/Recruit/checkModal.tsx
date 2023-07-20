@@ -10,16 +10,17 @@ import { useModal } from '@ceos-fe/utils';
 
 interface ModalProps {
   step: string;
+  isOpen: boolean;
+  toggleModal: () => void;
 }
 
 export const CheckModal = (props: ModalProps) => {
-  const { isOpen, toggleModal } = useModal();
   return (
     <div css={backCss} className="open">
       <div css={ModalBoxCss}>
         <CloseIcon
-          isOpen={isOpen}
-          toggleModal={toggleModal}
+          isOpen={props.isOpen}
+          toggleModal={props.toggleModal}
           margin="0 0 auto auto"
         />
         <div css={ModalContentCss}>
