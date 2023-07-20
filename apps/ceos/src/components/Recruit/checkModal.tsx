@@ -61,7 +61,6 @@ export const ModalBoxCss = css`
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
   position: relative;
-  z-index: 999;
   position: fixed;
   top: 20.3703vh;
   left: 33.3333vw;
