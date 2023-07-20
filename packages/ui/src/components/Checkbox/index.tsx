@@ -31,6 +31,7 @@ export const CheckBox = ({ checked, onClick, value, type }: CheckBoxProps) => {
             paletteColor={checked ? 'Blue' : 'Gray2'}
             webTypo="Label3"
             mobileTypo="Label2"
+            style={{ whiteSpace: 'nowrap' }}
           >
             {text}
           </Text>

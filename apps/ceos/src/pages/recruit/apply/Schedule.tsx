@@ -2,6 +2,7 @@ import { CheckBox, Desktop, Flex, Mobile, Text, theme } from 'packages/ui';
 import { ColumnLine } from '.';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
+import { css } from '@emotion/react';
 
 interface ScheduleProps {
   watch: RecruitApplyFormInterface['watch'];
@@ -157,4 +158,8 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+`;
+
+export const gap = css`
+  width: 144px;
 `;
