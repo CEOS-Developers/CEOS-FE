@@ -1,6 +1,5 @@
 import { Flex, TextField, Text, theme, Button } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { SelectButton } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
@@ -14,13 +13,17 @@ import Information from './Information';
 import Common from './Common';
 import Part from './Part';
 import Schedule from './Schedule';
-import { Modal } from './Modal';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-  useQuery,
-} from '@tanstack/react-query';
+import { SubmitModal } from './modal/SubmitModal';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import { SuccessModal } from './modal/SuccessModal';
+
+interface apiResponseInterface {
+  timestamp: string;
+  success: boolean;
+  code: string;
+  status: string;
+  reason: string;
+}
 
 const Apply = () => {
   const { register, watch, setValue, getValues, handleSubmit } = useForm({
@@ -99,13 +102,27 @@ const Apply = () => {
   }, [data]);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  const submitForm = () => {
-    const body = getValues();
+  const submitForm = async () => {
+    let body = getValues();
+    body.gender = body.gender.trim();
+    body.university = body.university.trim();
+
     if (questionList) {
-      recruitApi.POST_APPLY(questionList?.times, body);
+      const res: any = await recruitApi.POST_APPLY(questionList?.times, body);
+      console.log(res);
+      setIsOpen(false);
+
+      if (res?.status === 200) {
+        setIsSubmit(true);
+
+        setTimeout(() => {
+          setIsSubmit(false);
+        }, 4000);
+        window.location.href = '/recruit';
+      }
     }
-    setIsOpen(!isOpen);
   };
 
   return (
@@ -142,7 +159,8 @@ const Apply = () => {
           © 2016-2023 Ceos ALL RIGHTS RESERVED.
         </Text>
       </Flex>
-      {isOpen && <Modal submitForm={submitForm} />}
+      {isOpen && <SubmitModal submitForm={submitForm} />}
+      {isSubmit && <SuccessModal />}
     </Wrapper>
   );
 };
@@ -201,6 +219,7 @@ export const ColumnLine = styled.div`
   width: 2px;
   height: 70px;
   background-color: ${theme.palette.Gray2};
+  flex-shrink: 0;
 `;
 
 export const Section = styled(Flex)`

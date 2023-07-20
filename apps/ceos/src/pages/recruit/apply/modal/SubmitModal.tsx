@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ModalBgImage } from './asset/ModalBgImage';
+import { ModalBgImage } from '../asset/ModalBgImage';
 import { Button, CheckBox, Flex, Text, theme } from 'packages/ui';
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ export interface ModalProps {
   submitForm: () => void;
 }
 
-export const Modal = ({ submitForm }: ModalProps) => {
+export const SubmitModal = ({ submitForm }: ModalProps) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <div css={backCss}>
@@ -16,14 +16,14 @@ export const Modal = ({ submitForm }: ModalProps) => {
         <ModalBgImage />
       </Container>
       <TextContainer>
-        <Text paletteColor="Blue" webTypo="Heading2">
+        <Text paletteColor="Blue" webTypo="Heading2" mobileTypo="Heading2">
           서류를 제출하시겠습니까?
         </Text>
         <Flex direction="column">
-          <Text paletteColor="Black" webTypo="Body2">
+          <Text paletteColor="Black" webTypo="Body2" mobileTypo="Body1">
             제출 후 수정은 불가능합니다.
           </Text>
-          <Text paletteColor="Black" webTypo="Body2">
+          <Text paletteColor="Black" webTypo="Body2" mobileTypo="Body1">
             면접 날짜를 '불가능한 시간'에 체크했는지 확인해주세요.
           </Text>
         </Flex>
@@ -57,6 +57,7 @@ export const backCss = () => css`
 
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const Container = styled.div`
@@ -64,6 +65,12 @@ const Container = styled.div`
   top: 200px;
 
   border-radius: 20px;
+
+  @media (max-width: 1023px) {
+    position: fixed;
+    top: 50px;
+    left: 25vw;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -74,4 +81,8 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 24px;
+
+  @media (max-width: 1023px) {
+    top: 250px;
+  }
 `;

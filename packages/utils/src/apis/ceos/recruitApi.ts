@@ -91,8 +91,7 @@ export const recruitApi = {
 
     try {
       const response = await ceosInstance.post(`/applications`, newBody);
-      alert('지원해주셔서 감사합니다. 메일을 확인해주세요.');
-      window.location.href = '/recruit';
+
       return response;
     } catch (error: any) {
       console.error(error);
