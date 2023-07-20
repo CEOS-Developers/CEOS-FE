@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { Button, Flex, Text } from 'packages/ui';
@@ -20,6 +20,7 @@ import { ResponseInterface } from '@ceos-fe/utils';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from './applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
+import { InterviewTimeModal } from './interviewTimeModal';
 
 interface DropdownInterface {
   option: DropdownItemInterface[];
@@ -39,13 +40,13 @@ const DropdownList: DropdownInterface[] = [
   },
   {
     option: PassDropdownList,
-    label: 'FinalPassDropdown',
+    label: 'finalPassDropdown',
     placeholder: '최종 합격 여부',
   },
 ];
 interface ApplicantResponse {
   pageInfo: PageInterface;
-  applicationBriefInfoVos: applicationInfoInterface[];
+  content: applicationInfoInterface[];
 }
 
 export default function ApplyStatement() {
@@ -56,18 +57,61 @@ export default function ApplyStatement() {
   });
   // 모달창 open 여부
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalSubject, setModalSubject] = useState(''); // option: interview, application
+  // 지원자 id
   const [applicantId, setApplicantId] = useState(0);
   // 지원자 엑셀 업데이트 시간
   const [createAt, setCreateAt] = useState('생성되지 않음');
+  // 지원자 목록 필터링
+  const [sortingPart, setSortingPart] = useState('ALL');
+  const [sortingDocPass, setSortingDocPass] = useState('ALL');
+  const [sortingFinalPass, setSortingFinalPass] = useState('ALL');
 
-  const { setValue, watch } = useForm();
+  const { setValue, watch, getValues } = useForm();
 
   //지원자 목록 가져오기
-  const { data, isSuccess, isFetching, isLoading } = useQuery<
-    ResponseInterface<ApplicantResponse>
-  >(['applicantData', pagination.page], () =>
-    applyStatementApi.GET_APPLYCANT(pagination.page - 1, pagination.pageSize),
+  const {
+    data: applicantData,
+    isSuccess,
+    isFetching,
+    isLoading,
+    refetch: getApplicantsList,
+  } = useQuery<ResponseInterface<ApplicantResponse>>(
+    ['applicantData', pagination.page],
+    () =>
+      applyStatementApi.GET_APPLYCANT(
+        pagination.page - 1,
+        pagination.pageSize,
+        sortingPart,
+        sortingDocPass,
+        sortingFinalPass,
+      ),
   );
+
+  // 파트 sorting
+  useEffect(() => {
+    updateSorting('partDropdown', setSortingPart);
+    updateSorting('docPassDropdown', setSortingDocPass);
+    updateSorting('finalPassDropdown', setSortingFinalPass);
+  }, [
+    getValues('partDropdown'),
+    getValues('docPassDropdown'),
+    getValues('finalPassDropdown'),
+  ]);
+
+  // updateSorting 함수 정의
+  const updateSorting = (
+    dropdownName: string,
+    setSorting: Dispatch<SetStateAction<string>>,
+  ) => {
+    const dropdownValue = getValues(dropdownName);
+    setSorting(dropdownValue ? dropdownValue.value.toUpperCase() : 'ALL');
+  };
+
+  useEffect(() => {
+    getApplicantsList();
+  }, [sortingPart, sortingDocPass, sortingFinalPass]);
+
   // 지원자 엑셀 생성 get 요청
   const {
     refetch: createApplicantExcel,
@@ -98,44 +142,44 @@ export default function ApplyStatement() {
   const [dataSource, setDataSource] = useState<object[]>(
     Array.from(new Array(pagination.pageSize), (_, i) => {
       return {
-        id: data?.data.applicationBriefInfoVos[i]?.id,
-        uuid: data?.data.applicationBriefInfoVos[i]?.uuid,
-        name: data?.data.applicationBriefInfoVos[i]?.name,
-        part: data?.data.applicationBriefInfoVos[i]?.part,
-        email: data?.data.applicationBriefInfoVos[i]?.email,
-        phone_number: data?.data.applicationBriefInfoVos[
-          i
-        ]?.phoneNumber.replace('-', ''),
-        doc_pass: data?.data.applicationBriefInfoVos[i]?.documentPass,
-        interview_time: data?.data.applicationBriefInfoVos[i]?.interviewTime,
-        final_pass: data?.data.applicationBriefInfoVos[i]?.finalPass,
+        id: applicantData?.data.content[i]?.id,
+        uuid: applicantData?.data.content[i]?.uuid,
+        name: applicantData?.data.content[i]?.name,
+        part: applicantData?.data.content[i]?.part,
+        email: applicantData?.data.content[i]?.email,
+        phone_number: applicantData?.data.content[i]?.phoneNumber.replace(
+          '-',
+          '',
+        ),
+        doc_pass: applicantData?.data.content[i]?.documentPass,
+        interview_time: applicantData?.data.content[i]?.interviewTime,
+        final_pass: applicantData?.data.content[i]?.finalPass,
       };
     }),
   );
   // 페이지네이션 지원자 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      if (data.data.applicationBriefInfoVos.length != 0) {
+      if (applicantData.data.content.length != 0) {
         setDataSource(
           Array.from(new Array(pagination.pageSize), (_, i) => {
             return {
-              id: data?.data.applicationBriefInfoVos[i]?.id,
-              uuid: data?.data.applicationBriefInfoVos[i]?.uuid,
-              name: data?.data.applicationBriefInfoVos[i]?.name,
-              part: data?.data.applicationBriefInfoVos[i]?.part,
-              email: data?.data.applicationBriefInfoVos[i]?.email,
-              phone_number: data?.data.applicationBriefInfoVos[
+              id: applicantData?.data.content[i]?.id,
+              uuid: applicantData?.data.content[i]?.uuid,
+              name: applicantData?.data.content[i]?.name,
+              part: applicantData?.data.content[i]?.part,
+              email: applicantData?.data.content[i]?.email,
+              phone_number: applicantData?.data.content[
                 i
               ]?.phoneNumber.replaceAll('-', ''),
-              doc_pass: data?.data.applicationBriefInfoVos[i]?.documentPass,
-              interview_time:
-                data?.data.applicationBriefInfoVos[i]?.interviewTime,
-              final_pass: data?.data.applicationBriefInfoVos[i]?.finalPass,
+              doc_pass: applicantData?.data.content[i]?.documentPass,
+              interview_time: applicantData?.data.content[i]?.interviewTime,
+              final_pass: applicantData?.data.content[i]?.finalPass,
             };
           }),
         );
       } else {
-        setDataSource(data.data.applicationBriefInfoVos);
+        setDataSource(applicantData.data.content);
       }
     }
   }, [isFetching, isSuccess]);
@@ -222,10 +266,19 @@ export default function ApplyStatement() {
       title: '면접시간',
       dataIndex: 'interview_time',
       width: '250px',
-      render: () => (
+      render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5}>
           <div style={{ width: '146px' }}> 00.00(토) 00:00-00:00</div>
-          <Button variant="admin_stroke">시간 지정</Button>
+          <Button
+            variant="admin_stroke"
+            onClick={() => {
+              setModalOpen(true);
+              setApplicantId(record.id);
+              setModalSubject('interview');
+            }}
+          >
+            시간 지정
+          </Button>
         </Flex>
       ),
     },
@@ -257,6 +310,7 @@ export default function ApplyStatement() {
           webWidth={57}
           onClick={() => {
             setModalOpen(true);
+            setModalSubject('application');
             setApplicantId(record.id);
           }}
         >
@@ -273,25 +327,6 @@ export default function ApplyStatement() {
   // 지원자 엑셀 다운로드
   const onClickDownloadExcel = () => {
     getApplicantExcel();
-
-    // 서버 응답 데이터
-    // const serverResponseData = getExceldata?.data;
-    // // 파일명 설정
-    // const filename = '지원서.xlsx';
-
-    // const cleanBase64String = serverResponseData.replace(/[^\x00-\x7F]/g, '');
-    // const zipData = atob(cleanBase64String);
-
-    // const link = document.createElement('a');
-    // link.href = URL.createObjectURL(
-    //   new Blob([zipData], { type: 'application/zip' }),
-    // );
-    // link.download = filename;
-
-    // document.body.appendChild(link);
-    // link.click();
-
-    // document.body.removeChild(link);
   };
 
   return (
@@ -359,7 +394,7 @@ export default function ApplyStatement() {
             margin: 'auto',
             marginLeft: '20%',
             width: '1032px',
-            height: '80%',
+            height: modalSubject == 'interview' ? '60%' : '80%',
             background: '#ffffff',
             display: 'flex',
             flexDirection: 'column',
@@ -377,7 +412,11 @@ export default function ApplyStatement() {
         >
           <CloseBtn />
         </Flex>
-        <ApplicationModal idx={applicantId} />
+        {modalSubject == 'interview' ? (
+          <InterviewTimeModal idx={applicantId} />
+        ) : (
+          <ApplicationModal idx={applicantId} />
+        )}
       </ReactModal>
     </Container>
   );
