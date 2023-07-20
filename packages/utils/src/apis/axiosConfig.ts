@@ -22,4 +22,4 @@ export const publicInstance = axios.create({
 
 // adminInstance 인터럽트 로직 추가 필요
 adminInstance.defaults.headers.common['Authorization'] =
-  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk2MDQ0ODcsImV4cCI6MTY4OTY5MDg4N30.XL2kKjnhB38PNyrGcwWQlwTpRIJ20KW_y3XdJ8kymQzD3rv-5urokyXZP5uHytcq7C_cbRiiuL2d__yYY6CQQw';
+  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk4NDU2NjMsImV4cCI6MTY4OTkzMjA2M30.yfWxLx4NfNpgHnapMZoAfGr29vbhDfarrkZ-3S7giGDjCGsAnyVoT9fvhK3diBKa6mryVzsJm30xdjdvGU6LSA';

@@ -1,6 +1,6 @@
 import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
-import { theme } from '@ceos-fe/ui';
+import { AdminRewardCard, theme } from '@ceos-fe/ui';
 import { ImageUploader } from '@admin/components/ImageUploader';
 import { useEffect } from 'react';
 
@@ -54,10 +54,32 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
-      <ImageUploader
-        value={watch('activity')}
-        setValue={(url: string | null) => setValue('activity', url)}
-        imageApiType="ACTIVITY"
+
+      <AdminRewardCard
+        generation={0}
+        projects={[]}
+        awards={[
+          {
+            generation: 0,
+            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
+            startDate: 'hi',
+          },
+          {
+            generation: 0,
+            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
+            startDate: 'hi',
+          },
+          {
+            generation: 0,
+            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
+            startDate: 'hi',
+          },
+          {
+            generation: 0,
+            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
+            startDate: 'hi',
+          },
+        ]}
       />
     </>
   );

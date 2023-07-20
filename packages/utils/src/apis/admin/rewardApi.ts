@@ -23,24 +23,22 @@ export interface RewardDTO {
 }
 
 export interface RewardResponse {
-  data: {
-    managers: RewardDTO[];
-    pageInfo: {
-      pageNum: number;
-      limit: number;
-      totalPages: number;
-      totalElements: number;
-    };
+  generationAwards: RewardDTO[];
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
   };
 }
 
-export const managementApi = {
+export const rewardApi = {
   GET_REWARD: async ({ pageNum = 0, limit = 12 }) => {
     const response = await adminInstance.get(
-      `/mangements?pageNum=${pageNum}&limit=${limit}`,
+      `/awards?pageNum=${pageNum}&limit=${limit}`,
     );
 
-    return response.data;
+    return response.data.data;
   },
   GET_ONE_REWARD: async (id: number) => {
     const response = await adminInstance.get(`/awards/${id}`);
