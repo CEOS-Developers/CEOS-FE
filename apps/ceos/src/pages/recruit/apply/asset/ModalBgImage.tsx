@@ -1,21 +1,34 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
+const Container = styled.div`
+  position: fixed;
+  top: 200px;
+  border-radius: 20px;
+
+  @media (max-width: 1023px) {
+    position: fixed;
+    top: 100px;
+  }
+`;
+
+const widthCss = css`
+  @media (max-width: 1023px) {
+    width: 370px;
+  }
+`;
 
 export const ModalBgImage = () => {
   return (
-    <div
-      css={css`
-        // @media (max-width: 1023px) {
-        //   width: 100%;
-        // }
-      `}
-    >
+    <Container>
       <svg
-        width="544"
+        width={544}
         height="579"
         viewBox="0 0 544 579"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
+        css={widthCss}
       >
         <g filter="url(#filter0_d_2807_13157)">
           <rect
@@ -83,6 +96,6 @@ export const ModalBgImage = () => {
           />
         </defs>
       </svg>
-    </div>
+    </Container>
   );
 };
