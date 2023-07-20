@@ -1,55 +1,37 @@
-import { useEffect, useState } from 'react';
-import { ResponseInterface } from 'packages/utils';
+import { ReactNode, useEffect, useState } from 'react';
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+
+// 인덱스 시그니처
 
 export interface InfiniteResponse<T> {
-  status: number;
-  message: string;
   data: {
-    data: T;
-    pageInfo: {
-      pageNum: number;
-      limit: number;
-      totalPages: number;
-      totalElements: number;
-    };
+    [key: string]: T[];
+  };
+  pageInfo: {
+    pageNum: number;
+    limit: number;
+    totalPages: number;
+    totalElements: number;
   };
 }
 
 export interface InfiniteRequestProps<T> {
   queryKey: QueryKey;
   queryFunction: (param: any) => Promise<InfiniteResponse<T>>;
-  limit: number;
+  PageItem: (props: any) => JSX.Element;
+  dataName: string;
 }
 
 const useInfiniteQueries = <T,>({
   queryKey,
   queryFunction,
-  limit,
+  PageItem,
+  dataName,
 }: InfiniteRequestProps<T>) => {
   const [results, setResults] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
-
-  const getNextData = async ({ pageParam = 0, limit }: any) => {
-    const param = {
-      pageNum: currentPage,
-      limit: limit,
-    };
-
-    console.log('param', param);
-
-    const res = await queryFunction(param);
-
-    setCurrentPage(pageParam);
-    console.log('page', pageParam);
-    console.log('res', res);
-
-    return {
-      board_page: res.data,
-      current_page: pageParam,
-      isLast: pageParam === res.data.pageInfo.totalPages,
-    };
-  };
+  const [ref, inView] = useInView();
 
   const {
     data: getBoard,
@@ -57,11 +39,32 @@ const useInfiniteQueries = <T,>({
     isSuccess: getBoardIsSuccess,
     hasNextPage: getNextPageIsPossible,
     isLoading: isLoading,
-  } = useInfiniteQuery([queryKey, currentPage], getNextData, {
+  } = useInfiniteQuery([queryKey, currentPage], queryFunction, {
     getNextPageParam: (lastPage: any) => {
-      if (!lastPage.isLast) return lastPage.current_page;
+      if (!lastPage.pageInfo.isLast) return lastPage.pageInfo.pageNum + 1;
       return undefined;
     },
+  });
+
+  useEffect(() => {
+    if (!getBoard) return;
+
+    const totalPage = getBoard.pages[currentPage].pageInfo.totalPages - 1;
+    const isLast = getBoard.pages[currentPage].pageInfo.pageNum === totalPage;
+
+    if (inView) {
+      console.log('next');
+    }
+
+    if (inView && !isLast) {
+      getNextPage();
+    }
+  }, [inView, currentPage, ref]);
+
+  const pageData: ReactNode[] | undefined = getBoard?.pages.map((page_data) => {
+    return page_data[dataName]?.map((data: any, index: number) => (
+      <PageItem {...data} key={index} />
+    ));
   });
 
   return {
@@ -71,8 +74,9 @@ const useInfiniteQueries = <T,>({
     getNextPageIsPossible,
     isLoading,
     results,
-    getNextData,
     currentPage,
+    ref,
+    infiniteData: <>{pageData}</>,
   };
 };
 
