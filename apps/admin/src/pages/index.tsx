@@ -56,7 +56,7 @@ export default function Home() {
       />
       <ImageUploader
         value={watch('activity')}
-        setValue={(url: string | null) => setValue('activity', url)}
+        setValue={setValue}
         imageApiType="ACTIVITY"
         label="activity"
       />
