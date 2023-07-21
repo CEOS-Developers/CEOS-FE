@@ -36,13 +36,7 @@ const useInfiniteQueries = <T,>({
       limit: limit,
     };
 
-    console.log('param', param);
-
     const res = await queryFunction(param);
-
-    setCurrentPage(pageParam);
-    console.log('page', pageParam);
-    console.log('res', res);
 
     return {
       board_page: res.data,
