@@ -13,14 +13,14 @@ interface AwardsInterface {
 }
 
 export interface RewardCardProps {
-  generation?: number;
+  generation: number;
   projects?: { name: string; description: string; generation?: number }[];
   awards?: AwardsInterface[];
 }
 
 export interface AdminRewardCardProps extends RewardCardProps {
-  onClickRemove?: (id: number) => void;
-  onClickUpdate?: (id: number) => void;
+  onClickRemove: () => void;
+  onClickUpdate: () => void;
 }
 
 export const RewardCard = (props: {
@@ -205,8 +205,8 @@ export const AdminRewardCard = ({
         borderRadius={20}
         className="is-hover"
       >
-        {/* <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button> */}
+        <Button onClick={onClickRemove}>삭제하기</Button>
+        <Button onClick={onClickUpdate}>수정하기</Button>
       </AbsoluteFlex>
     </RelativeContainer>
   );
