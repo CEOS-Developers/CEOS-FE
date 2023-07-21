@@ -1,14 +1,14 @@
 import { AdminRewardCard, RewardCardProps } from '@ceos-fe/ui';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { rewardApi } from '@ceos-fe/utils';
+import { adminRewardApi } from '@ceos-fe/utils';
 
 export const RewardCardContainer = (props: RewardCardProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   // 이력 삭제 api
-  const rewardDeleteMutation = useMutation(rewardApi.DELETE_REWARD, {
+  const rewardDeleteMutation = useMutation(adminRewardApi.DELETE_REWARD, {
     onSuccess: async () => {
       alert('삭제 완료');
       queryClient.invalidateQueries(['management']);

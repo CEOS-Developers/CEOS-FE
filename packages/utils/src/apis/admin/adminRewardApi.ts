@@ -29,7 +29,7 @@ export interface RewardResponse {
   };
 }
 
-export const rewardApi = {
+export const adminRewardApi = {
   GET_REWARD: async ({ pageNum = 0, limit = 12 }) => {
     const response = await adminInstance.get(
       `/awards?pageNum=${pageNum}&limit=${limit}`,

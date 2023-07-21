@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Flex, Button, Space } from '@ceos-fe/ui';
 import { PageTitle } from '@admin/components/Common/PageTitle';
-import { RewardResponse, rewardApi } from '@ceos-fe/utils';
+import { RewardResponse, adminRewardApi } from '@ceos-fe/utils';
 import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
 import styled from '@emotion/styled';
 import { RewardCardContainer } from '@admin/components/reward/RewardCardContainer';
@@ -11,7 +11,7 @@ export default function Reward() {
   const { infiniteData, ref } = useInfiniteQueries<RewardResponse>({
     queryKey: ['reward'],
     queryFunction: ({ pageParam = 0 }) =>
-      rewardApi.GET_REWARD({ pageNum: pageParam, limit: 12 }),
+      adminRewardApi.GET_REWARD({ pageNum: pageParam, limit: 12 }),
     PageItem: RewardCardContainer,
   });
 

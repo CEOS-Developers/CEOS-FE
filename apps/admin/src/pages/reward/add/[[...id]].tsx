@@ -3,7 +3,7 @@ import { Button, Flex, Space, Text, TextField } from '@ceos-fe/ui';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { useMutation } from '@tanstack/react-query';
-import { rewardApi, RewardDTO } from '@ceos-fe/utils';
+import { adiminadminRewardApi, RewardDTO } from '@ceos-fe/utils';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 
@@ -22,7 +22,7 @@ export default function AddReward() {
   });
 
   // 수정 시 정보 가져오기 api
-  const getRewardMutation = useMutation(rewardApi.GET_ONE_REWARD, {
+  const getRewardMutation = useMutation(adminRewardApi.GET_ONE_REWARD, {
     onSuccess: async (data: RewardDTO) => {
       setValue('generation', data.generation);
       setValue('startDate', data.awards[0]?.startDate);
@@ -43,7 +43,7 @@ export default function AddReward() {
   }, [router.query.id]);
 
   // 수상 내역 생성 api
-  const postRewardCreateMutation = useMutation(rewardApi.POST_REWARD, {
+  const postRewardCreateMutation = useMutation(adminRewardApi.POST_REWARD, {
     onSuccess: () => {
       alert('추가 완료');
       router.push('/reward');
@@ -51,7 +51,7 @@ export default function AddReward() {
   });
 
   // 수상 내역 수정 api
-  const putRewardCreateMutation = useMutation(rewardApi.PUT_REWARD, {
+  const putRewardCreateMutation = useMutation(adminRewardApi.PUT_REWARD, {
     onSuccess: () => {
       alert('수정 완료');
       router.push('/reward');
