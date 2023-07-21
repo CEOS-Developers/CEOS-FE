@@ -8,6 +8,7 @@ import { ModalContentCss, InputCss } from './checkModal';
  */
 
 interface ModalProps {
+  step: string;
   isOpen: boolean;
   toggleModal: () => void;
 }
@@ -23,10 +24,12 @@ export const DropModal = (props: ModalProps) => {
         />
         <div css={ModalContentCss}>
           <Text webTypo="Heading2" paletteColor="Blue" margin="0 0 12px 0">
-            면접 참여가 불가능하신가요?
+            {props.step === '서류' ? '면접 참여가' : '18기 활동이'}{' '}
+            불가능하신가요?
           </Text>
           <Text webTypo="Body2" margin="0 0 24px 0">
-            ‘참여 불가능합니다’를 선택하셨습니다.
+            ‘{props.step === '서류' ? '참여' : '활동'} 불가능합니다’를
+            선택하셨습니다.
             <br />
             불가능한 사유를 알려주세요.
           </Text>

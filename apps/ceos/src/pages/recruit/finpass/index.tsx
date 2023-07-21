@@ -1,16 +1,17 @@
 import { PassBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
-import { Text } from '@ceos-fe/ui';
-import { DocPassGlassBox } from '@ceos/components/GlassBox';
+import { Text, theme } from '@ceos-fe/ui';
+import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
 
 //이름, step
 
-const Pass = () => {
+const FinPass = () => {
   return (
     <div css={PassMainCss}>
       <PassBgImg />
       <div css={PassContentCss}>
+        <p css={WelcomeText}>Welcome CEOS 18th</p>
         <Text webTypo="Heading1_Kor" paletteColor="White">
           유선호님은&nbsp;
           <p
@@ -18,33 +19,43 @@ const Pass = () => {
               text-decoration: underline;
             `}
           >
-            서류 합격
+            최종 합격
           </p>
           &nbsp; 입니다.
         </Text>
         <Text webTypo="Body1" paletteColor="White">
-          CEOS 18기 서류 합격을 축하드립니다 &#58;&#41;
+          CEOS 18기 최종 합격을 축하드립니다 &#58;&#41;
           <br />
-          먼저 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
+          하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
           <br />
-          유선호님은 면접 대상자로, 하단의 면접 일정을 꼭 확인해주시고
-          <br />
-          면접 참여 가능 여부를 반드시 알려주시기 바랍니다.
+          다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
         </Text>
-        <DocPassGlassBox />
+        <p>CEOS 드림</p>
+        <FinPassGlassBox />
         <FooterText />
       </div>
     </div>
   );
 };
 
-export default Pass;
+export default FinPass;
+
+const WelcomeText = css`
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 100%;
+  color: white;
+`;
 
 export const PassMainCss = css`
   position: relative;
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  overflow-x: hidden;
 `;
 
 export const PassContentCss = css`
@@ -58,6 +69,8 @@ export const PassContentCss = css`
   top: 8.2vw;
   gap: 48px;
   width: 1032px;
+  color: white;
+  typo: ${theme.typo.Web.Body2};
 
   transform: translateX(-50%);
   text-wrap: nowrap;

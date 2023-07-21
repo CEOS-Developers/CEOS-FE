@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { ModalPortal, useModal } from '@ceos-fe/utils';
 import { DropModal } from '../Modals/dropModal';
+import { TimeModal } from '../Modals/timeModal';
 
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
@@ -97,7 +98,87 @@ export const DocPassGlassBox = () => {
       )}
       {isOpen && (
         <ModalPortal>
-          <DropModal isOpen={isOpen} toggleModal={toggleModal} />
+          <DropModal step="서류" isOpen={isOpen} toggleModal={toggleModal} />
+        </ModalPortal>
+      )}
+    </div>
+  );
+};
+
+export const FinPassGlassBox = () => {
+  const [isPossible, setIsPossible] = useState(false);
+  const { isOpen, toggleModal } = useModal();
+  return (
+    <div css={GlassBoxCss({ width: 552 })}>
+      <Diamond />
+      <Text
+        webTypo="Heading3"
+        paletteColor="White"
+        css={css`
+          gap: 0px;
+          margin-top: 4px;
+        `}
+      >
+        CEOS 18기 안내사항
+      </Text>
+      <p>- OT 일정 : 9월 7일 (수) 오후 7시, ZOOM으로 진행</p>
+      <p>
+        - 최종 합격자에게는 활동 일정 안내를 위해
+        <br />
+        개별적으로 연락 드릴 예정입니다.
+      </p>
+      <p>
+        ​- 최종 합격자께서는 2분 자기 PR자료(pdf)를
+        <br />
+        이번주 수요일(9/7) 오후 5시까지
+        <br />
+        ceos.sinchon@gmail.com 으로 제출해 주시기 바랍니다.
+      </p>
+      <p>- 9월 6일 화요일 중으로 CEOS 18기 단톡방 초대 예정입니다.</p>
+      <Text webTypo="Heading4">
+        합격 대상자의 경우 하단의 활동 가능 버튼을 눌러
+        <br />
+        활동 여부를 반드시 제출해 주세요.
+      </Text>
+      <div>
+        <Button
+          variant="white"
+          webWidth={223}
+          css={css`
+            gap: 0px;
+            margin-bottom: 12px;
+          `}
+          onClick={() => {
+            setIsPossible(true);
+          }}
+        >
+          활동 가능합니다.
+        </Button>
+        <p
+          css={css`
+            text-decoration: underline;
+            color: ${theme.palette.Gray3};
+
+            :hover {
+              cursor: pointer;
+            }
+          `}
+          onClick={() => {
+            toggleModal();
+          }}
+        >
+          아니요, 불가능합니다.
+        </p>
+      </div>
+      {isPossible && (
+        <ModalPortal>
+          <TimeModal />
+        </ModalPortal>
+      )}
+
+      {isOpen && (
+        <ModalPortal>
+          <DropModal step="최종" isOpen={isOpen} toggleModal={toggleModal} />
         </ModalPortal>
       )}
     </div>
