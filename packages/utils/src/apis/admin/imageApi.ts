@@ -17,7 +17,7 @@ export const imageApi = {
     return response.data.data.url;
   },
   GET_MANAGEMENT_IMAGE: async (): Promise<string> => {
-    const response = await adminInstance.get(`/managements/image`);
+    const response = await adminInstance.get(`/mangements/image`);
 
     return response.data.data.url;
   },
