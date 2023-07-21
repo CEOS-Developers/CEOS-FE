@@ -21,6 +21,11 @@ export const imageApi = {
 
     return response.data.data.url;
   },
+  GET_PROJECTS_IMAGE: async (): Promise<string> => {
+    const response = await adminInstance.get(`/projects/image`);
+
+    return response.data.data.url;
+  },
   PUT_IMAGE: async ({ url, file }: uploadImageProps) => {
     const response = await publicInstance.put(url, file, {
       headers: {
