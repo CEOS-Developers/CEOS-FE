@@ -38,10 +38,16 @@ interface personalQuestionListInterface {
 }
 
 export const ApplicationModal = ({ idx }: { idx: number }) => {
-  const { data } = useQuery<ResponseInterface<applicationInterface>>(
-    ['applicantData'],
-    () => applyStatementApi.GET_APPLICANTINFO(idx),
-  );
+  const { data, isLoading, isError } = useQuery<
+    ResponseInterface<applicationInterface>
+  >(['applicantData'], () => applyStatementApi.GET_APPLICANTINFO(idx));
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError || !data) {
+    return <div>Error: Failed to fetch data</div>;
+  }
 
   const PersonalQuestionList: personalQuestionListInterface[] = [
     {
@@ -80,33 +86,17 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
 
   return (
     <Container>
-      {PersonalQuestionList[0].questions.map(
-        (i: personalQuestionInterface, index: number) => (
-          <Flex height={24} justify="flex-start" key={index}>
-            <Text webTypo="Label3">{i.question} : &nbsp;</Text>
-            <Text webTypo="Body3">{i.answer}</Text>
-          </Flex>
-        ),
-      )}
-      <Line />
-      {PersonalQuestionList[1].questions.map(
-        (i: personalQuestionInterface, index: number) => (
-          <Flex height={24} justify="flex-start" key={index}>
-            <Text webTypo="Label3">{i.question} : &nbsp;</Text>
-            <Text webTypo="Body3">{i.answer}</Text>
-          </Flex>
-        ),
-      )}
-      <Line />
-      {PersonalQuestionList[2].questions.map(
-        (i: personalQuestionInterface, index: number) => (
-          <Flex height={24} justify="flex-start" key={index}>
-            <Text webTypo="Label3">{i.question} : &nbsp;</Text>
-            <Text webTypo="Body3">{i.answer}</Text>
-          </Flex>
-        ),
-      )}
-      <Line />
+      {PersonalQuestionList.map((list: personalQuestionListInterface) => (
+        <>
+          {list.questions.map((i: personalQuestionInterface, index: number) => (
+            <Flex height={24} justify="flex-start" key={index}>
+              <Text webTypo="Label3">{i.question} : &nbsp;</Text>
+              <Text webTypo="Body3">{i.answer}</Text>
+            </Flex>
+          ))}
+          <Line />
+        </>
+      ))}
       {/* 공통 질문 */}
       <Text webTypo="Heading4">공통 질문</Text>
       {data?.data.commonQuestions.map(
@@ -129,7 +119,7 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
       )}
       {/* 파트별 질문 */}
       <Text webTypo="Heading4" style={{ padding: '30px 0 0 0' }}>
-        {data?.data.partQuestions[0].question}
+        {data?.data.part} {data?.data.partQuestions[0].question}
       </Text>
       {data?.data.partQuestions.map(
         (question: questionInterface, index: number) => (
