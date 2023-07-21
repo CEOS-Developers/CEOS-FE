@@ -54,6 +54,12 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
+      <ImageUploader
+        value={watch('activity')}
+        setValue={(url: string | null) => setValue('activity', url)}
+        imageApiType="ACTIVITY"
+        label="activity"
+      />
     </>
   );
 }

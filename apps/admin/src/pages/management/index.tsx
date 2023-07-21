@@ -1,9 +1,9 @@
 import { PageTitle } from '@admin/components/Common/PageTitle';
 import { DataGrid } from '@admin/components/DataGrid';
 import { Button, Flex, Space } from '@ceos-fe/ui';
-import { managementApi } from '@ceos-fe/utils';
+import { adminManagementApi } from '@ceos-fe/utils';
 import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
-import { ManagementResponse } from '../../../../../packages/utils/src/apis/admin/managementApi';
+import { ManagementResponse } from '../../../../../packages/utils/src/apis/admin/adminManagementApi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -13,12 +13,12 @@ export default function Management() {
   const [page, setPage] = useState<number>(0);
   const queryClient = useQueryClient();
   const { data } = useQuery<ManagementResponse>(['management', page], () =>
-    managementApi.GET_MANAGEMENT({ pageNum: page, limit: 12 }),
+    adminManagementApi.GET_MANAGEMENT({ pageNum: page, limit: 12 }),
   );
 
   // 운영진 삭제 api
   const managementDeleteMutation = useMutation(
-    managementApi.DELETE_MANAGEMENT,
+    adminManagementApi.DELETE_MANAGEMENT,
     {
       onSuccess: async () => {
         alert('삭제 완료');
