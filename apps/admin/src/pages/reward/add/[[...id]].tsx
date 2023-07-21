@@ -3,7 +3,7 @@ import { Button, Flex, Space, Text, TextField } from '@ceos-fe/ui';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { useMutation } from '@tanstack/react-query';
-import { adiminadminRewardApi, RewardDTO } from '@ceos-fe/utils';
+import { adminRewardApi, RewardDTO } from '@ceos-fe/utils';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 

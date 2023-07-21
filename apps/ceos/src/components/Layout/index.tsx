@@ -1,5 +1,6 @@
 import { Header } from '@ceos/components/Header';
 import { Flex } from '@ceos-fe/ui';
+import styled from '@emotion/styled';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
