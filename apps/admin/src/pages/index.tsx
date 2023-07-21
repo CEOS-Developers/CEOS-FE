@@ -58,6 +58,7 @@ export default function Home() {
         value={watch('activity')}
         setValue={(url: string | null) => setValue('activity', url)}
         imageApiType="ACTIVITY"
+        label="activity"
       />
     </>
   );

@@ -33,7 +33,7 @@ export interface ManagementResponse {
   };
 }
 
-export const managementApi = {
+export const adminManagementApi = {
   GET_MANAGEMENT: async ({ pageNum = 0, limit = 12 }) => {
     const response = await adminInstance.get(
       `/mangements?pageNum=${pageNum}&limit=${limit}`,

@@ -289,6 +289,7 @@ export default function ProjectDetail() {
             </Text>
             <ImageUploader
               imageApiType="PROJECTS"
+              label="projectImages.0.imageUrl"
               value={watch('projectImages.0.imageUrl')}
               setValue={(url: string | null) => {
                 if (!url) return;
@@ -302,6 +303,7 @@ export default function ProjectDetail() {
             </Text>
             <ImageUploader
               imageApiType="PROJECTS"
+              label="projectImages.1.imageUrl"
               value={watch('projectImages.1.imageUrl')}
               setValue={(url: string | null) => {
                 if (!url) return;

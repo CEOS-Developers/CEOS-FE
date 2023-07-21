@@ -12,9 +12,8 @@ import { Dropdown } from '@admin/components/Dropdown';
 import { ImageUploader } from '@admin/components/ImageUploader';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { useMutation } from '@tanstack/react-query';
-import { managementApi } from '@ceos-fe/utils';
+import { adminManagementApi, ManagementDTO } from '@ceos-fe/utils';
 import { useEffect, useState } from 'react';
-import { ManagementDTO } from '../../../../../../packages/utils/src/apis/admin/managementApi';
 
 const PART: Record<string, string> = {
   기획: 'strategy',
@@ -74,31 +73,34 @@ export default function AddManagement() {
   ]);
 
   // 수정 시 정보 가져오기 api
-  const getManagementMutation = useMutation(managementApi.GET_ONE_MANAGEMENT, {
-    onSuccess: async (data: ManagementDTO) => {
-      setValue('category', data.role === '멘토' ? '멘토' : '운영진');
-      setValue('name', data.name);
-      setValue('generation', data.generation);
-      setValue('part', {
-        label: data.part,
-        value: PART[data.part],
-      });
-      setValue('role', {
-        label: data.role,
-        value: ROLE[data.role],
-      });
-      setValue('university', {
-        label: data.university,
-        value: UNIVERSITY[data.university],
-      });
-      setValue('major', data.major);
-      setValue('company', data.company);
-      setValue('imageUrl', data.imageUrl);
+  const getManagementMutation = useMutation(
+    adminManagementApi.GET_ONE_MANAGEMENT,
+    {
+      onSuccess: async (data: ManagementDTO) => {
+        setValue('category', data.role === '멘토' ? '멘토' : '운영진');
+        setValue('name', data.name);
+        setValue('generation', data.generation);
+        setValue('part', {
+          label: data.part,
+          value: PART[data.part],
+        });
+        setValue('role', {
+          label: data.role,
+          value: ROLE[data.role],
+        });
+        setValue('university', {
+          label: data.university,
+          value: UNIVERSITY[data.university],
+        });
+        setValue('major', data.major);
+        setValue('company', data.company);
+        setValue('imageUrl', data.imageUrl);
+      },
+      onError: (error: any) => {
+        console.log(error);
+      },
     },
-    onError: (error: any) => {
-      console.log(error);
-    },
-  });
+  );
 
   // 수정 시 value set
   useEffect(() => {
@@ -109,7 +111,7 @@ export default function AddManagement() {
 
   // 운영진 생성 api
   const postManagementCreateMutation = useMutation(
-    managementApi.POST_MANAGEMENT,
+    adminManagementApi.POST_MANAGEMENT,
     {
       onSuccess: () => {
         alert('추가 완료');
@@ -120,7 +122,7 @@ export default function AddManagement() {
 
   // 운영진 수정 api
   const patchManagementCreateMutation = useMutation(
-    managementApi.PATCH_MANAGEMENT,
+    adminManagementApi.PATCH_MANAGEMENT,
     {
       onSuccess: () => {
         alert('수정 완료');
@@ -355,7 +357,6 @@ export default function AddManagement() {
             label="imageUrl"
             value={watch('imageUrl')}
             setValue={setValue}
-            width={328}
             height={328}
           />
         </div>

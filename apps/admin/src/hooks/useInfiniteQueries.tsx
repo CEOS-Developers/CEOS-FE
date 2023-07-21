@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ResponseInterface } from 'packages/utils';
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
 export interface InfiniteResponse<T> {

@@ -7,8 +7,7 @@ import { CardImage } from 'react-bootstrap-icons';
 import Image from 'next/image';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
 
-export interface ImageUploaderProps
-  extends InputHTMLAttributes<HTMLInputElement> {
+export interface ImageUploaderProps {
   height?: number;
   imageApiType: ImageApiType;
   value: string;
