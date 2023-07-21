@@ -87,6 +87,9 @@ export const backCss = () => css`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
   }
+  justiy-content: center;
+  align-items: center;
+  display: flex;
 `;
 
 export const positionCss = (isOpen: boolean) => css`

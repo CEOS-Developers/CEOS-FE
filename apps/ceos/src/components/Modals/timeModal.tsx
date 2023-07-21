@@ -28,31 +28,10 @@ export const TimeModal = () => {
 
   return (
     <div css={backCss} className="open">
-      <div
-        css={css`
-          width: 504px;
-          z-index: 10;
-          border-radius: 20px;
-          background-color: #ffffff;
-          padding: 40px;
-          box-sizing: border-box;
-          text-align: center;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-          flex-direction: column;
-          typo: ${theme.typo.Web.Body2};
-          gap: 12px;
-          position: relative;
-          position: fixed;
-          top: 40.3703vh;
-          left: 33.3333vw;
-          shadow: ${theme.shadow.PopUp};
-          opacity: ${opacity}%;
-        `}
-      >
+      <div css={TimeModalCss(opacity)}>
         <Text webTypo="Heading2" paletteColor="Blue">
-          CEOS 18기가 되신 것을 환영합니다 &#58;&#41;
+          CEOS 18기가 되신 것을
+          <br className="mobile" /> 환영합니다 &#58;&#41;
         </Text>
         <p>
           활동에 관련된 사항들은 <br />
@@ -62,3 +41,39 @@ export const TimeModal = () => {
     </div>
   );
 };
+
+const TimeModalCss = (opacity: number) => css`
+  width: 504px;
+  z-index: 10;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  typo: ${theme.typo.Web.Body2};
+  gap: 12px;
+  position: relative;
+
+  left: 50%;
+  transform: translateX(-50%);
+  shadow: ${theme.shadow.PopUp};
+  opacity: ${opacity}%;
+
+  .mobile {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    width: 346px;
+    height: 184px;
+    padding: 1.25rem 1.25rem 1.44rem 1.25rem;
+
+    .mobile {
+      display: block;
+    }
+  }
+`;

@@ -23,11 +23,16 @@ export const DropModal = (props: ModalProps) => {
           margin="0 0 auto auto"
         />
         <div css={ModalContentCss}>
-          <Text webTypo="Heading2" paletteColor="Blue" margin="0 0 12px 0">
+          <Text
+            webTypo="Heading2"
+            mobileTypo="Heading2"
+            paletteColor="Blue"
+            margin="0 0 12px 0"
+          >
             {props.step === '서류' ? '면접 참여가' : '18기 활동이'}{' '}
             불가능하신가요?
           </Text>
-          <Text webTypo="Body2" margin="0 0 24px 0">
+          <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
             ‘{props.step === '서류' ? '참여' : '활동'} 불가능합니다’를
             선택하셨습니다.
             <br />
@@ -39,6 +44,11 @@ export const DropModal = (props: ModalProps) => {
             label="면접 참여 불가능 사유"
             placeholder="내용을 입력해주세요."
             width={376}
+            css={css`
+              @media (max-width: 1023px) {
+                width: 306px;
+              }
+            `}
           />
           <Button variant="default" webWidth={376}>
             확인하기
@@ -58,7 +68,13 @@ export const ModalBoxCss = css`
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
   position: relative;
-  position: fixed;
-  top: 25.3703vh;
-  left: 33.3333vw;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: 1023px) {
+    width: 346px;
+    height: 356px;
+    padding: 1.25rem 1.25rem 1.44rem 1.25rem;
+  }
 `;

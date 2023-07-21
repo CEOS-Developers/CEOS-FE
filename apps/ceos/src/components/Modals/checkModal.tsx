@@ -23,10 +23,15 @@ export const CheckModal = (props: ModalProps) => {
           margin="0 0 auto auto"
         />
         <div css={ModalContentCss}>
-          <Text webTypo="Heading2" paletteColor="Blue" margin="0 0 12px 0">
+          <Text
+            webTypo="Heading2"
+            mobileTypo="Heading2"
+            paletteColor="Blue"
+            margin="0 0 12px 0"
+          >
             {props.step} 합격 여부 확인하기
           </Text>
-          <Text webTypo="Body2" margin="0 0 24px 0">
+          <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
             지원서에 작성해주신 이메일과,
             <br />
             해당 메일로 발급된 uuid를 입력해주세요.
@@ -37,13 +42,23 @@ export const CheckModal = (props: ModalProps) => {
             label="이메일"
             placeholder="내용을 입력해주세요."
             width={376}
+            css={css`
+              @media (max-width: 1023px) {
+                width: 306px;
+              }
+            `}
           />
           <TextField
             label="uuid"
             placeholder="내용을 입력해주세요."
             width={376}
+            css={css`
+              @media (max-width: 1023px) {
+                width: 306px;
+              }
+            `}
           />
-          <Button variant="default" webWidth={376}>
+          <Button variant="default" webWidth={376} mobileWidth={306}>
             확인하기
           </Button>
         </div>
@@ -61,9 +76,14 @@ export const ModalBoxCss = css`
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
   position: relative;
-  position: fixed;
-  top: 20.3703vh;
-  left: 33.3333vw;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: 1023px) {
+    width: 346px;
+    height: 451px;
+    padding: 1.25rem 1.25rem 1.44rem 1.25rem;
+  }
 `;
 
 export const ModalContentCss = css`
@@ -82,5 +102,9 @@ export const InputCss = css`
 
   button {
     margin-top: 16px;
+  }
+
+  @media (max-width: 1023px) {
+    gap: 12px;
   }
 `;
