@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { useEffect, useState } from 'react';
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
@@ -39,9 +38,9 @@ const useInfiniteQueries = <T,>({
     const res = await queryFunction(param);
 
     return {
-      board_page: res.data,
+      board_page: res,
       current_page: pageParam,
-      isLast: pageParam === res.data.pageInfo.totalPages,
+      isLast: pageParam === res.pageInfo.totalPages,
     };
   };
 
