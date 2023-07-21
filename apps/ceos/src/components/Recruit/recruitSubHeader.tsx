@@ -8,9 +8,10 @@ import { Button, Text } from '@ceos-fe/ui';
 import { RecruitBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
-import { CheckModal } from '@ceos/components/Recruit/checkModal';
+import { CheckModal } from '@ceos/components/Modals/checkModal';
 import { ModalPortal } from '@ceos-fe/utils/';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export const RecruitSubHeader = () => {
   const { isOpen, toggleModal } = useModal();
@@ -26,9 +27,11 @@ export const RecruitSubHeader = () => {
           CEOS와 함께 성장할
           <br className="mobile" /> 18기를 모집합니다!
         </Text>
-        {/* <Button variant="glass" webWidth={182} css={BtnCss}>
-          18기 지원하기
-        </Button> */}
+        {/* <Link href={'recruit/apply'}>
+          <Button variant="glass" webWidth={182} css={BtnCss}>
+            18기 지원하기
+          </Button>
+        </Link> */}
         {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
         </Button> */}

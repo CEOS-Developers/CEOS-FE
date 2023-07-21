@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { backCss } from '../MenuBar';
 import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
-import { useModal } from '@ceos-fe/utils';
 
 /**
  * @param step '서류' | '최종'
