@@ -1,7 +1,7 @@
 import { Title } from '@ceos/components/Title';
 import { Flex, MentorCard, ManagementCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { managementApi, ResponseInterface } from '@ceos-fe/utils';
+import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
@@ -47,24 +47,29 @@ export const getStaticProps = async () => {
 };
 
 const Management = () => {
-  const { data } = useQuery<{
-    manageData: ResponseInterface<ManageResponse>;
-  }>(['ceos', 'management'], async () => {
-    const manageData = await managementApi.GET_MANAGE({
-      pageNum: 0,
-      limit: 1000,
-    });
+  const { data } = useQuery<ManageResponse>(
+    ['ceos', 'management'],
+    async () => {
+      const manageData = await managementApi.GET_MANAGE({
+        pageNum: 0,
+        limit: 1000,
+      });
 
-    return manageData;
-  });
+      return manageData;
+    },
+  );
 
-  const managers = data?.managers?.filter((m: ManagerInterface) => {
-    return m.role === '운영진';
-  });
+  const managers = data
+    ? data.managers?.filter((m: ManagerInterface) => {
+        return m.role === '운영진';
+      })
+    : [];
 
-  const mentors = data?.managers?.filter((m: ManagerInterface) => {
-    return m.role === '멘토';
-  });
+  const mentors = data
+    ? data.managers?.filter((m: ManagerInterface) => {
+        return m.role === '멘토';
+      })
+    : [];
 
   return (
     <Flex
