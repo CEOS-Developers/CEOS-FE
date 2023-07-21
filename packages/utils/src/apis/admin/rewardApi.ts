@@ -1,20 +1,16 @@
 import { adminInstance } from '../axiosConfig';
 
 export interface RewardInterface {
-  awards: {
-    id: number;
-    generation: number;
-    content: string;
-    startDate: string;
-  };
+  id: number;
+  generation: number;
+  content: string;
+  startDate: string;
 }
 
 export interface ProjectInterface {
-  projects: {
-    name: string;
-    description: string;
-    generation: number;
-  };
+  name: string;
+  description: string;
+  generation: number;
 }
 
 export interface RewardDTO {
@@ -55,14 +51,14 @@ export const rewardApi = {
     return response.data.data;
   },
 
-  PATCH_REWARD: async ({
+  PUT_REWARD: async ({
     payload,
     id,
   }: {
     payload: RewardDTO;
     id: number;
   }): Promise<undefined> => {
-    const response = await adminInstance.patch(`/awards/${id}`, payload);
+    const response = await adminInstance.put(`/awards/${id}`, payload);
     return response.data.data;
   },
 
