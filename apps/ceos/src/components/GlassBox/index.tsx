@@ -13,7 +13,7 @@ export const DocPassGlassBox = () => {
   const [isPossible, setIsPossible] = useState(false);
   const { isOpen, toggleModal } = useModal();
   return (
-    <div css={GlassBoxCss}>
+    <div css={GlassBoxCss({ width: 552 })}>
       <Diamond />
       <Text
         webTypo="Heading4"
@@ -104,8 +104,33 @@ export const DocPassGlassBox = () => {
   );
 };
 
-const GlassBoxCss = css`
-  width: 552px;
+export const NonPassGlassBox = () => {
+  return (
+    <div css={GlassBoxCss({ width: 680 })}>
+      <p>안녕하세요. CEOS 입니다.</p>
+      <p>
+        먼저 리크루팅 과정에 귀중한 시간을 내어 참여해주셔서 진심으로
+        감사드립니다. <br />
+        창업의 뜻을 이루기 위해 지원자분과 같은 입장에서 노력하고 있는
+        <br />
+        저희 운영진이 감히 합격자를 가려낸다는 것은 늘 어려운 일입니다.
+        <br />
+      </p>
+      <p>
+        {' '}
+        제한된 인원으로 인해 합격 소식을 전하지 못하게 되어
+        <br />
+        아쉽고 죄송한 18기 운영진의 진심이 전해졌으면 합니다.
+        <br /> 추후 좋은 기회에 꼭 다시 만나뵐 수 있기를 기대하며,
+        <br /> 다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
+      </p>
+      <p> CEOS 드림.</p>
+    </div>
+  );
+};
+
+const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
+  width: ${width}px;
   border-radius: 16px;
   color: ${theme.palette.White};
   ${theme.glass.Border};

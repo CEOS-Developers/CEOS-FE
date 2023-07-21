@@ -2,8 +2,7 @@ import { css } from '@emotion/react';
 import { backCss } from '../MenuBar';
 import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
-import { useModal } from '@ceos-fe/utils';
-
+import { ModalContentCss, InputCss } from './checkModal';
 /**
  * @param step '서류' | '최종'
  */
@@ -59,23 +58,4 @@ export const ModalBoxCss = css`
   position: fixed;
   top: 25.3703vh;
   left: 33.3333vw;
-`;
-
-export const ModalContentCss = css`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const InputCss = css`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-
-  button {
-    margin-top: 16px;
-  }
 `;

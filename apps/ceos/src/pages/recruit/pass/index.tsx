@@ -32,9 +32,7 @@ const Pass = () => {
           면접 참여 가능 여부를 반드시 알려주시기 바랍니다.
         </Text>
         <DocPassGlassBox />
-        <div>
-          <FooterText />
-        </div>
+        <FooterText />
       </div>
     </div>
   );
@@ -45,9 +43,7 @@ export default Pass;
 export const PassMainCss = css`
   position: relative;
   width: 100vw;
-  aspect-ratio: 1660 / 1439;
   height: 100vh;
-  //   overflow: hidden;
   z-index: 1;
 `;
 
