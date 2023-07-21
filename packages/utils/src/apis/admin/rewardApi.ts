@@ -2,6 +2,7 @@ import { adminInstance } from '../axiosConfig';
 
 export interface RewardInterface {
   awards: {
+    id: number;
     generation: number;
     content: string;
     startDate: string;

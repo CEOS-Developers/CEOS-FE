@@ -23,7 +23,7 @@ export interface ManagementDTO {
 
 export interface ManagementResponse {
   data: {
-    managers: ManagementDTO[];
+    content: ManagementDTO[];
     pageInfo: {
       pageNum: number;
       limit: number;
@@ -36,13 +36,13 @@ export interface ManagementResponse {
 export const managementApi = {
   GET_MANAGEMENT: async ({ pageNum = 0, limit = 12 }) => {
     const response = await adminInstance.get(
-      `/mangements?pageNum=${pageNum}&limit=${limit}`,
+      `/managements?pageNum=${pageNum}&limit=${limit}`,
     );
 
     return response.data;
   },
   GET_ONE_MANAGEMENT: async (id: number) => {
-    const response = await adminInstance.get(`/mangements/${id}`);
+    const response = await adminInstance.get(`/managements/${id}`);
 
     return response.data.data;
   },
@@ -51,7 +51,7 @@ export const managementApi = {
   }: {
     payload: ManagementDTO;
   }): Promise<undefined> => {
-    const response = await adminInstance.post(`/mangements`, payload);
+    const response = await adminInstance.post(`/managements`, payload);
     return response.data.data;
   },
 
@@ -62,12 +62,12 @@ export const managementApi = {
     payload: ManagementDTO;
     id: number;
   }): Promise<undefined> => {
-    const response = await adminInstance.patch(`/mangements/${id}`, payload);
+    const response = await adminInstance.patch(`/managements/${id}`, payload);
     return response.data.data;
   },
 
   DELETE_MANAGEMENT: async (id: number): Promise<undefined> => {
-    const response = await adminInstance.delete(`/mangements/${id}`);
+    const response = await adminInstance.delete(`/managements/${id}`);
     return response.data.data;
   },
 };

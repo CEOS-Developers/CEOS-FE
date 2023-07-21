@@ -54,33 +54,6 @@ export default function Home() {
         placeholder="파트 선택"
         width={152}
       />
-
-      <AdminRewardCard
-        generation={0}
-        projects={[]}
-        awards={[
-          {
-            generation: 0,
-            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
-            startDate: 'hi',
-          },
-          {
-            generation: 0,
-            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
-            startDate: 'hi',
-          },
-          {
-            generation: 0,
-            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
-            startDate: 'hi',
-          },
-          {
-            generation: 0,
-            content: '창업경진대회 어쩌구 저쩌구 뿡뿡',
-            startDate: 'hi',
-          },
-        ]}
-      />
     </>
   );
 }
