@@ -16,7 +16,7 @@ export const RewardCardContainer = (props: RewardCardProps) => {
   });
 
   const onClickRemoveHandler = (generation: number) => {
-    () => rewardDeleteMutation.mutate(generation);
+    rewardDeleteMutation.mutate(generation);
   };
 
   const onClickUpdateHandler = (generation: number) => {
