@@ -13,7 +13,6 @@ export default function Reward() {
     queryFunction: ({ pageParam = 0 }) =>
       rewardApi.GET_REWARD({ pageNum: pageParam, limit: 12 }),
     PageItem: RewardCardContainer,
-    dataName: 'generationAwards',
   });
 
   return (

@@ -17,16 +17,12 @@ export interface InfiniteRequestProps<T> {
   queryKey: QueryKey;
   queryFunction: (param: any) => Promise<InfiniteResponse<T>>;
   PageItem: (props: any) => JSX.Element;
-  dataName: string;
-  onClickRemove?: () => void;
-  onClickUpdate?: () => void;
 }
 
 const useInfiniteQueries = <T,>({
   queryKey,
   queryFunction,
   PageItem,
-  dataName,
   ...props
 }: InfiniteRequestProps<T>) => {
   const [results, setResults] = useState<number>(0);
