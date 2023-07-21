@@ -3,11 +3,8 @@ import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
 // 인덱스 시그니처
-
 export interface InfiniteResponse<T> {
-  data: {
-    [key: string]: T[];
-  };
+  content: T[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -21,6 +18,8 @@ export interface InfiniteRequestProps<T> {
   queryFunction: (param: any) => Promise<InfiniteResponse<T>>;
   PageItem: (props: any) => JSX.Element;
   dataName: string;
+  onClickRemove?: () => void;
+  onClickUpdate?: () => void;
 }
 
 const useInfiniteQueries = <T,>({
@@ -28,6 +27,7 @@ const useInfiniteQueries = <T,>({
   queryFunction,
   PageItem,
   dataName,
+  ...props
 }: InfiniteRequestProps<T>) => {
   const [results, setResults] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -62,8 +62,8 @@ const useInfiniteQueries = <T,>({
   }, [inView, currentPage, ref]);
 
   const pageData: ReactNode[] | undefined = getBoard?.pages.map((page_data) => {
-    return page_data[dataName]?.map((data: any, index: number) => (
-      <PageItem {...data} key={index} />
+    return page_data.content.map((data: any, index: number) => (
+      <PageItem {...data} {...props} key={index} />
     ));
   });
 
