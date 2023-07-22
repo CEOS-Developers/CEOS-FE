@@ -2,7 +2,6 @@ import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
 import { AdminRewardCard, theme } from '@ceos-fe/ui';
 import { ImageUploader } from '@admin/components/ImageUploader';
-import { useEffect } from 'react';
 
 export default function Home() {
   const { setValue, watch, getValues, register } = useForm();
