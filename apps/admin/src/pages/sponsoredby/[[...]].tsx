@@ -36,7 +36,7 @@ export default function SponsoredBy() {
     {
       onSuccess: () => {
         alert('추가 완료');
-        router.push('/sponsoredby');
+        window.location.reload();
       },
     },
   );

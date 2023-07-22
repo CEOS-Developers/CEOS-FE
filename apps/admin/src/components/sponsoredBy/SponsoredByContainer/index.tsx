@@ -14,6 +14,7 @@ export const SponsoredByContainer = (props: SponsorCardProps) => {
       onSuccess: async () => {
         alert('삭제 완료');
         queryClient.invalidateQueries(['sponsor']);
+        window.location.reload();
       },
     },
   );
