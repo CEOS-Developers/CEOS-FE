@@ -12,9 +12,10 @@ import useInfiniteQueries from '../../hooks/useInfiniteQueries';
 import { PageTitle } from '../../components/Common/PageTitle';
 import { useForm } from 'react-hook-form';
 import { ImageUploader } from '../../components/ImageUploader/index';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function SponsoredBy() {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const {
     watch,
@@ -36,7 +37,7 @@ export default function SponsoredBy() {
     {
       onSuccess: () => {
         alert('추가 완료');
-        window.location.reload();
+        queryClient.invalidateQueries([['sponsor']]);
       },
     },
   );
@@ -47,6 +48,7 @@ export default function SponsoredBy() {
     {
       onSuccess: () => {
         alert('수정 완료');
+        queryClient.invalidateQueries([['sponsor']]);
         router.push('/sponsoredby');
       },
     },
@@ -143,7 +145,7 @@ export default function SponsoredBy() {
             <Text webTypo="Label3">썸네일 이미지</Text>
             <Space height={8} />
             <ImageUploader
-              imageApiType="MANAGEMENT"
+              imageApiType="SPONSOR"
               label="imageUrl"
               value={watch('imageUrl')}
               setValue={setValue}
