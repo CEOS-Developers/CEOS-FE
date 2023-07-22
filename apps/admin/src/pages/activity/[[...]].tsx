@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Flex, Button, Space, TextField, Text } from '@ceos-fe/ui';
-import {
-  RewardResponse,
-  SponsoredByDTO,
-  adminActivityApi,
-  adminSponsoredByApi,
-} from '@ceos-fe/utils';
+import { RewardResponse, adminActivityApi } from '@ceos-fe/utils';
 import styled from '@emotion/styled';
 import { SponsoredByContainer } from '../../components/sponsoredBy/SponsoredByContainer/index';
 import useInfiniteQueries from '../../hooks/useInfiniteQueries';
@@ -15,7 +10,10 @@ import { useForm } from 'react-hook-form';
 import { ImageUploader } from '../../components/ImageUploader/index';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ActivityCardContainer } from '../../components/activity/ActivityCardContainer/indext';
-import { ActivityDTO } from '../../../../../packages/utils/src/apis/admin/adminActivityApi';
+import {
+  ActivityDTO,
+  ActivityResponse,
+} from '../../../../../packages/utils/src/apis/admin/adminActivityApi';
 
 export default function Activity() {
   const queryClient = useQueryClient();
@@ -27,7 +25,7 @@ export default function Activity() {
     handleSubmit,
     formState: { isValid },
   } = useForm();
-  const { infiniteData, ref } = useInfiniteQueries<RewardResponse>({
+  const { infiniteData, ref } = useInfiniteQueries<ActivityResponse>({
     queryKey: ['activity'],
     queryFunction: ({ pageParam = 0 }) =>
       adminActivityApi.GET_ACTIVITY({ pageNum: pageParam, limit: 12 }),

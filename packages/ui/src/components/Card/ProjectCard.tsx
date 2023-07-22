@@ -13,13 +13,19 @@ export interface ProjectCardProps {
   name: string;
   description: string;
   generation: number;
-  previewImage: ProjectImageProps;
+  thumbnailImage: ProjectImageProps;
+}
+
+export interface AdminProjectCardProps extends ProjectCardProps {
+  onClickRemove: () => void;
+  onClickUpdate: () => void;
 }
 
 export const ProjectCard = (props: {
   projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
+  const { id, name, description, generation, thumbnailImage } =
+    props.projectCard;
   return (
     <Wrapper>
       {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
@@ -47,20 +53,20 @@ export const ProjectCard = (props: {
   );
 };
 
-export const AdminProjectCard = (props: {
-  projectCard: ProjectCardProps;
-  onClickRemove: (id: number) => void;
-  onClickUpdate: (id: number) => void;
-}): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
-  const [onClickRemove, onClickUpdate] = [
-    props.onClickRemove,
-    props.onClickUpdate,
-  ];
+export const AdminProjectCard = ({
+  id,
+  name,
+  description,
+  generation,
+  thumbnailImage,
+  onClickRemove,
+  onClickUpdate,
+  ...props
+}: AdminProjectCardProps) => {
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={previewImage.imageUrl} width={328} height={184} />
+        <ProjectImg src={thumbnailImage.imageUrl} width={328} height={184} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -81,8 +87,8 @@ export const AdminProjectCard = (props: {
         borderRadius={16}
         className="is-hover"
       >
-        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+        <Button onClick={onClickRemove}>삭제하기</Button>
+        <Button onClick={onClickUpdate}>수정하기</Button>
       </AbsoluteFlex>
     </RelativeContainer>
   );

@@ -1,4 +1,11 @@
-import { AdminProjectCard, Button, Flex, Text } from '@ceos-fe/ui';
+import {
+  AdminProjectCard,
+  Button,
+  Flex,
+  ProjectCard,
+  Space,
+  Text,
+} from '@ceos-fe/ui';
 import {
   QueryClient,
   dehydrate,
@@ -8,24 +15,19 @@ import {
 import { ProjectListInterface, adminProjectApi } from '@ceos-fe/utils';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
+import { ProjectCardContainer } from '../../components/project/ProjectCardContainer/index';
+import { css } from '@emotion/react';
 
 export default function Project() {
   const router = useRouter();
 
-  const { data, isFetching, isSuccess } =
-    useInfiniteQuery<ProjectListInterface>(
-      ['admin', 'projects'],
-      ({ pageParam = 0 }) =>
-        adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 10000 }),
-      {
-        getNextPageParam: (lastPage) => {
-          return true;
-        },
-      },
-    );
-  const { mutate: deleteProject } = useMutation((id: number) =>
-    adminProjectApi.DELETE_PROJECT(id),
-  );
+  const { infiniteData, ref } = useInfiniteQueries<ProjectListInterface>({
+    queryKey: ['project'],
+    queryFunction: ({ pageParam = 0 }) =>
+      adminProjectApi.GET_PROJECTS({ pageNum: pageParam, limit: 12 }),
+    PageItem: ProjectCardContainer,
+  });
 
   return (
     <>
@@ -50,18 +52,22 @@ export default function Project() {
           </Button>
         </Flex>
       </Flex>
-
-      <GridContainer>
-        {!isFetching &&
-          isSuccess &&
-          data.pages[0].projectBriefInfoVos.map((project) => (
-            <AdminProjectCard
-              projectCard={{ ...project, previewImage: project.thumbnailImage }}
-              onClickRemove={() => deleteProject(project.id)}
-              onClickUpdate={() => router.push(`/project/edit/${project.id}`)}
-            />
-          ))}
-      </GridContainer>
+      <Space height={48} />
+      <div>
+        <Flex
+          webGap={24}
+          mobileGap={24}
+          justify={'flex-start'}
+          align={'flex-start'}
+          width={1032}
+          css={css`
+            flex-wrap: wrap;
+          `}
+        >
+          {infiniteData}
+        </Flex>
+        <div ref={ref}></div>
+      </div>
     </>
   );
 }
@@ -71,7 +77,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchInfiniteQuery(['admin', 'projects'], () =>
-      adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 10000 }),
+      adminProjectApi.GET_PROJECTS({ pageNum: 0, limit: 24 }),
     );
 
     return {
