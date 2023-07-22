@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "./",
+    "paths": {
+      "@ceos-fe/ui": ["./packages/ui/src/*"],
+      "@ceos-fe/utils/*": ["./packages/utils/src/*"]
+    }
+  },
+  "references": [
+    {
+      "path": "apps/ceos"
+    },
+    {
+      "path": "apps/admin"
+    },
+    {
+      "path": "packages/ui"
+    },
+    {
+      "path": "packages/utils"
+    }
+  ],
+  "include": ["src", "custom.d.ts"],
+  "exclude": ["apps/**/dist/**"]
+}
