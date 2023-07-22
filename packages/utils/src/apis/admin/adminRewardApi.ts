@@ -20,7 +20,7 @@ export interface RewardDTO {
 }
 
 export interface RewardResponse {
-  generationAwards: RewardDTO[];
+  content: RewardDTO[];
   pageInfo: {
     pageNum: number;
     limit: number;
