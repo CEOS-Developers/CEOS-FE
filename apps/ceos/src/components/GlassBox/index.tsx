@@ -258,13 +258,13 @@ const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   }
 
   @media (max-width: 1023px) {
-    width: 346px;
     gap: 28px;
     padding: 32px;
     type: ${theme.typo.Mobile.Body1};
   }
 
   @media (max-width: 390px) {
+    width: 346px;
     padding-left : 17.5px;
     padding-right : 17.5px;
     .mobile {

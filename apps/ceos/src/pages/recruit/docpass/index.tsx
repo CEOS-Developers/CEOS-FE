@@ -80,6 +80,7 @@ export const PassContentCss = css`
   @media (max-width: 1023px) {
     width: 100%;
     gap: 60px;
+    top: 23.2vw;
   }
 
   @media (max-width: 390px) {

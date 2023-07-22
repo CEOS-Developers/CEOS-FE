@@ -927,7 +927,6 @@ export const RecruitBgImg = () => {
         </svg>
       ) : (
         <svg
-          width="100vw"
           viewBox="0 0 1660 600"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
