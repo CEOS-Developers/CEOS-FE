@@ -50,4 +50,9 @@ export const NonPassContentCss = css`
 
   transform: translateX(-50%);
   text-wrap: nowrap;
+
+  @media (max-width: 390px) {
+    top: 20vh;
+    height: 80vh;
+  }
 `;

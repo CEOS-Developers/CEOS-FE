@@ -18,6 +18,7 @@ export const DocPassGlassBox = () => {
       <Diamond />
       <Text
         webTypo="Heading4"
+        mobileTypo="Heading3"
         paletteColor="White"
         css={css`
           gap: 0px;
@@ -27,15 +28,18 @@ export const DocPassGlassBox = () => {
         면접 일정
       </Text>
       <p>
-        000님의 면접 타임은 0월 0일 오후 0시 00분 입니다.
+        000님의 면접 타임은 <br className="mobile" /> 0월 0일 오후 0시 00분
+        입니다.
         <br />
-        해당 면접 시간에 참여 가능하신지 꼭 확인 부탁드립니다.
+        해당 면접 시간에 참여 가능하신지
+        <br className="mobile" /> 꼭 확인 부탁드립니다.
       </p>
       {!isPossible ? (
         <div>
           <Button
             variant="white"
             webWidth={223}
+            mobileWidth={306}
             css={css`
               gap: 0px;
               margin-bottom: 12px;
@@ -71,11 +75,13 @@ export const DocPassGlassBox = () => {
             인터뷰 전 ZOOM이 가능한 계정이 있는지 확인해 주세요.
           </p>
           <p>
-            - 화상 면접이 가능한 노트북과 이어폰을 준비해 주시고,
+            - 화상 면접이 가능한 노트북과
+            <br className="mobile" /> 이어폰을 준비해 주시고,
             <br />
             조용한 환경에서 면접에 참여해 주시길 부탁드리겠습니다.
             <br />
-            면접 전에 미리 이어폰 및 마이크에 문제가 없는지 확인 부탁드립니다
+            면접 전에 미리 이어폰 및 마이크에 <br className="mobile" /> 문제가
+            없는지 확인 부탁드립니다
           </p>
           <p>
             - 배정된 인터뷰 시간 15분 전에, <br />
@@ -113,6 +119,7 @@ export const FinPassGlassBox = () => {
       <Diamond />
       <Text
         webTypo="Heading3"
+        mobileTypo="Heading3"
         paletteColor="White"
         css={css`
           gap: 0px;
@@ -132,18 +139,25 @@ export const FinPassGlassBox = () => {
         <br />
         이번주 수요일(9/7) 오후 5시까지
         <br />
-        ceos.sinchon@gmail.com 으로 제출해 주시기 바랍니다.
+        ceos.sinchon@gmail.com 으로
+        <br className="mobile" /> 제출해 주시기 바랍니다.
       </p>
-      <p>- 9월 6일 화요일 중으로 CEOS 18기 단톡방 초대 예정입니다.</p>
-      <Text webTypo="Heading4">
-        합격 대상자의 경우 하단의 활동 가능 버튼을 눌러
-        <br />
+      <p>
+        - 9월 6일 화요일 중으로
+        <br className="mobile" /> CEOS 18기 단톡방 초대 예정입니다.
+      </p>
+      <Text webTypo="Heading4" mobileTypo="Heading3">
+        합격 대상자의 경우
+        <br className="mobile" /> 하단의 활동 가능 버튼을 눌러
+        <br className="mobile" />
+        <br className="desktop" />
         활동 여부를 반드시 제출해 주세요.
       </Text>
       <div>
         <Button
           variant="white"
           webWidth={223}
+          mobileWidth={306}
           css={css`
             gap: 0px;
             margin-bottom: 12px;
@@ -190,20 +204,25 @@ export const NonPassGlassBox = () => {
     <div css={GlassBoxCss({ width: 680 })}>
       <p>안녕하세요. CEOS 입니다.</p>
       <p>
-        먼저 리크루팅 과정에 귀중한 시간을 내어 참여해주셔서 진심으로
-        감사드립니다. <br />
-        창업의 뜻을 이루기 위해 지원자분과 같은 입장에서 노력하고 있는
-        <br />
-        저희 운영진이 감히 합격자를 가려낸다는 것은 늘 어려운 일입니다.
+        먼저 리크루팅 과정에 귀중한 시간을 내어
+        <br className="mobile" /> 참여해주셔서 진심으로 감사드립니다. <br />
+        창업의 뜻을 이루기 위해 지원자분과 같은 입장에서
+        <br className="mobile" /> 노력하고 있는
+        <br className="desktop" />
+        저희 운영진이 감히 합격자를
+        <br className="mobile" /> 가려낸다는 것은 늘 어려운 일입니다.
         <br />
       </p>
       <p>
         {' '}
-        제한된 인원으로 인해 합격 소식을 전하지 못하게 되어
-        <br />
-        아쉽고 죄송한 18기 운영진의 진심이 전해졌으면 합니다.
+        제한된 인원으로 인해 합격 소식을
+        <br className="mobile" /> 전하지 못하게 되어&nbsp;
+        <br className="desktop" />
+        아쉽고 죄송한
+        <br className="mobile" /> 18기 운영진의 진심이 전해졌으면 합니다.
         <br /> 추후 좋은 기회에 꼭 다시 만나뵐 수 있기를 기대하며,
-        <br /> 다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
+        <br /> 다시 한번 CEOS에 보여주신 관심과 열정에
+        <br className="mobile" /> 깊은 감사를 드립니다.
       </p>
       <p> CEOS 드림.</p>
     </div>
@@ -226,6 +245,10 @@ const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   background-clip: border-box;
   gap: 24px;
 
+  .mobile {
+    display: none;
+  }
+
   &:hover {
     background-image: linear-gradient(
         rgba(255, 255, 255, 0.05),
@@ -233,4 +256,21 @@ const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
       ),
       linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
   }
+
+  @media (max-width: 1023px) {
+    width: 346px;
+    gap: 28px;
+    padding: 32px;
+    type: ${theme.typo.Mobile.Body1};
+  }
+
+  @media (max-width: 390px) {
+    padding-left : 17.5px;
+    padding-right : 17.5px;
+    .mobile {
+      display: block;
+    }
+    .desktop {
+      display: none;
+    }
 `;

@@ -46,7 +46,7 @@ export const DropModal = (props: ModalProps) => {
             width={376}
             css={css`
               @media (max-width: 1023px) {
-                width: 306px;
+                width: 306px; !important;
               }
             `}
           />

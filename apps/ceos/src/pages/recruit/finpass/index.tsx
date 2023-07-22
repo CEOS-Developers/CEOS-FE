@@ -12,7 +12,11 @@ const FinPass = () => {
       <PassBgImg />
       <div css={PassContentCss}>
         <p css={WelcomeText}>Welcome CEOS 18th</p>
-        <Text webTypo="Heading1_Kor" paletteColor="White">
+        <Text
+          webTypo="Heading1_Kor"
+          mobileTypo="Heading1_Kor"
+          paletteColor="White"
+        >
           유선호님은&nbsp;
           <p
             css={css`
@@ -23,7 +27,7 @@ const FinPass = () => {
           </p>
           &nbsp; 입니다.
         </Text>
-        <Text webTypo="Body1" paletteColor="White">
+        <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
           CEOS 18기 최종 합격을 축하드립니다 &#58;&#41;
           <br />
           하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
@@ -48,6 +52,10 @@ const WelcomeText = css`
   font-weight: 800;
   line-height: 100%;
   color: white;
+
+  @media (max-width: 1023px) {
+    typo: ${theme.typo.Web.Heading1_Eng};
+  }
 `;
 
 export const PassMainCss = css`
@@ -67,11 +75,37 @@ export const PassContentCss = css`
   display: flex;
   left: 50%;
   top: 8.2vw;
-  gap: 48px;
+  gap: 60px;
   width: 1032px;
   color: white;
   typo: ${theme.typo.Web.Body2};
 
   transform: translateX(-50%);
   text-wrap: nowrap;
+
+  .mobile {
+    display: none;
+  }
+
+  transform: translateX(-50%);
+  white-space: nowrap;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    gap: 60px;
+  }
+
+  @media (max-width: 390px) {
+    width: 346px;
+    top: 40vw;
+    white-space: normal;
+    word-break: keep-all;
+
+    .mobile {
+      display: block;
+    }
+    .desktop {
+      display: none;
+    }
+  }
 `;
