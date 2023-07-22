@@ -11,7 +11,7 @@ import {
   PartDropdownList,
   PassDropdownList,
 } from '@admin/assets/data/dropDownList';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   applicationInfoInterface,
   applyStatementApi,
@@ -132,6 +132,9 @@ export default function ApplyStatement() {
       enabled: false,
     },
   );
+  const { mutate: patchDocPass } = useMutation(() =>
+    applyStatementApi.PATCH_DOCPASS(applicantId, 'pass'),
+  );
 
   // 지원서 엑셀 생성일시 업데이트
   useEffect(() => {
@@ -145,7 +148,7 @@ export default function ApplyStatement() {
         id: applicantData?.data.content[i]?.id,
         uuid: applicantData?.data.content[i]?.uuid,
         name: applicantData?.data.content[i]?.name,
-        part: applicantData?.data.content[i]?.part,
+        part: applicantData?.data.content[i]?.part?.slice(0, 4),
         email: applicantData?.data.content[i]?.email,
         phone_number: applicantData?.data.content[i]?.phoneNumber.replace(
           '-',
@@ -167,7 +170,7 @@ export default function ApplyStatement() {
               id: applicantData?.data.content[i]?.id,
               uuid: applicantData?.data.content[i]?.uuid,
               name: applicantData?.data.content[i]?.name,
-              part: applicantData?.data.content[i]?.part,
+              part: applicantData?.data.content[i]?.part?.slice(0, 3),
               email: applicantData?.data.content[i]?.email,
               phone_number: applicantData?.data.content[
                 i
@@ -268,7 +271,7 @@ export default function ApplyStatement() {
       width: '250px',
       render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5}>
-          <div style={{ width: '146px' }}> 00.00(토) 00:00-00:00</div>
+          <div style={{ width: '146px' }}> {record.interview_time}</div>
           <Button
             variant="admin_stroke"
             onClick={() => {
@@ -413,7 +416,7 @@ export default function ApplyStatement() {
           <CloseBtn />
         </Flex>
         {modalSubject == 'interview' ? (
-          <InterviewTimeModal idx={applicantId} />
+          <InterviewTimeModal idx={applicantId} setModalOpen={setModalOpen} />
         ) : (
           <ApplicationModal idx={applicantId} />
         )}

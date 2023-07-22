@@ -1,7 +1,7 @@
-import { adminInstance } from '../axiosConfig';
+import { adminInstance, ResponseInterface } from '../axiosConfig';
 
 const accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk4Nzc1ODksImV4cCI6MTY4OTk2Mzk4OX0.Qb6W8IY212Dq_zwAh2ythuxqJlfCW2HnrajsUCJUKcPwbkKFIP4u-8hv8-ridMTk0fY6RRfJ2CBijid7pS8YWQ';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk5ODIzMjgsImV4cCI6MTY5MDA2ODcyOH0.dN4Sg7rpza4GJK815i6zeURI56ee80vSajUJcjjKVuTcjCKTrInJ9RulL7nHZBpgtVVPaH5nRWufAiWr1ZMsVg';
 
 export interface applicationInfoInterface {
   birth?: string;
@@ -63,6 +63,55 @@ export const applyStatementApi = {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    return response.data;
+  },
+  PATCH_INTERVIEWTIME: async (
+    idx: number,
+    date: string | undefined,
+    time: string | undefined,
+  ) => {
+    const response = await adminInstance.patch(
+      `/applications/${idx}/interview`,
+      {
+        date: date,
+        duration: time,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    return response.data;
+  },
+  PATCH_DOCPASS: async (idx: number, pass: string) => {
+    const response = await adminInstance.patch(
+      `/applications/${idx}/document`,
+      {
+        pass: pass,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+
+    return response.data;
+  },
+  PATCH_FINALPASS: async (idx: number, pass: string) => {
+    const response = await adminInstance.patch(
+      `/applications/${idx}/final`,
+      {
+        pass: pass,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+
     return response.data;
   },
 };
