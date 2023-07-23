@@ -14,6 +14,8 @@ import {
   useMutation,
   useQuery,
 } from '@tanstack/react-query';
+import { useAlert } from '@admin/hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 interface RecruitDateInterface extends RecruitBaseInterface {
   startDateDoc: Date;
@@ -31,8 +33,15 @@ export default function Recruit() {
     ['admin', 'recruit'],
     async () => await adminRecruitApi.GET_RECRUIT(),
   );
+
+  const { isOpen, type, openAlert } = useAlert();
+
   const { mutate: postRecruitments } = useMutation(
     adminRecruitApi.POST_RECRUIT,
+    {
+      onSuccess: () => openAlert('success'),
+      onError: () => openAlert('error'),
+    },
   );
 
   const { getValues, setValue, reset, register } =
@@ -246,6 +255,15 @@ export default function Recruit() {
       >
         저장하기
       </Button>
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }
