@@ -133,6 +133,7 @@ export default function ManageUser() {
   useEffect(() => {
     if (managementId !== undefined && managementId !== 0) {
       deleteManagement();
+      setManagementId(0);
     }
   }, [managementId]);
 
