@@ -1,13 +1,18 @@
+import { ManagementDropdownList } from '@admin/assets/data/dropDownList';
 import { DataGrid } from '@admin/components/DataGrid';
 import { PageInterface } from '@admin/components/DataGrid/Pagination';
 import { Dropdown } from '@admin/components/Dropdown';
 import styled from '@emotion/styled';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'packages/ui';
 import { ResponseInterface, manageUserApi } from 'packages/utils';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function ManageUser() {
+  const { setValue, watch, getValues } = useForm();
+  const [managementId, setManagementId] = useState(0);
+
   const [pagination, setPagination] = useState<PageInterface>({
     page: 1, // 현재 선택된 페이지 넘버
     pageSize: 10, // 한 페이지에 들어가는 데이터 개수
@@ -15,51 +20,55 @@ export default function ManageUser() {
   });
 
   //운영진 목록 가져오기
-  const { data, isSuccess, isFetching } = useQuery<ResponseInterface<any>>(
+  const {
+    data,
+    isSuccess,
+    isFetching,
+    refetch: getManagement,
+  } = useQuery<ResponseInterface<any>>(
     ['applicantData', pagination.page],
-    () =>
-      manageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
+    () => manageUserApi.GET_MANAGEMENT(),
+    // manageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
+  );
+  const { mutate: deleteManagement } = useMutation(
+    () => manageUserApi.DELETE_MANAGEMENT(managementId),
+    {
+      onSuccess: () => {
+        getManagement();
+      },
+      onError: (err: any) => console.log(err.response.data.reason),
+    },
   );
 
   // 지원자 목록 초기 데이터
   const [dataSource, setDataSource] = useState<object[]>(
     Array.from(new Array(pagination.pageSize), (_, i) => {
       return {
-        id: data?.data.content[i]?.id,
-        name: data?.data.content[i]?.name,
-        role: data?.data.content[i]?.role,
-        part: data?.data.content[i]?.part,
-        generation: data?.data.content[i]?.generation,
-        managementGeneration: data?.data.content[i]?.managementGeneration,
-        university: data?.data.content[i]?.university,
-        major: data?.data.content[i]?.major,
-        company: data?.data.content[i]?.company,
-        imageUrl: data?.data.content[i]?.imageUrl,
+        id: data?.data.adminBriefInfoVos[i]?.id,
+        name: data?.data.adminBriefInfoVos[i]?.name,
+        role: data?.data.adminBriefInfoVos[i]?.role,
+        email: data?.data.adminBriefInfoVos[i]?.email,
+        part: data?.data.adminBriefInfoVos[i]?.part,
       };
     }),
   );
   // 페이지네이션 지원자 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      if (data.data.content.length != 0) {
+      if (data.data.adminBriefInfoVos.length != 0) {
         setDataSource(
           Array.from(new Array(pagination.pageSize), (_, i) => {
             return {
-              id: data?.data.content[i]?.id,
-              name: data?.data.content[i]?.name,
-              role: data?.data.content[i]?.role,
-              part: data?.data.content[i]?.part,
-              generation: data?.data.content[i]?.generation,
-              managementGeneration: data?.data.content[i]?.managementGeneration,
-              university: data?.data.content[i]?.university,
-              major: data?.data.content[i]?.major,
-              company: data?.data.content[i]?.company,
-              imageUrl: data?.data.content[i]?.imageUrl,
+              id: data?.data.adminBriefInfoVos[i]?.id,
+              name: data?.data.adminBriefInfoVos[i]?.name,
+              role: data?.data.adminBriefInfoVos[i]?.role,
+              email: data?.data.adminBriefInfoVos[i]?.email,
+              part: data?.data.adminBriefInfoVos[i]?.part,
             };
           }),
         );
       } else {
-        setDataSource(data.data.content);
+        setDataSource(data.data.adminBriefInfoVos);
       }
     }
   }, [isFetching, isSuccess, data]);
@@ -90,29 +99,42 @@ export default function ManageUser() {
       title: '권한',
       dataIndex: 'doc_pass',
       width: '120px',
-      //   render: (_text: string, record: any) => {
-      //     return (
-      //       <Dropdown
-      //         options={ColorPassDropdownList}
-      //         label={`DocPassDropdown_${record.uuid}`}
-      //         setValue={setValue}
-      //         value={watch(`DocPassDropdown_${record.uuid}`)}
-      //         placeholder="선택"
-      //       />
-      //     );
-      //   },
+      render: (_text: string, record: any) => {
+        return (
+          <Dropdown
+            options={ManagementDropdownList}
+            label={`ManagementDropdown_${record.id}`}
+            setValue={setValue}
+            value={watch(`ManagementDropdown_${record.id}`)}
+            placeholder="선택"
+            width={110}
+          />
+        );
+      },
     },
     {
       title: '관리',
       dataIndex: 'cv',
       width: '61px',
       render: (_text: string, record: any) => (
-        <Button variant="admin_stroke" webWidth={81}>
+        <Button
+          variant="admin_stroke"
+          webWidth={81}
+          onClick={() => {
+            setManagementId(record.id);
+          }}
+        >
           삭제하기
         </Button>
       ),
     },
   ];
+
+  useEffect(() => {
+    if (managementId !== undefined && managementId !== 0) {
+      deleteManagement();
+    }
+  }, [managementId]);
 
   return (
     <Container>

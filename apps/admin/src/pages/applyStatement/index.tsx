@@ -179,10 +179,6 @@ export default function ApplyStatement() {
       ) {
         // 서버 데이터와 로컬 데이터 업데이트
         data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
-        console.log(
-          data.finalPass,
-          getValues(`FinalPassDropdown_${data.uuid}`).label,
-        );
         // 뮤테이션 호출하여 서버 데이터 업데이트
         if (data.id !== 0 && data.id !== undefined) {
           updateFinalPassMutation({
