@@ -17,7 +17,12 @@ import { FooterText } from '@ceos/components/FooterText';
 
 const Recruit = () => {
   return (
-    <Flex direction="column">
+    <Flex
+      direction="column"
+      css={css`
+        overflow-x: hidden;
+      `}
+    >
       <RecruitSubHeader />
       <div css={RecruitMainCss}>
         <Text webTypo="Heading3" margin="0 0 12px 0">

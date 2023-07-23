@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import { backCss } from '../MenuBar';
 import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
+import { useForm } from 'react-hook-form';
+import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 /**
  * @param step '서류' | '최종'
@@ -13,7 +17,81 @@ interface ModalProps {
   toggleModal: () => void;
 }
 
+interface FormInterface {
+  email: string;
+  uuid: string;
+}
+
 export const CheckModal = (props: ModalProps) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { getValues, register, reset } = useForm<FormInterface>({
+    defaultValues: {
+      uuid: '',
+      email: '',
+    },
+  });
+
+  const handleSubmit = async () => {
+    //서류 체크
+    if (props.step === '서류') {
+      try {
+        const passCheck = await recruitApi.GET_DOCPASS({
+          uuid: getValues('uuid'),
+          email: getValues('email'),
+        });
+
+        queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
+        if (passCheck.data.pass === '불합격') {
+          router.push({
+            pathname: '/recruit/nonpass',
+            query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
+          });
+        } else if (passCheck.data.pass === '합격') {
+          router.push({
+            pathname: '/recruit/docpass',
+            query: {
+              uuid: getValues('uuid'),
+              pass: passCheck.data.pass,
+              name: passCheck.data.name,
+              date: passCheck.data.date,
+              duration: passCheck.data.duration,
+            },
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (props.step === '최종') {
+      try {
+        const passCheck = await recruitApi.GET_FINPASS({
+          uuid: getValues('uuid'),
+          email: getValues('email'),
+        });
+
+        queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
+        if (passCheck.data.pass === '불합격') {
+          router.push({
+            pathname: '/recruit/nonpass',
+            query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
+          });
+        } else if (passCheck.data.pass === '합격') {
+          router.push({
+            pathname: '/recruit/finpass',
+            query: {
+              uuid: getValues('uuid'),
+              pass: passCheck.data.pass,
+              name: passCheck.data.name,
+            },
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   return (
     <div css={backCss} className="open">
       <div css={ModalBoxCss}>
@@ -39,16 +117,7 @@ export const CheckModal = (props: ModalProps) => {
         </div>
         <div css={InputCss}>
           <TextField
-            label="이메일"
-            placeholder="내용을 입력해주세요."
-            width={376}
-            css={css`
-              @media (max-width: 1023px) {
-                width: 306px;
-              }
-            `}
-          />
-          <TextField
+            {...register('uuid', { required: true })}
             label="uuid"
             placeholder="내용을 입력해주세요."
             width={376}
@@ -58,7 +127,29 @@ export const CheckModal = (props: ModalProps) => {
               }
             `}
           />
-          <Button variant="default" webWidth={376} mobileWidth={306}>
+          <TextField
+            {...register('email', {
+              required: true,
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                message: '이메일 형식이 아닙니다.',
+              },
+            })}
+            label="이메일"
+            placeholder="내용을 입력해주세요."
+            width={376}
+            css={css`
+              @media (max-width: 1023px) {
+                width: 306px;
+              }
+            `}
+          />
+          <Button
+            variant="default"
+            webWidth={376}
+            mobileWidth={306}
+            onClick={handleSubmit}
+          >
             확인하기
           </Button>
         </div>

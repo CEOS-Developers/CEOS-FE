@@ -3,10 +3,42 @@ import { css } from '@emotion/react';
 import { Text } from '@ceos-fe/ui';
 import { DocPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 
 //이름, step
 
+interface RouterDataInterface extends ParsedUrlQuery {
+  pass: string;
+  name: string;
+  date: string;
+  duration: string;
+}
+
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
+
 const Pass = () => {
+  const router = useRouter();
+
+  const { name, date, duration } = router.query as RouterDataInterface;
+
+  useEffect(() => {
+    if (router.query.pass !== '합격') {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <div css={PassMainCss}>
       <PassBgImg />
@@ -16,7 +48,7 @@ const Pass = () => {
           mobileTypo="Heading1_Kor"
           paletteColor="White"
         >
-          유선호님은&nbsp;
+          {name}님은&nbsp;
           <br className="mobile" />
           <p
             css={css`
@@ -34,14 +66,14 @@ const Pass = () => {
           먼저 CEOS에 보여주신 관심과 열정에
           <br className="mobile" /> 깊은 감사를 드립니다.
           <br />
-          유선호님은 면접 대상자로, 하단의 면접 일정을
+          {name}님은 면접 대상자로, 하단의 면접 일정을
           <br className="mobile" /> 꼭 확인해주시고&nbsp;
           <br className="desktop" />
           면접 참여 가능 여부를
           <br className="mobile" /> 반드시 알려주시기 바랍니다.
         </Text>
 
-        <DocPassGlassBox />
+        <DocPassGlassBox name={name} date={date} duration={duration} />
         <FooterText />
       </div>
     </div>
@@ -69,6 +101,7 @@ export const PassContentCss = css`
   top: 8.2vw;
   gap: 48px;
   width: 1032px;
+  overflow-x: hidden;
 
   .mobile {
     display: none;

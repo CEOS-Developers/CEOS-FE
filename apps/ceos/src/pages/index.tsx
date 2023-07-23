@@ -33,7 +33,11 @@ export const getStaticProps = async () => {
 
 export default function Home() {
   return (
-    <main>
+    <main
+      css={css`
+        overflow-x: hidden;
+      `}
+    >
       <SubHeader />
       {/* section1 => blue */}
       <HomeFlex margin="0 auto 0 auto">

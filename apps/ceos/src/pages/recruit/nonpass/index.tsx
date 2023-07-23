@@ -3,10 +3,32 @@ import { css } from '@emotion/react';
 import { Text } from '@ceos-fe/ui';
 import { NonPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
+import { useEffect } from 'react';
+import { NextRouter, Router, useRouter } from 'next/router';
 
 //이름, step
 
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
+
 const NonPass = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.pass !== '불합격') {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <div css={NonPassMainCss}>
       <PassBgImg />

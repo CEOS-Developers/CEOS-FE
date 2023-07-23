@@ -46,12 +46,17 @@ export const RecruitSubHeader = () => {
         >
           서류 합격 여부 확인하기
         </Button>
-        {/* <Button variant="glass" webWidth={249} css={BtnCss} onClick={() => {
+        <Button
+          variant="glass"
+          webWidth={249}
+          css={BtnCss}
+          onClick={() => {
             toggleModal();
             setStep('최종');
-          }}>
+          }}
+        >
           최종 합격 여부 확인하기
-        </Button> */}
+        </Button>
       </div>
       {isOpen && (
         <ModalPortal>

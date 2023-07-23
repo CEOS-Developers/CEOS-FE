@@ -10,9 +10,27 @@ import { TimeModal } from '../Modals/timeModal';
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
 
-export const DocPassGlassBox = () => {
+interface DocGlassBoxProps {
+  name: string;
+  date: string;
+  duration: string;
+}
+
+export const DocPassGlassBox = (props: DocGlassBoxProps) => {
   const [isPossible, setIsPossible] = useState(false);
   const { isOpen, toggleModal } = useModal();
+  let month, day, hour, minute;
+
+  if (props.date) {
+    [month, day] = props.date.split('/').map((s) => parseInt(s, 10));
+  }
+  const duration = props.duration.match(/^(\d{2}:\d{2})/);
+  if (duration) {
+    [hour, minute] = duration[0].split(':');
+  } else {
+    console.log('error');
+  }
+
   return (
     <div css={GlassBoxCss({ width: 552 })}>
       <Diamond />
@@ -28,8 +46,8 @@ export const DocPassGlassBox = () => {
         면접 일정
       </Text>
       <p>
-        000님의 면접 타임은 <br className="mobile" /> 0월 0일 오후 0시 00분
-        입니다.
+        {props.name}님의 면접 타임은 <br className="mobile" /> {month}월 {day}일
+        오후 {hour && parseInt(hour) - 12}시 {minute}분 입니다.
         <br />
         해당 면접 시간에 참여 가능하신지
         <br className="mobile" /> 꼭 확인 부탁드립니다.

@@ -3,10 +3,32 @@ import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
+import { NextRouter, useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 //이름, step
 
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
+
 const FinPass = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.pass !== '합격') {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <div css={PassMainCss}>
       <PassBgImg />
@@ -17,7 +39,7 @@ const FinPass = () => {
           mobileTypo="Heading1_Kor"
           paletteColor="White"
         >
-          유선호님은&nbsp;
+          {router.query.name}님은&nbsp;
           <p
             css={css`
               text-decoration: underline;
@@ -79,6 +101,7 @@ export const PassContentCss = css`
   width: 1032px;
   color: white;
   typo: ${theme.typo.Web.Body2};
+  overflow-x: hidden;
 
   transform: translateX(-50%);
   text-wrap: nowrap;
