@@ -58,6 +58,17 @@ export const applyStatementApi = {
     });
     return response.data;
   },
+  GET_EXCELCREATEDTIME: async () => {
+    const response = await adminInstance.get(
+      '/applications/file/creationtime',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    return response.data;
+  },
   GET_INTERVIEWTIME: async (idx: number) => {
     const response = await adminInstance.get(`/applications/${idx}/interview`, {
       headers: {

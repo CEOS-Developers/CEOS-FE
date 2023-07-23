@@ -88,6 +88,12 @@ export default function ApplyStatement() {
       ),
   );
 
+  //지원서 생성 시각 get
+  const { data: excelCreatedTime, isSuccess: getCreatedTimeSuccess } = useQuery(
+    ['excelCreatedTime'],
+    () => applyStatementApi.GET_EXCELCREATEDTIME(),
+  );
+
   const { mutate: updateDocumentPassMutation } = useMutation(
     ({ applicantId, pass }: { applicantId: number; pass: string }) =>
       applyStatementApi.PATCH_DOCPASS(applicantId, pass),
@@ -179,10 +185,6 @@ export default function ApplyStatement() {
       ) {
         // 서버 데이터와 로컬 데이터 업데이트
         data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
-        console.log(
-          data.finalPass,
-          getValues(`FinalPassDropdown_${data.uuid}`).label,
-        );
         // 뮤테이션 호출하여 서버 데이터 업데이트
         if (data.id !== 0 && data.id !== undefined) {
           updateFinalPassMutation({
@@ -220,6 +222,13 @@ export default function ApplyStatement() {
       enabled: false,
     },
   );
+  // 지원서 엑셀 생성 시각
+  useEffect(() => {
+    if (getCreatedTimeSuccess) {
+      setCreateAt(excelCreatedTime?.data.createAt);
+    }
+  }, [excelCreatedTime]);
+
   // 지원자 엑셀 다운로드 get 요청
   const { refetch: getApplicantExcel, data: getExceldata } = useQuery(
     ['applicantExcel'],
