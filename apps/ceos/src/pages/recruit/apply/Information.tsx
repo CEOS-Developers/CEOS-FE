@@ -1,14 +1,13 @@
-import {
-  Flex,
-  TextField,
-  Text,
-  DatePicker,
-  SelectButton,
-  Desktop,
-  Mobile,
-} from '@ceos-fe/ui';
+import { Flex, Text, DatePicker, SelectButton } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
+import {
+  CustomFlex,
+  CustomTextField,
+  Explain,
+  Question,
+  QuestionFlex,
+} from './style';
 
 interface InformationProps {
   register: RecruitApplyFormInterface['register'];
@@ -29,65 +28,52 @@ const Information = ({ register, setValue }: InformationProps) => {
 
   return (
     <Flex direction="column">
-      {/* 데스크탑 뷰 */}
-      <Desktop>
-        <Flex direction="column" webGap={36}>
-          <Flex direction="row" justify="space-between" width={680} webGap={32}>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">이름</Text>
-              <TextField
-                width={328}
-                onChange={(e) => setValue('name', e.target.value)}
+      <Flex direction="column" webGap={36} mobileGap={28}>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>이름</Question>
+            <CustomTextField {...register('name')} />
+          </QuestionFlex>
+          <QuestionFlex>
+            <Question>성별</Question>
+            <Flex webGap={12} mobileGap={14}>
+              <SelectButton
+                variant="ceos"
+                value="남성"
+                webWidth={158}
+                {...register('gender')}
+              />
+              <SelectButton
+                variant="ceos"
+                value="여성"
+                webWidth={158}
+                {...register('gender')}
               />
             </Flex>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">성별</Text>
-              <Flex webGap={12}>
-                <SelectButton
-                  variant="ceos"
-                  value="남성"
-                  webWidth={158}
-                  {...register('gender')}
-                />
-                <SelectButton
-                  variant="ceos"
-                  value="여성"
-                  webWidth={158}
-                  {...register('gender')}
-                />
-              </Flex>
-            </Flex>
-          </Flex>
-          <Flex direction="row" justify="space-between" width={680} webGap={32}>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">생년월일</Text>
-              <TextField
-                width={328}
-                onChange={(e) => setValue('birth', e.target.value)}
-              />
-            </Flex>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">이메일</Text>
-              <TextField
-                width={328}
-                onChange={(e) => setValue('email', e.target.value)}
-              />
-            </Flex>
-          </Flex>
-          <Flex justify="start" width={680} webGap={32}>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">전화번호</Text>
-              <TextField
-                width={328}
-                onChange={(e) => setValue('phoneNumber', e.target.value)}
-              />
-            </Flex>
-          </Flex>
-          <Line />
-          <Flex direction="column" width={680} webGap={32}>
-            <Flex direction="column" align="flex-start" width={680} webGap={8}>
-              <Text webTypo="Label3">재학 중인 학교</Text>
-              <Flex webGap={12}>
+          </QuestionFlex>
+        </CustomFlex>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>생년월일</Question>
+            <CustomTextField {...register('birth')} />
+          </QuestionFlex>
+          <QuestionFlex>
+            <Question>이메일</Question>
+            <CustomTextField {...register('email')} />
+          </QuestionFlex>
+        </CustomFlex>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>전화번호</Question>
+            <CustomTextField {...register('phoneNumber')} />
+          </QuestionFlex>
+        </CustomFlex>
+        <Line />
+        <Flex direction="column" webGap={36} mobileGap={28}>
+          <CustomFlex>
+            <QuestionFlex>
+              <Question>재학 중인 학교</Question>
+              <Grid>
                 {univ.map((uni) => (
                   <SelectButton
                     variant="ceos"
@@ -96,186 +82,57 @@ const Information = ({ register, setValue }: InformationProps) => {
                     {...register('university')}
                   />
                 ))}
+              </Grid>
+              <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
+            </QuestionFlex>
+          </CustomFlex>
+          <CustomFlex>
+            <QuestionFlex>
+              <Question>전공(학과)</Question>
+              <CustomTextField {...register('major')} />
+              <Flex direction="column" align="start">
+                <Explain>*복수전공 및 부전공까지 포함하여 입력</Explain>
+                <Explain>ex. 컴퓨터공학과 / 경영학과</Explain>
               </Flex>
-              <Text webTypo="Body3" paletteColor="Gray5">
-                *학부생, 대학원생, 휴학생 모두 해당
-              </Text>
-            </Flex>
-            <Flex direction="row" align="space-between" width={680} webGap={24}>
-              <Flex direction="column" align="start" webGap={8}>
-                <Text webTypo="Label3">전공(학과)</Text>
-                <TextField width={328} {...register('major')} />
-                <Text webTypo="Body3" paletteColor="Gray5">
-                  *복수전공 및 부전공까지 포함하여 입력
-                </Text>
-                <Text webTypo="Body3" paletteColor="Gray5">
-                  ex. 컴퓨터공학과 / 경영학과
-                </Text>
-              </Flex>
-              <Flex direction="column" align="start" webGap={8}>
-                <Text webTypo="Label3">졸업까지 남은 학기 수</Text>
-                <TextField width={328} {...register('semestersLeftNumber')} />
-                <Text webTypo="Body3" paletteColor="Gray5">
-                  *ex. 2학기
-                </Text>
-              </Flex>
-            </Flex>
-          </Flex>
-
-          <Line />
-          <Flex direction="row" justify="space-between" width={680} webGap={32}>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">CEOS OT 날짜는?</Text>
-              <DatePicker
-                onChange={(date: Date | null) =>
-                  setValue('otDate', changeDate(date))
-                }
-              />
-            </Flex>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">CEOS 데모데이 날짜는?</Text>
-              <DatePicker
-                onChange={(date: Date | null) =>
-                  setValue('demodayDate', changeDate(date))
-                }
-              />
-            </Flex>
-          </Flex>
-          <Flex width={680} webGap={32}>
-            <Flex direction="column" align="start" webGap={8}>
-              <Text webTypo="Label3">
-                이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
-              </Text>
-              <TextField width={680} {...register('otherActivities')} />
-              <Text webTypo="Body3" paletteColor="Gray5">
-                *다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등
-              </Text>
-            </Flex>
-          </Flex>
-          <Line />
+            </QuestionFlex>
+            <QuestionFlex>
+              <Question>졸업까지 남은 학기 수</Question>
+              <CustomTextField {...register('semestersLeftNumber')} />
+              <Explain>*ex. 2학기</Explain>
+            </QuestionFlex>
+          </CustomFlex>
         </Flex>
-      </Desktop>
 
-      {/* 모바일 뷰 */}
-      <Mobile>
-        <Flex direction="column" mobileGap={28}>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">이름</Text>
-            <CustomTextField {...register('name')} />
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">성별</Text>
-            <Flex mobileGap={14}>
-              <SelectButton
-                variant="ceos"
-                value="남성 "
-                {...register('gender')}
-              />
-              <SelectButton
-                variant="ceos"
-                value="여성 "
-                {...register('gender')}
-              />
-            </Flex>
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">생년월일</Text>
-            <CustomTextField {...register('birth')} />
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">이메일</Text>
-            <CustomTextField {...register('email')} />
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">전화번호</Text>
-            <CustomTextField {...register('phoneNumber')} />
-          </Flex>
-          <Line />
-          <Flex direction="column" align="flex-start" mobileGap={14}>
-            <Text mobileTypo="Heading4">재학 중인 학교</Text>
-            <Flex mobileGap={14}>
-              <SelectButton
-                variant="ceos"
-                value="연세대학교 "
-                {...register('university')}
-              />
-              <SelectButton
-                variant="ceos"
-                value="서강대학교 "
-                {...register('university')}
-              />
-            </Flex>
-            <Flex mobileGap={14}>
-              <SelectButton
-                variant="ceos"
-                value="이화여자대학교 "
-                {...register('university')}
-              />
-              <SelectButton
-                variant="ceos"
-                value="홍익대학교 "
-                {...register('university')}
-              />
-            </Flex>
-            <Text mobileTypo="Body2" paletteColor="Gray5">
-              *학부생, 대학원생, 휴학생 모두 해당
-            </Text>
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">전공(학과)</Text>
-            <CustomTextField
-              onChange={(e) => setValue('major', e.target.value)}
-            />
-            <Flex direction="column" align="flex-start">
-              <Text mobileTypo="Body2" paletteColor="Gray5">
-                *복수전공 및 부전공까지 포함하여 입력
-              </Text>
-              <Text mobileTypo="Body2" paletteColor="Gray5">
-                ex. 컴퓨터공학과 / 경영학과
-              </Text>
-            </Flex>
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">졸업까지 남은 학기 수</Text>
-            <CustomTextField
-              onChange={(e) => setValue('semestersLeftNumber', +e.target.value)}
-            />
-            <Text mobileTypo="Body2" paletteColor="Gray5">
-              *ex. 2학기
-            </Text>
-          </Flex>
-
-          <Line />
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">CEOS OT 날짜는?</Text>
+        <Line />
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>CEOS OT 날짜는?</Question>
             <DatePicker
               onChange={(date: Date | null) =>
                 setValue('otDate', changeDate(date))
               }
             />
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">CEOS 데모데이 날짜는?</Text>
+          </QuestionFlex>
+          <QuestionFlex>
+            <Text webTypo="Label3">CEOS 데모데이 날짜는?</Text>
             <DatePicker
               onChange={(date: Date | null) =>
                 setValue('demodayDate', changeDate(date))
               }
             />
-          </Flex>
-          <Flex direction="column" align="start" mobileGap={14}>
-            <Text mobileTypo="Heading4">
+          </QuestionFlex>
+        </CustomFlex>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>
               이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
-            </Text>
-            <CustomTextField
-              onChange={(e) => setValue('otherActivities', e.target.value)}
-            />
-            <Text mobileTypo="Body2" paletteColor="Gray5">
-              *다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등
-            </Text>
-          </Flex>
-          <Line />
-        </Flex>
-      </Mobile>
+            </Question>
+            <CustomTextField {...register('otherActivities')} />
+            <Explain>*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등</Explain>
+          </QuestionFlex>
+        </CustomFlex>
+        <Line />
+      </Flex>
     </Flex>
   );
 };
@@ -293,6 +150,11 @@ const Line = styled.div`
   }
 `;
 
-export const CustomTextField = styled(TextField)`
-  width: 100%;
+const Grid = styled(Flex)`
+  gap: 12px;
+  @media (max-width: 1023px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
 `;
