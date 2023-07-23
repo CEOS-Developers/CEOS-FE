@@ -29,10 +29,12 @@ export const getStaticProps = async () => {
     console.error(err);
   }
 };
+import { DatePicker, Flex, TextField } from '@ceos-fe/ui';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import React from 'react';
 
 export default function Home() {
-<<<<<<< HEAD
-=======
   const { register, watch, setValue } = useForm({
     defaultValues: {
       date: '',
@@ -40,7 +42,6 @@ export default function Home() {
     },
   });
 
->>>>>>> 8dd8f1c11336641d4e1d441225606050408b4f93
   return (
     <main>
       <SubHeader />

@@ -2,13 +2,10 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
-import Image from 'next/image';
 
 export interface ProjectImageProps {
   category: string;
   id: number;
-  created_at: string;
-  updated_at: string;
   imageUrl: string;
 }
 export interface ProjectCardProps {
@@ -16,13 +13,19 @@ export interface ProjectCardProps {
   name: string;
   description: string;
   generation: number;
-  previewImage: ProjectImageProps;
+  thumbnailImage: ProjectImageProps;
+}
+
+export interface AdminProjectCardProps extends ProjectCardProps {
+  onClickRemove: () => void;
+  onClickUpdate: () => void;
 }
 
 export const ProjectCard = (props: {
   projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
+  const { id, name, description, generation, thumbnailImage } =
+    props.projectCard;
   return (
     <Wrapper>
       {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
@@ -50,27 +53,27 @@ export const ProjectCard = (props: {
   );
 };
 
-export const AdminProjectCard = (props: {
-  projectCard: ProjectCardProps;
-  onClickRemove: (id: number) => void;
-  onClickUpdate: (id: number) => void;
-}): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
-  const [onClickRemove, onClickUpdate] = [
-    props.onClickRemove,
-    props.onClickUpdate,
-  ];
+export const AdminProjectCard = ({
+  id,
+  name,
+  description,
+  generation,
+  thumbnailImage,
+  onClickRemove,
+  onClickUpdate,
+  ...props
+}: AdminProjectCardProps) => {
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={previewImage.imageUrl} width={328} height={184} />
+        <ProjectImg src={thumbnailImage.imageUrl} width={328} height={184} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
               {name}
             </Text>
             <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
-              {generation}
+              {generation}기
             </Text>
           </Row>
           <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
@@ -84,8 +87,8 @@ export const AdminProjectCard = (props: {
         borderRadius={16}
         className="is-hover"
       >
-        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+        <Button onClick={onClickRemove}>삭제하기</Button>
+        <Button onClick={onClickUpdate}>수정하기</Button>
       </AbsoluteFlex>
     </RelativeContainer>
   );
@@ -108,7 +111,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProjectImg = styled(Image)`
+const ProjectImg = styled.img`
   // width: 328px;
   // height: 184px;
   border-radius: 16px;

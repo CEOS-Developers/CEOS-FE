@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { theme } from '../../styles';
 import { css } from '@emotion/react';
 
@@ -17,6 +17,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   webWidth?: number;
   webHeight?: number;
   mobileWidth?: number;
+  webHeight?: number;
+  mobileHeight?: number;
+  leftElement?: ReactNode;
+  rightElement?: ReactNode;
 }
 
 const BUTTON_FIGURE = {
@@ -117,6 +121,10 @@ export const Button = ({
   webWidth,
   webHeight,
   mobileWidth,
+  webHeight,
+  mobileHeight,
+  leftElement,
+  rightElement,
   ...props
 }: ButtonProps) => {
   return (
@@ -125,9 +133,12 @@ export const Button = ({
       webWidth={webWidth}
       webHeight={webHeight}
       mobileWidth={mobileWidth}
+      mobileHeight={mobileHeight}
       {...props}
     >
+      {leftElement}
       {children}
+      {rightElement}
     </StyledButton>
   );
 };
@@ -137,7 +148,13 @@ const StyledButton = styled.button<{
   webWidth?: number;
   webHeight?: number;
   mobileWidth?: number;
+  mobileHeight?: number;
 }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
   width: ${({ webWidth, variant }) =>
     webWidth ? `${webWidth}px` : `${BUTTON_FIGURE.width[variant]}px`};
   height: ${({ webHeight, variant }) =>
@@ -156,7 +173,10 @@ const StyledButton = styled.button<{
         : !variant.includes('admin')
         ? '100%'
         : ''};
-    height: ${({ variant }) => `${BUTTON_FIGURE.mobile_height[variant]}px`};
+    height: ${({ mobileHeight, variant }) =>
+      mobileHeight
+        ? `${mobileHeight}px`
+        : `${BUTTON_FIGURE.mobile_height[variant]}px`};
 
     ${({ variant }) => BUTTON_TYPO.mobile[variant]};
   }
