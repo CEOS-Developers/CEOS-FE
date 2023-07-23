@@ -136,7 +136,7 @@ const Apply = () => {
         {/* 인적사항 질문 */}
         <Information register={register} setValue={setValue} />
         {/* 공통 질문 */}
-        <Common setValue={setValue} questionList={questionList} />
+        <Common register={register} questionList={questionList} />
         {/* 파트별 질문 */}
         <Part
           register={register}
