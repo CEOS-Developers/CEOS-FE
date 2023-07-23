@@ -93,9 +93,10 @@ export default function ApplyStatement() {
       applyStatementApi.PATCH_DOCPASS(applicantId, pass),
     {
       onSuccess: () => {
+        console.log('성공');
         getApplicantsList();
       },
-      onError: (err: any) => alert(err.response.data.reason),
+      onError: (err: any) => console.log(err.response.data.reason),
     },
   );
   const { mutate: updateFinalPassMutation } = useMutation(
@@ -105,7 +106,7 @@ export default function ApplyStatement() {
       onSuccess: () => {
         getApplicantsList();
       },
-      onError: (err: any) => alert(err.response.data.reason),
+      onError: (err: any) => console.log(err.response.data.reason),
     },
   );
 
@@ -146,6 +147,7 @@ export default function ApplyStatement() {
         data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
       ) {
         // 서버 데이터와 로컬 데이터 업데이트
+        data.documentPass = getValues(`DocPassDropdown_${data.uuid}`).label;
 
         // 뮤테이션 호출하여 서버 데이터 업데이트
         if (data.id !== 0 && data.id !== undefined) {
@@ -176,6 +178,11 @@ export default function ApplyStatement() {
         data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
       ) {
         // 서버 데이터와 로컬 데이터 업데이트
+        data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
+        console.log(
+          data.finalPass,
+          getValues(`FinalPassDropdown_${data.uuid}`).label,
+        );
         // 뮤테이션 호출하여 서버 데이터 업데이트
         if (data.id !== 0 && data.id !== undefined) {
           updateFinalPassMutation({
@@ -200,31 +207,6 @@ export default function ApplyStatement() {
       }
     });
   }
-
-  /*
-    applicantData.data.content.forEach((data: any) => {
-      // document
-      const docPassValue = getValues(`DocPassDropdown_${data.uuid}`);
-      if (docPassValue && data.documentPass !== docPassValue.label) {
-
-        const applicantId = data.id || 0;
-        updateDocumentPassMutation({
-          applicantId: applicantId,
-          pass: docPassValue.label,
-        });
-
-        // final
-        const finalPassValue = watch(`FinalPassDropdown_${data.uuid}`);
-        if (finalPassValue && data.finalPass !== finalPassValue.label) {
-          const applicantId = data.id || 0;
-          updateFinalPassMutation({
-            applicantId: applicantId,
-            pass: finalPassValue.label,
-          });
-        }
-      }
-    });
-  }, [applicantData, watch]);*/
 
   // 지원자 엑셀 생성 get 요청
   const {
