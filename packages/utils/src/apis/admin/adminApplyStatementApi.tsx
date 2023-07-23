@@ -1,4 +1,4 @@
-import { adminInstance, ResponseInterface } from '../axiosConfig';
+import { adminInstance } from '../axiosConfig';
 
 const accessToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2OTAwNzIyMDMsImV4cCI6MTY5MDE1ODYwM30.CYvvN0c00J06z3_Ngp3SlhxlMPJUtGPQ7siRc3SALyPCvpgkPXUtxYmFOok2dShbSOaHjFCMBHoyExzkQEtBXw';
@@ -20,7 +20,7 @@ export interface applicationInfoInterface {
   uuid: string;
   part?: string;
 }
-export const applyStatementApi = {
+export const adminApplyStatementApi = {
   GET_APPLYCANT: async (
     pageNum: number,
     limit: number,

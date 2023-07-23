@@ -14,13 +14,14 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   applicationInfoInterface,
-  applyStatementApi,
-} from '@ceos-fe/utils/src/apis/admin/applyStatementApi';
-import { ResponseInterface } from '@ceos-fe/utils';
+  adminApplyStatementApi,
+} from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from './applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
 import { InterviewTimeModal } from './interviewTimeModal';
+import { useAlert } from '@admin/hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 interface DropdownInterface {
   option: DropdownItemInterface[];
@@ -50,6 +51,7 @@ interface ApplicantResponse {
 }
 
 export default function ApplyStatement() {
+  const { isOpen, type, openAlert } = useAlert();
   const [pagination, setPagination] = useState<PageInterface>({
     page: 1, // 현재 선택된 페이지 넘버
     pageSize: 7, // 한 페이지에 들어가는 데이터 개수
@@ -76,45 +78,50 @@ export default function ApplyStatement() {
     isFetching,
     isLoading,
     refetch: getApplicantsList,
-  } = useQuery<ResponseInterface<ApplicantResponse>>(
-    ['applicantData', pagination.page],
-    () =>
-      applyStatementApi.GET_APPLYCANT(
-        pagination.page - 1,
-        pagination.pageSize,
-        sortingPart,
-        sortingDocPass,
-        sortingFinalPass,
-      ),
+  } = useQuery(['applicantData', pagination.page], () =>
+    adminApplyStatementApi.GET_APPLYCANT(
+      pagination.page - 1,
+      pagination.pageSize,
+      sortingPart,
+      sortingDocPass,
+      sortingFinalPass,
+    ),
   );
 
   //지원서 생성 시각 get
   const { data: excelCreatedTime, isSuccess: getCreatedTimeSuccess } = useQuery(
     ['excelCreatedTime'],
-    () => applyStatementApi.GET_EXCELCREATEDTIME(),
+    () => adminApplyStatementApi.GET_EXCELCREATEDTIME(),
   );
 
-  const { mutate: updateDocumentPassMutation } = useMutation(
-    ({ applicantId, pass }: { applicantId: number; pass: string }) =>
-      applyStatementApi.PATCH_DOCPASS(applicantId, pass),
-    {
-      onSuccess: () => {
-        console.log('성공');
-        getApplicantsList();
+  const { mutate: updateDocumentPassMutation, isSuccess: docPassSuccess } =
+    useMutation(
+      ({ applicantId, pass }: { applicantId: number; pass: string }) =>
+        adminApplyStatementApi.PATCH_DOCPASS(applicantId, pass),
+      {
+        onSuccess: () => {
+          openAlert('success');
+          getApplicantsList();
+        },
+        onError: () => {
+          openAlert('error');
+        },
       },
-      onError: (err: any) => console.log(err.response.data.reason),
-    },
-  );
-  const { mutate: updateFinalPassMutation } = useMutation(
-    ({ applicantId, pass }: { applicantId: number; pass: string }) =>
-      applyStatementApi.PATCH_FINALPASS(applicantId, pass),
-    {
-      onSuccess: () => {
-        getApplicantsList();
+    );
+  const { mutate: updateFinalPassMutation, isSuccess: finalPassSuccess } =
+    useMutation(
+      ({ applicantId, pass }: { applicantId: number; pass: string }) =>
+        adminApplyStatementApi.PATCH_FINALPASS(applicantId, pass),
+      {
+        onSuccess: () => {
+          getApplicantsList();
+          openAlert('success');
+        },
+        onError: () => {
+          openAlert('error');
+        },
       },
-      onError: (err: any) => console.log(err.response.data.reason),
-    },
-  );
+    );
 
   // 파트 sorting
   useEffect(() => {
@@ -167,7 +174,7 @@ export default function ApplyStatement() {
           value = 'fail';
           color = '#FF6262';
         }
-        if (isSuccess) {
+        if (docPassSuccess) {
           // 드롭다운 컴포넌트의 값을 업데이트
           setValue(`DocPassDropdown_${data.uuid}`, {
             label: getValues(`DocPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
@@ -199,13 +206,15 @@ export default function ApplyStatement() {
           color = '#FF6262';
         }
 
-        // 드롭다운 컴포넌트의 값을 업데이트
-        setValue(`FinalPassDropdown_${data.uuid}`, {
-          label: getValues(`FinalPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
-          value: value, // 이전 value 값 유지
-          background: background,
-          color: color,
-        });
+        if (finalPassSuccess) {
+          // 드롭다운 컴포넌트의 값을 업데이트
+          setValue(`FinalPassDropdown_${data.uuid}`, {
+            label: getValues(`FinalPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
+            value: value, // 이전 value 값 유지
+            background: background,
+            color: color,
+          });
+        }
       }
     });
   }
@@ -217,7 +226,7 @@ export default function ApplyStatement() {
     data: createExcelData,
   } = useQuery(
     ['createApplicantExcel'],
-    applyStatementApi.CREATE_APPLICANTEXCEL,
+    adminApplyStatementApi.CREATE_APPLICANTEXCEL,
     {
       enabled: false,
     },
@@ -232,7 +241,7 @@ export default function ApplyStatement() {
   // 지원자 엑셀 다운로드 get 요청
   const { refetch: getApplicantExcel, data: getExceldata } = useQuery(
     ['applicantExcel'],
-    applyStatementApi.GET_APPLICANTEXCEL,
+    adminApplyStatementApi.GET_APPLICANTEXCEL,
     {
       enabled: false,
     },
@@ -523,6 +532,15 @@ export default function ApplyStatement() {
           <ApplicationModal idx={applicantId} />
         )}
       </ReactModal>
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </Container>
   );
 }
