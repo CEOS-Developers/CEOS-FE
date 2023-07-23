@@ -1,8 +1,7 @@
 import { Dropdown } from '@admin/components/Dropdown';
 import { useForm } from 'react-hook-form';
-import { theme } from '@ceos-fe/ui';
+import { AdminRewardCard, theme } from '@ceos-fe/ui';
 import { ImageUploader } from '@admin/components/ImageUploader';
-import { useEffect } from 'react';
 
 export default function Home() {
   const { setValue, watch, getValues, register } = useForm();
@@ -56,8 +55,9 @@ export default function Home() {
       />
       <ImageUploader
         value={watch('activity')}
-        setValue={(url: string | null) => setValue('activity', url)}
+        setValue={setValue}
         imageApiType="ACTIVITY"
+        label="activity"
       />
     </>
   );

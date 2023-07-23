@@ -11,6 +11,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.19",
     "axios": "^1.4.0"
   }
 }

@@ -20,7 +20,7 @@ export interface ProjectItemInterface {
   }[];
 }
 export interface ProjectListInterface {
-  projectBriefInfoVos: {
+  content: {
     id: number;
     name: string;
     description: string;
@@ -57,13 +57,19 @@ export const adminProjectApi = {
 
     return response.data.data;
   },
-  POST_PROJECT: async (project: ProjectItemInterface) => {
-    const response = await adminInstance.post(`/projects`, project);
+  POST_PROJECT: async ({ payload }: { payload: ProjectItemInterface }) => {
+    const response = await adminInstance.post(`/projects`, payload);
 
     return response.data.data;
   },
-  PATCH_PROJECT: async (project: ProjectItemInterface) => {
-    const response = await adminInstance.patch(`/projects`, project);
+  PATCH_PROJECT: async ({
+    payload,
+    id,
+  }: {
+    payload: ProjectItemInterface;
+    id: number;
+  }) => {
+    const response = await adminInstance.patch(`/projects/${id}`, payload);
 
     return response.data.data;
   },

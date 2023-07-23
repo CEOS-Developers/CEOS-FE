@@ -5,17 +5,22 @@ import { AbsoluteFlex, Flex, RelativeContainer, Text } from '../common';
 
 export interface SponsorCardProps {
   id: number;
-  img: string;
+  imageUrl: string;
   name: string;
+}
+
+export interface AdminSponsorCardProps extends SponsorCardProps {
+  onClickRemove: () => void;
+  onClickUpdate: () => void;
 }
 
 export const SponsorCard = (props: {
   sponsorCard: SponsorCardProps;
 }): EmotionJSX.Element => {
-  const { img, name } = props.sponsorCard;
+  const { imageUrl, name } = props.sponsorCard;
   return (
     <Wrapper>
-      <Profile src={img} />
+      <Profile src={imageUrl} />
       <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
         {name}
       </Text>
@@ -23,21 +28,19 @@ export const SponsorCard = (props: {
   );
 };
 
-export const AdminSponsorCard = (props: {
-  sponsorCard: SponsorCardProps;
-  onClickRemove: (id: number) => void;
-  onClickUpdate: (id: number) => void;
-}): EmotionJSX.Element => {
-  const { id, img, name } = props.sponsorCard;
-  const [onClickRemove, onClickUpdate] = [
-    props.onClickRemove,
-    props.onClickUpdate,
-  ];
+export const AdminSponsorCard = ({
+  id,
+  imageUrl,
+  name,
+  onClickRemove,
+  onClickUpdate,
+  ...props
+}: AdminSponsorCardProps) => {
   return (
     <RelativeContainer width={240} height={203}>
       <AbsoluteFlex width={240}>
         <Wrapper>
-          <Profile src={img} admin={true} />
+          <Profile src={imageUrl} admin={true} />
           <Text webTypo="Heading4" mobileTypo="Heading4" paletteColor="Black">
             {name}
           </Text>
@@ -50,8 +53,8 @@ export const AdminSponsorCard = (props: {
         borderRadius={20}
         className="is-hover"
       >
-        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+        <Button onClick={onClickRemove}>삭제하기</Button>
+        <Button onClick={onClickUpdate}>수정하기</Button>
       </AbsoluteFlex>
     </RelativeContainer>
   );
@@ -78,7 +81,7 @@ const Wrapper = styled.div`
 const Profile = styled.img<{ admin?: boolean }>`
   height: 100px;
   width: 100px;
-  background-color: ${theme.palette.Gray5}
+  background-color: ${theme.palette.Gray5};
   border-radius: 12px;
   margin-bottom: ${({ admin }) => (admin ? '16px' : '24px;')};
 `;

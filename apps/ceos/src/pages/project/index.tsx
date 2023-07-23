@@ -19,7 +19,7 @@ import styled from '@emotion/styled';
 import DetailModal from './DetailModal';
 
 interface ProjectResponse {
-  projectBriefInfoVos: ProjectCardProps[];
+  content: ProjectCardProps[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -32,7 +32,7 @@ const Project = () => {
   const { data, isLoading, isSuccess } = useInfiniteQuery<ProjectResponse>(
     ['ceos', 'project'],
     ({ pageParam = 0 }) =>
-      projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 10000 }),
+      projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 16 }),
     {
       getNextPageParam: (lastPage) => {
         return true;
@@ -40,7 +40,7 @@ const Project = () => {
     },
   );
 
-  const projectList = data?.pages[0].projectBriefInfoVos;
+  const projectList = data?.pages[0].content;
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
