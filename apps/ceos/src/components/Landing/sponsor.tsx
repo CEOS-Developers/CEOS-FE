@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 interface SponsorInterface {
   id: number;
   name: string;
-  img: string;
+  imageUrl: string;
 }
 
 interface SponsorResponse {
