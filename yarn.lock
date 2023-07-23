@@ -1664,6 +1664,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emotion/react@npm:^11.11.1":
+  version: 11.11.1
+  resolution: "@emotion/react@npm:11.11.1"
+  dependencies:
+    "@babel/runtime": ^7.18.3
+    "@emotion/babel-plugin": ^11.11.0
+    "@emotion/cache": ^11.11.0
+    "@emotion/serialize": ^1.1.2
+    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.1
+    "@emotion/utils": ^1.2.1
+    "@emotion/weak-memoize": ^0.3.1
+    hoist-non-react-statics: ^3.3.1
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: aec3c36650f5f0d3d4445ff44d73dd88712b1609645b6af3e6d08049cfbc51f1785fe13dea1a1d4ab1b0800d68f2339ab11e459687180362b1ef98863155aae5
+  languageName: node
+  linkType: hard
+
 "@emotion/serialize@npm:^1.1.2":
   version: 1.1.2
   resolution: "@emotion/serialize@npm:1.1.2"
@@ -2402,7 +2423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^4.29.19":
+"@tanstack/react-query@npm:^4.29.19, @tanstack/react-query@npm:^4.32.0":
   version: 4.32.0
   resolution: "@tanstack/react-query@npm:4.32.0"
   dependencies:
@@ -3245,11 +3266,11 @@ __metadata:
   resolution: "ceos-fe@workspace:."
   dependencies:
     "@emotion/babel-plugin": ^11.11.0
-    "@emotion/react": ^11.11.0
+    "@emotion/react": ^11.11.1
     "@emotion/styled": ^11.11.0
     "@next/font": ^13.4.1
     "@svgr/webpack": ^8.0.1
-    "@tanstack/react-query": ^4.29.15
+    "@tanstack/react-query": ^4.32.0
     "@types/jest": ^29.5.1
     "@types/node": ^20.1.0
     "@types/react": ^18.2.6
@@ -3272,6 +3293,7 @@ __metadata:
     prettier: ^2.8.8
     react: latest
     react-dom: latest
+    react-hook-form: ^7.45.2
     react-intersection-observer: ^9.5.2
     react-modal: ^3.16.1
     turbo: latest
@@ -6755,6 +6777,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
   checksum: 65b94de625f2b7921c4e856bf0abbe142bfe06c052217bd1bcc3a842e2cc37fa3a3e03758119dc038bbcf5edb49e02c29206528b80b201f9a4d601471ef78153
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.45.2":
+  version: 7.45.2
+  resolution: "react-hook-form@npm:7.45.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 023ca091f2bb1f3117d8a694871874c4a344f02c795c6a08b8f78b09b78444451375fbe921d7db4ba7cd78909b1fa5e92d19efd2bfedc43124fdc44540ac036c
   languageName: node
   linkType: hard
 
