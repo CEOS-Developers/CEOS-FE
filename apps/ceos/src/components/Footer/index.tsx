@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
-import Image from 'next/image';
+import { FooterBackground } from './FooterBackground';
 
 interface ButtonProps {
   title?: string;
@@ -19,14 +19,9 @@ const Footer = ({
 }) => {
   return (
     <Flex direction="column">
-      <Desktop style={{ width: '100%' }}>
-        <BackgroundWrapper>
-          <Background
-            alt="background"
-            src="/shortcuts.svg"
-            width={0}
-            height={0}
-          />
+      <Desktop>
+        <RelativeContainer>
+          <FooterBackground />
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>
@@ -45,17 +40,12 @@ const Footer = ({
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
           </GlassFlex>
-        </BackgroundWrapper>
+        </RelativeContainer>
       </Desktop>
 
-      <Mobile style={{ width: '100%' }}>
-        <BackgroundWrapper align="start">
-          <Background
-            alt="background"
-            src="/mobileShortcuts.svg"
-            width={0}
-            height={0}
-          />
+      <Mobile>
+        <RelativeContainer align="start">
+          <FooterBackground />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href="/FAQ">
@@ -74,7 +64,7 @@ const Footer = ({
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
           </GlassFlex>
-        </BackgroundWrapper>
+        </RelativeContainer>
       </Mobile>
     </Flex>
   );
@@ -89,24 +79,4 @@ const GlassFlex = styled(Flex)`
   @media (max-width: 1023px) {
     bottom: 30px;
   }
-`;
-
-const Background = styled(Image)`
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  z-index: -99;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: auto;
-    max-height: 500px;
-  }
-`;
-
-const BackgroundWrapper = styled(RelativeContainer)`
-  width: 100%;
-  height: 500px;
 `;
