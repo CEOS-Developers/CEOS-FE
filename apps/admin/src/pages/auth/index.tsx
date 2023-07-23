@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button, Flex, Text, TextField, theme } from '@ceos-fe/ui';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
-import { authApi, signInInterface } from '@ceos-fe/utils';
+import { adminAuthApi, signInInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -11,7 +11,7 @@ import { StyledForm } from '@admin/styles/common';
 
 export default function SignIn() {
   const router = useRouter();
-  const { mutate: postSignInMutation } = useMutation(authApi.SIGN_IN);
+  const { mutate: postSignInMutation } = useMutation(adminAuthApi.SIGN_IN);
   const { register, handleSubmit } = useForm();
   const [token, setToken] = useRecoilState<string>(accessToken);
 

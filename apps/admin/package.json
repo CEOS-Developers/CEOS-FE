@@ -26,8 +26,8 @@
     "react-bootstrap-icons": "^1.10.3",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
-    "recoil": "^0.7.7",
     "react-intersection-observer": "^9.5.2",
+    "recoil": "^0.7.7",
     "typescript": "5.0.4"
   },
   "devDependencies": {

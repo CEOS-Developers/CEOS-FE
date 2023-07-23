@@ -1,5 +1,5 @@
 export * from './faqApi';
-export * from './authApi';
+export * from './adminAuthApi';
 export * from './adminFaqApi';
 export * from './imageApi';
 export * from './adminRecruitApi';

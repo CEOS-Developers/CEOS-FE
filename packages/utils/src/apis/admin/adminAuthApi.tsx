@@ -25,7 +25,7 @@ export interface findPwInterface extends CommonInterface {
 //   partDropdown: { label: string; value: string };
 // }
 
-export const authApi = {
+export const adminAuthApi = {
   SIGN_UP: async (signUpData: signUpInterface) => {
     const response = await adminInstance.post(`/admin/signup`, signUpData);
     return response.data;

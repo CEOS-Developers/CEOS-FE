@@ -2,7 +2,7 @@ import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
 import { useMutation } from '@tanstack/react-query';
-import { authApi, findPwInterface } from '../../../../../../packages/utils';
+import { adminAuthApi, findPwInterface } from '../../../../../../packages/utils';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
@@ -11,7 +11,7 @@ import { PartDropdownList } from '@admin/assets/data/dropDownList';
 export default function findPW() {
   const [sentEmail, setSentEmail] = useState(false);
   const { setValue, watch, register, handleSubmit } = useForm();
-  const { mutate: findPwMutation } = useMutation(authApi.FIND_PW);
+  const { mutate: findPwMutation } = useMutation(adminAuthApi.FIND_PW);
 
   const onSubmit = (data: any) => {
     const findPwdata: findPwInterface = {

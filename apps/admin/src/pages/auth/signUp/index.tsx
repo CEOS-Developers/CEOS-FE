@@ -3,7 +3,7 @@ import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown'; //절대 경로 수정 필요
 import {
-  authApi,
+  adminAuthApi,
   // authDataFormInterface,
   signUpInterface,
 } from '@ceos-fe/utils';
@@ -25,7 +25,7 @@ export default function SignUp() {
   //   username: '',
   // },
 
-  const { mutate: postSignUpMutation } = useMutation(authApi.SIGN_UP, {
+  const { mutate: postSignUpMutation } = useMutation(adminAuthApi.SIGN_UP, {
     onSuccess: () => {
       alert('회원가입 완료');
       router.push('/auth');
@@ -37,7 +37,7 @@ export default function SignUp() {
       }
     },
   });
-  const { mutate: postUserIDMutation } = useMutation(authApi.CHECK_ID, {
+  const { mutate: postUserIDMutation } = useMutation(adminAuthApi.CHECK_ID, {
     onSuccess: () => {
       setCheckId(true);
       alert('사용 가능한 아이디입니다.');

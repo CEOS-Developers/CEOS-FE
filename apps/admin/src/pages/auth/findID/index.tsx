@@ -3,7 +3,7 @@ import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
 import { useMutation } from '@tanstack/react-query';
-import { authApi, findIdInterface } from '../../../../../../packages/utils'; //절대경로 수정필요
+import { adminAuthApi, findIdInterface } from '../../../../../../packages/utils'; //절대경로 수정필요
 import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
 import { PartDropdownList } from '@admin/assets/data/dropDownList';
@@ -11,7 +11,7 @@ import { PartDropdownList } from '@admin/assets/data/dropDownList';
 export default function findID() {
   const [id, setId] = useState<string>('');
   const { setValue, watch, register, handleSubmit } = useForm();
-  const { mutate: findIdMutation } = useMutation(authApi.FIND_ID);
+  const { mutate: findIdMutation } = useMutation(adminAuthApi.FIND_ID);
 
   const onSubmit = (data: any) => {
     const findIDdata: findIdInterface = {
