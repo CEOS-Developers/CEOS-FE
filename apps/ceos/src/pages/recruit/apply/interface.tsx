@@ -1,5 +1,6 @@
 import { RecruitApplyValuesInterface } from 'packages/utils';
 import {
+  FormState,
   UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
@@ -33,6 +34,7 @@ export interface RecruitApplyFormInterface {
   setValue: UseFormSetValue<RecruitApplyValuesInterface>;
   getValues: UseFormGetValues<RecruitApplyValuesInterface>;
   handleSubmit: UseFormHandleSubmit<RecruitApplyValuesInterface>;
+  formState: FormState<RecruitApplyValuesInterface>;
   questionList?: RecruitApplyResponse;
 }
 

@@ -1,4 +1,4 @@
-import { Flex, TextField, Text, theme, Button } from '@ceos-fe/ui';
+import { Flex, Text, theme, Button } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
@@ -8,7 +8,7 @@ import {
   RecruitApplyFormInterface,
   RecruitApplyResponse,
 } from './interface';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Information from './Information';
 import Common from './Common';
 import Part from './Part';
@@ -17,16 +17,19 @@ import { SubmitModal } from './modal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { SuccessModal } from './modal/SuccessModal';
 
-interface apiResponseInterface {
-  timestamp: string;
-  success: boolean;
-  code: string;
-  status: string;
-  reason: string;
-}
-
 const Apply = () => {
-  const { register, watch, setValue, getValues, handleSubmit } = useForm({
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [submitBtn, setSubmitBtn] = useState(false);
+
+  const {
+    register,
+    watch,
+    setValue,
+    getValues,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+  } = useForm({
     defaultValues: {
       name: '',
       gender: '',
@@ -101,10 +104,52 @@ const Apply = () => {
     setValue('unableTimes', setTimes);
   }, [data]);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const keyList = [
+    'name',
+    'gender',
+    'birth',
+    'email',
+    'phoneNumber',
+    'university',
+    'major',
+    'semestersLeftNumber',
+    'otDate',
+    'demodayDate',
+    'otherActivities',
+
+    'commonAnswers',
+    'partAnswers',
+  ] as const;
+
+  // 모두 입력했는지 체크하기
+  const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
+    [key: string]: number;
+  };
+  useEffect(() => {
+    for (const key of keyList) {
+      if (key === 'commonAnswers') {
+        for (const item of getValues(key)) {
+          if (!item.answer) return setSubmitBtn(false);
+        }
+      } else if (key === 'partAnswers') {
+        let num = partInfo[getValues('part')];
+        for (const item of getValues(`partAnswers.${num}`)) {
+          if (!item.answer) return setSubmitBtn(false);
+        }
+      } else if (!getValues(key)) {
+        return setSubmitBtn(false);
+      }
+    }
+    setSubmitBtn(true);
+  }, [watch()]);
+
+  const isValid = () => {
+    return true;
+  };
 
   const submitForm = async () => {
+    if (!isValid) return;
+
     let body = getValues();
     body.gender = body.gender.trim();
     body.university = body.university.trim();
@@ -125,6 +170,10 @@ const Apply = () => {
     }
   };
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper direction="column">
       <Title
@@ -132,33 +181,40 @@ const Apply = () => {
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
       ></Title>
       <TopMargin />
-      <Flex direction="column">
-        {/* 인적사항 질문 */}
-        <Information register={register} setValue={setValue} />
-        {/* 공통 질문 */}
-        <Common register={register} questionList={questionList} />
-        {/* 파트별 질문 */}
-        <Part
-          register={register}
-          watch={watch}
-          setValue={setValue}
-          getValues={getValues}
-          questionList={questionList}
-        />
-        {/* 면접 날짜 */}
-        <Schedule
-          watch={watch}
-          setValue={setValue}
-          getValues={getValues}
-          questionList={questionList}
-        />
-        <Button variant="default" onClick={() => setIsOpen(true)}>
-          제출하기
-        </Button>
-        <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-          © 2016-2023 Ceos ALL RIGHTS RESERVED.
-        </Text>
-      </Flex>
+      <form onSubmit={onSubmit}>
+        <Flex direction="column">
+          {/* 인적사항 질문 */}
+          <Information register={register} setValue={setValue} />
+          {/* 공통 질문 */}
+          <Common register={register} questionList={questionList} />
+          {/* 파트별 질문 */}
+          <Part
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            getValues={getValues}
+            questionList={questionList}
+          />
+          {/* 면접 날짜 */}
+          <Schedule
+            watch={watch}
+            setValue={setValue}
+            getValues={getValues}
+            questionList={questionList}
+          />
+          <Button
+            variant="default"
+            disabled={!submitBtn}
+            onClick={() => setIsOpen(true)}
+          >
+            제출하기
+          </Button>
+          <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
+            © 2016-2023 Ceos ALL RIGHTS RESERVED.
+          </Text>
+        </Flex>
+      </form>
+
       {isOpen && <SubmitModal submitForm={submitForm} />}
       {isSubmit && <SuccessModal />}
     </Wrapper>

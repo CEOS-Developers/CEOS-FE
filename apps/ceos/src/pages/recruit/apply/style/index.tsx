@@ -20,7 +20,7 @@ export const CustomTextField = styled(TextField)`
   width: 328px;
   @media (max-width: 1023px) {
     width: 100%;
-    flex-shrink: 0;
+    // flex-shrink: 0;
   }
 `;
 

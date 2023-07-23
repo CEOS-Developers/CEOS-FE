@@ -89,16 +89,31 @@ const Information = ({ register, setValue }: InformationProps) => {
           <CustomFlex>
             <QuestionFlex>
               <Question>전공(학과)</Question>
-              <CustomTextField {...register('major')} />
-              <Flex direction="column" align="start">
-                <Explain>*복수전공 및 부전공까지 포함하여 입력</Explain>
-                <Explain>ex. 컴퓨터공학과 / 경영학과</Explain>
-              </Flex>
+              <CustomTextField
+                {...register('major')}
+                helperText={[
+                  {
+                    type: 'normal',
+                    text: '*복수전공 및 부전공까지 포함하여 입력',
+                  },
+                  {
+                    type: 'normal',
+                    text: 'ex. 컴퓨터공학과 / 경영학과',
+                  },
+                ]}
+              />
             </QuestionFlex>
             <QuestionFlex>
               <Question>졸업까지 남은 학기 수</Question>
-              <CustomTextField {...register('semestersLeftNumber')} />
-              <Explain>*ex. 2학기</Explain>
+              <CustomTextField
+                {...register('semestersLeftNumber')}
+                helperText={[
+                  {
+                    type: 'normal',
+                    text: '*ex. 2학기',
+                  },
+                ]}
+              />
             </QuestionFlex>
           </CustomFlex>
         </Flex>
@@ -127,8 +142,15 @@ const Information = ({ register, setValue }: InformationProps) => {
             <Question>
               이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
             </Question>
-            <CustomTextField {...register('otherActivities')} />
-            <Explain>*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등</Explain>
+            <CustomTextField
+              {...register('otherActivities')}
+              helperText={[
+                {
+                  type: 'normal',
+                  text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
+                },
+              ]}
+            />
           </QuestionFlex>
         </CustomFlex>
         <Line />
