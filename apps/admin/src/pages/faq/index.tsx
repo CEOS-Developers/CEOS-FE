@@ -113,8 +113,13 @@ export default function Faq() {
         </Text>
       </Flex>
 
-      <Flex direction="column" webGap={24} style={{ marginTop: '48px' }}>
-        <Flex webGap={24}>
+      <Flex
+        direction="column"
+        webGap={24}
+        mobileGap={24}
+        style={{ marginTop: '48px' }}
+      >
+        <Flex webGap={24} mobileGap={24}>
           <SelectButton
             variant="admin"
             value="리크루팅 관련 질문"
@@ -136,8 +141,8 @@ export default function Faq() {
         </Flex>
 
         {fields.map((faq, idx) => (
-          <Flex key={faq.id} direction="column" webGap={16}>
-            <Flex webGap={8} align="flex-end">
+          <Flex key={faq.id} direction="column" webGap={16} mobileGap={16}>
+            <Flex webGap={8} mobileGap={8} align="flex-end">
               <TextField
                 {...register(`faqList.${idx}.question`)}
                 label="질문"
@@ -177,7 +182,7 @@ export default function Faq() {
           webWidth={128}
           onClick={handleAppendQuestion}
         >
-          <Flex webGap={4}>
+          <Flex webGap={4} mobileGap={4}>
             <Plus />
             질문 추가하기
           </Flex>

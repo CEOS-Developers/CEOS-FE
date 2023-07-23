@@ -237,24 +237,29 @@ export default function Application() {
         지원서 질문을 관리하는 페이지입니다.
       </Text>
 
-      <Flex direction="column" webGap={48} style={{ marginTop: '48px' }}>
-        <Flex direction="column" webGap={24} align="flex-start">
+      <Flex
+        direction="column"
+        webGap={48}
+        mobileGap={48}
+        style={{ marginTop: '48px' }}
+      >
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">고정 질문</Text>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="이름" isAdmin />
             <TextField value="성별" isAdmin />
             <TextField value="생년월일" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="이메일" isAdmin />
             <TextField value="전화번호" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="재학 중인 학교" isAdmin />
             <TextField value="전공" isAdmin />
             <TextField value="졸업까지 남은 학기 수" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="CEOS OT 날짜는?" isAdmin />
             <TextField value="CEOS 데모데이 날짜는?" isAdmin />
           </Flex>
@@ -265,11 +270,16 @@ export default function Application() {
           />
         </Flex>
 
-        <Flex direction="column" webGap={24} align="flex-start">
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">공통 질문</Text>
           {commonQuestions.map((question, idx) => (
-            <Flex key={question.id} direction="column" webGap={16}>
-              <Flex webGap={8} justify="flex-start">
+            <Flex
+              key={question.id}
+              direction="column"
+              webGap={16}
+              mobileGap={16}
+            >
+              <Flex webGap={8} mobileGap={8} justify="flex-start">
                 <TextField
                   {...register(`commonQuestions.${idx}.question`)}
                   width={875}
@@ -293,6 +303,7 @@ export default function Application() {
                   key={detailIdx}
                   justify="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   margin="0 0 0 8px"
                 >
                   <TextField
@@ -336,17 +347,17 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendCommonQuestion}
           >
-            <Flex webGap={4}>
+            <Flex webGap={4} mobileGap={4}>
               <Plus />
               질문 추가하기
             </Flex>
           </Button>
         </Flex>
 
-        <Flex direction="column" webGap={24} align="flex-start">
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">파트별 질문</Text>
 
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <SelectButton
               variant="admin"
               value="기획"
@@ -374,8 +385,13 @@ export default function Application() {
           </Flex>
 
           {partQuestions.map((question, idx) => (
-            <Flex key={question.id} direction="column" webGap={16}>
-              <Flex webGap={8} justify="flex-start">
+            <Flex
+              key={question.id}
+              direction="column"
+              webGap={16}
+              mobileGap={16}
+            >
+              <Flex webGap={8} mobileGap={8} justify="flex-start">
                 <TextField
                   {...register(`partQuestions.${idx}.question`)}
                   width={715}
@@ -432,6 +448,7 @@ export default function Application() {
                   key={detailIdx}
                   justify="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   margin="0 0 0 8px"
                 >
                   <TextField
@@ -476,7 +493,7 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendPartQuestion}
           >
-            <Flex webGap={4}>
+            <Flex webGap={4} mobileGap={4}>
               <Plus />
               질문 추가하기
             </Flex>
@@ -485,13 +502,24 @@ export default function Application() {
 
         {getValues('times').map((_, dateIdx) => (
           <Fragment key={dateIdx}>
-            <Flex direction="column" webGap={24} align="flex-start">
+            <Flex
+              direction="column"
+              webGap={24}
+              mobileGap={24}
+              align="flex-start"
+            >
               <Text webTypo="Heading4">면접 날짜</Text>
-              <Flex webGap={16} direction="column" align="flex-start">
+              <Flex
+                webGap={16}
+                mobileGap={16}
+                direction="column"
+                align="flex-start"
+              >
                 <Flex
                   direction="column"
                   align="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   width={328}
                 >
                   <Text webTypo="Label3">날짜 {dateIdx + 1}</Text>
@@ -517,6 +545,7 @@ export default function Application() {
                     <Flex
                       key={idx}
                       webGap={8}
+                      mobileGap={8}
                       align="flex-end"
                       justify="flex-start"
                     >
@@ -543,7 +572,7 @@ export default function Application() {
                   style={{ alignSelf: 'center' }}
                   onClick={() => handleAppendDate(dateIdx)}
                 >
-                  <Flex webGap={4}>
+                  <Flex webGap={4} mobileGap={4}>
                     <Plus />
                     시간 추가하기
                   </Flex>
