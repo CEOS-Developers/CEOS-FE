@@ -1,4 +1,4 @@
-import { Flex, SelectButton, Text } from 'packages/ui';
+import { Flex, SelectButton, Text } from '@ceos-fe/ui';
 import { RowLine, Section } from '.';
 import { PartName, RecruitApplyFormInterface } from './interface';
 import { CustomTextField, Explain, Question } from './style';

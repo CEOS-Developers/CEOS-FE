@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import { Flex, Text, TextField, theme } from 'packages/ui';
+import { Flex, Text, TextField, theme } from '@ceos-fe/ui';
 
 export const CustomFlex = styled(Flex)`
   flex-direction: row;
   justify-content: space-between;
+  align-items: start;
   width: 680px;
   gap: 32px;
 

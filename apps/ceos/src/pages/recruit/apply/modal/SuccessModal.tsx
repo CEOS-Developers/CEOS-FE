@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Flex, Text } from 'packages/ui';
+import { Flex, Text } from '@ceos-fe/ui';
 
 export const SuccessModal = () => {
   return (

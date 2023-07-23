@@ -1,4 +1,4 @@
-import { RecruitApplyValuesInterface } from 'packages/utils';
+import { RecruitApplyValuesInterface } from '@ceos-fe/utils';
 import {
   FormState,
   UseFormGetValues,

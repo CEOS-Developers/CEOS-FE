@@ -1,4 +1,4 @@
-import { CheckBox, Desktop, Flex, Mobile, Text, theme } from 'packages/ui';
+import { CheckBox, Desktop, Flex, Mobile, Text, theme } from '@ceos-fe/ui';
 import { ColumnLine } from '.';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';

@@ -1,4 +1,4 @@
-import { Desktop, Flex, Mobile, Text, TextField } from 'packages/ui';
+import { Desktop, Flex, Mobile, Text, TextField } from '@ceos-fe/ui';
 import { RowLine, Section } from '.';
 import { RecruitApplyFormInterface } from './interface';
 import { CustomTextField, Explain, Question, QuestionFlex } from './style';

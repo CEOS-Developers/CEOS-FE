@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ModalBgImage } from '../asset/ModalBgImage';
-import { Button, CheckBox, Desktop, Flex, Mobile, Text } from 'packages/ui';
+import { Button, CheckBox, Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import { useState } from 'react';
 
 export interface ModalProps {
