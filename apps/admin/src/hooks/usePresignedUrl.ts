@@ -2,10 +2,11 @@ import { imageApi } from '@ceos-fe/utils';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-export type ImageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT';
+export type ImageApiType = 'ACTIVITY' | 'SPONSOR' | 'MANAGEMENT' | 'PROJECTS';
 
 const usePresignedUrl = (apiType: ImageApiType) => {
   const [image, setImage] = useState<File>();
+  const [pUrl, setPUrl] = useState('');
   const [url, setUrl] = useState('');
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const usePresignedUrl = (apiType: ImageApiType) => {
     {
       onSuccess: async (data: string) => {
         uploadImageMutation.mutate({ url: data, file: image! });
-        setUrl(data.slice(0, data.indexOf('?X-Amz')));
+        setPUrl(data.slice(0, data.indexOf('?X-Amz')));
       },
       onError: (error: any) => {
         console.log(error);
@@ -28,7 +29,9 @@ const usePresignedUrl = (apiType: ImageApiType) => {
   );
 
   const uploadImageMutation = useMutation(imageApi.PUT_IMAGE, {
-    onSuccess: async (data: any) => {},
+    onSuccess: async (data: any) => {
+      setUrl(pUrl);
+    },
     onError: (error: any) => {
       console.log(error);
     },

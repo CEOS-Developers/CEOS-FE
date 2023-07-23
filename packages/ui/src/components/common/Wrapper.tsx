@@ -36,13 +36,6 @@ export const Flex = styled.div<{
   @media (max-width: 1023px) {
     gap: ${({ mobileGap }) => (mobileGap ? `${mobileGap}px` : '0px')};
   }
-
-  &.header-padding {
-    padding-top: 70px;
-    @media (max-width: 1023px) {
-      padding-top: 124px;
-    }
-  }
 `;
 
 export const RelativeContainer = styled(Flex)`
@@ -65,4 +58,12 @@ export const AbsoluteFlex = styled(Flex)`
   &.is-hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+`;
+
+export const Space = styled.div<{
+  height?: number;
+  width?: number;
+}>`
+  height: ${({ height }) => `${height}px`};
+  width: ${({ width }) => `${width}px`};
 `;

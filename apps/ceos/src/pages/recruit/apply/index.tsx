@@ -1,9 +1,5 @@
 import { Flex, TextField, Text } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import Information from './Information';
-import Common from './Common';
-import Part from './Part';
-import Schedule from './Schedule';
 import { SelectButton } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 
