@@ -8,7 +8,7 @@ import {
   RecruitApplyFormInterface,
   RecruitApplyResponse,
 } from './interface';
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Information from './Information';
 import Common from './Common';
 import Part from './Part';
@@ -143,13 +143,7 @@ const Apply = () => {
     setSubmitBtn(true);
   }, [watch()]);
 
-  const isValid = () => {
-    return true;
-  };
-
   const submitForm = async () => {
-    if (!isValid) return;
-
     let body = getValues();
     body.gender = body.gender.trim();
     body.university = body.university.trim();
@@ -170,8 +164,37 @@ const Apply = () => {
     }
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = () => {
+    const [birth, email, phoneNumber, semestersLeftNumber] = [
+      getValues('birth'),
+      getValues('email'),
+      getValues('phoneNumber'),
+      getValues('semestersLeftNumber'),
+    ];
+
+    const [birthReg, emailReg, phoneNumberReg] = [
+      /^\d{4}\.\d{2}\.\d{2}$/,
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]*$/,
+      /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/,
+    ];
+
+    console.log(phoneNumber, phoneNumberReg, !phoneNumberReg.test(phoneNumber));
+
+    if (!birthReg.test(birth)) {
+      alert('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
+      return;
+    } else if (!emailReg.test(email)) {
+      alert('이메일 형식을 확인해주세요!');
+      return;
+    } else if (!phoneNumberReg.test(phoneNumber)) {
+      alert('휴대폰번호 형식을 확인해주세요!');
+      return;
+    } else if (semestersLeftNumber !== null && +semestersLeftNumber < 0) {
+      alert('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요');
+      console.log(typeof semestersLeftNumber, semestersLeftNumber);
+      return;
+    }
+    setIsOpen(true);
   };
 
   return (
@@ -181,39 +204,33 @@ const Apply = () => {
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
       ></Title>
       <TopMargin />
-      <form onSubmit={onSubmit}>
-        <Flex direction="column">
-          {/* 인적사항 질문 */}
-          <Information register={register} setValue={setValue} />
-          {/* 공통 질문 */}
-          <Common register={register} questionList={questionList} />
-          {/* 파트별 질문 */}
-          <Part
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            getValues={getValues}
-            questionList={questionList}
-          />
-          {/* 면접 날짜 */}
-          <Schedule
-            watch={watch}
-            setValue={setValue}
-            getValues={getValues}
-            questionList={questionList}
-          />
-          <Button
-            variant="default"
-            disabled={!submitBtn}
-            onClick={() => setIsOpen(true)}
-          >
-            제출하기
-          </Button>
-          <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-            © 2016-2023 Ceos ALL RIGHTS RESERVED.
-          </Text>
-        </Flex>
-      </form>
+      <Flex direction="column">
+        {/* 인적사항 질문 */}
+        <Information register={register} setValue={setValue} />
+        {/* 공통 질문 */}
+        <Common register={register} questionList={questionList} />
+        {/* 파트별 질문 */}
+        <Part
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          getValues={getValues}
+          questionList={questionList}
+        />
+        {/* 면접 날짜 */}
+        <Schedule
+          watch={watch}
+          setValue={setValue}
+          getValues={getValues}
+          questionList={questionList}
+        />
+        <Button variant="default" disabled={!submitBtn} onClick={onSubmit}>
+          제출하기
+        </Button>
+        <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
+          © 2016-2023 Ceos ALL RIGHTS RESERVED.
+        </Text>
+      </Flex>
 
       {isOpen && <SubmitModal submitForm={submitForm} />}
       {isSubmit && <SuccessModal />}

@@ -19,9 +19,9 @@ const Common = ({ register, questionList }: CommonProps) => {
           <QuestionFlex key={ques.questionId}>
             <Question>{`${idx + 1}. ${ques.question}`}</Question>
             <CustomTextField
-              multiline={ques.multiline}
-              isMobileFull={true}
+              style={{ width: '100%' }}
               {...register(`commonAnswers.${idx}.answer`)}
+              multiline={true}
             />
             <Flex direction="column" align="start">
               {ques.questionDetail.map((detail, idx) =>

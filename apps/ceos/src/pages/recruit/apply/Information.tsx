@@ -55,7 +55,7 @@ const Information = ({ register, setValue }: InformationProps) => {
         <CustomFlex>
           <QuestionFlex>
             <Question>생년월일</Question>
-            <CustomTextField {...register('birth')} />
+            <CustomTextField {...register('birth')} placeholder="yyyy.mm.dd" />
           </QuestionFlex>
           <QuestionFlex>
             <Question>이메일</Question>
@@ -65,7 +65,10 @@ const Information = ({ register, setValue }: InformationProps) => {
         <CustomFlex>
           <QuestionFlex>
             <Question>전화번호</Question>
-            <CustomTextField {...register('phoneNumber')} />
+            <CustomTextField
+              {...register('phoneNumber')}
+              placeholder="000-0000-0000"
+            />
           </QuestionFlex>
         </CustomFlex>
         <Line />
@@ -110,7 +113,7 @@ const Information = ({ register, setValue }: InformationProps) => {
                 helperText={[
                   {
                     type: 'normal',
-                    text: '*ex. 2학기',
+                    text: '*ex. 2',
                   },
                 ]}
               />

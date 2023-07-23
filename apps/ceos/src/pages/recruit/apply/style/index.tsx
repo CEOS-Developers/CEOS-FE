@@ -17,19 +17,17 @@ export const CustomFlex = styled(Flex)`
 `;
 
 export const CustomTextField = styled(TextField)`
-  width: 328px;
-  @media (max-width: 1023px) {
-    width: 100%;
-    // flex-shrink: 0;
-  }
+  width: 100%;
+  // flex-shrink: 0;
+  // border: 0px solid black;
 `;
 
 export const QuestionFlex = styled(Flex)`
   flex-direction: column;
   align-items: start;
   gap: 8px;
+  width: 100%;
   @media (max-width: 1023px) {
-    width: 100%;
     gap: 14px;
   }
 `;
