@@ -88,6 +88,27 @@ export default function ApplyStatement() {
       ),
   );
 
+  const { mutate: updateDocumentPassMutation } = useMutation(
+    ({ applicantId, pass }: { applicantId: number; pass: string }) =>
+      applyStatementApi.PATCH_DOCPASS(applicantId, pass),
+    {
+      onSuccess: () => {
+        getApplicantsList();
+      },
+      onError: (err: any) => alert(err.response.data.reason),
+    },
+  );
+  const { mutate: updateFinalPassMutation } = useMutation(
+    ({ applicantId, pass }: { applicantId: number; pass: string }) =>
+      applyStatementApi.PATCH_FINALPASS(applicantId, pass),
+    {
+      onSuccess: () => {
+        getApplicantsList();
+      },
+      onError: (err: any) => alert(err.response.data.reason),
+    },
+  );
+
   // 파트 sorting
   useEffect(() => {
     updateSorting('partDropdown', setSortingPart);
@@ -112,6 +133,99 @@ export default function ApplyStatement() {
     getApplicantsList();
   }, [sortingPart, sortingDocPass, sortingFinalPass]);
 
+  //합격 불합격 여부 변경
+  if (applicantData && applicantData.data && applicantData.data.content) {
+    let background = '#D4FFF7';
+    let color = '#01D1A8';
+    let value = 'pass';
+
+    applicantData.data.content.forEach((data: any) => {
+      //document
+      if (
+        getValues(`DocPassDropdown_${data.uuid}`) &&
+        data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
+      ) {
+        // 서버 데이터와 로컬 데이터 업데이트
+
+        // 뮤테이션 호출하여 서버 데이터 업데이트
+        if (data.id !== 0 && data.id !== undefined) {
+          updateDocumentPassMutation({
+            applicantId: data.id,
+            pass: getValues(`DocPassDropdown_${data.uuid}`).label,
+          });
+        }
+        if (data.doc_pass === '불합격') {
+          background = '#FFE7E7';
+          value = 'fail';
+          color = '#FF6262';
+        }
+        if (isSuccess) {
+          // 드롭다운 컴포넌트의 값을 업데이트
+          setValue(`DocPassDropdown_${data.uuid}`, {
+            label: getValues(`DocPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
+            value: value, // 이전 value 값 유지
+            background: background,
+            color: color,
+          });
+        }
+      }
+
+      //final
+      if (
+        getValues(`FinalPassDropdown_${data.uuid}`) &&
+        data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
+      ) {
+        // 서버 데이터와 로컬 데이터 업데이트
+        // 뮤테이션 호출하여 서버 데이터 업데이트
+        if (data.id !== 0 && data.id !== undefined) {
+          updateFinalPassMutation({
+            applicantId: data.id,
+            pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
+          });
+        }
+
+        if (getValues(`FinalPassDropdown_${data.uuid}`).label === '불합격') {
+          background = '#FFE7E7';
+          value = 'fail';
+          color = '#FF6262';
+        }
+
+        // 드롭다운 컴포넌트의 값을 업데이트
+        setValue(`FinalPassDropdown_${data.uuid}`, {
+          label: getValues(`FinalPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
+          value: value, // 이전 value 값 유지
+          background: background,
+          color: color,
+        });
+      }
+    });
+  }
+
+  /*
+    applicantData.data.content.forEach((data: any) => {
+      // document
+      const docPassValue = getValues(`DocPassDropdown_${data.uuid}`);
+      if (docPassValue && data.documentPass !== docPassValue.label) {
+
+        const applicantId = data.id || 0;
+        updateDocumentPassMutation({
+          applicantId: applicantId,
+          pass: docPassValue.label,
+        });
+
+        // final
+        const finalPassValue = watch(`FinalPassDropdown_${data.uuid}`);
+        if (finalPassValue && data.finalPass !== finalPassValue.label) {
+          const applicantId = data.id || 0;
+          updateFinalPassMutation({
+            applicantId: applicantId,
+            pass: finalPassValue.label,
+          });
+        }
+      }
+    });
+  }, [applicantData, watch]);*/
+
   // 지원자 엑셀 생성 get 요청
   const {
     refetch: createApplicantExcel,
@@ -131,9 +245,6 @@ export default function ApplyStatement() {
     {
       enabled: false,
     },
-  );
-  const { mutate: patchDocPass } = useMutation(() =>
-    applyStatementApi.PATCH_DOCPASS(applicantId, 'pass'),
   );
 
   // 지원서 엑셀 생성일시 업데이트
@@ -155,7 +266,8 @@ export default function ApplyStatement() {
           '',
         ),
         doc_pass: applicantData?.data.content[i]?.documentPass,
-        interview_time: applicantData?.data.content[i]?.interviewTime,
+        date: applicantData?.data.content[i]?.date,
+        duration: applicantData?.data.content[i]?.duration,
         final_pass: applicantData?.data.content[i]?.finalPass,
       };
     }),
@@ -176,7 +288,8 @@ export default function ApplyStatement() {
                 i
               ]?.phoneNumber.replaceAll('-', ''),
               doc_pass: applicantData?.data.content[i]?.documentPass,
-              interview_time: applicantData?.data.content[i]?.interviewTime,
+              date: applicantData?.data.content[i]?.date,
+              duration: applicantData?.data.content[i]?.duration,
               final_pass: applicantData?.data.content[i]?.finalPass,
             };
           }),
@@ -185,7 +298,7 @@ export default function ApplyStatement() {
         setDataSource(applicantData.data.content);
       }
     }
-  }, [isFetching, isSuccess]);
+  }, [isFetching, isSuccess, applicantData]);
 
   // 지원자 합불 여부에 따른 dropdown 상태
   useEffect(() => {
@@ -193,7 +306,7 @@ export default function ApplyStatement() {
       // 서류
       if (applicant.doc_pass === '합격') {
         setValue(`DocPassDropdown_${applicant.uuid}`, ColorPassDropdownList[0]);
-      } else if (applicant.doc_pass === '탈락') {
+      } else if (applicant.doc_pass === '불합격') {
         setValue(`DocPassDropdown_${applicant.uuid}`, ColorPassDropdownList[1]);
       }
       // 최종
@@ -202,14 +315,14 @@ export default function ApplyStatement() {
           `FinalPassDropdown_${applicant.uuid}`,
           ColorPassDropdownList[0],
         );
-      } else if (applicant.final_pass === '탈락') {
+      } else if (applicant.final_pass === '불합격') {
         setValue(
           `FinalPassDropdown_${applicant.uuid}`,
           ColorPassDropdownList[1],
         );
       }
     });
-  }, [dataSource]);
+  }, [dataSource, applicantData]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -256,9 +369,7 @@ export default function ApplyStatement() {
           <Dropdown
             options={ColorPassDropdownList}
             label={`DocPassDropdown_${record.uuid}`}
-            setValue={(value) =>
-              setValue(`DocPassDropdown_${record.uuid}`, value)
-            }
+            setValue={setValue}
             value={watch(`DocPassDropdown_${record.uuid}`)}
             placeholder="선택"
           />
@@ -271,7 +382,9 @@ export default function ApplyStatement() {
       width: '250px',
       render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5}>
-          <div style={{ width: '146px' }}> {record.interview_time}</div>
+          <div style={{ width: '146px' }}>
+            {record.date?.slice(5, 10)} &nbsp; {record.duration}
+          </div>
           <Button
             variant="admin_stroke"
             onClick={() => {
@@ -294,9 +407,7 @@ export default function ApplyStatement() {
           <Dropdown
             options={ColorPassDropdownList}
             label={`FinalPassDropdown_${record.uuid}`}
-            setValue={(value) =>
-              setValue(`FinalPassDropdown_${record.uuid}`, value)
-            }
+            setValue={setValue}
             value={watch(`FinalPassDropdown_${record.uuid}`)}
             placeholder="선택"
           />

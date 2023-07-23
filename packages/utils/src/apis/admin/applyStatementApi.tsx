@@ -1,7 +1,7 @@
 import { adminInstance, ResponseInterface } from '../axiosConfig';
 
 const accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk5ODIzMjgsImV4cCI6MTY5MDA2ODcyOH0.dN4Sg7rpza4GJK815i6zeURI56ee80vSajUJcjjKVuTcjCKTrInJ9RulL7nHZBpgtVVPaH5nRWufAiWr1ZMsVg';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2OTAwNzIyMDMsImV4cCI6MTY5MDE1ODYwM30.CYvvN0c00J06z3_Ngp3SlhxlMPJUtGPQ7siRc3SALyPCvpgkPXUtxYmFOok2dShbSOaHjFCMBHoyExzkQEtBXw';
 
 export interface applicationInfoInterface {
   birth?: string;
@@ -10,7 +10,8 @@ export interface applicationInfoInterface {
   finalPass: string;
   gender?: string;
   id?: number;
-  interviewTime: string;
+  date: string;
+  duration: string;
   major?: string;
   name: string;
   phoneNumber: string;
