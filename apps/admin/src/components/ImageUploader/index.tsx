@@ -1,5 +1,5 @@
 import usePresignedUrl, { ImageApiType } from '@admin/hooks/usePresignedUrl';
-import { InputHTMLAttributes, forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { Flex, Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -11,7 +11,7 @@ export interface ImageUploaderProps {
   height?: number;
   imageApiType: ImageApiType;
   value: string;
-  setValue: UseFormSetValue<FieldValues>;
+  setValue: UseFormSetValue<any>;
   label: string;
 }
 
@@ -26,7 +26,9 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
     }, [value]);
 
     useEffect(() => {
-      setValue(label, presignedUrl);
+      if (presignedUrl) {
+        setValue(label, presignedUrl);
+      }
     }, [presignedUrl]);
 
     const handleImageChange = async (
