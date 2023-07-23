@@ -8,7 +8,7 @@ export interface managementInterface {
   name: string;
   email: string;
   adminRole: string;
-  part?: string;
+  part?: string | undefined;
 }
 
 export const manageUserApi = {
@@ -30,6 +30,17 @@ export const manageUserApi = {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    return response;
+  },
+  CHANGE_MANAGEMENTROLE: async (idx: number, role: string) => {
+    const response = await adminInstance.delete(
+      `admin/super?id=${idx}&adminRole=${role}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
     return response;
   },
 };

@@ -30,45 +30,50 @@ export default function ManageUser() {
     () => manageUserApi.GET_MANAGEMENT(),
     // manageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
   );
+  // 운영진 삭제
   const { mutate: deleteManagement } = useMutation(
     () => manageUserApi.DELETE_MANAGEMENT(managementId),
     {
       onSuccess: () => {
+        alert('삭제완료');
         getManagement();
       },
-      onError: (err: any) => console.log(err.response.data.reason),
+      onError: (err: any) => alert(err.response.data.reason),
+    },
+  );
+  // 운영진 권한 변경
+  const { mutate: changeManagementRole } = useMutation(
+    ({ idx, role }: { idx: number; role: string }) =>
+      manageUserApi.CHANGE_MANAGEMENTROLE(idx, role),
+    {
+      onSuccess: () => {
+        alert('수정완료');
+        getManagement();
+      },
+      onError: (err: any) => console.log(err),
     },
   );
 
   // 지원자 목록 초기 데이터
-  const [dataSource, setDataSource] = useState<object[]>(
-    Array.from(new Array(pagination.pageSize), (_, i) => {
-      return {
-        id: data?.data.adminBriefInfoVos[i]?.id,
-        name: data?.data.adminBriefInfoVos[i]?.name,
-        role: data?.data.adminBriefInfoVos[i]?.role,
-        email: data?.data.adminBriefInfoVos[i]?.email,
-        part: data?.data.adminBriefInfoVos[i]?.part,
-      };
-    }),
-  );
+  const [dataSource, setDataSource] = useState<object[]>([]);
+
   // 페이지네이션 지원자 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      if (data.data.adminBriefInfoVos.length != 0) {
+      if (data?.data.adminBriefInfoVos?.length !== 0) {
         setDataSource(
           Array.from(new Array(pagination.pageSize), (_, i) => {
             return {
               id: data?.data.adminBriefInfoVos[i]?.id,
               name: data?.data.adminBriefInfoVos[i]?.name,
-              role: data?.data.adminBriefInfoVos[i]?.role,
+              adminRole: data?.data.adminBriefInfoVos[i]?.adminRole,
               email: data?.data.adminBriefInfoVos[i]?.email,
               part: data?.data.adminBriefInfoVos[i]?.part,
             };
           }),
         );
       } else {
-        setDataSource(data.data.adminBriefInfoVos);
+        setDataSource([]);
       }
     }
   }, [isFetching, isSuccess, data]);
@@ -136,6 +141,61 @@ export default function ManageUser() {
       setManagementId(0);
     }
   }, [managementId]);
+
+  // 지원자 합불 여부에 따른 dropdown 상태
+  useEffect(() => {
+    dataSource.forEach((applicant: any) => {
+      // 서류
+      if (applicant.adminRole === '임시') {
+        setValue(`ManagementDropdown_${applicant.id}`, {
+          label: '임시',
+          value: 'guest',
+        });
+      } else if (applicant.adminRole === '루트') {
+        setValue(`ManagementDropdown_${applicant.id}`, {
+          label: '루트',
+          value: 'root',
+        });
+      } else if (applicant.adminRole === '운영진') {
+        setValue(`ManagementDropdown_${applicant.id}`, {
+          label: '운영진',
+          value: 'management',
+        });
+      }
+    });
+  }, [dataSource]);
+
+  if (data && data.data && data.data.adminBriefInfoVos) {
+    let value = 'root';
+
+    data.data.adminBriefInfoVos.forEach((data: any) => {
+      //document
+      if (
+        getValues(`ManagementDropdown_${data.id}`) &&
+        data.adminRole !== getValues(`ManagementDropdown_${data.id}`).label
+      ) {
+        // 서버 데이터와 로컬 데이터 업데이트
+        data.adminRole = getValues(`ManagementDropdown_${data.id}`).label;
+
+        // 뮤테이션 호출하여 서버 데이터 업데이트
+        if (data.id !== 0 && data.id !== undefined) {
+          changeManagementRole({
+            idx: data.id,
+            role: getValues(`ManagementDropdown_${data.id}`).label,
+          });
+        }
+        if (data.adminRole === '임시') value = 'guest';
+        else if (data.adminRole === '운영진') value = 'management';
+        if (isSuccess) {
+          // 드롭다운 컴포넌트의 값을 업데이트
+          setValue(`ManagementDropdown_${data.id}`, {
+            label: getValues(`ManagementDropdown_${data.id}`).label, // 새로운 라벨 값
+            value: value,
+          });
+        }
+      }
+    });
+  }
 
   return (
     <Container>
