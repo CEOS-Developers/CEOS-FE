@@ -1,4 +1,4 @@
-import { Flex, Space, Text } from '@ceos-fe/ui';
+import { Flex, Text } from '@ceos-fe/ui';
 import { BackArrow } from '../../../assets/Arrow/index';
 import { css } from '@emotion/react';
 

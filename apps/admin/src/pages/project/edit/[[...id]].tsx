@@ -33,9 +33,20 @@ export default function ProjectDetail() {
       enabled: isEditMode,
     },
   );
-  const { mutate: mutateProject } = useMutation(
-    isEditMode ? adminProjectApi.PATCH_PROJECT : adminProjectApi.POST_PROJECT,
-  );
+
+  const postProjectMutation = useMutation(adminProjectApi.POST_PROJECT, {
+    onSuccess: () => {
+      alert('저장 완료');
+      router.push('/project');
+    },
+  });
+
+  const patchProjectMutation = useMutation(adminProjectApi.PATCH_PROJECT, {
+    onSuccess: () => {
+      alert('수정 완료');
+      router.push('/project');
+    },
+  });
 
   const { control, getValues, setValue, reset, watch, register } =
     useForm<ProjectItemInterface>({
@@ -85,7 +96,7 @@ export default function ProjectDetail() {
   };
 
   const handleSaveProject = () => {
-    mutateProject({
+    const data = {
       name: getValues('name'),
       description: getValues('description'),
       generation: Number(getValues('generation')),
@@ -118,7 +129,22 @@ export default function ProjectDetail() {
       }),
       projectImages: getValues('projectImages'),
       projectUrls: getValues('projectUrls'),
-    });
+    } as ProjectItemInterface;
+
+    if (isEditMode) {
+      patchProjectMutation.mutate({
+        id: Number(router.query.id),
+        payload: {
+          ...data,
+        },
+      });
+    } else {
+      postProjectMutation.mutate({
+        payload: {
+          ...data,
+        },
+      });
+    }
   };
 
   return (
@@ -291,10 +317,7 @@ export default function ProjectDetail() {
               imageApiType="PROJECTS"
               label="projectImages.0.imageUrl"
               value={watch('projectImages.0.imageUrl')}
-              setValue={(url: string | null) => {
-                if (!url) return;
-                setValue('projectImages.0.imageUrl', url);
-              }}
+              setValue={setValue}
             />
           </Flex>
           <Flex webGap={8} direction="column" align="flex-start">
@@ -305,10 +328,7 @@ export default function ProjectDetail() {
               imageApiType="PROJECTS"
               label="projectImages.1.imageUrl"
               value={watch('projectImages.1.imageUrl')}
-              setValue={(url: string | null) => {
-                if (!url) return;
-                setValue('projectImages.1.imageUrl', url);
-              }}
+              setValue={setValue}
             />
           </Flex>
         </Flex>

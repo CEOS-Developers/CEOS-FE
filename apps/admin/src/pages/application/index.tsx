@@ -28,6 +28,8 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { getFormattedDate } from '@admin/utils/date';
+import { useAlert } from '@admin/hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 interface ApplicationFormInterface {
   commonQuestions: AdminApplicationListItemInterface[];
@@ -50,8 +52,15 @@ export default function Application() {
     AdminApplicationInterface,
     AxiosError
   >(['admin', 'application'], adminApplicationApi.GET_APPLICATION);
+
+  const { isOpen, type, openAlert } = useAlert();
+
   const { mutate: putApplication } = useMutation(
     adminApplicationApi.PUT_APPLICATION,
+    {
+      onSuccess: () => openAlert('success'),
+      onError: () => openAlert('error'),
+    },
   );
 
   const [allPartQuestions, setAllPartQuestions] = useState<
@@ -588,6 +597,15 @@ export default function Application() {
           저장하기
         </Button>
       </Flex>
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }

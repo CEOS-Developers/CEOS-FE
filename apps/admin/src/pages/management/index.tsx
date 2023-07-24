@@ -108,7 +108,7 @@ export default function Management() {
             pageSize: 12,
             total: data.data.pageInfo.totalPages,
           }}
-          dataSource={data.data.managers}
+          dataSource={data.data.content}
           onChangePage={(newPage: number) => {
             setPage(newPage - 1);
           }}

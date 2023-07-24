@@ -40,6 +40,7 @@ export const Flex = styled.div<{
 
 export const RelativeContainer = styled(Flex)`
   position: relative;
+
   .is-hover {
     display: none;
   }
@@ -64,6 +65,6 @@ export const Space = styled.div<{
   height?: number;
   width?: number;
 }>`
-  height: ${({ height }) => `${height}px`};
-  width: ${({ width }) => `${width}px`};
+  height: ${({ height }) => (height ? `${height}px` : '')};
+  width: ${({ width }) => (width ? `${width}px` : '')};
 `;

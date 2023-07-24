@@ -14,6 +14,8 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { AxiosError } from 'axios';
+import { useAlert } from '../../hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 type FaqCategoryKorType =
   | '리크루팅 관련 질문'
@@ -46,6 +48,8 @@ export default function Faq() {
     name: 'faqList',
   });
 
+  const { isOpen, type, openAlert } = useAlert();
+
   const { data, isFetching, isSuccess } = useQuery<FaqResponse, AxiosError>(
     ['admin', 'faq', watch('category')],
     () => adminFaqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
@@ -54,17 +58,26 @@ export default function Faq() {
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.POST_FAQ);
+  >(adminFaqApi.POST_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: patchFaqMutation } = useMutation<
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.PATCH_FAQ);
+  >(adminFaqApi.PATCH_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: deleteFaqMutation } = useMutation<
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.DELETE_FAQ);
+  >(adminFaqApi.DELETE_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
 
   useEffect(() => {
     if (!isFetching && isSuccess) {
@@ -188,6 +201,14 @@ export default function Faq() {
           </Flex>
         </Button>
       </Flex>
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }
