@@ -100,6 +100,7 @@ export default function Recruit() {
         direction="column"
         align="flex-start"
         webGap={24}
+        mobileGap={24}
         style={{ marginTop: '48px' }}
       >
         <TextField
@@ -114,9 +115,10 @@ export default function Recruit() {
           align="flex-start"
           justify="flex-end"
           webGap={8}
+          mobileGap={8}
         >
           <Text webTypo="Label3">서류 접수</Text>
-          <Flex justify="flex-start" webGap={8}>
+          <Flex justify="flex-start" webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateDoc')}
@@ -142,9 +144,10 @@ export default function Recruit() {
           align="flex-start"
           justify="flex-end"
           webGap={8}
+          mobileGap={8}
         >
           <Text webTypo="Label3">면접 일자</Text>
-          <Flex justify="flex-start" webGap={8}>
+          <Flex justify="flex-start" webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateInterview')}
@@ -165,8 +168,14 @@ export default function Recruit() {
           </Flex>
         </Flex>
 
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">서류 발표</Text>
             <DatePicker
               isAdmin
@@ -177,7 +186,13 @@ export default function Recruit() {
               }}
             />
           </Flex>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">합격 발표</Text>
             <DatePicker
               isAdmin
@@ -190,8 +205,14 @@ export default function Recruit() {
           </Flex>
         </Flex>
 
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">OT</Text>
             <DatePicker
               isAdmin
@@ -202,7 +223,13 @@ export default function Recruit() {
               }}
             />
           </Flex>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">데모데이</Text>
             <DatePicker
               isAdmin
