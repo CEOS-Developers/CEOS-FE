@@ -5,7 +5,7 @@ export default function Home() {
 export const getStaticProps = async () => {
   return {
     redirect: {
-      destination: '/applyStatement',
+      destination: '/auth',
     },
   };
 };

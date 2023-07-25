@@ -3,9 +3,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Flex } from '@ceos-fe/ui';
 import Sidebar from '../Sidebar/index';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../../store/recoil/index';
+import { NonLogin } from '../../pages/auth/nonLogin/index';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const logIn = useRecoilValue(loginState);
 
   return (
     <Container path={router.pathname}>
@@ -15,7 +19,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
       )}
       <ChildrenContainer path={router.pathname}>
-        <FlexBox path={router.pathname}>{children}</FlexBox>
+        {logIn ? (
+          <FlexBox path={router.pathname}>{children}</FlexBox>
+        ) : router.pathname.includes('/auth') ? (
+          <FlexBox path={router.pathname}>{children}</FlexBox>
+        ) : (
+          <NonLogin />
+        )}
       </ChildrenContainer>
     </Container>
   );
@@ -41,9 +51,9 @@ const ChildrenContainer = styled.div<{ path?: string }>`
 
 const FlexBox = styled.div<{ path?: string }>`
   display: flex;
+  margin: 0;
   flex-direction: column;
-  align-items: flex-start;
-  justify-contents: flex-start;
-  //align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   padding: ${(props) => (props.path?.includes('/auth') ? '0px' : '88px 0')};
 `;

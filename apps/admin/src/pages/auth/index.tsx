@@ -6,8 +6,10 @@ import { adminAuthApi, signInInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { accessToken } from '@admin/store/recoil';
+import { accessToken, loginState } from '@admin/store/recoil';
 import { StyledForm } from '@admin/styles/common';
+import { useEffect } from 'react';
+import { adminInstance } from '../../../../../packages/utils/src/apis/axiosConfig';
 
 export default function SignIn() {
   const router = useRouter();
@@ -21,7 +23,7 @@ export default function SignIn() {
       adminInstance.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${token}`;
-  }, [loginState]);
+  }, [login]);
 
   const onSubmit = (data: any) => {
     const SignIndataForm: signInInterface = {
@@ -31,7 +33,7 @@ export default function SignIn() {
     postSignInMutation(SignIndataForm, {
       onSuccess: (res: { accessToken: string }) => {
         alert('로그인 성공');
-        router.push('/faq');
+        router.push('/applyStatement');
         setToken(res.accessToken);
         setLogin(true);
       },
