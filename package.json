@@ -39,11 +39,11 @@
   "packageManager": "yarn@3.5.0",
   "dependencies": {
     "@emotion/babel-plugin": "^11.11.0",
-    "@emotion/react": "^11.11.1",
+    "@emotion/react": "11.11.0",
     "@emotion/styled": "^11.11.0",
     "@next/font": "^13.4.1",
     "@svgr/webpack": "^8.0.1",
-    "@tanstack/react-query": "^4.32.0",
+    "@tanstack/react-query": "4.29.15",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "emotion-reset": "^3.0.1",
