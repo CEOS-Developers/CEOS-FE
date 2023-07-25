@@ -5,7 +5,7 @@ import { Dropdown } from '@admin/components/Dropdown';
 import styled from '@emotion/styled';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'packages/ui';
-import { ResponseInterface, manageUserApi } from 'packages/utils';
+import { ResponseInterface, adminManageUserApi } from 'packages/utils';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,7 +15,7 @@ export default function ManageUser() {
 
   const [pagination, setPagination] = useState<PageInterface>({
     page: 1, // 현재 선택된 페이지 넘버
-    pageSize: 10, // 한 페이지에 들어가는 데이터 개수
+    pageSize: 8, // 한 페이지에 들어가는 데이터 개수
     total: 10, // 전체 페이지 개수
   });
 
@@ -25,14 +25,12 @@ export default function ManageUser() {
     isSuccess,
     isFetching,
     refetch: getManagement,
-  } = useQuery<ResponseInterface<any>>(
-    ['applicantData', pagination.page],
-    () => manageUserApi.GET_MANAGEMENT(),
-    // manageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
+  } = useQuery<ResponseInterface<any>>(['applicantData', pagination.page], () =>
+    adminManageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
   );
   // 운영진 삭제
   const { mutate: deleteManagement } = useMutation(
-    () => manageUserApi.DELETE_MANAGEMENT(managementId),
+    () => adminManageUserApi.DELETE_MANAGEMENT(managementId),
     {
       onSuccess: () => {
         alert('삭제완료');
@@ -44,7 +42,7 @@ export default function ManageUser() {
   // 운영진 권한 변경
   const { mutate: changeManagementRole } = useMutation(
     ({ idx, role }: { idx: number; role: string }) =>
-      manageUserApi.CHANGE_MANAGEMENTROLE(idx, role),
+      adminManageUserApi.CHANGE_MANAGEMENTROLE(idx, role),
     {
       onSuccess: () => {
         alert('수정완료');
@@ -54,10 +52,10 @@ export default function ManageUser() {
     },
   );
 
-  // 지원자 목록 초기 데이터
+  // 운영진 목록 초기 데이터
   const [dataSource, setDataSource] = useState<object[]>([]);
 
-  // 페이지네이션 지원자 목록 업데이트
+  // 페이지네이션 운영진 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
       if (data?.data.adminBriefInfoVos?.length !== 0) {
@@ -200,8 +198,8 @@ export default function ManageUser() {
   return (
     <Container>
       <div className="title">
-        <Text webTypo="Heading2">지원현황</Text>
-        <Text webTypo="Body3">세오스 전체 지원자 현황입니다.</Text>
+        <Text webTypo="Heading2">유저 관리</Text>
+        <Text webTypo="Body3">세오스 전체 운영진 현황입니다.</Text>
       </div>
 
       <DataGrid
