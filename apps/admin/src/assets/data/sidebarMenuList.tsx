@@ -17,7 +17,7 @@ export const SidebarMenuList: sidebarInterface[] = [
   {
     icon: <SidebarPageEdit />,
     menu: '페이지 수정',
-    path: '/',
+    path: '',
     submenuopen: false,
     submenu: [
       { subMenuName: 'PROJECT', path: '/project' },
@@ -30,7 +30,7 @@ export const SidebarMenuList: sidebarInterface[] = [
   {
     icon: <SidebarRecruiting />,
     menu: '리쿠르팅',
-    path: '/',
+    path: '',
     submenuopen: false,
     submenu: [
       { subMenuName: 'RECRUIT', path: '/recruit' },
