@@ -1,8 +1,5 @@
 import { adminInstance } from '../axiosConfig';
 
-const accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfUk9PVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2OTAwNzIyMDMsImV4cCI6MTY5MDE1ODYwM30.CYvvN0c00J06z3_Ngp3SlhxlMPJUtGPQ7siRc3SALyPCvpgkPXUtxYmFOok2dShbSOaHjFCMBHoyExzkQEtBXw';
-
 export interface applicationInfoInterface {
   birth?: string;
   documentPass: string;
@@ -34,47 +31,24 @@ export const adminApplyStatementApi = {
     return response.data;
   },
   GET_APPLICANTINFO: async (idx: number) => {
-    const response = await adminInstance.get(`/applications/${idx}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await adminInstance.get(`/applications/${idx}`);
 
     return response.data;
   },
   GET_APPLICANTEXCEL: async () => {
-    const response = await adminInstance.get('/applications/file/download', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await adminInstance.get('/applications/file/download');
     return response;
   },
   CREATE_APPLICANTEXCEL: async () => {
-    const response = await adminInstance.get('/applications/file/create', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await adminInstance.get('/applications/file/create');
     return response.data;
   },
   GET_EXCELCREATEDTIME: async () => {
-    const response = await adminInstance.get(
-      '/applications/file/creationtime',
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
+    const response = await adminInstance.get('/applications/file/creationtime');
     return response.data;
   },
   GET_INTERVIEWTIME: async (idx: number) => {
-    const response = await adminInstance.get(`/applications/${idx}/interview`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await adminInstance.get(`/applications/${idx}/interview`);
     return response.data;
   },
   PATCH_INTERVIEWTIME: async (
@@ -88,11 +62,6 @@ export const adminApplyStatementApi = {
         date: date,
         duration: time,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
     );
     return response.data;
   },
@@ -102,27 +71,14 @@ export const adminApplyStatementApi = {
       {
         pass: pass,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
     );
 
     return response.data;
   },
   PATCH_FINALPASS: async (idx: number, pass: string) => {
-    const response = await adminInstance.patch(
-      `/applications/${idx}/final`,
-      {
-        pass: pass,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
+    const response = await adminInstance.patch(`/applications/${idx}/final`, {
+      pass: pass,
+    });
 
     return response.data;
   },
