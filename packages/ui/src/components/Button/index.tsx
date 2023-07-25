@@ -15,7 +15,6 @@ export type ButtonVariant =
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
   webWidth?: number;
-  webHeight?: number;
   mobileWidth?: number;
   webHeight?: number;
   mobileHeight?: number;
@@ -119,7 +118,6 @@ export const Button = ({
   children,
   variant,
   webWidth,
-  webHeight,
   mobileWidth,
   webHeight,
   mobileHeight,

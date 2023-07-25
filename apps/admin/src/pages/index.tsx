@@ -1,64 +1,79 @@
-import { Dropdown } from '@admin/components/Dropdown';
+import styled from '@emotion/styled';
+import { Button, Flex, Text, TextField, theme } from '@ceos-fe/ui';
+import { useMutation } from '@tanstack/react-query';
+import Link from 'next/link';
+import { adminAuthApi, adminInstance, signInInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
-import { AdminRewardCard, theme } from '@ceos-fe/ui';
-import { ImageUploader } from '@admin/components/ImageUploader';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { accessToken, loginState } from '@admin/store/recoil';
+import { StyledForm } from '@admin/styles/common';
+import { useEffect } from 'react';
 
-export default function Home() {
-  const { setValue, watch, getValues, register } = useForm();
+export default function SignIn() {
+  const router = useRouter();
+  const { mutate: postSignInMutation } = useMutation(adminAuthApi.SIGN_IN);
+  const { register, handleSubmit } = useForm();
+  const [token, setToken] = useRecoilState<string>(accessToken);
+  const [login, setLogin] = useRecoilState<boolean>(loginState);
+
+  useEffect(() => {
+    if (login === true)
+      adminInstance.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${token}`;
+  }, [loginState]);
+
+  const onSubmit = (data: any) => {
+    const SignIndataForm: signInInterface = {
+      username: data.username,
+      password: data.password,
+    };
+    postSignInMutation(SignIndataForm, {
+      onSuccess: (res: { accessToken: string }) => {
+        alert('로그인 성공');
+        router.push('/faq');
+        setToken(res.accessToken);
+        setLogin(true);
+      },
+      onError: () => {
+        alert('아이디와 비밀번호를 다시 확인해주세요');
+      },
+    });
+  };
 
   return (
     <>
-      <Dropdown
-        options={[
-          {
-            label: '합격',
-            value: 'pass',
-            background: theme.palette.Admin.Green2,
-            color: theme.palette.Admin.Green1,
-          },
-          {
-            label: '불합격',
-            value: 'nonpass',
-            background: theme.palette.Admin.Red2,
-            color: theme.palette.Admin.Red1,
-          },
-        ]}
-        label="passDropdown"
-        setValue={setValue}
-        value={watch('passDropdown')}
-        placeholder="선택"
-      />
-      <Dropdown
-        options={[
-          {
-            label: '기획',
-            value: 'strategy',
-          },
-          {
-            label: '디자인',
-            value: 'design',
-          },
-          {
-            label: '프론트엔드',
-            value: 'frontend',
-          },
-          {
-            label: '백엔드',
-            value: 'backend',
-          },
-        ]}
-        label="partDropdown"
-        setValue={setValue}
-        value={watch('partDropdown')}
-        placeholder="파트 선택"
-        width={152}
-      />
-      <ImageUploader
-        value={watch('activity')}
-        setValue={setValue}
-        imageApiType="ACTIVITY"
-        label="activity"
-      />
+      <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
+        <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
+        <Flex direction="column" webGap={24}>
+          <TextField label="ID" isAdmin {...register('username')} />
+          <TextField
+            type="password"
+            label="PW"
+            isAdmin
+            {...register('password')}
+          />
+        </Flex>
+        <div>
+          <Button variant="admin" webWidth={324}>
+            로그인하기
+          </Button>
+        </div>
+      </StyledForm>
+
+      <Text webTypo="Label3" paletteColor="Gray5">
+        <Flex webGap={24}>
+          <StyledLink href="/auth/findID">아이디 찾기</StyledLink>|
+          <StyledLink href="/auth/findPW">비밀번호 찾기</StyledLink>|
+          <StyledLink href="/auth/signUp">회원가입</StyledLink>
+        </Flex>
+      </Text>
     </>
   );
 }
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${theme.palette.Gray5};
+`;

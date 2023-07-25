@@ -9,7 +9,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Container path={router.pathname}>
-      {router.pathname.includes('/auth') ? <></> : <Sidebar />}
+      {router.pathname.includes('/auth') || router.pathname === '/' ? (
+        <></>
+      ) : (
+        <Sidebar />
+      )}
       <ChildrenContainer path={router.pathname}>
         <FlexBox path={router.pathname}>{children}</FlexBox>
       </ChildrenContainer>
@@ -21,15 +25,15 @@ const Container = styled.div<{ path?: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: ${(props) =>
-    props.path?.includes('/auth') ? 'center' : 'auto'};
-  justify-content: ${(props) =>
-    props.path?.includes('/auth') ? 'center' : ''};
+  align-items: ${({ path }) =>
+    path?.includes('/auth') || path === '/' ? 'center' : 'auto'};
+  justify-content: ${({ path }) =>
+    path?.includes('/auth') || path === '/' ? 'center' : ''};
 `;
 
 const ChildrenContainer = styled.div<{ path?: string }>`
   margin-left: ${({ path }) =>
-    path?.includes('/auth') ? 0 : 'max(16.5%, 200px)'};
+    path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'};
   display: flex;
   flex-direction: column;
   align-items: center;
