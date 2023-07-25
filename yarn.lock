@@ -1491,6 +1491,7 @@ __metadata:
     "@types/node": 18.16.3
     "@types/react": 18.2.3
     "@types/react-dom": 18.2.3
+    "@types/react-modal": ^3
     antd: ^5.5.2
     axios: ^1.4.0
     eslint: 8.39.0
@@ -1502,6 +1503,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: ^7.43.9
     react-intersection-observer: ^9.5.2
+    react-modal: ^3.16.1
     typescript: 5.0.4
   languageName: unknown
   linkType: soft
@@ -1641,7 +1643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.11.0":
+"@emotion/react@npm:11.11.0, @emotion/react@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/react@npm:11.11.0"
   dependencies:
@@ -2381,7 +2383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^4.29.15":
+"@tanstack/react-query@npm:4.29.15, @tanstack/react-query@npm:^4.29.15":
   version: 4.29.15
   resolution: "@tanstack/react-query@npm:4.29.15"
   dependencies:
@@ -2547,6 +2549,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 8301f35cf1cbfec8c723e9477aecf87774e3c168bd457d353b23c45064737213d3e8008b067c6767b7b08e4f2b3823ee239242a6c225fc91e7f8725ef8734124
+  languageName: node
+  linkType: hard
+
+"@types/react-modal@npm:^3":
+  version: 3.16.0
+  resolution: "@types/react-modal@npm:3.16.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: 975c0238d81cea234a2318a7cfcb95a8e6beb7fc5341ca2311651535c6476881e8d2f2f2e1c679ca6e416c04505c748071a1fab0d3fb3e88b0a9e43060b012fe
   languageName: node
   linkType: hard
 
@@ -3234,15 +3245,16 @@ __metadata:
   resolution: "ceos-fe@workspace:."
   dependencies:
     "@emotion/babel-plugin": ^11.11.0
-    "@emotion/react": ^11.11.0
+    "@emotion/react": 11.11.0
     "@emotion/styled": ^11.11.0
     "@next/font": ^13.4.1
     "@svgr/webpack": ^8.0.1
-    "@tanstack/react-query": ^4.29.15
+    "@tanstack/react-query": 4.29.15
     "@types/jest": ^29.5.1
     "@types/node": ^20.1.0
     "@types/react": ^18.2.6
     "@types/react-dom": latest
+    "@types/react-modal": ^3
     "@typescript-eslint/eslint-plugin": ^5.59.2
     "@typescript-eslint/parser": ^5.59.2
     axios: ^1.4.0
@@ -3260,9 +3272,11 @@ __metadata:
     prettier: ^2.8.8
     react: latest
     react-dom: latest
+    react-hook-form: ^7.45.2
     react-intersection-observer: ^9.5.2
+    react-modal: ^3.16.1
     turbo: latest
-    typescript: 5.0.4
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -4471,6 +4485,13 @@ __metadata:
     signal-exit: ^3.0.7
     strip-final-newline: ^3.0.0
   checksum: 21fa46fc69314ace4068cf820142bdde5b643a5d89831c2c9349479c1555bff137a291b8e749e7efca36535e4e0a8c772c11008ca2e84d2cbd6ca141a3c8f937
+  languageName: node
+  linkType: hard
+
+"exenv@npm:^1.2.0":
+  version: 1.2.2
+  resolution: "exenv@npm:1.2.2"
+  checksum: a894f3b60ab8419e0b6eec99c690a009c8276b4c90655ccaf7d28faba2de3a6b93b3d92210f9dc5efd36058d44f04098f6bbccef99859151104bfd49939904dc
   languageName: node
   linkType: hard
 
@@ -6738,6 +6759,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.45.2":
+  version: 7.45.2
+  resolution: "react-hook-form@npm:7.45.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 023ca091f2bb1f3117d8a694871874c4a344f02c795c6a08b8f78b09b78444451375fbe921d7db4ba7cd78909b1fa5e92d19efd2bfedc43124fdc44540ac036c
+  languageName: node
+  linkType: hard
+
 "react-intersection-observer@npm:^9.5.2":
   version: 9.5.2
   resolution: "react-intersection-observer@npm:9.5.2"
@@ -6758,6 +6788,28 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
+  languageName: node
+  linkType: hard
+
+"react-lifecycles-compat@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "react-lifecycles-compat@npm:3.0.4"
+  checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
+  languageName: node
+  linkType: hard
+
+"react-modal@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "react-modal@npm:3.16.1"
+  dependencies:
+    exenv: ^1.2.0
+    prop-types: ^15.7.2
+    react-lifecycles-compat: ^3.0.0
+    warning: ^4.0.3
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+  checksum: 978936e9320fad839c039b9ee4de55d40888156cb40e093615d6fbc2ff07139d5db06f14782cb7767f780bd5fb57956778669426c535ebc0068a7a03882c7e75
   languageName: node
   linkType: hard
 
@@ -7593,6 +7645,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.1.6":
+  version: 5.1.6
+  resolution: "typescript@npm:5.1.6"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: b2f2c35096035fe1f5facd1e38922ccb8558996331405eb00a5111cc948b2e733163cc22fab5db46992aba7dd520fff637f2c1df4996ff0e134e77d3249a7350
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@5.0.4#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.0.4
   resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"
@@ -7610,6 +7672,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
+  version: 5.1.6
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=85af82"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 21e88b0a0c0226f9cb9fd25b9626fb05b4c0f3fddac521844a13e1f30beb8f14e90bd409a9ac43c812c5946d714d6e0dee12d5d02dfc1c562c5aacfa1f49b606
   languageName: node
   linkType: hard
 
@@ -7719,7 +7791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"warning@npm:^4.0.2":
+"warning@npm:^4.0.2, warning@npm:^4.0.3":
   version: 4.0.3
   resolution: "warning@npm:4.0.3"
   dependencies:
