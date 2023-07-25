@@ -20,11 +20,11 @@ export const SidebarMenuList: sidebarInterface[] = [
     path: '/',
     submenuOpen: false,
     submenu: [
-      { subMenuName: 'PROJECT', path: '/' },
-      { subMenuName: 'REWARD', path: '/' },
-      { subMenuName: 'ACTIVITY', path: '/' },
-      { subMenuName: 'MANAGEMENT', path: '/' },
-      { subMenuName: 'SPONSORED BY', path: '/' },
+      { subMenuName: 'PROJECT', path: '/project' },
+      { subMenuName: 'REWARD', path: '/reward' },
+      { subMenuName: 'ACTIVITY', path: '/activity' },
+      { subMenuName: 'MANAGEMENT', path: '/management' },
+      { subMenuName: 'SPONSORED BY', path: '/sponsoredby' },
     ],
   },
   {
@@ -34,7 +34,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     submenuOpen: false,
     submenu: [
       { subMenuName: 'RECRUIT', path: '/recruit' },
-      { subMenuName: '지원서 제출', path: '/' },
+      { subMenuName: '지원서 제출', path: '/application' },
       { subMenuName: 'FAQ', path: '/faq' },
     ],
   },

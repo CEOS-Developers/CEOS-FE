@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { Flex, Text, theme } from 'packages/ui';
-import { ResponseInterface } from 'packages/utils';
 import {
   applicationInfoInterface,
-  applyStatementApi,
-} from 'packages/utils/src/apis/admin/applyStatementApi';
+  adminApplyStatementApi,
+} from 'packages/utils/src/apis/admin/adminApplyStatementApi';
 
 interface questionInterface {
   questionIndex: number;
@@ -38,9 +37,9 @@ interface personalQuestionListInterface {
 }
 
 export const ApplicationModal = ({ idx }: { idx: number }) => {
-  const { data, isLoading, isError } = useQuery<
-    ResponseInterface<applicationInterface>
-  >(['applicantData'], () => applyStatementApi.GET_APPLICANTINFO(idx));
+  const { data, isLoading, isError } = useQuery(['applicantData'], () =>
+    adminApplyStatementApi.GET_APPLICANTINFO(idx),
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;

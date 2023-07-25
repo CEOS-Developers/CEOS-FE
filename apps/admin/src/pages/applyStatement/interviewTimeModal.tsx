@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Flex, Text } from 'packages/ui';
-import { applyStatementApi } from 'packages/utils/src/apis/admin/applyStatementApi';
+import { adminApplyStatementApi } from 'packages/utils/src/apis/admin/adminApplyStatementApi';
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 interface interviewtimeInterface {
@@ -22,7 +22,7 @@ export const InterviewTimeModal = ({
 }) => {
   const { data, isSuccess, isLoading, isError } = useQuery(
     ['interviewTime'],
-    () => applyStatementApi.GET_INTERVIEWTIME(idx),
+    () => adminApplyStatementApi.GET_INTERVIEWTIME(idx),
   );
 
   const [interviewData, setInterviewData] = useState(data?.data.times); // 면접 1일차
@@ -40,7 +40,7 @@ export const InterviewTimeModal = ({
   const [interviewTime, setInterviewTime] = useState<interviewtimeInterface>();
 
   const { mutate: patchInterviewTime } = useMutation(() =>
-    applyStatementApi.PATCH_INTERVIEWTIME(
+    adminApplyStatementApi.PATCH_INTERVIEWTIME(
       idx,
       interviewTime?.date,
       interviewTime?.duration,
