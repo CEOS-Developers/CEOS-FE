@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Table } from 'antd';
 import { Pagination, PageInterface } from './Pagination';
-import { Space, theme } from '@ceos-fe/ui';
+import { Space } from 'packages/ui';
 
 interface ColumnsInterface {
   title: string;
@@ -32,6 +32,7 @@ export const DataGrid = ({
         dataSource={dataSource}
         columns={columns}
         pagination={false}
+        //rowKey={'uuid'}
       />
       <Space height={48} />
       <Pagination pagination={pagination} onChangePage={onChangePage} />
@@ -40,19 +41,31 @@ export const DataGrid = ({
 };
 
 const StyledTable = styled(Table)`
-  width: 1032px;
-
   .ant-table-thead .ant-table-cell {
     background-color: #f3f5f8;
+    height: 45px;
+    padding: 12px 10px 10px 10px;
 
-    ${theme.typo.Web.Label3};
-    color: ${theme.palette.Gray5};
+    font-family: 'Pretendard', 'Apple SD Gothic Neo';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
 
     border-start-start-radius: 0 !important;
     border-start-end-radius: 0 !important;
   }
 
   tbody {
-    ${theme.typo.Web.Body3};
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+  }
+  .ant-table-row .ant-table-cell {
+    padding: 10px;
+  }
+  .ant-table-row .ant-table-cell button {
+    margin: -10px;
   }
 `;

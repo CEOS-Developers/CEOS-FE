@@ -44,5 +44,6 @@ const FlexBox = styled.div<{ path?: string }>`
   flex-direction: column;
   align-items: flex-start;
   justify-contents: flex-start;
+  //align-items: center;
   padding: ${(props) => (props.path?.includes('/auth') ? '0px' : '88px 0')};
 `;

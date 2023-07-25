@@ -14,6 +14,14 @@ export default function SignIn() {
   const { mutate: postSignInMutation } = useMutation(adminAuthApi.SIGN_IN);
   const { register, handleSubmit } = useForm();
   const [token, setToken] = useRecoilState<string>(accessToken);
+  const [login, setLogin] = useRecoilState<boolean>(loginState);
+
+  useEffect(() => {
+    if (login === true)
+      adminInstance.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${token}`;
+  }, [loginState]);
 
   const onSubmit = (data: any) => {
     const SignIndataForm: signInInterface = {
@@ -23,8 +31,9 @@ export default function SignIn() {
     postSignInMutation(SignIndataForm, {
       onSuccess: (res: { accessToken: string }) => {
         alert('로그인 성공');
-        router.push('/');
+        router.push('/faq');
         setToken(res.accessToken);
+        setLogin(true);
       },
       onError: () => {
         alert('아이디와 비밀번호를 다시 확인해주세요');

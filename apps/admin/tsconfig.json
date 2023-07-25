@@ -19,6 +19,12 @@
       "@admin/*": ["./apps/admin/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts", "../../packages/utils/src/hooks/useInfiniteQueries.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../../**/*.d.ts",
+    "../../packages/utils/src/hooks/useInfiniteQueries.tsx"
+  ],
   "exclude": ["node_modules"]
 }

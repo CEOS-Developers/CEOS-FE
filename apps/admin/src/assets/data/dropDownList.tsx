@@ -3,7 +3,7 @@ import { DropdownItemInterface } from '@admin/utils/dropdown';
 export const PartDropdownList: DropdownItemInterface[] = [
   {
     label: '기획',
-    value: 'strategy',
+    value: 'product',
   },
   {
     label: '디자인',
@@ -26,7 +26,7 @@ export const PassDropdownList: DropdownItemInterface[] = [
   },
   {
     label: '불합격',
-    value: 'nonpass',
+    value: 'fail',
   },
 ];
 
@@ -39,23 +39,8 @@ export const ColorPassDropdownList = [
   },
   {
     label: '불합격',
-    value: 'nonpass',
+    value: 'fail',
     background: '#FFE7E7',
     color: '#FF6262',
   },
 ];
-
-// export const FinalPassDropdownList = [
-//   {
-//     label: '합격',
-//     value: 'pass',
-//     background: '#D4FFF7',
-//     color: '#01D1A8',
-//   },
-//   {
-//     label: '불합격',
-//     value: 'nonpass',
-//     background: '#FFE7E7',
-//     color: '#FF6262',
-//   },
-// ];
