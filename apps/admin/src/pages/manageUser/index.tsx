@@ -19,6 +19,8 @@ export default function ManageUser() {
     total: 10, // 전체 페이지 개수
   });
 
+  const { isOpen, type, openAlert } = useAlert();
+
   //운영진 목록 가져오기
   const {
     data,
@@ -33,10 +35,12 @@ export default function ManageUser() {
     () => adminManageUserApi.DELETE_MANAGEMENT(managementId),
     {
       onSuccess: () => {
-        alert('삭제완료');
+        openAlert('success');
         getManagement();
       },
-      onError: (err: any) => alert(err.response.data.reason),
+      onError: () => {
+        openAlert('error');
+      },
     },
   );
   // 운영진 권한 변경
@@ -45,10 +49,12 @@ export default function ManageUser() {
       adminManageUserApi.CHANGE_MANAGEMENTROLE(idx, role),
     {
       onSuccess: () => {
-        alert('수정완료');
+        openAlert('success');
         getManagement();
       },
-      onError: (err: any) => console.log(err),
+      onError: () => {
+        openAlert('error');
+      },
     },
   );
 
@@ -208,6 +214,15 @@ export default function ManageUser() {
         columns={columns}
         onChangePage={onChangePage}
       />
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </Container>
   );
 }
