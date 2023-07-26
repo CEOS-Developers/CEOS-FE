@@ -13,6 +13,7 @@ import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { TopMargin } from '../FAQ/index';
+import { css } from '@emotion/react';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -88,7 +89,12 @@ const Activity = () => {
       </Desktop>
 
       <Mobile>
-        <Flex direction="column">
+        <Flex
+          direction="column"
+          css={css`
+            height: 100vh;
+          `}
+        >
           <Title
             title="Activity"
             explain={[

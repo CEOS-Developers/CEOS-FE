@@ -3,6 +3,7 @@ import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
 import { FooterBackground } from './FooterBackground';
+import { MobileFooterBackground } from './MobileFooterBackground';
 
 interface ButtonProps {
   title?: string;
@@ -45,7 +46,7 @@ const Footer = ({
 
       <Mobile>
         <RelativeContainer align="start">
-          <FooterBackground />
+          <MobileFooterBackground />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href="/FAQ">

@@ -7,11 +7,6 @@ export const FooterBackground = () => {
         z-index: -99;
         width: 100vw;
         height: 500px;
-
-        @media (max-width: 1023px) {
-          height: auto;
-          max-height: 500px;
-        }
       `}
     >
       <svg

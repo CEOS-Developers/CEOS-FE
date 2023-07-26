@@ -70,7 +70,7 @@ const Project = () => {
             ]}
           />
           <TopMargin />
-          <Flex webGap={24}>
+          <Flex webGap={24} margin="0 0 180px 0">
             {[0, 1, 2].map((columnNum) => (
               <Flex
                 direction="column"
