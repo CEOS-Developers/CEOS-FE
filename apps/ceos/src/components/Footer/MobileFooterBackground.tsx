@@ -6,15 +6,17 @@ export const MobileFooterBackground = () => {
       css={css`
         z-index: -99;
         width: 100vw;
+        max-height: 500px;
       `}
     >
       <svg
         css={css`
           z-index: -99;
           width: 100vw;
+          max-height: 500px;
         `}
-        width="390"
-        height="393"
+        width="1023"
+        height="1030"
         viewBox="0 0 390 393"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

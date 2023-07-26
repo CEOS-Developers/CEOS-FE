@@ -6,7 +6,7 @@ export const FooterBackground = () => {
       css={css`
         z-index: -99;
         width: 100vw;
-        height: 500px;
+        max-height: 500px;
       `}
     >
       <svg
