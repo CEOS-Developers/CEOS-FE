@@ -53,6 +53,7 @@ export const CheckModal = (props: ModalProps) => {
             pathname: '/recruit/docpass',
             query: {
               uuid: getValues('uuid'),
+              email: getValues('email'),
               pass: passCheck.data.pass,
               name: passCheck.data.name,
               date: passCheck.data.date,
@@ -81,6 +82,7 @@ export const CheckModal = (props: ModalProps) => {
             pathname: '/recruit/finpass',
             query: {
               uuid: getValues('uuid'),
+              email: getValues('email'),
               pass: passCheck.data.pass,
               name: passCheck.data.name,
             },

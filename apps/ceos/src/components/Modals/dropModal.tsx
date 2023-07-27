@@ -3,17 +3,66 @@ import { backCss } from '../MenuBar';
 import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { ModalContentCss, InputCss } from './checkModal';
+import { useForm } from 'react-hook-form';
+import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
+import { useMutation } from '@tanstack/react-query';
 /**
  * @param step '서류' | '최종'
  */
 
 interface ModalProps {
+  uuid: string;
+  email: string;
   step: string;
   isOpen: boolean;
   toggleModal: () => void;
 }
 
+interface FormInterface {
+  reason: string;
+}
+
 export const DropModal = (props: ModalProps) => {
+  const { getValues, register } = useForm<FormInterface>({
+    defaultValues: {
+      reason: '',
+    },
+  });
+  const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
+    onSuccess: (res) => {
+      if (res === '활동 여부를 이미 선택했습니다.') {
+        alert('활동 여부를 이미 선택했습니다.');
+      }
+      props.toggleModal();
+    },
+  });
+  const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
+    onSuccess: (res) => {
+      if (res === '면접 참여 여부를 이미 선택했습니다.') {
+        alert('면접 참여 여부를 이미 선택했습니다.');
+      }
+      props.toggleModal();
+    },
+  });
+
+  const handleClick = async () => {
+    if (props.step === '서류') {
+      patchDoc({
+        uuid: props.uuid,
+        email: props.email,
+        available: false,
+        reason: getValues('reason'),
+      });
+    } else if (props.step === '최종') {
+      patchFin({
+        uuid: props.uuid,
+        email: props.email,
+        available: false,
+        reason: getValues('reason'),
+      });
+    }
+  };
+
   return (
     <div css={backCss} className="open">
       <div css={ModalBoxCss}>
@@ -41,7 +90,12 @@ export const DropModal = (props: ModalProps) => {
         </div>
         <div css={InputCss}>
           <TextField
-            label="면접 참여 불가능 사유"
+            {...register('reason', { required: true })}
+            label={
+              props.step === '서류'
+                ? '면접 참여 불가능 사유'
+                : '활동 불가능 사유'
+            }
             placeholder="내용을 입력해주세요."
             width={376}
             css={css`
@@ -50,7 +104,7 @@ export const DropModal = (props: ModalProps) => {
               }
             `}
           />
-          <Button variant="default" webWidth={376}>
+          <Button variant="default" webWidth={376} onClick={handleClick}>
             확인하기
           </Button>
         </div>

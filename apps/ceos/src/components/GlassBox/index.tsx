@@ -6,19 +6,28 @@ import { useState } from 'react';
 import { ModalPortal, useModal } from '@ceos-fe/utils';
 import { DropModal } from '../Modals/dropModal';
 import { TimeModal } from '../Modals/timeModal';
-
+import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
+import { useMutation } from '@tanstack/react-query';
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
 
 interface DocGlassBoxProps {
+  uuid: string;
+  email: string;
   name: string;
   date: string;
   duration: string;
 }
 
+interface FinalGlassBoxProps {
+  uuid: string;
+  email: string;
+}
+
 export const DocPassGlassBox = (props: DocGlassBoxProps) => {
   const [isPossible, setIsPossible] = useState(false);
   const { isOpen, toggleModal } = useModal();
+
   let month, day, hour, minute;
 
   if (props.date) {
@@ -30,6 +39,27 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
   } else {
     console.log('error');
   }
+
+  const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
+    onSuccess: (res) => {
+      if (res === '면접 참여 여부를 이미 선택했습니다.') {
+        setIsPossible(true);
+      }
+    },
+  });
+
+  const handleClick = async () => {
+    try {
+      patchDoc({
+        uuid: props.uuid,
+        email: props.email,
+        available: true,
+        reason: null,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div css={GlassBoxCss({ width: 552 })}>
@@ -62,9 +92,7 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
               gap: 0px;
               margin-bottom: 12px;
             `}
-            onClick={() => {
-              setIsPossible(true);
-            }}
+            onClick={handleClick}
           >
             네, 참여 가능합니다.
           </Button>
@@ -122,16 +150,44 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
       )}
       {isOpen && (
         <ModalPortal>
-          <DropModal step="서류" isOpen={isOpen} toggleModal={toggleModal} />
+          <DropModal
+            step="서류"
+            uuid={props.uuid}
+            email={props.email}
+            isOpen={isOpen}
+            toggleModal={toggleModal}
+          />
         </ModalPortal>
       )}
     </div>
   );
 };
 
-export const FinPassGlassBox = () => {
+export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
   const [isPossible, setIsPossible] = useState(false);
   const { isOpen, toggleModal } = useModal();
+  const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
+    onSuccess: (res) => {
+      if (res === '활동 여부를 이미 선택했습니다.') {
+        alert('활동 여부를 이미 선택했습니다.');
+      } else {
+        setIsPossible(true);
+      }
+    },
+  });
+
+  const handleClick = async () => {
+    try {
+      patchFin({
+        uuid: props.uuid,
+        email: props.email,
+        available: true,
+        reason: null,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div css={GlassBoxCss({ width: 552 })}>
       <Diamond />
@@ -171,6 +227,8 @@ export const FinPassGlassBox = () => {
         <br className="desktop" />
         활동 여부를 반드시 제출해 주세요.
       </Text>
+
+      {/* 삼항연산자로 patch api 호출 -> 이미 제출한 사람(400에러)면 버튼도 안뜨게 */}
       <div>
         <Button
           variant="white"
@@ -180,9 +238,7 @@ export const FinPassGlassBox = () => {
             gap: 0px;
             margin-bottom: 12px;
           `}
-          onClick={() => {
-            setIsPossible(true);
-          }}
+          onClick={handleClick}
         >
           활동 가능합니다.
         </Button>
@@ -210,7 +266,13 @@ export const FinPassGlassBox = () => {
 
       {isOpen && (
         <ModalPortal>
-          <DropModal step="최종" isOpen={isOpen} toggleModal={toggleModal} />
+          <DropModal
+            step="최종"
+            uuid={props.uuid}
+            email={props.email}
+            isOpen={isOpen}
+            toggleModal={toggleModal}
+          />
         </ModalPortal>
       )}
     </div>

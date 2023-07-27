@@ -30,8 +30,8 @@ export const recruitApi = {
   }: {
     uuid: string;
     email: string;
-    available: string;
-    reason: boolean;
+    available: boolean;
+    reason: string | null;
   }) => {
     try {
       const response = await ceosInstance.patch(
@@ -40,8 +40,10 @@ export const recruitApi = {
         { params: { uuid, email } },
       );
       return response.data;
-    } catch (error) {
-      console.error(error);
+    } catch (e: any) {
+      if (e.response && e.response.status === 400) {
+        return e.response.data.reason;
+      }
     }
   },
 
@@ -65,8 +67,8 @@ export const recruitApi = {
   }: {
     uuid: string;
     email: string;
-    available: string;
-    reason: boolean;
+    available: boolean;
+    reason: string | null;
   }) => {
     try {
       const response = await ceosInstance.patch(
@@ -74,9 +76,12 @@ export const recruitApi = {
         { available, reason },
         { params: { uuid, email } },
       );
-      return response.data;
-    } catch (error) {
-      console.error(error);
+      return response;
+    } catch (e: any) {
+      if (e.response && e.response.status === 400) {
+        return e.response.data.reason;
+        //활동 여부를 이미 선택했습니다.
+      }
     }
   },
 };

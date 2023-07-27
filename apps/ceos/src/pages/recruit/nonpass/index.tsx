@@ -8,18 +8,6 @@ import { NextRouter, Router, useRouter } from 'next/router';
 
 //이름, step
 
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
-
 const NonPass = () => {
   const router = useRouter();
 
@@ -48,6 +36,18 @@ const NonPass = () => {
 };
 
 export default NonPass;
+
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
 
 export const NonPassMainCss = css`
   position: relative;

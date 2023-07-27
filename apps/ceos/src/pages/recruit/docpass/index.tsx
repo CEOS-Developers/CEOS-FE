@@ -10,28 +10,19 @@ import { ParsedUrlQuery } from 'querystring';
 //이름, step
 
 interface RouterDataInterface extends ParsedUrlQuery {
+  uuid: string;
+  email: string;
   pass: string;
   name: string;
   date: string;
   duration: string;
 }
 
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
-
 const Pass = () => {
   const router = useRouter();
 
-  const { name, date, duration } = router.query as RouterDataInterface;
+  const { uuid, email, name, date, duration } =
+    router.query as RouterDataInterface;
 
   useEffect(() => {
     if (router.query.pass !== '합격') {
@@ -73,7 +64,13 @@ const Pass = () => {
           <br className="mobile" /> 반드시 알려주시기 바랍니다.
         </Text>
 
-        <DocPassGlassBox name={name} date={date} duration={duration} />
+        <DocPassGlassBox
+          uuid={uuid}
+          email={email}
+          name={name}
+          date={date}
+          duration={duration}
+        />
         <FooterText />
       </div>
     </div>
@@ -81,6 +78,18 @@ const Pass = () => {
 };
 
 export default Pass;
+
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
 
 export const PassMainCss = css`
   position: relative;

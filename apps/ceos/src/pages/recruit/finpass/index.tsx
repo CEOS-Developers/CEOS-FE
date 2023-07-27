@@ -5,23 +5,20 @@ import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
 import { NextRouter, useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 
 //이름, step
 
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
+interface RouterDataInterface extends ParsedUrlQuery {
+  uuid: string;
+  email: string;
+  pass: string;
+  name: string;
+}
 
 const FinPass = () => {
   const router = useRouter();
+  const { uuid, email } = router.query as RouterDataInterface;
 
   useEffect(() => {
     if (router.query.pass !== '합격') {
@@ -57,7 +54,7 @@ const FinPass = () => {
           다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
         </Text>
         <p>CEOS 드림</p>
-        <FinPassGlassBox />
+        <FinPassGlassBox uuid={uuid} email={email} />
         <FooterText />
       </div>
     </div>
@@ -65,6 +62,18 @@ const FinPass = () => {
 };
 
 export default FinPass;
+
+export const getServerSideProps = async ({
+  query: { pass },
+}: {
+  query: { pass: string };
+}) => {
+  return {
+    props: {
+      pass,
+    },
+  };
+};
 
 const WelcomeText = css`
   text-align: center;
