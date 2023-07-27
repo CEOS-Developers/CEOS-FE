@@ -931,6 +931,7 @@ export const RecruitBgImg = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
+          style={{ minHeight: '250px' }}
         >
           <rect width="1660" height="600" fill="url(#pattern0)" />
           <defs>

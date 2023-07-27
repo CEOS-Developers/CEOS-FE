@@ -7,7 +7,6 @@ export const RecruitCss = css`
   aspect-ratio: 1660 / 600;
   z-index: 1;
   margin-bottom: 120px;
-
   @media (max-width: 1023px) {
     margin-bottom: 60px;
   }
@@ -79,7 +78,12 @@ export const RecruitMainCss = css`
     width: 90%;
   }
 
+  @media (max-width: 550px) {
+    margin-top: 90px;
+  }
+
   @media (max-width: 390px) {
     margin-bottom: 48px;
+    margin-top: 0px;
   }
 `;
