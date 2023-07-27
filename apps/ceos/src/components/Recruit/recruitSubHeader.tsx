@@ -32,10 +32,10 @@ export const RecruitSubHeader = () => {
             18기 지원하기
           </Button>
         </Link> */}
-        {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
+        <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
-        </Button> */}
-        <Button
+        </Button>
+        {/* <Button
           variant="glass"
           webWidth={249}
           css={BtnCss}
@@ -45,8 +45,8 @@ export const RecruitSubHeader = () => {
           }}
         >
           서류 합격 여부 확인하기
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           variant="glass"
           webWidth={249}
           css={BtnCss}
@@ -56,7 +56,7 @@ export const RecruitSubHeader = () => {
           }}
         >
           최종 합격 여부 확인하기
-        </Button>
+        </Button> */}
       </div>
       {isOpen && (
         <ModalPortal>
