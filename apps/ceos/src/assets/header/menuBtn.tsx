@@ -13,7 +13,7 @@ export const MenuBtn = (props: MenuProps) => {
     <div
       className="menu"
       css={css`
-        color: ${backColor === 'White' ? theme.palette.Gray8 : 'white'};
+        color: ${backColor === 'White' ? theme.palette.Gray8 : 'White'};
         &:hover {
           cursor: pointer;
         }
@@ -29,19 +29,19 @@ export const MenuBtn = (props: MenuProps) => {
       >
         <path
           d="M25 23L5 23"
-          stroke="#787E88"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
         />
         <path
           d="M25 15L5 15"
-          stroke="#787E88"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
         />
         <path
           d="M25 7L5 7"
-          stroke="#787E88"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
         />

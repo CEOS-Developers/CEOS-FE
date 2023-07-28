@@ -8,6 +8,7 @@ import {
   AwardResponse,
 } from '@ceos/components/Landing/rewards';
 import { FooterText } from '@ceos/components/FooterText';
+import Footer from '@ceos/components/Footer';
 
 export default function Rewards() {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
@@ -51,13 +52,13 @@ export default function Rewards() {
             <RewardCard key={a.generation} rewardCard={a} />
           ))}
       </div>
-      <div
+      {/* <div
         css={css`
           margin-top: 36px;
         `}
       >
         <FooterText />
-      </div>
+      </div> */}
       {/* <Mobile
         css={css`
           margin-top: 36px;
