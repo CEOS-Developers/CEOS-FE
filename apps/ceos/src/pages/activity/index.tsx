@@ -9,7 +9,6 @@ import {
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
-import { ResponseInterface } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
 import Link from 'next/link';
@@ -39,7 +38,7 @@ export const rightBtn = {
 
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<{
-    activityData: ResponseInterface<ActivityResponse>;
+    activityData: ActivityResponse;
   }>(['ceos', 'activity'], async () => {
     const activityData = await activityApi.GET_ACTIVITY({
       pageNum: 0,
@@ -48,7 +47,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.data.activities;
+  const acitivityList = data?.activityData.activities;
 
   return (
     <>

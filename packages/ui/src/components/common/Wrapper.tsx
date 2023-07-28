@@ -40,6 +40,7 @@ export const Flex = styled.div<{
 
 export const RelativeContainer = styled(Flex)`
   position: relative;
+
   .is-hover {
     display: none;
   }
@@ -58,4 +59,12 @@ export const AbsoluteFlex = styled(Flex)`
   &.is-hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+`;
+
+export const Space = styled.div<{
+  height?: number;
+  width?: number;
+}>`
+  height: ${({ height }) => (height ? `${height}px` : '')};
+  width: ${({ width }) => (width ? `${width}px` : '')};
 `;

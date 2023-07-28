@@ -7,14 +7,15 @@ import {
 import {
   CategoryType,
   FaqListItemInterface,
-  ResponseInterface,
-  faqApi,
+  adminFaqApi,
 } from '@ceos-fe/utils';
 import { Button, Flex, Text, TextField, SelectButton } from '@ceos-fe/ui';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { AxiosError } from 'axios';
+import { useAlert } from '../../hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 type FaqCategoryKorType =
   | '리크루팅 관련 질문'
@@ -47,31 +48,40 @@ export default function Faq() {
     name: 'faqList',
   });
 
-  const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<FaqResponse>,
-    AxiosError
-  >(['admin', 'faq', watch('category')], () =>
-    faqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
+  const { isOpen, type, openAlert } = useAlert();
+
+  const { data, isFetching, isSuccess } = useQuery<FaqResponse, AxiosError>(
+    ['admin', 'faq', watch('category')],
+    () => adminFaqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
   );
   const { mutate: postFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.POST_FAQ);
+  >(adminFaqApi.POST_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: patchFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.PATCH_FAQ);
+  >(adminFaqApi.PATCH_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: deleteFaqMutation } = useMutation<
-    ResponseInterface<FaqListItemInterface>,
+    FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(faqApi.DELETE_FAQ);
+  >(adminFaqApi.DELETE_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
 
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      replace(data.data.categoryFaqList);
+      replace(data.categoryFaqList);
     }
   }, [isFetching, isSuccess]);
 
@@ -104,16 +114,25 @@ export default function Faq() {
   return (
     <>
       <Flex direction="column" align="start">
-        <Text webTypo="Heading2" color="Black">
+        <Text webTypo="Heading2" paletteColor="Black">
           FAQ
         </Text>
-        <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+        <Text
+          webTypo="Body3"
+          paletteColor="Gray5"
+          style={{ marginTop: '12px' }}
+        >
           페이지에 게재되는 질의응답 내용을 관리합니다.
         </Text>
       </Flex>
 
-      <Flex direction="column" webGap={24} style={{ marginTop: '48px' }}>
-        <Flex webGap={24}>
+      <Flex
+        direction="column"
+        webGap={24}
+        mobileGap={24}
+        style={{ marginTop: '48px' }}
+      >
+        <Flex webGap={24} mobileGap={24}>
           <SelectButton
             variant="admin"
             value="리크루팅 관련 질문"
@@ -135,8 +154,8 @@ export default function Faq() {
         </Flex>
 
         {fields.map((faq, idx) => (
-          <Flex key={faq.id} direction="column" webGap={16}>
-            <Flex webGap={8} align="flex-end">
+          <Flex key={faq.id} direction="column" webGap={16} mobileGap={16}>
+            <Flex webGap={8} mobileGap={8} align="flex-end">
               <TextField
                 {...register(`faqList.${idx}.question`)}
                 label="질문"
@@ -176,12 +195,20 @@ export default function Faq() {
           webWidth={128}
           onClick={handleAppendQuestion}
         >
-          <Flex webGap={4}>
+          <Flex webGap={4} mobileGap={4}>
             <Plus />
             질문 추가하기
           </Flex>
         </Button>
       </Flex>
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }
@@ -191,7 +218,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['admin', 'faq', 'RECRUIT'], () =>
-      faqApi.GET_FAQ('RECRUIT'),
+      adminFaqApi.GET_FAQ('RECRUIT'),
     );
 
     return {
