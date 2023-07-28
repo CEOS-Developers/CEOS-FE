@@ -17,9 +17,9 @@ import {
   adminApplyStatementApi,
 } from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
 import ReactModal from 'react-modal';
-import { ApplicationModal } from './applicationModal';
+import { ApplicationModal } from '../../components/Modals/applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
-import { InterviewTimeModal } from './interviewTimeModal';
+import { InterviewTimeModal } from '../../components/Modals/interviewTimeModal';
 import { useAlert } from '@admin/hooks/useAlert';
 import { Alert } from '@admin/components/Alert';
 

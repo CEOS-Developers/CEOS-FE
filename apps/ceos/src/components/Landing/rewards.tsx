@@ -41,12 +41,22 @@ export const Rewards = () => {
   const awardList = data?.generationAwards;
 
   return (
-    <Flex margin="0 0 80px 0" direction="column">
+    <Flex
+      margin="0 0 80px 0"
+      direction="column"
+      css={css`
+        margin-bottom: 60px;
+      `}
+    >
       <div
         css={css`
           display: flex;
           gap: 24px;
           margin-bottom: 80px;
+          @media (max-width: 767px) {
+            margin-top: 60px;
+            flex-direction: column;
+          }
         `}
         className="intro"
       >
@@ -68,27 +78,57 @@ export const Rewards = () => {
         className="rewards"
         css={css`
           width: 100%;
+
+          @media (max-width: 1023px) {
+            width: 716px;
+          }
+
+          @media (max-width: 390px) {
+            width: 346px;
+          }
         `}
       >
-        <Text webTypo="Heading1_Eng" paletteColor="Blue">
+        <Text
+          webTypo="Heading1_Eng"
+          mobileTypo="Heading1_Eng"
+          paletteColor="Blue"
+        >
           REWARDS
         </Text>
-        <Flex margin="12px 0 32px 0">
-          <Text webTypo="Body1">
-            CEOS 프로젝트들의 수상 내역을 확인해보세요!
+        <div
+          css={css`
+            justify-content: space-between;
+            display: flex;
+            margin: 12px 0 32px 0;
+            .mobile_br {
+              display: none;
+            }
+
+            @media (max-width: 767px) {
+              .mobile_br {
+                display: block;
+              }
+            }
+          `}
+        >
+          <Text webTypo="Body1" mobileTypo="Body1">
+            CEOS 프로젝트들의
+            <br className="mobile_br" /> 수상 내역을 확인해보세요!
           </Text>
           <Text
             webTypo="Label1"
+            mobileTypo="Label2"
             paletteColor="Gray5"
             css={css`
               text-decoration: underline;
               cursor: pointer;
               margin-left: auto;
+              align-self: flex-end;
             `}
           >
             <CustomLink href={'/rewards'}>전체 보기</CustomLink>
           </Text>
-        </Flex>
+        </div>
         <div
           css={css`
             display: flex;
