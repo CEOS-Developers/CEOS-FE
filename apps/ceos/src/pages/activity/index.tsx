@@ -16,7 +16,7 @@ import { TopMargin } from '../FAQ/index';
 
 // TODO: interface 재정의
 interface ActivityResponse {
-  activities: { content: string; id: number; imageUrl: string; name: string }[];
+  content: { content: string; id: number; imageUrl: string; name: string }[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -47,7 +47,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.activities;
+  const acitivityList = data?.activityData.content;
 
   return (
     <>
