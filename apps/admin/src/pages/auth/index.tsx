@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { accessToken, loginState } from '@admin/store/recoil';
 import { StyledForm } from '@admin/styles/common';
 import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { adminInstance } from '../../../../../packages/utils/src/apis/axiosConfig';
 
 export default function SignIn() {
@@ -17,6 +18,7 @@ export default function SignIn() {
   const { register, handleSubmit } = useForm();
   const [token, setToken] = useRecoilState<string>(accessToken);
   const [login, setLogin] = useRecoilState<boolean>(loginState);
+  const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
   useEffect(() => {
     if (login === true)
@@ -31,17 +33,40 @@ export default function SignIn() {
       password: data.password,
     };
     postSignInMutation(SignIndataForm, {
-      onSuccess: (res: { accessToken: string }) => {
+      onSuccess: (res: { accessToken: string; refreshToken: string }) => {
         alert('로그인 성공');
         router.push('/applyStatement');
         setToken(res.accessToken);
         setLogin(true);
+        if (res.refreshToken !== undefined) LoginUntilExpires(res.refreshToken);
       },
       onError: () => {
         alert('아이디와 비밀번호를 다시 확인해주세요');
       },
     });
   };
+
+  // login cookie
+  const getExpiredDate = (time: number) => {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() + time);
+    return date;
+  };
+  const LoginUntilExpires = (refreshToken: string) => {
+    // if (!loginCookie) return;
+    const expires = getExpiredDate(5);
+    // setAppCookies('LOGIN_EXPIRES', true, {
+    //   path: '/',
+    //   expires,
+    // });
+    setAppCookies('LOGIN_EXPIRES', refreshToken, {
+      path: '/',
+      expires,
+    });
+  };
+  useEffect(() => {
+    if (appCookies['LOGIN_EXPIRES']) return;
+  }, []);
 
   return (
     <>

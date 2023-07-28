@@ -3,13 +3,18 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Flex } from '@ceos-fe/ui';
 import Sidebar from '../Sidebar/index';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loginState } from '../../store/recoil/index';
 import { NonLogin } from '../../pages/auth/nonLogin/index';
+import { Cookies } from 'react-cookie';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const logIn = useRecoilValue(loginState);
+  const [login, setLogin] = useRecoilState<boolean>(loginState);
+
+  const cookies = new Cookies().get('LOGIN_EXPIRES');
+  if (cookies !== undefined) setLogin(true);
+  else setLogin(false);
 
   return (
     <Container path={router.pathname}>
@@ -19,7 +24,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
       )}
       <ChildrenContainer path={router.pathname}>
-        {logIn ? (
+        {login ? (
           <FlexBox path={router.pathname}>{children}</FlexBox>
         ) : router.pathname.includes('/auth') ? (
           <FlexBox path={router.pathname}>{children}</FlexBox>
