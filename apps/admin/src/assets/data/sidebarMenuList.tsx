@@ -41,7 +41,7 @@ export const SidebarMenuList: sidebarInterface[] = [
   {
     icon: <SidebarUser />,
     menu: '유저관리',
-    path: '/',
+    path: '/manageUser',
     submenuOpen: false,
     submenu: [],
   },
