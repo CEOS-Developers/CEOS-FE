@@ -1,11 +1,5 @@
 import styled from '@emotion/styled';
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-} from '../../../../../packages/ui';
+import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
 import Image from 'next/image';

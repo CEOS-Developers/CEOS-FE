@@ -28,13 +28,7 @@ export const ProjectCard = (props: {
     props.projectCard;
   return (
     <Wrapper>
-      {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
-      <ProjectImg
-        src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-        className="ceos"
-        width={328}
-        height={184}
-      />
+      <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
 
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
@@ -66,7 +60,7 @@ export const AdminProjectCard = ({
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={thumbnailImage.imageUrl} width={328} height={184} />
+        <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -97,6 +91,7 @@ export const AdminProjectCard = ({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 328px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -112,9 +107,10 @@ const Wrapper = styled.div`
 `;
 
 const ProjectImg = styled.img`
-  // width: 328px;
-  // height: 184px;
   border-radius: 16px;
+  width: 100%;
+  height: 184px;
+  object-fit: cover;
 
   @media (max-width: 1023px) {
     &.ceos {
@@ -128,7 +124,7 @@ const ProjectImg = styled.img`
 const ExplainBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: 100%;
   height: 122px;
   margin-top: -20px;
   z-index: -1;
@@ -141,7 +137,7 @@ const ExplainBox = styled.div`
 
   @media (max-width: 1023px) {
     &.ceos-hover {
-      margin-top: -0.5rem;
+      margin-top: -10px;
       width: 346px;
       height: 89px;
       border-radius: 10px;
