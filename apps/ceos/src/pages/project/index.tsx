@@ -16,7 +16,7 @@ import Footer from '@ceos/components/Footer';
 import { TopMargin } from '../FAQ/index';
 
 interface ProjectResponse {
-  projectBriefInfoVos: ProjectCardProps[];
+  content: ProjectCardProps[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -28,7 +28,7 @@ interface ProjectResponse {
 const Project = () => {
   const { data, isLoading, isSuccess } = useInfiniteQuery<ProjectResponse>(
     ['ceos', 'project'],
-    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 0, limit: 10000 }),
+    ({ pageParam = 0 }) => projectApi.GET_PROJECT({ pageNum: 0, limit: 16 }),
     {
       getNextPageParam: (lastPage) => {
         return true;
@@ -36,7 +36,7 @@ const Project = () => {
     },
   );
 
-  const projectList = data?.pages[0].projectBriefInfoVos;
+  const projectList = data?.pages[0].content;
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -61,7 +61,7 @@ const Project = () => {
             ]}
           />
           <TopMargin />
-          <Flex webGap={24}>
+          <Flex webGap={24} margin="0 0 120px 0">
             <Flex
               direction="column"
               justify="start"
@@ -109,7 +109,7 @@ const Project = () => {
             ]}
           />
           <TopMargin />
-          <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
+          <Flex direction="column" mobileGap={50} margin="0 0 36px 0">
             {projectList?.map((project, idx) => (
               <ProjectCard projectCard={project} />
             ))}

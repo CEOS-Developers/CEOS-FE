@@ -16,7 +16,7 @@ import { TopMargin } from '../FAQ/index';
 
 // TODO: interface 재정의
 interface ActivityResponse {
-  activities: { content: string; id: number; imageUrl: string; name: string }[];
+  content: { content: string; id: number; imageUrl: string; name: string }[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -24,6 +24,17 @@ interface ActivityResponse {
     totalElements: number;
   };
 }
+
+export const leftBtn = {
+  title: '더 궁금한 것이 있다면',
+  content: ['자주 묻는 질문', '보러가기'],
+  link: '/FAQ',
+};
+export const rightBtn = {
+  title: 'CEOS에 참여하고 싶다면',
+  content: ['CEOS 18기', '지원하기'],
+  link: '/recruit',
+};
 
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<{
@@ -36,18 +47,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.activities;
-
-  const leftBtn = {
-    title: '더 궁금한 것이 있다면',
-    content: ['자주 묻는 질문', '보러가기'],
-    link: '/FAQ',
-  };
-  const rightBtn = {
-    title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
-    link: '/recruit',
-  };
+  const acitivityList = data?.activityData.content;
 
   return (
     <>

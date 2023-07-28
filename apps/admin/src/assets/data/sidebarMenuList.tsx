@@ -11,7 +11,7 @@ export const SidebarMenuList: sidebarInterface[] = [
     icon: <SidebarApply />,
     menu: '지원현황',
     path: '/applyStatement',
-    submenuOpen: false,
+    submenuopen: false,
     submenu: [],
   },
   {
