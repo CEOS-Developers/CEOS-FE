@@ -1,11 +1,12 @@
-export default function Home() {
-  return <></>;
-}
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export const getStaticProps = async () => {
-  return {
-    redirect: {
-      destination: '/applyStatement',
-    },
-  };
-};
+export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/applyStatement');
+  }, []);
+
+  return null;
+}
