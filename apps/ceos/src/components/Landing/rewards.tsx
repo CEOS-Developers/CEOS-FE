@@ -23,7 +23,7 @@ export interface AwardCardInterface {
 }
 
 export interface AwardResponse {
-  generationAwards: AwardCardInterface[];
+  content: AwardCardInterface[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -34,11 +34,11 @@ export interface AwardResponse {
 
 export const Rewards = () => {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
-    const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 16 });
+    const awardData = await awardApi.GET_AWARD({ pageNum: 0, limit: 16 });
     return awardData;
   });
 
-  const awardList = data?.generationAwards;
+  const awardList = data?.content;
 
   return (
     <Flex
