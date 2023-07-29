@@ -90,7 +90,7 @@ const navCss = ({
   position: fixed;
   top: 0;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 70px;
   z-index: 2;
   background-color: ${!isScrolled && backColor === 'Blue'
@@ -98,7 +98,7 @@ const navCss = ({
     : theme.palette[backColor]};
 
   @media (max-width: 1023px) {
-    width: 100%;
+    width: 100vw;
     height: 124px;
     align-items: flex-end;
     .logo {
@@ -120,6 +120,7 @@ export const contentCss = (backColor: KeyOfPalette) => css`
 
 
   @media (max-width: 1023px) {
+    gap : 0px;
     .text {
       display: none;
     }
@@ -129,6 +130,7 @@ export const contentCss = (backColor: KeyOfPalette) => css`
     margin-right : 22px;
     margin-bottom : 27px;
   }
+
   }
 `;
 

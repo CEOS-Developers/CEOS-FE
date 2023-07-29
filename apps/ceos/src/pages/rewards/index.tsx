@@ -1,5 +1,5 @@
 import { Title } from '@ceos/components/Title';
-import { Flex, RewardCard } from '@ceos-fe/ui';
+import { Flex, Mobile, RewardCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -7,6 +7,7 @@ import {
   AwardCardInterface,
   AwardResponse,
 } from '@ceos/components/Landing/rewards';
+import { FooterText } from '@ceos/components/FooterText';
 
 export default function Rewards() {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
@@ -21,7 +22,15 @@ export default function Rewards() {
       direction="column"
       css={css`
         width: 1032px;
-        margin: 80px 0 100px 0px;
+        margin: 80px 0 0px 0px;
+
+        @media (max-width: 1023px) {
+          width: 716px;
+        }
+
+        @media (max-width: 390px) {
+          width: 346px;
+        }
       `}
     >
       <Title
@@ -34,6 +43,7 @@ export default function Rewards() {
           flex-wrap: wrap;
           gap: 24px;
           align-items: flex-start;
+          margin-top: 80px;
         `}
       >
         {awardList &&
@@ -41,6 +51,19 @@ export default function Rewards() {
             <RewardCard key={a.generation} rewardCard={a} />
           ))}
       </div>
+      <div
+        css={css`
+          margin-top: 36px;
+        `}
+      >
+        <FooterText />
+      </div>
+      {/* <Mobile
+        css={css`
+          margin-top: 36px;
+          justify-content: center;
+        `}
+      ></Mobile> */}
     </Flex>
   );
 }

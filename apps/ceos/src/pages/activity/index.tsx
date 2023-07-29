@@ -26,6 +26,17 @@ interface ActivityResponse {
   };
 }
 
+export const leftBtn = {
+  title: '더 궁금한 것이 있다면',
+  content: ['자주 묻는 질문', '보러가기'],
+  link: '/FAQ',
+};
+export const rightBtn = {
+  title: 'CEOS에 참여하고 싶다면',
+  content: ['CEOS 18기', '지원하기'],
+  link: '/recruit',
+};
+
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<{
     activityData: ActivityResponse;
@@ -38,17 +49,6 @@ const Activity = () => {
   });
 
   const acitivityList = data?.activityData.content;
-
-  const leftBtn = {
-    title: '더 궁금한 것이 있다면',
-    content: ['자주 묻는 질문', '보러가기'],
-    link: '/FAQ',
-  };
-  const rightBtn = {
-    title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
-    link: '/recruit',
-  };
 
   return (
     <>

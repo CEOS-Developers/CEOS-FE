@@ -108,7 +108,7 @@ const Project = () => {
             ]}
           />
           <TopMargin />
-          <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
+          <Flex direction="column" mobileGap={50} margin="0 0 36px 0">
             {projectList?.map((project, idx) => (
               <div
                 onClick={() => setModalNumber(project.id)}
