@@ -91,6 +91,7 @@ export const AdminProjectCard = ({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   width: 328px;
 
   @media (min-width: 1024px) {

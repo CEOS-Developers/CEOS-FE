@@ -18,6 +18,7 @@ interface TextFieldProps
   width?: number;
   height?: number;
   multiline?: boolean;
+  isMobileFull?: boolean;
   isAdmin?: boolean;
   isSubTextField?: boolean;
   fontColor?: string;
@@ -48,6 +49,7 @@ export const TextField = forwardRef<
       height,
       multiline = false,
       isAdmin = false,
+      isMobileFull = false,
       isSubTextField = false,
       fontColor = theme.palette.Black,
       right,
