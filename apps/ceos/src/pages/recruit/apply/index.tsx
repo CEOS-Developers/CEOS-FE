@@ -150,7 +150,6 @@ const Apply = () => {
 
     if (questionList) {
       const res: any = await recruitApi.POST_APPLY(questionList?.times, body);
-      console.log(res);
       setIsOpen(false);
 
       if (res?.status === 200) {
@@ -178,8 +177,6 @@ const Apply = () => {
       /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/,
     ];
 
-    console.log(phoneNumber, phoneNumberReg, !phoneNumberReg.test(phoneNumber));
-
     if (!birthReg.test(birth)) {
       alert('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
       return;
@@ -191,7 +188,6 @@ const Apply = () => {
       return;
     } else if (semestersLeftNumber !== null && +semestersLeftNumber < 0) {
       alert('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요');
-      console.log(typeof semestersLeftNumber, semestersLeftNumber);
       return;
     }
     setIsOpen(true);
