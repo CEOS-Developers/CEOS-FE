@@ -46,11 +46,12 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
           <WhiteCloseIcon fillColor="#232527" />
         </Mobile>
 
-        <MainImage
+        <ModalImage
           alt="mainImage"
-          src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
+          src={projectInfo ? projectInfo.projectImages[0].imageUrl : 'error'}
           width={0}
           height={0}
+          isMain={true}
         />
         <Desktop style={{ width: '100%' }}>
           <Flex justify="space-between" padding="40px 64px">
@@ -131,12 +132,12 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
           </Flex>
         </Mobile>
 
-        <SubImage
+        <ModalImage
           alt="subImage"
-          src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-          // src={projectInfo?.projectImages[1].imageUrl}
+          src={projectInfo ? projectInfo.projectImages[0].imageUrl : 'error'}
           width={0}
           height={0}
+          isMain={false}
         />
       </Container>
     </div>
@@ -183,6 +184,7 @@ const Container = styled(Flex)`
   flex-direction: column;
   justify-content: start;
   width: 1032px;
+  height: auto;
 
   border-radius: 20px;
   background: #fff;
@@ -201,16 +203,10 @@ const Container = styled(Flex)`
   }
 `;
 
-const MainImage = styled(Image)`
+const ModalImage = styled(Image)<{ isMain: boolean }>`
   width: 100%;
   height: 541px;
-  border-radius: 20px 20px 0 0;
-`;
-
-const SubImage = styled(Image)`
-  width: 100%;
-  height: 541px;
-  border-radius: 0 0 20px 20px;
+  border-radius: ${(isMain) => (isMain ? '20px 20px 0 0' : '0 0 20px 20px')};
 `;
 
 const TeamWrapper = styled.div`
