@@ -5,10 +5,12 @@ import { activityApi } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { TopMargin } from '../FAQ/index';
+import { css } from '@emotion/react';
 
 // TODO: interface 재정의
 interface ActivityResponse {
-  activities: { content: string; id: number; imageUrl: string; name: string }[];
+  content: { content: string; id: number; imageUrl: string; name: string }[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -16,6 +18,17 @@ interface ActivityResponse {
     totalElements: number;
   };
 }
+
+export const leftBtn = {
+  title: '더 궁금한 것이 있다면',
+  content: ['자주 묻는 질문', '보러가기'],
+  link: '/FAQ',
+};
+export const rightBtn = {
+  title: 'CEOS에 참여하고 싶다면',
+  content: ['CEOS 18기', '지원하기'],
+  link: '/recruit',
+};
 
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<{
@@ -28,18 +41,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.activities;
-
-  const leftBtn = {
-    title: '더 궁금한 것이 있다면',
-    content: ['자주 묻는 질문', '보러가기'],
-    link: '/FAQ',
-  };
-  const rightBtn = {
-    title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
-    link: '/recruit',
-  };
+  const acitivityList = data?.activityData.content;
 
   return (
     <>
@@ -80,7 +82,12 @@ const Activity = () => {
       </Desktop>
 
       <Mobile>
-        <Flex direction="column">
+        <Flex
+          direction="column"
+          css={css`
+            height: 100vh;
+          `}
+        >
           <Title
             title="Activity"
             explain={[
@@ -122,37 +129,3 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
-
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 99;
-  @media (max-width: 1023px) {
-    bottom: 30px;
-  }
-`;
-
-const Background = styled.img`
-  width: 100%;
-  z-index: -99;
-  max-height: 500px;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    max-height: 500px;
-  }
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
-
-const TopMargin = styled.div`
-  height: 80px;
-  @media (max-width: 1023px) {
-    height: 36px;
-  }
-`;

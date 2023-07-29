@@ -13,22 +13,22 @@ export interface ProjectCardProps {
   name: string;
   description: string;
   generation: number;
-  previewImage: ProjectImageProps;
+  thumbnailImage: ProjectImageProps;
+}
+
+export interface AdminProjectCardProps extends ProjectCardProps {
+  onClickRemove: () => void;
+  onClickUpdate: () => void;
 }
 
 export const ProjectCard = (props: {
   projectCard: ProjectCardProps;
 }): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
+  const { id, name, description, generation, thumbnailImage } =
+    props.projectCard;
   return (
     <Wrapper>
-      {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
-      <ProjectImg
-        src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-        className="ceos"
-        width={328}
-        height={184}
-      />
+      <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
 
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
@@ -47,20 +47,20 @@ export const ProjectCard = (props: {
   );
 };
 
-export const AdminProjectCard = (props: {
-  projectCard: ProjectCardProps;
-  onClickRemove: (id: number) => void;
-  onClickUpdate: (id: number) => void;
-}): EmotionJSX.Element => {
-  const { id, name, description, generation, previewImage } = props.projectCard;
-  const [onClickRemove, onClickUpdate] = [
-    props.onClickRemove,
-    props.onClickUpdate,
-  ];
+export const AdminProjectCard = ({
+  id,
+  name,
+  description,
+  generation,
+  thumbnailImage,
+  onClickRemove,
+  onClickUpdate,
+  ...props
+}: AdminProjectCardProps) => {
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={previewImage.imageUrl} width={328} height={184} />
+        <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -81,8 +81,8 @@ export const AdminProjectCard = (props: {
         borderRadius={16}
         className="is-hover"
       >
-        <Button onClick={() => onClickRemove(id)}>삭제하기</Button>
-        <Button onClick={() => onClickUpdate(id)}>수정하기</Button>
+        <Button onClick={onClickRemove}>삭제하기</Button>
+        <Button onClick={onClickUpdate}>수정하기</Button>
       </AbsoluteFlex>
     </RelativeContainer>
   );
@@ -91,6 +91,8 @@ export const AdminProjectCard = (props: {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  width: 328px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -106,9 +108,10 @@ const Wrapper = styled.div`
 `;
 
 const ProjectImg = styled.img`
-  // width: 328px;
-  // height: 184px;
   border-radius: 16px;
+  width: 100%;
+  height: 184px;
+  object-fit: cover;
 
   @media (max-width: 1023px) {
     &.ceos {
@@ -122,7 +125,7 @@ const ProjectImg = styled.img`
 const ExplainBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: 100%;
   height: 122px;
   margin-top: -20px;
   z-index: -1;
@@ -135,7 +138,7 @@ const ExplainBox = styled.div`
 
   @media (max-width: 1023px) {
     &.ceos-hover {
-      margin-top: -0.5rem;
+      margin-top: -10px;
       width: 346px;
       height: 89px;
       border-radius: 10px;

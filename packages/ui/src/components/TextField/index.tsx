@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import {
   ForwardedRef,
   InputHTMLAttributes,
@@ -56,8 +57,8 @@ export const TextField = forwardRef<
     ref,
   ) => {
     return (
-      <Container width={isSubTextField ? width + 37 : width}>
-        {label && <StyledLabel>{label}</StyledLabel>}
+      <Container width={isSubTextField ? width + 37 : width} isAdmin={isAdmin}>
+        {label && <StyledLabel isAdmin={isAdmin}>{label}</StyledLabel>}
         <Flex align="flex-start">
           {isSubTextField && <SubTextFieldIcon />}
           {multiline ? (
@@ -88,7 +89,7 @@ export const TextField = forwardRef<
           )}
         </Flex>
         {helperText && (
-          <StyledHelperTextBox>
+          <StyledHelperTextBox isAdmin={isAdmin}>
             {helperText.map((helper, idx) => (
               <StyledHelperText
                 key={idx}
@@ -104,21 +105,33 @@ export const TextField = forwardRef<
   },
 );
 
-const Container = styled(Flex)<{ width: number }>`
+const Container = styled(Flex)<{ width: number; isAdmin: boolean }>`
   width: ${({ width }) => width}px;
 
   flex-direction: column;
   align-items: flex-start;
 
   @media (max-width: 1023px) {
-    width: 100%;
+    ${({ isAdmin }) =>
+      isAdmin
+        ? ''
+        : css`
+            width: 100%;
+          `};
   }
 `;
-const StyledHelperTextBox = styled.div`
+const StyledHelperTextBox = styled.div<{
+  isAdmin: boolean;
+}>`
   margin-top: 8px;
 
   @media (max-width: 1023px) {
-    margin-top: 14px;
+    ${({ isAdmin }) =>
+      isAdmin
+        ? ''
+        : css`
+            margin-top: 14px;
+          `};
   }
 `;
 const InputContainer = styled.div`
@@ -169,7 +182,12 @@ const StyledInput = styled.input<{
   }
 
   @media (max-width: 1023px) {
-    ${theme.typo.Mobile.Body1};
+    ${({ isAdmin }) =>
+      isAdmin
+        ? ''
+        : css`
+            ${theme.typo.Mobile.Body1};
+          `};
   }
 `;
 const StyledIcon = styled.div`
@@ -223,21 +241,31 @@ const StyledTextArea = styled.textarea<{
   }
 
   @media (max-width: 1023px) {
-    height: 400px;
-
-    ${theme.typo.Mobile.Body1};
+    ${({ isAdmin }) =>
+      isAdmin
+        ? ''
+        : css`
+            height: 400px;
+            ${theme.typo.Mobile.Body1}
+          `};
   }
 `;
-const StyledLabel = styled.p`
+const StyledLabel = styled.p<{
+  isAdmin: boolean;
+}>`
   margin-bottom: 8px;
 
   ${theme.typo.Web.Label3};
   color: ${theme.palette.Black};
 
   @media (max-width: 1023px) {
-    margin-bottom: 14px;
-
-    ${theme.typo.Mobile.Label1};
+    ${({ isAdmin }) =>
+      isAdmin
+        ? ''
+        : css`
+            margin-bottom: 14px;
+            ${theme.typo.Mobile.Label1};
+          `};
   }
 `;
 const StyledHelperText = styled.p<{ isImportant: boolean }>`

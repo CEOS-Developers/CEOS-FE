@@ -19,19 +19,3 @@ export const loginApi = {
     }
   },
 };
-
-// const Login = async ({
-//   username,
-//   password,
-// }: {
-//   username: string;
-//   password: string;
-// }) => {
-//   const { accessToken, refreshToken } = await loginApi.SIGN_IN({
-//     username,
-//     password,
-//   });
-//   adminInstance.defaults.headers.common[
-//     'Authorization'
-//   ] = `Bearer ${accessToken}`;
-// };

@@ -1,25 +1,34 @@
 import usePresignedUrl, { ImageApiType } from '@admin/hooks/usePresignedUrl';
-import { InputHTMLAttributes, forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { Flex, Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { CardImage } from 'react-bootstrap-icons';
 import Image from 'next/image';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 
-export interface ImageUploaderProps
-  extends InputHTMLAttributes<HTMLInputElement> {
+export interface ImageUploaderProps {
   height?: number;
   imageApiType: ImageApiType;
   value: string;
-  setValue: (arg: string | null) => void;
+  setValue: UseFormSetValue<any>;
+  label: string;
 }
 
 export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
-  ({ value, height = 184, imageApiType, setValue, ...props }, ref) => {
+  ({ value, height = 184, imageApiType, setValue, label, ...props }, ref) => {
     const { presignedUrl, setUrl, setImage } = usePresignedUrl(imageApiType);
 
     useEffect(() => {
-      setValue(presignedUrl);
+      if (value) {
+        setUrl(value);
+      }
+    }, [value]);
+
+    useEffect(() => {
+      if (presignedUrl) {
+        setValue(label, presignedUrl);
+      }
     }, [presignedUrl]);
 
     const handleImageChange = async (
@@ -46,6 +55,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
           {presignedUrl && (
             <>
               <DeleteCover
+                height={height}
                 onClick={() => {
                   setImage(undefined);
                   setUrl('');
@@ -118,7 +128,9 @@ const Label = styled.label<{
   cursor: pointer;
 `;
 
-const DeleteCover = styled(Flex)`
+const DeleteCover = styled(Flex)<{
+  height?: number;
+}>`
   height: ${({ height }) => (height ? `${height}px` : '184px')};
   width: 328px;
   border-radius: 8px;

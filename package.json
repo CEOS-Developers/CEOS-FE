@@ -19,6 +19,7 @@
     "@types/node": "^20.1.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "latest",
+    "@types/react-modal": "^3",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "babel-plugin-emotion": "^11.0.0",
@@ -30,8 +31,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8",
-    "turbo": "latest",
-    "typescript": "^5.0.3"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -39,16 +39,20 @@
   "packageManager": "yarn@3.5.0",
   "dependencies": {
     "@emotion/babel-plugin": "^11.11.0",
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "11.11.0",
     "@emotion/styled": "^11.11.0",
     "@next/font": "^13.4.1",
     "@svgr/webpack": "^8.0.1",
-    "@tanstack/react-query": "^4.29.15",
+    "@tanstack/react-query": "4.29.15",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "emotion-reset": "^3.0.1",
     "next-images": "^1.8.5",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-hook-form": "^7.45.2",
+    "react-intersection-observer": "^9.5.2",
+    "react-modal": "^3.16.1",
+    "typescript": "^5.1.6"
   }
 }

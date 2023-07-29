@@ -100,6 +100,19 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
   }
 
   @media (max-width: 1023px) {
+    width: 200px;
+    height: ${(props) => (props.typeNum == 1 ? '60px' : '101px')};
+    border-radius: 10px;
+
+    .text-container {
+      ${theme.typo.Mobile.Body2};
+    }
+    .shortcut1-diamond-text,
+    .shortcut2-diamond-text {
+      ${theme.typo.Web.Label3}
+    }
+  }
+  @media (max-width: 390px) {
     width: 346px;
     height: ${(props) => (props.typeNum == 1 ? '69px' : '101px')};
     border-radius: 10px;

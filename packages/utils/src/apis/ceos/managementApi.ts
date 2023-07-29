@@ -1,7 +1,7 @@
 import { ceosInstance } from '../axiosConfig';
 
 export const managementApi = {
-  GET_MANAGE: async ({
+  GET_MENTOR: async ({
     pageNum,
     limit,
   }: {
@@ -15,6 +15,13 @@ export const managementApi = {
       .then((res) => {
         return res.data.data;
       });
+    return response;
+  },
+
+  GET_MANAGER: async () => {
+    const response = await ceosInstance.get(`/mangements/part`).then((res) => {
+      return res.data.data;
+    });
     return response;
   },
 };

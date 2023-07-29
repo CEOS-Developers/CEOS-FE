@@ -14,6 +14,8 @@ import {
   useMutation,
   useQuery,
 } from '@tanstack/react-query';
+import { useAlert } from '@admin/hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 interface RecruitDateInterface extends RecruitBaseInterface {
   startDateDoc: Date;
@@ -31,8 +33,15 @@ export default function Recruit() {
     ['admin', 'recruit'],
     async () => await adminRecruitApi.GET_RECRUIT(),
   );
+
+  const { isOpen, type, openAlert } = useAlert();
+
   const { mutate: postRecruitments } = useMutation(
     adminRecruitApi.POST_RECRUIT,
+    {
+      onSuccess: () => openAlert('success'),
+      onError: () => openAlert('error'),
+    },
   );
 
   const { getValues, setValue, reset, register } =
@@ -91,6 +100,7 @@ export default function Recruit() {
         direction="column"
         align="flex-start"
         webGap={24}
+        mobileGap={24}
         style={{ marginTop: '48px' }}
       >
         <TextField
@@ -105,9 +115,10 @@ export default function Recruit() {
           align="flex-start"
           justify="flex-end"
           webGap={8}
+          mobileGap={8}
         >
           <Text webTypo="Label3">서류 접수</Text>
-          <Flex justify="flex-start" webGap={8}>
+          <Flex justify="flex-start" webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateDoc')}
@@ -133,9 +144,10 @@ export default function Recruit() {
           align="flex-start"
           justify="flex-end"
           webGap={8}
+          mobileGap={8}
         >
           <Text webTypo="Label3">면접 일자</Text>
-          <Flex justify="flex-start" webGap={8}>
+          <Flex justify="flex-start" webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateInterview')}
@@ -156,8 +168,14 @@ export default function Recruit() {
           </Flex>
         </Flex>
 
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">서류 발표</Text>
             <DatePicker
               isAdmin
@@ -168,7 +186,13 @@ export default function Recruit() {
               }}
             />
           </Flex>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">합격 발표</Text>
             <DatePicker
               isAdmin
@@ -181,8 +205,14 @@ export default function Recruit() {
           </Flex>
         </Flex>
 
-        <Flex justify="flex-start" align="flex-end" webGap={24}>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">OT</Text>
             <DatePicker
               isAdmin
@@ -193,7 +223,13 @@ export default function Recruit() {
               }}
             />
           </Flex>
-          <Flex direction="column" align="flex-start" webGap={8} width={328}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
             <Text webTypo="Label3">데모데이</Text>
             <DatePicker
               isAdmin
@@ -246,6 +282,15 @@ export default function Recruit() {
       >
         저장하기
       </Button>
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }

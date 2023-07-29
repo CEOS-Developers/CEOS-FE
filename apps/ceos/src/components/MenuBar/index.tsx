@@ -50,6 +50,7 @@ export const MenuBar = (props: MenuProps) => {
 };
 
 export const backCss = () => css`
+  z-index: 99;
   &.open {
     position: fixed;
     top: 0;
@@ -57,6 +58,7 @@ export const backCss = () => css`
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
   }
 `;
 

@@ -1,14 +1,9 @@
 import styled from '@emotion/styled';
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-} from '../../../../../packages/ui';
+import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
-import Image from 'next/image';
+import { FooterBackground } from './FooterBackground';
+import { MobileFooterBackground } from './MobileFooterBackground';
 
 interface ButtonProps {
   title?: string;
@@ -26,13 +21,8 @@ const Footer = ({
   return (
     <Flex direction="column">
       <Desktop>
-        <RelativeContainer height={500}>
-          <Background
-            alt="background"
-            src="/shortcuts.svg"
-            width={0}
-            height={0}
-          />
+        <RelativeContainer>
+          <FooterBackground />
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`}>
@@ -55,13 +45,8 @@ const Footer = ({
       </Desktop>
 
       <Mobile>
-        <RelativeContainer align="start" height={500}>
-          <Background
-            alt="background"
-            src="/mobileShortcuts.svg"
-            width={0}
-            height={0}
-          />
+        <RelativeContainer align="start">
+          <MobileFooterBackground />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href="/FAQ">
@@ -91,23 +76,8 @@ export default Footer;
 const GlassFlex = styled(Flex)`
   position: absolute;
   bottom: 80px;
-  z-index: 99;
+  z-index: -1;
   @media (max-width: 1023px) {
     bottom: 30px;
-  }
-`;
-
-const Background = styled(Image)`
-  width: 100%;
-  height: auto;
-  z-index: -99;
-  max-height: 500px;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: auto;
-    max-height: 500px;
   }
 `;
