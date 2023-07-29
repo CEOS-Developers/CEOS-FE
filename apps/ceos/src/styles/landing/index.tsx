@@ -41,7 +41,7 @@ export const BgText = css`
 
 export const FloatingCss = css`
   position: fixed;
-  z-index: 1000;
+  z-index: 11;
   top: 66.66667%;
   left: 83.5%;
 `;
