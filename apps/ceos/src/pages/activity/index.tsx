@@ -1,11 +1,4 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-  ActivityCard,
-} from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, ActivityCard } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
