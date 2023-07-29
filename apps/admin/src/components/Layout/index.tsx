@@ -1,20 +1,55 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { Flex } from '@ceos-fe/ui';
+import React, { useEffect } from 'react';
 import Sidebar from '../Sidebar/index';
 import { useRecoilState } from 'recoil';
-import { loginState } from '../../store/recoil/index';
+import { loginState, accessToken } from '../../store/recoil/index';
 import { NonLogin } from '../../pages/auth/nonLogin/index';
 import { Cookies } from 'react-cookie';
+import { adminAuthApi, adminInstance } from 'packages/utils';
+import { useMutation } from '@tanstack/react-query';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const [login, setLogin] = useRecoilState<boolean>(loginState);
-
   const cookies = new Cookies().get('LOGIN_EXPIRES');
+  const [accesstoken, setAccesstoken] = useRecoilState(accessToken);
+
   if (cookies !== undefined) setLogin(true);
   else setLogin(false);
+
+  const { mutate: getNewAccessToken } = useMutation(
+    () => adminAuthApi.POST_REFRESHTOKEN(cookies),
+    {
+      onSuccess: (data: any) => {
+        console.log(data);
+        setAccesstoken(data.accessToken);
+        adminInstance.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${data.accessToken}`;
+      },
+      onError: () => {
+        //  console.log(err);
+        console.log('err');
+      },
+    },
+  );
+
+  // if (login && accesstoken === '') {
+  //   getNewAccessToken();
+  // }
+
+  useEffect(() => {
+    if (cookies !== undefined) {
+      setLogin(true);
+      if (accesstoken === '') {
+        getNewAccessToken();
+      }
+    } else {
+      setLogin(false);
+    }
+    console.log(cookies, '///////', accesstoken);
+  }, [accesstoken]);
 
   return (
     <Container path={router.pathname}>

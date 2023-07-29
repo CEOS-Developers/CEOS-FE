@@ -48,6 +48,16 @@ export const adminAuthApi = {
     const response = await adminInstance.post(`/admin/password`, findPWdata);
     return response.data;
   },
+  POST_REFRESHTOKEN: async (refreshToken: string) => {
+    try {
+      const response = await adminInstance.post(`/admin/reissue`, {
+        refreshToken: refreshToken,
+      });
+      return response.data;
+    } catch {
+      console.log('error');
+    }
+  },
 };
 
 // const Login = async ({

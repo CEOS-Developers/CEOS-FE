@@ -3,7 +3,10 @@ import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
 import { useMutation } from '@tanstack/react-query';
-import { adminAuthApi, findIdInterface } from '../../../../../../packages/utils'; //절대경로 수정필요
+import {
+  adminAuthApi,
+  findIdInterface,
+} from '../../../../../../packages/utils'; //절대경로 수정필요
 import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
 import { PartDropdownList } from '@admin/assets/data/dropDownList';
@@ -25,8 +28,8 @@ export default function findID() {
         status: number;
         data: { username: React.SetStateAction<string> };
       }) => (res.status == 201 ? setId(res.data.username) : setId('')),
-      onError: (err: { response: { data: { reason: string } } }) =>
-        alert(err.response.data.reason),
+      // onError: (err: { response: { data: { reason: string } } }) =>
+      //   alert(err.response.data.reason),
     });
   };
 
