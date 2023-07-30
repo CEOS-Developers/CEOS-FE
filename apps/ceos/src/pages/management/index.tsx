@@ -58,11 +58,10 @@ const Management = () => {
       limit: 1000,
     });
     const partManagerData = await managementApi.GET_MANAGER();
-
     return { manageData, partManagerData };
   });
 
-  const mentors = data?.manageData?.managers.filter((m: ManagerInterface) => {
+  const mentors = data?.manageData?.content?.filter((m: ManagerInterface) => {
     return m.role === '멘토';
   });
 
