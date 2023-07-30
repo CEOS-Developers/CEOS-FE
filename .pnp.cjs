@@ -69,7 +69,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.6"],\
             ["@types/react-dom", "npm:18.2.4"],\
             ["@types/react-modal", "npm:3.16.0"],\
-            ["@types/recoil", "npm:0.0.9"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["axios", "npm:1.4.0"],\
@@ -90,7 +89,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:7.45.2"],\
             ["react-intersection-observer", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:9.5.2"],\
             ["react-modal", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.16.1"],\
-            ["recoil", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.7.7"],\
             ["turbo", "npm:1.9.3"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
           ],\
@@ -2682,6 +2680,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.16.3"],\
             ["@types/react", "npm:18.2.3"],\
             ["@types/react-dom", "npm:18.2.3"],\
+            ["@types/recoil", "npm:0.0.9"],\
             ["axios", "npm:1.4.0"],\
             ["date-fns", "npm:2.30.0"],\
             ["emotion", "npm:11.0.0"],\
@@ -2692,6 +2691,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:18.2.0"],\
             ["react-hook-form", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:7.43.9"],\
+            ["recoil", "virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.7.7"],\
             ["reset", "npm:0.1.0"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
           ],\
@@ -5262,7 +5262,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.6"],\
             ["@types/react-dom", "npm:18.2.4"],\
             ["@types/react-modal", "npm:3.16.0"],\
-            ["@types/recoil", "npm:0.0.9"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.59.2"],\
             ["axios", "npm:1.4.0"],\
@@ -5283,7 +5282,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:7.45.2"],\
             ["react-intersection-observer", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:9.5.2"],\
             ["react-modal", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.16.1"],\
-            ["recoil", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.7.7"],\
             ["turbo", "npm:1.9.3"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
           ],\
@@ -10518,16 +10516,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.7.7", {\
-          "packageLocation": "./.yarn/__virtual__/recoil-virtual-12502db766/0/cache/recoil-npm-0.7.7-4452f58b67-65edecbcb8.zip/node_modules/recoil/",\
+        ["virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.7.7", {\
+          "packageLocation": "./.yarn/__virtual__/recoil-virtual-86403faf91/0/cache/recoil-npm-0.7.7-4452f58b67-65edecbcb8.zip/node_modules/recoil/",\
           "packageDependencies": [\
-            ["recoil", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.7.7"],\
-            ["@types/react", "npm:18.2.6"],\
-            ["@types/react-dom", "npm:18.2.4"],\
+            ["recoil", "virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.7.7"],\
+            ["@types/react", "npm:18.2.3"],\
+            ["@types/react-dom", "npm:18.2.3"],\
             ["@types/react-native", null],\
             ["hamt_plus", "npm:1.0.2"],\
             ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:18.2.0"],\
+            ["react-dom", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:18.2.0"],\
             ["react-native", null]\
           ],\
           "packagePeers": [\
