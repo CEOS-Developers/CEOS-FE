@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/index';
 import { useRecoilState } from 'recoil';
 import { loginState, accessToken } from '../../store/recoil/index';
 import { NonLogin } from '../../pages/auth/nonLogin/index';
-import { Cookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import { adminAuthApi, adminInstance } from 'packages/utils';
 import { useMutation } from '@tanstack/react-query';
 
@@ -14,6 +14,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [login, setLogin] = useRecoilState<boolean>(loginState);
   const cookies = new Cookies().get('LOGIN_EXPIRES');
   const [accesstoken, setAccesstoken] = useRecoilState(accessToken);
+  const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
   if (cookies !== undefined) setLogin(true);
   else setLogin(false);
@@ -22,22 +23,32 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     () => adminAuthApi.POST_REFRESHTOKEN(cookies),
     {
       onSuccess: (data: any) => {
-        console.log(data);
-        setAccesstoken(data.accessToken);
+        setAccesstoken(data.data.accessToken);
         adminInstance.defaults.headers.common[
           'Authorization'
-        ] = `Bearer ${data.accessToken}`;
-      },
-      onError: () => {
-        //  console.log(err);
-        console.log('err');
+        ] = `Bearer ${data.data.accessToken}`;
+        if (data.data.refreshToken !== undefined)
+          LoginUntilExpires(data.data.refreshToken);
       },
     },
   );
 
-  // if (login && accesstoken === '') {
-  //   getNewAccessToken();
-  // }
+  // login cookie
+  const getExpiredDate = (time: number) => {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() + time);
+    return date;
+  };
+  const LoginUntilExpires = (refreshToken: string) => {
+    const expires = getExpiredDate(720);
+    setAppCookies('LOGIN_EXPIRES', refreshToken, {
+      path: '/',
+      expires,
+    });
+  };
+  useEffect(() => {
+    if (appCookies['LOGIN_EXPIRES']) return;
+  }, []);
 
   useEffect(() => {
     if (cookies !== undefined) {
@@ -48,8 +59,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     } else {
       setLogin(false);
     }
-    console.log(cookies, '///////', accesstoken);
-  }, [accesstoken]);
+  }, [accesstoken, cookies]);
 
   return (
     <Container path={router.pathname}>
@@ -60,7 +70,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       )}
       <ChildrenContainer path={router.pathname}>
         {login ? (
-          <FlexBox path={router.pathname}>{children}</FlexBox>
+          accesstoken !== '' ? (
+            <FlexBox path={router.pathname}>{children}</FlexBox>
+          ) : (
+            <NonLogin />
+          )
         ) : router.pathname.includes('/auth') ? (
           <FlexBox path={router.pathname}>{children}</FlexBox>
         ) : (

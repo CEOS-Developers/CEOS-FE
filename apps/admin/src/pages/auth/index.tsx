@@ -21,11 +21,13 @@ export default function SignIn() {
   const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
   useEffect(() => {
-    if (login === true)
+    // \if (login === true)
+    if (token !== '')
       adminInstance.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${token}`;
-  }, [login]);
+  }, [token]);
+  // }, [login]);
 
   const onSubmit = (data: any) => {
     const SignIndataForm: signInInterface = {
@@ -53,12 +55,7 @@ export default function SignIn() {
     return date;
   };
   const LoginUntilExpires = (refreshToken: string) => {
-    // if (!loginCookie) return;
-    const expires = getExpiredDate(5);
-    // setAppCookies('LOGIN_EXPIRES', true, {
-    //   path: '/',
-    //   expires,
-    // });
+    const expires = getExpiredDate(720);
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
       expires,

@@ -12,10 +12,7 @@ import {
   PassDropdownList,
 } from '@admin/assets/data/dropDownList';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import {
-  applicationInfoInterface,
-  adminApplyStatementApi,
-} from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
+import { adminApplyStatementApi } from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from '../../components/Modals/applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
@@ -45,10 +42,6 @@ const DropdownList: DropdownInterface[] = [
     placeholder: '최종 합격 여부',
   },
 ];
-interface ApplicantResponse {
-  pageInfo: PageInterface;
-  content: applicationInfoInterface[];
-}
 
 export default function ApplyStatement() {
   const { isOpen, type, openAlert } = useAlert();

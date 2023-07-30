@@ -1,11 +1,13 @@
 import { ManagementDropdownList } from '@admin/assets/data/dropDownList';
+import { Alert } from '@admin/components/Alert';
 import { DataGrid } from '@admin/components/DataGrid';
 import { PageInterface } from '@admin/components/DataGrid/Pagination';
 import { Dropdown } from '@admin/components/Dropdown';
+import { useAlert } from '@admin/hooks/useAlert';
 import styled from '@emotion/styled';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Text } from 'packages/ui';
-import { ResponseInterface, adminManageUserApi } from 'packages/utils';
+import { adminManageUserApi } from 'packages/utils';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -27,7 +29,7 @@ export default function ManageUser() {
     isSuccess,
     isFetching,
     refetch: getManagement,
-  } = useQuery<ResponseInterface<any>>(['applicantData', pagination.page], () =>
+  } = useQuery(['applicantData', pagination.page], () =>
     adminManageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
   );
   // 운영진 삭제
