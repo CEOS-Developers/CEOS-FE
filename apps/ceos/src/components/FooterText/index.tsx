@@ -6,11 +6,10 @@ export const FooterText = () => {
     <Text
       webTypo="Label3"
       paletteColor="Gray4"
-      margin="0 0 60px 0"
       css={css`
         display: flex;
         justify-content: center;
-
+        margin-bottom: 60px;
         @media (max-width: 767px) {
           margin-bottom: 30px;
         }

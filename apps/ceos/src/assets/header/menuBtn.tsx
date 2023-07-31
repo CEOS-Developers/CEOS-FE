@@ -13,7 +13,7 @@ export const MenuBtn = (props: MenuProps) => {
     <div
       className="menu"
       css={css`
-        color: ${backColor === 'White' ? theme.palette.Gray8 : 'white'};
+        color: ${backColor === 'White' ? theme.palette.Gray8 : 'White'};
         &:hover {
           cursor: pointer;
         }
@@ -24,7 +24,7 @@ export const MenuBtn = (props: MenuProps) => {
         width="30"
         height="30"
         viewBox="0 0 30 30"
-        fill="none"
+        fill={backColor === 'White' ? theme.palette.Gray8 : 'White'}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

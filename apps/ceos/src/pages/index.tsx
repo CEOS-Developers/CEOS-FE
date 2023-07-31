@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'award'], () => {
-      awardApi.GET_AWARD({ pageNum: 1, limit: 20 });
+      awardApi.GET_AWARD({ pageNum: 0, limit: 20 });
     });
     await queryClient.prefetchQuery(['ceos', 'sponsor'], () => {
       sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
@@ -38,7 +38,11 @@ export default function Home() {
   });
 
   return (
-    <main>
+    <main
+      css={css`
+        overflow-x: hidden;
+      `}
+    >
       <SubHeader />
       {/* section1 => blue */}
       <HomeFlex margin="0 auto 0 auto">
