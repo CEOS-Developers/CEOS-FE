@@ -19,8 +19,8 @@ const Common = ({ register, questionList }: CommonProps) => {
           <QuestionFlex key={ques.questionId}>
             <Question>{`${idx + 1}. ${ques.question}`}</Question>
             <CustomTextField
-              style={{ width: '100%' }}
               {...register(`commonAnswers.${idx}.answer`)}
+              width={856}
               multiline={true}
             />
             <Flex direction="column" align="start">

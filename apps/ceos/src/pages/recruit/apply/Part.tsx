@@ -61,7 +61,7 @@ const Part = ({ register, watch, setValue, questionList }: PartProps) => {
                   >
                     <Question>{`${idx + 1}. ${ques.question}`}</Question>
                     <CustomTextField
-                      style={{ width: '100%' }}
+                      width={856}
                       multiline={true}
                       {...register(
                         `partAnswers.${partInfo[selectedPart]}.${idx}.answer`,
