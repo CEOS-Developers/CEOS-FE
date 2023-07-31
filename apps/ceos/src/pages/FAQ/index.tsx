@@ -74,13 +74,13 @@ const FAQ = () => {
         })}
       </CustomFlex>
       <CustomFlex width={680} direction="column" webGap={36}>
-        <Flex width={220} justify="space-between" margin="80px 0 0 0">
+        <FaqTitleBox>
           <FAQIcon />
           <Text webTypo="Heading3" mobileTypo="Heading3">
             활동 관련 질문
           </Text>
           <FAQIcon />
-        </Flex>
+        </FaqTitleBox>
         {data?.activityData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
@@ -105,13 +105,13 @@ const FAQ = () => {
         })}
       </CustomFlex>
       <CustomFlex width={680} direction="column" webGap={36}>
-        <Flex width={220} justify="space-between" margin="80px 0 0 0">
+        <FaqTitleBox>
           <FAQIcon />
           <Text webTypo="Heading3" mobileTypo="Heading3">
             파트별 관련 질문
           </Text>
           <FAQIcon />
-        </Flex>
+        </FaqTitleBox>
         {data?.partData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
@@ -167,6 +167,16 @@ export const getStaticProps = async () => {
 const CustomFlex = styled(Flex)`
   @media (max-width: 1023px) {
     width: 100%;
+  }
+`;
+
+const FaqTitleBox = styled(Flex)`
+  width: 220px;
+  justify-content: space-between;
+  margin: 80px 0 0 0;
+
+  @media (max-width: 1023px) {
+    margin: 60px 0 0 0;
   }
 `;
 
