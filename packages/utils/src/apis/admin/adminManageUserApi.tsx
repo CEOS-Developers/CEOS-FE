@@ -1,4 +1,4 @@
-import { adminInstance, ResponseInterface } from '../axiosConfig';
+import { adminInstance } from '../axiosConfig';
 
 export interface managementInterface {
   id: number;

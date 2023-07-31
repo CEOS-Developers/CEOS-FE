@@ -197,7 +197,10 @@ const Apply = () => {
     } else if (!phoneNumberReg.test(phoneNumber)) {
       setError('휴대폰번호 형식을 확인해주세요!');
       return;
-    } else if (isNaN(+semestersLeftNumber) || +semestersLeftNumber < 0) {
+    } else if (
+      semestersLeftNumber !== null &&
+      (isNaN(+semestersLeftNumber) || +semestersLeftNumber < 0)
+    ) {
       setError('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요!');
       return;
     }

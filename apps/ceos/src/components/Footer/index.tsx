@@ -23,7 +23,7 @@ const Footer = ({
     <Flex direction="column">
       <Desktop>
         <RelativeContainer>
-          <FooterBackground style={{ zIndex: -99 }} />
+          <FooterBackground />
           <GlassFlex
             direction="column"
             webGap={80}
@@ -52,7 +52,7 @@ const Footer = ({
 
       <Mobile>
         <RelativeContainer align="start">
-          <MobileFooterBackground style={{ zIndex: -99 }} />
+          <MobileFooterBackground />
           <GlassFlex direction="column" mobileGap={63} style={{ zIndex: 10 }}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href={`${leftBtn.link}`} style={{ zIndex: 11 }}>

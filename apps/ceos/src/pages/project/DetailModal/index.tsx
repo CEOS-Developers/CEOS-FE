@@ -48,7 +48,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
 
         <ModalImage
           alt="mainImage"
-          src={projectInfo?.projectImages[0].imageUrl}
+          src={projectInfo ? projectInfo.projectImages[0].imageUrl : 'error'}
           width={0}
           height={0}
           isMain={true}
@@ -134,7 +134,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
 
         <ModalImage
           alt="subImage"
-          src={projectInfo?.projectImages[1].imageUrl}
+          src={projectInfo ? projectInfo.projectImages[1].imageUrl : 'error'}
           width={0}
           height={0}
           isMain={false}
