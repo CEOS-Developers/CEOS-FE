@@ -11,23 +11,26 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { useState } from 'react';
+import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <Layout>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={theme}>
-            <Global styles={globalStyle} />
-            <Component {...pageProps} />
-          </ThemeProvider>
-          <Desktop css={FloatingCss}>
-            <FloatingButton />
-          </Desktop>
-        </Hydrate>
-      </QueryClientProvider>
-    </Layout>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <Layout>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ThemeProvider theme={theme}>
+              <Global styles={globalStyle} />
+              <Component {...pageProps} />
+            </ThemeProvider>
+            <Desktop css={FloatingCss}>
+              <FloatingButton />
+            </Desktop>
+          </Hydrate>
+        </Layout>
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }

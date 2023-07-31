@@ -82,6 +82,7 @@ const Management = () => {
           margin-top: 36px;
         }
       `}
+      data-section="White"
     >
       <Title
         title="MANAGEMENT"

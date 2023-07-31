@@ -36,7 +36,7 @@ const FAQ = () => {
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" data-section="White">
       <Title
         title="FAQ"
         explain={['ceos에 대해 자주 묻는 질문들에', '대한 답변입니다.']}

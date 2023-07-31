@@ -33,6 +33,7 @@ export default function Rewards() {
           width: 346px;
         }
       `}
+      data-section="White"
     >
       <Title
         title="REWARDS"

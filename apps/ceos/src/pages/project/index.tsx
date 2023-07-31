@@ -52,7 +52,7 @@ const Project = () => {
   return (
     <>
       <Desktop>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Title
             title="Project"
             explain={[
@@ -100,7 +100,7 @@ const Project = () => {
         </Flex>
       </Desktop>
       <Mobile>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Title
             title="Project"
             explain={[
