@@ -5,17 +5,9 @@ import styled from '@emotion/styled';
 export const MainCss = css`
   position: relative;
   width: 100vw;
-  aspect-ratio: 1660 / 720;
+
   z-index: 1;
   margin-bottom: 80px;
-
-  @media (max-width: 1023px) {
-    margin-bottom: 60px;
-  }
-
-  @media (max-width: 390px) {
-    aspect-ratio: 390 / 700;
-  }
 `;
 
 export const BgText = css`
@@ -31,7 +23,7 @@ export const BgText = css`
   text-wrap: nowrap;
 
   @media (max-width: 1023px) {
-    typo: ${theme.typo.Mobile.Heading1_Kor};
+    ${theme.typo.Mobile.Heading1_Kor};
     gap: 24px;
   }
   @media (max-width: 390px) {

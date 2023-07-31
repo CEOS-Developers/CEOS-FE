@@ -5,7 +5,7 @@ import { Text } from '@ceos-fe/ui';
 
 export const SubHeader = () => {
   return (
-    <div css={MainCss}>
+    <div>
       <BgImage />
       <div css={BgText}>
         <Text webTypo="Heading2" mobileTypo="Heading1_Kor" paletteColor="White">
