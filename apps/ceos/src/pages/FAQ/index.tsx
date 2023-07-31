@@ -1,7 +1,6 @@
-import { Desktop, Flex, KeyOfPalette, Mobile, Text } from '@ceos-fe/ui';
+import { Flex, KeyOfPalette, Text } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { faqApi } from '../../../../../packages/utils/src/apis/ceos/faqApi';
-import { useEffect } from 'react';
+import { faqApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
@@ -44,7 +43,7 @@ const FAQ = () => {
   };
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" padding="0 22px">
       <Title
         title="FAQ"
         explain={['ceos에 대해 자주 묻는 질문들에', '대한 답변입니다.']}
