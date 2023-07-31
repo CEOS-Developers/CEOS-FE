@@ -212,6 +212,8 @@ export const AdminRewardCard = ({
   );
 };
 const Container = styled.div`
+  cursor: pointer;
+
   & > .web {
     display: block;
   }
@@ -240,6 +242,19 @@ const Box = styled.div`
   box-sizing: border-box;
   background-color: ${theme.palette.Gray1};
   border-radius: 20px;
+
+  @keyframes slide-in-reward-card {
+    0% {
+      clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+    }
+  }
+
+  .extended {
+    animation: slide-in-reward-card 0.3s ease-in;
+  }
 
   > .extended {
     display: none;
