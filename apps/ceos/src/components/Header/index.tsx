@@ -6,7 +6,7 @@ import { MenuBtn } from '../../assets/header/menuBtn';
 import { theme } from '@ceos-fe/ui';
 import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
-import { useModal } from '@ceos-fe/utils';
+import { useModal, useWindowTabletResize } from '@ceos-fe/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -22,6 +22,7 @@ export const Header = (props: HeaderProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
   const router = useRouter();
   const [, setBackColor] = useRecoilState(HeaderState);
+  const isMobile = useWindowTabletResize();
   //최상단인지 check
   useEffect(() => {
     const handleScroll = () => {
@@ -36,8 +37,9 @@ export const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('[data-section]'));
+    const rootMargin = isMobile ? `${70 * -1}px` : `${124 * -1}px`;
     const option = {
-      rootMargin: `${70 * -1}px`,
+      rootMargin: rootMargin,
       //모바일 되면 마진값 바꾸깅
       threshold: 0,
     };
