@@ -35,12 +35,7 @@ export const Header = (props: HeaderProps) => {
   }, []);
 
   useEffect(() => {
-    window.onbeforeunload = function pushRefresh() {
-      window.scrollTo(0, 0);
-    }; //새로고침시 스크롤 맨위로
-
     const sections = Array.from(document.querySelectorAll('[data-section]'));
-
     const option = {
       rootMargin: `${70 * -1}px`,
       //모바일 되면 마진값 바꾸깅
@@ -187,27 +182,26 @@ export const contentCss = (backColor: KeyOfPalette) => css`
     display: none;
   }
 
-
   @media (max-width: 1023px) {
-    gap : 0px;
+    gap: 0px;
     .text {
       display: none;
     }
     .menu {
       display: block;
     }
-    margin-right : 22px;
-    margin-bottom : 27px;
-  }
-
+    margin-right: 22px;
+    margin-bottom: 27px;
   }
 `;
 
 export const Content = styled.div`
   box-sizing: border-box;
 
+  transition: color 0.3s;
+
   &:hover {
-    cursor: grab;
+    cursor: pointer;
     color: ${theme.palette.Green};
   }
 `;

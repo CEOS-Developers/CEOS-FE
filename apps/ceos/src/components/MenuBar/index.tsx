@@ -3,6 +3,7 @@ import { Flex, FloatingButton, theme } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 export interface MenuProps {
   isOpen: boolean;
@@ -12,11 +13,12 @@ export interface MenuProps {
 
 export const MenuBar = (props: MenuProps) => {
   const { isOpen, modalRef, toggleModal } = props;
+  const router = useRouter();
 
   return (
     <div css={backCss} className={isOpen ? 'open' : 'close'}>
       <div
-        css={positionCss(isOpen)}
+        css={positionCss()}
         ref={modalRef}
         className={isOpen ? 'open' : 'close'}
       >
@@ -28,16 +30,40 @@ export const MenuBar = (props: MenuProps) => {
           />
           <div css={contentCss}>
             <p>
-              <CustomLink href="/project">PROJECT</CustomLink>
+              <CustomLink
+                href="/project"
+                onClick={toggleModal}
+                isSelected={router.pathname === '/project'}
+              >
+                PROJECT
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/activity">ACTIVITY</CustomLink>
+              <CustomLink
+                href="/activity"
+                onClick={toggleModal}
+                isSelected={router.pathname === '/activity'}
+              >
+                ACTIVITY
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/FAQ">FAQ</CustomLink>
+              <CustomLink
+                href="/FAQ"
+                onClick={toggleModal}
+                isSelected={router.pathname === '/FAQ'}
+              >
+                FAQ
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/recruit">RECRUIT</CustomLink>
+              <CustomLink
+                href="/recruit"
+                onClick={toggleModal}
+                isSelected={router.pathname === '/recruit'}
+              >
+                RECRUIT
+              </CustomLink>
             </p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
@@ -50,6 +76,7 @@ export const MenuBar = (props: MenuProps) => {
 };
 
 export const backCss = () => css`
+  z-index: 99;
   &.open {
     position: fixed;
     top: 0;
@@ -57,11 +84,14 @@ export const backCss = () => css`
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 1000;
   }
+  justiy-content: center;
+  align-items: center;
+  display: flex;
 `;
 
-export const positionCss = (isOpen: boolean) => css`
+export const positionCss = () => css`
   height: 100%;
   right: -90%;
   top: 0;
@@ -75,7 +105,7 @@ export const positionCss = (isOpen: boolean) => css`
 `;
 
 export const contentCss = () => css`
-  dispaly: flex;
+  display: flex;
   flex-direction: column;
   typo: ${theme.typo.Mobile.Heading1_Kor};
   color: ${theme.palette.Gray6};
@@ -90,7 +120,9 @@ export const contentCss = () => css`
   }
 `;
 
-export const CustomLink = styled(Link)`
+export const CustomLink = styled(Link)<{ isSelected?: boolean }>`
   text-decoration: none;
   color: inherit;
+  color: ${({ isSelected }) =>
+    isSelected ? theme.palette.Green : theme.palette.Gray4};
 `;

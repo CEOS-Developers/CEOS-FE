@@ -44,3 +44,18 @@ export const ColorPassDropdownList = [
     color: '#FF6262',
   },
 ];
+
+export const ManagementDropdownList: DropdownItemInterface[] = [
+  {
+    label: '임시',
+    value: 'guest',
+  },
+  {
+    label: '루트',
+    value: 'root',
+  },
+  {
+    label: '운영진',
+    value: 'management',
+  },
+];

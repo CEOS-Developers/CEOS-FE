@@ -1,5 +1,5 @@
 import { Flex, RewardCard, RewardCardProps, Text } from '@ceos-fe/ui';
-import { HomeFlex, CardFlex } from '@ceos/styles/landing';
+import { CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -33,8 +33,8 @@ export interface AwardResponse {
 }
 
 export const Rewards = () => {
-  const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
-    const awardData = await awardApi.GET_AWARD({ pageNum: 0, limit: 16 });
+  const { data } = useQuery(['ceos', 'award'], async () => {
+    const awardData = await awardApi.GET_AWARD({ pageNum: 0, limit: 20 });
     return awardData;
   });
 

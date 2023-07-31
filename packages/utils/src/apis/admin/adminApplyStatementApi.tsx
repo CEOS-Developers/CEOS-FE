@@ -36,7 +36,9 @@ export const adminApplyStatementApi = {
     return response.data;
   },
   GET_APPLICANTEXCEL: async () => {
-    const response = await adminInstance.get('/applications/file/download');
+    const response = await adminInstance.get('/applications/file/download', {
+      responseType: 'blob',
+    });
     return response;
   },
   CREATE_APPLICANTEXCEL: async () => {

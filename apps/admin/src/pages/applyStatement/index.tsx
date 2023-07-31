@@ -12,10 +12,7 @@ import {
   PassDropdownList,
 } from '@admin/assets/data/dropDownList';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import {
-  applicationInfoInterface,
-  adminApplyStatementApi,
-} from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
+import { adminApplyStatementApi } from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from '../../components/Modals/applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
@@ -45,10 +42,6 @@ const DropdownList: DropdownInterface[] = [
     placeholder: '최종 합격 여부',
   },
 ];
-interface ApplicantResponse {
-  pageInfo: PageInterface;
-  content: applicationInfoInterface[];
-}
 
 export default function ApplyStatement() {
   const { isOpen, type, openAlert } = useAlert();
@@ -105,9 +98,11 @@ export default function ApplyStatement() {
         },
         onError: () => {
           openAlert('error');
+          window.location.reload();
         },
       },
     );
+
   const { mutate: updateFinalPassMutation, isSuccess: finalPassSuccess } =
     useMutation(
       ({ applicantId, pass }: { applicantId: number; pass: string }) =>
@@ -118,6 +113,7 @@ export default function ApplyStatement() {
           openAlert('success');
         },
         onError: () => {
+          window.location.reload();
           openAlert('error');
         },
       },
@@ -149,10 +145,6 @@ export default function ApplyStatement() {
 
   //합격 불합격 여부 변경
   if (applicantData && applicantData.data && applicantData.data.content) {
-    let background = '#D4FFF7';
-    let color = '#01D1A8';
-    let value = 'pass';
-
     applicantData.data.content.forEach((data: any) => {
       //document
       if (
@@ -169,20 +161,11 @@ export default function ApplyStatement() {
             pass: getValues(`DocPassDropdown_${data.uuid}`).label,
           });
         }
-        if (data.doc_pass === '불합격') {
-          background = '#FFE7E7';
-          value = 'fail';
-          color = '#FF6262';
-        }
-        if (docPassSuccess) {
-          // 드롭다운 컴포넌트의 값을 업데이트
-          setValue(`DocPassDropdown_${data.uuid}`, {
-            label: getValues(`DocPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
-            value: value, // 이전 value 값 유지
-            background: background,
-            color: color,
-          });
-        }
+        // if (!docPassSuccess) {
+        //   if (data.documentPass === '불합격') {
+        //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
+        //   }
+        // }
       }
 
       //final
@@ -197,22 +180,6 @@ export default function ApplyStatement() {
           updateFinalPassMutation({
             applicantId: data.id,
             pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
-          });
-        }
-
-        if (getValues(`FinalPassDropdown_${data.uuid}`).label === '불합격') {
-          background = '#FFE7E7';
-          value = 'fail';
-          color = '#FF6262';
-        }
-
-        if (finalPassSuccess) {
-          // 드롭다운 컴포넌트의 값을 업데이트
-          setValue(`FinalPassDropdown_${data.uuid}`, {
-            label: getValues(`FinalPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
-            value: value, // 이전 value 값 유지
-            background: background,
-            color: color,
           });
         }
       }
@@ -247,35 +214,29 @@ export default function ApplyStatement() {
     },
   );
 
+  useEffect(() => {
+    if (getExceldata) {
+      const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `지원현황_${Date.now()}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+    }
+  }, [getExceldata]);
+
   // 지원서 엑셀 생성일시 업데이트
   useEffect(() => {
     if (isCreateExcelSuccess) setCreateAt(createExcelData?.data.createAt);
   }, [isCreateExcelSuccess, createExcelData]);
 
   // 지원자 목록 초기 데이터
-  const [dataSource, setDataSource] = useState<object[]>(
-    Array.from(new Array(pagination.pageSize), (_, i) => {
-      return {
-        id: applicantData?.data.content[i]?.id,
-        uuid: applicantData?.data.content[i]?.uuid,
-        name: applicantData?.data.content[i]?.name,
-        part: applicantData?.data.content[i]?.part?.slice(0, 4),
-        email: applicantData?.data.content[i]?.email,
-        phone_number: applicantData?.data.content[i]?.phoneNumber.replace(
-          '-',
-          '',
-        ),
-        doc_pass: applicantData?.data.content[i]?.documentPass,
-        date: applicantData?.data.content[i]?.date,
-        duration: applicantData?.data.content[i]?.duration,
-        final_pass: applicantData?.data.content[i]?.finalPass,
-      };
-    }),
-  );
+  const [dataSource, setDataSource] = useState<object[]>([]);
+
   // 페이지네이션 지원자 목록 업데이트
   useEffect(() => {
     if (!isFetching && isSuccess) {
-      if (applicantData.data.content.length != 0) {
+      if (applicantData?.data.content?.length !== 0) {
         setDataSource(
           Array.from(new Array(pagination.pageSize), (_, i) => {
             return {
@@ -295,7 +256,7 @@ export default function ApplyStatement() {
           }),
         );
       } else {
-        setDataSource(applicantData.data.content);
+        setDataSource([]);
       }
     }
   }, [isFetching, isSuccess, applicantData]);

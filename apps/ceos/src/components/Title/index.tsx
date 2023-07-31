@@ -1,4 +1,6 @@
 import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
+import styled from '@emotion/styled';
+
 export const Title = ({
   title,
   explain,
@@ -16,7 +18,7 @@ export const Title = ({
   });
 
   return (
-    <Flex direction="column" margin="80px 0 0 0" webGap={12} mobileGap={10}>
+    <Container webGap={12} mobileGap={10}>
       <Text
         webTypo="Heading1_Eng"
         mobileTypo="Heading1_Eng"
@@ -38,6 +40,15 @@ export const Title = ({
           ))}
         </Flex>
       </Mobile>
-    </Flex>
+    </Container>
   );
 };
+
+const Container = styled(Flex)`
+  flex-direction: column;
+  margin-top: 150px;
+
+  @media (max-width: 1023px) {
+    margin-top: 160px;
+  }
+`;

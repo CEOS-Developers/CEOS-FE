@@ -8,6 +8,7 @@ import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
 import { FooterText } from '@ceos/components/FooterText';
+import { useForm } from 'react-hook-form';
 
 export default function Home() {
   return (

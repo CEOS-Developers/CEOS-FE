@@ -1,18 +1,10 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-  ActivityCard,
-} from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, ActivityCard } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
-import styled from '@emotion/styled';
-import Link from 'next/link';
 import { TopMargin } from '../FAQ/index';
+import styled from '@emotion/styled';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -47,7 +39,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.content;
+  const activityList = data?.activityData.content;
 
   return (
     <>
@@ -62,26 +54,12 @@ const Activity = () => {
               ]}
             />
             <TopMargin />
-            {acitivityList?.map((_, idx) => {
-              return idx % 3 === 0 ? (
-                <Flex
-                  key={`row_${idx}`}
-                  justify="flex-start"
-                  width={1032}
-                  margin="0 0 32px 0"
-                  webGap={24}
-                >
-                  {acitivityList.slice(idx, idx + 3).map((activity, subIdx) => (
-                    <ActivityCard
-                      key={`activity_${idx}_${subIdx}`}
-                      activityCard={activity}
-                    />
-                  ))}
-                </Flex>
-              ) : (
-                <></>
-              );
-            })}
+            <GridContainer>
+              {activityList &&
+                activityList.map((activity, idx) => (
+                  <ActivityCard key={idx} activityCard={activity} />
+                ))}
+            </GridContainer>
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
@@ -98,7 +76,7 @@ const Activity = () => {
           />
           <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
-            {acitivityList?.map((activity, idx) => {
+            {activityList?.map((activity, idx) => {
               return (
                 <ActivityCard key={`activity_${idx}`} activityCard={activity} />
               );
@@ -131,29 +109,11 @@ export const getStaticProps = async () => {
 
 export default Activity;
 
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 99;
-  @media (max-width: 1023px) {
-    bottom: 30px;
-  }
-`;
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  row-gap: 48px;
 
-const Background = styled.img`
-  width: 100%;
-  z-index: -99;
-  max-height: 500px;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    max-height: 500px;
-  }
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
+  margin-bottom: 100px;
 `;
