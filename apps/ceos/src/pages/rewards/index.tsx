@@ -1,7 +1,7 @@
 import { Title } from '@ceos/components/Title';
 import { Flex, Mobile, RewardCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { awardApi, ResponseInterface } from '@ceos-fe/utils';
+import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import {
   AwardCardInterface,
@@ -10,7 +10,7 @@ import {
 import { FooterText } from '@ceos/components/FooterText';
 
 export default function Rewards() {
-  const { data } = useQuery(['ceos', 'award'], async () => {
+  const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
     const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 20 });
     return awardData;
   });

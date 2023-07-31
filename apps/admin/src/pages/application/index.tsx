@@ -15,7 +15,6 @@ import { Plus } from '@admin/assets/Plus';
 import {
   AdminApplicationInterface,
   AdminApplicationListItemInterface,
-  ResponseInterface,
   AdminSelectedPartType,
   AdminSelectedQuestionsType,
   AdminPartQuestionsInterface,
@@ -29,6 +28,8 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { getFormattedDate } from '@admin/utils/date';
+import { useAlert } from '@admin/hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 interface ApplicationFormInterface {
   commonQuestions: AdminApplicationListItemInterface[];
@@ -48,11 +49,18 @@ const PART_MAP: Record<AdminSelectedPartType, AdminSelectedQuestionsType> = {
 
 export default function Application() {
   const { data, isFetching, isSuccess } = useQuery<
-    ResponseInterface<AdminApplicationInterface>,
+    AdminApplicationInterface,
     AxiosError
   >(['admin', 'application'], adminApplicationApi.GET_APPLICATION);
+
+  const { isOpen, type, openAlert } = useAlert();
+
   const { mutate: putApplication } = useMutation(
     adminApplicationApi.PUT_APPLICATION,
+    {
+      onSuccess: () => openAlert('success'),
+      onError: () => openAlert('error'),
+    },
   );
 
   const [allPartQuestions, setAllPartQuestions] = useState<
@@ -96,19 +104,18 @@ export default function Application() {
   useEffect(() => {
     if (isFetching || !isSuccess) return;
 
-    const applicationData = data.data;
-    replaceCommonQuestions(data.data.commonQuestions);
+    replaceCommonQuestions(data.commonQuestions);
 
-    setValue('times', applicationData.times);
+    setValue('times', data.times);
 
     setAllPartQuestions({
-      productQuestions: applicationData.productQuestions,
-      designQuestions: applicationData.designQuestions,
-      frontendQuestions: applicationData.frontendQuestions,
-      backendQuestions: applicationData.backendQuestions,
+      productQuestions: data.productQuestions,
+      designQuestions: data.designQuestions,
+      frontendQuestions: data.frontendQuestions,
+      backendQuestions: data.backendQuestions,
       selectedPart: '기획',
     });
-    replacePartQuestions(applicationData[PART_MAP[getValues('selectedPart')]]);
+    replacePartQuestions(data[PART_MAP[getValues('selectedPart')]]);
   }, [isFetching, isSuccess]);
   useEffect(() => {
     setAllPartQuestions({
@@ -232,31 +239,36 @@ export default function Application() {
 
   return (
     <>
-      <Text webTypo="Heading2" color="Black">
+      <Text webTypo="Heading2" paletteColor="Black">
         지원서 제출
       </Text>
-      <Text webTypo="Body3" color="Gray5" style={{ marginTop: '12px' }}>
+      <Text webTypo="Body3" paletteColor="Gray5" style={{ marginTop: '12px' }}>
         지원서 질문을 관리하는 페이지입니다.
       </Text>
 
-      <Flex direction="column" webGap={48} style={{ marginTop: '48px' }}>
-        <Flex direction="column" webGap={24} align="flex-start">
+      <Flex
+        direction="column"
+        webGap={48}
+        mobileGap={48}
+        style={{ marginTop: '48px' }}
+      >
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">고정 질문</Text>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="이름" isAdmin />
             <TextField value="성별" isAdmin />
             <TextField value="생년월일" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="이메일" isAdmin />
             <TextField value="전화번호" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="재학 중인 학교" isAdmin />
             <TextField value="전공" isAdmin />
             <TextField value="졸업까지 남은 학기 수" isAdmin />
           </Flex>
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <TextField value="CEOS OT 날짜는?" isAdmin />
             <TextField value="CEOS 데모데이 날짜는?" isAdmin />
           </Flex>
@@ -267,11 +279,16 @@ export default function Application() {
           />
         </Flex>
 
-        <Flex direction="column" webGap={24} align="flex-start">
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">공통 질문</Text>
           {commonQuestions.map((question, idx) => (
-            <Flex key={question.id} direction="column" webGap={16}>
-              <Flex webGap={8} justify="flex-start">
+            <Flex
+              key={question.id}
+              direction="column"
+              webGap={16}
+              mobileGap={16}
+            >
+              <Flex webGap={8} mobileGap={8} justify="flex-start">
                 <TextField
                   {...register(`commonQuestions.${idx}.question`)}
                   width={875}
@@ -295,6 +312,7 @@ export default function Application() {
                   key={detailIdx}
                   justify="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   margin="0 0 0 8px"
                 >
                   <TextField
@@ -338,17 +356,17 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendCommonQuestion}
           >
-            <Flex webGap={4}>
+            <Flex webGap={4} mobileGap={4}>
               <Plus />
               질문 추가하기
             </Flex>
           </Button>
         </Flex>
 
-        <Flex direction="column" webGap={24} align="flex-start">
+        <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
           <Text webTypo="Heading4">파트별 질문</Text>
 
-          <Flex webGap={24} justify="flex-start">
+          <Flex webGap={24} mobileGap={24} justify="flex-start">
             <SelectButton
               variant="admin"
               value="기획"
@@ -376,8 +394,13 @@ export default function Application() {
           </Flex>
 
           {partQuestions.map((question, idx) => (
-            <Flex key={question.id} direction="column" webGap={16}>
-              <Flex webGap={8} justify="flex-start">
+            <Flex
+              key={question.id}
+              direction="column"
+              webGap={16}
+              mobileGap={16}
+            >
+              <Flex webGap={8} mobileGap={8} justify="flex-start">
                 <TextField
                   {...register(`partQuestions.${idx}.question`)}
                   width={715}
@@ -434,6 +457,7 @@ export default function Application() {
                   key={detailIdx}
                   justify="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   margin="0 0 0 8px"
                 >
                   <TextField
@@ -478,7 +502,7 @@ export default function Application() {
             style={{ alignSelf: 'center' }}
             onClick={handleAppendPartQuestion}
           >
-            <Flex webGap={4}>
+            <Flex webGap={4} mobileGap={4}>
               <Plus />
               질문 추가하기
             </Flex>
@@ -487,13 +511,24 @@ export default function Application() {
 
         {getValues('times').map((_, dateIdx) => (
           <Fragment key={dateIdx}>
-            <Flex direction="column" webGap={24} align="flex-start">
+            <Flex
+              direction="column"
+              webGap={24}
+              mobileGap={24}
+              align="flex-start"
+            >
               <Text webTypo="Heading4">면접 날짜</Text>
-              <Flex webGap={16} direction="column" align="flex-start">
+              <Flex
+                webGap={16}
+                mobileGap={16}
+                direction="column"
+                align="flex-start"
+              >
                 <Flex
                   direction="column"
                   align="flex-start"
                   webGap={8}
+                  mobileGap={8}
                   width={328}
                 >
                   <Text webTypo="Label3">날짜 {dateIdx + 1}</Text>
@@ -503,12 +538,13 @@ export default function Application() {
                       initialValue={
                         new Date(getValues(`times.${dateIdx}.date`))
                       }
-                      onChange={(date: string) =>
+                      onChange={(date: Date | null) => {
+                        if (date === null) return;
                         setValue(
                           `times.${dateIdx}.date`,
-                          getFormattedDate(new Date(date)),
-                        )
-                      }
+                          getFormattedDate(date),
+                        );
+                      }}
                     />
                   )}
                 </Flex>
@@ -518,6 +554,7 @@ export default function Application() {
                     <Flex
                       key={idx}
                       webGap={8}
+                      mobileGap={8}
                       align="flex-end"
                       justify="flex-start"
                     >
@@ -544,7 +581,7 @@ export default function Application() {
                   style={{ alignSelf: 'center' }}
                   onClick={() => handleAppendDate(dateIdx)}
                 >
-                  <Flex webGap={4}>
+                  <Flex webGap={4} mobileGap={4}>
                     <Plus />
                     시간 추가하기
                   </Flex>
@@ -560,6 +597,15 @@ export default function Application() {
           저장하기
         </Button>
       </Flex>
+
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }

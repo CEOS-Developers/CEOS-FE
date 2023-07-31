@@ -1,7 +1,7 @@
 import { Flex, RewardCard, RewardCardProps, Text } from '@ceos-fe/ui';
 import { HomeFlex, CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
-import { awardApi, ResponseInterface } from '@ceos-fe/utils';
+import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { CustomLink } from '../Header';
 

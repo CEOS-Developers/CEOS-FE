@@ -1,7 +1,7 @@
 import { Title } from '@ceos/components/Title';
 import { Flex, MentorCard, ManagementCard, EmptyCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
-import { managementApi, ResponseInterface } from '@ceos-fe/utils';
+import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';

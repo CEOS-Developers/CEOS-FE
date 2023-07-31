@@ -12,6 +12,7 @@
     "@ceos-fe/ui": "workspace:packages/ui",
     "@ceos-fe/utils": "workspace:packages/utils",
     "@tanstack/react-query": "^4.29.15",
+    "@tanstack/react-query-devtools": "^4.29.23",
     "@types/node": "18.16.3",
     "@types/react": "18.2.3",
     "@types/react-dom": "18.2.3",
@@ -23,13 +24,18 @@
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
     "react-bootstrap-icons": "^1.10.3",
+    "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-intersection-observer": "^9.5.2",
+    "react-modal": "^3.16.1",
+    "recoil": "^0.7.7",
     "typescript": "5.0.4"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@types/eslint": "^8"
+    "@types/eslint": "^8",
+    "@types/react-modal": "^3"
   }
 }

@@ -1,11 +1,4 @@
-import {
-  Text,
-  Flex,
-  SponsorCard,
-  SponsorCardProps,
-  Desktop,
-  Mobile,
-} from '@ceos-fe/ui';
+import { Text, SponsorCard, Mobile } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { sponsorApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 interface SponsorInterface {
   id: number;
   name: string;
-  img: string;
+  imageUrl: string;
 }
 
 interface SponsorResponse {
@@ -27,11 +20,14 @@ interface SponsorResponse {
 }
 
 export const Sponsors = () => {
-  const { data } = useQuery(['ceos', 'sponsor'], async () => {
-    const sponsorData = await sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
-
-    return sponsorData;
-  });
+  const { data } = useQuery<SponsorResponse>(
+    ['ceos', 'sponsor'],
+    async () =>
+      await sponsorApi.GET_SPONSORS({
+        pageNum: 0,
+        limit: 4,
+      }),
+  );
 
   const sponsorList = data?.sponsors;
 

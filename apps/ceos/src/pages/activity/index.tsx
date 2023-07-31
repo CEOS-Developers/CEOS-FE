@@ -1,23 +1,16 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-  ActivityCard,
-} from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, ActivityCard } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
-import { ResponseInterface } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { TopMargin } from '../FAQ/index';
+import { css } from '@emotion/react';
 
 // TODO: interface 재정의
 interface ActivityResponse {
-  activities: { content: string; id: number; imageUrl: string; name: string }[];
+  content: { content: string; id: number; imageUrl: string; name: string }[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -39,7 +32,7 @@ export const rightBtn = {
 
 const Activity = () => {
   const { data, isLoading, isSuccess } = useQuery<{
-    activityData: ResponseInterface<ActivityResponse>;
+    activityData: ActivityResponse;
   }>(['ceos', 'activity'], async () => {
     const activityData = await activityApi.GET_ACTIVITY({
       pageNum: 0,
@@ -48,7 +41,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.data.activities;
+  const acitivityList = data?.activityData.content;
 
   return (
     <>
@@ -89,7 +82,12 @@ const Activity = () => {
       </Desktop>
 
       <Mobile>
-        <Flex direction="column">
+        <Flex
+          direction="column"
+          css={css`
+            height: 100vh;
+          `}
+        >
           <Title
             title="Activity"
             explain={[
@@ -131,30 +129,3 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
-
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 99;
-  @media (max-width: 1023px) {
-    bottom: 30px;
-  }
-`;
-
-const Background = styled.img`
-  width: 100%;
-  z-index: -99;
-  max-height: 500px;
-
-  @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    max-height: 500px;
-  }
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;

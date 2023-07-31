@@ -3,10 +3,10 @@ import { Title } from '@ceos/components/Title';
 import { faqApi } from '../../../../../packages/utils/src/apis/ceos/faqApi';
 import { useEffect } from 'react';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { ResponseInterface } from '@ceos-fe/utils';
 import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
 import styled from '@emotion/styled';
+import Footer from '@ceos/components/Footer';
 
 interface ActivityResponse {
   categoryFaqList: {
@@ -19,9 +19,9 @@ interface ActivityResponse {
 
 const FAQ = () => {
   const { data, isLoading, isSuccess } = useQuery<{
-    recruitData: ResponseInterface<ActivityResponse>;
-    activityData: ResponseInterface<ActivityResponse>;
-    partData: ResponseInterface<ActivityResponse>;
+    recruitData: ActivityResponse;
+    activityData: ActivityResponse;
+    partData: ActivityResponse;
   }>(['ceos', 'faq'], async () => {
     const recruitData = await faqApi.GET_FAQ({ category: 'RECRUIT' });
     const activityData = await faqApi.GET_FAQ({ category: 'ACTIVITY' });
@@ -30,11 +30,18 @@ const FAQ = () => {
     return { recruitData, activityData, partData };
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
+
+  const leftBtn = {
+    title: '이전 활동들이 궁금하다면',
+    content: ['CEOS 프로젝트', '보러가기'],
+    link: '/project',
+  };
+  const rightBtn = {
+    title: 'CEOS에 참여하고 싶다면',
+    content: ['CEOS 18기', '지원하기'],
+    link: '/recruit',
+  };
 
   return (
     <Flex direction="column">
@@ -51,7 +58,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.recruitData.data.categoryFaqList.map((faq, idx) => {
+        {data?.recruitData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -75,7 +82,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.activityData.data.categoryFaqList.map((faq, idx) => {
+        {data?.activityData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -86,7 +93,7 @@ const FAQ = () => {
               <FAQBox
                 color={
                   questionColor[
-                    (data?.recruitData.data.categoryFaqList.length + idx) % 3
+                    (data?.recruitData.categoryFaqList.length + idx) % 3
                   ]
                 }
                 isAnswer={false}
@@ -106,7 +113,7 @@ const FAQ = () => {
           </Text>
           <FAQIcon />
         </Flex>
-        {data?.partData.data.categoryFaqList.map((faq, idx) => {
+        {data?.partData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
               width={680}
@@ -117,8 +124,8 @@ const FAQ = () => {
               <FAQBox
                 color={
                   questionColor[
-                    (data?.recruitData.data.categoryFaqList.length +
-                      data?.activityData.data.categoryFaqList.length +
+                    (data?.recruitData.categoryFaqList.length +
+                      data?.activityData.categoryFaqList.length +
                       idx) %
                       3
                   ]
@@ -131,13 +138,9 @@ const FAQ = () => {
             </CustomFlex>
           );
         })}
-        <Desktop></Desktop>
-        <Mobile>
-          <Text webTypo="Label3" paletteColor="Gray3" margin="36px 0 30px 0">
-            © 2016-2023 Ceos ALL RIGHTS RESERVED.
-          </Text>
-        </Mobile>
       </CustomFlex>
+      <BottomMargin />
+      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </Flex>
   );
 };
@@ -173,6 +176,10 @@ export const TopMargin = styled.div`
   @media (max-width: 1023px) {
     height: 36px;
   }
+`;
+
+export const BottomMargin = styled.div`
+  height: 100px;
 `;
 
 export default FAQ;

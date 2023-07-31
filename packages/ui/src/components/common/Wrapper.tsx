@@ -9,6 +9,8 @@ export const Flex = styled.div<{
   padding?: string;
   webGap?: number;
   mobileGap?: number;
+  widthPer?: number;
+  heightPer?: number;
   width?: number | string;
   height?: number | string;
   borderRadius?: number;
@@ -19,10 +21,10 @@ export const Flex = styled.div<{
   justify-content: ${({ justify }) => (justify ? `${justify}` : 'center')};
   align-items: ${({ align }) => (align ? `${align}` : 'center')};
   gap: ${({ webGap }) => (webGap ? `${webGap}px` : '0px')};
-  width: ${({ width }) =>
-    (width as number) ? `${width}px` : width === 'auto' ? '' : '100%'};
-  height: ${({ height }) =>
-    height ? `${height}px` : height === 'auto' ? '' : '100%'};
+  width: ${({ width, widthPer }) =>
+    width ? `${width}px` : widthPer ? `${widthPer}%` : '100%'};
+  height: ${({ height, heightPer }) =>
+    height ? `${height}px` : heightPer ? `${heightPer}%` : '100%'};
   margin: ${({ margin }) => (margin ? margin : '0')};
   padding: ${({ padding }) => (padding ? padding : '0')};
   box-sizing: border-box;
@@ -40,6 +42,7 @@ export const Flex = styled.div<{
 
 export const RelativeContainer = styled(Flex)`
   position: relative;
+
   .is-hover {
     display: none;
   }
@@ -58,4 +61,12 @@ export const AbsoluteFlex = styled(Flex)`
   &.is-hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+`;
+
+export const Space = styled.div<{
+  height?: number;
+  width?: number;
+}>`
+  height: ${({ height }) => (height ? `${height}px` : '')};
+  width: ${({ width }) => (width ? `${width}px` : '')};
 `;
