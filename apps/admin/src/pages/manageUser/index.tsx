@@ -58,6 +58,7 @@ export default function ManageUser() {
       },
       onError: () => {
         openAlert('error');
+        window.location.reload();
       },
     },
   );
