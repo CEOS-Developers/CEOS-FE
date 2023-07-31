@@ -50,14 +50,14 @@ const Footer = ({
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
               <CustomLink href="/FAQ">
-                <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
-                  자주 묻는 질문 <br /> 보러가기
+                <GlassShortcutwithTitle title={`${leftBtn.title}`}>
+                  {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
               </CustomLink>
 
               <CustomLink href="/recruit">
-                <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
-                  CEOS 18기 <br /> 지원하기
+                <GlassShortcutwithTitle title={`${leftBtn.title}`}>
+                  {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
               </CustomLink>
             </Flex>
