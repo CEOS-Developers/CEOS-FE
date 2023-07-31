@@ -247,6 +247,17 @@ export default function ApplyStatement() {
     },
   );
 
+  useEffect(() => {
+    if (getExceldata) {
+      const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `지원현황_${Date.now()}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+    }
+  }, [getExceldata]);
+
   // 지원서 엑셀 생성일시 업데이트
   useEffect(() => {
     if (isCreateExcelSuccess) setCreateAt(createExcelData?.data.createAt);

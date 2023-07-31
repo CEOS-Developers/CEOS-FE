@@ -7,15 +7,15 @@ import {
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
-} from './interface';
+} from '../../../components/recruit/interface';
 import { useEffect, useState } from 'react';
-import Information from './Information';
-import Common from './Common';
-import Part from './Part';
-import Schedule from './Schedule';
-import { SubmitModal } from './modal/SubmitModal';
+import Information from '../../../components/recruit/Information';
+import Common from '../../../components/recruit/Common';
+import Part from '../../../components/recruit/Part';
+import Schedule from '../../../components/recruit/Schedule';
+import { SubmitModal } from '../../../components/recruitModal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { SuccessModal } from './modal/SuccessModal';
+import { SuccessModal } from '../../../components/recruitModal/SuccessModal';
 
 const Apply = () => {
   const [isOpen, setIsOpen] = useState(false);
