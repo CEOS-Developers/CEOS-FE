@@ -250,7 +250,6 @@ export default function ApplyStatement() {
   useEffect(() => {
     if (getExceldata) {
       const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
-      console.log(new Blob([getExceldata.data]), url);
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', `지원현황_${Date.now()}.xlsx`);
