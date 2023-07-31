@@ -36,7 +36,7 @@ export const ProjectCard = (props: {
             {name}
           </Text>
           <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
-            {generation}
+            {generation}기
           </Text>
         </Row>
         <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
@@ -123,8 +123,6 @@ const ProjectImg = styled.img`
 `;
 
 const ExplainBox = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
   margin-top: -20px;
   z-index: -1;
@@ -134,16 +132,26 @@ const ExplainBox = styled.div`
 
   background-color: ${theme.palette.Gray1};
 
+  animation: slide-in-project-card 0.1s ease-in;
+
   @media (max-width: 1023px) {
-    &.ceos-hover {
-      padding: 24px 20px 20px;
-      margin-top: -10px;
-      width: 346px;
-      border-radius: 10px;
-    }
+    padding: 24px 20px 20px;
+    margin-top: -10px;
+    width: 346px;
+    border-radius: 10px;
+    display: block;
   }
   @media (min-width: 1023px) {
     box-shadow: ${theme.shadow.Card.Black};
+  }
+
+  @keyframes slide-in-project-card {
+    0% {
+      clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+    }
   }
 `;
 
