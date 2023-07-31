@@ -41,7 +41,13 @@ export const DatePicker = (props: DatePickerProps) => {
         disabledKeyboardNavigation
         dateFormat="yyyy년 MM월 dd일"
         placeholderText={props.placeholder}
-        customInput={<TextField isAdmin={props.isAdmin} right={<Calendar />} />}
+        customInput={
+          <TextField
+            isAdmin={props.isAdmin}
+            right={<Calendar />}
+            width={props.width ?? 346}
+          />
+        }
       />
     </DatePickerStyles>
   );

@@ -32,7 +32,7 @@ const Information = ({ register, setValue }: InformationProps) => {
         <CustomFlex>
           <QuestionFlex>
             <Question>이름</Question>
-            <CustomTextField {...register('name')} />
+            <CustomTextField {...register('name')} width={346} />
           </QuestionFlex>
           <QuestionFlex>
             <Question>성별</Question>
@@ -55,11 +55,15 @@ const Information = ({ register, setValue }: InformationProps) => {
         <CustomFlex>
           <QuestionFlex>
             <Question>생년월일</Question>
-            <CustomTextField {...register('birth')} placeholder="yyyy.mm.dd" />
+            <CustomTextField
+              {...register('birth')}
+              placeholder="yyyy.mm.dd"
+              width={346}
+            />
           </QuestionFlex>
           <QuestionFlex>
             <Question>이메일</Question>
-            <CustomTextField {...register('email')} />
+            <CustomTextField {...register('email')} width={346} />
           </QuestionFlex>
         </CustomFlex>
         <CustomFlex>
@@ -68,6 +72,7 @@ const Information = ({ register, setValue }: InformationProps) => {
             <CustomTextField
               {...register('phoneNumber')}
               placeholder="000-0000-0000"
+              width={346}
             />
           </QuestionFlex>
         </CustomFlex>
@@ -104,6 +109,7 @@ const Information = ({ register, setValue }: InformationProps) => {
                     text: 'ex. 컴퓨터공학과 / 경영학과',
                   },
                 ]}
+                width={346}
               />
             </QuestionFlex>
             <QuestionFlex>
@@ -116,6 +122,7 @@ const Information = ({ register, setValue }: InformationProps) => {
                     text: '*ex. 2',
                   },
                 ]}
+                width={346}
               />
             </QuestionFlex>
           </CustomFlex>
@@ -153,6 +160,7 @@ const Information = ({ register, setValue }: InformationProps) => {
                   text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
                 },
               ]}
+              width={346}
             />
           </QuestionFlex>
         </CustomFlex>

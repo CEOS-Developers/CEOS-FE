@@ -66,21 +66,14 @@ const Part = ({ register, watch, setValue, questionList }: PartProps) => {
                       {...register(
                         `partAnswers.${partInfo[selectedPart]}.${idx}.answer`,
                       )}
+                      helperText={ques.questionDetail.map((detail) => {
+                        return {
+                          type:
+                            detail.color === 'gray' ? 'normal' : 'important',
+                          text: detail.explaination,
+                        };
+                      })}
                     />
-
-                    <Flex direction="column" align="start">
-                      {ques.questionDetail.map((detail, idx) =>
-                        detail.color === 'gray' ? (
-                          <Explain key={`detail_${idx}`}>
-                            {detail.explaination}
-                          </Explain>
-                        ) : (
-                          <Explain paletteColor="Blue" key={`detail_${idx}`}>
-                            {detail.explaination}
-                          </Explain>
-                        ),
-                      )}
-                    </Flex>
                   </Flex>
                 ),
               )}

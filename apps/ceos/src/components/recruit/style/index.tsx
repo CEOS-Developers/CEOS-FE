@@ -42,7 +42,8 @@ export const Question = styled(Text)`
 
 export const Explain = styled(Text)`
   ${theme.typo.Web.Body3};
-  ${theme.palette.Gray5}
+  color: ${theme.palette.Gray5};
+
   @media (max-width: 1023px) {
     ${theme.typo.Mobile.Body2};
   }

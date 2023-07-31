@@ -19,19 +19,16 @@ const Common = ({ register, questionList }: CommonProps) => {
           <QuestionFlex key={ques.questionId}>
             <Question>{`${idx + 1}. ${ques.question}`}</Question>
             <CustomTextField
-              style={{ width: '100%' }}
               {...register(`commonAnswers.${idx}.answer`)}
-              multiline={true}
+              width={346}
+              multiline={ques.multiline}
+              helperText={ques.questionDetail.map((detail) => {
+                return {
+                  type: detail.color === 'gray' ? 'normal' : 'important',
+                  text: detail.explaination,
+                };
+              })}
             />
-            <Flex direction="column" align="start">
-              {ques.questionDetail.map((detail, idx) =>
-                detail.color === 'gray' ? (
-                  <Explain key={`detail_${idx}`}>{detail.explaination}</Explain>
-                ) : (
-                  <Explain>{detail.explaination}</Explain>
-                ),
-              )}
-            </Flex>
           </QuestionFlex>
         ))}
       </Section>
