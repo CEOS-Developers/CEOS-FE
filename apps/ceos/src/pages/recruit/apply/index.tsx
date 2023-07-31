@@ -16,11 +16,14 @@ import Schedule from './Schedule';
 import { SubmitModal } from './modal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { SuccessModal } from './modal/SuccessModal';
+import { ErrorModal } from './modal/ErrorModal';
 
 const Apply = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [submitBtn, setSubmitBtn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   const {
     register,
@@ -177,17 +180,25 @@ const Apply = () => {
       /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/,
     ];
 
+    const setError = (text: string) => {
+      setErrorText(text);
+      setIsError(true);
+      setTimeout(() => {
+        setIsError(false);
+      }, 1500);
+    };
+
     if (!birthReg.test(birth)) {
-      alert('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
+      setError('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
       return;
     } else if (!emailReg.test(email)) {
-      alert('이메일 형식을 확인해주세요!');
+      setError('이메일 형식을 확인해주세요!');
       return;
     } else if (!phoneNumberReg.test(phoneNumber)) {
-      alert('휴대폰번호 형식을 확인해주세요!');
+      setError('휴대폰번호 형식을 확인해주세요!');
       return;
-    } else if (semestersLeftNumber !== null && +semestersLeftNumber < 0) {
-      alert('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요');
+    } else if (isNaN(+semestersLeftNumber) || +semestersLeftNumber < 0) {
+      setError('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요!');
       return;
     }
     setIsOpen(true);
@@ -228,8 +239,13 @@ const Apply = () => {
         </Text>
       </Flex>
 
-      {isOpen && <SubmitModal submitForm={submitForm} />}
+      {isOpen && (
+        <SubmitModal submitForm={submitForm} onClose={() => setIsOpen(false)} />
+      )}
       {isSubmit && <SuccessModal />}
+      {isError && (
+        <ErrorModal text={errorText} onClose={() => setIsError(false)} />
+      )}
     </Wrapper>
   );
 };
