@@ -7,6 +7,7 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
 import { FooterText } from '@ceos/components/FooterText';
 import { useForm } from 'react-hook-form';
+import { css } from '@emotion/react';
 
 export const getStaticProps = async () => {
   try {
