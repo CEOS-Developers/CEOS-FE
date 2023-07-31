@@ -11,11 +11,11 @@ import { FooterText } from '@ceos/components/FooterText';
 
 export default function Rewards() {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
-    const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 20 });
+    const awardData = await awardApi.GET_AWARD({ pageNum: 0, limit: 20 });
     return awardData;
   });
 
-  const awardList = data?.generationAwards;
+  const awardList = data?.content;
 
   return (
     <Flex
