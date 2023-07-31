@@ -10,8 +10,6 @@ import { Button, Text } from 'packages/ui';
 import { adminManageUserApi } from 'packages/utils';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAlert } from '../../hooks/useAlert';
-import { Alert } from '../../components/Alert/index';
 
 export default function ManageUser() {
   const { setValue, watch, getValues } = useForm();

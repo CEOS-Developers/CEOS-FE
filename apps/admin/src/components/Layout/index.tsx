@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Sidebar from '../Sidebar/index';
 import { useRecoilState } from 'recoil';
 import { loginState, accessToken } from '../../store/recoil/index';
-import { NonLogin } from '../../pages/auth/nonLogin/index';
+import { NonLogin } from '../NonLogin/index';
 import { Cookies, useCookies } from 'react-cookie';
 import { adminAuthApi, adminInstance } from 'packages/utils';
 import { useMutation } from '@tanstack/react-query';
