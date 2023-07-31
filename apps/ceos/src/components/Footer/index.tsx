@@ -23,12 +23,12 @@ const Footer = ({
     <Flex direction="column">
       <Desktop>
         <RelativeContainer>
-          <FooterBackground css={zIndexBack} />
+          <FooterBackground style={{ zIndex: -99 }} />
           <GlassFlex
             direction="column"
             webGap={80}
             height="auto"
-            css={zIndexFront}
+            style={{ zIndex: 10 }}
           >
             <Flex webGap={24}>
               <CustomLink href={`${leftBtn.link}`} style={{ zIndex: 11 }}>
@@ -51,19 +51,19 @@ const Footer = ({
       </Desktop>
 
       <Mobile>
-        <RelativeContainer align="start" css={zIndexBack}>
-          <MobileFooterBackground />
-          <GlassFlex direction="column" mobileGap={63}>
+        <RelativeContainer align="start">
+          <MobileFooterBackground style={{ zIndex: -99 }} />
+          <GlassFlex direction="column" mobileGap={63} style={{ zIndex: 10 }}>
             <Flex mobileGap={17} direction="column">
-              <CustomLink href="/FAQ">
-                <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
-                  자주 묻는 질문 <br /> 보러가기
+              <CustomLink href={`${leftBtn.link}`} style={{ zIndex: 11 }}>
+                <GlassShortcutwithTitle title={`${leftBtn.title}`}>
+                  {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
               </CustomLink>
 
-              <CustomLink href="/recruit">
-                <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
-                  CEOS 18기 <br /> 지원하기
+              <CustomLink href={`${rightBtn.link}`} style={{ zIndex: 11 }}>
+                <GlassShortcutwithTitle title={`${rightBtn.title}`}>
+                  {rightBtn.content[0]} <br /> {rightBtn.content[1]}
                 </GlassShortcutwithTitle>
               </CustomLink>
             </Flex>
@@ -86,12 +86,4 @@ const GlassFlex = styled(Flex)`
   @media (max-width: 1023px) {
     bottom: 30px;
   }
-`;
-
-const zIndexBack = css`
-  z-index: -99;
-`;
-
-const zIndexFront = css`
-  z-index: 10;
 `;
