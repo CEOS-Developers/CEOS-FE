@@ -82,12 +82,7 @@ const Activity = () => {
       </Desktop>
 
       <Mobile>
-        <Flex
-          direction="column"
-          css={css`
-            height: 100vh;
-          `}
-        >
+        <Flex direction="column">
           <Title
             title="Activity"
             explain={[
