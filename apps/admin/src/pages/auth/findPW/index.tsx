@@ -2,7 +2,7 @@ import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { Dropdown } from '../../../components/Dropdown/index';
 import { useMutation } from '@tanstack/react-query';
-import { adminAuthApi, findPwInterface } from '../../../../../../packages/utils';
+import { adminAuthApi, findPwInterface } from '@ceos-fe/utils';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
@@ -25,8 +25,7 @@ export default function findPW() {
       onSuccess: (res: { status: number }) => {
         res.status == 201 ? setSentEmail(true) : setSentEmail(false);
       },
-      onError: (err: { response: { data: { reason: string } } }) =>
-        alert(err.response.data.reason),
+      onError: (err: any) => alert(err.response.data.reason),
     });
   };
 

@@ -10,7 +10,7 @@ import { accessToken, loginState } from '@admin/store/recoil';
 import { StyledForm } from '@admin/styles/common';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { adminInstance } from '../../../../../packages/utils/src/apis/axiosConfig';
+import { adminInstance } from '@ceos-fe/utils';
 
 export default function SignIn() {
   const router = useRouter();
