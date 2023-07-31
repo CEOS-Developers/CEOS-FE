@@ -191,6 +191,7 @@ const Container = styled(Flex)`
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
 
   overflow-x: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
+  overscroll-behavior: none;
 
   ::-webkit-scrollbar {
     display: none;
