@@ -2,16 +2,19 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ModalBgImage } from '../asset/ModalBgImage';
 import { Button, CheckBox, Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export interface ModalProps {
   submitForm: () => void;
+  onClose: () => void;
 }
 
-export const SubmitModal = ({ submitForm }: ModalProps) => {
+export const SubmitModal = ({ submitForm, onClose }: ModalProps) => {
   const [isChecked, setIsChecked] = useState(false);
+  const modalRef = useRef(null);
+
   return (
-    <div css={backCss}>
+    <div css={backCss} onClick={onClose} ref={modalRef}>
       <ModalBgImage />
 
       <TextContainer>
