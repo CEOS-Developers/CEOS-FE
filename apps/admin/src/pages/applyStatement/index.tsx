@@ -98,9 +98,11 @@ export default function ApplyStatement() {
         },
         onError: () => {
           openAlert('error');
+          window.location.reload();
         },
       },
     );
+
   const { mutate: updateFinalPassMutation, isSuccess: finalPassSuccess } =
     useMutation(
       ({ applicantId, pass }: { applicantId: number; pass: string }) =>
@@ -111,6 +113,7 @@ export default function ApplyStatement() {
           openAlert('success');
         },
         onError: () => {
+          window.location.reload();
           openAlert('error');
         },
       },
@@ -142,10 +145,6 @@ export default function ApplyStatement() {
 
   //합격 불합격 여부 변경
   if (applicantData && applicantData.data && applicantData.data.content) {
-    let background = '#D4FFF7';
-    let color = '#01D1A8';
-    let value = 'pass';
-
     applicantData.data.content.forEach((data: any) => {
       //document
       if (
@@ -162,20 +161,11 @@ export default function ApplyStatement() {
             pass: getValues(`DocPassDropdown_${data.uuid}`).label,
           });
         }
-        if (data.doc_pass === '불합격') {
-          background = '#FFE7E7';
-          value = 'fail';
-          color = '#FF6262';
-        }
-        if (docPassSuccess) {
-          // 드롭다운 컴포넌트의 값을 업데이트
-          setValue(`DocPassDropdown_${data.uuid}`, {
-            label: getValues(`DocPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
-            value: value, // 이전 value 값 유지
-            background: background,
-            color: color,
-          });
-        }
+        // if (!docPassSuccess) {
+        //   if (data.documentPass === '불합격') {
+        //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
+        //   }
+        // }
       }
 
       //final
@@ -190,22 +180,6 @@ export default function ApplyStatement() {
           updateFinalPassMutation({
             applicantId: data.id,
             pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
-          });
-        }
-
-        if (getValues(`FinalPassDropdown_${data.uuid}`).label === '불합격') {
-          background = '#FFE7E7';
-          value = 'fail';
-          color = '#FF6262';
-        }
-
-        if (finalPassSuccess) {
-          // 드롭다운 컴포넌트의 값을 업데이트
-          setValue(`FinalPassDropdown_${data.uuid}`, {
-            label: getValues(`FinalPassDropdown_${data.uuid}`).label, // 새로운 라벨 값
-            value: value, // 이전 value 값 유지
-            background: background,
-            color: color,
           });
         }
       }
