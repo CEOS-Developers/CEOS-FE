@@ -34,7 +34,7 @@ const Part = ({ register, watch, setValue, questionList }: PartProps) => {
           *지원하고자 하는 파트를 선택하여 답변을 작성해주세요.
         </Text>
       </Flex>
-      <Flex webGap={20} mobileGap={14}>
+      <Flex webGap={20} mobileGap={8}>
         {Object.keys(partInfo).map((key) => (
           <SelectButton
             key={key}
@@ -59,13 +59,13 @@ const Part = ({ register, watch, setValue, questionList }: PartProps) => {
                     mobileGap={14}
                     key={ques.questionId}
                   >
-                    <Question>{`${idx + 1}. ${ques.question}`}</Question>
                     <CustomTextField
-                      style={{ width: '100%' }}
-                      multiline={true}
+                      label={`${idx + 1}. ${ques.question}`}
+                      multiline={ques.multiline}
                       {...register(
                         `partAnswers.${partInfo[selectedPart]}.${idx}.answer`,
                       )}
+                      width={856}
                       helperText={ques.questionDetail.map((detail) => {
                         return {
                           type:

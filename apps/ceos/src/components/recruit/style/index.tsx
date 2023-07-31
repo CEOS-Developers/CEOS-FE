@@ -6,7 +6,7 @@ export const CustomFlex = styled(Flex)`
   justify-content: space-between;
   align-items: start;
   width: 680px;
-  gap: 32px;
+  gap: 24px;
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -17,8 +17,15 @@ export const CustomFlex = styled(Flex)`
   }
 `;
 
-export const CustomTextField = styled(TextField)`
-  width: 100%;
+export const CustomTextField = styled(TextField)<{
+  webWidth?: string;
+  mobileWidth?: string;
+}>`
+  width: ${({ webWidth }) => webWidth ?? '100%'};
+
+  @media (max-width: 1023px) {
+    width: ${({ mobileWidth }) => mobileWidth ?? '100%'};
+  }
   // flex-shrink: 0;
   // border: 0px solid black;
 `;

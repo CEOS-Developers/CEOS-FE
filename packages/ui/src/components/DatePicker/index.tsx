@@ -42,18 +42,28 @@ export const DatePicker = (props: DatePickerProps) => {
         dateFormat="yyyy년 MM월 dd일"
         placeholderText={props.placeholder}
         customInput={
-          <TextField
-            isAdmin={props.isAdmin}
-            right={<Calendar />}
-            width={props.width ?? 346}
-          />
+          <CustomTextField isAdmin={props.isAdmin} right={<Calendar />} />
         }
       />
     </DatePickerStyles>
   );
 };
 
+const CustomTextField = styled(TextField)`
+  width: 100%;
+
+  @media (min-width: 1023px) {
+    width: 328px;
+  }
+`;
+
 const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
+  width: 100%;
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
   .react-datepicker {
     background-color: ${theme.glass.Glass};
 

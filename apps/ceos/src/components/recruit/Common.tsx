@@ -17,11 +17,11 @@ const Common = ({ register, questionList }: CommonProps) => {
         </Text>
         {questionList?.commonQuestions.map((ques, idx) => (
           <QuestionFlex key={ques.questionId}>
-            <Question>{`${idx + 1}. ${ques.question}`}</Question>
             <CustomTextField
               {...register(`commonAnswers.${idx}.answer`)}
-              width={346}
+              label={`${idx + 1}. ${ques.question}`}
               multiline={ques.multiline}
+              width={856}
               helperText={ques.questionDetail.map((detail) => {
                 return {
                   type: detail.color === 'gray' ? 'normal' : 'important',
