@@ -4,6 +4,7 @@ import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
 import { FooterBackground } from './FooterBackground';
 import { MobileFooterBackground } from './MobileFooterBackground';
+import Link from 'next/link';
 
 interface ButtonProps {
   title?: string;
@@ -25,11 +26,11 @@ const Footer = ({
           <FooterBackground />
           <GlassFlex direction="column" webGap={80} height="auto">
             <Flex webGap={24}>
-              <CustomLink href={`${leftBtn.link}`}>
+              <Link href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
 
               <CustomLink href={`${rightBtn.link}`}>
                 <GlassShortcutwithTitle title={`${rightBtn.title}`}>
@@ -49,17 +50,17 @@ const Footer = ({
           <MobileFooterBackground />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
-              <CustomLink href="/FAQ">
+              <Link href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
 
-              <CustomLink href="/recruit">
+              <Link href={`${rightBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
             </Flex>
             <Text paletteColor="White" webTypo="Label3">
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
