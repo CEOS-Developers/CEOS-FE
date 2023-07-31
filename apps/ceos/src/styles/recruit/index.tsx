@@ -17,9 +17,9 @@ export const RecruitCss = css`
     margin-bottom: 60px;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     background-image: url('/recruit/banner-mobile.png');
-    background-size: 390px;
+    background-size: 687px;
     height: 630px;
     margin-bottom: 48px;
   }
@@ -43,7 +43,7 @@ export const RecruitBgText = css`
     }
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     .mobile {
       display: block;
     }
@@ -66,7 +66,7 @@ export const RecruitTextCss = css`
     margin-bottom: 8px;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     margin-bottom: 24px;
   }
 `;
@@ -81,11 +81,7 @@ export const RecruitMainCss = css`
     width: 90%;
   }
 
-  @media (max-width: 550px) {
-    margin-top: 90px;
-  }
-
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     margin-bottom: 48px;
     margin-top: 0px;
   }

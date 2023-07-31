@@ -81,7 +81,7 @@ export const BtnCss = css`
     height: 40px;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     margin-top: 90px;
     width: 346px;
     height: 59px;
