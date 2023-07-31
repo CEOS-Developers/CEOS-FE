@@ -2,31 +2,34 @@ import { theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
 export const RecruitCss = css`
-  position: relative;
+  background-image: url('/recruit/banner-desktop.png');
+  background-position: center;
+  background-size: 1660px;
+  background-repeat: no-repeat;
+  background-color: ${theme.palette.Blue};
+  height: 600px;
   width: 100vw;
-  aspect-ratio: 1660 / 600;
+
   z-index: 1;
   margin-bottom: 120px;
+
   @media (max-width: 1023px) {
     margin-bottom: 60px;
   }
 
   @media (max-width: 390px) {
-    aspect-ratio: 390 / 630;
+    background-image: url('/recruit/banner-mobile.png');
+    background-size: 390px;
+    height: 630px;
     margin-bottom: 48px;
   }
 `;
 
 export const RecruitBgText = css`
-  position: absolute;
-  z-index: 2;
   display: flex;
   align-items: center;
   flex-direction: column;
-  bottom: 0;
-  top: 10.19vw;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 195px;
   text-wrap: nowrap;
   color: white;
 
@@ -68,7 +71,7 @@ export const RecruitTextCss = css`
   }
 `;
 export const RecruitMainCss = css`
-  dispaly: flex;
+  display: flex;
   flex-direction: column;
   width: 1032px;
   justify-content: flex-start;

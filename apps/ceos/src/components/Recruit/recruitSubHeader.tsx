@@ -4,7 +4,6 @@ import {
   RecruitBgText,
 } from '@ceos/styles/recruit';
 import { Button, Text } from '@ceos-fe/ui';
-import { RecruitBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
@@ -18,7 +17,6 @@ export const RecruitSubHeader = () => {
 
   return (
     <div css={RecruitCss}>
-      <RecruitBgImg />
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
           CEOS 18th <br /> Recruit
@@ -38,6 +36,7 @@ export const RecruitSubHeader = () => {
         <Button
           variant="glass"
           webWidth={249}
+          mobileWidth={249}
           css={BtnCss}
           onClick={() => {
             toggleModal();
