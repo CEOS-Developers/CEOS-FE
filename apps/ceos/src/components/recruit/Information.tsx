@@ -30,11 +30,13 @@ const Information = ({ register, setValue }: InformationProps) => {
     <Flex direction="column">
       <Flex direction="column" webGap={36} mobileGap={28}>
         <CustomFlex>
-          <CustomTextField
-            label="이름"
-            {...register('name')}
-            webWidth="328px"
-          />
+          <QuestionFlex>
+            <CustomTextField
+              label="이름"
+              {...register('name')}
+              webWidth="328px"
+            />
+          </QuestionFlex>
           <QuestionFlex>
             <Question>성별</Question>
             <Flex webGap={12} mobileGap={14}>

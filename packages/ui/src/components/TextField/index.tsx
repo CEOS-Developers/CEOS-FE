@@ -71,7 +71,6 @@ export const TextField = forwardRef<
               height={height}
               isAdmin={isAdmin}
               fontColor={fontColor}
-              width={width}
             />
           ) : (
             <InputContainer>
@@ -83,7 +82,6 @@ export const TextField = forwardRef<
                 isAdmin={isAdmin}
                 fontColor={fontColor}
                 isRight={Boolean(right)}
-                width={width}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -144,9 +142,8 @@ const StyledInput = styled.input<{
   fontColor: string;
   isRight: boolean;
   value?: string | number | readonly string[] | undefined;
-  width: number;
 }>`
-  width: ${({ width }) => width}px;
+  width: inherit;
   padding: ${({ isRight }) => (isRight ? '8px 50px 8px 16px' : '8px 16px')};
 
   box-sizing: border-box;
@@ -205,9 +202,8 @@ const StyledTextArea = styled.textarea<{
   isAdmin: boolean;
   height?: number;
   fontColor: string;
-  width: number;
 }>`
-  width: ${({ width }) => width}px;
+  width: inherit;
   height: ${({ height }) => (height ? height : 240)}px;
   padding: ${({ height }) => (height ? '8px 16px' : '12px 8px 12px 16px')};
 
