@@ -1,5 +1,5 @@
 import { CheckBox, Desktop, Flex, Mobile, Text, theme } from '@ceos-fe/ui';
-import { ColumnLine } from '.';
+import { ColumnLine } from '../../pages/recruit/apply';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
 import { css } from '@emotion/react';

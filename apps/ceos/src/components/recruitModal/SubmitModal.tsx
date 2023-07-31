@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ModalBgImage } from '../asset/ModalBgImage';
+import { ModalBgImage } from '../../assets/apply/ModalBgImage';
 import { Button, CheckBox, Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import { useState } from 'react';
 
