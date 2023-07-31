@@ -43,7 +43,7 @@ export const GlassShortcutwithTitle = ({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <GlassStyledButton {...props}>
+    <GlassStyledButtonWithTitle {...props}>
       <div className="text-container">
         {title}
         <Flex webGap={16} mobileGap={8} className="shortcut2-diamond-text">
@@ -52,7 +52,7 @@ export const GlassShortcutwithTitle = ({
           <Diamond />
         </Flex>
       </div>
-    </GlassStyledButton>
+    </GlassStyledButtonWithTitle>
   );
 };
 
@@ -125,5 +125,12 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
     .shortcut2-diamond-text {
       ${theme.typo.Web.Label3}
     }
+  }
+`;
+
+const GlassStyledButtonWithTitle = styled(GlassStyledButton)`
+  @media (max-width: 1023px) {
+    width: 100%;
+    min-width: 346px;
   }
 `;

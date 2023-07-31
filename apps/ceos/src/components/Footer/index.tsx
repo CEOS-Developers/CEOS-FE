@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
-import { Desktop, Flex, Mobile, RelativeContainer, Text } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, Text, theme } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
-import { FooterBackground } from './FooterBackground';
-import { MobileFooterBackground } from './MobileFooterBackground';
 import Link from 'next/link';
 
 interface ButtonProps {
@@ -20,12 +18,11 @@ const Footer = ({
   rightBtn: ButtonProps;
 }) => {
   return (
-    <Flex direction="column">
+    <Wrapper>
       <Desktop>
-        <RelativeContainer>
-          <FooterBackground />
-          <GlassFlex direction="column" webGap={80} height="auto">
-            <Flex webGap={24}>
+        <Container>
+          <Flex direction="column" webGap={80}>
+            <Flex webGap={24} height={159}>
               <Link href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
@@ -41,44 +38,57 @@ const Footer = ({
             <Text paletteColor="White" webTypo="Label3">
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
-          </GlassFlex>
-        </RelativeContainer>
+          </Flex>
+        </Container>
       </Desktop>
 
       <Mobile>
-        <RelativeContainer align="start">
-          <MobileFooterBackground />
-          <GlassFlex direction="column" mobileGap={63}>
-            <Flex mobileGap={17} direction="column">
+        <Container>
+          <Flex direction="column" mobileGap={63}>
+            <Flex mobileGap={17} direction="column" height={219} width={101}>
               <Link href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
-                  {leftBtn.content[0]} <br /> {leftBtn.content[1]}
+                  {leftBtn.content[0]} {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
               </Link>
 
               <Link href={`${rightBtn.link}`}>
-                <GlassShortcutwithTitle title={`${leftBtn.title}`}>
-                  {leftBtn.content[0]} <br /> {leftBtn.content[1]}
+                <GlassShortcutwithTitle title={`${rightBtn.title}`}>
+                  {rightBtn.content[0]} {rightBtn.content[1]}
                 </GlassShortcutwithTitle>
               </Link>
             </Flex>
             <Text paletteColor="White" webTypo="Label3">
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
-          </GlassFlex>
-        </RelativeContainer>
+          </Flex>
+        </Container>
       </Mobile>
-    </Flex>
+    </Wrapper>
   );
 };
 
 export default Footer;
 
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: -1;
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 420px;
+  background-color: ${theme.palette.Blue};
+
   @media (max-width: 1023px) {
-    bottom: 30px;
+    height: 393px;
+  }
+`;
+
+const Container = styled.div`
+  width: 100vw;
+  height: 420px;
+  background-image: url('/footer/background-desktop.png');
+  background-size: 1660px;
+  background-position: center;
+
+  @media (max-width: 1023px) {
+    height: 393px;
+    background-image: url('/footer/background-mobile.png');
   }
 `;
