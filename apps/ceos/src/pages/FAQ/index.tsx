@@ -1,7 +1,6 @@
-import { Desktop, Flex, KeyOfPalette, Mobile, Text } from '@ceos-fe/ui';
+import { Flex, KeyOfPalette, Text } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { faqApi } from '../../../../../packages/utils/src/apis/ceos/faqApi';
-import { useEffect } from 'react';
+import { faqApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
@@ -44,7 +43,7 @@ const FAQ = () => {
   };
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" padding="0 22px">
       <Title
         title="FAQ"
         explain={['ceos에 대해 자주 묻는 질문들에', '대한 답변입니다.']}
@@ -75,13 +74,13 @@ const FAQ = () => {
         })}
       </CustomFlex>
       <CustomFlex width={680} direction="column" webGap={36}>
-        <Flex width={220} justify="space-between" margin="80px 0 0 0">
+        <FaqTitleBox>
           <FAQIcon />
           <Text webTypo="Heading3" mobileTypo="Heading3">
             활동 관련 질문
           </Text>
           <FAQIcon />
-        </Flex>
+        </FaqTitleBox>
         {data?.activityData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
@@ -106,13 +105,13 @@ const FAQ = () => {
         })}
       </CustomFlex>
       <CustomFlex width={680} direction="column" webGap={36}>
-        <Flex width={220} justify="space-between" margin="80px 0 0 0">
+        <FaqTitleBox>
           <FAQIcon />
           <Text webTypo="Heading3" mobileTypo="Heading3">
             파트별 관련 질문
           </Text>
           <FAQIcon />
-        </Flex>
+        </FaqTitleBox>
         {data?.partData.categoryFaqList.map((faq, idx) => {
           return (
             <CustomFlex
@@ -168,6 +167,16 @@ export const getStaticProps = async () => {
 const CustomFlex = styled(Flex)`
   @media (max-width: 1023px) {
     width: 100%;
+  }
+`;
+
+const FaqTitleBox = styled(Flex)`
+  width: 220px;
+  justify-content: space-between;
+  margin: 80px 0 0 0;
+
+  @media (max-width: 1023px) {
+    margin: 60px 0 0 0;
   }
 `;
 

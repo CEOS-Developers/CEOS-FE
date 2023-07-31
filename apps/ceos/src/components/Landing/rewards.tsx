@@ -1,5 +1,5 @@
 import { Flex, RewardCard, RewardCardProps, Text } from '@ceos-fe/ui';
-import { HomeFlex, CardFlex } from '@ceos/styles/landing';
+import { CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -23,7 +23,7 @@ export interface AwardCardInterface {
 }
 
 export interface AwardResponse {
-  generationAwards: AwardCardInterface[];
+  content: AwardCardInterface[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -38,7 +38,7 @@ export const Rewards = () => {
     return awardData;
   });
 
-  const awardList = data?.generationAwards;
+  const awardList = data?.content;
 
   return (
     <Flex

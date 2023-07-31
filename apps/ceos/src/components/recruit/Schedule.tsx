@@ -11,6 +11,16 @@ interface ScheduleProps {
   questionList?: RecruitApplyFormInterface['questionList'];
 }
 
+const dateToDay: Record<number, string> = {
+  0: '일',
+  1: '월',
+  2: '화',
+  3: '수',
+  4: '목',
+  5: '금',
+  6: '토',
+};
+
 const Schedule = ({
   watch,
   setValue,
@@ -60,31 +70,43 @@ const Schedule = ({
             </Text>
           </div>
 
-          {questionList?.times.map((time, timeIdx) => (
-            <Flex justify="start" webGap={20} key={`time_${timeIdx}`}>
-              <Text webTypo="Heading4">{time.date}</Text>
-              <ColumnLine />
-              <CheckBox
-                checked={isUnavailable(timeIdx)}
-                onClick={() => onClickNone(timeIdx)}
-                value={['불가능한 시간', '없음']}
-                type="column"
-              />
-              <ColumnLine />
-              {time.durations.map((duration, durIdx) => {
-                const [start, end] = duration.split('-');
-                return (
-                  <CheckBox
-                    checked={watch(`unableTimes.${timeIdx}.${durIdx}`) === 1}
-                    onClick={() => onClickCheck(timeIdx, durIdx)}
-                    value={[start, `~ ${end}`]}
-                    type="column"
-                    key={`duration_${durIdx}`}
-                  />
-                );
-              })}
-            </Flex>
-          ))}
+          {questionList?.times.map((time, timeIdx) => {
+            const questionDate = new Date(time.date);
+            const questionMonthDay = `${questionDate.getMonth()}/${questionDate.getDate()}`;
+            const questionDay = dateToDay[questionDate.getDay() as number];
+
+            return (
+              <Flex justify="start" webGap={20} key={`time_${timeIdx}`}>
+                <Text webTypo="Heading4" style={{ whiteSpace: 'nowrap' }}>
+                  {questionMonthDay} ({questionDay})
+                </Text>
+                <ColumnLine />
+                <CheckBox
+                  checked={isUnavailable(timeIdx)}
+                  onClick={() => onClickNone(timeIdx)}
+                  value={['불가능한 시간', '없음']}
+                  type="column"
+                />
+                <ColumnLine />
+                <Flex webGap={12} justify="flex-start">
+                  {time.durations.map((duration, durIdx) => {
+                    const [start, end] = duration.split('-');
+                    return (
+                      <CheckBox
+                        checked={
+                          watch(`unableTimes.${timeIdx}.${durIdx}`) === 1
+                        }
+                        onClick={() => onClickCheck(timeIdx, durIdx)}
+                        value={[start, `~ ${end}`]}
+                        type="column"
+                        key={`duration_${durIdx}`}
+                      />
+                    );
+                  })}
+                </Flex>
+              </Flex>
+            );
+          })}
         </Flex>
       </Desktop>
       <Mobile>
@@ -105,47 +127,55 @@ const Schedule = ({
             </Text>
             <Text mobileTypo="Body2" paletteColor="Gray5">
               *모든 면접은 화상(ZOOM)으로 이루어지며, 면접 시작 10분 전에 대기실
-              참가 안내를 드리니 이를 고려하여 선택 부탁드립니다.
+              참가 안내를 드리니 이를 고려하여 선택해주세요.
             </Text>
           </div>
 
-          {questionList?.times.map((time, timeIdx) => (
-            <Flex
-              direction="column"
-              justify="start"
-              mobileGap={20}
-              key={`time_${timeIdx}`}
-              style={{
-                padding: '20px',
-                borderRadius: '10px',
-                backgroundColor: theme.palette.Gray1,
-              }}
-            >
-              <Text mobileTypo="Heading4">{time.date}</Text>
-              <Grid>
-                {time.durations.map((duration, durIdx) => {
-                  const [start, end] = duration.split('-');
-                  return (
-                    <CheckBox
-                      checked={
-                        getValues(`unableTimes.${timeIdx}.${durIdx}`) === 1
-                      }
-                      onClick={() => onClickCheck(timeIdx, durIdx)}
-                      value={[`${start} ~ ${end}`]}
-                      type="row"
-                      key={`duration_${durIdx}`}
-                    />
-                  );
-                })}
-                <CheckBox
-                  checked={isUnavailable(timeIdx)}
-                  onClick={() => onClickNone(timeIdx)}
-                  value={['모두 가능']}
-                  type="row"
-                />
-              </Grid>
-            </Flex>
-          ))}
+          {questionList?.times.map((time, timeIdx) => {
+            const questionDate = new Date(time.date);
+            const questionMonthDay = `${questionDate.getMonth()}/${questionDate.getDate()}`;
+            const questionDay = dateToDay[questionDate.getDay() as number];
+
+            return (
+              <Flex
+                direction="column"
+                justify="start"
+                mobileGap={20}
+                key={`time_${timeIdx}`}
+                style={{
+                  padding: '20px',
+                  borderRadius: '10px',
+                  backgroundColor: theme.palette.Gray1,
+                }}
+              >
+                <Text mobileTypo="Heading4" style={{ whiteSpace: 'nowrap' }}>
+                  {questionMonthDay} ({questionDay})
+                </Text>
+                <Grid>
+                  {time.durations.map((duration, durIdx) => {
+                    const [start, end] = duration.split('-');
+                    return (
+                      <CheckBox
+                        checked={
+                          getValues(`unableTimes.${timeIdx}.${durIdx}`) === 1
+                        }
+                        onClick={() => onClickCheck(timeIdx, durIdx)}
+                        value={[`${start} ~ ${end}`]}
+                        type="row"
+                        key={`duration_${durIdx}`}
+                      />
+                    );
+                  })}
+                  <CheckBox
+                    checked={isUnavailable(timeIdx)}
+                    onClick={() => onClickNone(timeIdx)}
+                    value={['모두 가능']}
+                    type="row"
+                  />
+                </Grid>
+              </Flex>
+            );
+          })}
         </Flex>
       </Mobile>
     </>
@@ -157,7 +187,8 @@ export default Schedule;
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-row-gap: 14px;
+  grid-column-gap: 40px;
 `;
 
 export const gap = css`

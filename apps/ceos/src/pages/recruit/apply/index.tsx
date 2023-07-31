@@ -197,7 +197,7 @@ const Apply = () => {
     <Wrapper direction="column">
       <Title
         title="CEOS 18기 리크루팅"
-        explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
+        explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다 :)']}
       ></Title>
       <TopMargin />
       <Flex direction="column">
@@ -269,7 +269,7 @@ const TopMargin = styled.div`
 const Wrapper = styled(Flex)`
   position: relative;
   @media (max-width: 1023px) {
-    padding: 23px;
+    padding: 0 23px;
   }
 `;
 

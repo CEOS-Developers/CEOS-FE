@@ -1,14 +1,13 @@
-import { css } from '@emotion/react';
-
 import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
 import { HomeFlex } from '@ceos/styles/landing';
 import { Buttons } from '@ceos/components/Landing/buttons';
-import { Text } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
 import { FooterText } from '@ceos/components/FooterText';
+import { useForm } from 'react-hook-form';
+import { css } from '@emotion/react';
 
 export const getStaticProps = async () => {
   try {
@@ -30,10 +29,6 @@ export const getStaticProps = async () => {
     console.error(err);
   }
 };
-import { DatePicker, Flex, TextField } from '@ceos-fe/ui';
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import React from 'react';
 
 export default function Home() {
   const { register, watch, setValue } = useForm({

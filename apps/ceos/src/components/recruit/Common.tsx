@@ -17,21 +17,18 @@ const Common = ({ register, questionList }: CommonProps) => {
         </Text>
         {questionList?.commonQuestions.map((ques, idx) => (
           <QuestionFlex key={ques.questionId}>
-            <Question>{`${idx + 1}. ${ques.question}`}</Question>
             <CustomTextField
-              style={{ width: '100%' }}
               {...register(`commonAnswers.${idx}.answer`)}
-              multiline={true}
+              label={`${idx + 1}. ${ques.question}`}
+              multiline={ques.multiline}
+              width={856}
+              helperText={ques.questionDetail.map((detail) => {
+                return {
+                  type: detail.color === 'gray' ? 'normal' : 'important',
+                  text: detail.explaination,
+                };
+              })}
             />
-            <Flex direction="column" align="start">
-              {ques.questionDetail.map((detail, idx) =>
-                detail.color === 'gray' ? (
-                  <Explain key={`detail_${idx}`}>{detail.explaination}</Explain>
-                ) : (
-                  <Explain>{detail.explaination}</Explain>
-                ),
-              )}
-            </Flex>
           </QuestionFlex>
         ))}
       </Section>

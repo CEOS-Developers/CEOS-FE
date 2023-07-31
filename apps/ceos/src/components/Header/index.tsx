@@ -118,27 +118,26 @@ export const contentCss = (backColor: KeyOfPalette) => css`
     display: none;
   }
 
-
   @media (max-width: 1023px) {
-    gap : 0px;
+    gap: 0px;
     .text {
       display: none;
     }
     .menu {
       display: block;
     }
-    margin-right : 22px;
-    margin-bottom : 27px;
-  }
-
+    margin-right: 22px;
+    margin-bottom: 27px;
   }
 `;
 
 export const Content = styled.div`
   box-sizing: border-box;
 
+  transition: color 0.3s;
+
   &:hover {
-    cursor: grab;
+    cursor: pointer;
     color: ${theme.palette.Green};
   }
 `;

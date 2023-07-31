@@ -56,6 +56,7 @@ const boxCss = ({
 
   @media (max-width: 1023px) {
     width: 100%;
-    typo: ${isAnswer ? theme.typo.Mobile.Body2 : theme.typo.Mobile.Heading4};
+    ${isAnswer ? theme.typo.Mobile.Body2 : theme.typo.Mobile.Heading4};
+    margin: ${!isAnswer ? '24px 0px 14px 0px' : '0px'};
   }
 `;

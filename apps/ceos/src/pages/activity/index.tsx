@@ -3,10 +3,8 @@ import { Title } from '@ceos/components/Title';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { activityApi } from '@ceos-fe/utils';
 import Footer from '@ceos/components/Footer';
-import styled from '@emotion/styled';
-import Link from 'next/link';
 import { TopMargin } from '../FAQ/index';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -41,7 +39,7 @@ const Activity = () => {
     return { activityData: activityData };
   });
 
-  const acitivityList = data?.activityData.content;
+  const activityList = data?.activityData.content;
 
   return (
     <>
@@ -56,38 +54,19 @@ const Activity = () => {
               ]}
             />
             <TopMargin />
-            {acitivityList?.map((_, idx) => {
-              return idx % 3 === 0 ? (
-                <Flex
-                  key={`row_${idx}`}
-                  justify="flex-start"
-                  width={1032}
-                  margin="0 0 32px 0"
-                  webGap={24}
-                >
-                  {acitivityList.slice(idx, idx + 3).map((activity, subIdx) => (
-                    <ActivityCard
-                      key={`activity_${idx}_${subIdx}`}
-                      activityCard={activity}
-                    />
-                  ))}
-                </Flex>
-              ) : (
-                <></>
-              );
-            })}
+            <GridContainer>
+              {activityList &&
+                activityList.map((activity, idx) => (
+                  <ActivityCard key={idx} activityCard={activity} />
+                ))}
+            </GridContainer>
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Desktop>
 
       <Mobile>
-        <Flex
-          direction="column"
-          css={css`
-            height: 100vh;
-          `}
-        >
+        <Flex direction="column">
           <Title
             title="Activity"
             explain={[
@@ -97,7 +76,7 @@ const Activity = () => {
           />
           <TopMargin />
           <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
-            {acitivityList?.map((activity, idx) => {
+            {activityList?.map((activity, idx) => {
               return (
                 <ActivityCard key={`activity_${idx}`} activityCard={activity} />
               );
@@ -129,3 +108,12 @@ export const getStaticProps = async () => {
 };
 
 export default Activity;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  row-gap: 48px;
+
+  margin-bottom: 100px;
+`;
