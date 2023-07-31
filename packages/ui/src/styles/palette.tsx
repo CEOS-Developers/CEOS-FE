@@ -27,7 +27,7 @@ export const palette = {
 
   Shadow: {
     Card: {
-      Black: 'rgba(0, 0, 0, 0.15)',
+      Black: 'rgba(0, 0, 0, 0.10)',
     },
     Button: {
       Blue: 'rgba(56, 77, 248, 0.2)',

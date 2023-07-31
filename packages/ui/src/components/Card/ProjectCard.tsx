@@ -58,7 +58,7 @@ export const AdminProjectCard = ({
   ...props
 }: AdminProjectCardProps) => {
   return (
-    <RelativeContainer width={328} height={290}>
+    <RelativeContainer width={346} height={290}>
       <AbsoluteFlex direction="column">
         <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
@@ -92,7 +92,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  width: 328px;
+  width: 346px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -126,7 +126,6 @@ const ExplainBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 122px;
   margin-top: -20px;
   z-index: -1;
   padding: 14px 20px 20px;
@@ -134,15 +133,17 @@ const ExplainBox = styled.div`
   border-radius: 16px;
 
   background-color: ${theme.palette.Gray1};
-  box-shadow: ${theme.shadow.Card.Black};
 
   @media (max-width: 1023px) {
     &.ceos-hover {
+      padding: 24px 20px 20px;
       margin-top: -10px;
       width: 346px;
-      height: 89px;
       border-radius: 10px;
     }
+  }
+  @media (min-width: 1023px) {
+    box-shadow: ${theme.shadow.Card.Black};
   }
 `;
 
