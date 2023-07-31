@@ -29,6 +29,7 @@ export const BgText = css`
   left: 50%;
   transform: translateX(-50%);
   text-wrap: nowrap;
+  color: white;
 
   @media (max-width: 1023px) {
     typo: ${theme.typo.Mobile.Heading1_Kor};
@@ -41,7 +42,7 @@ export const BgText = css`
 
 export const FloatingCss = css`
   position: fixed;
-  z-index: 11;
+  z-index: 100;
   top: 66.66667%;
   left: 83.5%;
 `;

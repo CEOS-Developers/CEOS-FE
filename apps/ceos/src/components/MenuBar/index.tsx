@@ -28,16 +28,44 @@ export const MenuBar = (props: MenuProps) => {
           />
           <div css={contentCss}>
             <p>
-              <CustomLink href="/project">PROJECT</CustomLink>
+              <CustomLink
+                href="/project"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                PROJECT
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/activity">ACTIVITY</CustomLink>
+              <CustomLink
+                href="/activity"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                ACTIVITY
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/FAQ">FAQ</CustomLink>
+              <CustomLink
+                href="/FAQ"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                FAQ
+              </CustomLink>
             </p>
             <p>
-              <CustomLink href="/recruit">RECRUIT</CustomLink>
+              <CustomLink
+                href="/recruit"
+                onClick={() => {
+                  toggleModal();
+                }}
+              >
+                RECRUIT
+              </CustomLink>
             </p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
@@ -58,8 +86,11 @@ export const backCss = () => css`
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 1000;
   }
+  justiy-content: center;
+  align-items: center;
+  display: flex;
 `;
 
 export const positionCss = (isOpen: boolean) => css`
