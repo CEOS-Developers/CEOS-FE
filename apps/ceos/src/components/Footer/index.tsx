@@ -4,6 +4,7 @@ import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
 import { FooterBackground } from './FooterBackground';
 import { MobileFooterBackground } from './MobileFooterBackground';
+import { css } from '@emotion/react';
 
 interface ButtonProps {
   title?: string;
@@ -22,16 +23,21 @@ const Footer = ({
     <Flex direction="column">
       <Desktop>
         <RelativeContainer>
-          <FooterBackground />
-          <GlassFlex direction="column" webGap={80} height="auto">
+          <FooterBackground css={zIndexBack} />
+          <GlassFlex
+            direction="column"
+            webGap={80}
+            height="auto"
+            css={zIndexFront}
+          >
             <Flex webGap={24}>
-              <CustomLink href={`${leftBtn.link}`}>
+              <CustomLink href={`${leftBtn.link}`} style={{ zIndex: 11 }}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
               </CustomLink>
 
-              <CustomLink href={`${rightBtn.link}`}>
+              <CustomLink href={`${rightBtn.link}`} style={{ zIndex: 11 }}>
                 <GlassShortcutwithTitle title={`${rightBtn.title}`}>
                   {rightBtn.content[0]} <br /> {rightBtn.content[1]}
                 </GlassShortcutwithTitle>
@@ -45,7 +51,7 @@ const Footer = ({
       </Desktop>
 
       <Mobile>
-        <RelativeContainer align="start">
+        <RelativeContainer align="start" css={zIndexBack}>
           <MobileFooterBackground />
           <GlassFlex direction="column" mobileGap={63}>
             <Flex mobileGap={17} direction="column">
@@ -80,4 +86,12 @@ const GlassFlex = styled(Flex)`
   @media (max-width: 1023px) {
     bottom: 30px;
   }
+`;
+
+const zIndexBack = css`
+  z-index: -99;
+`;
+
+const zIndexFront = css`
+  z-index: 10;
 `;

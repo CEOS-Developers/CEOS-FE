@@ -4,7 +4,7 @@ export const FooterBackground = () => {
   return (
     <div
       css={css`
-        z-index: -99;
+        // z-index: -99;
         width: 100vw;
         max-height: 500px;
       `}
