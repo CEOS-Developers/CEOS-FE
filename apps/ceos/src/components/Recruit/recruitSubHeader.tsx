@@ -1,4 +1,3 @@
-import { Logo } from '@ceos/assets/logo';
 import {
   RecruitCss,
   RecruitTextCss,
@@ -14,8 +13,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export const RecruitSubHeader = () => {
-  const { isOpen, toggleModal } = useModal();
+  const { modalRef, isOpen, toggleModal } = useModal();
   const [step, setStep] = useState('');
+
   return (
     <div css={RecruitCss}>
       <RecruitBgImg />
@@ -27,15 +27,15 @@ export const RecruitSubHeader = () => {
           CEOS와 함께 성장할
           <br className="mobile" /> 18기를 모집합니다!
         </Text>
-        {/* <Link href={'recruit/apply'}>
+        {/* <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
           <Button variant="glass" webWidth={182} css={BtnCss}>
             18기 지원하기
           </Button>
         </Link> */}
-        <Button variant="glass" webWidth={234} css={BtnCss} disabled>
+        {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
-        </Button>
-        {/* <Button
+        </Button> */}
+        <Button
           variant="glass"
           webWidth={249}
           css={BtnCss}
@@ -45,7 +45,7 @@ export const RecruitSubHeader = () => {
           }}
         >
           서류 합격 여부 확인하기
-        </Button> */}
+        </Button>
         {/* <Button
           variant="glass"
           webWidth={249}
@@ -60,7 +60,12 @@ export const RecruitSubHeader = () => {
       </div>
       {isOpen && (
         <ModalPortal>
-          <CheckModal step={step} isOpen={isOpen} toggleModal={toggleModal} />
+          <CheckModal
+            step={step}
+            isOpen={isOpen}
+            toggleModal={toggleModal}
+            ref={modalRef}
+          />
         </ModalPortal>
       )}
     </div>
