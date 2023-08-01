@@ -35,3 +35,11 @@ export type KeyOfTShdow = keyof typeof shadow;
 
 export type TypeOfGlass = typeof glass;
 export type KeyOfGlass = keyof typeof glass;
+
+export const customMediaQuery = (minWidth: number): string =>
+  `@media (min-width: ${minWidth}px)`;
+export const media = {
+  custom: customMediaQuery,
+  pc: customMediaQuery(1024),
+  mobile: `@media (max-width : 1023px)`,
+};

@@ -4,6 +4,7 @@ import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
 import { HomeFlex } from '@ceos/styles/landing';
 import { Buttons } from '@ceos/components/Landing/buttons';
+import { Text, media } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
@@ -19,10 +20,8 @@ export default function Home() {
         <Rewards />
       </HomeFlex>
       {/* section2 => white */}
-
       <Buttons dataSection="Blue" />
       {/* section3 => blue */}
-
       <HomeFlex margin="0 auto 0 auto" data-section="White">
         <Sponsors />
       </HomeFlex>
