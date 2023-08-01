@@ -71,7 +71,7 @@ export const MiniBoxCss = css`
   }
 
   @media (max-width: 768px) {
-    width: 166px;
+    width: 100%;
     height: 97px;
   }
 `;

@@ -13,6 +13,7 @@ import Link from 'next/link';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
+  generation: number;
 }
 
 export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
@@ -23,15 +24,15 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
     <div css={RecruitCss}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
-          CEOS 18th <br /> Recruit
+          CEOS {props.generation}th <br /> Recruit
         </p>
         <Text webTypo="Heading4" className="subText">
           CEOS와 함께 성장할
-          <br className="mobile" /> 18기를 모집합니다!
+          <br className="mobile" /> {props.generation}기를 모집합니다!
         </Text>
         {/* <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
           <Button variant="glass" webWidth={182} css={BtnCss}>
-            18기 지원하기
+            {props.generation}기 지원하기
           </Button>
         </Link> */}
         {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>

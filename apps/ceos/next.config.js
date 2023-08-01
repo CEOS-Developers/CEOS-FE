@@ -19,22 +19,22 @@ const nextConfig = {
       {
         source: '/recruit/apply',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/docpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/finpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/nonpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
     ];
   },
