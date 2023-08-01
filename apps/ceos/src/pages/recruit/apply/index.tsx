@@ -242,7 +242,9 @@ const Apply = () => {
         </Text>
       </Flex>
 
-      {isOpen && <SubmitModal submitForm={submitForm} />}
+      {isOpen && (
+        <SubmitModal submitForm={submitForm} onClose={() => setIsOpen(false)} />
+      )}
       {isSubmit && <SuccessModal />}
       {isError && (
         <ErrorModal text={errorText} onClose={() => setIsError(false)} />
