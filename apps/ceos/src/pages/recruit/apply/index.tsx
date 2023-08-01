@@ -7,12 +7,12 @@ import {
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
-} from '@ceos/components/Recruit/interface';
+} from '@ceos/components/recruit/interface';
 import { useEffect, useState } from 'react';
-import Information from '@ceos/components/Recruit/Information';
-import Common from '@ceos/components/Recruit/Common';
-import Part from '@ceos/components/Recruit/Part';
-import Schedule from '@ceos/components/Recruit/Schedule';
+import Information from '@ceos/components/recruit/Information';
+import Common from '@ceos/components/recruit/Common';
+import Part from '@ceos/components/recruit/Part';
+import Schedule from '@ceos/components/recruit/Schedule';
 import { SubmitModal } from '@ceos/components/recruitModal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';

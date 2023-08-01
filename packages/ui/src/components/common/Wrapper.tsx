@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { KeyOfPalette, theme } from '../../styles';
+import { KeyOfPalette, media, theme } from '../../styles';
 
 export const Flex = styled.div<{
   direction?: string;
@@ -66,7 +66,14 @@ export const AbsoluteFlex = styled(Flex)`
 export const Space = styled.div<{
   height?: number;
   width?: number;
+  mobileHeight?: number;
+  mobileWidth?: number;
 }>`
   height: ${({ height }) => (height ? `${height}px` : '')};
   width: ${({ width }) => (width ? `${width}px` : '')};
+
+  ${media.mobile} {
+    height: ${({ mobileHeight }) => (mobileHeight ? `${mobileHeight}px` : '')};
+    width: ${({ mobileWidth }) => (mobileWidth ? `${mobileWidth}px` : '')};
+  }
 `;

@@ -1,17 +1,17 @@
 import { Flex, Mobile, theme } from '@ceos-fe/ui';
-import { RecruitSubHeader } from '@ceos/components/Recruit/recruitSubHeader';
+import { RecruitSubHeader } from '@ceos/components/recruit/recruitSubHeader';
 import { RecruitMainCss } from '@ceos/styles/recruit';
 import { Text } from '@ceos-fe/ui';
 import {
   RecruitBoxCss,
   RecruitMiniBox,
-} from '@ceos/components/Recruit/recruitBox';
+} from '@ceos/components/recruit/recruitBox';
 import {
   BtnWrapper,
   DesginBtn,
   DevBtn,
   PMBtn,
-} from '@ceos/components/Recruit/recruitBtn';
+} from '@ceos/components/recruit/recruitBtn';
 import { css } from '@emotion/react';
 import { FooterText } from '@ceos/components/FooterText';
 import { notionUrl } from '@ceos/assets/constant';
