@@ -32,15 +32,12 @@ const Recruit = () => {
           css={{
             ...RecruitBoxCss({
               width: 1032,
-              height: 90,
               margin: '0 0 124px 0',
             }),
           }}
         >
-          <p>
-            IT 창업에 열정 있는 서강대 / 연세대 / 이화여대 / 홍익대 학생 누구나
-            지원 가능합니다. 전공, 나이, 학번은 무관합니다.
-          </p>
+          IT 창업에 열정 있는 서강대 / 연세대 / 이화여대 / 홍익대 학생 누구나
+          지원 가능합니다. 전공, 나이, 학번은 무관합니다.
         </div>
         <Text webTypo="Heading3" margin="0 0 12px 0">
           모집 직군
@@ -59,7 +56,7 @@ const Recruit = () => {
           gap : 24px;
           margin : 0 0 12px 0
           justify-content : space-between;
-            @media (max-width: 390px) {
+            @media (max-width: 768px) {
               width: 346px;
               flex-wrap: wrap;
               gap: 14px;

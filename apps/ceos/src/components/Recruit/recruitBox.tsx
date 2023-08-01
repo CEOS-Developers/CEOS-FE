@@ -8,16 +8,13 @@ interface MiniBoxProps {
 
 export const RecruitBoxCss = ({
   width,
-  height,
   margin = '0',
 }: {
   width: number;
-  height: number;
   margin?: string;
 }) => css`
   background-color: ${theme.palette.Gray1};
   width: ${width}px;
-  height: ${height}px;
   margin: ${margin};
   display: flex;
   flex-direction: column;
@@ -28,7 +25,7 @@ export const RecruitBoxCss = ({
   border-radius: 16px;
   word-break: keep-all;
   text-align: center;
-  typo: ${theme.typo.Web.Body1};
+  ${theme.typo.Web.Body1};
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -37,7 +34,7 @@ export const RecruitBoxCss = ({
   @media (max-width: 390px) {
     width: 347px;
     height: 219px;
-    typo: ${theme.typo.Mobile.Body1};
+    ${theme.typo.Mobile.Body1};
     margin-bottom: 48px;
   }
 `;
@@ -73,7 +70,7 @@ export const MiniBoxCss = css`
     width: 200px;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     width: 166px;
     height: 97px;
   }

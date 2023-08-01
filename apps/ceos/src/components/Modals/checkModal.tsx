@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { forwardRef } from 'react';
 
 /**
  * @param step '서류' | '최종'
@@ -22,143 +23,145 @@ interface FormInterface {
   uuid: string;
 }
 
-export const CheckModal = (props: ModalProps) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
+  (props, ref) => {
+    const queryClient = useQueryClient();
+    const router = useRouter();
 
-  const { getValues, register, reset } = useForm<FormInterface>({
-    defaultValues: {
-      uuid: '',
-      email: '',
-    },
-  });
+    const { getValues, register, reset } = useForm<FormInterface>({
+      defaultValues: {
+        uuid: '',
+        email: '',
+      },
+    });
 
-  const handleSubmit = async () => {
-    //서류 체크
-    if (props.step === '서류') {
-      try {
-        const passCheck = await recruitApi.GET_DOCPASS({
-          uuid: getValues('uuid'),
-          email: getValues('email'),
-        });
-
-        queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
-        if (passCheck.data.pass === '불합격') {
-          router.push({
-            pathname: '/recruit/nonpass',
-            query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
+    const handleSubmit = async () => {
+      //서류 체크
+      if (props.step === '서류') {
+        try {
+          const passCheck = await recruitApi.GET_DOCPASS({
+            uuid: getValues('uuid'),
+            email: getValues('email'),
           });
-        } else if (passCheck.data.pass === '합격') {
-          router.push({
-            pathname: '/recruit/docpass',
-            query: {
-              uuid: getValues('uuid'),
-              email: getValues('email'),
-              pass: passCheck.data.pass,
-              name: passCheck.data.name,
-              date: passCheck.data.date,
-              duration: passCheck.data.duration,
-            },
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    } else if (props.step === '최종') {
-      try {
-        const passCheck = await recruitApi.GET_FINPASS({
-          uuid: getValues('uuid'),
-          email: getValues('email'),
-        });
 
-        queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
-        if (passCheck.data.pass === '불합격') {
-          router.push({
-            pathname: '/recruit/nonpass',
-            query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
-          });
-        } else if (passCheck.data.pass === '합격') {
-          router.push({
-            pathname: '/recruit/finpass',
-            query: {
-              uuid: getValues('uuid'),
-              email: getValues('email'),
-              pass: passCheck.data.pass,
-              name: passCheck.data.name,
-            },
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
-  return (
-    <div css={backCss} className="open">
-      <div css={ModalBoxCss}>
-        <CloseIcon
-          isOpen={props.isOpen}
-          toggleModal={props.toggleModal}
-          margin="0 0 auto auto"
-        />
-        <div css={ModalContentCss}>
-          <Text
-            webTypo="Heading2"
-            mobileTypo="Heading2"
-            paletteColor="Blue"
-            margin="0 0 12px 0"
-          >
-            {props.step} 합격 여부 확인하기
-          </Text>
-          <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
-            지원서에 작성해주신 이메일과,
-            <br />
-            해당 메일로 발급된 uuid를 입력해주세요.
-          </Text>
-        </div>
-        <div css={InputCss}>
-          <TextField
-            {...register('uuid', { required: true })}
-            label="uuid"
-            placeholder="내용을 입력해주세요."
-            width={376}
-            css={css`
-              @media (max-width: 1023px) {
-                width: 306px;
-              }
-            `}
-          />
-          <TextField
-            {...register('email', {
-              required: true,
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                message: '이메일 형식이 아닙니다.',
+          queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
+          if (passCheck.data.pass === '불합격') {
+            router.push({
+              pathname: '/recruit/nonpass',
+              query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
+            });
+          } else if (passCheck.data.pass === '합격') {
+            router.push({
+              pathname: '/recruit/docpass',
+              query: {
+                uuid: getValues('uuid'),
+                email: getValues('email'),
+                pass: passCheck.data.pass,
+                name: passCheck.data.name,
+                date: passCheck.data.date,
+                duration: passCheck.data.duration,
               },
-            })}
-            label="이메일"
-            placeholder="내용을 입력해주세요."
-            width={376}
-            css={css`
-              @media (max-width: 1023px) {
-                width: 306px;
-              }
-            `}
+            });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      } else if (props.step === '최종') {
+        try {
+          const passCheck = await recruitApi.GET_FINPASS({
+            uuid: getValues('uuid'),
+            email: getValues('email'),
+          });
+
+          queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
+          if (passCheck.data.pass === '불합격') {
+            router.push({
+              pathname: '/recruit/nonpass',
+              query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
+            });
+          } else if (passCheck.data.pass === '합격') {
+            router.push({
+              pathname: '/recruit/finpass',
+              query: {
+                uuid: getValues('uuid'),
+                email: getValues('email'),
+                pass: passCheck.data.pass,
+                name: passCheck.data.name,
+              },
+            });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    };
+
+    return (
+      <div css={backCss} className="open">
+        <div css={ModalBoxCss} ref={ref}>
+          <CloseIcon
+            isOpen={props.isOpen}
+            toggleModal={props.toggleModal}
+            margin="0 0 auto auto"
           />
-          <Button
-            variant="default"
-            webWidth={376}
-            mobileWidth={306}
-            onClick={handleSubmit}
-          >
-            확인하기
-          </Button>
+          <div css={ModalContentCss}>
+            <Text
+              webTypo="Heading2"
+              mobileTypo="Heading2"
+              paletteColor="Blue"
+              margin="0 0 12px 0"
+            >
+              {props.step} 합격 여부 확인하기
+            </Text>
+            <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
+              지원서에 작성해주신 이메일과,
+              <br />
+              해당 메일로 발급된 uuid를 입력해주세요.
+            </Text>
+          </div>
+          <div css={InputCss}>
+            <TextField
+              {...register('uuid', { required: true })}
+              label="uuid"
+              placeholder="내용을 입력해주세요."
+              width={376}
+              css={css`
+                @media (max-width: 1023px) {
+                  width: 306px;
+                }
+              `}
+            />
+            <TextField
+              {...register('email', {
+                required: true,
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                  message: '이메일 형식이 아닙니다.',
+                },
+              })}
+              label="이메일"
+              placeholder="내용을 입력해주세요."
+              width={376}
+              css={css`
+                @media (max-width: 1023px) {
+                  width: 306px;
+                }
+              `}
+            />
+            <Button
+              variant="default"
+              webWidth={376}
+              mobileWidth={306}
+              onClick={handleSubmit}
+            >
+              확인하기
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 export const ModalBoxCss = css`
   width: 504px;

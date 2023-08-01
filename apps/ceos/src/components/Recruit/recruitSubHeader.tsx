@@ -1,11 +1,9 @@
-import { Logo } from '@ceos/assets/logo';
 import {
   RecruitCss,
   RecruitTextCss,
   RecruitBgText,
 } from '@ceos/styles/recruit';
 import { Button, Text } from '@ceos-fe/ui';
-import { RecruitBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
@@ -18,11 +16,11 @@ interface RecruitSubHeaderProps {
 }
 
 export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
-  const { isOpen, toggleModal } = useModal();
+  const { modalRef, isOpen, toggleModal } = useModal();
   const [step, setStep] = useState('');
+
   return (
-    <div css={RecruitCss} data-section={props.dataSection}>
-      <RecruitBgImg />
+    <div css={RecruitCss}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
           CEOS 18th <br /> Recruit
@@ -31,17 +29,18 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           CEOS와 함께 성장할
           <br className="mobile" /> 18기를 모집합니다!
         </Text>
-        {/* <Link href={'recruit/apply'}>
+        {/* <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
           <Button variant="glass" webWidth={182} css={BtnCss}>
             18기 지원하기
           </Button>
         </Link> */}
-        <Button variant="glass" webWidth={234} css={BtnCss} disabled>
+        {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
-        </Button>
-        {/* <Button
+        </Button> */}
+        <Button
           variant="glass"
           webWidth={249}
+          mobileWidth={249}
           css={BtnCss}
           onClick={() => {
             toggleModal();
@@ -49,7 +48,7 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           }}
         >
           서류 합격 여부 확인하기
-        </Button> */}
+        </Button>
         {/* <Button
           variant="glass"
           webWidth={249}
@@ -64,7 +63,12 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
       </div>
       {isOpen && (
         <ModalPortal>
-          <CheckModal step={step} isOpen={isOpen} toggleModal={toggleModal} />
+          <CheckModal
+            step={step}
+            isOpen={isOpen}
+            toggleModal={toggleModal}
+            ref={modalRef}
+          />
         </ModalPortal>
       )}
     </div>
@@ -81,7 +85,7 @@ export const BtnCss = css`
     height: 40px;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     margin-top: 90px;
     width: 346px;
     height: 59px;

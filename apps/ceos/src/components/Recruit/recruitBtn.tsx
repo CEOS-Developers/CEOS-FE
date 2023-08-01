@@ -319,7 +319,7 @@ export const BtnWrapper = css`
   gap: 24px;
   margin-bottom: 36px;
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     width: 346px;
     flex-direction: column;
   }
