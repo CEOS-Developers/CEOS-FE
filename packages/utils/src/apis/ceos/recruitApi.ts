@@ -41,6 +41,16 @@ export interface PostApplyValuesInterface extends RecruitApplyInterface {
 }
 
 export const recruitApi = {
+  GET_STUDY_URL: async () => {
+    try {
+      const response = await ceosInstance.get(`/recruitments`).then((res) => {
+        return res.data.data;
+      });
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   GET_DOCPASS: async ({ uuid, email }: { uuid: string; email: string }) => {
     try {
       const response = await ceosInstance
