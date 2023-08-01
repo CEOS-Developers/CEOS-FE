@@ -3,9 +3,18 @@ import { GlassShortcut } from '../Shortcut';
 import { BgCss, BtnCss } from '@ceos/styles/landing';
 import Link from 'next/link';
 
-export const Buttons = () => {
+interface BtnProps {
+  className?: string;
+  dataSection?: string;
+}
+
+export const Buttons = (props: BtnProps) => {
   return (
-    <div css={BgCss}>
+    <div
+      css={BgCss}
+      className={props.className}
+      data-section={props.dataSection}
+    >
       <MiniBgImg />
       <div css={BtnCss}>
         <Link href={'/project'}>

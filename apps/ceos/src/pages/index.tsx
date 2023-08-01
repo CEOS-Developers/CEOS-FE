@@ -1,3 +1,5 @@
+import React from 'react';
+import { css } from '@emotion/react';
 import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
 import { HomeFlex } from '@ceos/styles/landing';
@@ -7,7 +9,29 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
 import { FooterText } from '@ceos/components/FooterText';
 import { useForm } from 'react-hook-form';
-import { css } from '@emotion/react';
+
+export default function Home() {
+  return (
+    <main className="main">
+      <SubHeader dataSection="Blue" />
+      {/* section1 => blue */}
+      <HomeFlex margin="0 auto 0 auto" data-section="White">
+        <Rewards />
+      </HomeFlex>
+      {/* section2 => white */}
+
+      <Buttons dataSection="Blue" />
+      {/* section3 => blue */}
+
+      <HomeFlex margin="0 auto 0 auto" data-section="White">
+        <Sponsors />
+      </HomeFlex>
+      {/* section4 => white */}
+      <FooterText />
+      {/*section 5 */}
+    </main>
+  );
+}
 
 export const getStaticProps = async () => {
   try {
@@ -17,7 +41,7 @@ export const getStaticProps = async () => {
       awardApi.GET_AWARD({ pageNum: 0, limit: 20 });
     });
     await queryClient.prefetchQuery(['ceos', 'sponsor'], () => {
-      sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 4 });
+      sponsorApi.GET_SPONSORS({ pageNum: 0, limit: 10 });
     });
 
     return {
@@ -29,37 +53,3 @@ export const getStaticProps = async () => {
     console.error(err);
   }
 };
-
-export default function Home() {
-  const { register, watch, setValue } = useForm({
-    defaultValues: {
-      date: '',
-      adminDate: '',
-    },
-  });
-
-  return (
-    <main
-      css={css`
-        overflow-x: hidden;
-      `}
-    >
-      <SubHeader />
-      {/* section1 => blue */}
-      <HomeFlex margin="0 auto 0 auto">
-        <Rewards />
-      </HomeFlex>
-      {/* section2 => white */}
-
-      <Buttons />
-      {/* section3 => blue */}
-
-      <HomeFlex margin="0 auto 0 auto">
-        <Sponsors />
-      </HomeFlex>
-      {/* section4 => white */}
-      <FooterText />
-      {/*section 5 */}
-    </main>
-  );
-}

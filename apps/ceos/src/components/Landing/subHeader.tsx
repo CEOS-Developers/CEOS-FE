@@ -3,9 +3,18 @@ import { BgImage } from '@ceos/assets/bgImage';
 import { MainCss, BgText } from '@ceos/styles/landing';
 import { Text } from '@ceos-fe/ui';
 
-export const SubHeader = () => {
+interface SubHeaderProps {
+  className?: string;
+  dataSection?: string;
+}
+
+export const SubHeader = (props: SubHeaderProps) => {
   return (
-    <div css={MainCss}>
+    <div
+      css={MainCss}
+      className={props.className}
+      data-section={props.dataSection}
+    >
       <BgImage />
       <div css={BgText}>
         <Text webTypo="Heading2" mobileTypo="Heading1_Kor" paletteColor="White">

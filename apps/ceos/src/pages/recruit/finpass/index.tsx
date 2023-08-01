@@ -27,7 +27,7 @@ const FinPass = () => {
   }, []);
 
   return (
-    <div css={PassMainCss}>
+    <div css={PassMainCss} data-section="Blue">
       <PassBgImg />
       <div css={PassContentCss}>
         <p css={WelcomeText}>Welcome CEOS 18th</p>

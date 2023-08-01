@@ -31,7 +31,7 @@ const Pass = () => {
   }, []);
 
   return (
-    <div css={PassMainCss}>
+    <div css={PassMainCss} data-section="Blue">
       <PassBgImg />
       <div css={PassContentCss}>
         <Text
