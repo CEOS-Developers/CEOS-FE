@@ -4,7 +4,7 @@ import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
 import { HomeFlex } from '@ceos/styles/landing';
 import { Buttons } from '@ceos/components/Landing/buttons';
-import { Text } from '@ceos-fe/ui';
+import { Text, media } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
@@ -34,6 +34,7 @@ import { DatePicker, Flex, TextField } from '@ceos-fe/ui';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import React from 'react';
+import styled from '@emotion/styled';
 
 export default function Home() {
   const { register, watch, setValue } = useForm({
@@ -44,12 +45,16 @@ export default function Home() {
   });
 
   return (
-    <main>
+    <main
+      css={css`
+        overflow: hidden;
+      `}
+    >
       <SubHeader />
       {/* section1 => blue */}
-      <HomeFlex margin="0 auto 0 auto">
-        <Rewards />
-      </HomeFlex>
+
+      <Rewards />
+
       {/* section2 => white */}
 
       <Buttons />
