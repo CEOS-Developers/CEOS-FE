@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { palette } from './palette';
-import { theme } from './theme';
 
 export const glass = {
   Glass: css`

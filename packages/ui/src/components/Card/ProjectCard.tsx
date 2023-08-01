@@ -28,13 +28,7 @@ export const ProjectCard = (props: {
     props.projectCard;
   return (
     <Wrapper>
-      {/* <ProjectImg src={previewImage.imageUrl} className="ceos" width={328} height={184}/> */}
-      <ProjectImg
-        src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-        className="ceos"
-        width={328}
-        height={184}
-      />
+      <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
 
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
@@ -42,7 +36,7 @@ export const ProjectCard = (props: {
             {name}
           </Text>
           <Text webTypo="Label2" mobileTypo="Label2" paletteColor="Gray4">
-            {generation}
+            {generation}기
           </Text>
         </Row>
         <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Black">
@@ -64,9 +58,9 @@ export const AdminProjectCard = ({
   ...props
 }: AdminProjectCardProps) => {
   return (
-    <RelativeContainer width={328} height={290}>
+    <RelativeContainer width={346} height={290}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={thumbnailImage.imageUrl} width={328} height={184} />
+        <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -97,6 +91,8 @@ export const AdminProjectCard = ({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  width: 346px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -112,9 +108,10 @@ const Wrapper = styled.div`
 `;
 
 const ProjectImg = styled.img`
-  // width: 328px;
-  // height: 184px;
   border-radius: 16px;
+  width: 100%;
+  height: 184px;
+  object-fit: cover;
 
   @media (max-width: 1023px) {
     &.ceos {
@@ -126,10 +123,7 @@ const ProjectImg = styled.img`
 `;
 
 const ExplainBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 328px;
-  height: 122px;
+  width: 100%;
   margin-top: -20px;
   z-index: -1;
   padding: 14px 20px 20px;
@@ -137,14 +131,26 @@ const ExplainBox = styled.div`
   border-radius: 16px;
 
   background-color: ${theme.palette.Gray1};
-  box-shadow: ${theme.shadow.Card.Black};
+
+  animation: slide-in-project-card 0.1s ease-in;
 
   @media (max-width: 1023px) {
-    &.ceos-hover {
-      margin-top: -0.5rem;
-      width: 346px;
-      height: 89px;
-      border-radius: 10px;
+    padding: 24px 20px 20px;
+    margin-top: -10px;
+    width: 346px;
+    border-radius: 10px;
+    display: block;
+  }
+  @media (min-width: 1023px) {
+    box-shadow: ${theme.shadow.Card.Black};
+  }
+
+  @keyframes slide-in-project-card {
+    0% {
+      clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
     }
   }
 `;

@@ -6,9 +6,11 @@ import { MenuBtn } from '../../assets/header/menuBtn';
 import { theme } from '@ceos-fe/ui';
 import { MenuBar } from '../MenuBar';
 import styled from '@emotion/styled';
-import { useModal } from '@ceos-fe/utils';
+import { useModal, useWindowTabletResize } from '@ceos-fe/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { HeaderState } from '@ceos/state';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -19,7 +21,8 @@ export const Header = (props: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isOpen, modalRef, toggleModal } = useModal();
   const router = useRouter();
-
+  const [, setBackColor] = useRecoilState(HeaderState);
+  const isMobile = useWindowTabletResize();
   //최상단인지 check
   useEffect(() => {
     const handleScroll = () => {
@@ -32,9 +35,72 @@ export const Header = (props: HeaderProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll('[data-section]'));
+    const rootMargin = isMobile ? `${70 * -1}px` : `${124 * -1}px`;
+    const option = {
+      rootMargin: rootMargin,
+      //모바일 되면 마진값 바꾸깅
+      threshold: 0,
+    };
+
+    let direction = 'up';
+    let prevYPosition = 0;
+
+    const updateBackColor = (target: Element) => {
+      const element = target as HTMLElement;
+      const color = element.dataset.section as KeyOfPalette;
+      setBackColor(color);
+    };
+
+    const getTargetSection = (entry: IntersectionObserverEntry) => {
+      const index = sections.findIndex((section) => section === entry.target);
+
+      if (index >= sections.length - 1) {
+        return entry.target;
+      } else {
+        return sections[index + 1];
+      }
+    };
+
+    const shouldUpdate = (entry: any) => {
+      if (direction === 'down' && !entry.isIntersecting) {
+        return true;
+      }
+
+      if (direction === 'up' && entry.isIntersecting) {
+        return true;
+      }
+
+      return false;
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (window.scrollY > prevYPosition) {
+          direction = 'down';
+        } else {
+          direction = 'up';
+        }
+
+        prevYPosition = window.scrollY;
+
+        const target =
+          direction === 'down' ? getTargetSection(entry) : entry.target;
+        if (entry.boundingClientRect.top <= 0 && shouldUpdate(entry)) {
+          updateBackColor(target);
+        }
+      });
+    }, option);
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  }, [router.pathname]);
+
   return (
     <>
-      <nav css={navCss({ backColor, isScrolled })}>
+      <nav css={navCss({ backColor, isScrolled })} data-header>
         <CustomLink href="/">
           <Logo
             backColor={backColor === 'White' ? 'Blue' : 'White'}
@@ -90,15 +156,15 @@ const navCss = ({
   position: fixed;
   top: 0;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 70px;
   z-index: 2;
   background-color: ${!isScrolled && backColor === 'Blue'
     ? theme.palette.Opacity[backColor]
     : theme.palette[backColor]};
-
+  transition: background-color 200ms, color 200ms;
   @media (max-width: 1023px) {
-    width: 100%;
+    width: 100vw;
     height: 124px;
     align-items: flex-end;
     .logo {
@@ -118,25 +184,26 @@ export const contentCss = (backColor: KeyOfPalette) => css`
     display: none;
   }
 
-
   @media (max-width: 1023px) {
+    gap: 0px;
     .text {
       display: none;
     }
     .menu {
       display: block;
     }
-    margin-right : 22px;
-    margin-bottom : 27px;
-  }
+    margin-right: 22px;
+    margin-bottom: 27px;
   }
 `;
 
 export const Content = styled.div`
   box-sizing: border-box;
 
+  transition: color 0.3s;
+
   &:hover {
-    cursor: grab;
+    cursor: pointer;
     color: ${theme.palette.Green};
   }
 `;

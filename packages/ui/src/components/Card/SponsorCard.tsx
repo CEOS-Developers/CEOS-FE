@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { AbsoluteFlex, Flex, RelativeContainer, Text } from '../common';
 
@@ -72,9 +72,9 @@ const Wrapper = styled.div`
   background-color: ${theme.palette.Gray1};
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
-  @media (max-width: 1023px) {
-  }
-  @media (max-width: 767px) {
+  ${media.mobile} {
+    width: 100%;
+    height: 171px;
   }
 `;
 
@@ -84,6 +84,11 @@ const Profile = styled.img<{ admin?: boolean }>`
   background-color: ${theme.palette.Gray5};
   border-radius: 12px;
   margin-bottom: ${({ admin }) => (admin ? '16px' : '24px;')};
+
+  @media (max-width: 1023px) {
+    height: 90px;
+    width: 90px;
+  }
 `;
 
 const Button = styled.button`

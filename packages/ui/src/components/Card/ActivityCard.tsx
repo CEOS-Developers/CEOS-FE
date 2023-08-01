@@ -21,12 +21,7 @@ export const ActivityCard = (props: {
   const { imageUrl, name, content } = props.activityCard;
   return (
     <Flex direction="column" width="auto">
-      {/* <ActivityImg src={imageUrl} /> */}
-      <ActivityImg
-        src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-        width={328}
-        height={184}
-      />
+      <ActivityImg src={imageUrl} width={328} height={184} />
 
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">

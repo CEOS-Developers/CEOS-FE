@@ -14,6 +14,8 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { AxiosError } from 'axios';
+import { useAlert } from '../../hooks/useAlert';
+import { Alert } from '@admin/components/Alert';
 
 type FaqCategoryKorType =
   | '리크루팅 관련 질문'
@@ -46,6 +48,8 @@ export default function Faq() {
     name: 'faqList',
   });
 
+  const { isOpen, type, openAlert } = useAlert();
+
   const { data, isFetching, isSuccess } = useQuery<FaqResponse, AxiosError>(
     ['admin', 'faq', watch('category')],
     () => adminFaqApi.GET_FAQ(CATEGORY_MAP[watch('category')]),
@@ -54,17 +58,26 @@ export default function Faq() {
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.POST_FAQ);
+  >(adminFaqApi.POST_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: patchFaqMutation } = useMutation<
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.PATCH_FAQ);
+  >(adminFaqApi.PATCH_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
   const { mutate: deleteFaqMutation } = useMutation<
     FaqListItemInterface,
     AxiosError,
     FaqListItemInterface
-  >(adminFaqApi.DELETE_FAQ);
+  >(adminFaqApi.DELETE_FAQ, {
+    onSuccess: () => openAlert('success'),
+    onError: () => openAlert('error'),
+  });
 
   useEffect(() => {
     if (!isFetching && isSuccess) {
@@ -113,8 +126,13 @@ export default function Faq() {
         </Text>
       </Flex>
 
-      <Flex direction="column" webGap={24} style={{ marginTop: '48px' }}>
-        <Flex webGap={24}>
+      <Flex
+        direction="column"
+        webGap={24}
+        mobileGap={24}
+        style={{ marginTop: '48px' }}
+      >
+        <Flex webGap={24} mobileGap={24}>
           <SelectButton
             variant="admin"
             value="리크루팅 관련 질문"
@@ -136,8 +154,8 @@ export default function Faq() {
         </Flex>
 
         {fields.map((faq, idx) => (
-          <Flex key={faq.id} direction="column" webGap={16}>
-            <Flex webGap={8} align="flex-end">
+          <Flex key={faq.id} direction="column" webGap={16} mobileGap={16}>
+            <Flex webGap={8} mobileGap={8} align="flex-end">
               <TextField
                 {...register(`faqList.${idx}.question`)}
                 label="질문"
@@ -177,12 +195,20 @@ export default function Faq() {
           webWidth={128}
           onClick={handleAppendQuestion}
         >
-          <Flex webGap={4}>
+          <Flex webGap={4} mobileGap={4}>
             <Plus />
             질문 추가하기
           </Flex>
         </Button>
       </Flex>
+      {isOpen && (
+        <Alert
+          type={type}
+          message={
+            type === 'success' ? '요청에 성공했습니다' : '요청에 실패했습니다'
+          }
+        />
+      )}
     </>
   );
 }

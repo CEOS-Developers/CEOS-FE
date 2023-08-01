@@ -11,6 +11,6 @@ export const Mobile = styled.div`
   display: none;
   @media (max-width: 1023px) {
     width: 100%;
-    display: flex;
+    display: grid;
   }
 `;

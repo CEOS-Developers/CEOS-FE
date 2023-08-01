@@ -1,7 +1,7 @@
 import { ArrowUpRight } from '@ceos/assets/ArrowUpRight';
 import styled from '@emotion/styled';
 import { ButtonHTMLAttributes } from 'react';
-import { Flex, theme } from '@ceos-fe/ui';
+import { Flex, media, theme } from '@ceos-fe/ui';
 import { Diamond } from '@ceos/assets/Diamond';
 
 /**
@@ -43,7 +43,7 @@ export const GlassShortcutwithTitle = ({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <GlassStyledButton {...props}>
+    <GlassStyledButtonWithTitle {...props}>
       <div className="text-container">
         {title}
         <Flex webGap={16} mobileGap={8} className="shortcut2-diamond-text">
@@ -52,7 +52,7 @@ export const GlassShortcutwithTitle = ({
           <Diamond />
         </Flex>
       </div>
-    </GlassStyledButton>
+    </GlassStyledButtonWithTitle>
   );
 };
 
@@ -100,8 +100,21 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
   }
 
   @media (max-width: 1023px) {
-    width: 346px;
-    height: ${(props) => (props.typeNum == 1 ? '69px' : '101px')};
+    width: 200px;
+    height: ${(props) => (props.typeNum == 1 ? '60px' : '101px')};
+    border-radius: 10px;
+
+    .text-container {
+      ${theme.typo.Mobile.Body2};
+    }
+    .shortcut1-diamond-text,
+    .shortcut2-diamond-text {
+      ${theme.typo.Web.Label3}
+    }
+  }
+  ${media.mobile} {
+    width: 100%;
+    height: ${(props) => (props.typeNum == 1 ? '75px' : '101px')};
     border-radius: 10px;
 
     .text-container {
@@ -112,5 +125,12 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
     .shortcut2-diamond-text {
       ${theme.typo.Web.Label3}
     }
+  }
+`;
+
+const GlassStyledButtonWithTitle = styled(GlassStyledButton)`
+  @media (max-width: 1023px) {
+    width: 100%;
+    min-width: 346px;
   }
 `;

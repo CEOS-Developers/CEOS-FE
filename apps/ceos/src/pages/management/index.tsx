@@ -1,5 +1,5 @@
 import { Title } from '@ceos/components/Title';
-import { Flex, MentorCard, ManagementCard } from '@ceos-fe/ui';
+import { Flex, MentorCard, ManagementCard, EmptyCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -33,9 +33,14 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'management'], () => {
-      managementApi.GET_MANAGE({ pageNum: 0, limit: 1000 });
+    await queryClient.prefetchQuery(['ceos', 'mentor'], () => {
+      managementApi.GET_MENTOR({ pageNum: 0, limit: 1000 });
     });
+
+    await queryClient.prefetchQuery(['ceos', 'manager'], () => {
+      managementApi.GET_MANAGER();
+    });
+
     return {
       props: {
         dehydratedProps: dehydrate(queryClient),
@@ -47,29 +52,20 @@ export const getStaticProps = async () => {
 };
 
 const Management = () => {
-  const { data } = useQuery<ManageResponse>(
-    ['ceos', 'management'],
-    async () => {
-      const manageData = await managementApi.GET_MANAGE({
-        pageNum: 0,
-        limit: 1000,
-      });
+  const { data } = useQuery(['ceos', 'mentor'], async () => {
+    const manageData = await managementApi.GET_MENTOR({
+      pageNum: 0,
+      limit: 1000,
+    });
+    const partManagerData = await managementApi.GET_MANAGER();
+    return { manageData, partManagerData };
+  });
 
-      return manageData;
-    },
-  );
+  const mentors = data?.manageData?.content?.filter((m: ManagerInterface) => {
+    return m.role === '멘토';
+  });
 
-  const managers = data
-    ? data.managers?.filter((m: ManagerInterface) => {
-        return m.role === '운영진';
-      })
-    : [];
-
-  const mentors = data
-    ? data.managers?.filter((m: ManagerInterface) => {
-        return m.role === '멘토';
-      })
-    : [];
+  const managers = data?.partManagerData;
 
   return (
     <Flex
@@ -77,21 +73,40 @@ const Management = () => {
       css={css`
         width: 1032px;
         margin: 80px 0 100px 0px;
+
+        @media (max-width: 1023px) {
+          width: 750px;
+        }
+        @media (max-width: 390px) {
+          width: 346px;
+          margin-top: 36px;
+        }
       `}
+      data-section="White"
     >
       <Title
         title="MANAGEMENT"
         explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
       />
       <div css={ListCss}>
-        {managers?.map((manager: ManagerInterface) => (
+        {managers?.presidency.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        <EmptyCard />
+        {managers?.generalAffairs.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        {managers?.partLeaders.map((manager: ManagerInterface) => (
+          <ManagementCard key={manager.id} managementCard={manager} />
+        ))}
+        {managers?.managers.map((manager: ManagerInterface) => (
           <ManagementCard key={manager.id} managementCard={manager} />
         ))}
       </div>
       <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
       <div css={ListCss}>
-        {mentors?.map((manager: ManagerInterface) => (
-          <MentorCard key={manager.id} mentorCard={manager} />
+        {mentors?.map((mentor: ManagerInterface) => (
+          <MentorCard key={mentor.id} mentorCard={mentor} />
         ))}
       </div>
     </Flex>

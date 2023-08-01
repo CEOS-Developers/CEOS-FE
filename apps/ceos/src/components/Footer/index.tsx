@@ -1,14 +1,8 @@
 import styled from '@emotion/styled';
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  RelativeContainer,
-  Text,
-} from '../../../../../packages/ui';
+import { Desktop, Flex, Mobile, Text, theme } from '@ceos-fe/ui';
 import { CustomLink } from '../MenuBar';
 import { GlassShortcutwithTitle } from '../Shortcut';
-import Image from 'next/image';
+import Link from 'next/link';
 
 interface ButtonProps {
   title?: string;
@@ -24,22 +18,16 @@ const Footer = ({
   rightBtn: ButtonProps;
 }) => {
   return (
-    <Flex direction="column">
+    <Wrapper>
       <Desktop>
-        <RelativeContainer height={500}>
-          <Background
-            alt="background"
-            src="/shortcuts.svg"
-            width={0}
-            height={0}
-          />
-          <GlassFlex direction="column" webGap={80} height="auto">
-            <Flex webGap={24}>
-              <CustomLink href={`${leftBtn.link}`}>
+        <Container>
+          <Flex direction="column" webGap={80}>
+            <Flex webGap={24} height={159}>
+              <Link href={`${leftBtn.link}`}>
                 <GlassShortcutwithTitle title={`${leftBtn.title}`}>
                   {leftBtn.content[0]} <br /> {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
 
               <CustomLink href={`${rightBtn.link}`}>
                 <GlassShortcutwithTitle title={`${rightBtn.title}`}>
@@ -50,64 +38,57 @@ const Footer = ({
             <Text paletteColor="White" webTypo="Label3">
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
-          </GlassFlex>
-        </RelativeContainer>
+          </Flex>
+        </Container>
       </Desktop>
 
       <Mobile>
-        <RelativeContainer align="start" height={500}>
-          <Background
-            alt="background"
-            src="/mobileShortcuts.svg"
-            width={0}
-            height={0}
-          />
-          <GlassFlex direction="column" mobileGap={63}>
-            <Flex mobileGap={17} direction="column">
-              <CustomLink href="/FAQ">
-                <GlassShortcutwithTitle title="더 궁금한 것이 있다면">
-                  자주 묻는 질문 <br /> 보러가기
+        <Container>
+          <Flex direction="column" mobileGap={63}>
+            <Flex mobileGap={17} direction="column" height={219} width={101}>
+              <Link href={`${leftBtn.link}`}>
+                <GlassShortcutwithTitle title={`${leftBtn.title}`}>
+                  {leftBtn.content[0]} {leftBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
 
-              <CustomLink href="/recruit">
-                <GlassShortcutwithTitle title="CEOS에 참여하고 싶다면">
-                  CEOS 18기 <br /> 지원하기
+              <Link href={`${rightBtn.link}`}>
+                <GlassShortcutwithTitle title={`${rightBtn.title}`}>
+                  {rightBtn.content[0]} {rightBtn.content[1]}
                 </GlassShortcutwithTitle>
-              </CustomLink>
+              </Link>
             </Flex>
             <Text paletteColor="White" webTypo="Label3">
               © 2016-2023 CEOS ALL RIGHTS RESERVED.
             </Text>
-          </GlassFlex>
-        </RelativeContainer>
+          </Flex>
+        </Container>
       </Mobile>
-    </Flex>
+    </Wrapper>
   );
 };
 
 export default Footer;
 
-const GlassFlex = styled(Flex)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 99;
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 420px;
+  background-color: ${theme.palette.Blue};
+
   @media (max-width: 1023px) {
-    bottom: 30px;
+    height: 393px;
   }
 `;
 
-const Background = styled(Image)`
-  width: 100%;
-  height: auto;
-  z-index: -99;
-  max-height: 500px;
+const Container = styled.div`
+  width: 100vw;
+  height: 420px;
+  background-image: url('/footer/background-desktop.png');
+  background-size: 1660px;
+  background-position: center;
 
   @media (max-width: 1023px) {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: auto;
-    max-height: 500px;
+    height: 393px;
+    background-image: url('/footer/background-mobile.png');
   }
 `;

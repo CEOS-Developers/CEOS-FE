@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles';
 import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import { css } from '@emotion/react';
 
 export interface ManagementCardProps {
   imageUrl?: string;
@@ -82,6 +83,22 @@ export const MentorCard = (props: {
   );
 };
 
+export const EmptyCard = () => {
+  return (
+    <div
+      css={css`
+        width: 240px;
+
+        @media (max-width: 1023px) {
+          width: 166px;
+          display: flex;
+          gap: 14px;
+        }
+      `}
+    />
+  );
+};
+
 const MentorContainer = styled.div`
   position: relative;
   > .extra-info {
@@ -131,12 +148,12 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 30px 26px;
   box-sizing: border-box;
-  width: 272px;
+  width: 240px;
 
   background-color: ${theme.palette.Gray1};
   border-radius: 16px;
 
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
 
