@@ -30,15 +30,17 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           CEOS와 함께 성장할
           <br className="mobile" /> {props.generation}기를 모집합니다!
         </Text>
-        {/* <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
-          <Button variant="glass" webWidth={182} css={BtnCss}>
-            {props.generation}기 지원하기
-          </Button>
-        </Link> */}
         {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
         </Button> */}
-        <Button
+
+        <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
+          <Button variant="glass" webWidth={182} css={BtnCss}>
+            {props?.generation}기 지원하기
+          </Button>
+        </Link>
+
+        {/* <Button
           variant="glass"
           webWidth={249}
           mobileWidth={249}
@@ -49,7 +51,8 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           }}
         >
           서류 합격 여부 확인하기
-        </Button>
+        </Button> */}
+
         {/* <Button
           variant="glass"
           webWidth={249}

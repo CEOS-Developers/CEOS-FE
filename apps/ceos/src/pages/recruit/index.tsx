@@ -37,11 +37,10 @@ interface RecruitStudyResponse {
 
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
-    ['ceos', 'recuit', 'apply'],
+    ['ceos', 'recruit', 'study'],
     () => recruitApi.GET_STUDY_URL(),
   );
 
-  console.log(data);
   return (
     <Flex
       direction="column"
@@ -148,7 +147,7 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'recuit', 'study'], () => {
+    await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
       recruitApi.GET_STUDY_URL;
     });
 
