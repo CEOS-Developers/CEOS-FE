@@ -14,30 +14,30 @@ const nextConfig = {
   images: {
     domains: ['avatars.githubusercontent.com'],
   },
-  async redirects() {
-    return [
-      {
-        source: '/recruit/apply',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/recruit/docpass',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/recruit/finpass',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/recruit/nonpass',
-        destination: '/',
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/recruit/apply',
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: '/recruit/docpass',
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: '/recruit/finpass',
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: '/recruit/nonpass',
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = withTM(nextConfig);

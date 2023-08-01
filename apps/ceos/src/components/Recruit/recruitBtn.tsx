@@ -320,7 +320,7 @@ export const BtnWrapper = css`
   margin-bottom: 36px;
 
   @media (max-width: 768px) {
-    width: 346px;
+    width: 100%;
     flex-direction: column;
   }
 `;
