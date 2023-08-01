@@ -14,6 +14,8 @@ import {
 } from '@ceos/components/Recruit/recruitBtn';
 import { css } from '@emotion/react';
 import { FooterText } from '@ceos/components/FooterText';
+import { notionUrl } from '@ceos/assets/constant';
+import { CustomLink } from '@ceos/components/Header';
 
 const Recruit = () => {
   return (
@@ -43,9 +45,17 @@ const Recruit = () => {
           모집 직군
         </Text>
         <div css={BtnWrapper}>
-          <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
-          <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
-          <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
+          <CustomLink href={notionUrl.기획}>
+            <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
+          </CustomLink>
+
+          <CustomLink href={notionUrl.디자인}>
+            <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
+          </CustomLink>
+
+          <CustomLink href={notionUrl.개발}>
+            <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
+          </CustomLink>
         </div>
         <Text webTypo="Heading3" margin="0 0 12px 0">
           모집 일정

@@ -303,6 +303,10 @@ const BtnCss = css`
   word-break: keep-all;
   typo: ${theme.typo.Web.Body2};
 
+  :hover{
+    cursor:pointer;
+  }
+
   @media (max-width: 1023px) {
     width: 100%;
   }
