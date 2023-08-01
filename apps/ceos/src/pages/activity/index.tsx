@@ -44,7 +44,7 @@ const Activity = () => {
   return (
     <>
       <Desktop>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Flex direction="column">
             <Title
               title="Activity"
@@ -66,7 +66,7 @@ const Activity = () => {
       </Desktop>
 
       <Mobile>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Title
             title="Activity"
             explain={[

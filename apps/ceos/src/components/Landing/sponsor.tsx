@@ -10,7 +10,7 @@ interface SponsorInterface {
 }
 
 interface SponsorResponse {
-  sponsors: SponsorInterface[];
+  content: SponsorInterface[];
   pageInfo: {
     pageNum: number;
     limit: number;
@@ -20,17 +20,15 @@ interface SponsorResponse {
 }
 
 export const Sponsors = () => {
-  const { data } = useQuery<SponsorResponse>(
-    ['ceos', 'sponsor'],
-    async () =>
-      await sponsorApi.GET_SPONSORS({
-        pageNum: 0,
-        limit: 4,
-      }),
-  );
+  const { data } = useQuery<SponsorResponse>(['ceos', 'sponsor'], async () => {
+    const res = await sponsorApi.GET_SPONSORS({
+      pageNum: 0,
+      limit: 10,
+    });
+    return res;
+  });
 
-  const sponsorList = data?.sponsors;
-
+  const sponsorList = data?.content;
   return (
     <div
       className="rewards"

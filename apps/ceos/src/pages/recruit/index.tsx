@@ -1,17 +1,17 @@
 import { Flex, Mobile, theme } from '@ceos-fe/ui';
-import { RecruitSubHeader } from '@ceos/components/recruit/recruitSubHeader';
+import { RecruitSubHeader } from '@ceos/components/Recruit/recruitSubHeader';
 import { RecruitMainCss } from '@ceos/styles/recruit';
 import { Text } from '@ceos-fe/ui';
 import {
   RecruitBoxCss,
   RecruitMiniBox,
-} from '@ceos/components/recruit/recruitBox';
+} from '@ceos/components/Recruit/recruitBox';
 import {
   BtnWrapper,
   DesginBtn,
   DevBtn,
   PMBtn,
-} from '@ceos/components/recruit/recruitBtn';
+} from '@ceos/components/Recruit/recruitBtn';
 import { css } from '@emotion/react';
 import { FooterText } from '@ceos/components/FooterText';
 
@@ -23,8 +23,8 @@ const Recruit = () => {
         overflow-x: hidden;
       `}
     >
-      <RecruitSubHeader />
-      <div css={RecruitMainCss}>
+      <RecruitSubHeader dataSection="Blue" />
+      <div css={RecruitMainCss} data-section="White">
         <Text webTypo="Heading3" margin="0 0 12px 0">
           모집 대상
         </Text>

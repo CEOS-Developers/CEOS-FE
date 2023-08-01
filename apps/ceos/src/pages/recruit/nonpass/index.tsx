@@ -18,7 +18,7 @@ const NonPass = () => {
   }, []);
 
   return (
-    <div css={NonPassMainCss}>
+    <div css={NonPassMainCss} data-section="Blue">
       <PassBgImg />
       <div css={NonPassContentCss}>
         <NonPassGlassBox />

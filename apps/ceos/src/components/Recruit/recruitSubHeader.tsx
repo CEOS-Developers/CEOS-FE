@@ -13,11 +13,15 @@ import { ModalPortal } from '@ceos-fe/utils/';
 import { useState } from 'react';
 import Link from 'next/link';
 
-export const RecruitSubHeader = () => {
+interface RecruitSubHeaderProps {
+  dataSection?: string;
+}
+
+export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
   const { isOpen, toggleModal } = useModal();
   const [step, setStep] = useState('');
   return (
-    <div css={RecruitCss}>
+    <div css={RecruitCss} data-section={props.dataSection}>
       <RecruitBgImg />
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>

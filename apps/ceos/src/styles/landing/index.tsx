@@ -7,11 +7,9 @@ export const MainCss = css`
   width: 100vw;
   aspect-ratio: 1660 / 720;
   z-index: 1;
-  margin-bottom: 80px;
+  overflow: hidden;
 
-  @media (max-width: 1023px) {
-    margin-bottom: 60px;
-  }
+  background-color: Blue;
 
   @media (max-width: 390px) {
     aspect-ratio: 390 / 700;
@@ -49,9 +47,16 @@ export const FloatingCss = css`
 
 export const HomeFlex = styled(Flex)`
   width: 1032px;
-
+  background-color: White;
+  overflow-x: hidden;
   @media (max-width: 1023px) {
     width: 100vw;
+  }
+
+  margin-top: 80px;
+
+  @media (max-width: 1023px) {
+    margin-top: 60px;
   }
 `;
 
@@ -83,7 +88,8 @@ export const BgCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 7.6vh;
+  background-color: Blue;
+  overflow: hidden;
 
   @media (max-width: 390px) {
     aspect-ratio: 390 / 372;
