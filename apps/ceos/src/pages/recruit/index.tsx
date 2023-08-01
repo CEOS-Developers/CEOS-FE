@@ -35,11 +35,25 @@ interface RecruitStudyResponse {
   demoDayDate: string;
 }
 
+export interface DateProps {
+  startDateDoc: Date;
+  endDateDoc: Date;
+  resultDateDoc: Date;
+  resultDateFinal: Date;
+}
+
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
     () => recruitApi.GET_STUDY_URL(),
   );
+
+  const date = {
+    startDateDoc: new Date(data ? data.startDateDoc : ''),
+    endDateDoc: new Date(data ? data.endDateDoc : ''),
+    resultDateDoc: new Date(data ? data.resultDateDoc : ''),
+    resultDateFinal: new Date(data ? data.resultDateFinal : ''),
+  } as DateProps;
 
   return (
     <Flex
@@ -48,7 +62,11 @@ const Recruit = () => {
         overflow-x: hidden;
       `}
     >
-      <RecruitSubHeader dataSection="Blue" generation={data?.generation} />
+      <RecruitSubHeader
+        dataSection="Blue"
+        generation={data?.generation}
+        date={date}
+      />
       <div css={RecruitMainCss} data-section="White">
         <Text webTypo="Heading3" margin="0 0 12px 0">
           모집 대상
