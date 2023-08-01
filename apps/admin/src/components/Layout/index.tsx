@@ -105,9 +105,9 @@ const ChildrenContainer = styled.div<{ path?: string }>`
 
 const FlexBox = styled.div<{ path?: string }>`
   display: flex;
-  margin: 0;
+  padding: 0;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: ${(props) => (props.path?.includes('/auth') ? '0px' : '88px 0')};
+  margin: ${(props) => (props.path?.includes('/auth') ? '0px' : '88px 0')};
 `;

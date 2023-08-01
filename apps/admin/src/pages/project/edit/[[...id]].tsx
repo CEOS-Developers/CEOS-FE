@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Button, Flex, Text, TextField } from '@ceos-fe/ui';
+import { Button, Flex, Text, TextField, Space } from '@ceos-fe/ui';
 import { BackArrow } from '@admin/assets/Arrow';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { ProjectItemInterface, adminProjectApi } from '@ceos-fe/utils';
@@ -13,6 +13,8 @@ import {
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { ImageUploader } from '@admin/components/ImageUploader';
+import { BackButton } from '@admin/components/Common/BackButton';
+import { css } from '@emotion/react';
 
 const UrlCategoryMap = {
   서비스: 'Service Link',
@@ -149,18 +151,14 @@ export default function ProjectDetail() {
 
   return (
     <>
-      <Flex webGap={14} justify="flex-start">
-        <div onClick={() => router.back()} style={{ cursor: 'pointer' }}>
-          <BackArrow />
-        </div>
-        <Text webTypo="Heading3" paletteColor="Black">
-          프로젝트 {isEditMode ? '수정' : '추가'}
-        </Text>
-      </Flex>
-
-      <Flex margin="48px 0 0 0" webGap={24} align="flex-start">
-        <Flex webGap={24} direction="column" width={680}>
-          <Flex webGap={24}>
+      <BackButton
+        title={isEditMode ? '프로젝트 수정' : '프로젝트 추가'}
+        onClick={() => router.back()}
+      />
+      <Space height={48} />
+      <Flex webGap={24} mobileGap={24} align="flex-start">
+        <Flex webGap={24} mobileGap={24} direction="column" width={680}>
+          <Flex webGap={24} mobileGap={24}>
             <TextField {...register('name')} label="팀명" isAdmin />
             <TextField {...register('generation')} label="활동기수" isAdmin />
           </Flex>
@@ -172,7 +170,7 @@ export default function ProjectDetail() {
             isAdmin
           />
 
-          <Flex webGap={24}>
+          <Flex webGap={24} mobileGap={24}>
             <TextField
               {...register('participants.0.name')}
               label="기획 팀원1"
@@ -203,7 +201,7 @@ export default function ProjectDetail() {
             />
           </Flex>
 
-          <Flex webGap={24}>
+          <Flex webGap={24} mobileGap={24}>
             <TextField
               {...register('participants.4.name')}
               label="프론트 팀원1"
@@ -234,49 +232,54 @@ export default function ProjectDetail() {
             />
           </Flex>
 
-          <Flex webGap={6} direction="column" align="flex-start">
+          <Flex webGap={6} mobileGap={6} direction="column" align="flex-start">
             <Text webTypo="Label3" paletteColor="Black">
               링크 추가
             </Text>
-            <Flex webGap={16} direction="column">
+            <Flex webGap={16} mobileGap={16} direction="column">
               {projectUrls.map((_, idx) => (
                 <Flex
                   key={idx}
                   webGap={16}
-                  align="flex-end"
+                  mobileGap={16}
+                  align="flex-start"
                   width={680}
                   justify="flex-start"
                 >
-                  <Dropdown
-                    width={152}
-                    label={`projectUrls.${idx}.category`}
-                    value={{
-                      label:
-                        UrlCategoryMap[watch(`projectUrls.${idx}.category`)],
-                      value: watch(`projectUrls.${idx}.category`),
-                    }}
-                    options={[
-                      {
-                        label: 'Service Link',
-                        value: '서비스',
-                      },
-                      {
-                        label: 'Github',
-                        value: '깃허브',
-                      },
-                      {
-                        label: 'Behance',
-                        value: '비핸스',
-                      },
-                      {
-                        label: 'Instagram',
-                        value: '인스타',
-                      },
-                    ]}
-                    setValue={(_, val) =>
-                      setValue(`projectUrls.${idx}.category`, val.value)
-                    }
-                  />
+                  {' '}
+                  <div>
+                    <Space height={4} />
+                    <Dropdown
+                      width={152}
+                      label={`projectUrls.${idx}.category`}
+                      value={{
+                        label:
+                          UrlCategoryMap[watch(`projectUrls.${idx}.category`)],
+                        value: watch(`projectUrls.${idx}.category`),
+                      }}
+                      options={[
+                        {
+                          label: 'Service Link',
+                          value: '서비스',
+                        },
+                        {
+                          label: 'Github',
+                          value: '깃허브',
+                        },
+                        {
+                          label: 'Behance',
+                          value: '비핸스',
+                        },
+                        {
+                          label: 'Instagram',
+                          value: '인스타',
+                        },
+                      ]}
+                      setValue={(_, val) =>
+                        setValue(`projectUrls.${idx}.category`, val.value)
+                      }
+                    />
+                  </div>
                   <TextField
                     {...register(`projectUrls.${idx}.linkUrl`)}
                     isAdmin
@@ -286,7 +289,7 @@ export default function ProjectDetail() {
                   <Button
                     variant="admin_navy"
                     webWidth={57}
-                    style={{ marginBottom: '4px' }}
+                    style={{ marginTop: '4px' }}
                     onClick={() => removeProjectUrls(idx)}
                   >
                     삭제
@@ -299,7 +302,7 @@ export default function ProjectDetail() {
                 webWidth={128}
                 onClick={handleAppendUrl}
               >
-                <Flex webGap={4}>
+                <Flex webGap={4} mobileGap={4}>
                   <Plus />
                   링크 추가하기
                 </Flex>
@@ -307,9 +310,8 @@ export default function ProjectDetail() {
             </Flex>
           </Flex>
         </Flex>
-
-        <Flex webGap={24} direction="column" width={328}>
-          <Flex webGap={8} direction="column" align="flex-start">
+        <Flex webGap={24} mobileGap={24} direction="column" width={328}>
+          <Flex webGap={8} mobileGap={8} direction="column" align="flex-start">
             <Text webTypo="Label3" paletteColor="Black">
               썸네일 이미지
             </Text>
@@ -320,7 +322,7 @@ export default function ProjectDetail() {
               setValue={setValue}
             />
           </Flex>
-          <Flex webGap={8} direction="column" align="flex-start">
+          <Flex webGap={8} mobileGap={8} direction="column" align="flex-start">
             <Text webTypo="Label3" paletteColor="Black">
               상세 이미지
             </Text>
@@ -333,14 +335,21 @@ export default function ProjectDetail() {
           </Flex>
         </Flex>
       </Flex>
-
-      <Button
-        variant="admin"
-        style={{ marginTop: '80px', alignSelf: 'center' }}
-        onClick={handleSaveProject}
-      >
-        저장하기
-      </Button>
+      <div>
+        <Space height={80} />
+        <Button
+          variant="admin_navy"
+          webWidth={328}
+          webHeight={46}
+          mobileHeight={46}
+          onClick={handleSaveProject}
+          css={css`
+            flex-shrink: 0;
+          `}
+        >
+          저장하기
+        </Button>
+      </div>
     </>
   );
 }
