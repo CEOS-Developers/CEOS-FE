@@ -58,7 +58,7 @@ export const AdminProjectCard = ({
   ...props
 }: AdminProjectCardProps) => {
   return (
-    <RelativeContainer width={346} height={290}>
+    <RelativeContainer width={328} height={275}>
       <AbsoluteFlex direction="column">
         <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
@@ -142,7 +142,9 @@ const ExplainBox = styled.div`
     display: block;
   }
   @media (min-width: 1023px) {
-    box-shadow: ${theme.shadow.Card.Black};
+    .ceos {
+      box-shadow: ${theme.shadow.Card.Black};
+    }
   }
 
   @keyframes slide-in-project-card {
