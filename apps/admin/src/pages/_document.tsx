@@ -15,6 +15,8 @@ export default function Document() {
           crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css"
         />
+        <meta property="og:title" content="CEOS ADMIN>
+        <meta property="og:image" content="%PUBLIC_URL%/og-admin.png" />
       </Head>
       <body>
         <Main />
