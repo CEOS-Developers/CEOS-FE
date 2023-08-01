@@ -61,7 +61,7 @@ const Project = () => {
   return (
     <Container>
       <Desktop>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Title
             title="Project"
             explain={[
@@ -70,36 +70,18 @@ const Project = () => {
             ]}
           />
           <TopMargin />
-          <Flex webGap={24} margin="0 0 180px 0">
-            {[0, 1, 2].map((columnNum) => (
-              <Flex
-                direction="column"
-                justify="start"
-                webGap={47}
-                height={(291 * Number(projectList?.length)) / 3}
-                width="auto"
-                key={columnNum}
-              >
-                {projectList?.map((project, idx) =>
-                  idx % 3 === columnNum ? (
-                    <div onClick={() => setModalNumber(project.id)}>
-                      <ProjectCard
-                        projectCard={project}
-                        key={`project_card${idx}`}
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  ),
-                )}
-              </Flex>
+          <GridContainer length={projectList?.length ?? 0}>
+            {projectList?.map((project, idx) => (
+              <div onClick={() => setModalNumber(project.id)}>
+                <ProjectCard projectCard={project} key={`project_card${idx}`} />
+              </div>
             ))}
-          </Flex>
+          </GridContainer>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
       </Desktop>
       <Mobile>
-        <Flex direction="column">
+        <Flex direction="column" data-section="White">
           <Title
             title="Project"
             explain={[
@@ -150,4 +132,17 @@ export default Project;
 
 const Container = styled.div`
   position: relative;
+`;
+
+const GridContainer = styled.div<{ length: number }>`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  row-gap: 48px;
+
+  margin-bottom: 100px;
+
+  @media (min-width: 1023px) {
+    height: ${({ length }) => Math.ceil(length / 3) * 184 + 160}px;
+  }
 `;

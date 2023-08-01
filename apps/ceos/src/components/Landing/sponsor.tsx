@@ -36,6 +36,7 @@ export const Sponsors = () => {
     console.log(sponsorList);
   }, [sponsorList]);
 
+  const sponsorList = data?.content;
   return (
     <div
       css={css`

@@ -3,18 +3,18 @@ import { css } from '@emotion/react';
 export const CheckIcon = ({
   width = 20,
   height = 20,
-  display = 'none',
+  checked = false,
 }: {
   width?: number;
   height?: number;
-  display?: string;
+  checked?: boolean;
 }) => {
   return (
     <div
       css={css`
         width: ${width}px;
         height: ${height}px;
-        display: ${display};
+        opacity: ${checked ? 1 : 0};
       `}
     >
       <svg

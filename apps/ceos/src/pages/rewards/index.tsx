@@ -8,14 +8,15 @@ import {
   AwardResponse,
 } from '@ceos/components/Landing/rewards';
 import { FooterText } from '@ceos/components/FooterText';
+import Footer from '@ceos/components/Footer';
 
 export default function Rewards() {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
-    const awardData = await awardApi.GET_AWARD({ pageNum: 1, limit: 20 });
+    const awardData = await awardApi.GET_AWARD({ pageNum: 0, limit: 20 });
     return awardData;
   });
 
-  const awardList = data?.generationAwards;
+  const awardList = data?.content;
 
   return (
     <Flex
@@ -32,6 +33,7 @@ export default function Rewards() {
           width: 346px;
         }
       `}
+      data-section="White"
     >
       <Title
         title="REWARDS"
@@ -51,13 +53,13 @@ export default function Rewards() {
             <RewardCard key={a.generation} rewardCard={a} />
           ))}
       </div>
-      <div
+      {/* <div
         css={css`
           margin-top: 36px;
         `}
       >
         <FooterText />
-      </div>
+      </div> */}
       {/* <Mobile
         css={css`
           margin-top: 36px;

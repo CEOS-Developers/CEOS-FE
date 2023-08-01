@@ -25,12 +25,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
+    "recoil": "^0.7.7",
     "typescript": "5.0.4"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@types/eslint": "^8",
+    "@types/recoil": "^0.0.9",
     "emotion": "^11.0.0",
     "reset": "^0.1.0"
   }

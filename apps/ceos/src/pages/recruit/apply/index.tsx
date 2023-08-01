@@ -7,15 +7,15 @@ import {
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
-} from '../../../components/recruit/interface';
+} from '@ceos/components/Recruit/interface';
 import { useEffect, useState } from 'react';
-import Information from '../../../components/recruit/Information';
-import Common from '../../../components/recruit/Common';
-import Part from '../../../components/recruit/Part';
-import Schedule from '../../../components/recruit/Schedule';
-import { SubmitModal } from '../../../components/recruitModal/SubmitModal';
+import Information from '@ceos/components/Recruit/Information';
+import Common from '@ceos/components/Recruit/Common';
+import Part from '@ceos/components/Recruit/Part';
+import Schedule from '@ceos/components/Recruit/Schedule';
+import { SubmitModal } from '@ceos/components/recruitModal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { SuccessModal } from '../../../components/recruitModal/SuccessModal';
+import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 
 const Apply = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -194,10 +194,10 @@ const Apply = () => {
   };
 
   return (
-    <Wrapper direction="column">
+    <Wrapper direction="column" data-section="White">
       <Title
         title="CEOS 18기 리크루팅"
-        explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다:)']}
+        explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다 :)']}
       ></Title>
       <TopMargin />
       <Flex direction="column">
@@ -269,7 +269,7 @@ const TopMargin = styled.div`
 const Wrapper = styled(Flex)`
   position: relative;
   @media (max-width: 1023px) {
-    padding: 23px;
+    padding: 0 23px;
   }
 `;
 

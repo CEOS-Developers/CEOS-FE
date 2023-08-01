@@ -10,11 +10,16 @@ import {
 } from '@ceos/assets/landing/glassButtonText';
 import useWindowSize from '@ceos/hooks/useWindoSize';
 
-export const SubHeader = () => {
+interface SubHeaderProps {
+  className?: string;
+  dataSection?: string;
+}
+
+export const SubHeader = (props: SubHeaderProps) => {
   const windowSize = useWindowSize();
 
   return (
-    <Wrapper>
+    <Wrapper className={props.className} data-section={props.dataSection}>
       <div className="banner-image">
         <BannerImage
           src={

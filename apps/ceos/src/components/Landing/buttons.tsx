@@ -8,12 +8,17 @@ import {
   WebShortcut,
 } from '@ceos/assets/landing/shortcutBackground';
 
-export const Buttons = () => {
+interface ButtonsProps {
+  className?: string;
+  dataSection?: string;
+}
+
+export const Buttons = (props: ButtonsProps) => {
   const router = useRouter();
   const windowSize = useWindowSize();
 
   return (
-    <Wrapper>
+    <Wrapper className={props.className} data-section={props.dataSection}>
       <div>
         <Space height={32} mobileHeight={24} />
         <Flex className="shortcut-image">
