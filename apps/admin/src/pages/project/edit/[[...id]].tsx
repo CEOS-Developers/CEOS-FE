@@ -310,7 +310,14 @@ export default function ProjectDetail() {
             </Flex>
           </Flex>
         </Flex>
-        <Flex webGap={24} mobileGap={24} direction="column" width={328}>
+        <Flex
+          webGap={24}
+          mobileGap={24}
+          direction="column"
+          width={328}
+          height={490}
+          align="flex-start"
+        >
           <Flex webGap={8} mobileGap={8} direction="column" align="flex-start">
             <Text webTypo="Label3" paletteColor="Black">
               썸네일 이미지

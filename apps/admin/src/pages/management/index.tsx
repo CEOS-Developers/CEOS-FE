@@ -7,6 +7,7 @@ import { ManagementResponse } from '../../../../../packages/utils/src/apis/admin
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
 
 export default function Management() {
   const router = useRouter();
@@ -61,29 +62,32 @@ export default function Management() {
       dataIndex: 'manage',
       width: '178px',
       render: (text: string, record: any, index: number) => (
-        <Flex justify="space-between" webGap={8}>
-          <Space width={8} />
-          <Button
-            variant="admin_stroke"
-            webWidth={81}
-            onClick={() => router.push(`/management/add/${record.id}`)}
-          >
-            수정하기
-          </Button>
-          <Button
-            variant="admin_stroke"
-            webWidth={81}
-            onClick={() => managementDeleteMutation.mutate(Number(record.id))}
-          >
-            삭제하기
-          </Button>
+        <Flex align="center">
+          <Flex margin="7.5px 0px 7.5px 8px">
+            <Button
+              variant="admin_stroke"
+              webWidth={81}
+              onClick={() => router.push(`/management/add/${record.id}`)}
+            >
+              수정하기
+            </Button>
+          </Flex>
+          <Flex margin="7.5px 0px 7.5px 8px">
+            <Button
+              variant="admin_stroke"
+              webWidth={81}
+              onClick={() => managementDeleteMutation.mutate(Number(record.id))}
+            >
+              삭제하기
+            </Button>
+          </Flex>
         </Flex>
       ),
     },
   ];
 
   return (
-    <Flex direction="column" align="flex-start" justify="flex-start">
+    <Wrapper direction="column" align="flex-start" justify="flex-start">
       <Flex align="flex-end" justify="space-between" width={1032}>
         <PageTitle
           title={'MANAGEMENT'}
@@ -99,7 +103,9 @@ export default function Management() {
           임원진 추가
         </Button>
       </Flex>
-      <Space height={48} />
+      <div>
+        <Space height={48} />
+      </div>
       {data && (
         <DataGrid
           columns={columns}
@@ -114,6 +120,12 @@ export default function Management() {
           }}
         />
       )}
-    </Flex>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled(Flex)`
+  td {
+    padding: 10px 0px !important;
+  }
+`;

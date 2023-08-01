@@ -155,7 +155,7 @@ export default function AddManagement() {
   };
 
   return (
-    <>
+    <Flex direction="column">
       <BackButton title="임원진 추가" onClick={() => router.back()} />
       <Space height={48} />
       <Flex
@@ -374,6 +374,6 @@ export default function AddManagement() {
           저장하기
         </Button>
       </Flex>
-    </>
+    </Flex>
   );
 }

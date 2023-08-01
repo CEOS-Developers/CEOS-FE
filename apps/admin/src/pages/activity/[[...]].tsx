@@ -95,7 +95,9 @@ export default function Activity() {
           description={'세오스 활동 목록을 관리합니다.'}
         />
       </Flex>
-      <Space height={48} />
+      <div>
+        <Space height={48} />
+      </div>
       <Flex
         direction="row"
         align="flex-start"

@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { adminRewardApi, RewardDTO } from '@ceos-fe/utils';
 import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
+import { css } from '@emotion/react';
 
 export default function AddReward() {
   const router = useRouter();
@@ -84,109 +85,146 @@ export default function AddReward() {
   };
 
   return (
-    <Flex width={680} direction="column" align="flex-start">
-      <BackButton
-        title={router.query.id ? '이력 수정' : '이력 추가'}
-        onClick={() => router.back()}
-      />
-      <Space height={48} />
+    <Flex width={1023} justify="flex-start">
+      <Flex width={680} direction="column" align="flex-start">
+        <BackButton
+          title={router.query.id ? '이력 수정' : '이력 추가'}
+          onClick={() => router.back()}
+        />
+        <Space height={48} />
 
-      <Flex
-        direction="column"
-        align="flex-start"
-        justify="flex-start"
-        webGap={24}
-        mobileGap={24}
-      >
         <Flex
-          direction="row"
+          direction="column"
           align="flex-start"
           justify="flex-start"
           webGap={24}
           mobileGap={24}
         >
-          <TextField
-            type="number"
-            label="활동 기수"
-            placeholder="내용을 입력하세요."
-            isAdmin
-            {...register('generation', {
-              required: true,
-            })}
-          />
-          <TextField
-            label="활동 기간"
-            placeholder="내용을 입력하세요."
-            isAdmin
-            {...register('startDate', {
-              required: true,
-            })}
-          />
-        </Flex>
-      </Flex>
-      <Space height={24} />
-      <Text webTypo="Heading4">기수 내 수상 이력</Text>
-      <Space height={24} />
-      <Text webTypo="Label3">수상 이력</Text>
-      <Space height={8} />
-      <Flex direction="column" webGap={16} mobileGap={16}>
-        {fields.map((field, index) => (
           <Flex
-            key={field.id}
-            align="flex-end"
+            direction="row"
+            align="flex-start"
             justify="flex-start"
-            webGap={8}
-            mobileGap={8}
+            webGap={24}
+            mobileGap={24}
           >
             <TextField
+              type="number"
+              label="활동 기수"
               placeholder="내용을 입력하세요."
               isAdmin
-              width={615}
-              {...register(`content.${index}.content.`, {
+              {...register('generation', {
                 required: true,
               })}
-              defaultValue=""
             />
-            <div>
-              <Button
-                variant="admin_stroke"
-                webWidth={56}
-                mobileWidth={56}
-                onClick={() => remove(index)}
-              >
-                삭제
-              </Button>
-              <Space height={4} />
-            </div>
+            <TextField
+              label="활동 기간"
+              placeholder="내용을 입력하세요."
+              isAdmin
+              {...register('startDate', {
+                required: true,
+              })}
+            />
           </Flex>
-        ))}
-      </Flex>
-      <Space height={16} />
-      <Flex>
-        <Button
-          variant="admin_stroke"
-          webWidth={128}
-          mobileWidth={128}
-          leftElement={<Plus />}
-          onClick={() => append({ content: '' })}
-        >
-          이력 추가하기
-        </Button>
-      </Flex>
-      <Space height={4} />
+        </Flex>
+        <Space
+          height={24}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
+        <Text webTypo="Heading4">기수 내 수상 이력</Text>
+        <Space
+          height={24}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
+        <Text webTypo="Label3">수상 이력</Text>
+        <Space
+          height={8}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
+        <Flex direction="column" webGap={16} mobileGap={16}>
+          {fields.map((field, index) => (
+            <Flex
+              key={field.id}
+              align="center"
+              justify="flex-start"
+              webGap={8}
+              mobileGap={8}
+            >
+              <TextField
+                placeholder="내용을 입력하세요."
+                isAdmin
+                width={615}
+                {...register(`content.${index}.content.`, {
+                  required: true,
+                })}
+                defaultValue=""
+              />
+              <div>
+                <Button
+                  variant="admin_stroke"
+                  webWidth={56}
+                  mobileWidth={56}
+                  onClick={() => remove(index)}
+                >
+                  삭제
+                </Button>
+                <Space
+                  height={4}
+                  css={css`
+                    flex-shrink: 0;
+                  `}
+                />
+              </div>
+            </Flex>
+          ))}
+        </Flex>
+        <Space
+          height={16}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
+        <Flex>
+          <Button
+            variant="admin_stroke"
+            webWidth={128}
+            mobileWidth={128}
+            leftElement={<Plus />}
+            onClick={() => append({ content: '' })}
+          >
+            이력 추가하기
+          </Button>
+        </Flex>
+        <Space
+          height={4}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
 
-      <Space height={48} />
-      <Flex>
-        <Button
-          variant="admin_navy"
-          webWidth={328}
-          webHeight={46}
-          mobileHeight={46}
-          disabled={!isValid}
-          onClick={handleSubmit(onSubmit)}
-        >
-          저장하기
-        </Button>
+        <Space
+          height={48}
+          css={css`
+            flex-shrink: 0;
+          `}
+        />
+        <Flex>
+          <Button
+            variant="admin_navy"
+            webWidth={328}
+            webHeight={46}
+            mobileHeight={46}
+            disabled={!isValid}
+            onClick={handleSubmit(onSubmit)}
+          >
+            저장하기
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );
