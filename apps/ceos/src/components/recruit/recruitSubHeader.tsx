@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
-  generation: number;
+  generation?: number;
 }
 
 export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
