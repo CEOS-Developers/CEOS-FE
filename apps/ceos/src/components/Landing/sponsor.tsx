@@ -31,12 +31,6 @@ export const Sponsors = () => {
   );
 
   const sponsorList = data?.content;
-
-  useEffect(() => {
-    console.log(sponsorList);
-  }, [sponsorList]);
-
-  const sponsorList = data?.content;
   return (
     <div
       css={css`
