@@ -5,6 +5,8 @@ import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 export interface ManagerInterface {
   id: number;
@@ -67,6 +69,8 @@ const Management = () => {
 
   const managers = data?.partManagerData;
 
+  const generation = useRecoilValue(generationState);
+
   return (
     <Flex
       direction="column"
@@ -86,7 +90,9 @@ const Management = () => {
     >
       <Title
         title="MANAGEMENT"
-        explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
+        explain={[
+          `CEOS를 이끌어나가는 ${generation}기의 운영진들을 소개합니다.`,
+        ]}
       />
       <div css={ListCss}>
         {managers?.presidency.map((manager: ManagerInterface) => (

@@ -17,6 +17,8 @@ import { TopMargin } from '../FAQ/index';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import DetailModal from './DetailModal';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 interface ProjectResponse {
   content: ProjectCardProps[];
@@ -40,6 +42,8 @@ const Project = () => {
     },
   );
 
+  const generation = useRecoilValue(generationState);
+
   const projectList = data?.pages[0].content;
 
   const leftBtn = {
@@ -49,7 +53,7 @@ const Project = () => {
   };
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
+    content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
   };
 

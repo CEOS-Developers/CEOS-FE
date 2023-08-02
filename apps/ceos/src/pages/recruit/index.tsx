@@ -45,7 +45,7 @@ export interface DateProps {
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
-    () => recruitApi.GET_STUDY_URL(),
+    () => recruitApi.GER_RECRUITMENTS(),
   );
 
   const date = {
@@ -166,7 +166,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
-      recruitApi.GET_STUDY_URL;
+      recruitApi.GER_RECRUITMENTS;
     });
 
     return {
