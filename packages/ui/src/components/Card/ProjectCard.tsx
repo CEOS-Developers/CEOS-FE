@@ -21,11 +21,13 @@ export interface AdminProjectCardProps extends ProjectCardProps {
   onClickUpdate: () => void;
 }
 
-export const ProjectCard = (props: {
-  projectCard: ProjectCardProps;
-}): EmotionJSX.Element => {
-  const { id, name, description, generation, thumbnailImage } =
-    props.projectCard;
+export const ProjectCard = ({
+  id,
+  name,
+  description,
+  generation,
+  thumbnailImage,
+}: ProjectCardProps) => {
   return (
     <Wrapper>
       <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
@@ -92,7 +94,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  width: 346px;
+  width: 328px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -112,6 +114,7 @@ const ProjectImg = styled.img`
   width: 100%;
   height: 184px;
   object-fit: cover;
+  background-color: ${theme.palette.Gray5};
 
   @media (max-width: 1023px) {
     &.ceos {
