@@ -84,6 +84,7 @@ const Project = () => {
         </Flex>
         <div ref={ref}></div>
       </Flex>
+      <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
   );
