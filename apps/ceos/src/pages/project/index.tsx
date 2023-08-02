@@ -44,7 +44,6 @@ const Project = () => {
     PageItem: ProjectCard,
   });
 
-
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
     content: ['자주 묻는 질문', '보러가기'],
@@ -85,6 +84,7 @@ const Project = () => {
         </Flex>
         <div ref={ref}></div>
       </Flex>
+      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
   );
 };
