@@ -15,6 +15,16 @@ interface ActivityResponse {
     category: string;
   }[];
 }
+export const leftBtn = {
+  title: '이전 활동들이 궁금하다면',
+  content: ['CEOS 프로젝트', '보러가기'],
+  link: '/project',
+};
+export const rightBtn = {
+  title: 'CEOS에 참여하고 싶다면',
+  content: ['CEOS 18기', '지원하기'],
+  link: '/recruit',
+};
 
 const FAQ = () => {
   const { data, isLoading, isSuccess } = useQuery<{
@@ -30,17 +40,6 @@ const FAQ = () => {
   });
 
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
-
-  const leftBtn = {
-    title: '이전 활동들이 궁금하다면',
-    content: ['CEOS 프로젝트', '보러가기'],
-    link: '/project',
-  };
-  const rightBtn = {
-    title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
-    link: '/recruit',
-  };
 
   return (
     <Flex direction="column" padding="0 22px" data-section="White">

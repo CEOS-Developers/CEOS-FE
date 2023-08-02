@@ -5,6 +5,8 @@ import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
+import Footer from '@ceos/components/Footer';
+import { leftBtn, rightBtn } from '../rewards';
 
 export interface ManagerInterface {
   id: number;
@@ -73,14 +75,12 @@ const Management = () => {
         direction="column"
         css={css`
           width: 1032px;
-          margin: 80px 0 100px 0px;
 
           @media (max-width: 1023px) {
             width: 750px;
           }
           @media (max-width: 390px) {
             width: 346px;
-            margin-top: 36px;
           }
         `}
         data-section="White"
@@ -104,15 +104,27 @@ const Management = () => {
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
         </div>
-        <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-        <div css={ListCss}>
+        <Title
+          title="MENTORS"
+          explain={['CEOS의 멘토분들을 소개합니다.']}
+          className="mentor"
+        />
+        <div css={[ListCss, ListMargin]}>
           {mentors?.map((mentor: ManagerInterface) => (
             <MentorCard key={mentor.id} mentorCard={mentor} />
           ))}
         </div>
+        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
     </div>
   );
 };
 
 export default Management;
+
+const ListMargin = css`
+  margin-bottom: 100px;
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
+`;

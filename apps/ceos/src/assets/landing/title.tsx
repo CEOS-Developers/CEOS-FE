@@ -1,14 +1,12 @@
 import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 
-export const Title = ({
+export const BigTitle = ({
   title,
   explain,
-  className,
 }: {
   title: string;
   explain: string[];
-  className?: string;
 }) => {
   let webString = '';
   explain.forEach((ex, idx) => {
@@ -20,7 +18,7 @@ export const Title = ({
   });
 
   return (
-    <Container webGap={12} mobileGap={10} className={className}>
+    <Container webGap={12} mobileGap={10}>
       <Text
         webTypo="Heading1_Eng"
         mobileTypo="Heading1_Eng"
@@ -48,13 +46,9 @@ export const Title = ({
 
 const Container = styled(Flex)`
   flex-direction: column;
-  margin-top: 150px;
+  margin-top: 80px;
 
   @media (max-width: 1023px) {
-    margin-top: 160px;
-
-    &.mentor {
-      margin-top: 36px;
-    }
+    margin-top: 36px;
   }
 `;

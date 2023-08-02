@@ -1,5 +1,4 @@
-import { Title } from '@ceos/components/Title';
-import { Flex, Mobile, RewardCard } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, RewardCard } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +8,18 @@ import {
 } from '@ceos/components/Landing/rewards';
 import { FooterText } from '@ceos/components/FooterText';
 import Footer from '@ceos/components/Footer';
+import { Title } from '@ceos/components/Title';
+
+export const leftBtn = {
+  title: '더 궁금한 것이 있다면',
+  content: ['자주 묻는 질문', '보러가기'],
+  link: '/FAQ',
+};
+export const rightBtn = {
+  title: 'CEOS에 참여하고 싶다면',
+  content: ['CEOS 18기', '지원하기'],
+  link: '/recruit',
+};
 
 export default function Rewards() {
   const { data } = useQuery<AwardResponse>(['ceos', 'award'], async () => {
@@ -32,6 +43,13 @@ export default function Rewards() {
             gap: 24px;
             align-items: flex-start;
             margin-top: 80px;
+
+            margin-bottom: 100px;
+
+            @media (max-width: 1023px) {
+              margin-top: 40px;
+              margin-bottom: 36px;
+            }
           `}
         >
           {awardList &&
@@ -46,13 +64,17 @@ export default function Rewards() {
       >
         <FooterText />
       </div> */}
-        {/* <Mobile
-        css={css`
-          margin-top: 36px;
-          justify-content: center;
-        `}
-      ></Mobile> */}
-        {/* <Footer /> */}
+        <Mobile
+          css={css`
+            margin-bottom: 30px;
+            justify-content: center;
+          `}
+        >
+          <FooterText />
+        </Mobile>
+        <Desktop>
+          <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
+        </Desktop>
       </Flex>
     </div>
   );
@@ -60,7 +82,6 @@ export default function Rewards() {
 
 export const RewardMainCss = css`
   width: 1032px;
-  margin: 80px 0 0px 0px;
 
   @media (max-width: 1023px) {
     width: 716px;
