@@ -51,6 +51,18 @@ export const RecruitSubHeader = ({
     ), // 일주일 뒤를 합격 확인 마감기간으로 설정
   ];
 
+  console.log(
+    resultDateDoc,
+    curDate,
+    resultDateFinal,
+    '지원 기간',
+    startDateDoc <= curDate && curDate <= endDateDoc,
+    '서류 합격 기간',
+    resultDateDoc <= curDate && curDate < resultDateFinal,
+    '최종 합격 기간',
+    resultDateFinal <= curDate && curDate <= endDate,
+  );
+
   return (
     <div css={RecruitCss}>
       <div css={RecruitBgText}>
@@ -108,14 +120,16 @@ export const RecruitSubHeader = ({
                       </Button>
                     </div>
                   ) : (
-                    <Button
-                      variant="glass"
-                      webWidth={234}
-                      css={BtnCss}
-                      disabled
-                    >
-                      지원 기간이 아닙니다.
-                    </Button>
+                    <div style={{ width: '234px' }}>
+                      <Button
+                        variant="glass"
+                        webWidth={234}
+                        css={BtnCss}
+                        disabled
+                      >
+                        지원 기간이 아닙니다.
+                      </Button>
+                    </div>
                   )}
                 </>
               )}
