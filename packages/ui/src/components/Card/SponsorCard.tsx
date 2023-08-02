@@ -85,6 +85,8 @@ const Profile = styled.img<{ admin?: boolean }>`
   border-radius: 12px;
   margin-bottom: ${({ admin }) => (admin ? '16px' : '24px;')};
 
+  object-fit: cover;
+
   @media (max-width: 1023px) {
     height: 90px;
     width: 90px;
