@@ -14,11 +14,12 @@ interface RouterDataInterface extends ParsedUrlQuery {
   email: string;
   pass: string;
   name: string;
+  attendanceStatus: boolean;
 }
 
 const FinPass = () => {
   const router = useRouter();
-  const { uuid, email } = router.query as RouterDataInterface;
+  const { uuid, email, attendanceStatus } = router.query as RouterDataInterface;
 
   useEffect(() => {
     if (router.query.pass !== '합격') {
@@ -54,7 +55,11 @@ const FinPass = () => {
           다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
         </Text>
         <p>CEOS 드림</p>
-        <FinPassGlassBox uuid={uuid} email={email} />
+        <FinPassGlassBox
+          uuid={uuid}
+          email={email}
+          attendanceStatus={attendanceStatus}
+        />
         <FooterText />
       </div>
     </div>

@@ -60,6 +60,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
                 name: passCheck.data.name,
                 date: passCheck.data.date,
                 duration: passCheck.data.duration,
+                attendanceStatus: passCheck.data.attendanceStatus,
               },
             });
           }
@@ -87,6 +88,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
                 email: getValues('email'),
                 pass: passCheck.data.pass,
                 name: passCheck.data.name,
+                attendanceStatus: passCheck.data.attendanceStatus,
               },
             });
           }

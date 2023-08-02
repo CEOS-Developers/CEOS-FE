@@ -38,7 +38,7 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
         {/* <Button variant="glass" webWidth={234} css={BtnCss} disabled>
           지원 기간이 아닙니다.
         </Button> */}
-        <Button
+        {/* <Button
           variant="glass"
           webWidth={249}
           mobileWidth={249}
@@ -49,8 +49,8 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           }}
         >
           서류 합격 여부 확인하기
-        </Button>
-        {/* <Button
+        </Button> */}
+        <Button
           variant="glass"
           webWidth={249}
           css={BtnCss}
@@ -60,7 +60,7 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
           }}
         >
           최종 합격 여부 확인하기
-        </Button> */}
+        </Button>
       </div>
       {isOpen && (
         <ModalPortal>

@@ -16,12 +16,13 @@ interface RouterDataInterface extends ParsedUrlQuery {
   name: string;
   date: string;
   duration: string;
+  attendanceStatus: boolean;
 }
 
 const Pass = () => {
   const router = useRouter();
 
-  const { uuid, email, name, date, duration } =
+  const { uuid, email, name, date, duration, attendanceStatus } =
     router.query as RouterDataInterface;
 
   useEffect(() => {
@@ -70,6 +71,7 @@ const Pass = () => {
           name={name}
           date={date}
           duration={duration}
+          attendanceStatus={attendanceStatus}
         />
         <FooterText />
       </div>
