@@ -45,13 +45,14 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
         <Mobile css={iconCss} onClick={setClose} style={{ width: 'auto' }}>
           <WhiteCloseIcon fillColor="#232527" />
         </Mobile>
+        {projectInfo && (
+          <DetailImg
+            alt="mainImage"
+            src={projectInfo.projectImages[0].imageUrl}
+            isMain={true}
+          />
+        )}
 
-        <MainImage
-          alt="mainImage"
-          src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-          width={0}
-          height={0}
-        />
         <Desktop style={{ width: '100%' }}>
           <Flex justify="space-between" padding="40px 64px">
             <Flex direction="column" align="start">
@@ -74,7 +75,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 ))}
               </Flex>
             </Flex>
-            <Flex direction="column" width={220}>
+            <Flex direction="column" width={300}>
               {Object.values(Part).map((val) => (
                 <Flex justify="space-between">
                   <Text paletteColor="Gray5" webTypo="Label2">
@@ -131,13 +132,13 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
           </Flex>
         </Mobile>
 
-        <SubImage
-          alt="subImage"
-          src={'https://avatars.githubusercontent.com/u/65931227?v=4'}
-          // src={projectInfo?.projectImages[1].imageUrl}
-          width={0}
-          height={0}
-        />
+        {projectInfo && (
+          <DetailImg
+            alt="mainImage"
+            src={projectInfo.projectImages[1].imageUrl}
+            isMain={false}
+          />
+        )}
       </Container>
     </div>
   );
@@ -181,8 +182,9 @@ const Container = styled(Flex)`
 
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   width: 1032px;
+  height: auto;
 
   border-radius: 20px;
   background: #fff;
@@ -202,16 +204,9 @@ const Container = styled(Flex)`
   }
 `;
 
-const MainImage = styled(Image)`
+const DetailImg = styled.img<{ isMain: boolean }>`
   width: 100%;
-  height: 541px;
-  border-radius: 20px 20px 0 0;
-`;
-
-const SubImage = styled(Image)`
-  width: 100%;
-  height: 541px;
-  border-radius: 0 0 20px 20px;
+  border-radius: 20px;
 `;
 
 const TeamWrapper = styled.div`
