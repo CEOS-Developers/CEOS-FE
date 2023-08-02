@@ -64,6 +64,7 @@ export default function Rewards() {
           {infiniteData}
         </ScrollWrapper>
       </Flex>
+      <div ref={ref}></div>
       <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </Flex>
@@ -75,13 +76,13 @@ const ScrollWrapper = styled(Flex)<{
 }>`
   height: auto;
 
-  & > :nth-child(even) {
+  & > :nth-of-type(even) {
     ${media.pc} {
       display: ${({ line }) => (line !== 2 ? 'none' : '')};
     }
   }
 
-  & > :nth-child(odd) {
+  & > :nth-of-type(odd) {
     ${media.pc} {
       display: ${({ line }) => (line !== 1 ? 'none' : '')};
     }
