@@ -31,12 +31,24 @@ export const RecruitSubHeader = ({
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   };
 
-  const [curDate, startDateDoc, endDateDoc, resultDateDoc, resultDateFinal] = [
+  const [
+    curDate,
+    startDateDoc,
+    endDateDoc,
+    resultDateDoc,
+    resultDateFinal,
+    endDate,
+  ] = [
     getDate(newDate),
     getDate(date.startDateDoc),
     getDate(date.endDateDoc),
     getDate(date.resultDateDoc),
     getDate(date.resultDateFinal),
+    getDate(
+      new Date(
+        date.resultDateFinal.setDate(date.resultDateFinal.getDate() + 7),
+      ),
+    ), // 일주일 뒤를 합격 확인 마감기간으로 설정
   ];
 
   return (
@@ -81,7 +93,7 @@ export const RecruitSubHeader = ({
                 </div>
               ) : (
                 <>
-                  {resultDateFinal <= curDate ? (
+                  {resultDateFinal <= curDate && curDate <= endDate ? (
                     <div style={{ width: '249px' }}>
                       <Button
                         variant="glass"
