@@ -1,4 +1,4 @@
-import { CheckBox, Desktop, Flex, Mobile, Text, theme } from '@ceos-fe/ui';
+import { CheckBox, Desktop, Flex, Text, theme } from '@ceos-fe/ui';
 import { ColumnLine } from '../../pages/recruit/apply';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
@@ -193,4 +193,12 @@ const Grid = styled.div`
 
 export const gap = css`
   width: 144px;
+`;
+
+export const Mobile = styled.div`
+  display: none;
+  @media (max-width: 1023px) {
+    width: 100%;
+    display: flex;
+  }
 `;
