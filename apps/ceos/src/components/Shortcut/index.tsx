@@ -1,7 +1,7 @@
 import { ArrowUpRight } from '@ceos/assets/ArrowUpRight';
 import styled from '@emotion/styled';
 import { ButtonHTMLAttributes } from 'react';
-import { Flex, theme } from '@ceos-fe/ui';
+import { Flex, media, theme } from '@ceos-fe/ui';
 import { Diamond } from '@ceos/assets/Diamond';
 
 /**
@@ -112,9 +112,9 @@ const GlassStyledButton = styled.button<{ typeNum?: number }>`
       ${theme.typo.Web.Label3}
     }
   }
-  @media (max-width: 390px) {
-    width: 346px;
-    height: ${(props) => (props.typeNum == 1 ? '69px' : '101px')};
+  ${media.mobile} {
+    width: 100%;
+    height: ${(props) => (props.typeNum == 1 ? '75px' : '101px')};
     border-radius: 10px;
 
     .text-container {

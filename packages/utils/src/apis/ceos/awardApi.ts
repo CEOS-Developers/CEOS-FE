@@ -1,14 +1,11 @@
 import { ceosInstance } from '../axiosConfig';
 
 export const awardApi = {
-  GET_AWARD: async ({ pageNum, limit }: { pageNum: number; limit: number }) => {
-    const response = await ceosInstance
-      .get(`/awards`, {
-        params: { pageNum, limit },
-      })
-      .then((res) => {
-        return res.data.data;
-      });
-    return response;
+  GET_AWARD: async ({ pageNum = 0, limit = 4 }) => {
+    const response = await ceosInstance.get(
+      `/awards?pageNum=${pageNum}&limit=${limit}`,
+    );
+
+    return response.data.data;
   },
 };

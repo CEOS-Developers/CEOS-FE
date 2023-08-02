@@ -1,7 +1,7 @@
 import { Desktop, Flex, Mobile, Text, TextField } from '@ceos-fe/ui';
 import { RowLine, Section } from '../../pages/recruit/apply';
-import { RecruitApplyFormInterface } from './interface';
 import { CustomTextField, Explain, Question, QuestionFlex } from './style';
+import { RecruitApplyFormInterface } from './interface';
 
 interface CommonProps {
   register: RecruitApplyFormInterface['register'];
