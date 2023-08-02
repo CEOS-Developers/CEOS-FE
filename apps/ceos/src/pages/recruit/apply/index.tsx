@@ -17,6 +17,8 @@ import { SubmitModal } from '@ceos/components/recruitModal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 const Apply = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +65,8 @@ const Apply = () => {
   const [questionList, setQuestionList] = useState<
     RecruitApplyResponse | undefined
   >(undefined);
+
+  const generation = useRecoilValue(generationState);
 
   useEffect(() => {
     setQuestionList(data);
@@ -210,7 +214,7 @@ const Apply = () => {
   return (
     <Wrapper direction="column" data-section="White">
       <Title
-        title="CEOS 18기 리크루팅"
+        title={`CEOS ${generation}기 리크루팅`}
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다 :)']}
       ></Title>
       <TopMargin />
@@ -238,7 +242,7 @@ const Apply = () => {
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-          © 2016-2023 Ceos ALL RIGHTS RESERVED.
+          © 2016-2023 CEOS ALL RIGHTS RESERVED.
         </Text>
       </Flex>
 

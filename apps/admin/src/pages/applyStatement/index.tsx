@@ -246,7 +246,7 @@ export default function ApplyStatement() {
     if (!isFetching && isSuccess) {
       if (applicantData?.data.content?.length !== 0) {
         setDataSource(
-          applicantData?.data.content.map((data) => {
+          applicantData?.data.content.map((data: any) => {
             return {
               id: data?.id,
               uuid: data?.uuid,

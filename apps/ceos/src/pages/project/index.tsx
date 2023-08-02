@@ -19,6 +19,8 @@ import { TopMargin } from '../FAQ/index';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import DetailModal from './DetailModal';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
 
@@ -33,12 +35,15 @@ interface ProjectResponse {
 }
 
 const Project = () => {
+  const generation = useRecoilValue(generationState);
+
   const { infiniteData, ref } = useInfiniteQueries<ProjectListInterface>({
     queryKey: ['project'],
     queryFunction: ({ pageParam = 0 }) =>
       projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
     PageItem: ProjectCard,
   });
+
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -47,7 +52,7 @@ const Project = () => {
   };
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
+    content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
   };
 
