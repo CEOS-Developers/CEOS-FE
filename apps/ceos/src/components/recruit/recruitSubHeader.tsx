@@ -21,7 +21,7 @@ export const RecruitSubHeader = (props: RecruitSubHeaderProps) => {
   const [step, setStep] = useState('');
 
   return (
-    <div css={RecruitCss}>
+    <div css={RecruitCss} data-section={props.dataSection}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
           CEOS {props.generation}th <br /> Recruit

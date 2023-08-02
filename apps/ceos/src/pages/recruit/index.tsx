@@ -41,7 +41,6 @@ const Recruit = () => {
     () => recruitApi.GET_STUDY_URL(),
   );
 
-  console.log(data);
   return (
     <Flex
       direction="column"
