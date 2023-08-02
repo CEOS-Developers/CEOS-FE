@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <title>CEOS | 세오스</title>
         <link rel="icon" href="ceos-favicon.svg" />
         <link
           href="https://fonts.cdnfonts.com/css/gilroy-bold"
