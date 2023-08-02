@@ -346,6 +346,17 @@ export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   }
 
   @media (max-width: 768px) {
+    width: 100%;
+    padding: 17.5px;
+    .mobile {
+      display: block;
+    }
+    .desktop {
+      display: none;
+    }
+  }
+
+  @media (max-width: 390px) {
     width: 346px;
     padding: 17.5px;
     .mobile {

@@ -1,11 +1,11 @@
-import { PassBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
-import { Text } from '@ceos-fe/ui';
+import { Text, theme } from '@ceos-fe/ui';
 import { DocPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ParsedUrlQuery } from 'querystring';
+import styled from '@emotion/styled';
 
 //이름, step
 
@@ -33,41 +33,42 @@ const Pass = () => {
 
   return (
     <div css={PassMainCss} data-section="Blue">
-      <PassBgImg />
-      <div css={PassContentCss}>
-        <Text
-          webTypo="Heading1_Kor"
-          mobileTypo="Heading1_Kor"
-          paletteColor="White"
-        >
-          {query.name}님은&nbsp;
-          <br className="mobile" />
-          <p
-            css={css`
-              text-decoration: underline;
-            `}
+      <Container>
+        <div css={PassContentCss}>
+          <Text
+            webTypo="Heading1_Kor"
+            mobileTypo="Heading1_Kor"
+            paletteColor="White"
           >
-            서류 합격
-          </p>
-          &nbsp; 입니다.
-        </Text>
+            {query.name}님은&nbsp;
+            <br className="mobile" />
+            <p
+              css={css`
+                text-decoration: underline;
+              `}
+            >
+              서류 합격
+            </p>
+            &nbsp; 입니다.
+          </Text>
 
-        <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-          CEOS {query.generation}기 서류 합격을 축하드립니다 &#58;&#41;
-          <br />
-          먼저 CEOS에 보여주신 관심과 열정에
-          <br className="mobile" /> 깊은 감사를 드립니다.
-          <br />
-          {query.name}님은 면접 대상자로, 하단의 면접 일정을
-          <br className="mobile" /> 꼭 확인해주시고&nbsp;
-          <br className="desktop" />
-          면접 참여 가능 여부를
-          <br className="mobile" /> 반드시 알려주시기 바랍니다.
-        </Text>
+          <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
+            CEOS {query.generation}기 서류 합격을 축하드립니다 &#58;&#41;
+            <br />
+            먼저 CEOS에 보여주신 관심과 열정에
+            <br className="mobile" /> 깊은 감사를 드립니다.
+            <br />
+            {query.name}님은 면접 대상자로, 하단의 면접 일정을
+            <br className="mobile" /> 꼭 확인해주시고&nbsp;
+            <br className="desktop" />
+            면접 참여 가능 여부를
+            <br className="mobile" /> 반드시 알려주시기 바랍니다.
+          </Text>
 
-        <DocPassGlassBox query={query} />
-        <FooterText />
-      </div>
+          <DocPassGlassBox query={query} />
+          <FooterText />
+        </div>
+      </Container>
     </div>
   );
 };
@@ -86,12 +87,28 @@ export const getServerSideProps = async ({
   };
 };
 
+const Container = styled.div`
+  width: 100vw;
+  height: 1024px;
+  background-image: url('/recruit/pass-desktop.png');
+  background-size: 1660px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (max-width: 1023px) {
+    background-size: 782px;
+    height: 867px;
+    background-image: url('/recruit/pass-mobile.png');
+  }
+`;
+
 export const PassMainCss = css`
   position: relative;
   width: 100vw;
   height: 100vh;
   z-index: 1;
   overflow-x: hidden;
+  background-color: ${theme.palette.Blue};
 `;
 
 export const PassContentCss = css`
@@ -116,6 +133,8 @@ export const PassContentCss = css`
 
   @media (max-width: 1023px) {
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 22px;
     gap: 60px;
     top: 23.2vw;
   }

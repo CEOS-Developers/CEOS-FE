@@ -82,7 +82,7 @@ export const getServerSideProps = async ({
 
 const Container = styled.div`
   width: 100vw;
-  height: 1439px;
+  height: 1024px;
   background-image: url('/recruit/pass-desktop.png');
   background-size: 1660px;
   background-position: center;
@@ -105,7 +105,7 @@ const WelcomeText = css`
   color: white;
 
   @media (max-width: 1023px) {
-    typo: ${theme.typo.Web.Heading1_Eng};
+    ${theme.typo.Web.Heading1_Eng};
   }
 `;
 
@@ -145,6 +145,8 @@ export const PassContentCss = css`
 
   @media (max-width: 1023px) {
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 22px;
     gap: 60px;
     top: 23.2vw;
   }
