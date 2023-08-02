@@ -56,7 +56,17 @@ export default function Rewards() {
         explain={['CEOS 프로젝트들의 수상 내역을 확인해보세요!']}
       />
       <Space height={80} mobileHeight={60} />
-      <Flex align="flex-start" webGap={24} mobileGap={24}>
+      <Flex
+        align="flex-start"
+        webGap={24}
+        mobileGap={24}
+        css={css`
+          ${media.mobile} {
+            width: 100vw;
+            padding: 0px 22px;
+          }
+        `}
+      >
         <ScrollWrapper webGap={24} mobileGap={20} direction="column" line={1}>
           {infiniteData}
         </ScrollWrapper>

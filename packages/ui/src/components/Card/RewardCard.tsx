@@ -89,7 +89,7 @@ export const RewardCard = ({
       </Flex>
 
       {/* 모바일기준화면 */}
-      <Flex className="mobile" width={346}>
+      <Flex className="mobile">
         <Box>
           <TitleWrapper>
             <Text mobileTypo="Heading4" paletteColor="Black">
@@ -215,6 +215,9 @@ export const AdminRewardCard = ({
 const Container = styled.div`
   cursor: pointer;
 
+  width: 100%;
+  box-sizing: border-box;
+
   & > .web {
     display: block;
   }
@@ -228,6 +231,7 @@ const Container = styled.div`
       display: none;
     }
     & > .mobile {
+      width: 100%;
       display: block;
     }
   }
@@ -280,8 +284,8 @@ const Line = styled.div`
   margin: 28px 0;
 
   @media (max-width: 1023px) {
-    margin: 20px 0;
-    width: 318px;
+    margin: 20px 14px;
+    width: 100%;
   }
 `;
 
