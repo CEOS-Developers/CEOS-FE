@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -11,17 +11,21 @@ import { ParsedUrlQuery } from 'querystring';
 
 interface RouterDataInterface extends ParsedUrlQuery {
   uuid: string;
+  generation: string;
   email: string;
   pass: string;
   name: string;
+  date: string;
+  otDate: string;
+  duration: string;
 }
 
 const FinPass = () => {
   const router = useRouter();
-  const { uuid, email } = router.query as RouterDataInterface;
+  const query = router.query as RouterDataInterface;
 
   useEffect(() => {
-    if (router.query.pass !== '합격') {
+    if (query.pass !== '합격') {
       router.push('/');
     }
   }, []);
@@ -30,13 +34,13 @@ const FinPass = () => {
     <div css={PassMainCss} data-section="Blue">
       <PassBgImg />
       <div css={PassContentCss}>
-        <p css={WelcomeText}>Welcome CEOS 18th</p>
+        <p css={WelcomeText}>Welcome CEOS {query.generation}th</p>
         <Text
           webTypo="Heading1_Kor"
           mobileTypo="Heading1_Kor"
           paletteColor="White"
         >
-          {router.query.name}님은&nbsp;
+          {query.name}님은&nbsp;
           <p
             css={css`
               text-decoration: underline;
@@ -47,14 +51,14 @@ const FinPass = () => {
           &nbsp; 입니다.
         </Text>
         <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-          CEOS 18기 최종 합격을 축하드립니다 &#58;&#41;
+          CEOS {query.generation}기 최종 합격을 축하드립니다 &#58;&#41;
           <br />
           하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
           <br />
           다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
         </Text>
         <p>CEOS 드림</p>
-        <FinPassGlassBox uuid={uuid} email={email} />
+        <FinPassGlassBox query={query} />
         <FooterText />
       </div>
     </div>

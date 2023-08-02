@@ -6,6 +6,7 @@ import { ModalContentCss, InputCss } from './checkModal';
 import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useMutation } from '@tanstack/react-query';
+import { forwardRef } from 'react';
 /**
  * @param step '서류' | '최종'
  */
@@ -14,6 +15,7 @@ interface ModalProps {
   uuid: string;
   email: string;
   step: string;
+  generation: string;
   isOpen: boolean;
   toggleModal: () => void;
 }
@@ -22,96 +24,100 @@ interface FormInterface {
   reason: string;
 }
 
-export const DropModal = (props: ModalProps) => {
-  const { getValues, register } = useForm<FormInterface>({
-    defaultValues: {
-      reason: '',
-    },
-  });
-  const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
-    onSuccess: (res) => {
-      if (res === '활동 여부를 이미 선택했습니다.') {
-        alert('활동 여부를 이미 선택했습니다.');
-      }
-      props.toggleModal();
-    },
-  });
-  const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
-    onSuccess: (res) => {
-      if (res === '면접 참여 여부를 이미 선택했습니다.') {
-        alert('면접 참여 여부를 이미 선택했습니다.');
-      }
-      props.toggleModal();
-    },
-  });
+export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
+  (props, ref) => {
+    const { getValues, register } = useForm<FormInterface>({
+      defaultValues: {
+        reason: '',
+      },
+    });
+    const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
+      onSuccess: (res) => {
+        if (res === '활동 여부를 이미 선택했습니다.') {
+          alert('활동 여부를 이미 선택했습니다.');
+        }
+        props.toggleModal();
+      },
+    });
+    const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
+      onSuccess: (res) => {
+        if (res === '면접 참여 여부를 이미 선택했습니다.') {
+          alert('면접 참여 여부를 이미 선택했습니다.');
+        }
+        props.toggleModal();
+      },
+    });
 
-  const handleClick = async () => {
-    if (props.step === '서류') {
-      patchDoc({
-        uuid: props.uuid,
-        email: props.email,
-        available: false,
-        reason: getValues('reason'),
-      });
-    } else if (props.step === '최종') {
-      patchFin({
-        uuid: props.uuid,
-        email: props.email,
-        available: false,
-        reason: getValues('reason'),
-      });
-    }
-  };
+    const handleClick = async () => {
+      if (props.step === '서류') {
+        patchDoc({
+          uuid: props.uuid,
+          email: props.email,
+          available: false,
+          reason: getValues('reason'),
+        });
+      } else if (props.step === '최종') {
+        patchFin({
+          uuid: props.uuid,
+          email: props.email,
+          available: false,
+          reason: getValues('reason'),
+        });
+      }
+    };
 
-  return (
-    <div css={backCss} className="open">
-      <div css={ModalBoxCss}>
-        <CloseIcon
-          isOpen={props.isOpen}
-          toggleModal={props.toggleModal}
-          margin="0 0 auto auto"
-        />
-        <div css={ModalContentCss}>
-          <Text
-            webTypo="Heading2"
-            mobileTypo="Heading2"
-            paletteColor="Blue"
-            margin="0 0 12px 0"
-          >
-            {props.step === '서류' ? '면접 참여가' : '18기 활동이'}{' '}
-            불가능하신가요?
-          </Text>
-          <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
-            ‘{props.step === '서류' ? '참여' : '활동'} 불가능합니다’를
-            선택하셨습니다.
-            <br />
-            불가능한 사유를 알려주세요.
-          </Text>
-        </div>
-        <div css={InputCss}>
-          <TextField
-            {...register('reason', { required: true })}
-            label={
-              props.step === '서류'
-                ? '면접 참여 불가능 사유'
-                : '활동 불가능 사유'
-            }
-            placeholder="내용을 입력해주세요."
-            width={376}
-            css={css`
+    return (
+      <div css={backCss} className="open">
+        <div css={ModalBoxCss} ref={ref}>
+          <CloseIcon
+            isOpen={props.isOpen}
+            toggleModal={props.toggleModal}
+            margin="0 0 auto auto"
+          />
+          <div css={ModalContentCss}>
+            <Text
+              webTypo="Heading2"
+              mobileTypo="Heading2"
+              paletteColor="Blue"
+              margin="0 0 12px 0"
+            >
+              {props.step === '서류'
+                ? '면접 참여가'
+                : `${props.generation}기 활동이`}{' '}
+              불가능하신가요?
+            </Text>
+            <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
+              ‘{props.step === '서류' ? '참여' : '활동'} 불가능합니다’를
+              선택하셨습니다.
+              <br />
+              불가능한 사유를 알려주세요.
+            </Text>
+          </div>
+          <div css={InputCss}>
+            <TextField
+              {...register('reason', { required: true })}
+              label={
+                props.step === '서류'
+                  ? '면접 참여 불가능 사유'
+                  : '활동 불가능 사유'
+              }
+              placeholder="내용을 입력해주세요."
+              width={376}
+              css={css`
               @media (max-width: 1023px) {
                 width: 306px; !important;
               }
             `}
-          />
-          <Button variant="default" webWidth={376} onClick={handleClick}>
-            확인하기
-          </Button>
+            />
+            <Button variant="default" webWidth={376} onClick={handleClick}>
+              확인하기
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 export const ModalBoxCss = css`
   width: 504px;

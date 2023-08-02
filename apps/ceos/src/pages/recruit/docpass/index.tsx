@@ -11,18 +11,19 @@ import { ParsedUrlQuery } from 'querystring';
 
 interface RouterDataInterface extends ParsedUrlQuery {
   uuid: string;
+  generation: string;
   email: string;
   pass: string;
   name: string;
   date: string;
+  otDate: string;
   duration: string;
 }
 
 const Pass = () => {
   const router = useRouter();
 
-  const { uuid, email, name, date, duration } =
-    router.query as RouterDataInterface;
+  const query = router.query as RouterDataInterface;
 
   useEffect(() => {
     if (router.query.pass !== '합격') {
@@ -39,7 +40,7 @@ const Pass = () => {
           mobileTypo="Heading1_Kor"
           paletteColor="White"
         >
-          {name}님은&nbsp;
+          {query.name}님은&nbsp;
           <br className="mobile" />
           <p
             css={css`
@@ -52,25 +53,19 @@ const Pass = () => {
         </Text>
 
         <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-          CEOS 18기 서류 합격을 축하드립니다 &#58;&#41;
+          CEOS {query.generation}기 서류 합격을 축하드립니다 &#58;&#41;
           <br />
           먼저 CEOS에 보여주신 관심과 열정에
           <br className="mobile" /> 깊은 감사를 드립니다.
           <br />
-          {name}님은 면접 대상자로, 하단의 면접 일정을
+          {query.name}님은 면접 대상자로, 하단의 면접 일정을
           <br className="mobile" /> 꼭 확인해주시고&nbsp;
           <br className="desktop" />
           면접 참여 가능 여부를
           <br className="mobile" /> 반드시 알려주시기 바랍니다.
         </Text>
 
-        <DocPassGlassBox
-          uuid={uuid}
-          email={email}
-          name={name}
-          date={date}
-          duration={duration}
-        />
+        <DocPassGlassBox query={query} />
         <FooterText />
       </div>
     </div>

@@ -11,29 +11,38 @@ import { useMutation } from '@tanstack/react-query';
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
 
-interface DocGlassBoxProps {
-  uuid: string;
-  email: string;
-  name: string;
-  date: string;
-  duration: string;
+interface PassQueryType {
+  query: {
+    uuid: string;
+    generation: string;
+    email: string;
+    pass: string;
+    name: string;
+    date: string;
+    otDate: string;
+    duration: string;
+  };
 }
+const dateToDay: Record<number, string> = {
+  0: '일',
+  1: '월',
+  2: '화',
+  3: '수',
+  4: '목',
+  5: '금',
+  6: '토',
+};
 
-interface FinalGlassBoxProps {
-  uuid: string;
-  email: string;
-}
-
-export const DocPassGlassBox = (props: DocGlassBoxProps) => {
+export const DocPassGlassBox = ({ query }: PassQueryType) => {
   const [isPossible, setIsPossible] = useState(false);
-  const { isOpen, toggleModal } = useModal();
+  const { modalRef, isOpen, toggleModal } = useModal();
 
   let month, day, hour, minute;
 
-  if (props.date) {
-    [month, day] = props.date.split('/').map((s) => parseInt(s, 10));
+  if (query.date) {
+    [month, day] = query.date.split('/').map((s) => parseInt(s, 10));
   }
-  const duration = props.duration.match(/^(\d{2}:\d{2})/);
+  const duration = query.duration.match(/^(\d{2}:\d{2})/);
   if (duration) {
     [hour, minute] = duration[0].split(':');
   } else {
@@ -51,8 +60,8 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
   const handleClick = async () => {
     try {
       patchDoc({
-        uuid: props.uuid,
-        email: props.email,
+        uuid: query.uuid,
+        email: query.email,
         available: true,
         reason: null,
       });
@@ -76,7 +85,7 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
         면접 일정
       </Text>
       <p>
-        {props.name}님의 면접 타임은 <br className="mobile" /> {month}월 {day}일
+        {query.name}님의 면접 타임은 <br className="mobile" /> {month}월 {day}일
         오후 {hour && parseInt(hour) - 12}시 {minute}분 입니다.
         <br />
         해당 면접 시간에 참여 가능하신지
@@ -141,7 +150,7 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
           </p>
           <p>- 인터뷰는 최대 4인 1조로 약 30분간 진행됩니다.</p>
           <p>서류 합격을 다시 한번 축하드리며, 면접일에 뵙겠습니다 :)</p>
-          <p>CEOS 17기 운영진 드림</p>
+          <p>CEOS {query.generation}기 운영진 드림</p>
           <Button variant="white" webWidth={218}>
             <ArrowUpRight color={theme.palette.Blue} />
             &nbsp;오픈 채팅방 링크
@@ -151,9 +160,11 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
       {isOpen && (
         <ModalPortal>
           <DropModal
+            ref={modalRef}
             step="서류"
-            uuid={props.uuid}
-            email={props.email}
+            uuid={query.uuid}
+            generation={query.generation}
+            email={query.email}
             isOpen={isOpen}
             toggleModal={toggleModal}
           />
@@ -163,9 +174,9 @@ export const DocPassGlassBox = (props: DocGlassBoxProps) => {
   );
 };
 
-export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
+export const FinPassGlassBox = ({ query }: PassQueryType) => {
   const [isPossible, setIsPossible] = useState(false);
-  const { isOpen, toggleModal } = useModal();
+  const { modalRef, isOpen, toggleModal } = useModal();
   const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
     onSuccess: (res) => {
       if (res === '활동 여부를 이미 선택했습니다.') {
@@ -179,8 +190,8 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
   const handleClick = async () => {
     try {
       patchFin({
-        uuid: props.uuid,
-        email: props.email,
+        uuid: query.uuid,
+        email: query.email,
         available: true,
         reason: null,
       });
@@ -188,6 +199,14 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
       console.log(e);
     }
   };
+
+  const parsedOtDate = new Date(query.otDate);
+  const parsedOtPrevDate = new Date(
+    new Date(query.otDate).setDate(new Date(query.otDate).getDate() - 1),
+  );
+
+  console.log(query.otDate, parsedOtDate, parsedOtPrevDate);
+
   return (
     <div css={GlassBoxCss({ width: 552 })}>
       <Diamond />
@@ -200,9 +219,12 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
           margin-top: 4px;
         `}
       >
-        CEOS 18기 안내사항
+        CEOS {query.generation}기 안내사항
       </Text>
-      <p>- OT 일정 : 9월 7일 (수) 오후 7시, ZOOM으로 진행</p>
+      <p>
+        - OT 일정 : {parsedOtDate.getMonth() + 1}월 {parsedOtDate.getDate()}일 (
+        {dateToDay[parsedOtDate.getDay()]}) 오후 7시, ZOOM으로 진행
+      </p>
       <p>
         - 최종 합격자에게는 활동 일정 안내를 위해
         <br />
@@ -211,14 +233,22 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
       <p>
         ​- 최종 합격자께서는 2분 자기 PR자료(pdf)를
         <br />
-        이번주 수요일(9/7) 오후 5시까지
+        이번주 {dateToDay[parsedOtDate.getDay()]}요일(
+        {parsedOtDate.getMonth() + 1}/{parsedOtDate.getDate()}) 오후 5시까지
         <br />
         ceos.sinchon@gmail.com 으로
         <br className="mobile" /> 제출해 주시기 바랍니다.
       </p>
       <p>
-        - 9월 6일 화요일 중으로
-        <br className="mobile" /> CEOS 18기 단톡방 초대 예정입니다.
+        - {parsedOtPrevDate.getMonth() + 1}월 {parsedOtPrevDate.getDate()}일{' '}
+        {
+          dateToDay[
+            parsedOtDate.getDay() - 1 === -1 ? 6 : parsedOtDate.getDay() - 1
+          ]
+        }
+        요일 중으로
+        <br className="mobile" /> CEOS {query.generation}기 단톡방 초대
+        예정입니다.
       </p>
       <Text webTypo="Heading4" mobileTypo="Heading3">
         합격 대상자의 경우
@@ -260,16 +290,18 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
       </div>
       {isPossible && (
         <ModalPortal>
-          <TimeModal />
+          <TimeModal generation={Number(query.generation)} />
         </ModalPortal>
       )}
 
       {isOpen && (
         <ModalPortal>
           <DropModal
+            ref={modalRef}
             step="최종"
-            uuid={props.uuid}
-            email={props.email}
+            uuid={query.uuid}
+            generation={query.generation}
+            email={query.email}
             isOpen={isOpen}
             toggleModal={toggleModal}
           />
@@ -279,37 +311,7 @@ export const FinPassGlassBox = (props: FinalGlassBoxProps) => {
   );
 };
 
-export const NonPassGlassBox = () => {
-  return (
-    <div css={GlassBoxCss({ width: 680 })}>
-      <p>안녕하세요. CEOS 입니다.</p>
-      <p>
-        먼저 리크루팅 과정에 귀중한 시간을 내어
-        <br className="mobile" /> 참여해주셔서 진심으로 감사드립니다. <br />
-        창업의 뜻을 이루기 위해 지원자분과 같은 입장에서
-        <br className="mobile" /> 노력하고 있는
-        <br className="desktop" />
-        저희 운영진이 감히 합격자를
-        <br className="mobile" /> 가려낸다는 것은 늘 어려운 일입니다.
-        <br />
-      </p>
-      <p>
-        {' '}
-        제한된 인원으로 인해 합격 소식을
-        <br className="mobile" /> 전하지 못하게 되어&nbsp;
-        <br className="desktop" />
-        아쉽고 죄송한
-        <br className="mobile" /> 18기 운영진의 진심이 전해졌으면 합니다.
-        <br /> 추후 좋은 기회에 꼭 다시 만나뵐 수 있기를 기대하며,
-        <br /> 다시 한번 CEOS에 보여주신 관심과 열정에
-        <br className="mobile" /> 깊은 감사를 드립니다.
-      </p>
-      <p> CEOS 드림.</p>
-    </div>
-  );
-};
-
-const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
+export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   width: ${width}px;
   border-radius: 16px;
   color: ${theme.palette.White};
