@@ -140,7 +140,7 @@ const GridContainer = styled.div<{ length: number }>`
   column-gap: 24px;
   row-gap: 48px;
 
-  margin-bottom: 100px;
+  margin-bottom: 220px;
 
   @media (min-width: 1023px) {
     height: ${({ length }) => Math.ceil(length / 3) * 184 + 160}px;
