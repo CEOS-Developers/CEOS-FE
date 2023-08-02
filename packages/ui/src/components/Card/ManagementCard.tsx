@@ -132,7 +132,7 @@ const ManageWapper = styled.div`
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
-    width: 166px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -159,7 +159,7 @@ const Wrapper = styled.div`
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
-    width: 166px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
