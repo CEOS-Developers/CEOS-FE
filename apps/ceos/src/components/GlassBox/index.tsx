@@ -2,7 +2,7 @@ import { Button, Text, theme } from '@ceos-fe/ui';
 import { ArrowUpRight } from '@ceos/assets/ArrowUpRight';
 import { Diamond } from '@ceos/assets/Diamond';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import { ModalPortal, useModal } from '@ceos-fe/utils';
 import { DropModal } from '../Modals/dropModal';
 import { TimeModal } from '../Modals/timeModal';
@@ -22,6 +22,7 @@ interface PassQueryType {
     otDate: string;
     duration: string;
   };
+  setErrorText: Dispatch<string>;
 }
 const dateToDay: Record<number, string> = {
   0: '일',
@@ -33,7 +34,7 @@ const dateToDay: Record<number, string> = {
   6: '토',
 };
 
-export const DocPassGlassBox = ({ query }: PassQueryType) => {
+export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const [isPossible, setIsPossible] = useState(false);
   const { modalRef, isOpen, toggleModal } = useModal();
 
@@ -167,6 +168,7 @@ export const DocPassGlassBox = ({ query }: PassQueryType) => {
             email={query.email}
             isOpen={isOpen}
             toggleModal={toggleModal}
+            setErrorText={setErrorText}
           />
         </ModalPortal>
       )}
@@ -174,13 +176,17 @@ export const DocPassGlassBox = ({ query }: PassQueryType) => {
   );
 };
 
-export const FinPassGlassBox = ({ query }: PassQueryType) => {
+export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const [isPossible, setIsPossible] = useState(false);
   const { modalRef, isOpen, toggleModal } = useModal();
+
   const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
     onSuccess: (res) => {
       if (res === '활동 여부를 이미 선택했습니다.') {
-        alert('활동 여부를 이미 선택했습니다.');
+        setErrorText('활동 여부를 이미 선택했습니다.');
+        setTimeout(() => {
+          setErrorText('');
+        }, 3000);
       } else {
         setIsPossible(true);
       }
@@ -204,8 +210,6 @@ export const FinPassGlassBox = ({ query }: PassQueryType) => {
   const parsedOtPrevDate = new Date(
     new Date(query.otDate).setDate(new Date(query.otDate).getDate() - 1),
   );
-
-  console.log(query.otDate, parsedOtDate, parsedOtPrevDate);
 
   return (
     <div css={GlassBoxCss({ width: 552 })}>
@@ -304,6 +308,7 @@ export const FinPassGlassBox = ({ query }: PassQueryType) => {
             email={query.email}
             isOpen={isOpen}
             toggleModal={toggleModal}
+            setErrorText={setErrorText}
           />
         </ModalPortal>
       )}

@@ -6,7 +6,7 @@ import { ModalContentCss, InputCss } from './checkModal';
 import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useMutation } from '@tanstack/react-query';
-import { forwardRef } from 'react';
+import { Dispatch, forwardRef } from 'react';
 /**
  * @param step '서류' | '최종'
  */
@@ -18,6 +18,7 @@ interface ModalProps {
   generation: string;
   isOpen: boolean;
   toggleModal: () => void;
+  setErrorText: Dispatch<string>;
 }
 
 interface FormInterface {
@@ -34,7 +35,10 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
     const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
       onSuccess: (res) => {
         if (res === '활동 여부를 이미 선택했습니다.') {
-          alert('활동 여부를 이미 선택했습니다.');
+          props.setErrorText('활동 여부를 이미 선택했습니다.');
+          setTimeout(() => {
+            props.setErrorText('');
+          }, 3000);
         }
         props.toggleModal();
       },
@@ -42,7 +46,10 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
     const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
       onSuccess: (res) => {
         if (res === '면접 참여 여부를 이미 선택했습니다.') {
-          alert('면접 참여 여부를 이미 선택했습니다.');
+          props.setErrorText('면접 참여 여부를 이미 선택했습니다.');
+          setTimeout(() => {
+            props.setErrorText('');
+          }, 3000);
         }
         props.toggleModal();
       },
