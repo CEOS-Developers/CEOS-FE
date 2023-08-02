@@ -68,48 +68,50 @@ const Management = () => {
   const managers = data?.partManagerData;
 
   return (
-    <Flex
-      direction="column"
-      css={css`
-        width: 1032px;
-        margin: 80px 0 100px 0px;
+    <div data-section="White">
+      <Flex
+        direction="column"
+        css={css`
+          width: 1032px;
+          margin: 80px 0 100px 0px;
 
-        @media (max-width: 1023px) {
-          width: 750px;
-        }
-        @media (max-width: 390px) {
-          width: 346px;
-          margin-top: 36px;
-        }
-      `}
-      data-section="White"
-    >
-      <Title
-        title="MANAGEMENT"
-        explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
-      />
-      <div css={ListCss}>
-        {managers?.presidency.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        <EmptyCard />
-        {managers?.generalAffairs.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        {managers?.partLeaders.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        {managers?.managers.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-      </div>
-      <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-      <div css={ListCss}>
-        {mentors?.map((mentor: ManagerInterface) => (
-          <MentorCard key={mentor.id} mentorCard={mentor} />
-        ))}
-      </div>
-    </Flex>
+          @media (max-width: 1023px) {
+            width: 750px;
+          }
+          @media (max-width: 390px) {
+            width: 346px;
+            margin-top: 36px;
+          }
+        `}
+        data-section="White"
+      >
+        <Title
+          title="MANAGEMENT"
+          explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
+        />
+        <div css={ListCss}>
+          {managers?.presidency.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          <EmptyCard />
+          {managers?.generalAffairs.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          {managers?.partLeaders.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          {managers?.managers.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+        </div>
+        <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
+        <div css={ListCss}>
+          {mentors?.map((mentor: ManagerInterface) => (
+            <MentorCard key={mentor.id} mentorCard={mentor} />
+          ))}
+        </div>
+      </Flex>
+    </div>
   );
 };
 

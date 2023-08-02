@@ -19,53 +19,54 @@ export default function Rewards() {
   const awardList = data?.content;
 
   return (
-    <Flex
-      direction="column"
-      css={css`
-        width: 1032px;
-        margin: 80px 0 0px 0px;
-
-        @media (max-width: 1023px) {
-          width: 716px;
-        }
-
-        @media (max-width: 390px) {
-          width: 346px;
-        }
-      `}
-      data-section="White"
-    >
-      <Title
-        title="REWARDS"
-        explain={['CEOS 프로젝트들의 수상 내역을 확인해보세요!']}
-      />
-      <div
-        css={css`
-          display: flex;
-          flex-wrap: wrap;
-          gap: 24px;
-          align-items: flex-start;
-          margin-top: 80px;
-        `}
-      >
-        {awardList &&
-          awardList.map((a: AwardCardInterface) => (
-            <RewardCard key={a.generation} rewardCard={a} />
-          ))}
-      </div>
-      {/* <div
+    <div data-section="White">
+      <Flex direction="column" css={RewardMainCss}>
+        <Title
+          title="REWARDS"
+          explain={['CEOS 프로젝트들의 수상 내역을 확인해보세요!']}
+        />
+        <div
+          css={css`
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: flex-start;
+            margin-top: 80px;
+          `}
+        >
+          {awardList &&
+            awardList.map((a: AwardCardInterface) => (
+              <RewardCard key={a.generation} rewardCard={a} />
+            ))}
+        </div>
+        {/* <div
         css={css`
           margin-top: 36px;
         `}
       >
         <FooterText />
       </div> */}
-      {/* <Mobile
+        {/* <Mobile
         css={css`
           margin-top: 36px;
           justify-content: center;
         `}
       ></Mobile> */}
-    </Flex>
+        {/* <Footer /> */}
+      </Flex>
+    </div>
   );
 }
+
+export const RewardMainCss = css`
+  width: 1032px;
+  margin: 80px 0 0px 0px;
+
+  @media (max-width: 1023px) {
+    width: 716px;
+  }
+
+  @media (max-width: 390px) {
+    width: 346px;
+  }
+`;
