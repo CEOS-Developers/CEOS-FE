@@ -303,6 +303,10 @@ const BtnCss = css`
   word-break: keep-all;
   typo: ${theme.typo.Web.Body2};
 
+  :hover{
+    cursor:pointer;
+  }
+
   @media (max-width: 1023px) {
     width: 100%;
   }
@@ -320,7 +324,7 @@ export const BtnWrapper = css`
   margin-bottom: 36px;
 
   @media (max-width: 768px) {
-    width: 346px;
+    width: 100%;
     flex-direction: column;
   }
 `;
