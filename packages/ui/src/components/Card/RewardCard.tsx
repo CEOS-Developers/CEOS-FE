@@ -23,10 +23,11 @@ export interface AdminRewardCardProps extends RewardCardProps {
   onClickUpdate: () => void;
 }
 
-export const RewardCard = (props: {
-  rewardCard: RewardCardProps;
-}): EmotionJSX.Element => {
-  const { generation, projects, awards } = props.rewardCard;
+export const RewardCard = ({
+  generation = 0,
+  projects,
+  awards,
+}: RewardCardProps) => {
   const [isExtend, setIsExtend] = useState(false);
   return (
     <Container>
