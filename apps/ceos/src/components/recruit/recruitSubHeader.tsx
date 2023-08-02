@@ -45,46 +45,56 @@ export const RecruitSubHeader = ({
         <p css={RecruitTextCss}>
           CEOS {generation}th <br /> Recruit
         </p>
-        <Text webTypo="Heading4" className="subText">
+        <Text
+          webTypo="Heading4"
+          className="subText"
+          style={{ textAlign: 'center' }}
+        >
           CEOS와 함께 성장할
           <br className="mobile" /> {generation}기를 모집합니다!
         </Text>
         <>
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
-            <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
-              <Button variant="glass" webWidth={182} css={BtnCss}>
-                {generation}기 지원하기
-              </Button>
-            </Link>
+            <div style={{ width: '182px' }}>
+              <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
+                <Button variant="glass" webWidth={182} css={BtnCss}>
+                  {generation}기 지원하기
+                </Button>
+              </Link>
+            </div>
           ) : (
             <>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <Button
-                  variant="glass"
-                  webWidth={249}
-                  mobileWidth={249}
-                  css={BtnCss}
-                  onClick={() => {
-                    toggleModal();
-                    setStep('서류');
-                  }}
-                >
-                  서류 합격 여부 확인하기
-                </Button>
+                <div style={{ width: '249px' }}>
+                  <Button
+                    variant="glass"
+                    webWidth={249}
+                    mobileWidth={249}
+                    css={BtnCss}
+                    onClick={() => {
+                      toggleModal();
+                      setStep('서류');
+                    }}
+                  >
+                    서류 합격 여부 확인하기
+                  </Button>
+                </div>
               ) : (
                 <>
                   {resultDateFinal <= curDate ? (
-                    <Button
-                      variant="glass"
-                      webWidth={249}
-                      css={BtnCss}
-                      onClick={() => {
-                        toggleModal();
-                        setStep('최종');
-                      }}
-                    >
-                      최종 합격 여부 확인하기
-                    </Button>
+                    <div style={{ width: '249px' }}>
+                      <Button
+                        variant="glass"
+                        webWidth={249}
+                        css={BtnCss}
+                        onClick={() => {
+                          toggleModal();
+                          setStep('최종');
+                        }}
+                      >
+                        최종 합격 여부 확인하기
+                      </Button>
+                    </div>
                   ) : (
                     <Button
                       variant="glass"
@@ -118,14 +128,9 @@ export const RecruitSubHeader = ({
 export const BtnCss = css`
   height: 46px;
   margin-top: 40px;
-  block-sizing: border-box;
+  box-sizing: border-box;
 
   @media (max-width: 1023px) {
-    margin-top: 12px;
-    height: 40px;
-  }
-
-  @media (max-width: 768px) {
     margin-top: 90px;
     width: 346px;
     height: 59px;
