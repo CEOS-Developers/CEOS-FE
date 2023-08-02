@@ -85,6 +85,7 @@ const Container = styled.div`
   background: ${theme.palette.Admin.DeepNavy};
   position: fixed;
   min-width: 200px;
+  z-index: 999;
 
   // 이미지 및 텍스트 드래그 방지
   -webkit-user-select: none;
