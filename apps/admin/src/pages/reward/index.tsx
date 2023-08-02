@@ -32,8 +32,9 @@ export default function Reward() {
           이력 추가
         </Button>
       </Flex>
-      <Space height={48} />
-
+      <div>
+        <Space height={48} />
+      </div>
       <Flex
         webGap={24}
         mobileGap={24}
@@ -65,6 +66,8 @@ export default function Reward() {
 const InfiniteElement = styled(Flex)<{
   isLeft: boolean;
 }>`
+  height: auto;
+
   & > :nth-child(even) {
     display: ${({ isLeft }) => (isLeft ? 'none' : '')};
   }

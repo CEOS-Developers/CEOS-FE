@@ -82,8 +82,8 @@ export default function Recruit() {
   };
 
   return (
-    <>
-      <Flex direction="column" align="start">
+    <Flex width={1032} direction="column" align="flex-start">
+      <Flex width={680} direction="column" align="flex-start">
         <Text webTypo="Heading2" paletteColor="Black">
           RECRUIT
         </Text>
@@ -118,7 +118,7 @@ export default function Recruit() {
           mobileGap={8}
         >
           <Text webTypo="Label3">서류 접수</Text>
-          <Flex justify="flex-start" webGap={8} mobileGap={8}>
+          <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateDoc')}
@@ -147,7 +147,7 @@ export default function Recruit() {
           mobileGap={8}
         >
           <Text webTypo="Label3">면접 일자</Text>
-          <Flex justify="flex-start" webGap={8} mobileGap={8}>
+          <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
               initialValue={getValues('startDateInterview')}
@@ -277,6 +277,7 @@ export default function Recruit() {
           marginTop: '48px',
           transform: 'translate(-50%, 0)',
           alignSelf: 'center',
+          flexShrink: '0',
         }}
         onClick={handleSave}
       >
@@ -291,7 +292,7 @@ export default function Recruit() {
           }
         />
       )}
-    </>
+    </Flex>
   );
 }
 
