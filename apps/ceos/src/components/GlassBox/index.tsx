@@ -322,7 +322,7 @@ export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   justify-content: center;
   padding: 40px;
   box-sizing: border-box;
-  typo: ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body2};
   color: white;
   background-clip: border-box;
   gap: 24px;
@@ -342,17 +342,17 @@ export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
   @media (max-width: 1023px) {
     gap: 28px;
     padding: 32px;
-    type: ${theme.typo.Mobile.Body1};
+    ${theme.typo.Mobile.Body1};
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 768px) {
     width: 346px;
-    padding-left : 17.5px;
-    padding-right : 17.5px;
+    padding: 17.5px;
     .mobile {
       display: block;
     }
     .desktop {
       display: none;
     }
+  }
 `;

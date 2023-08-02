@@ -1,4 +1,3 @@
-import { PassBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { FinPassGlassBox } from '@ceos/components/GlassBox';
@@ -6,6 +5,7 @@ import { FooterText } from '@ceos/components/FooterText';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ParsedUrlQuery } from 'querystring';
+import styled from '@emotion/styled';
 
 //이름, step
 
@@ -32,35 +32,36 @@ const FinPass = () => {
 
   return (
     <div css={PassMainCss} data-section="Blue">
-      <PassBgImg />
-      <div css={PassContentCss}>
-        <p css={WelcomeText}>Welcome CEOS {query.generation}th</p>
-        <Text
-          webTypo="Heading1_Kor"
-          mobileTypo="Heading1_Kor"
-          paletteColor="White"
-        >
-          {query.name}님은&nbsp;
-          <p
-            css={css`
-              text-decoration: underline;
-            `}
+      <Container>
+        <div css={PassContentCss}>
+          <p css={WelcomeText}>Welcome CEOS {query.generation}th</p>
+          <Text
+            webTypo="Heading1_Kor"
+            mobileTypo="Heading1_Kor"
+            paletteColor="White"
           >
-            최종 합격
-          </p>
-          &nbsp; 입니다.
-        </Text>
-        <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-          CEOS {query.generation}기 최종 합격을 축하드립니다 &#58;&#41;
-          <br />
-          하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
-          <br />
-          다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
-        </Text>
-        <p>CEOS 드림</p>
-        <FinPassGlassBox query={query} />
-        <FooterText />
-      </div>
+            {query.name}님은&nbsp;
+            <p
+              css={css`
+                text-decoration: underline;
+              `}
+            >
+              최종 합격
+            </p>
+            &nbsp; 입니다.
+          </Text>
+          <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
+            CEOS {query.generation}기 최종 합격을 축하드립니다 &#58;&#41;
+            <br />
+            하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
+            <br />
+            다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
+          </Text>
+          <p>CEOS 드림</p>
+          <FinPassGlassBox query={query} />
+          <FooterText />
+        </div>
+      </Container>
     </div>
   );
 };
@@ -78,6 +79,21 @@ export const getServerSideProps = async ({
     },
   };
 };
+
+const Container = styled.div`
+  width: 100vw;
+  height: 1439px;
+  background-image: url('/recruit/pass-desktop.png');
+  background-size: 1660px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (max-width: 1023px) {
+    background-size: 782px;
+    height: 867px;
+    background-image: url('/recruit/pass-mobile.png');
+  }
+`;
 
 const WelcomeText = css`
   text-align: center;
@@ -99,6 +115,7 @@ export const PassMainCss = css`
   height: 100vh;
   z-index: 1;
   overflow-x: hidden;
+  background-color: ${theme.palette.Blue};
 `;
 
 export const PassContentCss = css`
