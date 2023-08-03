@@ -21,7 +21,10 @@ export default function Document() {
           property="og:description"
           content="CEOS는 연세대학교, 서강대학교, 이화여자대학교, 홍익대학교 학생들이 모인 최고의 IT 창업 학회입니다."
         />
-        <meta property="og:image" content="%PUBLIC_URL%/og-ceos.png" />
+        <meta
+          property="og:image"
+          content="https://ceos-web-17.s3.ap-northeast-2.amazonaws.com/activities/f0c69be6-68b1-4c4e-9bd9-3c212145b99f"
+        />
       </Head>
       <body>
         <div id="modal_root"></div>

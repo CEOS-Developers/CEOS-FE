@@ -17,7 +17,10 @@ export default function Document() {
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css"
         />
         <meta property="og:title" content="CEOS ADMIN" />
-        <meta property="og:image" content="%PUBLIC_URL%/og-admin.png" />
+        <meta
+          property="og:image"
+          content="https://ceos-web-17.s3.ap-northeast-2.amazonaws.com/activities/0bcb4af1-fdfe-428a-b0e8-87f12d931c67"
+        />
       </Head>
       <body>
         <Main />
