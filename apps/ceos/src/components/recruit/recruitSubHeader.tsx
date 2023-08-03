@@ -67,7 +67,7 @@ export const RecruitSubHeader = ({
         </Text>
         <>
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
-            <div style={{ width: '182px' }}>
+            <div style={{ width: '182px', display: 'flex' }}>
               <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
                 <Button variant="glass" webWidth={182} css={BtnCss}>
                   {generation}기 지원하기
@@ -75,9 +75,9 @@ export const RecruitSubHeader = ({
               </Link>
             </div>
           ) : (
-            <>
+            <div>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <div style={{ width: '249px' }}>
+                <div style={{ width: '249px', display: 'flex' }}>
                   <Button
                     variant="glass"
                     webWidth={249}
@@ -92,9 +92,9 @@ export const RecruitSubHeader = ({
                   </Button>
                 </div>
               ) : (
-                <>
+                <div>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
-                    <div style={{ width: '249px' }}>
+                    <div style={{ width: '249px', display: 'flex' }}>
                       <Button
                         variant="glass"
                         webWidth={249}
@@ -108,7 +108,7 @@ export const RecruitSubHeader = ({
                       </Button>
                     </div>
                   ) : (
-                    <div style={{ width: '234px' }}>
+                    <div style={{ width: '234px', display: 'flex' }}>
                       <Button
                         variant="glass"
                         webWidth={234}
@@ -119,9 +119,9 @@ export const RecruitSubHeader = ({
                       </Button>
                     </div>
                   )}
-                </>
+                </div>
               )}
-            </>
+            </div>
           )}
         </>
       </div>
