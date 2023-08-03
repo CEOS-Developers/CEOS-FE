@@ -8,28 +8,30 @@ import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
 import { ModalPortal } from '@ceos-fe/utils/';
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import Link from 'next/link';
 import { DateProps } from '@ceos/pages/recruit';
+import { PassDataInterface } from './interface';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
   generation?: number;
   date: DateProps;
+  setPassData: Dispatch<PassDataInterface>;
+  step: string;
+  setStep: Dispatch<string>;
 }
 
 export const RecruitSubHeader = ({
   dataSection,
   generation,
   date,
+  setPassData,
+  step,
+  setStep,
 }: RecruitSubHeaderProps) => {
   const { modalRef, isOpen, toggleModal } = useModal();
-  const [step, setStep] = useState('');
   const newDate = new Date();
-
-  const getDate = (date: Date) => {
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  };
 
   const [
     curDate,
@@ -39,16 +41,17 @@ export const RecruitSubHeader = ({
     resultDateFinal,
     endDate,
   ] = [
-    getDate(newDate),
-    getDate(date.startDateDoc),
-    getDate(date.endDateDoc),
-    getDate(date.resultDateDoc),
-    getDate(date.resultDateFinal),
-    getDate(
-      new Date(
-        date.resultDateFinal.setDate(date.resultDateFinal.getDate() + 7),
+    newDate,
+    date.startDateDoc,
+    date.endDateDoc,
+    date.resultDateDoc,
+    date.resultDateFinal,
+    new Date(
+      new Date(date.resultDateFinal).setDate(
+        date.resultDateFinal.getDate() + 7,
       ),
-    ), // 일주일 뒤를 합격 확인 마감기간으로 설정
+    ),
+    // 일주일 뒤를 합격 확인 마감기간으로 설정
   ];
 
   return (
@@ -131,6 +134,7 @@ export const RecruitSubHeader = ({
             step={step}
             isOpen={isOpen}
             toggleModal={toggleModal}
+            setPassData={setPassData}
             ref={modalRef}
           />
         </ModalPortal>

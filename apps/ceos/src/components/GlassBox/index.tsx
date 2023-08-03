@@ -14,7 +14,7 @@ import { useMutation } from '@tanstack/react-query';
 interface PassQueryType {
   query: {
     uuid: string;
-    generation: string;
+    generation: number;
     email: string;
     pass: string;
     name: string;
@@ -120,9 +120,13 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
             `}
             onClick={() => {
               if (query.attendanceStatus) {
-                alert('면접 참여 여부를 이미 선택하셨습니다.');
+                setErrorText('면접 참여 여부를 이미 선택하셨습니다.');
+                setTimeout(() => {
+                  setErrorText('');
+                }, 3000);
+              } else {
+                toggleModal();
               }
-              toggleModal();
             }}
           >
             아니요, 불가능합니다.
@@ -293,8 +297,13 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
           `}
           onClick={() => {
             if (query.attendanceStatus) {
-              alert('활동 가능 여부를 이미 제출하셨습니다.');
-            } else toggleModal();
+              setErrorText('활동 가능 여부를 이미 제출하셨습니다.');
+              setTimeout(() => {
+                setErrorText('');
+              }, 3000);
+            } else {
+              toggleModal();
+            }
           }}
         >
           아니요, 불가능합니다.

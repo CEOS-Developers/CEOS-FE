@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import {
   Creative,
-  Enterpreneurship,
+  Entrepreneurship,
   Openness,
   Sustainability,
 } from '@ceos/assets/landing/glassButtonText';
@@ -20,18 +20,7 @@ export const SubHeader = (props: SubHeaderProps) => {
 
   return (
     <Wrapper className={props.className} data-section={props.dataSection}>
-      <div className="banner-image">
-        <BannerImage
-          src={
-            windowSize.width < 600 && windowSize.width !== 0
-              ? '/banner-graphic-mobile.png'
-              : '/banner-graphic-web.png'
-          }
-          width={1660}
-          height={720}
-          alt=""
-        />
-      </div>
+      <div className="banner-image"></div>
       <Flex
         className="typo"
         direction="column"
@@ -55,7 +44,7 @@ export const SubHeader = (props: SubHeaderProps) => {
           <Creative />
         </GlassText>
         <GlassText>
-          <Enterpreneurship />
+          <Entrepreneurship />
         </GlassText>
         <GlassText>
           <Openness />
@@ -74,13 +63,21 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   .banner-image {
+    position: relative;
     height: 720px;
     background-color: ${theme.palette.Blue};
 
     overflow: hidden;
 
+    width: 100vw;
+    background-image: url('/banner-graphic-web.png');
+    background-size: 1660px;
+    background-position: center;
+
     ${media.mobile} {
       height: 700px;
+      background-size: 906px;
+      background-image: url('/banner-graphic-mobile.png');
     }
   }
 
@@ -108,17 +105,19 @@ const Wrapper = styled.div`
 `;
 
 const BannerImage = styled(Image)`
+  position: absolute;
+
   width: 100vw;
   height: auto;
 
   ${media.mobile} {
-    margin-top: 250px;
-    margin-left: 65px;
+    top: 200px;
+    left: 65px;
   }
 `;
 
 const GlassText = styled(Flex)`
-  ${theme.glass.Border};
+  ${theme.glass.Landing};
 
   border-radius: 20px;
 

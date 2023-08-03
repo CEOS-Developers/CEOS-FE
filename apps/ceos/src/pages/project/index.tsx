@@ -1,38 +1,14 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  ProjectCard,
-  ProjectCardProps,
-  Space,
-  media,
-} from '@ceos-fe/ui';
+import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
-import { TopMargin } from '../FAQ/index';
-import { useState } from 'react';
 import styled from '@emotion/styled';
-import DetailModal from './DetailModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
-
-interface ProjectResponse {
-  content: ProjectCardProps[];
-  pageInfo: {
-    pageNum: number;
-    limit: number;
-    totalPages: number;
-    totalElements: number;
-  };
-}
+import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -41,9 +17,8 @@ const Project = () => {
     queryKey: ['project'],
     queryFunction: ({ pageParam = 0 }) =>
       projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
-    PageItem: ProjectCard,
+    PageItem: ProjectCardContainer,
   });
-
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -56,23 +31,28 @@ const Project = () => {
     link: '/recruit',
   };
 
-  const [modalNumber, setModalNumber] = useState(-1);
-  const setClose = () => {
-    setModalNumber(-1);
-  };
-
   return (
     <div>
       <Flex direction="column" data-section="White">
         <Title
-          title="Project"
+          title="PROJECT"
           explain={[
             '신촌 연합 IT 창업동아리 CEOS의',
             '활동 프로젝트를 소개합니다.',
           ]}
         />
         <Space height={80} mobileHeight={60} />
-        <Flex align="flex-start" webGap={24} mobileGap={24}>
+        <Flex
+          align="flex-start"
+          webGap={24}
+          mobileGap={24}
+          css={css`
+            width: 1032px;
+            ${media.mobile} {
+              width: 100%;
+            }
+          `}
+        >
           <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>
             {infiniteData}
           </ScrollWrapper>
@@ -85,6 +65,8 @@ const Project = () => {
         </Flex>
         <div ref={ref}></div>
       </Flex>
+      <Space height={100} mobileHeight={60} />
+      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
   );
 };
@@ -134,5 +116,11 @@ const ScrollWrapper = styled(Flex)<{
 
   ${media.mobile} {
     display: ${({ line }) => (line !== 1 ? 'none' : '')};
+    padding: 0px 22px;
+    > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 `;

@@ -36,6 +36,7 @@ const FAQ = () => {
     content: ['CEOS 프로젝트', '보러가기'],
     link: '/project',
   };
+
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
     content: ['CEOS 18기', '지원하기'],
