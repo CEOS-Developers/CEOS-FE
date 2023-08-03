@@ -96,10 +96,6 @@ const Management = () => {
         align="center"
         css={css`
           margin: 80px 0 100px 0px;
-
-          ${media.mobile} {
-            width: 100vw;
-          }
         `}
         data-section="White"
       >
