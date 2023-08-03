@@ -22,7 +22,6 @@ export const Header = (props: HeaderProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
   const router = useRouter();
   const [, setBackColor] = useRecoilState(HeaderState);
-  const isMobile = useWindowTabletResize();
   //최상단인지 check
   useEffect(() => {
     const handleScroll = () => {
@@ -37,10 +36,7 @@ export const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('[data-section]'));
-    const rootMargin = isMobile ? `${70 * -1}px` : `${124 * -1}px`;
     const option = {
-      rootMargin: rootMargin,
-      //모바일 되면 마진값 바꾸깅
       threshold: 0,
     };
 

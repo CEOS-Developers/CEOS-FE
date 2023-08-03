@@ -21,6 +21,7 @@ interface PassQueryType {
     date: string;
     otDate: string;
     duration: string;
+    attendanceStatus: boolean;
   };
   setErrorText: Dispatch<string>;
 }
@@ -53,7 +54,9 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
     onSuccess: (res) => {
       if (res === '면접 참여 여부를 이미 선택했습니다.') {
-        setIsPossible(true);
+        if (query.attendanceStatus) {
+          setIsPossible(true);
+        }
       }
     },
   });
@@ -116,6 +119,9 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
               }
             `}
             onClick={() => {
+              if (query.attendanceStatus) {
+                alert('면접 참여 여부를 이미 선택하셨습니다.');
+              }
               toggleModal();
             }}
           >
@@ -183,12 +189,13 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
     onSuccess: (res) => {
       if (res === '활동 여부를 이미 선택했습니다.') {
-        setErrorText('활동 여부를 이미 선택했습니다.');
-        setTimeout(() => {
-          setErrorText('');
-        }, 3000);
-      } else {
-        setIsPossible(true);
+        if (query.attendanceStatus) setIsPossible(true);
+        else {
+          setErrorText('활동 여부를 이미 선택했습니다.');
+          setTimeout(() => {
+            setErrorText('');
+          }, 3000);
+        }
       }
     },
   });
@@ -261,7 +268,6 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
         <br className="desktop" />
         활동 여부를 반드시 제출해 주세요.
       </Text>
-
       {/* 삼항연산자로 patch api 호출 -> 이미 제출한 사람(400에러)면 버튼도 안뜨게 */}
       <div>
         <Button
@@ -286,18 +292,20 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
             }
           `}
           onClick={() => {
-            toggleModal();
+            if (query.attendanceStatus) {
+              alert('활동 가능 여부를 이미 제출하셨습니다.');
+            } else toggleModal();
           }}
         >
           아니요, 불가능합니다.
         </p>
       </div>
+
       {isPossible && (
         <ModalPortal>
           <TimeModal generation={Number(query.generation)} />
         </ModalPortal>
       )}
-
       {isOpen && (
         <ModalPortal>
           <DropModal

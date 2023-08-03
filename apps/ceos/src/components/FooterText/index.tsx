@@ -9,13 +9,17 @@ export const FooterText = () => {
       css={css`
         display: flex;
         justify-content: center;
-        margin-bottom: 60px;
-        @media (max-width: 767px) {
-          margin-bottom: 30px;
-        }
       `}
     >
       © 2016-2023 CEOS ALL RIGHTS RESERVED.
     </Text>
   );
 };
+
+export const FooterTextCss = css`
+  margin-bottom: 80px;
+
+  @media (max-width: 1023px) {
+    margin-bottom: 30px;
+  }
+`;

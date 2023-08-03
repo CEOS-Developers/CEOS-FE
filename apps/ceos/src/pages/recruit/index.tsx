@@ -1,4 +1,4 @@
-import { Flex, Mobile, theme } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, theme } from '@ceos-fe/ui';
 import { RecruitSubHeader } from '@ceos/components/recruit/recruitSubHeader';
 import { RecruitMainCss } from '@ceos/styles/recruit';
 import { Text } from '@ceos-fe/ui';
@@ -18,6 +18,8 @@ import { notionUrl } from '@ceos/assets/constant';
 import { CustomLink } from '@ceos/components/Header';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
+import Footer from '@ceos/components/Footer';
+import { leftBtn } from '../rewards';
 
 interface RecruitStudyResponse {
   generation: number;
@@ -48,6 +50,11 @@ const Recruit = () => {
     () => recruitApi.GER_RECRUITMENTS(),
   );
 
+  const rightBtn = {
+    title: '이전 활동들이 궁금하다면',
+    content: ['CEOS 프로젝트', '보러가기'],
+    link: '/project',
+  };
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
     endDateDoc: new Date(data ? data.endDateDoc : ''),
@@ -147,16 +154,17 @@ const Recruit = () => {
           *서류 제출 후 온라인으로 면접을 진행합니다.
         </Text>
       </div>
-      <div
+      <Mobile
         css={css`
-          display: none;
-          @media (max-width: 390px) {
-            display: block;
-          }
+          margin-bottom: 30px;
+          justify-content: center;
         `}
       >
         <FooterText />
-      </div>
+      </Mobile>
+      <Desktop>
+        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
+      </Desktop>
     </Flex>
   );
 };
