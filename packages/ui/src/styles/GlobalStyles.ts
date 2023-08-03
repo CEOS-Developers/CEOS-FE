@@ -36,4 +36,8 @@ export const globalStyle = css`
     border: none;
     margin: 0;
   }
+
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
 `;
