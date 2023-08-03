@@ -116,5 +116,11 @@ const ScrollWrapper = styled(Flex)<{
 
   ${media.mobile} {
     display: ${({ line }) => (line !== 1 ? 'none' : '')};
+    padding: 0px 22px;
+    > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 `;

@@ -95,10 +95,6 @@ const Wrapper = styled.div`
   cursor: pointer;
   width: 328px;
 
-  ${media.mobile} {
-    width: 100%;
-  }
-
   ${media.pc} {
     & > .ceos-hover {
       display: none;
@@ -109,6 +105,13 @@ const Wrapper = styled.div`
         display: block;
       }
     }
+  }
+
+  ${media.mobile} {
+    max-width: 400px;
+
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -121,8 +124,10 @@ const ProjectImg = styled.img`
 
   ${media.mobile} {
     &.ceos {
-      width: 346px;
-      height: 194px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 346 / 194;
+
       border-radius: 10px;
     }
   }
@@ -143,9 +148,11 @@ const ExplainBox = styled.div`
   @media (max-width: 1023px) {
     padding: 24px 20px 20px;
     margin-top: -10px;
-    width: 346px;
     border-radius: 10px;
-    display: block;
+
+    width: 100%;
+    height: auto;
+    aspect-ratio: 346 / 89;
   }
   @media (min-width: 1023px) {
     .ceos {
