@@ -30,49 +30,51 @@ export default function Rewards() {
   };
 
   return (
-    <Flex
-      direction="column"
-      css={css`
-        width: 1032px;
-        margin: 80px 0 0px 0px;
-
-        @media (max-width: 1023px) {
-          width: 716px;
-        }
-
-        @media (max-width: 390px) {
-          width: 346px;
-        }
-      `}
-      data-section="White"
-    >
-      <Title
-        title="REWARDS"
-        explain={['CEOS 프로젝트들의 수상 내역을 확인해보세요!']}
-      />
-      <Space height={80} mobileHeight={60} />
+    <div data-section="White">
       <Flex
-        align="flex-start"
-        webGap={24}
-        mobileGap={24}
+        direction="column"
         css={css`
-          ${media.mobile} {
-            width: 100vw;
-            padding: 0px 22px;
+          width: 1032px;
+          margin: 80px 0 0px 0px;
+
+          @media (max-width: 1023px) {
+            width: 716px;
+          }
+
+          @media (max-width: 390px) {
+            width: 346px;
           }
         `}
+        data-section="White"
       >
-        <ScrollWrapper webGap={24} mobileGap={20} direction="column" line={1}>
-          {infiniteData}
-        </ScrollWrapper>
-        <ScrollWrapper webGap={24} mobileGap={20} direction="column" line={2}>
-          {infiniteData}
-        </ScrollWrapper>
+        <Title
+          title="REWARDS"
+          explain={['CEOS 프로젝트들의 수상 내역을 확인해보세요!']}
+        />
+        <Space height={80} mobileHeight={60} />
+        <Flex
+          align="flex-start"
+          webGap={24}
+          mobileGap={24}
+          css={css`
+            ${media.mobile} {
+              width: 100vw;
+              padding: 0px 22px;
+            }
+          `}
+        >
+          <ScrollWrapper webGap={24} mobileGap={20} direction="column" line={1}>
+            {infiniteData}
+          </ScrollWrapper>
+          <ScrollWrapper webGap={24} mobileGap={20} direction="column" line={2}>
+            {infiniteData}
+          </ScrollWrapper>
+        </Flex>
+        <div ref={ref}></div>
+        <Space height={100} mobileHeight={60} />
+        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
-      <div ref={ref}></div>
-      <Space height={100} mobileHeight={60} />
-      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
-    </Flex>
+    </div>
   );
 }
 
