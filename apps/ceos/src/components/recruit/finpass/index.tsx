@@ -2,48 +2,27 @@ import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { ParsedUrlQuery } from 'querystring';
+import { useState } from 'react';
 import styled from '@emotion/styled';
+import { PassDataInterface } from '../interface';
 
 //이름, step
 
-interface RouterDataInterface extends ParsedUrlQuery {
-  uuid: string;
-  generation: string;
-  email: string;
-  pass: string;
-  name: string;
-  attendanceStatus: string | string[] | undefined;
-  date: string;
-  otDate: string;
-  duration: string;
-}
-
-const FinPass = () => {
-  const router = useRouter();
-  const query = router.query as RouterDataInterface;
+const FinPass = ({ props }: { props: PassDataInterface }) => {
   const [errorText, setErrorText] = useState('');
-
-  useEffect(() => {
-    if (query.pass !== '합격') {
-      router.push('/');
-    }
-  }, []);
 
   return (
     <>
       <div css={PassMainCss} data-section="Blue">
         <Container>
           <div css={PassContentCss}>
-            <p css={WelcomeText}>Welcome CEOS {query.generation}th</p>
+            <p css={WelcomeText}>Welcome CEOS {props.generation}th</p>
             <Text
               webTypo="Heading1_Kor"
               mobileTypo="Heading1_Kor"
               paletteColor="White"
             >
-              {query.name}님은&nbsp;
+              {props.name}님은&nbsp;
               <p
                 css={css`
                   text-decoration: underline;
@@ -54,14 +33,14 @@ const FinPass = () => {
               &nbsp; 입니다.
             </Text>
             <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-              CEOS {query.generation}기 최종 합격을 축하드립니다 &#58;&#41;
+              CEOS {props.generation}기 최종 합격을 축하드립니다 &#58;&#41;
               <br />
               하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
               <br />
               다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
             </Text>
             <p>CEOS 드림</p>
-            <FinPassGlassBox query={query} setErrorText={setErrorText} />
+            <FinPassGlassBox query={props} setErrorText={setErrorText} />
             <FooterText />
           </div>
         </Container>
@@ -81,18 +60,6 @@ const FinPass = () => {
 };
 
 export default FinPass;
-
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
 
 const Container = styled.div`
   width: 100vw;

@@ -5,8 +5,8 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { forwardRef } from 'react';
+import { Dispatch, forwardRef } from 'react';
+import { PassDataInterface } from '../recruit/interface';
 
 /**
  * @param step '서류' | '최종'
@@ -16,6 +16,7 @@ interface ModalProps {
   step: string;
   isOpen: boolean;
   toggleModal: () => void;
+  setPassData: Dispatch<PassDataInterface>;
 }
 
 interface FormInterface {
@@ -26,7 +27,6 @@ interface FormInterface {
 export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
     const queryClient = useQueryClient();
-    const router = useRouter();
 
     const { getValues, register, reset } = useForm<FormInterface>({
       defaultValues: {
@@ -45,41 +45,17 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
           });
 
           queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
-          if (passCheck.data.pass === '불합격') {
-            router.push(
-              {
-                pathname: '/recruit/nonpass',
-                query: {
-                  uuid: getValues('uuid'),
-                  email: getValues('email'),
-                  generation: passCheck.data.generation,
-                  pass: passCheck.data.pass,
-                  name: passCheck.data.name,
-                  date: passCheck.data.date,
-                  duration: passCheck.data.duration,
-                  attendanceStatus: passCheck.data.attendanceStatus,
-                },
-              },
-              '/recruit/pass',
-            );
-          } else if (passCheck.data.pass === '합격') {
-            router.push(
-              {
-                pathname: '/recruit/docpass',
-                query: {
-                  uuid: getValues('uuid'),
-                  email: getValues('email'),
-                  generation: passCheck.data.generation,
-                  pass: passCheck.data.pass,
-                  name: passCheck.data.name,
-                  date: passCheck.data.date,
-                  duration: passCheck.data.duration,
-                  attendanceStatus: passCheck.data.attendanceStatus,
-                },
-              },
-              '/recruit/pass',
-            );
-          }
+          props.setPassData({
+            uuid: getValues('uuid'),
+            email: getValues('email'),
+            generation: passCheck.data.generation,
+            pass: passCheck.data.pass,
+            name: passCheck.data.name,
+            date: passCheck.data.date,
+            duration: passCheck.data.duration,
+            otDate: passCheck.data.otDate,
+            attendanceStatus: passCheck.data.attendanceStatus,
+          });
         } catch (e) {
           console.log(e);
         }
@@ -91,42 +67,17 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
           });
 
           queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
-          if (passCheck.data.pass === '불합격') {
-            router.push(
-              {
-                pathname: '/recruit/nonpass',
-                query: {
-                  uuid: getValues('uuid'),
-                  email: getValues('email'),
-                  generation: passCheck.data.generation,
-                  pass: passCheck.data.pass,
-                  name: passCheck.data.name,
-                  date: passCheck.data.date,
-                  duration: passCheck.data.duration,
-                  attendanceStatus: passCheck.data.attendanceStatus,
-                },
-              },
-              '/recruit/pass',
-            );
-          } else if (passCheck.data.pass === '합격') {
-            router.push(
-              {
-                pathname: '/recruit/finpass',
-                query: {
-                  uuid: getValues('uuid'),
-                  email: getValues('email'),
-                  generation: passCheck.data.generation,
-                  pass: passCheck.data.pass,
-                  name: passCheck.data.name,
-                  otDate: passCheck.data.otDate,
-                  date: passCheck.data.date,
-                  duration: passCheck.data.duration,
-                  attendanceStatus: passCheck.data.attendanceStatus,
-                },
-              },
-              '/recruit/pass',
-            );
-          }
+          props.setPassData({
+            uuid: getValues('uuid'),
+            email: getValues('email'),
+            generation: passCheck.data.generation,
+            pass: passCheck.data.pass,
+            name: passCheck.data.name,
+            date: passCheck.data.date,
+            duration: passCheck.data.duration,
+            otDate: passCheck.data.otDate,
+            attendanceStatus: passCheck.data.attendanceStatus,
+          });
         } catch (e) {
           console.log(e);
         }
