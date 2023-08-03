@@ -27,10 +27,6 @@ export const RecruitSubHeader = ({
   const [step, setStep] = useState('');
   const newDate = new Date();
 
-  const getDate = (date: Date) => {
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  };
-
   const [
     curDate,
     startDateDoc,
@@ -39,16 +35,17 @@ export const RecruitSubHeader = ({
     resultDateFinal,
     endDate,
   ] = [
-    getDate(newDate),
-    getDate(date.startDateDoc),
-    getDate(date.endDateDoc),
-    getDate(date.resultDateDoc),
-    getDate(date.resultDateFinal),
-    getDate(
-      new Date(
-        date.resultDateFinal.setDate(date.resultDateFinal.getDate() + 7),
+    newDate,
+    date.startDateDoc,
+    date.endDateDoc,
+    date.resultDateDoc,
+    date.resultDateFinal,
+    new Date(
+      new Date(date.resultDateFinal).setDate(
+        date.resultDateFinal.getDate() + 7,
       ),
-    ), // 일주일 뒤를 합격 확인 마감기간으로 설정
+    ),
+    // 일주일 뒤를 합격 확인 마감기간으로 설정
   ];
 
   return (
