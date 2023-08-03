@@ -1,12 +1,17 @@
 import { Title } from '@ceos/components/Title';
-import { Flex, MentorCard, ManagementCard, EmptyCard } from '@ceos-fe/ui';
+import {
+  Flex,
+  MentorCard,
+  ManagementCard,
+  EmptyCard,
+  media,
+} from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
 import Footer from '@ceos/components/Footer';
-import { leftBtn, rightBtn } from '../rewards';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 
@@ -73,19 +78,27 @@ const Management = () => {
 
   const generation = useRecoilValue(generationState);
 
+  const leftBtn = {
+    title: '더 궁금한 것이 있다면',
+    content: ['자주 묻는 질문', '보러가기'],
+    link: '/FAQ',
+  };
+  const rightBtn = {
+    title: 'CEOS에 참여하고 싶다면',
+    content: [`CEOS ${generation}기`, '지원하기'],
+    link: '/recruit',
+  };
+
   return (
     <div data-section="White">
       <Flex
         direction="column"
+        align="center"
         css={css`
-          width: 1032px;
+          margin: 80px 0 100px 0px;
 
-          @media (max-width: 1023px) {
-            width: 750px;
-          }
-          @media (max-width: 390px) {
-            width: 346px;
-            margin-top: 36px;
+          ${media.mobile} {
+            width: 100vw;
           }
         `}
         data-section="White"
@@ -112,21 +125,15 @@ const Management = () => {
           ))}
         </div>
         <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-        <div css={[ListCss, ListMargin]}>
+        <div css={ListCss}>
           {mentors?.map((mentor: ManagerInterface) => (
             <MentorCard key={mentor.id} mentorCard={mentor} />
           ))}
         </div>
       </Flex>
+      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
   );
 };
 
 export default Management;
-
-const ListMargin = css`
-  margin-bottom: 100px;
-  @media (max-width: 768px) {
-    margin-bottom: 60px;
-  }
-`;
