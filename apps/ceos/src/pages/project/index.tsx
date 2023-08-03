@@ -3,14 +3,12 @@ import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
 import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
-import { TopMargin } from '../FAQ';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -37,7 +35,7 @@ const Project = () => {
     <div>
       <Flex direction="column" data-section="White">
         <Title
-          title="Project"
+          title="PROJECT"
           explain={[
             '신촌 연합 IT 창업동아리 CEOS의',
             '활동 프로젝트를 소개합니다.',
@@ -51,7 +49,7 @@ const Project = () => {
           css={css`
             width: 1032px;
             ${media.mobile} {
-              width: 100vw;
+              width: 100%;
             }
           `}
         >
@@ -118,5 +116,11 @@ const ScrollWrapper = styled(Flex)<{
 
   ${media.mobile} {
     display: ${({ line }) => (line !== 1 ? 'none' : '')};
+    padding: 0px 22px;
+    > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
