@@ -1,24 +1,10 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  ProjectCard,
-  ProjectCardProps,
-  Space,
-  media,
-} from '@ceos-fe/ui';
+import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
-import { TopMargin } from '../FAQ/index';
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import DetailModal from './DetailModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
@@ -77,7 +63,6 @@ const Project = () => {
           mobileGap={24}
           css={css`
             width: 1032px;
-
             ${media.mobile} {
               width: 100vw;
             }
