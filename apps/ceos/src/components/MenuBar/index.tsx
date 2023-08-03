@@ -4,6 +4,7 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export interface MenuProps {
   isOpen: boolean;
@@ -14,6 +15,12 @@ export interface MenuProps {
 export const MenuBar = (props: MenuProps) => {
   const { isOpen, modalRef, toggleModal } = props;
   const router = useRouter();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+  });
 
   return (
     <div css={backCss} className={isOpen ? 'open' : 'close'}>

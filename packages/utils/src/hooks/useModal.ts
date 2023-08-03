@@ -13,21 +13,29 @@ export const useModal = () => {
   }, [isOpen]);
 
   const toggleModal = () => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
+    setIsOpen((prevIsOpen) => {
+      if (!prevIsOpen) document.body.style.overflowY = 'hidden';
+      else document.body.style.overflowY = 'auto';
+      return !prevIsOpen;
+    });
   };
 
   const openModal = () => {
+    document.body.style.overflowY = 'hidden';
     setIsOpen(true);
   };
 
   const closeModal = () => {
+    document.body.style.overflowY = 'auto';
     setIsOpen(false);
   };
 
   const handleOutsideClick = (e: Event) => {
     const current = modalRef.current;
-    if (isOpen && current && !current.contains(e.target as Node))
+    if (isOpen && current && !current.contains(e.target as Node)) {
+      document.body.style.overflowY = 'auto';
       setIsOpen(false);
+    }
   };
 
   return { isOpen, modalRef, toggleModal, closeModal, openModal };
