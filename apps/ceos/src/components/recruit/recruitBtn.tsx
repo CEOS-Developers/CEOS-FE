@@ -301,20 +301,19 @@ export const DevBtn = (props: BtnProps) => {
 const BtnCss = css`
   width: 328px;
   word-break: keep-all;
-  typo: ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body2};
 
-  :hover{
-    cursor:pointer;
+  :hover {
+    cursor: pointer;
   }
 
   @media (max-width: 1023px) {
     width: 100%;
   }
-  
+
   @media (max-width: 390px) {
-    typo : ${theme.typo.Mobile.Body1};
-    width : 346px;
-    aspect radio : 346 /160;
+    ${theme.typo.Mobile.Body1};
+    width: 346px;
   }
 `;
 

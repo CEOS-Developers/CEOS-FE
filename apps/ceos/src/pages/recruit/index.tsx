@@ -45,7 +45,7 @@ export interface DateProps {
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
-    () => recruitApi.GET_STUDY_URL(),
+    () => recruitApi.GER_RECRUITMENTS(),
   );
 
   const date = {
@@ -88,13 +88,13 @@ const Recruit = () => {
         <div css={BtnWrapper}>
           {data ? (
             <>
-              <CustomLink href={data.prodStudyUrl}>
+              <CustomLink href={data.prodStudyUrl} style={{ flex: 1 }}>
                 <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
               </CustomLink>
-              <CustomLink href={data?.designStudyUrl}>
+              <CustomLink href={data?.designStudyUrl} style={{ flex: 1 }}>
                 <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
               </CustomLink>
-              <CustomLink href={data?.devStudyUrl}>
+              <CustomLink href={data?.devStudyUrl} style={{ flex: 1 }}>
                 <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
               </CustomLink>
             </>
@@ -166,7 +166,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
-      recruitApi.GET_STUDY_URL;
+      recruitApi.GER_RECRUITMENTS;
     });
 
     return {

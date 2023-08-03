@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
 import { ProjectCardContainer } from '../../components/project/ProjectCardContainer/index';
 import { css } from '@emotion/react';
+import { PageTitle } from '@admin/components/Common/PageTitle';
 
 export default function Project() {
   const router = useRouter();
@@ -31,28 +32,22 @@ export default function Project() {
 
   return (
     <>
-      <Flex direction="column" align="flex-start">
-        <Text webTypo="Heading2" paletteColor="Black">
-          PROJECT
-        </Text>
-        <Flex justify="space-between">
-          <Text
-            webTypo="Body3"
-            paletteColor="Gray5"
-            style={{ marginTop: '12px' }}
-          >
-            역대 세오스 프로젝트 데이터를 관리합니다.
-          </Text>
-          <Button
-            variant="admin_navy"
-            onClick={() => router.push(`/project/edit`)}
-            webWidth={108}
-          >
-            프로젝트 추가
-          </Button>
-        </Flex>
+      <Flex direction="row" justify="space-between" align="flex-end">
+        <PageTitle
+          title={'PROJECT'}
+          description={'역대 세오스 프로젝트 데이터를 관리합니다.'}
+        />
+        <Button
+          variant="admin_navy"
+          onClick={() => router.push(`/project/edit`)}
+          webWidth={108}
+        >
+          프로젝트 추가
+        </Button>
       </Flex>
-      <Space height={48} />
+      <div>
+        <Space height={48} />
+      </div>
       <div>
         <Flex
           webGap={24}

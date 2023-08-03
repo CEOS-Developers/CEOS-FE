@@ -4,19 +4,21 @@ import {
   Mobile,
   ProjectCard,
   ProjectCardProps,
+  Space,
+  media,
 } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
-import { projectApi } from '@ceos-fe/utils';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
+import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
 import { TopMargin } from '../FAQ/index';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import DetailModal from './DetailModal';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
+import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
+import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
 
 interface ProjectResponse {
   content: ProjectCardProps[];
@@ -29,18 +31,14 @@ interface ProjectResponse {
 }
 
 const Project = () => {
-  const { data, isLoading, isSuccess } = useInfiniteQuery<ProjectResponse>(
-    ['ceos', 'project'],
-    ({ pageParam = 0 }) =>
-      projectApi.GET_ALL_PROJECTS({ pageNum: 0, limit: 16 }),
-    {
-      getNextPageParam: (lastPage) => {
-        return true;
-      },
-    },
-  );
+  const generation = useRecoilValue(generationState);
 
-  const projectList = data?.pages[0].content;
+  const { infiniteData, ref } = useInfiniteQueries<ProjectListInterface>({
+    queryKey: ['project'],
+    queryFunction: ({ pageParam = 0 }) =>
+      projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
+    PageItem: ProjectCardContainer,
+  });
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -49,7 +47,7 @@ const Project = () => {
   };
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
+    content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
   };
 
@@ -59,54 +57,33 @@ const Project = () => {
   };
 
   return (
-    <Container>
-      <Desktop>
-        <Flex direction="column" data-section="White">
-          <Title
-            title="Project"
-            explain={[
-              '신촌 연합 IT 창업동아리 CEOS의',
-              '활동 프로젝트를 소개합니다.',
-            ]}
-          />
-          <TopMargin />
-          <GridContainer length={projectList?.length ?? 0}>
-            {projectList?.map((project, idx) => (
-              <div onClick={() => setModalNumber(project.id)}>
-                <ProjectCard projectCard={project} key={`project_card${idx}`} />
-              </div>
-            ))}
-          </GridContainer>
-          <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
+    <div>
+      <Flex direction="column" data-section="White">
+        <Title
+          title="Project"
+          explain={[
+            '신촌 연합 IT 창업동아리 CEOS의',
+            '활동 프로젝트를 소개합니다.',
+          ]}
+        />
+        <Space height={80} mobileHeight={60} />
+        <Flex align="flex-start" webGap={24} mobileGap={24}>
+          <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>
+            {infiniteData}
+          </ScrollWrapper>
+          <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={2}>
+            {infiniteData}
+          </ScrollWrapper>
+          <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={3}>
+            {infiniteData}
+          </ScrollWrapper>
         </Flex>
-      </Desktop>
-      <Mobile>
-        <Flex direction="column" data-section="White">
-          <Title
-            title="Project"
-            explain={[
-              '신촌 연합 IT 창업동아리 CEOS의',
-              '활동 프로젝트를 소개합니다.',
-            ]}
-          />
-          <TopMargin />
-          <Flex direction="column" mobileGap={50} margin="0 0 36px 0">
-            {projectList?.map((project, idx) => (
-              <div
-                onClick={() => setModalNumber(project.id)}
-                key={`project_mobile_${idx}`}
-              >
-                <ProjectCard projectCard={project} />
-              </div>
-            ))}
-          </Flex>
-          <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
-        </Flex>
-      </Mobile>
-      {modalNumber !== -1 && (
-        <DetailModal id={modalNumber} setClose={setClose} />
-      )}
-    </Container>
+        <div ref={ref}></div>
+        {modalNumber !== -1 && (
+          <DetailModal id={modalNumber} setClose={setClose} />
+        )}
+      </Flex>
+    </div>
   );
 };
 
@@ -130,19 +107,30 @@ export const getStaticProps = async () => {
 
 export default Project;
 
-const Container = styled.div`
-  position: relative;
-`;
+const ScrollWrapper = styled(Flex)<{
+  line: number;
+}>`
+  height: auto;
 
-const GridContainer = styled.div<{ length: number }>`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 24px;
-  row-gap: 48px;
+  & > :nth-child(3n) {
+    ${media.pc} {
+      display: ${({ line }) => (line !== 3 ? 'none' : '')};
+    }
+  }
 
-  margin-bottom: 220px;
+  & > :nth-child(3n - 1) {
+    ${media.pc} {
+      display: ${({ line }) => (line !== 2 ? 'none' : '')};
+    }
+  }
 
-  @media (min-width: 1023px) {
-    height: ${({ length }) => Math.ceil(length / 3) * 184 + 160}px;
+  & > :nth-child(3n - 2) {
+    ${media.pc} {
+      display: ${({ line }) => (line !== 1 ? 'none' : '')};
+    }
+  }
+
+  ${media.mobile} {
+    display: ${({ line }) => (line !== 1 ? 'none' : '')};
   }
 `;

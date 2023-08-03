@@ -129,6 +129,14 @@ export default function ApplyStatement() {
     getValues('docPassDropdown'),
     getValues('finalPassDropdown'),
   ]);
+  useEffect(() => {
+    if (!isFetching && isSuccess) {
+      setPagination({
+        ...pagination,
+        total: applicantData.data.pageInfo.totalPages,
+      });
+    }
+  }, [isFetching, isSuccess]);
 
   // updateSorting 함수 정의
   const updateSorting = (
@@ -238,20 +246,18 @@ export default function ApplyStatement() {
     if (!isFetching && isSuccess) {
       if (applicantData?.data.content?.length !== 0) {
         setDataSource(
-          Array.from(new Array(pagination.pageSize), (_, i) => {
+          applicantData?.data.content.map((data: any) => {
             return {
-              id: applicantData?.data.content[i]?.id,
-              uuid: applicantData?.data.content[i]?.uuid,
-              name: applicantData?.data.content[i]?.name,
-              part: applicantData?.data.content[i]?.part?.slice(0, 3),
-              email: applicantData?.data.content[i]?.email,
-              phone_number: applicantData?.data.content[
-                i
-              ]?.phoneNumber.replaceAll('-', ''),
-              doc_pass: applicantData?.data.content[i]?.documentPass,
-              date: applicantData?.data.content[i]?.date,
-              duration: applicantData?.data.content[i]?.duration,
-              final_pass: applicantData?.data.content[i]?.finalPass,
+              id: data?.id,
+              uuid: data?.uuid,
+              name: data?.name,
+              part: data?.part?.slice(0, 3),
+              email: data?.email,
+              phone_number: data?.phoneNumber.replaceAll('-', ''),
+              doc_pass: data?.documentPass,
+              date: data?.date,
+              duration: data?.duration,
+              final_pass: data?.finalPass,
             };
           }),
         );
