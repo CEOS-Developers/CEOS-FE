@@ -19,7 +19,7 @@ export default function Document() {
         <meta property="og:title" content="CEOS ADMIN" />
         <meta
           property="og:image"
-          content="https://ceos-web-17.s3.ap-northeast-2.amazonaws.com/activities/0bcb4af1-fdfe-428a-b0e8-87f12d931c67"
+          content="https://github.com/CEOS-Developers/CEOS-FE/assets/103591752/e339bbb2-6d83-4619-9f3f-a1f8ec47005a"
         />
       </Head>
       <body>

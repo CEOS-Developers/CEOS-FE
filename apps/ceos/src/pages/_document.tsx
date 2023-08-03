@@ -23,7 +23,7 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content="https://ceos-web-17.s3.ap-northeast-2.amazonaws.com/activities/f0c69be6-68b1-4c4e-9bd9-3c212145b99f"
+          content="https://github.com/CEOS-Developers/CEOS-FE/assets/103591752/5da7a41e-aaad-4df3-8f5b-4743cba9184a"
         />
       </Head>
       <body>

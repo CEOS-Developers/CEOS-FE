@@ -23,7 +23,7 @@ export const SubHeader = (props: SubHeaderProps) => {
       <div className="banner-image">
         <BannerImage
           src={
-            windowSize.width < 600 && windowSize.width !== 0
+            windowSize.width < 768 && windowSize.width !== 0
               ? '/banner-graphic-mobile.png'
               : '/banner-graphic-web.png'
           }
@@ -112,7 +112,7 @@ const BannerImage = styled(Image)`
   height: auto;
 
   ${media.mobile} {
-    margin-top: 250px;
+    margin-top: 200px;
     margin-left: 65px;
   }
 `;
