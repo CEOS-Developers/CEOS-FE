@@ -5,6 +5,8 @@ import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
+import Footer from '@ceos/components/Footer';
+import { leftBtn, rightBtn } from '../rewards';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 
@@ -72,51 +74,59 @@ const Management = () => {
   const generation = useRecoilValue(generationState);
 
   return (
-    <Flex
-      direction="column"
-      css={css`
-        width: 1032px;
-        margin: 80px 0 100px 0px;
+    <div data-section="White">
+      <Flex
+        direction="column"
+        css={css`
+          width: 1032px;
 
-        @media (max-width: 1023px) {
-          width: 750px;
-        }
-        @media (max-width: 390px) {
-          width: 346px;
-          margin-top: 36px;
-        }
-      `}
-      data-section="White"
-    >
-      <Title
-        title="MANAGEMENT"
-        explain={[
-          `CEOS를 이끌어나가는 ${generation}기의 운영진들을 소개합니다.`,
-        ]}
-      />
-      <div css={ListCss}>
-        {managers?.presidency.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        <EmptyCard />
-        {managers?.generalAffairs.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        {managers?.partLeaders.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-        {managers?.managers.map((manager: ManagerInterface) => (
-          <ManagementCard key={manager.id} managementCard={manager} />
-        ))}
-      </div>
-      <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-      <div css={ListCss}>
-        {mentors?.map((mentor: ManagerInterface) => (
-          <MentorCard key={mentor.id} mentorCard={mentor} />
-        ))}
-      </div>
-    </Flex>
+          @media (max-width: 1023px) {
+            width: 750px;
+          }
+          @media (max-width: 390px) {
+            width: 346px;
+            margin-top: 36px;
+          }
+        `}
+        data-section="White"
+      >
+        <Title
+          title="MANAGEMENT"
+          explain={[
+            `CEOS를 이끌어나가는 ${generation}기의 운영진들을 소개합니다.`,
+          ]}
+        />
+        <div css={ListCss}>
+          {managers?.presidency.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          <EmptyCard />
+          {managers?.generalAffairs.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          {managers?.partLeaders.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+          {managers?.managers.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
+        </div>
+        <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
+        <div css={[ListCss, ListMargin]}>
+          {mentors?.map((mentor: ManagerInterface) => (
+            <MentorCard key={mentor.id} mentorCard={mentor} />
+          ))}
+        </div>
+      </Flex>
+    </div>
   );
 };
 
 export default Management;
+
+const ListMargin = css`
+  margin-bottom: 100px;
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
+`;

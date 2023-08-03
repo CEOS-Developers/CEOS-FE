@@ -1,13 +1,8 @@
 import { Title } from '@ceos/components/Title';
-import { Flex, Mobile, RewardCard, Space, media } from '@ceos-fe/ui';
+import { Flex, RewardCard, Space, media } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
-import { useQuery } from '@tanstack/react-query';
-import {
-  AwardCardInterface,
-  AwardResponse,
-} from '@ceos/components/Landing/rewards';
-import { FooterText } from '@ceos/components/FooterText';
+import { AwardResponse } from '@ceos/components/Landing/rewards';
 import Footer from '@ceos/components/Footer';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import styled from '@emotion/styled';

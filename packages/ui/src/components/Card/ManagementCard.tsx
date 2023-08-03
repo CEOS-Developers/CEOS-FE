@@ -28,10 +28,17 @@ export const ManagementCard = (props: {
         <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
           {name}
         </Text>
-        <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
-          {university + ' '}
+        <Text
+          webTypo="Body3"
+          mobileTypo="Body2"
+          paletteColor="Gray5"
+          css={css`
+            text-align: center;
+          `}
+        >
+          {university}
           <br />
-          {major}
+          {' ' + major}
         </Text>
       </Content>
     </ManageWapper>
@@ -54,7 +61,14 @@ export const MentorCard = (props: {
           <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
             {name}
           </Text>
-          <Text webTypo="Body3" mobileTypo="Body2" paletteColor="Gray5">
+          <Text
+            webTypo="Body3"
+            mobileTypo="Body2"
+            paletteColor="Gray5"
+            css={css`
+              text-align: center;
+            `}
+          >
             {university + ' '}
             <br />
             {major}
@@ -132,7 +146,7 @@ const ManageWapper = styled.div`
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
-    width: 166px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -159,7 +173,7 @@ const Wrapper = styled.div`
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {
-    width: 166px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;

@@ -15,6 +15,7 @@ interface RouterDataInterface extends ParsedUrlQuery {
   email: string;
   pass: string;
   name: string;
+  attendanceStatus: boolean;
   date: string;
   otDate: string;
   duration: string;

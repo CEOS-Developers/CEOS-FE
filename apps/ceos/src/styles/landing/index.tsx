@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Flex, theme } from '../../../../../packages/ui';
 import styled from '@emotion/styled';
+import { theme, Flex, media } from '@ceos-fe/ui';
 
 export const MainCss = css`
   position: relative;
@@ -63,7 +63,7 @@ export const HomeFlex = styled(Flex)`
 export const CardFlex = styled(Flex)`
   width: 504px;
   height: 213px;
-  typo: ${theme.typo.Web.Body1};
+  ${theme.typo.Web.Body1};
   align-items: center;
   justify-content: center;
   word-break: break-all;
@@ -72,7 +72,7 @@ export const CardFlex = styled(Flex)`
   border-radius: 10px;
 
   @media (max-width: 1023px) {
-    typo: ${theme.typo.Mobile.Body1};
+    ${theme.typo.Mobile.Body1};
     width: 346px;
     hegiht: 200px;
     padding-left: 50px;
@@ -116,11 +116,13 @@ export const ListCss = css`
   align-items: flex-start;
   margin-top: 80px;
 
-  @media (max-width: 1023px) {
-    width: 750px;
-  }
-  @media (max-width: 390px) {
-    width: 346px;
-    gap: 14px;
+  ${media.mobile} {
+    width: 100vw;
+
+    box-sizing: border-box;
+    padding: 0px 22px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 14px;
   }
 `;

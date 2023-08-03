@@ -52,7 +52,7 @@ export const RecruitSubHeader = ({
   ];
 
   return (
-    <div css={RecruitCss}>
+    <div css={RecruitCss} data-section={dataSection}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
           CEOS {generation}th <br /> Recruit
