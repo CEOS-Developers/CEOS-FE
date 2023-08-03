@@ -71,7 +71,18 @@ const Project = () => {
           ]}
         />
         <Space height={80} mobileHeight={60} />
-        <Flex align="flex-start" webGap={24} mobileGap={24}>
+        <Flex
+          align="flex-start"
+          webGap={24}
+          mobileGap={24}
+          css={css`
+            width: 1032px;
+
+            ${media.mobile} {
+              width: 100vw;
+            }
+          `}
+        >
           <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>
             {infiniteData}
           </ScrollWrapper>

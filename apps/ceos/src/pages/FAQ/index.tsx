@@ -45,8 +45,6 @@ const FAQ = () => {
 
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
 
-<<<<<<< HEAD
-=======
   const leftBtn = {
     title: '이전 활동들이 궁금하다면',
     content: ['CEOS 프로젝트', '보러가기'],
@@ -58,7 +56,6 @@ const FAQ = () => {
     link: '/recruit',
   };
 
->>>>>>> b1f680c9da772e7ed8a0df4f4d0c338db3f30535
   return (
     <Flex direction="column" padding="0 22px" data-section="White">
       <Title

@@ -21,7 +21,7 @@ interface PassQueryType {
     date: string;
     otDate: string;
     duration: string;
-    attendanceStatus: boolean;
+    attendanceStatus: string | string[] | undefined;
   };
   setErrorText: Dispatch<string>;
 }

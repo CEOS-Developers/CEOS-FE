@@ -18,7 +18,7 @@ interface RouterDataInterface extends ParsedUrlQuery {
   date: string;
   otDate: string;
   duration: string;
-  attendanceStatus: boolean;
+  attendanceStatus: string | string[] | undefined;
 }
 
 const Pass = () => {

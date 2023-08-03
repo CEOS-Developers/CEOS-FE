@@ -19,7 +19,6 @@ import { CustomLink } from '@ceos/components/Header';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
-import { leftBtn } from '../rewards';
 
 interface RecruitStudyResponse {
   generation: number;
@@ -49,6 +48,12 @@ const Recruit = () => {
     ['ceos', 'recruit', 'study'],
     () => recruitApi.GER_RECRUITMENTS(),
   );
+
+  const leftBtn = {
+    title: '더 궁금한 것이 있다면',
+    content: ['자주 묻는 질문', '보러가기'],
+    link: '/FAQ',
+  };
 
   const rightBtn = {
     title: '이전 활동들이 궁금하다면',
