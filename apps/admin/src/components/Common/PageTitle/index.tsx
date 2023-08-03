@@ -7,7 +7,7 @@ interface PageTitleProps {
 
 export const PageTitle = ({ title, description }: PageTitleProps) => {
   return (
-    <Flex direction="column" align="flex-start">
+    <div>
       <Text webTypo="Heading2" paletteColor="Black">
         {title}
       </Text>
@@ -15,6 +15,6 @@ export const PageTitle = ({ title, description }: PageTitleProps) => {
       <Text webTypo="Body3" paletteColor="Gray5">
         {description}
       </Text>
-    </Flex>
+    </div>
   );
 };

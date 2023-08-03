@@ -16,11 +16,16 @@ import Schedule from '@ceos/components/recruit/Schedule';
 import { SubmitModal } from '@ceos/components/recruitModal/SubmitModal';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
+import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 const Apply = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [submitBtn, setSubmitBtn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   const {
     register,
@@ -60,6 +65,8 @@ const Apply = () => {
   const [questionList, setQuestionList] = useState<
     RecruitApplyResponse | undefined
   >(undefined);
+
+  const generation = useRecoilValue(generationState);
 
   useEffect(() => {
     setQuestionList(data);
@@ -163,6 +170,14 @@ const Apply = () => {
     }
   };
 
+  const setError = (text: string) => {
+    setErrorText(text);
+    setIsError(true);
+    setTimeout(() => {
+      setIsError(false);
+    }, 1500);
+  };
+
   const onSubmit = () => {
     const [birth, email, phoneNumber, semestersLeftNumber] = [
       getValues('birth'),
@@ -178,16 +193,19 @@ const Apply = () => {
     ];
 
     if (!birthReg.test(birth)) {
-      alert('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
+      setError('생년월일을 yyyy.mm.dd 의 형식으로 입력해주세요!');
       return;
     } else if (!emailReg.test(email)) {
-      alert('이메일 형식을 확인해주세요!');
+      setError('이메일 형식을 확인해주세요!');
       return;
     } else if (!phoneNumberReg.test(phoneNumber)) {
-      alert('휴대폰번호 형식을 확인해주세요!');
+      setError('휴대폰번호 형식을 확인해주세요!');
       return;
-    } else if (semestersLeftNumber !== null && +semestersLeftNumber < 0) {
-      alert('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요');
+    } else if (
+      semestersLeftNumber !== null &&
+      (isNaN(+semestersLeftNumber) || +semestersLeftNumber < 0)
+    ) {
+      setError('졸업까지 남은 학기 수는 0 이상의 숫자를 입력해주세요!');
       return;
     }
     setIsOpen(true);
@@ -196,7 +214,7 @@ const Apply = () => {
   return (
     <Wrapper direction="column" data-section="White">
       <Title
-        title="CEOS 18기 리크루팅"
+        title={`CEOS ${generation}기 리크루팅`}
         explain={['서류 답변은 한 번만 가능하니,', '꼼꼼하게 확인 바랍니다 :)']}
       ></Title>
       <TopMargin />
@@ -224,12 +242,17 @@ const Apply = () => {
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-          © 2016-2023 Ceos ALL RIGHTS RESERVED.
+          © 2016-2023 CEOS ALL RIGHTS RESERVED.
         </Text>
       </Flex>
 
-      {isOpen && <SubmitModal submitForm={submitForm} />}
+      {isOpen && (
+        <SubmitModal submitForm={submitForm} onClose={() => setIsOpen(false)} />
+      )}
       {isSubmit && <SuccessModal />}
+      {isError && (
+        <ErrorModal text={errorText} onClose={() => setIsError(false)} />
+      )}
     </Wrapper>
   );
 };

@@ -6,35 +6,35 @@ const withTM = require('next-transpile-modules')([
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   compiler: {
     emotion: true,
   },
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ['ceos-web-17.s3.ap-northeast-2.amazonaws.com'],
   },
   async redirects() {
     return [
       {
         source: '/recruit/apply',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/docpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/finpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/recruit/nonpass',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
     ];
   },

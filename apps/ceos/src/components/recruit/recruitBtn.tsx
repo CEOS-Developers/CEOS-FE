@@ -301,16 +301,19 @@ export const DevBtn = (props: BtnProps) => {
 const BtnCss = css`
   width: 328px;
   word-break: keep-all;
-  typo: ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body2};
+
+  :hover {
+    cursor: pointer;
+  }
 
   @media (max-width: 1023px) {
     width: 100%;
   }
-  
+
   @media (max-width: 390px) {
-    typo : ${theme.typo.Mobile.Body1};
-    width : 346px;
-    aspect radio : 346 /160;
+    ${theme.typo.Mobile.Body1};
+    width: 346px;
   }
 `;
 
@@ -320,7 +323,7 @@ export const BtnWrapper = css`
   margin-bottom: 36px;
 
   @media (max-width: 768px) {
-    width: 346px;
+    width: 100%;
     flex-direction: column;
   }
 `;

@@ -8,7 +8,7 @@ import { Text, media } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { awardApi, sponsorApi } from '@ceos-fe/utils';
-import { FooterText } from '@ceos/components/FooterText';
+import { FooterText, FooterTextCss } from '@ceos/components/FooterText';
 import { useForm } from 'react-hook-form';
 
 export default function Home() {
@@ -26,7 +26,9 @@ export default function Home() {
         <Sponsors />
       </HomeFlex>
       {/* section4 => white */}
-      <FooterText />
+      <div css={FooterTextCss}>
+        <FooterText />
+      </div>
       {/*section 5 */}
     </main>
   );
