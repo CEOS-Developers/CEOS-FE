@@ -35,7 +35,6 @@ export default function Rewards() {
         direction="column"
         css={css`
           width: 1032px;
-          margin: 80px 0 0px 0px;
 
           @media (max-width: 1023px) {
             width: 716px;
