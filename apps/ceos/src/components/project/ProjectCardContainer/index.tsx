@@ -9,7 +9,6 @@ export const ProjectCardContainer = (props: ProjectCardProps) => {
   };
   const openModal = () => {
     setModalNumber(props.id);
-    console.log(props.id);
   };
   return (
     <>
