@@ -9,6 +9,8 @@ import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
+import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
+import { TopMargin } from '../FAQ';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
