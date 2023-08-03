@@ -222,6 +222,7 @@ export default function ApplyStatement() {
     },
   );
 
+  // 지원자 엑셀 다운로드
   useEffect(() => {
     if (getExceldata) {
       const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
