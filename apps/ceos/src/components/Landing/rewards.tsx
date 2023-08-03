@@ -105,7 +105,12 @@ export const Rewards = () => {
             awardList
               .slice(0, 2)
               .map((a: AwardCardInterface) => (
-                <RewardCard key={a.generation} rewardCard={a} />
+                <RewardCard
+                  key={a.generation}
+                  generation={a.generation}
+                  projects={a.projects}
+                  awards={a.awards}
+                />
               ))}
         </Flex>
         <Flex direction="column" webGap={24} mobileGap={14}>
@@ -113,7 +118,12 @@ export const Rewards = () => {
             awardList
               .slice(2, 4)
               .map((a: AwardCardInterface) => (
-                <RewardCard key={a.generation} rewardCard={a} />
+                <RewardCard
+                  key={a.generation}
+                  generation={a.generation}
+                  projects={a.projects}
+                  awards={a.awards}
+                />
               ))}
         </Flex>
       </Flex>
