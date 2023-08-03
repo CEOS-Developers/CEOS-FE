@@ -1,8 +1,9 @@
-import { Text, SponsorCard, Mobile, media, Space } from '@ceos-fe/ui';
+import { Text, SponsorCard, media, Space } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { sponsorApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import styled from '@emotion/styled';
 
 interface SponsorInterface {
   id: number;
@@ -63,7 +64,6 @@ export const Sponsors = () => {
             display: none;
           }
           gap: 24px;
-          display: flex;
           margin-top: 32px;
         `}
       >
@@ -94,3 +94,11 @@ export const Sponsors = () => {
     </div>
   );
 };
+
+const Mobile = styled.div`
+  display: none;
+  @media (max-width: 1023px) {
+    width: 100%;
+    display: grid;
+  }
+`;
