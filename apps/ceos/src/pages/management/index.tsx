@@ -7,6 +7,8 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { ListCss } from '@ceos/styles/landing';
 import Footer from '@ceos/components/Footer';
 import { leftBtn, rightBtn } from '../rewards';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 export interface ManagerInterface {
   id: number;
@@ -69,6 +71,8 @@ const Management = () => {
 
   const managers = data?.partManagerData;
 
+  const generation = useRecoilValue(generationState);
+
   return (
     <div data-section="White">
       <Flex
@@ -81,13 +85,16 @@ const Management = () => {
           }
           @media (max-width: 390px) {
             width: 346px;
+            margin-top: 36px;
           }
         `}
         data-section="White"
       >
         <Title
           title="MANAGEMENT"
-          explain={['CEOS를 이끌어나가는 17기의 운영진들을 소개합니다.']}
+          explain={[
+            `CEOS를 이끌어나가는 ${generation}기의 운영진들을 소개합니다.`,
+          ]}
         />
         <div css={ListCss}>
           {managers?.presidency.map((manager: ManagerInterface) => (
@@ -104,17 +111,12 @@ const Management = () => {
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
         </div>
-        <Title
-          title="MENTORS"
-          explain={['CEOS의 멘토분들을 소개합니다.']}
-          className="mentor"
-        />
+        <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
         <div css={[ListCss, ListMargin]}>
           {mentors?.map((mentor: ManagerInterface) => (
             <MentorCard key={mentor.id} mentorCard={mentor} />
           ))}
         </div>
-        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
     </div>
   );

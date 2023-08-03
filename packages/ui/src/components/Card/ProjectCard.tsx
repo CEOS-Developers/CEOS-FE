@@ -21,11 +21,13 @@ export interface AdminProjectCardProps extends ProjectCardProps {
   onClickUpdate: () => void;
 }
 
-export const ProjectCard = (props: {
-  projectCard: ProjectCardProps;
-}): EmotionJSX.Element => {
-  const { id, name, description, generation, thumbnailImage } =
-    props.projectCard;
+export const ProjectCard = ({
+  id,
+  name,
+  description,
+  generation,
+  thumbnailImage,
+}: ProjectCardProps) => {
   return (
     <Wrapper>
       <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
@@ -58,7 +60,7 @@ export const AdminProjectCard = ({
   ...props
 }: AdminProjectCardProps) => {
   return (
-    <RelativeContainer width={346} height={290}>
+    <RelativeContainer width={328} height={275}>
       <AbsoluteFlex direction="column">
         <ProjectImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
@@ -92,7 +94,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  width: 346px;
+  width: 328px;
 
   @media (min-width: 1024px) {
     & > .ceos-hover {
@@ -112,6 +114,7 @@ const ProjectImg = styled.img`
   width: 100%;
   height: 184px;
   object-fit: cover;
+  background-color: ${theme.palette.Gray5};
 
   @media (max-width: 1023px) {
     &.ceos {
@@ -142,7 +145,9 @@ const ExplainBox = styled.div`
     display: block;
   }
   @media (min-width: 1023px) {
-    box-shadow: ${theme.shadow.Card.Black};
+    .ceos {
+      box-shadow: ${theme.shadow.Card.Black};
+    }
   }
 
   @keyframes slide-in-project-card {

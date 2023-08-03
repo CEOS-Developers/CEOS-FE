@@ -1,68 +1,82 @@
-import { PassBgImg } from '@ceos/assets/bgImage';
 import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { FinPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
-import { NextRouter, useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { ParsedUrlQuery } from 'querystring';
+import styled from '@emotion/styled';
 
 //이름, step
 
 interface RouterDataInterface extends ParsedUrlQuery {
   uuid: string;
+  generation: string;
   email: string;
   pass: string;
   name: string;
   attendanceStatus: boolean;
+  date: string;
+  otDate: string;
+  duration: string;
 }
 
 const FinPass = () => {
   const router = useRouter();
-  const { uuid, email, attendanceStatus } = router.query as RouterDataInterface;
+  const query = router.query as RouterDataInterface;
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
-    if (router.query.pass !== '합격') {
+    if (query.pass !== '합격') {
       router.push('/');
     }
   }, []);
 
   return (
-    <div css={PassMainCss} data-section="Blue">
-      <PassBgImg />
-      <div css={PassContentCss}>
-        <p css={WelcomeText}>Welcome CEOS 18th</p>
-        <Text
-          webTypo="Heading1_Kor"
-          mobileTypo="Heading1_Kor"
-          paletteColor="White"
-        >
-          {router.query.name}님은&nbsp;
-          <p
-            css={css`
-              text-decoration: underline;
-            `}
-          >
-            최종 합격
-          </p>
-          &nbsp; 입니다.
-        </Text>
-        <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-          CEOS 18기 최종 합격을 축하드립니다 &#58;&#41;
-          <br />
-          하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
-          <br />
-          다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
-        </Text>
-        <p>CEOS 드림</p>
-        <FinPassGlassBox
-          uuid={uuid}
-          email={email}
-          attendanceStatus={attendanceStatus}
-        />
-        <FooterText />
+    <>
+      <div css={PassMainCss} data-section="Blue">
+        <Container>
+          <div css={PassContentCss}>
+            <p css={WelcomeText}>Welcome CEOS {query.generation}th</p>
+            <Text
+              webTypo="Heading1_Kor"
+              mobileTypo="Heading1_Kor"
+              paletteColor="White"
+            >
+              {query.name}님은&nbsp;
+              <p
+                css={css`
+                  text-decoration: underline;
+                `}
+              >
+                최종 합격
+              </p>
+              &nbsp; 입니다.
+            </Text>
+            <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
+              CEOS {query.generation}기 최종 합격을 축하드립니다 &#58;&#41;
+              <br />
+              하단의 OT 일정을 꼼꼼하게 확인해주시길 바랍니다.
+              <br />
+              다시 한번 CEOS에 보여주신 관심과 열정에 깊은 감사를 드립니다.
+            </Text>
+            <p>CEOS 드림</p>
+            <FinPassGlassBox query={query} setErrorText={setErrorText} />
+            <FooterText />
+          </div>
+        </Container>
       </div>
-    </div>
+
+      {errorText && (
+        <div css={backCss}>
+          <ErrorTextContainer>
+            <Text webTypo="Body1" mobileTypo="Body1" paletteColor="Blue">
+              {errorText}
+            </Text>
+          </ErrorTextContainer>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -80,6 +94,21 @@ export const getServerSideProps = async ({
   };
 };
 
+const Container = styled.div`
+  width: 100vw;
+  height: 1024px;
+  background-image: url('/recruit/pass-desktop.png');
+  background-size: 1660px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (max-width: 1023px) {
+    background-size: 782px;
+    height: 867px;
+    background-image: url('/recruit/pass-mobile.png');
+  }
+`;
+
 const WelcomeText = css`
   text-align: center;
   font-family: Gilroy;
@@ -90,7 +119,7 @@ const WelcomeText = css`
   color: white;
 
   @media (max-width: 1023px) {
-    typo: ${theme.typo.Web.Heading1_Eng};
+    ${theme.typo.Web.Heading1_Eng};
   }
 `;
 
@@ -100,6 +129,7 @@ export const PassMainCss = css`
   height: 100vh;
   z-index: 1;
   overflow-x: hidden;
+  background-color: ${theme.palette.Blue};
 `;
 
 export const PassContentCss = css`
@@ -129,6 +159,8 @@ export const PassContentCss = css`
 
   @media (max-width: 1023px) {
     width: 100%;
+    box-sizing: border-box;
+    padding: 0 22px;
     gap: 60px;
     top: 23.2vw;
   }
@@ -145,5 +177,43 @@ export const PassContentCss = css`
     .desktop {
       display: none;
     }
+  }
+`;
+
+export const backCss = () => css`
+  z-index: 10;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ErrorTextContainer = styled.div`
+  position: fixed;
+  top: 409px;
+  display: flex;
+  width: 504px;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  border-radius: 20px;
+  background: #fff;
+
+  /* 팝업창그림자 */
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1023px) {
+    top: 300px;
+    width: 80%;
   }
 `;

@@ -30,7 +30,7 @@ export const RecruitBgText = css`
   align-items: center;
   flex-direction: column;
   margin-top: 195px;
-  text-wrap: nowrap;
+  white-space: nowrap;
   color: white;
 
   .mobile {
@@ -39,7 +39,7 @@ export const RecruitBgText = css`
 
   @media (max-width: 1023px) {
     .subText {
-      typo: ${theme.typo.Mobile.Body1};
+      ${theme.typo.Mobile.Body1};
     }
   }
 

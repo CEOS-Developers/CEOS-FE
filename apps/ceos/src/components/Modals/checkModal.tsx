@@ -46,23 +46,39 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
           if (passCheck.data.pass === '불합격') {
-            router.push({
-              pathname: '/recruit/nonpass',
-              query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
-            });
-          } else if (passCheck.data.pass === '합격') {
-            router.push({
-              pathname: '/recruit/docpass',
-              query: {
-                uuid: getValues('uuid'),
-                email: getValues('email'),
-                pass: passCheck.data.pass,
-                name: passCheck.data.name,
-                date: passCheck.data.date,
-                duration: passCheck.data.duration,
-                attendanceStatus: passCheck.data.attendanceStatus,
+            router.push(
+              {
+                pathname: '/recruit/nonpass',
+                query: {
+                  uuid: getValues('uuid'),
+                  email: getValues('email'),
+                  generation: passCheck.data.generation,
+                  pass: passCheck.data.pass,
+                  name: passCheck.data.name,
+                  date: passCheck.data.date,
+                  duration: passCheck.data.duration,
+                  attendanceStatus: passCheck.data.attendanceStatus,
+                },
               },
-            });
+              '/recruit/pass',
+            );
+          } else if (passCheck.data.pass === '합격') {
+            router.push(
+              {
+                pathname: '/recruit/docpass',
+                query: {
+                  uuid: getValues('uuid'),
+                  email: getValues('email'),
+                  generation: passCheck.data.generation,
+                  pass: passCheck.data.pass,
+                  name: passCheck.data.name,
+                  date: passCheck.data.date,
+                  duration: passCheck.data.duration,
+                  attendanceStatus: passCheck.data.attendanceStatus,
+                },
+              },
+              '/recruit/pass',
+            );
           }
         } catch (e) {
           console.log(e);
@@ -76,21 +92,40 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
           if (passCheck.data.pass === '불합격') {
-            router.push({
-              pathname: '/recruit/nonpass',
-              query: { uuid: getValues('uuid'), pass: passCheck.data.pass },
-            });
-          } else if (passCheck.data.pass === '합격') {
-            router.push({
-              pathname: '/recruit/finpass',
-              query: {
-                uuid: getValues('uuid'),
-                email: getValues('email'),
-                pass: passCheck.data.pass,
-                name: passCheck.data.name,
-                attendanceStatus: passCheck.data.attendanceStatus,
+            router.push(
+              {
+                pathname: '/recruit/nonpass',
+                query: {
+                  uuid: getValues('uuid'),
+                  email: getValues('email'),
+                  generation: passCheck.data.generation,
+                  pass: passCheck.data.pass,
+                  name: passCheck.data.name,
+                  date: passCheck.data.date,
+                  duration: passCheck.data.duration,
+                  attendanceStatus: passCheck.data.attendanceStatus,
+                },
               },
-            });
+              '/recruit/pass',
+            );
+          } else if (passCheck.data.pass === '합격') {
+            router.push(
+              {
+                pathname: '/recruit/finpass',
+                query: {
+                  uuid: getValues('uuid'),
+                  email: getValues('email'),
+                  generation: passCheck.data.generation,
+                  pass: passCheck.data.pass,
+                  name: passCheck.data.name,
+                  otDate: passCheck.data.otDate,
+                  date: passCheck.data.date,
+                  duration: passCheck.data.duration,
+                  attendanceStatus: passCheck.data.attendanceStatus,
+                },
+              },
+              '/recruit/pass',
+            );
           }
         } catch (e) {
           console.log(e);

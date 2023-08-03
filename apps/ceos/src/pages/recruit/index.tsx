@@ -37,10 +37,17 @@ interface RecruitStudyResponse {
   demoDayDate: string;
 }
 
+export interface DateProps {
+  startDateDoc: Date;
+  endDateDoc: Date;
+  resultDateDoc: Date;
+  resultDateFinal: Date;
+}
+
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
-    ['ceos', 'recuit', 'apply'],
-    () => recruitApi.GET_STUDY_URL(),
+    ['ceos', 'recruit', 'study'],
+    () => recruitApi.GER_RECRUITMENTS(),
   );
 
   const rightBtn = {
@@ -48,6 +55,12 @@ const Recruit = () => {
     content: ['CEOS 프로젝트', '보러가기'],
     link: '/project',
   };
+  const date = {
+    startDateDoc: new Date(data ? data.startDateDoc : ''),
+    endDateDoc: new Date(data ? data.endDateDoc : ''),
+    resultDateDoc: new Date(data ? data.resultDateDoc : ''),
+    resultDateFinal: new Date(data ? data.resultDateFinal : ''),
+  } as DateProps;
 
   return (
     <Flex
@@ -56,7 +69,11 @@ const Recruit = () => {
         overflow-x: hidden;
       `}
     >
-      <RecruitSubHeader dataSection="Blue" generation={data?.generation} />
+      <RecruitSubHeader
+        dataSection="Blue"
+        generation={data?.generation}
+        date={date}
+      />
       <div css={RecruitMainCss} data-section="White">
         <Text webTypo="Heading3" margin="0 0 12px 0">
           모집 대상
@@ -78,13 +95,13 @@ const Recruit = () => {
         <div css={BtnWrapper}>
           {data ? (
             <>
-              <CustomLink href={data.prodStudyUrl}>
+              <CustomLink href={data.prodStudyUrl} style={{ flex: 1 }}>
                 <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
               </CustomLink>
-              <CustomLink href={data?.designStudyUrl}>
+              <CustomLink href={data?.designStudyUrl} style={{ flex: 1 }}>
                 <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
               </CustomLink>
-              <CustomLink href={data?.devStudyUrl}>
+              <CustomLink href={data?.devStudyUrl} style={{ flex: 1 }}>
                 <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
               </CustomLink>
             </>
@@ -156,8 +173,8 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'recuit', 'study'], () => {
-      recruitApi.GET_STUDY_URL;
+    await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
+      recruitApi.GER_RECRUITMENTS;
     });
 
     return {
