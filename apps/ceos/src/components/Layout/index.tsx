@@ -1,5 +1,5 @@
 import { Header } from '@ceos/components/Header';
-import { Flex } from '@ceos-fe/ui';
+import { Flex, media } from '@ceos-fe/ui';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { HeaderState } from '@ceos/state';
 import { useQuery } from '@tanstack/react-query';

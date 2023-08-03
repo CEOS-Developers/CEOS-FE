@@ -15,7 +15,7 @@ interface RouterDataInterface extends ParsedUrlQuery {
   email: string;
   pass: string;
   name: string;
-  attendanceStatus: boolean;
+  attendanceStatus: string | string[] | undefined;
   date: string;
   otDate: string;
   duration: string;
@@ -144,11 +144,10 @@ export const PassContentCss = css`
   gap: 60px;
   width: 1032px;
   color: white;
-  typo: ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body2};
   overflow-x: hidden;
 
   transform: translateX(-50%);
-  text-wrap: nowrap;
 
   .mobile {
     display: none;
