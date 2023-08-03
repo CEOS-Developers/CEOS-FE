@@ -1,14 +1,14 @@
-import { Flex, Space, media } from '@ceos-fe/ui';
+import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
-import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
-import { TopMargin } from '../FAQ';
+import { css } from '@emotion/react';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -48,7 +48,6 @@ const Project = () => {
           mobileGap={24}
           css={css`
             width: 1032px;
-
             ${media.mobile} {
               width: 100vw;
             }
