@@ -1,38 +1,14 @@
-import {
-  Desktop,
-  Flex,
-  Mobile,
-  ProjectCard,
-  ProjectCardProps,
-  Space,
-  media,
-} from '@ceos-fe/ui';
+import { Flex, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
-import {
-  QueryClient,
-  dehydrate,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
-import { TopMargin } from '../FAQ/index';
-import { useState } from 'react';
 import styled from '@emotion/styled';
-import DetailModal from './DetailModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
-import { css } from '@emotion/react';
-
-interface ProjectResponse {
-  content: ProjectCardProps[];
-  pageInfo: {
-    pageNum: number;
-    limit: number;
-    totalPages: number;
-    totalElements: number;
-  };
-}
+import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
+import { TopMargin } from '../FAQ';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -41,7 +17,7 @@ const Project = () => {
     queryKey: ['project'],
     queryFunction: ({ pageParam = 0 }) =>
       projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
-    PageItem: ProjectCard,
+    PageItem: ProjectCardContainer,
   });
 
   const leftBtn = {
@@ -53,11 +29,6 @@ const Project = () => {
     title: 'CEOS에 참여하고 싶다면',
     content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
-  };
-
-  const [modalNumber, setModalNumber] = useState(-1);
-  const setClose = () => {
-    setModalNumber(-1);
   };
 
   return (
@@ -94,6 +65,8 @@ const Project = () => {
           </ScrollWrapper>
         </Flex>
         <div ref={ref}></div>
+        <TopMargin />
+        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
       <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
