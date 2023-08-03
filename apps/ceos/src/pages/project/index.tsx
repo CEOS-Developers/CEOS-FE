@@ -3,14 +3,12 @@ import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
 import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
-import { TopMargin } from '../FAQ';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);

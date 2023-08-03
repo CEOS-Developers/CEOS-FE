@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import {
   Creative,
-  Enterpreneurship,
+  Entrepreneurship,
   Openness,
   Sustainability,
 } from '@ceos/assets/landing/glassButtonText';
@@ -55,7 +55,7 @@ export const SubHeader = (props: SubHeaderProps) => {
           <Creative />
         </GlassText>
         <GlassText>
-          <Enterpreneurship />
+          <Entrepreneurship />
         </GlassText>
         <GlassText>
           <Openness />
@@ -121,7 +121,7 @@ const BannerImage = styled(Image)`
 `;
 
 const GlassText = styled(Flex)`
-  ${theme.glass.Border};
+  ${theme.glass.Landing};
 
   border-radius: 20px;
 

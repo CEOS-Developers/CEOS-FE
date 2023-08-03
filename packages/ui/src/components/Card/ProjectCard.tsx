@@ -31,7 +31,6 @@ export const ProjectCard = ({
   return (
     <Wrapper>
       <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
-
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">

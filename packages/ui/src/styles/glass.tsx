@@ -76,4 +76,17 @@ export const glass = {
       border: none;
     }
   `,
+  Landing: css`
+    border: 0.1rem solid rgba(255, 255, 255, 0.3);
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.2)
+      ),
+      linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    background-origin: border-box;
+    background-clip: border-box, content-box;
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  `,
 };
