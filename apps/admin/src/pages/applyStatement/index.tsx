@@ -350,9 +350,13 @@ export default function ApplyStatement() {
       width: '250px',
       render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5}>
-          <div style={{ width: '146px' }}>
-            {record.date?.slice(5, 10)} &nbsp; {record.duration}
-          </div>
+          {record.doc_pass === '합격' ? (
+            <div style={{ width: '146px' }}>
+              {record.date?.slice(5, 10)} &nbsp; {record.duration}
+            </div>
+          ) : (
+            <>&nbsp;</>
+          )}
           <Button
             variant="admin_stroke"
             onClick={() => {
