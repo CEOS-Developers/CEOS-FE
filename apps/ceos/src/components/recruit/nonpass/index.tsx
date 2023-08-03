@@ -1,27 +1,13 @@
 import { css } from '@emotion/react';
 import { FooterText } from '@ceos/components/FooterText';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
 import { GlassBoxCss } from '@ceos/components/GlassBox';
 import styled from '@emotion/styled';
 import { theme } from 'packages/ui';
+import { PassDataInterface } from '../interface';
 
 //이름, step
-interface RouterDataInterface extends ParsedUrlQuery {
-  generation: string;
-}
 
-const NonPass = () => {
-  const router = useRouter();
-  const { generation } = router.query as RouterDataInterface;
-
-  useEffect(() => {
-    if (router.query.pass !== '불합격') {
-      router.push('/');
-    }
-  }, []);
-
+const NonPass = ({ props }: { props: PassDataInterface }) => {
   return (
     <div css={NonPassMainCss} data-section="Blue">
       <Container>
@@ -45,7 +31,7 @@ const NonPass = () => {
               <br className="mobile" /> 전하지 못하게 되어&nbsp;
               <br className="desktop" />
               아쉽고 죄송한
-              <br className="mobile" /> {generation}기 운영진의 진심이
+              <br className="mobile" /> {props.generation}기 운영진의 진심이
               전해졌으면 합니다.
               <br /> 추후 좋은 기회에 꼭 다시 만나뵐 수 있기를 기대하며,
               <br /> 다시 한번 CEOS에 보여주신 관심과 열정에
@@ -68,18 +54,6 @@ const NonPass = () => {
 };
 
 export default NonPass;
-
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
 
 const Container = styled.div`
   width: 100vw;

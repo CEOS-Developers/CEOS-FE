@@ -2,36 +2,15 @@ import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { DocPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { ParsedUrlQuery } from 'querystring';
+import { useState } from 'react';
+
 import styled from '@emotion/styled';
+import { PassDataInterface } from '../interface';
 
 //이름, step
 
-interface RouterDataInterface extends ParsedUrlQuery {
-  uuid: string;
-  generation: string;
-  email: string;
-  pass: string;
-  name: string;
-  date: string;
-  otDate: string;
-  duration: string;
-  attendanceStatus: string | string[] | undefined;
-}
-
-const Pass = () => {
-  const router = useRouter();
-
-  const query = router.query as RouterDataInterface;
+const DocPass = ({ props }: { props: PassDataInterface }) => {
   const [errorText, setErrorText] = useState('');
-
-  useEffect(() => {
-    if (router.query.pass !== '합격') {
-      router.push('/');
-    }
-  }, []);
 
   return (
     <>
@@ -43,7 +22,7 @@ const Pass = () => {
               mobileTypo="Heading1_Kor"
               paletteColor="White"
             >
-              {query.name}님은&nbsp;
+              {props.name}님은&nbsp;
               <br className="mobile" />
               <p
                 css={css`
@@ -56,19 +35,19 @@ const Pass = () => {
             </Text>
 
             <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">
-              CEOS {query.generation}기 서류 합격을 축하드립니다 &#58;&#41;
+              CEOS {props.generation}기 서류 합격을 축하드립니다 &#58;&#41;
               <br />
               먼저 CEOS에 보여주신 관심과 열정에
               <br className="mobile" /> 깊은 감사를 드립니다.
               <br />
-              {query.name}님은 면접 대상자로, 하단의 면접 일정을
+              {props.name}님은 면접 대상자로, 하단의 면접 일정을
               <br className="mobile" /> 꼭 확인해주시고&nbsp;
               <br className="desktop" />
               면접 참여 가능 여부를
               <br className="mobile" /> 반드시 알려주시기 바랍니다.
             </Text>
 
-            <DocPassGlassBox query={query} setErrorText={setErrorText} />
+            <DocPassGlassBox query={props} setErrorText={setErrorText} />
             <FooterText />
           </div>
         </Container>
@@ -87,19 +66,7 @@ const Pass = () => {
   );
 };
 
-export default Pass;
-
-export const getServerSideProps = async ({
-  query: { pass },
-}: {
-  query: { pass: string };
-}) => {
-  return {
-    props: {
-      pass,
-    },
-  };
-};
+export default DocPass;
 
 const Container = styled.div`
   width: 100vw;
