@@ -66,8 +66,6 @@ const Project = () => {
           </ScrollWrapper>
         </Flex>
         <div ref={ref}></div>
-        <TopMargin />
-        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
       <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
