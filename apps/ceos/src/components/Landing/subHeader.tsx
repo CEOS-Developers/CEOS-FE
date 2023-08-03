@@ -23,7 +23,7 @@ export const SubHeader = (props: SubHeaderProps) => {
       <div className="banner-image">
         <BannerImage
           src={
-            windowSize.width < 768 && windowSize.width !== 0
+            windowSize.width < 768
               ? '/banner-graphic-mobile.png'
               : '/banner-graphic-web.png'
           }
@@ -74,6 +74,7 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   .banner-image {
+    position: relative;
     height: 720px;
     background-color: ${theme.palette.Blue};
 
@@ -108,12 +109,14 @@ const Wrapper = styled.div`
 `;
 
 const BannerImage = styled(Image)`
+  position: absolute;
+
   width: 100vw;
   height: auto;
 
   ${media.mobile} {
-    margin-top: 200px;
-    margin-left: 65px;
+    top: 200px;
+    left: 65px;
   }
 `;
 
