@@ -26,7 +26,6 @@ export const BgText = css`
   top: 13.19vw;
   left: 50%;
   transform: translateX(-50%);
-  text-wrap: nowrap;
   color: white;
 
   @media (max-width: 1023px) {
@@ -74,7 +73,7 @@ export const CardFlex = styled(Flex)`
   @media (max-width: 1023px) {
     ${theme.typo.Mobile.Body1};
     width: 346px;
-    hegiht: 200px;
+    height: 200px;
     padding-left: 50px;
     padding-right: 50px;
   }

@@ -51,7 +51,7 @@ const Project = () => {
           css={css`
             width: 1032px;
             ${media.mobile} {
-              width: 100vw;
+              width: 100%;
             }
           `}
         >

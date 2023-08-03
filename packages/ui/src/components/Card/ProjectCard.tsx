@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 
 export interface ProjectImageProps {
@@ -96,7 +96,11 @@ const Wrapper = styled.div`
   cursor: pointer;
   width: 328px;
 
-  @media (min-width: 1024px) {
+  ${media.mobile} {
+    width: 100%;
+  }
+
+  ${media.pc} {
     & > .ceos-hover {
       display: none;
     }
@@ -116,7 +120,7 @@ const ProjectImg = styled.img`
   object-fit: cover;
   background-color: ${theme.palette.Gray5};
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     &.ceos {
       width: 346px;
       height: 194px;
