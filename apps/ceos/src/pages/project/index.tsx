@@ -35,7 +35,7 @@ const Project = () => {
     <div>
       <Flex direction="column" data-section="White">
         <Title
-          title="Project"
+          title="PROJECT"
           explain={[
             '신촌 연합 IT 창업동아리 CEOS의',
             '활동 프로젝트를 소개합니다.',
