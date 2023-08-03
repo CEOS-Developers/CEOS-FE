@@ -6,8 +6,6 @@ import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
 import styled from '@emotion/styled';
 import Footer from '@ceos/components/Footer';
-import { useRecoilValue } from 'recoil';
-import { generationState } from '@ceos/state';
 
 interface ActivityResponse {
   categoryFaqList: {
@@ -17,16 +15,6 @@ interface ActivityResponse {
     category: string;
   }[];
 }
-export const leftBtn = {
-  title: '이전 활동들이 궁금하다면',
-  content: ['CEOS 프로젝트', '보러가기'],
-  link: '/project',
-};
-export const rightBtn = {
-  title: 'CEOS에 참여하고 싶다면',
-  content: ['CEOS 18기', '지원하기'],
-  link: '/recruit',
-};
 
 const FAQ = () => {
   const { data, isLoading, isSuccess } = useQuery<{
@@ -41,12 +29,8 @@ const FAQ = () => {
     return { recruitData, activityData, partData };
   });
 
-  const generation = useRecoilValue(generationState);
-
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
 
-<<<<<<< HEAD
-=======
   const leftBtn = {
     title: '이전 활동들이 궁금하다면',
     content: ['CEOS 프로젝트', '보러가기'],
@@ -54,11 +38,10 @@ const FAQ = () => {
   };
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: [`CEOS ${generation}기`, '지원하기'],
+    content: ['CEOS 18기', '지원하기'],
     link: '/recruit',
   };
 
->>>>>>> b1f680c9da772e7ed8a0df4f4d0c338db3f30535
   return (
     <Flex direction="column" padding="0 22px" data-section="White">
       <Title
