@@ -8,23 +8,29 @@ import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
 import { ModalPortal } from '@ceos-fe/utils/';
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import Link from 'next/link';
 import { DateProps } from '@ceos/pages/recruit';
+import { PassDataInterface } from './interface';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
   generation?: number;
   date: DateProps;
+  setPassData: Dispatch<PassDataInterface>;
+  step: string;
+  setStep: Dispatch<string>;
 }
 
 export const RecruitSubHeader = ({
   dataSection,
   generation,
   date,
+  setPassData,
+  step,
+  setStep,
 }: RecruitSubHeaderProps) => {
   const { modalRef, isOpen, toggleModal } = useModal();
-  const [step, setStep] = useState('');
   const newDate = new Date();
 
   const [
@@ -128,6 +134,7 @@ export const RecruitSubHeader = ({
             step={step}
             isOpen={isOpen}
             toggleModal={toggleModal}
+            setPassData={setPassData}
             ref={modalRef}
           />
         </ModalPortal>
