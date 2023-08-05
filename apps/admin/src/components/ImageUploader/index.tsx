@@ -27,6 +27,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
 
     useEffect(() => {
       if (presignedUrl) {
+        console.log('ddd', presignedUrl);
         setValue(label, presignedUrl);
       }
     }, [presignedUrl]);
@@ -59,6 +60,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
                 onClick={() => {
                   setImage(undefined);
                   setUrl('');
+                  setValue(label, '');
                 }}
                 direction="column"
                 webGap={8}

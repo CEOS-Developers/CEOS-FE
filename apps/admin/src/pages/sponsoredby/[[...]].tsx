@@ -22,6 +22,7 @@ export default function SponsoredBy() {
     register,
     setValue,
     handleSubmit,
+    getValues,
     formState: { isValid },
   } = useForm();
   const { infiniteData, ref } = useInfiniteQueries<RewardResponse>({
@@ -159,7 +160,7 @@ export default function SponsoredBy() {
               webWidth={328}
               webHeight={46}
               mobileHeight={46}
-              disabled={!isValid}
+              disabled={!(isValid && getValues('imageUrl') !== '')}
               onClick={handleSubmit(onSubmit)}
             >
               저장하기
