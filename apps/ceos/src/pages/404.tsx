@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Flex, Space, Text, theme } from '@ceos-fe/ui';
+import { Button, Flex, Space, Text, media, theme } from '@ceos-fe/ui';
 import { useRouter } from 'next/router';
 
 const NotFound = () => {
@@ -10,6 +10,7 @@ const NotFound = () => {
       <Container>
         <Text
           webTypo="Heading1_Kor"
+          mobileTypo="Heading1_Kor"
           paletteColor="White"
           style={{ textDecoration: 'line-through' }}
         >
@@ -20,6 +21,7 @@ const NotFound = () => {
 
         <Text
           webTypo="Body1"
+          mobileTypo="Body1"
           paletteColor="White"
           style={{ textDecoration: 'line-through' }}
         >
@@ -35,6 +37,7 @@ const NotFound = () => {
         <Button
           variant="glass"
           webWidth={194}
+          mobileWidth={194}
           onClick={() => router.push('/')}
           style={{ textDecoration: 'line-through' }}
         >
@@ -58,15 +61,20 @@ const Container = styled(Flex)`
   margin-top: -40px;
 
   position: fixed;
-
   flex-direction: column;
-  touch-action: none;
 
   width: 100vw;
   height: 900px;
-  background-image: url('/404.png');
+  background-image: url('/404-desktop.png');
   background-size: 1660px;
   background-position: center;
+  background-repeat: no-repeat;
 
   text-align: center;
+
+  ${media.mobile} {
+    background-size: 646px;
+    height: 800px;
+    background-image: url('/404-mobile.png');
+  }
 `;
