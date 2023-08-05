@@ -43,7 +43,7 @@ export const RecruitSubHeader = ({
   ] = [
     newDate,
     date.startDateDoc,
-    date.endDateDoc,
+    new Date(new Date(date.endDateDoc).setHours(24)),
     date.resultDateDoc,
     date.resultDateFinal,
     new Date(
