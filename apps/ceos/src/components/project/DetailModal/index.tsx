@@ -33,10 +33,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
     Part[key].name = [...Part[key].name, person.name];
   });
 
-  const modalRef = useRef(null);
-
   return (
-    <div css={backCss} onClick={setClose} ref={modalRef}>
+    <div css={backCss}>
       <Desktop css={iconCss} onClick={setClose}>
         <WhiteCloseIcon />
       </Desktop>
