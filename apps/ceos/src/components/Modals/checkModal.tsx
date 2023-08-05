@@ -159,9 +159,6 @@ export const ModalBoxCss = css`
   padding: 1.5rem 1.5rem 60px 1.5rem;
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 
   @media (max-width: 1023px) {
     width: 346px;
