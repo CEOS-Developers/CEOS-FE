@@ -53,5 +53,6 @@ export interface PassDataInterface {
   attendanceStatus: boolean;
   date: string;
   otDate: string;
+  openChatUrl: string;
   duration: string;
 }
