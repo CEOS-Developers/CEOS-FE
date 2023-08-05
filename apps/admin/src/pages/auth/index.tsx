@@ -69,7 +69,7 @@ export default function SignIn() {
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
-        <Flex direction="column" webGap={24}>
+        <Flex direction="column" webGap={24} mobileGap={24}>
           <TextField label="ID" isAdmin {...register('username')} />
           <TextField
             type="password"
@@ -86,7 +86,7 @@ export default function SignIn() {
       </StyledForm>
 
       <Text webTypo="Label3" paletteColor="Gray5">
-        <Flex webGap={24}>
+        <Flex webGap={24} mobileGap={24}>
           <StyledLink href="/auth/findID">아이디 찾기</StyledLink>|
           <StyledLink href="/auth/findPW">비밀번호 찾기</StyledLink>|
           <StyledLink href="/auth/signUp">회원가입</StyledLink>
