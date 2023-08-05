@@ -26,16 +26,6 @@ const UrlCategoryMap = {
 export default function ProjectDetail() {
   const router = useRouter();
 
-  const isEditMode = router.query.id ? true : false;
-
-  const { data, isFetching, isSuccess } = useQuery<ProjectItemInterface>(
-    ['admin', 'project', router.query.id],
-    () => adminProjectApi.GET_PROJECT(Number(router.query.id)),
-    {
-      enabled: isEditMode,
-    },
-  );
-
   const postProjectMutation = useMutation(adminProjectApi.POST_PROJECT, {
     onSuccess: () => {
       alert('저장 완료');
@@ -124,11 +114,22 @@ export default function ProjectDetail() {
     name: 'projectUrls',
   });
 
-  useEffect(() => {
-    if (isFetching || !isSuccess) return;
+  const isEditMode = router.query.id ? true : false;
+  const { mutate: getProject } = useMutation(adminProjectApi.GET_PROJECT, {
+    onSuccess: async (data: ProjectItemInterface) => {
+      reset(data);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
 
-    reset(data);
-  }, [isFetching, isSuccess]);
+  // 수정 시 value set
+  useEffect(() => {
+    if (router.query.id) {
+      getProject(Number(router.query.id));
+    }
+  }, [router.query.id]);
 
   const handleAppendUrl = () => {
     appendProjectUrls({
