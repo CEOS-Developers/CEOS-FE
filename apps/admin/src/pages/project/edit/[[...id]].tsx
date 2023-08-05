@@ -1,16 +1,10 @@
 import { useRouter } from 'next/router';
 import { Button, Flex, Text, TextField, Space } from '@ceos-fe/ui';
-import { BackArrow } from '@admin/assets/Arrow';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { ProjectItemInterface, adminProjectApi } from '@ceos-fe/utils';
 import { Plus } from '@admin/assets/Plus';
 import { Dropdown } from '@admin/components/Dropdown';
-import {
-  QueryClient,
-  dehydrate,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { ImageUploader } from '@admin/components/ImageUploader';
 import { BackButton } from '@admin/components/Common/BackButton';
@@ -209,6 +203,7 @@ export default function ProjectDetail() {
               participant.part === '기획' ? (
                 <TextField
                   {...register(`participants.${idx}.name`)}
+                  key={idx}
                   label={`기획 팀원${idx + 1}`}
                   width={152}
                   isAdmin
@@ -222,6 +217,7 @@ export default function ProjectDetail() {
               participant.part === '디자인' ? (
                 <TextField
                   {...register(`participants.${idx}.name`)}
+                  key={idx}
                   label={`디자인 팀원${idx + 1}`}
                   width={152}
                   isAdmin
@@ -238,6 +234,7 @@ export default function ProjectDetail() {
               participant.part === '프론트엔드' ? (
                 <TextField
                   {...register(`participants.${idx}.name`)}
+                  key={idx}
                   label={`프론트 팀원${idx + 1}`}
                   width={152}
                   isAdmin
@@ -251,6 +248,7 @@ export default function ProjectDetail() {
               participant.part === '백엔드' ? (
                 <TextField
                   {...register(`participants.${idx}.name`)}
+                  key={idx}
                   label={`백엔드 팀원${idx + 1}`}
                   width={152}
                   isAdmin
@@ -395,38 +393,3 @@ export default function ProjectDetail() {
     </>
   );
 }
-
-export const getStaticPaths = async () => {
-  try {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const getStaticProps = async ({ params }: { params: any }) => {
-  try {
-    if (!params.id)
-      return {
-        props: {},
-      };
-
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchInfiniteQuery(
-      ['admin', 'project', params.id],
-      () => adminProjectApi.GET_PROJECT(params.id),
-    );
-
-    return {
-      props: {
-        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-      },
-    };
-  } catch (err) {
-    console.error(err);
-  }
-};

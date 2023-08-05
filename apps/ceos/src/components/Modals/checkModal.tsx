@@ -54,6 +54,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             date: passCheck.data.date,
             duration: passCheck.data.duration,
             otDate: passCheck.data.otDate,
+            openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
         } catch (e) {
@@ -76,6 +77,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             date: passCheck.data.date,
             duration: passCheck.data.duration,
             otDate: passCheck.data.otDate,
+            openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
         } catch (e) {
@@ -159,9 +161,6 @@ export const ModalBoxCss = css`
   padding: 1.5rem 1.5rem 60px 1.5rem;
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 
   @media (max-width: 1023px) {
     width: 346px;

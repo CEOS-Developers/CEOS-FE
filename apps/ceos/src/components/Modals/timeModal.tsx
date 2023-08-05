@@ -56,12 +56,10 @@ const TimeModalCss = (opacity: number) => css`
   align-items: center;
   display: flex;
   flex-direction: column;
-  typo: ${theme.typo.Web.Body2};
+  ${theme.typo.Web.Body2};
   gap: 12px;
   position: relative;
 
-  left: 50%;
-  transform: translateX(-50%);
   shadow: ${theme.shadow.PopUp};
   opacity: ${opacity}%;
 
