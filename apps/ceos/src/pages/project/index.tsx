@@ -4,11 +4,12 @@ import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
-import { useRecoilValue } from 'recoil';
-import { generationState } from '@ceos/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { generationState, projectId } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
 import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
+import DetailModal from '@ceos/components/project/DetailModal';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -19,6 +20,11 @@ const Project = () => {
       projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
     PageItem: ProjectCardContainer,
   });
+
+  const [modalNumber, setModalNumber] = useRecoilState<number>(projectId);
+  const setClose = () => {
+    setModalNumber(-1);
+  };
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -65,6 +71,9 @@ const Project = () => {
         </Flex>
         <div ref={ref}></div>
       </Flex>
+      {modalNumber !== -1 && (
+        <DetailModal id={modalNumber} setClose={setClose} />
+      )}
       <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
