@@ -1,4 +1,3 @@
-import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { RelativeContainer, AbsoluteFlex, Flex, Text } from '../common';
 import { theme } from '../../styles';
@@ -118,7 +117,7 @@ export const RewardCard = ({
             </Flex>
           ))}
           {isExtend ? (
-            <>
+            <MobileExtendContainer>
               <Line />
               <Flex direction="column" mobileGap={8}>
                 {awards?.map((item, idx) => (
@@ -140,7 +139,7 @@ export const RewardCard = ({
               <div onClick={() => setIsExtend(!isExtend)}>
                 <Up />
               </div>
-            </>
+            </MobileExtendContainer>
           ) : (
             <div onClick={() => setIsExtend(!isExtend)}>
               <Down />
@@ -237,6 +236,25 @@ const Container = styled.div`
   }
 `;
 
+const MobileExtendContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @keyframes slide-in-mobile-reward-card {
+    0% {
+      clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+    }
+  }
+
+  animation: slide-in-mobile-reward-card 0.2s ease-in;
+`;
+
 const Box = styled.div`
   width: 100%;
   height: auto;
@@ -258,7 +276,7 @@ const Box = styled.div`
   }
 
   .extended {
-    animation: slide-in-reward-card 0.3s ease-in;
+    animation: slide-in-reward-card 0.2s ease-in;
   }
 
   > .extended {
