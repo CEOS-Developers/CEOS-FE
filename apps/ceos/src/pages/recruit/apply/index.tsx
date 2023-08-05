@@ -27,14 +27,7 @@ const Apply = () => {
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
 
-  const {
-    register,
-    watch,
-    setValue,
-    getValues,
-    handleSubmit,
-    formState: { errors, dirtyFields },
-  } = useForm({
+  const { register, watch, setValue, getValues } = useForm({
     defaultValues: {
       name: '',
       gender: '',
