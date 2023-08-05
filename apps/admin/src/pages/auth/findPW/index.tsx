@@ -31,7 +31,9 @@ export default function findPW() {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Text webTypo="Heading2">ADMIN 비밀번호 찾기</Text>
+      <Text webTypo="Heading2" mobileTypo="Heading2">
+        ADMIN 비밀번호 찾기
+      </Text>
       {!sentEmail ? (
         <>
           <Dropdown
@@ -42,7 +44,12 @@ export default function findPW() {
             placeholder="파트 선택"
             width={152}
           />
-          <Flex webGap={24} direction="column" padding="0 0 28px 0">
+          <Flex
+            webGap={24}
+            mobileGap={24}
+            direction="column"
+            padding="0 0 28px 0"
+          >
             <TextField label="이름" isAdmin {...register('name')} />
             <TextField label="이메일" isAdmin {...register('email')} />
             <TextField label="ID" isAdmin {...register('username')} />
@@ -51,6 +58,7 @@ export default function findPW() {
       ) : (
         <Text
           webTypo="Body1"
+          mobileTypo="Body1"
           style={{ padding: '150px 0', textAlign: 'center' }}
         >
           입력하신 이메일로 랜덤 비밀번호를
@@ -60,13 +68,13 @@ export default function findPW() {
 
       {!sentEmail ? (
         <div>
-          <Button variant="admin" webWidth={324}>
+          <Button variant="admin" webWidth={324} mobileWidth={324}>
             확인하기
           </Button>
         </div>
       ) : (
         <Link href="/auth">
-          <Button variant="admin" webWidth={324}>
+          <Button variant="admin" webWidth={324} mobileWidth={324}>
             로그인하기
           </Button>
         </Link>

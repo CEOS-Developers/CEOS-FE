@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Flex, Text } from 'packages/ui';
 import { adminApplyStatementApi } from 'packages/utils/src/apis/admin/adminApplyStatementApi';
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Loading } from '../Loading';
 
 interface interviewtimeInterface {
   date?: string;
@@ -113,7 +114,7 @@ export const InterviewTimeModal = ({
                       ),
                     )
                   ) : (
-                    <>Loading..</>
+                    <Loading />
                   )}
                 </Flex>
               </Flex>
