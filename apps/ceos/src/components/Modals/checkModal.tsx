@@ -54,6 +54,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             date: passCheck.data.date,
             duration: passCheck.data.duration,
             otDate: passCheck.data.otDate,
+            openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
         } catch (e) {
@@ -76,6 +77,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             date: passCheck.data.date,
             duration: passCheck.data.duration,
             otDate: passCheck.data.otDate,
+            openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
         } catch (e) {
