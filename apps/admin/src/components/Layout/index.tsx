@@ -51,7 +51,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    console.log(login, accessToken, appCookies['LOGIN_EXPIRES']);
     if (login && router.pathname.includes('/auth')) {
       router.push('/applyStatement');
     }
