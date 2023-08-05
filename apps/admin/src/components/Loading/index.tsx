@@ -6,11 +6,7 @@ export const Loading = () => {
   return (
     <Container>
       <LoadingIcon />
-      <Text
-        webTypo="Heading1_Kor"
-        mobileTypo="Heading1_Kor"
-        margin="20px 0 0 0"
-      >
+      <Text webTypo="Heading2" mobileTypo="Heading2" margin="16px 0 0 0">
         로딩중입니다
       </Text>
     </Container>
