@@ -350,17 +350,19 @@ export default function Application() {
               ))}
             </Flex>
           ))}
-          <Button
-            variant="admin_stroke"
-            webWidth={128}
-            style={{ alignSelf: 'center' }}
-            onClick={handleAppendCommonQuestion}
-          >
-            <Flex webGap={4} mobileGap={4}>
-              <Plus />
-              질문 추가하기
-            </Flex>
-          </Button>
+          <div>
+            <Button
+              variant="admin_stroke"
+              webWidth={128}
+              style={{ alignSelf: 'center' }}
+              onClick={handleAppendCommonQuestion}
+            >
+              <Flex webGap={4} mobileGap={4}>
+                <Plus />
+                질문 추가하기
+              </Flex>
+            </Button>
+          </div>
         </Flex>
 
         <Flex direction="column" webGap={24} mobileGap={24} align="flex-start">
@@ -496,17 +498,19 @@ export default function Application() {
             </Flex>
           ))}
 
-          <Button
-            variant="admin_stroke"
-            webWidth={128}
-            style={{ alignSelf: 'center' }}
-            onClick={handleAppendPartQuestion}
-          >
-            <Flex webGap={4} mobileGap={4}>
-              <Plus />
-              질문 추가하기
-            </Flex>
-          </Button>
+          <div>
+            <Button
+              variant="admin_stroke"
+              webWidth={128}
+              style={{ alignSelf: 'center' }}
+              onClick={handleAppendPartQuestion}
+            >
+              <Flex webGap={4} mobileGap={4}>
+                <Plus />
+                질문 추가하기
+              </Flex>
+            </Button>
+          </div>
         </Flex>
 
         {getValues('times').map((_, dateIdx) => (
@@ -575,17 +579,19 @@ export default function Application() {
                   ))}
                 </GridContainer>
 
-                <Button
-                  variant="admin_stroke"
-                  webWidth={128}
-                  style={{ alignSelf: 'center' }}
-                  onClick={() => handleAppendDate(dateIdx)}
-                >
-                  <Flex webGap={4} mobileGap={4}>
-                    <Plus />
-                    시간 추가하기
-                  </Flex>
-                </Button>
+                <div>
+                  <Button
+                    variant="admin_stroke"
+                    webWidth={128}
+                    style={{ alignSelf: 'center' }}
+                    onClick={() => handleAppendDate(dateIdx)}
+                  >
+                    <Flex webGap={4} mobileGap={4}>
+                      <Plus />
+                      시간 추가하기
+                    </Flex>
+                  </Button>
+                </div>
               </Flex>
             </Flex>
 
@@ -593,9 +599,11 @@ export default function Application() {
           </Fragment>
         ))}
 
-        <Button variant="admin" onClick={handleSaveApplication}>
-          저장하기
-        </Button>
+        <div>
+          <Button variant="admin" onClick={handleSaveApplication}>
+            저장하기
+          </Button>
+        </div>
       </Flex>
 
       {isOpen && (

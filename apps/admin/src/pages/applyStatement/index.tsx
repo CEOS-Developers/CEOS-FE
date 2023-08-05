@@ -222,6 +222,7 @@ export default function ApplyStatement() {
     },
   );
 
+  // 지원자 엑셀 다운로드
   useEffect(() => {
     if (getExceldata) {
       const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
@@ -349,9 +350,13 @@ export default function ApplyStatement() {
       width: '250px',
       render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5}>
-          <div style={{ width: '146px' }}>
-            {record.date?.slice(5, 10)} &nbsp; {record.duration}
-          </div>
+          {record.doc_pass === '합격' ? (
+            <div style={{ width: '146px' }}>
+              {record.date?.slice(5, 10)} &nbsp; {record.duration}
+            </div>
+          ) : (
+            <>&nbsp;</>
+          )}
           <Button
             variant="admin_stroke"
             onClick={() => {
