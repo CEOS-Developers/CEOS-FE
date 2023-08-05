@@ -3,27 +3,30 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import Sidebar from '../Sidebar/index';
 import { useRecoilState } from 'recoil';
-import { loginState, accessToken } from '../../store/recoil/index';
-import { NonLogin } from '../NonLogin/index';
+import { loginState, accessTokenState } from '../../store/recoil/index';
 import { Cookies, useCookies } from 'react-cookie';
 import { adminAuthApi, adminInstance } from 'packages/utils';
 import { useMutation } from '@tanstack/react-query';
+import { Loading } from '../Loading';
+import { useState } from 'react';
+
+const cookies = new Cookies().get('LOGIN_EXPIRES');
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const [login, setLogin] = useRecoilState<boolean>(loginState);
-  const cookies = new Cookies().get('LOGIN_EXPIRES');
-  const [accesstoken, setAccesstoken] = useRecoilState(accessToken);
-  const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  if (cookies !== undefined) setLogin(true);
-  else setLogin(false);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
   const { mutate: getNewAccessToken } = useMutation(
     () => adminAuthApi.POST_REFRESHTOKEN(cookies),
     {
       onSuccess: (data: any) => {
-        setAccesstoken(data.data.accessToken);
+        setLogin(true);
+        setLoading(false);
+        setAccessToken(data.data.accessToken);
         adminInstance.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${data.data.accessToken}`;
@@ -46,20 +49,37 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       expires,
     });
   };
-  useEffect(() => {
-    if (appCookies['LOGIN_EXPIRES']) return;
-  }, []);
 
   useEffect(() => {
-    if (cookies !== undefined) {
-      setLogin(true);
-      if (accesstoken === '') {
+    console.log(login, accessToken, appCookies['LOGIN_EXPIRES']);
+    if (login && router.pathname.includes('/auth')) {
+      router.push('/applyStatement');
+    }
+
+    if (
+      !login ||
+      (login && accessToken === '' && !router.pathname.includes('/auth'))
+    ) {
+      router.push('/auth');
+    }
+  }, [login, cookies]);
+  useEffect(() => {
+    if (appCookies['LOGIN_EXPIRES']) {
+      if (accessToken === '') {
         getNewAccessToken();
+      } else {
+        setLogin(true);
+        setLoading(false);
       }
     } else {
       setLogin(false);
+      setLoading(false);
     }
-  }, [accesstoken, cookies]);
+  }, [accessToken, cookies]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Container path={router.pathname}>
@@ -68,18 +88,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       ) : (
         <Sidebar />
       )}
+
       <ChildrenContainer path={router.pathname}>
-        {login ? (
-          accesstoken !== '' ? (
-            <FlexBox path={router.pathname}>{children}</FlexBox>
-          ) : (
-            <NonLogin />
-          )
-        ) : router.pathname.includes('/auth') ? (
-          <FlexBox path={router.pathname}>{children}</FlexBox>
-        ) : (
-          <NonLogin />
-        )}
+        <FlexBox path={router.pathname}>{children}</FlexBox>
       </ChildrenContainer>
     </Container>
   );

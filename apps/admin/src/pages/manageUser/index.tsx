@@ -69,13 +69,13 @@ export default function ManageUser() {
     if (!isFetching && isSuccess) {
       if (data?.data.adminBriefInfoVos?.length !== 0) {
         setDataSource(
-          Array.from(new Array(pagination.pageSize), (_, i) => {
+          data?.data.adminBriefInfoVos.map((data: any) => {
             return {
-              id: data?.data.adminBriefInfoVos[i]?.id,
-              name: data?.data.adminBriefInfoVos[i]?.name,
-              adminRole: data?.data.adminBriefInfoVos[i]?.adminRole,
-              email: data?.data.adminBriefInfoVos[i]?.email,
-              part: data?.data.adminBriefInfoVos[i]?.part,
+              id: data?.id,
+              name: data?.name,
+              adminRole: data?.adminRole,
+              email: data?.email,
+              part: data?.part,
             };
           }),
         );
@@ -84,6 +84,14 @@ export default function ManageUser() {
       }
     }
   }, [isFetching, isSuccess, data]);
+  useEffect(() => {
+    if (!isFetching && isSuccess) {
+      setPagination({
+        ...pagination,
+        total: data.data.pageInfo.totalPages,
+      });
+    }
+  }, [isFetching, isSuccess]);
 
   // 페이지 변경
   const onChangePage = (newPage: number) => {

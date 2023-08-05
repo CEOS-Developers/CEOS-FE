@@ -19,6 +19,7 @@ import { CloseBtn } from '@admin/assets/CloseBtn';
 import { InterviewTimeModal } from '../../components/Modals/interviewTimeModal';
 import { useAlert } from '@admin/hooks/useAlert';
 import { Alert } from '@admin/components/Alert';
+import { Loading } from '@admin/components/Loading';
 
 interface DropdownInterface {
   option: DropdownItemInterface[];
@@ -222,6 +223,7 @@ export default function ApplyStatement() {
     },
   );
 
+  // 지원자 엑셀 다운로드
   useEffect(() => {
     if (getExceldata) {
       const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
@@ -292,7 +294,7 @@ export default function ApplyStatement() {
   }, [dataSource, applicantData]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   // 페이지 변경
@@ -348,10 +350,14 @@ export default function ApplyStatement() {
       dataIndex: 'interview_time',
       width: '250px',
       render: (_text: string, record: any) => (
-        <Flex justify="space-between" webGap={5}>
-          <div style={{ width: '146px' }}>
-            {record.date?.slice(5, 10)} &nbsp; {record.duration}
-          </div>
+        <Flex justify="space-between" webGap={5} mobileGap={5}>
+          {record.doc_pass === '합격' ? (
+            <div style={{ width: '146px' }}>
+              {record.date?.slice(5, 10)} &nbsp; {record.duration}
+            </div>
+          ) : (
+            <>&nbsp;</>
+          )}
           <Button
             variant="admin_stroke"
             onClick={() => {
@@ -389,6 +395,7 @@ export default function ApplyStatement() {
         <Button
           variant="admin_stroke"
           webWidth={57}
+          mobileWidth={57}
           onClick={() => {
             setModalOpen(true);
             setModalSubject('application');
@@ -413,12 +420,16 @@ export default function ApplyStatement() {
   return (
     <Container modalOpen={modalOpen}>
       <div className="title">
-        <Text webTypo="Heading2">지원현황</Text>
-        <Text webTypo="Body3">세오스 전체 지원자 현황입니다.</Text>
+        <Text webTypo="Heading2" mobileTypo="Heading2">
+          지원현황
+        </Text>
+        <Text webTypo="Body3" mobileTypo="Body2">
+          세오스 전체 지원자 현황입니다.
+        </Text>
       </div>
 
       <Flex justify="space-between" align="flex-end" padding="24px 0">
-        <Flex webGap={8} style={{ width: 'auto' }}>
+        <Flex webGap={8} mobileGap={8} style={{ width: 'auto' }}>
           {DropdownList.map((dropdown: DropdownInterface, index: number) => (
             <Dropdown
               key={index}
@@ -432,12 +443,18 @@ export default function ApplyStatement() {
           ))}
         </Flex>
 
-        <Flex webGap={8} align="flex-end" style={{ width: 'auto' }}>
+        <Flex
+          webGap={8}
+          mobileGap={8}
+          align="flex-end"
+          style={{ width: 'auto' }}
+        >
           <Text webTypo="Body3" paletteColor="Gray4">
             생성일시 :&nbsp;{createAt}
           </Text>
           <Button
             webWidth={108}
+            mobileWidth={108}
             variant="admin_navy"
             onClick={onClickCreateExcel}
           >
@@ -445,6 +462,7 @@ export default function ApplyStatement() {
           </Button>
           <Button
             webWidth={108}
+            mobileWidth={108}
             variant="admin_navy"
             onClick={onClickDownloadExcel}
           >
