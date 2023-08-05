@@ -107,7 +107,7 @@ export const PMBtn = (props: BtnProps) => {
   );
 };
 
-export const DesginBtn = (props: BtnProps) => {
+export const DesignBtn = (props: BtnProps) => {
   const isMobile = useWindowResize();
 
   return (
