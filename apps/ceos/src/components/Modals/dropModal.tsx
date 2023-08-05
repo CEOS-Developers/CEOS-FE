@@ -15,7 +15,7 @@ interface ModalProps {
   uuid: string;
   email: string;
   step: string;
-  generation: string;
+  generation: number;
   isOpen: boolean;
   toggleModal: () => void;
   setErrorText: Dispatch<string>;

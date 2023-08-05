@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import {
   Creative,
-  Enterpreneurship,
+  Entrepreneurship,
   Openness,
   Sustainability,
 } from '@ceos/assets/landing/glassButtonText';
@@ -20,18 +20,7 @@ export const SubHeader = (props: SubHeaderProps) => {
 
   return (
     <Wrapper className={props.className} data-section={props.dataSection}>
-      <div className="banner-image">
-        <BannerImage
-          src={
-            windowSize.width < 768
-              ? '/banner-graphic-mobile.png'
-              : '/banner-graphic-web.png'
-          }
-          width={1660}
-          height={720}
-          alt=""
-        />
-      </div>
+      <div className="banner-image"></div>
       <Flex
         className="typo"
         direction="column"
@@ -55,7 +44,7 @@ export const SubHeader = (props: SubHeaderProps) => {
           <Creative />
         </GlassText>
         <GlassText>
-          <Enterpreneurship />
+          <Entrepreneurship />
         </GlassText>
         <GlassText>
           <Openness />
@@ -80,8 +69,15 @@ const Wrapper = styled.div`
 
     overflow: hidden;
 
+    width: 100vw;
+    background-image: url('/banner-graphic-web.png');
+    background-size: 1660px;
+    background-position: center;
+
     ${media.mobile} {
       height: 700px;
+      background-size: 906px;
+      background-image: url('/banner-graphic-mobile.png');
     }
   }
 
@@ -121,7 +117,7 @@ const BannerImage = styled(Image)`
 `;
 
 const GlassText = styled(Flex)`
-  ${theme.glass.Border};
+  ${theme.glass.Landing};
 
   border-radius: 20px;
 

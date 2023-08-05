@@ -92,7 +92,7 @@ export const Header = (props: HeaderProps) => {
     sections.forEach((section) => {
       observer.observe(section);
     });
-  }, [router.pathname]);
+  });
 
   return (
     <>

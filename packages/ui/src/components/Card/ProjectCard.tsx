@@ -1,6 +1,6 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 
 export interface ProjectImageProps {
@@ -31,7 +31,6 @@ export const ProjectCard = ({
   return (
     <Wrapper>
       <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
-
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -96,7 +95,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   width: 328px;
 
-  @media (min-width: 1024px) {
+  ${media.pc} {
     & > .ceos-hover {
       display: none;
     }
@@ -107,6 +106,13 @@ const Wrapper = styled.div`
       }
     }
   }
+
+  ${media.mobile} {
+    max-width: 400px;
+
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const ProjectImg = styled.img`
@@ -116,10 +122,12 @@ const ProjectImg = styled.img`
   object-fit: cover;
   background-color: ${theme.palette.Gray5};
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     &.ceos {
-      width: 346px;
-      height: 194px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 346 / 194;
+
       border-radius: 10px;
     }
   }
@@ -140,9 +148,11 @@ const ExplainBox = styled.div`
   @media (max-width: 1023px) {
     padding: 24px 20px 20px;
     margin-top: -10px;
-    width: 346px;
     border-radius: 10px;
-    display: block;
+
+    width: 100%;
+    height: auto;
+    aspect-ratio: 346 / 89;
   }
   @media (min-width: 1023px) {
     .ceos {
