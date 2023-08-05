@@ -6,7 +6,7 @@ import { adminAuthApi, signInInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { accessToken, loginState } from '@admin/store/recoil';
+import { accessTokenState, loginState } from '@admin/store/recoil';
 import { StyledForm } from '@admin/styles/common';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
@@ -16,7 +16,7 @@ export default function SignIn() {
   const router = useRouter();
   const { mutate: postSignInMutation } = useMutation(adminAuthApi.SIGN_IN);
   const { register, handleSubmit } = useForm();
-  const [token, setToken] = useRecoilState<string>(accessToken);
+  const [token, setToken] = useRecoilState<string>(accessTokenState);
   const [login, setLogin] = useRecoilState<boolean>(loginState);
   const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
