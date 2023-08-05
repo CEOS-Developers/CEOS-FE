@@ -95,7 +95,11 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
         <Mobile>
           <Flex direction="column" align="start" padding="20px">
             <Flex justify="space-between">
-              <Text paletteColor="Blue" mobileTypo="Heading1_Eng">
+              <Text
+                paletteColor="Blue"
+                mobileTypo="Heading1_Eng"
+                style={{ fontWeight: 800 }}
+              >
                 {projectInfo?.name}
               </Text>
               <Text paletteColor="Gray5" mobileTypo="Label1">
