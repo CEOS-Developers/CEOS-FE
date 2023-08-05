@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { ImageUploader } from '@admin/components/ImageUploader';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { css } from '@emotion/react';
+import { isValid } from 'date-fns';
 
 const UrlCategoryMap = {
   서비스: 'Service Link',
@@ -50,31 +51,38 @@ export default function ProjectDetail() {
     },
   });
 
-  const { control, getValues, setValue, reset, watch, register } =
-    useForm<ProjectItemInterface>({
-      defaultValues: {
-        name: '',
-        description: '',
-        generation: 0,
-        projectUrls: [
-          {
-            category: '서비스',
-            linkUrl: '',
-          },
-        ],
-        projectImages: [
-          {
-            category: '썸네일',
-            imageUrl: '',
-          },
-          {
-            category: '상세',
-            imageUrl: '',
-          },
-        ],
-        participants: [],
-      },
-    });
+  const {
+    control,
+    getValues,
+    setValue,
+    reset,
+    watch,
+    register,
+    formState: { isValid },
+  } = useForm<ProjectItemInterface>({
+    defaultValues: {
+      name: '',
+      description: '',
+      generation: 0,
+      projectUrls: [
+        {
+          category: '서비스',
+          linkUrl: '',
+        },
+      ],
+      projectImages: [
+        {
+          category: '썸네일',
+          imageUrl: '',
+        },
+        {
+          category: '상세',
+          imageUrl: '',
+        },
+      ],
+      participants: [],
+    },
+  });
   const {
     fields: projectUrls,
     append: appendProjectUrls,
@@ -159,12 +167,26 @@ export default function ProjectDetail() {
       <Flex webGap={24} mobileGap={24} align="flex-start">
         <Flex webGap={24} mobileGap={24} direction="column" width={680}>
           <Flex webGap={24} mobileGap={24}>
-            <TextField {...register('name')} label="팀명" isAdmin />
-            <TextField {...register('generation')} label="활동기수" isAdmin />
+            <TextField
+              {...register('name', {
+                required: true,
+              })}
+              label="팀명"
+              isAdmin
+            />
+            <TextField
+              {...register('generation', {
+                required: true,
+              })}
+              label="활동기수"
+              isAdmin
+            />
           </Flex>
 
           <TextField
-            {...register('description')}
+            {...register('description', {
+              required: true,
+            })}
             width={680}
             label="한줄 소개"
             isAdmin
@@ -172,28 +194,36 @@ export default function ProjectDetail() {
 
           <Flex webGap={24} mobileGap={24}>
             <TextField
-              {...register('participants.0.name')}
+              {...register('participants.0.name', {
+                required: true,
+              })}
               label="기획 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.1.name')}
+              {...register('participants.1.name', {
+                required: true,
+              })}
               label="기획 팀원2"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.2.name')}
+              {...register('participants.2.name', {
+                required: true,
+              })}
               label="디자인 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.3.name')}
+              {...register('participants.3.name', {
+                required: true,
+              })}
               label="디자인 팀원2"
               width={152}
               isAdmin
@@ -203,28 +233,36 @@ export default function ProjectDetail() {
 
           <Flex webGap={24} mobileGap={24}>
             <TextField
-              {...register('participants.4.name')}
+              {...register('participants.4.name', {
+                required: true,
+              })}
               label="프론트 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.5.name')}
+              {...register('participants.5.name', {
+                required: true,
+              })}
               label="프론트 팀원2"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.6.name')}
+              {...register('participants.6.name', {
+                required: true,
+              })}
               label="백엔드 팀원1"
               width={152}
               isAdmin
               placeholder="이름을 입력하세요."
             />
             <TextField
-              {...register('participants.7.name')}
+              {...register('participants.7.name', {
+                required: true,
+              })}
               label="백엔드 팀원2"
               width={152}
               isAdmin
@@ -281,7 +319,9 @@ export default function ProjectDetail() {
                     />
                   </div>
                   <TextField
-                    {...register(`projectUrls.${idx}.linkUrl`)}
+                    {...register(`projectUrls.${idx}.linkUrl`, {
+                      required: true,
+                    })}
                     isAdmin
                     placeholder="링크를 입력하세요."
                     width={441}
@@ -350,6 +390,13 @@ export default function ProjectDetail() {
           webHeight={46}
           mobileHeight={46}
           onClick={handleSaveProject}
+          disabled={
+            !(
+              isValid &&
+              getValues('projectImages.0.imageUrl') &&
+              getValues('projectImages.1.imageUrl')
+            )
+          }
           css={css`
             flex-shrink: 0;
           `}
