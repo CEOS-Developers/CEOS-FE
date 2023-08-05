@@ -181,6 +181,7 @@ export default function ProjectDetail() {
               isAdmin
             />
             <TextField
+              type="number"
               {...register('generation', {
                 required: true,
               })}
@@ -199,81 +200,73 @@ export default function ProjectDetail() {
           />
 
           <Flex webGap={24} mobileGap={24}>
-            <TextField
-              {...register('participants.0.name', {
-                required: true,
-              })}
-              label="기획 팀원1"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.1.name', {
-                required: true,
-              })}
-              label="기획 팀원2"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.2.name', {
-                required: true,
-              })}
-              label="디자인 팀원1"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.3.name', {
-                required: true,
-              })}
-              label="디자인 팀원2"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
+            {watch('participants').map((participant, idx) =>
+              participant.part === '기획' ? (
+                <TextField
+                  {...register(`participants.${idx}.name`, {
+                    required: true,
+                  })}
+                  key={idx}
+                  label={`기획 팀원${idx + 1}`}
+                  width={152}
+                  isAdmin
+                  placeholder="이름을 입력하세요."
+                />
+              ) : (
+                <></>
+              ),
+            )}
+            {watch('participants').map((participant, idx) =>
+              participant.part === '디자인' ? (
+                <TextField
+                  {...register(`participants.${idx}.name`, {
+                    required: true,
+                  })}
+                  key={idx}
+                  label={`디자인 팀원${idx - 1}`}
+                  width={152}
+                  isAdmin
+                  placeholder="이름을 입력하세요."
+                />
+              ) : (
+                <></>
+              ),
+            )}
           </Flex>
 
           <Flex webGap={24} mobileGap={24}>
-            <TextField
-              {...register('participants.4.name', {
-                required: true,
-              })}
-              label="프론트 팀원1"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.5.name', {
-                required: true,
-              })}
-              label="프론트 팀원2"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.6.name', {
-                required: true,
-              })}
-              label="백엔드 팀원1"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
-            <TextField
-              {...register('participants.7.name', {
-                required: true,
-              })}
-              label="백엔드 팀원2"
-              width={152}
-              isAdmin
-              placeholder="이름을 입력하세요."
-            />
+            {watch('participants').map((participant, idx) =>
+              participant.part === '프론트엔드' ? (
+                <TextField
+                  {...register(`participants.${idx}.name`, {
+                    required: true,
+                  })}
+                  key={idx}
+                  label={`프론트 팀원${idx - 3}`}
+                  width={152}
+                  isAdmin
+                  placeholder="이름을 입력하세요."
+                />
+              ) : (
+                <></>
+              ),
+            )}
+            {watch('participants').map((participant, idx) =>
+              participant.part === '백엔드' ? (
+                <TextField
+                  {...register(`participants.${idx}.name`, {
+                    required: true,
+                  })}
+                  key={idx}
+                  label={`백엔드 팀원${idx - 5}`}
+                  width={152}
+                  isAdmin
+                  placeholder="이름을 입력하세요."
+                />
+              ) : (
+                <></>
+              ),
+            )}
           </Flex>
 
           <Flex webGap={6} mobileGap={6} direction="column" align="flex-start">
