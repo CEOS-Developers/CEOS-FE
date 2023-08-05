@@ -91,7 +91,6 @@ export default function AddReward() {
           title={router.query.id ? '이력 수정' : '이력 추가'}
           onClick={() => router.back()}
         />
-        <Space height={48} />
 
         <Flex
           direction="column"
@@ -99,6 +98,7 @@ export default function AddReward() {
           justify="flex-start"
           webGap={24}
           mobileGap={24}
+          margin="48px 0 0 0"
         >
           <Flex
             direction="row"
