@@ -51,6 +51,19 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    console.log(login, accessToken, appCookies['LOGIN_EXPIRES']);
+    if (login && router.pathname.includes('/auth')) {
+      router.push('/applyStatement');
+    }
+
+    if (
+      !login ||
+      (login && accessToken === '' && !router.pathname.includes('/auth'))
+    ) {
+      router.push('/auth');
+    }
+  }, [login, cookies]);
+  useEffect(() => {
     if (appCookies['LOGIN_EXPIRES']) {
       if (accessToken === '') {
         getNewAccessToken();
@@ -66,16 +79,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   if (loading) {
     return <Loading />;
-  }
-
-  if (login && router.pathname.includes('/auth')) {
-    router.push('/applyStatement');
-    return <></>;
-  }
-
-  if (login && accessToken === '' && !router.pathname.includes('/auth')) {
-    router.push('/auth');
-    return <></>;
   }
 
   return (
