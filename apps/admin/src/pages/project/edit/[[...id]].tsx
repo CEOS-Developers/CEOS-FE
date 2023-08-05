@@ -1,21 +1,14 @@
 import { useRouter } from 'next/router';
 import { Button, Flex, Text, TextField, Space } from '@ceos-fe/ui';
-import { BackArrow } from '@admin/assets/Arrow';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { ProjectItemInterface, adminProjectApi } from '@ceos-fe/utils';
 import { Plus } from '@admin/assets/Plus';
 import { Dropdown } from '@admin/components/Dropdown';
-import {
-  QueryClient,
-  dehydrate,
-  useMutation,
-  useQuery,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { ImageUploader } from '@admin/components/ImageUploader';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { css } from '@emotion/react';
-import { isValid } from 'date-fns';
 
 const UrlCategoryMap = {
   서비스: 'Service Link',
@@ -26,16 +19,6 @@ const UrlCategoryMap = {
 
 export default function ProjectDetail() {
   const router = useRouter();
-
-  const isEditMode = router.query.id ? true : false;
-
-  const { data, isFetching, isSuccess } = useQuery<ProjectItemInterface>(
-    ['admin', 'project', router.query.id],
-    () => adminProjectApi.GET_PROJECT(Number(router.query.id)),
-    {
-      enabled: isEditMode,
-    },
-  );
 
   const postProjectMutation = useMutation(adminProjectApi.POST_PROJECT, {
     onSuccess: () => {
@@ -80,7 +63,40 @@ export default function ProjectDetail() {
           imageUrl: '',
         },
       ],
-      participants: [],
+      participants: [
+        {
+          part: '기획',
+          name: '',
+        },
+        {
+          part: '기획',
+          name: '',
+        },
+        {
+          part: '디자인',
+          name: '',
+        },
+        {
+          part: '디자인',
+          name: '',
+        },
+        {
+          part: '프론트엔드',
+          name: '',
+        },
+        {
+          part: '프론트엔드',
+          name: '',
+        },
+        {
+          part: '백엔드',
+          name: '',
+        },
+        {
+          part: '백엔드',
+          name: '',
+        },
+      ],
     },
   });
   const {
@@ -92,11 +108,22 @@ export default function ProjectDetail() {
     name: 'projectUrls',
   });
 
-  useEffect(() => {
-    if (isFetching || !isSuccess) return;
+  const isEditMode = router.query.id ? true : false;
+  const { mutate: getProject } = useMutation(adminProjectApi.GET_PROJECT, {
+    onSuccess: async (data: ProjectItemInterface) => {
+      reset(data);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
 
-    reset(data);
-  }, [isFetching, isSuccess]);
+  // 수정 시 value set
+  useEffect(() => {
+    if (router.query.id) {
+      getProject(Number(router.query.id));
+    }
+  }, [router.query.id]);
 
   const handleAppendUrl = () => {
     appendProjectUrls({
@@ -110,32 +137,11 @@ export default function ProjectDetail() {
       name: getValues('name'),
       description: getValues('description'),
       generation: Number(getValues('generation')),
-      participants: getValues('participants').map((participant, idx) => {
-        switch (idx) {
-          case 0:
-          case 1:
-            return {
-              part: '기획',
-              name: participant.name,
-            };
-          case 2:
-          case 3:
-            return {
-              part: '디자인',
-              name: participant.name,
-            };
-          case 4:
-          case 5:
-            return {
-              part: '프론트엔드',
-              name: participant.name,
-            };
-          default:
-            return {
-              part: '백엔드',
-              name: participant.name,
-            };
-        }
+      participants: getValues('participants').map((participant) => {
+        return {
+          part: participant.part,
+          name: participant.name,
+        };
       }),
       projectImages: getValues('projectImages'),
       projectUrls: getValues('projectUrls'),
@@ -284,7 +290,6 @@ export default function ProjectDetail() {
                   width={680}
                   justify="flex-start"
                 >
-                  {' '}
                   <div>
                     <Space height={4} />
                     <Dropdown
@@ -337,16 +342,19 @@ export default function ProjectDetail() {
                 </Flex>
               ))}
 
-              <Button
-                variant="admin_stroke"
-                webWidth={128}
-                onClick={handleAppendUrl}
-              >
-                <Flex webGap={4} mobileGap={4}>
-                  <Plus />
-                  링크 추가하기
-                </Flex>
-              </Button>
+              <div>
+                <Button
+                  variant="admin_stroke"
+                  webWidth={128}
+                  mobileWidth={128}
+                  onClick={handleAppendUrl}
+                >
+                  <Flex webGap={4} mobileGap={4}>
+                    <Plus />
+                    링크 추가하기
+                  </Flex>
+                </Button>
+              </div>
             </Flex>
           </Flex>
         </Flex>
@@ -407,38 +415,3 @@ export default function ProjectDetail() {
     </>
   );
 }
-
-export const getStaticPaths = async () => {
-  try {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const getStaticProps = async ({ params }: { params: any }) => {
-  try {
-    if (!params.id)
-      return {
-        props: {},
-      };
-
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchInfiniteQuery(
-      ['admin', 'project', params.id],
-      () => adminProjectApi.GET_PROJECT(params.id),
-    );
-
-    return {
-      props: {
-        dehydratedProps: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-      },
-    };
-  } catch (err) {
-    console.error(err);
-  }
-};

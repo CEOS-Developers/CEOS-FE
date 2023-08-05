@@ -190,16 +190,18 @@ export default function Faq() {
           </Flex>
         ))}
 
-        <Button
-          variant="admin_stroke"
-          webWidth={128}
-          onClick={handleAppendQuestion}
-        >
-          <Flex webGap={4} mobileGap={4}>
-            <Plus />
-            질문 추가하기
-          </Flex>
-        </Button>
+        <Flex>
+          <Button
+            variant="admin_stroke"
+            webWidth={128}
+            onClick={handleAppendQuestion}
+          >
+            <Flex webGap={4} mobileGap={4}>
+              <Plus />
+              질문 추가하기
+            </Flex>
+          </Button>
+        </Flex>
       </Flex>
       {isOpen && (
         <Alert

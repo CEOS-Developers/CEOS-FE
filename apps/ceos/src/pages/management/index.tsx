@@ -95,7 +95,11 @@ const Management = () => {
         direction="column"
         align="center"
         css={css`
-          margin: 80px 0 100px 0px;
+          margin: 0 0 100px 0px;
+
+          @media (max-width: 1023px) {
+            margin-bottom: 60px;
+          }
         `}
         data-section="White"
       >

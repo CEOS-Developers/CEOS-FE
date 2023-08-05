@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { HeaderState } from '@ceos/state';
+import Image from 'next/image';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -92,7 +93,7 @@ export const Header = (props: HeaderProps) => {
     sections.forEach((section) => {
       observer.observe(section);
     });
-  }, [router.pathname]);
+  });
 
   return (
     <>
@@ -105,33 +106,57 @@ export const Header = (props: HeaderProps) => {
         </CustomLink>
 
         <div css={contentCss(backColor)}>
-          <CustomLink
+          <StyledLink
             href="/project"
             className={router.pathname === '/project' ? 'active' : ''}
           >
+            <StyledLinkContainer
+              alt="project link"
+              src="/header/project.svg"
+              width={137}
+              height={45}
+            />
             <Content className="text">PROJECT</Content>
-          </CustomLink>
+          </StyledLink>
 
-          <CustomLink
+          <StyledLink
             href="/activity"
             className={router.pathname === '/activity' ? 'active' : ''}
           >
+            <StyledLinkContainer
+              alt="project link"
+              src="/header/activity.svg"
+              width={139}
+              height={45}
+            />
             <Content className="text">ACTIVITY</Content>
-          </CustomLink>
+          </StyledLink>
 
-          <CustomLink
+          <StyledLink
             href="/FAQ"
             className={router.pathname === '/FAQ' ? 'active' : ''}
           >
+            <StyledLinkContainer
+              alt="project link"
+              src="/header/faq.svg"
+              width={79}
+              height={45}
+            />
             <Content className="text">FAQ</Content>
-          </CustomLink>
+          </StyledLink>
 
-          <CustomLink
+          <StyledLink
             href="/recruit"
             className={router.pathname === '/recruit' ? 'active' : ''}
           >
+            <StyledLinkContainer
+              alt="project link"
+              src="/header/recruit.svg"
+              width={130}
+              height={45}
+            />
             <Content className="text">RECRUIT</Content>
-          </CustomLink>
+          </StyledLink>
           <MenuBtn backColor={backColor} onClick={toggleModal} />
         </div>
       </nav>
@@ -159,6 +184,7 @@ const navCss = ({
     ? theme.palette.Opacity[backColor]
     : theme.palette[backColor]};
   transition: background-color 200ms, color 200ms;
+
   @media (max-width: 1023px) {
     width: 100vw;
     height: 124px;
@@ -170,8 +196,57 @@ const navCss = ({
   }
 `;
 
+export const Content = styled.div`
+  box-sizing: border-box;
+
+  transition: color 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    color: ${theme.palette.Green};
+  }
+`;
+
+const StyledLinkContainer = styled(Image)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+
+  transition: opacity 0.2s;
+`;
+
+const StyledLink = styled(Link)`
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+
+  :hover {
+    color: ${theme.palette.Green};
+    ${StyledLinkContainer} {
+      opacity: 1;
+
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    }
+  }
+
+  &.active {
+    color: ${theme.palette.Green};
+    ${StyledLinkContainer} {
+      opacity: 1;
+
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    }
+  }
+`;
+
 export const contentCss = (backColor: KeyOfPalette) => css`
-  typo: ${typo.Web.Label1};
+  ${typo.Web.Label1};
   color: ${backColor === 'White' ? theme.palette.Gray6 : theme.palette.Gray7};
   display: flex;
   gap: 70px;
@@ -182,25 +257,15 @@ export const contentCss = (backColor: KeyOfPalette) => css`
 
   @media (max-width: 1023px) {
     gap: 0px;
-    .text {
+    ${StyledLink} {
       display: none;
     }
     .menu {
       display: block;
     }
+
     margin-right: 22px;
     margin-bottom: 27px;
-  }
-`;
-
-export const Content = styled.div`
-  box-sizing: border-box;
-
-  transition: color 0.3s;
-
-  &:hover {
-    cursor: pointer;
-    color: ${theme.palette.Green};
   }
 `;
 

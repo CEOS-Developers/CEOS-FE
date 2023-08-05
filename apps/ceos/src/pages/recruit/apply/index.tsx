@@ -256,7 +256,7 @@ const Apply = () => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const queryClient = new QueryClient();
 

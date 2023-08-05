@@ -3,7 +3,6 @@ import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
 import { DetailPrejectInterface, projectApi } from 'packages/utils';
-import Image from 'next/image';
 import { Shortcut } from '@ceos/components/Shortcut';
 import { useRef } from 'react';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
@@ -96,7 +95,11 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
         <Mobile>
           <Flex direction="column" align="start" padding="20px">
             <Flex justify="space-between">
-              <Text paletteColor="Blue" mobileTypo="Heading1_Eng">
+              <Text
+                paletteColor="Blue"
+                mobileTypo="Heading1_Eng"
+                style={{ fontWeight: 800 }}
+              >
                 {projectInfo?.name}
               </Text>
               <Text paletteColor="Gray5" mobileTypo="Label1">

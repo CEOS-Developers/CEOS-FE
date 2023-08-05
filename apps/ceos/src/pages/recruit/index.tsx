@@ -62,6 +62,7 @@ const Recruit = () => {
     attendanceStatus: false,
     date: '',
     otDate: '',
+    openChatUrl: '',
     duration: '',
   });
   const [step, setStep] = useState('');
