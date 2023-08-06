@@ -35,7 +35,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
 
   return (
     <Flex css={containerCss}>
-      <div css={backCss}></div>
+      <div css={backCss} onClick={setClose}></div>
       {!isLoading && isSuccess && (
         <>
           <Desktop css={iconCss} onClick={setClose}>
