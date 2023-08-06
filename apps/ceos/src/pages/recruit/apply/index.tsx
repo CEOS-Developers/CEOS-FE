@@ -45,8 +45,6 @@ const Apply = () => {
       : false;
   }
 
-  const router = useRouter();
-
   useEffect(() => {
     const checkValid = async () => {
       if (!isValid()) {
@@ -159,23 +157,42 @@ const Apply = () => {
   const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
     [key: string]: number;
   };
-  useEffect(() => {
+
+  const isAllAnswer = () => {
     for (const key of keyList) {
       if (key === 'commonAnswers') {
         for (const item of getValues(key)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (key === 'partAnswers') {
         let num = partInfo[getValues('part')];
         for (const item of getValues(`partAnswers.${num}`)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (!getValues(key)) {
-        return setSubmitBtn(false);
+        return false;
       }
     }
-    setSubmitBtn(true);
-  }, [watch()]);
+    return true;
+  };
+
+  // useEffect(() => {
+  //   for (const key of keyList) {
+  //     if (key === 'commonAnswers') {
+  //       for (const item of getValues(key)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (key === 'partAnswers') {
+  //       let num = partInfo[getValues('part')];
+  //       for (const item of getValues(`partAnswers.${num}`)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (!getValues(key)) {
+  //       return setSubmitBtn(false);
+  //     }
+  //   }
+  //   setSubmitBtn(true);
+  // }, [watch()]);
 
   const submitForm = async () => {
     let body = getValues();
@@ -269,7 +286,7 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
-        <Button variant="default" disabled={!submitBtn} onClick={onSubmit}>
+        <Button variant="default" disabled={!isAllAnswer()} onClick={onSubmit}>
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
@@ -288,7 +305,7 @@ const Apply = () => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
