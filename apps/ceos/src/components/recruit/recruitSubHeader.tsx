@@ -10,8 +10,7 @@ import { CheckModal } from '@ceos/components/Modals/checkModal';
 import { ModalPortal } from '@ceos-fe/utils/';
 import { Dispatch, useState } from 'react';
 import Link from 'next/link';
-import { DateProps } from '@ceos/pages/recruit';
-import { PassDataInterface } from './interface';
+import { DateProps, PassDataInterface } from './interface';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;

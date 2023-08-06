@@ -57,6 +57,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
+
+          props.toggleModal();
         } catch (e) {
           console.log(e);
         }
@@ -80,6 +82,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             openChatUrl: passCheck.data.openChatUrl,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
+
+          props.toggleModal();
         } catch (e) {
           console.log(e);
         }

@@ -1,6 +1,6 @@
 import { ceosInstance } from '../axiosConfig';
 
-export interface DetailPrejectInterface {
+export interface DetailProjectInterface {
   projectId: number;
   name: string;
   description: string;

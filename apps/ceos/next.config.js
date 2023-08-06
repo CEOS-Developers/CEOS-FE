@@ -16,11 +16,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      {
-        source: '/recruit/apply',
-        destination: '/',
-        permanent: false,
-      },
+      // {
+      //   source: '/recruit/apply',
+      //   destination: '/',
+      //   permanent: false,
+      // },
       {
         source: '/recruit/docpass',
         destination: '/',

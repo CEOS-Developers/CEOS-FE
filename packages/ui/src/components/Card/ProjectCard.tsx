@@ -2,6 +2,7 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
+import Image from 'next/image';
 
 export interface ProjectImageProps {
   category: string;
@@ -30,7 +31,16 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <Wrapper>
-      <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
+      <ProjectImageContainer>
+        <ProjectImage
+          alt={`project ${name} image`}
+          src={thumbnailImage.imageUrl}
+          className="ceos"
+          layout="fill"
+          objectFit="cover"
+          loading="lazy"
+        />
+      </ProjectImageContainer>
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -61,7 +71,16 @@ export const AdminProjectCard = ({
   return (
     <RelativeContainer width={328} height={275}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={thumbnailImage.imageUrl} />
+        <ProjectImageContainer>
+          <ProjectImage
+            alt={`project ${name} image`}
+            src={thumbnailImage.imageUrl}
+            className="ceos"
+            layout="fill"
+            objectFit="contain"
+            loading="lazy"
+          />
+        </ProjectImageContainer>
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -115,22 +134,23 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProjectImg = styled.img`
-  border-radius: 16px;
+const ProjectImageContainer = styled.div`
   width: 100%;
   height: 184px;
-  object-fit: cover;
-  background-color: ${theme.palette.Gray5};
+  position: relative;
 
   ${media.mobile} {
-    &.ceos {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 346 / 194;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 346 / 194;
 
-      border-radius: 10px;
-    }
+    border-radius: 10px;
   }
+`;
+
+const ProjectImage = styled(Image)`
+  border-radius: 16px;
+  background-color: ${theme.palette.Gray5};
 `;
 
 const ExplainBox = styled.div`

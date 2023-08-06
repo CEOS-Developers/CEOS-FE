@@ -20,38 +20,19 @@ import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
 import { useState } from 'react';
-import { PassDataInterface } from '@ceos/components/recruit/interface';
+import {
+  DateProps,
+  PassDataInterface,
+  RecruitStudyResponse,
+} from '@ceos/components/recruit/interface';
 import NonPass from '@ceos/components/recruit/nonpass';
 import DocPass from '@ceos/components/recruit/docpass';
 import FinPass from '@ceos/components/recruit/finpass';
 
-interface RecruitStudyResponse {
-  generation: number;
-  prodStudyUrl: string;
-  designStudyUrl: string;
-  devStudyUrl: string;
-  startDateDoc: string;
-  endDateDoc: string;
-  resultDateDoc: string;
-  startDateInterview: string;
-  endDateInterview: string;
-  resultDateFinal: string;
-  openChatUrl: string;
-  otDate: string;
-  demoDayDate: string;
-}
-
-export interface DateProps {
-  startDateDoc: Date;
-  endDateDoc: Date;
-  resultDateDoc: Date;
-  resultDateFinal: Date;
-}
-
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
-    () => recruitApi.GER_RECRUITMENTS(),
+    () => recruitApi.GET_RECRUITMENTS(),
   );
   const [passData, setPassData] = useState<PassDataInterface>({
     uuid: '',
@@ -78,6 +59,7 @@ const Recruit = () => {
     content: ['CEOS 프로젝트', '보러가기'],
     link: '/project',
   };
+
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
     endDateDoc: new Date(data ? data.endDateDoc : ''),
@@ -214,7 +196,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
-      recruitApi.GER_RECRUITMENTS;
+      recruitApi.GET_RECRUITMENTS;
     });
 
     return {

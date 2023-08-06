@@ -1,4 +1,4 @@
-import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
+import { Flex, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
@@ -38,7 +38,11 @@ const Project = () => {
   };
 
   return (
-    <div>
+    <div
+      css={css`
+        position: relative;
+      `}
+    >
       <Flex direction="column" data-section="White">
         <Title
           title="PROJECT"
@@ -53,10 +57,8 @@ const Project = () => {
           webGap={24}
           mobileGap={24}
           css={css`
-            width: 1032px;
-            ${media.mobile} {
-              width: 100%;
-            }
+            width: 100%;
+            max-width: 1032px;
           `}
         >
           <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>

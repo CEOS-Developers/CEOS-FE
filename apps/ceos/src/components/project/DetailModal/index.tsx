@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, Text, media } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
-import { DetailPrejectInterface, projectApi } from 'packages/utils';
+import { DetailProjectInterface, projectApi } from 'packages/utils';
 import { Shortcut } from '@ceos/components/Shortcut';
-import { useRef } from 'react';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
+import Image from 'next/image';
 
 interface ModalProps {
   id: number;
@@ -13,8 +13,8 @@ interface ModalProps {
 }
 
 const DetailModal = ({ id, setClose }: ModalProps) => {
-  const { data, isLoading, isSuccess } = useQuery<DetailPrejectInterface>(
-    ['ceos', 'project', 'modal'],
+  const { data, isLoading, isSuccess } = useQuery<DetailProjectInterface>(
+    ['ceos', 'project', 'modal', id],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
 
@@ -34,118 +34,166 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   });
 
   return (
-    <div css={backCss}>
-      <Desktop css={iconCss} onClick={setClose}>
-        <WhiteCloseIcon />
-      </Desktop>
-      <Container>
-        <Mobile css={iconCss} onClick={setClose} style={{ width: 'auto' }}>
-          <WhiteCloseIcon fillColor="#232527" />
-        </Mobile>
-        {projectInfo && (
-          <DetailImg
-            alt="mainImage"
-            src={projectInfo.projectImages[0].imageUrl}
-            isMain={true}
-          />
-        )}
+    <Flex css={containerCss}>
+      <div css={backCss} onClick={setClose}></div>
+      {!isLoading && isSuccess && (
+        <>
+          <Desktop css={iconCss} onClick={setClose}>
+            <WhiteCloseIcon />
+          </Desktop>
+          <Container>
+            <Mobile
+              css={iconCss}
+              onClick={setClose}
+              style={{ width: 'auto', zIndex: 10 }}
+            >
+              <WhiteCloseIcon fillColor="#232527" />
+            </Mobile>
+            {projectInfo && (
+              <DetailThumbnailImageContainer>
+                <Image
+                  alt="mainImage"
+                  src={projectInfo.projectImages[0].imageUrl}
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </DetailThumbnailImageContainer>
+            )}
 
-        <Desktop style={{ width: '100%' }}>
-          <Flex justify="space-between" padding="40px 64px">
-            <Flex direction="column" align="start">
-              <Flex webGap={24} width="auto" height="auto">
-                <Text paletteColor="Blue" webTypo="Heading1_Eng">
-                  {projectInfo?.name}
-                </Text>
-                <Text paletteColor="Gray5" webTypo="Label2">
-                  {projectInfo?.generation}기
-                </Text>
-              </Flex>
-              <Text paletteColor="Black" webTypo="Body2">
-                {projectInfo?.description}
-              </Text>
-              <Flex width="auto" height="auto" margin="28px 0 0 0" webGap={12}>
-                {projectInfo?.projectUrls.map((url) => (
-                  <a href={url.linkUrl}>
-                    <Shortcut>{url.category}</Shortcut>
-                  </a>
-                ))}
-              </Flex>
-            </Flex>
-            <Flex direction="column" width={300}>
-              {Object.values(Part).map((val) => (
-                <Flex justify="space-between">
-                  <Text paletteColor="Gray5" webTypo="Label2">
-                    {val.eng}
+            <Desktop style={{ width: '100%' }}>
+              <Flex justify="space-between" padding="40px 64px">
+                <Flex direction="column" align="start">
+                  <Flex webGap={24} width="auto" height="auto">
+                    <Text paletteColor="Blue" webTypo="Heading1_Eng">
+                      {projectInfo?.name}
+                    </Text>
+                    <Text paletteColor="Gray5" webTypo="Label2">
+                      {projectInfo?.generation}기
+                    </Text>
+                  </Flex>
+                  <Text paletteColor="Black" webTypo="Body2">
+                    {projectInfo?.description}
                   </Text>
-                  <Flex width="auto" webGap={5}>
-                    {val.name.map((item) => (
-                      <Text paletteColor="Black" webTypo="Body3">
-                        {item}
-                      </Text>
+                  <Flex
+                    width="auto"
+                    height="auto"
+                    margin="28px 0 0 0"
+                    webGap={12}
+                  >
+                    {projectInfo?.projectUrls.map((url) => (
+                      <a href={url.linkUrl}>
+                        <Shortcut>{url.category}</Shortcut>
+                      </a>
                     ))}
                   </Flex>
                 </Flex>
-              ))}
-            </Flex>
-          </Flex>
-        </Desktop>
-        <Mobile>
-          <Flex direction="column" align="start" padding="20px">
-            <Flex justify="space-between">
-              <Text
-                paletteColor="Blue"
-                mobileTypo="Heading1_Eng"
-                style={{ fontWeight: 800 }}
-              >
-                {projectInfo?.name}
-              </Text>
-              <Text paletteColor="Gray5" mobileTypo="Label1">
-                {projectInfo?.generation}기
-              </Text>
-            </Flex>
-            <Text paletteColor="Black" mobileTypo="Body1">
-              {projectInfo?.description}
-            </Text>
-            <TeamWrapper>
-              {Object.values(Part).map((val) => (
+                <Flex direction="column" width={300}>
+                  {Object.values(Part).map((val) => (
+                    <Flex justify="space-between">
+                      <Text paletteColor="Gray5" webTypo="Label2">
+                        {val.eng}
+                      </Text>
+                      <Flex width="auto" webGap={5}>
+                        {val.name.map((item) => (
+                          <Text paletteColor="Black" webTypo="Body3">
+                            {item}
+                          </Text>
+                        ))}
+                      </Flex>
+                    </Flex>
+                  ))}
+                </Flex>
+              </Flex>
+            </Desktop>
+            <Mobile>
+              <Flex direction="column" align="start" padding="20px">
                 <Flex justify="space-between">
+                  <Text
+                    paletteColor="Blue"
+                    mobileTypo="Heading1_Eng"
+                    style={{ fontWeight: 800 }}
+                  >
+                    {projectInfo?.name}
+                  </Text>
                   <Text paletteColor="Gray5" mobileTypo="Label1">
-                    {val.eng}
+                    {projectInfo?.generation}기
                   </Text>
-                  <Flex width="auto" mobileGap={5}>
-                    {val.name.map((item) => (
-                      <Text paletteColor="Black" mobileTypo="Body1">
-                        {item}
-                      </Text>
-                    ))}
-                  </Flex>
                 </Flex>
-              ))}
-            </TeamWrapper>
-            <Flex width="auto" height="auto" margin="20px 0 0 0" mobileGap={8}>
-              {projectInfo?.projectUrls.map((url) => (
-                <a href={url.linkUrl}>
-                  <Shortcut>{url.category}</Shortcut>
-                </a>
-              ))}
-            </Flex>
-          </Flex>
-        </Mobile>
+                <Text paletteColor="Black" mobileTypo="Body1">
+                  {projectInfo?.description}
+                </Text>
+                <TeamWrapper>
+                  {Object.values(Part).map((val) => (
+                    <Flex justify="space-between">
+                      <Text paletteColor="Gray5" mobileTypo="Label1">
+                        {val.eng}
+                      </Text>
+                      <Flex width="auto" mobileGap={5}>
+                        {val.name.map((item) => (
+                          <Text paletteColor="Black" mobileTypo="Body1">
+                            {item}
+                          </Text>
+                        ))}
+                      </Flex>
+                    </Flex>
+                  ))}
+                </TeamWrapper>
+                <Flex
+                  width="auto"
+                  height="auto"
+                  margin="20px 0 0 0"
+                  mobileGap={8}
+                >
+                  {projectInfo?.projectUrls.map((url) => (
+                    <a href={url.linkUrl}>
+                      <Shortcut>{url.category}</Shortcut>
+                    </a>
+                  ))}
+                </Flex>
+              </Flex>
+            </Mobile>
 
-        {projectInfo && (
-          <DetailImg
-            alt="mainImage"
-            src={projectInfo.projectImages[1].imageUrl}
-            isMain={false}
-          />
-        )}
-      </Container>
-    </div>
+            {projectInfo && (
+              <DetailImageContainer>
+                <DetailImage
+                  alt="mainImage"
+                  src={projectInfo.projectImages[1].imageUrl}
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </DetailImageContainer>
+            )}
+          </Container>
+        </>
+      )}
+    </Flex>
   );
 };
 
 export default DetailModal;
+
+const containerCss = () => css`
+  z-index: 15;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 100px 0;
+
+  @media (max-width: 1023px) {
+    padding: 64px 22px;
+  }
+`;
 
 export const backCss = () => css`
   position: fixed;
@@ -153,23 +201,15 @@ export const backCss = () => css`
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 20;
-
-  display: flex;
-  justify-content: center;
-
-  padding: 100px 0;
+  z-index: 10;
 
   background-color: rgba(0, 0, 0, 0.5);
-
-  @media (max-width: 1023px) {
-    padding: 64px 22px;
-  }
 `;
 
 const iconCss = () => css`
   position: relative;
   right: -1070px;
+  z-index: 15;
 
   @media (max-width: 1023px) {
     position: fixed;
@@ -178,14 +218,12 @@ const iconCss = () => css`
   }
 `;
 
-const Container = styled(Flex)`
+const Container = styled.div`
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 1032px;
   height: auto;
+  max-height: 85vh;
 
   border-radius: 20px;
   background: #fff;
@@ -193,21 +231,40 @@ const Container = styled(Flex)`
   /* 팝업창그림자 */
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
 
-  overflow-x: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
-  overscroll-behavior: none;
+  overflow: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
 
   ::-webkit-scrollbar {
     display: none;
   }
+
+  z-index: 15;
 
   @media (max-width: 1023px) {
     width: 100%;
   }
 `;
 
-const DetailImg = styled.img<{ isMain: boolean }>`
-  width: 100%;
+const DetailThumbnailImageContainer = styled.div`
+  width: 1032px;
+  height: 541px;
+  position: relative;
   border-radius: 20px;
+  aspect-ratio: 1032 / 541;
+
+  ${media.mobile} {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const DetailImage = styled(Image)`
+  position: relative !important;
+  height: auto !important;
+`;
+
+const DetailImageContainer = styled.div`
+  width: 100%;
+  position: relative;
 `;
 
 const TeamWrapper = styled.div`
