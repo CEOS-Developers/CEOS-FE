@@ -10,8 +10,10 @@ import { Button, Text } from 'packages/ui';
 import { adminManageUserApi } from 'packages/utils';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 export default function ManageUser() {
+  const router = useRouter();
   const { setValue, watch, getValues } = useForm();
   const [managementId, setManagementId] = useState(0);
 
@@ -29,9 +31,21 @@ export default function ManageUser() {
     isSuccess,
     isFetching,
     refetch: getManagement,
-  } = useQuery(['applicantData', pagination.page], () =>
-    adminManageUserApi.GET_MANAGEMENT(pagination.page - 1, pagination.pageSize),
+  } = useQuery(
+    ['applicantData', pagination.page],
+    () =>
+      adminManageUserApi.GET_MANAGEMENT(
+        pagination.page - 1,
+        pagination.pageSize,
+      ),
+    {
+      onError: (err: any) => {
+        alert(err.response.data.reason);
+        router.push('/applyStatement');
+      },
+    },
   );
+
   // 운영진 삭제
   const { mutate: deleteManagement } = useMutation(
     () => adminManageUserApi.DELETE_MANAGEMENT(managementId),

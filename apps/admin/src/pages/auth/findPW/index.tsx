@@ -25,7 +25,7 @@ export default function findPW() {
       onSuccess: (res: { status: number }) => {
         res.status == 201 ? setSentEmail(true) : setSentEmail(false);
       },
-      onError: (err: any) => alert(err.response.data.reason),
+      onError: () => alert('입력 정보를 다시 확인해주세요'),
     });
   };
 
