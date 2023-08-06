@@ -133,7 +133,7 @@ export default function Application() {
       questionIndex:
         commonQuestions[commonQuestions.length - 1].questionIndex + 1,
       question: '',
-      multiline: false,
+      multiline: true,
       questionDetail: [],
     });
   };
@@ -142,7 +142,7 @@ export default function Application() {
     appendPartQuestions({
       questionIndex: partQuestions[partQuestions.length - 1].questionIndex + 1,
       question: '',
-      multiline: false,
+      multiline: true,
       questionDetail: [],
     });
   };
@@ -231,7 +231,12 @@ export default function Application() {
       [PART_MAP[allPartQuestions.selectedPart]]: [
         ...getValues('partQuestions'),
       ],
-      times: getValues('times'),
+      times: getValues('times').map((times) => {
+        return {
+          date: times.date.replace(/-/g, '/'),
+          durations: times.durations,
+        };
+      }),
     });
   };
 
