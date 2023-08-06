@@ -38,7 +38,11 @@ const Project = () => {
   };
 
   return (
-    <div>
+    <div
+      css={css`
+        position: relative;
+      `}
+    >
       <Flex direction="column" data-section="White">
         <Title
           title="PROJECT"
