@@ -58,7 +58,7 @@ const Apply = () => {
   }) as RecruitApplyFormInterface;
 
   const { data, isLoading, isSuccess } = useQuery<RecruitApplyResponse>(
-    ['ceos', 'recuit', 'apply'],
+    ['ceos', 'recruit', 'apply'],
     () => recruitApi.GET_QUESTION(),
   );
 
@@ -123,7 +123,6 @@ const Apply = () => {
     'otDate',
     'demodayDate',
     'otherActivities',
-
     'commonAnswers',
     'partAnswers',
   ] as const;
@@ -261,7 +260,7 @@ export const getServerSideProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'recuit', 'apply'], () => {
+    await queryClient.prefetchQuery(['ceos', 'recruit', 'apply'], () => {
       recruitApi.GET_QUESTION;
     });
 
