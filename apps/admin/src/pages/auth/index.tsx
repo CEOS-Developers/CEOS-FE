@@ -66,7 +66,7 @@ export default function SignIn() {
     if (appCookies['LOGIN_EXPIRES']) return;
   }, []);
 
-  return !appCookies['LOGIN_EXPIRES'] ? (
+  return !login ? (
     <p>
       <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
