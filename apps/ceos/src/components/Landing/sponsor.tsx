@@ -37,6 +37,7 @@ export const Sponsors = () => {
       css={css`
         width: 100vw;
         padding: 0px 22px;
+        user-select: none;
       `}
     >
       <Space height={80} mobileHeight={60} />
