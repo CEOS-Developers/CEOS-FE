@@ -12,6 +12,13 @@ interface ModalProps {
   setClose: () => void;
 }
 
+const LINK: Record<string, string> = {
+  서비스: 'Link',
+  깃허브: 'GiuHub',
+  비핸스: 'Behance',
+  인스타: 'Instagram',
+};
+
 const DetailModal = ({ id, setClose }: ModalProps) => {
   const { data, isLoading, isSuccess } = useQuery<DetailProjectInterface>(
     ['ceos', 'project', 'modal', id],
@@ -24,8 +31,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   const Part: Record<PartKey, { eng: string; name: string[] }> = {
     기획: { eng: 'PRODUCT', name: [] as string[] },
     디자인: { eng: 'DESIGN', name: [] as string[] },
-    프론트엔드: { eng: 'FRONT_END', name: [] as string[] },
-    백엔드: { eng: 'BACK_END', name: [] as string[] },
+    프론트엔드: { eng: 'FRONT-END', name: [] as string[] },
+    백엔드: { eng: 'BACK-END', name: [] as string[] },
   };
 
   projectInfo?.participants.forEach((person) => {
@@ -52,10 +59,10 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             {projectInfo && (
               <DetailThumbnailImageContainer>
                 <Image
+                  width={500}
+                  height={500}
                   alt="mainImage"
                   src={projectInfo.projectImages[0].imageUrl}
-                  layout="fill"
-                  objectFit="cover"
                   priority
                 />
               </DetailThumbnailImageContainer>
@@ -83,7 +90,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   >
                     {projectInfo?.projectUrls.map((url) => (
                       <a href={url.linkUrl}>
-                        <Shortcut>{url.category}</Shortcut>
+                        <Shortcut>{LINK[url.category]}</Shortcut>
                       </a>
                     ))}
                   </Flex>
@@ -147,7 +154,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 >
                   {projectInfo?.projectUrls.map((url) => (
                     <a href={url.linkUrl}>
-                      <Shortcut>{url.category}</Shortcut>
+                      <Shortcut>{LINK[url.category]}</Shortcut>
                     </a>
                   ))}
                 </Flex>
