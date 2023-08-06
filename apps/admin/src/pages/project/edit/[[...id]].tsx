@@ -203,9 +203,7 @@ export default function ProjectDetail() {
             {watch('participants').map((participant, idx) =>
               participant.part === '기획' ? (
                 <TextField
-                  {...register(`participants.${idx}.name`, {
-                    required: true,
-                  })}
+                  {...register(`participants.${idx}.name`)}
                   key={idx}
                   label={`기획 팀원${idx + 1}`}
                   width={152}
@@ -219,9 +217,7 @@ export default function ProjectDetail() {
             {watch('participants').map((participant, idx) =>
               participant.part === '디자인' ? (
                 <TextField
-                  {...register(`participants.${idx}.name`, {
-                    required: true,
-                  })}
+                  {...register(`participants.${idx}.name`)}
                   key={idx}
                   label={`디자인 팀원${idx - 1}`}
                   width={152}
@@ -238,9 +234,7 @@ export default function ProjectDetail() {
             {watch('participants').map((participant, idx) =>
               participant.part === '프론트엔드' ? (
                 <TextField
-                  {...register(`participants.${idx}.name`, {
-                    required: true,
-                  })}
+                  {...register(`participants.${idx}.name`)}
                   key={idx}
                   label={`프론트 팀원${idx - 3}`}
                   width={152}
@@ -254,9 +248,7 @@ export default function ProjectDetail() {
             {watch('participants').map((participant, idx) =>
               participant.part === '백엔드' ? (
                 <TextField
-                  {...register(`participants.${idx}.name`, {
-                    required: true,
-                  })}
+                  {...register(`participants.${idx}.name`)}
                   key={idx}
                   label={`백엔드 팀원${idx - 5}`}
                   width={152}
