@@ -56,6 +56,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             otDate: passCheck.data.otDate,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
+
+          props.toggleModal();
         } catch (e) {
           console.log(e);
         }
@@ -78,6 +80,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             otDate: passCheck.data.otDate,
             attendanceStatus: passCheck.data.attendanceStatus,
           });
+
+          props.toggleModal();
         } catch (e) {
           console.log(e);
         }
