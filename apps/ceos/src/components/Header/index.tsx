@@ -10,7 +10,7 @@ import { useModal, useWindowTabletResize } from '@ceos-fe/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { HeaderState } from '@ceos/state';
+import { HeaderState, ScrollState } from '@ceos/state';
 
 export interface HeaderProps {
   backColor: KeyOfPalette;
@@ -18,7 +18,7 @@ export interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
   const { backColor } = props;
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useRecoilState(ScrollState);
   const { isOpen, modalRef, toggleModal } = useModal();
   const router = useRouter();
   const [, setBackColor] = useRecoilState(HeaderState);
@@ -32,7 +32,7 @@ export const Header = (props: HeaderProps) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  });
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('[data-section]'));
