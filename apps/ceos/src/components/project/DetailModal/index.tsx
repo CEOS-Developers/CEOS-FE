@@ -14,7 +14,7 @@ interface ModalProps {
 
 const DetailModal = ({ id, setClose }: ModalProps) => {
   const { data, isLoading, isSuccess } = useQuery<DetailProjectInterface>(
-    ['ceos', 'project', 'modal'],
+    ['ceos', 'project', 'modal', id],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
 
