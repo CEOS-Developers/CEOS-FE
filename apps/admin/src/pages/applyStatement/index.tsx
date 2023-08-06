@@ -229,7 +229,7 @@ export default function ApplyStatement() {
       const url = window.URL.createObjectURL(new Blob([getExceldata.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `지원현황_${Date.now()}.xlsx`);
+      link.setAttribute('download', `ApplicationList.xlsx`);
       document.body.appendChild(link);
       link.click();
     }
