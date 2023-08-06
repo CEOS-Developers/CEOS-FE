@@ -1,7 +1,7 @@
-import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
+import React from 'react';
 
 export interface ProjectImageProps {
   category: string;
@@ -30,7 +30,7 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <Wrapper>
-      <ProjectImg src={thumbnailImage.imageUrl} className="ceos" />
+      <CardImg src={thumbnailImage.imageUrl} className="ceos" />
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -61,7 +61,7 @@ export const AdminProjectCard = ({
   return (
     <RelativeContainer width={328} height={275}>
       <AbsoluteFlex direction="column">
-        <ProjectImg src={thumbnailImage.imageUrl} />
+        <CardImg src={thumbnailImage.imageUrl} />
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -115,7 +115,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ProjectImg = styled.img`
+export const CardImg = styled.img`
   border-radius: 16px;
   width: 100%;
   height: 184px;
@@ -133,7 +133,7 @@ const ProjectImg = styled.img`
   }
 `;
 
-const ExplainBox = styled.div`
+export const ExplainBox = styled.div`
   width: 100%;
   margin-top: -20px;
   z-index: -1;
@@ -145,16 +145,14 @@ const ExplainBox = styled.div`
 
   animation: slide-in-project-card 0.1s ease-in;
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     padding: 24px 20px 20px;
     margin-top: -10px;
     border-radius: 10px;
 
-    width: 100%;
     height: auto;
     aspect-ratio: 346 / 89;
-  }
-  @media (min-width: 1023px) {
+
     .ceos {
       box-shadow: ${theme.shadow.Card.Black};
     }

@@ -1,7 +1,9 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { Text, Flex, RelativeContainer, AbsoluteFlex } from '../common';
+import React from 'react';
+import { CardImg } from './ProjectCard';
 
 export interface ActivityCardProps {
   id: number;
@@ -23,8 +25,8 @@ export const ActivityCard = ({
   ...props
 }: ActivityCardProps) => {
   return (
-    <Flex direction="column" height="auto" padding="">
-      <ActivityImg src={imageUrl} width={328} height={184} />
+    <Wrapper>
+      <CardImg src={imageUrl} />
 
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -34,7 +36,7 @@ export const ActivityCard = ({
           {content}
         </Text>
       </Content>
-    </Flex>
+    </Wrapper>
   );
 };
 
@@ -50,7 +52,7 @@ export const AdminActivityCard = ({
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ActivityImg src={imageUrl} width={328} height={184} />
+        <CardImg src={imageUrl} />
         <Content>
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -73,13 +75,15 @@ export const AdminActivityCard = ({
   );
 };
 
-const ActivityImg = styled.img`
-  border-radius: 16px;
-  object-fit: cover;
-  background-color: ${theme.palette.Gray5};
+const Wrapper = styled(Flex)`
+  flex-direction: column;
+  height: auto;
 
-  @media (max-width: 768px) {
+  ${media.mobile} {
+    max-width: 400px;
+
     width: 100%;
+    height: auto;
   }
 `;
 
@@ -95,7 +99,7 @@ const Content = styled.div`
 
   background-color: ${theme.palette.Gray1};
 
-  @media (max-width: 768px) {
+  ${media.mobile} {
     width: 100%;
   }
 `;
