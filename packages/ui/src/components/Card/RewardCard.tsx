@@ -8,11 +8,12 @@ import { css } from '@emotion/react';
 interface AwardsInterface {
   generation: number;
   content: string;
-  startDate: string;
+  startDate?: string;
 }
 
 export interface RewardCardProps {
   generation: number;
+  startDate?: string;
   projects?: { name: string; description: string; generation?: number }[];
   awards?: AwardsInterface[];
 }
@@ -24,6 +25,7 @@ export interface AdminRewardCardProps extends RewardCardProps {
 
 export const RewardCard = ({
   generation = 0,
+  startDate,
   projects,
   awards,
 }: RewardCardProps) => {
@@ -38,7 +40,7 @@ export const RewardCard = ({
               {generation}기
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
-              {/* {awards?.startDate} */}
+              {startDate}
             </Text>
           </TitleWrapper>
           <Flex direction="column" webGap={10}>
@@ -95,7 +97,7 @@ export const RewardCard = ({
               {generation}기
             </Text>
             <Text mobileTypo="Body2" paletteColor="Gray5">
-              {/* {time} */}
+              {startDate}
             </Text>
           </TitleWrapper>
           {projects?.map((pro, idx) => (
@@ -153,6 +155,7 @@ export const RewardCard = ({
 
 export const AdminRewardCard = ({
   generation = 0,
+  startDate,
   projects,
   awards,
   onClickRemove,
@@ -167,7 +170,7 @@ export const AdminRewardCard = ({
             {`${generation}기`}
           </Text>
           <Text webTypo="Label3" paletteColor="Gray5">
-            {'2022.03~'}
+            {startDate}
           </Text>
         </TitleWrapper>
         <Flex
