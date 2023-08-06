@@ -135,7 +135,6 @@ export default function Application() {
       question: '',
       multiline: false,
       questionDetail: [],
-      questionId: -1,
     });
   };
 
@@ -145,7 +144,6 @@ export default function Application() {
       question: '',
       multiline: false,
       questionDetail: [],
-      questionId: -1,
     });
   };
 
