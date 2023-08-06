@@ -110,7 +110,7 @@ const BUTTON_TYPO = {
 /**
  * @default button: (button 태그 속성 그대로)
  *
- * @param varient 버튼 종류 'default' | 'glass' | 'white' | 'admin' | 'admin_stroke' | 'admin_navy'
+ * @param variant 버튼 종류 'default' | 'glass' | 'white' | 'admin' | 'admin_stroke' | 'admin_navy'
  * @param webWidth? web 버튼 너비
  * @param mobileWidth? mobile 버튼 너비 (default 100%)
  */

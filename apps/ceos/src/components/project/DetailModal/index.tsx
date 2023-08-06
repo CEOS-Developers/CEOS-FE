@@ -276,7 +276,7 @@ const DetailThumbnailImageContainer = styled.div`
 `;
 
 const DetailImage = styled(Image)`
-  position: relative !important;
+  /* position: relative !important; */
   height: auto !important;
 `;
 

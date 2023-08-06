@@ -73,7 +73,7 @@ export const TextField = forwardRef<
               fontColor={fontColor}
             />
           ) : (
-            <InputContainer>
+            <InputContainer fontColor={fontColor}>
               <StyledInput
                 {...props}
                 ref={ref as ForwardedRef<HTMLInputElement>}
@@ -133,9 +133,22 @@ const StyledHelperTextBox = styled.div<{
           `};
   }
 `;
-const InputContainer = styled.div`
+const InputContainer = styled.div<{
+  fontColor: string;
+}>`
   position: relative;
   width: 100%;
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px ${theme.palette.Gray1} inset;
+    box-shadow: 0 0 0 1000px ${theme.palette.Gray1} inset;
+    //배경색
+    -webkit-text-fill-color: ${({ fontColor }) => fontColor};
+    //글자색
+  }
 `;
 const StyledInput = styled.input<{
   isAdmin: boolean;
