@@ -2,8 +2,7 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { media, theme } from '../../styles';
 import { Text, Flex, RelativeContainer, AbsoluteFlex } from '../common';
-import React from 'react';
-import { CardImg } from './ProjectCard';
+import Image from 'next/image';
 
 export interface ActivityCardProps {
   id: number;
@@ -26,7 +25,12 @@ export const ActivityCard = ({
 }: ActivityCardProps) => {
   return (
     <Wrapper>
-      <CardImg src={imageUrl} />
+      <ActivityImage
+        alt={`activity ${name} image`}
+        src={imageUrl}
+        width={328}
+        height={184}
+      />
 
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -52,7 +56,12 @@ export const AdminActivityCard = ({
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <CardImg src={imageUrl} />
+        <ActivityImage
+          alt={`activity ${name} image`}
+          src={imageUrl}
+          width={328}
+          height={184}
+        />
         <Content>
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -85,6 +94,14 @@ const Wrapper = styled(Flex)`
     width: 100%;
     height: auto;
   }
+`;
+
+const ActivityImage = styled(Image)`
+  border-radius: 16px;
+  width: 100%;
+  height: 184px;
+  object-fit: cover;
+  background-color: ${theme.palette.Gray5};
 `;
 
 const Content = styled.div`
