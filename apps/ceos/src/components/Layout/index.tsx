@@ -10,7 +10,7 @@ import { css } from '@emotion/react';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { data, isFetching, isSuccess } = useQuery(['generation'], () =>
-    recruitApi.GER_RECRUITMENTS(),
+    recruitApi.GET_RECRUITMENTS(),
   );
 
   const setGeneration = useSetRecoilState<number>(generationState);

@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
 import {
+  DateProps,
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
+  RecruitStudyResponse,
 } from '@ceos/components/recruit/interface';
 import { useEffect, useState } from 'react';
 import Information from '@ceos/components/recruit/Information';
@@ -19,8 +21,41 @@ import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
+import { useRouter } from 'next/router';
 
 const Apply = () => {
+  /* 정해진 기간 아닐 때, 접근 불가 로직 */
+  const { data: dateData } = useQuery<RecruitStudyResponse>(
+    ['ceos', 'recruit', 'study'],
+    () => recruitApi.GET_RECRUITMENTS(),
+  );
+
+  const date = {
+    startDateDoc: dateData ? new Date(dateData.startDateDoc) : '',
+    endDateDoc: dateData
+      ? new Date(new Date(dateData.endDateDoc).setHours(24))
+      : '',
+  } as DateProps;
+
+  const curDate = new Date();
+
+  function isValid() {
+    return date.startDateDoc <= curDate && curDate <= date.endDateDoc
+      ? true
+      : false;
+  }
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkValid = async () => {
+      if (!isValid()) {
+        window.location.href = '/'; // 페이지로 리로드
+      }
+    };
+    checkValid();
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [submitBtn, setSubmitBtn] = useState(false);
