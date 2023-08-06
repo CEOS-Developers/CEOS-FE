@@ -28,8 +28,7 @@ export default function findID() {
         status: number;
         data: { username: React.SetStateAction<string> };
       }) => (res.status == 201 ? setId(res.data.username) : setId('')),
-      // onError: (err: { response: { data: { reason: string } } }) =>
-      //   alert(err.response.data.reason),
+      onError: () => alert('입력 정보를 다시 확인해주세요'),
     });
   };
 
