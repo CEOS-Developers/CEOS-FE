@@ -56,3 +56,26 @@ export interface PassDataInterface {
   openChatUrl: string;
   duration: string;
 }
+
+export interface RecruitStudyResponse {
+  generation: number;
+  prodStudyUrl: string;
+  designStudyUrl: string;
+  devStudyUrl: string;
+  startDateDoc: string;
+  endDateDoc: string;
+  resultDateDoc: string;
+  startDateInterview: string;
+  endDateInterview: string;
+  resultDateFinal: string;
+  openChatUrl: string;
+  otDate: string;
+  demoDayDate: string;
+}
+
+export interface DateProps {
+  startDateDoc: Date;
+  endDateDoc: Date;
+  resultDateDoc: Date;
+  resultDateFinal: Date;
+}

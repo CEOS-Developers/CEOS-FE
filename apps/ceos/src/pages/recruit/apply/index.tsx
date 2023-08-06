@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
 import {
+  DateProps,
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
+  RecruitStudyResponse,
 } from '@ceos/components/recruit/interface';
 import { useEffect, useState } from 'react';
 import Information from '@ceos/components/recruit/Information';
@@ -19,7 +21,6 @@ import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
-import { DateProps, RecruitStudyResponse } from '..';
 import { useRouter } from 'next/router';
 
 const Apply = () => {
