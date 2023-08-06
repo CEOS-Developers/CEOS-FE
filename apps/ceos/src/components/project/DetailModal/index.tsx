@@ -59,10 +59,10 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             {projectInfo && (
               <DetailThumbnailImageContainer>
                 <Image
-                  width={500}
-                  height={500}
                   alt="mainImage"
                   src={projectInfo.projectImages[0].imageUrl}
+                  layout="fill"
+                  objectFit="cover"
                   priority
                 />
               </DetailThumbnailImageContainer>
