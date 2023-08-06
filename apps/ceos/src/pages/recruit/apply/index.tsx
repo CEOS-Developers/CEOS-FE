@@ -227,10 +227,6 @@ const Apply = () => {
   };
 
   const onSubmit = () => {
-    if (!isAllAnswer()) {
-      setError('모든 문항에 답변해주세요!!');
-      return;
-    }
     const [birth, email, phoneNumber, semestersLeftNumber] = [
       getValues('birth'),
       getValues('email'),
@@ -290,7 +286,7 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
-        <Button variant="default" onClick={onSubmit}>
+        <Button variant="default" disabled={!isAllAnswer()} onClick={onSubmit}>
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
