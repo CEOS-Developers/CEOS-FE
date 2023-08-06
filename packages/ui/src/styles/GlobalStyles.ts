@@ -4,6 +4,7 @@ import emotionReset from 'emotion-reset';
 export const globalStyle = css`
   ${emotionReset}
   body {
+    min-height: 100vh;
     font-family: 'Pretendard';
   }
   button {
