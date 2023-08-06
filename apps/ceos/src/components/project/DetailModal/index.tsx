@@ -34,8 +34,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   });
 
   return (
-    <div css={backCss}>
-      {!isLoading && isSuccess ? (
+    <Flex css={containerCss}>
+      <div css={backCss} onClick={setClose}></div>
+      {!isLoading && isSuccess && (
         <>
           <Desktop css={iconCss} onClick={setClose}>
             <WhiteCloseIcon />
@@ -166,14 +167,33 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             )}
           </Container>
         </>
-      ) : (
-        <></>
       )}
-    </div>
+    </Flex>
   );
 };
 
 export default DetailModal;
+
+const containerCss = () => css`
+  z-index: 15;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 100px 0;
+
+  @media (max-width: 1023px) {
+    padding: 64px 22px;
+  }
+`;
 
 export const backCss = () => css`
   position: fixed;
@@ -181,23 +201,15 @@ export const backCss = () => css`
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 20;
-
-  display: flex;
-  justify-content: center;
-
-  padding: 100px 0;
+  z-index: 10;
 
   background-color: rgba(0, 0, 0, 0.5);
-
-  @media (max-width: 1023px) {
-    padding: 64px 22px;
-  }
 `;
 
 const iconCss = () => css`
   position: relative;
   right: -1070px;
+  z-index: 15;
 
   @media (max-width: 1023px) {
     position: fixed;
@@ -211,6 +223,7 @@ const Container = styled.div`
 
   width: 1032px;
   height: auto;
+  max-height: 85vh;
 
   border-radius: 20px;
   background: #fff;
@@ -218,12 +231,13 @@ const Container = styled.div`
   /* 팝업창그림자 */
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
 
-  overflow-x: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
-  overscroll-behavior: none;
+  overflow: auto; /* 수정: 가로 영역을 벗어나면 스크롤 표시 */
 
   ::-webkit-scrollbar {
     display: none;
   }
+
+  z-index: 15;
 
   @media (max-width: 1023px) {
     width: 100%;

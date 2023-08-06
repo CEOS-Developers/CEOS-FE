@@ -24,7 +24,7 @@ export const ActivityCard = ({
   ...props
 }: ActivityCardProps) => {
   return (
-    <Flex direction="column" height="auto">
+    <Wrapper>
       <ActivityImage
         alt={`activity ${name} image`}
         src={imageUrl}
@@ -39,7 +39,7 @@ export const ActivityCard = ({
           {content}
         </Text>
       </Content>
-    </Flex>
+    </Wrapper>
   );
 };
 
@@ -61,7 +61,6 @@ export const AdminActivityCard = ({
           width={328}
           height={184}
         />
-
         <Content>
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -84,14 +83,19 @@ export const AdminActivityCard = ({
   );
 };
 
+const Wrapper = styled(Flex)`
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+`;
+
 const ActivityImage = styled(Image)`
   border-radius: 16px;
   background-color: ${theme.palette.Gray5};
   object-fit: cover;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 const Content = styled.div`
@@ -106,7 +110,7 @@ const Content = styled.div`
 
   background-color: ${theme.palette.Gray1};
 
-  @media (max-width: 768px) {
+  ${media.mobile} {
     width: 100%;
   }
 `;
