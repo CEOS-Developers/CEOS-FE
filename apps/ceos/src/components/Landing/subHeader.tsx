@@ -101,6 +101,20 @@ const Wrapper = styled.div`
       grid-template-rows: auto 1fr;
       gap: 14px;
     }
+
+    @keyframes rotate360 {
+      0% {
+        transform: rotateY(0deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+
+    .diamond {
+      animation: rotate360 2s linear infinite;
+      transform-origin: center center;
+    }
   }
 `;
 
