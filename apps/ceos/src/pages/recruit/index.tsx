@@ -25,7 +25,7 @@ import NonPass from '@ceos/components/recruit/nonpass';
 import DocPass from '@ceos/components/recruit/docpass';
 import FinPass from '@ceos/components/recruit/finpass';
 
-interface RecruitStudyResponse {
+export interface RecruitStudyResponse {
   generation: number;
   prodStudyUrl: string;
   designStudyUrl: string;
@@ -51,7 +51,7 @@ export interface DateProps {
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
-    () => recruitApi.GER_RECRUITMENTS(),
+    () => recruitApi.GET_RECRUITMENTS(),
   );
   const [passData, setPassData] = useState<PassDataInterface>({
     uuid: '',
@@ -78,6 +78,7 @@ const Recruit = () => {
     content: ['CEOS 프로젝트', '보러가기'],
     link: '/project',
   };
+
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
     endDateDoc: new Date(data ? data.endDateDoc : ''),
@@ -214,7 +215,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
-      recruitApi.GER_RECRUITMENTS;
+      recruitApi.GET_RECRUITMENTS;
     });
 
     return {
