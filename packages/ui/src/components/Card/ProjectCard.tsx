@@ -1,7 +1,8 @@
+import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
 import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
-import React from 'react';
+import Image from 'next/image';
 
 export interface ProjectImageProps {
   category: string;
@@ -30,7 +31,16 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <Wrapper>
-      <CardImg src={thumbnailImage.imageUrl} className="ceos" />
+      <ProjectImageContainer>
+        <ProjectImage
+          alt={`project ${name} image`}
+          src={thumbnailImage.imageUrl}
+          className="ceos"
+          layout="fill"
+          objectFit="cover"
+          loading="lazy"
+        />
+      </ProjectImageContainer>
       <ExplainBox className="ceos-hover">
         <Row className="ceos-hover">
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -61,7 +71,16 @@ export const AdminProjectCard = ({
   return (
     <RelativeContainer width={328} height={275}>
       <AbsoluteFlex direction="column">
-        <CardImg src={thumbnailImage.imageUrl} />
+        <ProjectImageContainer>
+          <ProjectImage
+            alt={`project ${name} image`}
+            src={thumbnailImage.imageUrl}
+            className="ceos"
+            layout="fill"
+            objectFit="contain"
+            loading="lazy"
+          />
+        </ProjectImageContainer>
         <ExplainBox>
           <Row>
             <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
@@ -115,25 +134,26 @@ const Wrapper = styled.div`
   }
 `;
 
-export const CardImg = styled.img`
-  border-radius: 16px;
+const ProjectImageContainer = styled.div`
   width: 100%;
   height: 184px;
-  object-fit: cover;
-  background-color: ${theme.palette.Gray5};
+  position: relative;
 
   ${media.mobile} {
-    &.ceos {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 346 / 194;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 346 / 194;
 
-      border-radius: 10px;
-    }
+    border-radius: 10px;
   }
 `;
 
-export const ExplainBox = styled.div`
+const ProjectImage = styled(Image)`
+  border-radius: 16px;
+  background-color: ${theme.palette.Gray5};
+`;
+
+const ExplainBox = styled.div`
   width: 100%;
   margin-top: -20px;
   z-index: -1;
@@ -145,14 +165,16 @@ export const ExplainBox = styled.div`
 
   animation: slide-in-project-card 0.1s ease-in;
 
-  ${media.mobile} {
+  @media (max-width: 1023px) {
     padding: 24px 20px 20px;
     margin-top: -10px;
     border-radius: 10px;
 
+    width: 100%;
     height: auto;
     aspect-ratio: 346 / 89;
-
+  }
+  @media (min-width: 1023px) {
     .ceos {
       box-shadow: ${theme.shadow.Card.Black};
     }

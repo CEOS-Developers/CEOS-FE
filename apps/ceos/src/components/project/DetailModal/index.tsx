@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
-import { DetailPrejectInterface, projectApi } from 'packages/utils';
+import { DetailProjectInterface, projectApi } from 'packages/utils';
 import { Shortcut } from '@ceos/components/Shortcut';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
 
@@ -12,7 +12,7 @@ interface ModalProps {
 }
 
 const DetailModal = ({ id, setClose }: ModalProps) => {
-  const { data, isLoading, isSuccess } = useQuery<DetailPrejectInterface>(
+  const { data, isLoading, isSuccess } = useQuery<DetailProjectInterface>(
     ['ceos', 'project', 'modal'],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
