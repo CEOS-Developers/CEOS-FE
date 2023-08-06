@@ -6,11 +6,10 @@ import {
   EmptyCard,
   media,
 } from '@ceos-fe/ui';
-import { css } from '@emotion/react';
 import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
-import { ListCss } from '@ceos/styles/landing';
+import { ListCss, MentorListCss } from '@ceos/styles/landing';
 import Footer from '@ceos/components/Footer';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
@@ -91,18 +90,7 @@ const Management = () => {
 
   return (
     <div data-section="White">
-      <Flex
-        direction="column"
-        align="center"
-        css={css`
-          margin: 0 0 100px 0px;
-
-          @media (max-width: 1023px) {
-            margin-bottom: 60px;
-          }
-        `}
-        data-section="White"
-      >
+      <Flex direction="column" align="center" data-section="White">
         <Title
           title="MANAGEMENT"
           explain={[
@@ -125,13 +113,13 @@ const Management = () => {
           ))}
         </div>
         <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-        <div css={ListCss}>
+        <div css={MentorListCss}>
           {mentors?.map((mentor: ManagerInterface) => (
             <MentorCard key={mentor.id} mentorCard={mentor} />
           ))}
         </div>
+        <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
-      <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
   );
 };

@@ -4,10 +4,18 @@ import { GlassBoxCss } from '@ceos/components/GlassBox';
 import styled from '@emotion/styled';
 import { theme } from 'packages/ui';
 import { PassDataInterface } from '../interface';
+import { useEffect } from 'react';
+import { ScrollState } from '@ceos/state';
+import { useRecoilState } from 'recoil';
 
 //이름, step
 
 const NonPass = ({ props }: { props: PassDataInterface }) => {
+  const [, setIsScrolled] = useRecoilState(ScrollState);
+
+  useEffect(() => {
+    setIsScrolled(true);
+  }, []);
   return (
     <div css={NonPassMainCss} data-section="Blue">
       <Container>
