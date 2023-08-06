@@ -57,10 +57,8 @@ const Project = () => {
           webGap={24}
           mobileGap={24}
           css={css`
-            width: 1032px;
-            ${media.mobile} {
-              width: 100%;
-            }
+            width: 100%;
+            max-width: 1032px;
           `}
         >
           <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>
