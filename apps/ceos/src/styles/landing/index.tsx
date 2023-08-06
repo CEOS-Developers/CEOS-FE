@@ -137,6 +137,7 @@ export const MentorListCss = css`
 
   ${media.mobile} {
     width: 100vw;
+    margin-top: 36px;
     margin-bottom: 212px;
 
     box-sizing: border-box;
