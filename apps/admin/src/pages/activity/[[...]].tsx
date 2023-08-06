@@ -22,6 +22,7 @@ export default function Activity() {
     watch,
     register,
     setValue,
+    getValues,
     handleSubmit,
     formState: { isValid },
   } = useForm();
@@ -171,7 +172,7 @@ export default function Activity() {
               webWidth={328}
               webHeight={46}
               mobileHeight={46}
-              disabled={!isValid}
+              disabled={!(isValid && getValues('imageUrl') !== '')}
               onClick={handleSubmit(onSubmit)}
             >
               저장하기

@@ -59,6 +59,7 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
                 onClick={() => {
                   setImage(undefined);
                   setUrl('');
+                  setValue(label, '');
                 }}
                 direction="column"
                 webGap={8}

@@ -181,6 +181,7 @@ export default function ProjectDetail() {
               isAdmin
             />
             <TextField
+              type="number"
               {...register('generation', {
                 required: true,
               })}
@@ -218,7 +219,7 @@ export default function ProjectDetail() {
                 <TextField
                   {...register(`participants.${idx}.name`)}
                   key={idx}
-                  label={`디자인 팀원${idx + 1}`}
+                  label={`디자인 팀원${idx - 1}`}
                   width={152}
                   isAdmin
                   placeholder="이름을 입력하세요."
@@ -235,7 +236,7 @@ export default function ProjectDetail() {
                 <TextField
                   {...register(`participants.${idx}.name`)}
                   key={idx}
-                  label={`프론트 팀원${idx + 1}`}
+                  label={`프론트 팀원${idx - 3}`}
                   width={152}
                   isAdmin
                   placeholder="이름을 입력하세요."
@@ -249,7 +250,7 @@ export default function ProjectDetail() {
                 <TextField
                   {...register(`participants.${idx}.name`)}
                   key={idx}
-                  label={`백엔드 팀원${idx + 1}`}
+                  label={`백엔드 팀원${idx - 5}`}
                   width={152}
                   isAdmin
                   placeholder="이름을 입력하세요."
@@ -382,7 +383,13 @@ export default function ProjectDetail() {
           webHeight={46}
           mobileHeight={46}
           onClick={handleSaveProject}
-          disabled={!isValid}
+          disabled={
+            !(
+              isValid &&
+              getValues('projectImages.0.imageUrl') &&
+              getValues('projectImages.1.imageUrl')
+            )
+          }
           css={css`
             flex-shrink: 0;
           `}

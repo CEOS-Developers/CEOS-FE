@@ -52,7 +52,7 @@ const Activity = () => {
             <Title
               title="ACTIVITY"
               explain={[
-                'ceos에서는 it 창업과 관련된',
+                'CEOS에서는 it 창업과 관련된',
                 '다양한 활동을 진행하고 있습니다.',
               ]}
             />
@@ -60,7 +60,13 @@ const Activity = () => {
             <GridContainer>
               {activityList &&
                 activityList.map((activity, idx) => (
-                  <ActivityCard key={idx} activityCard={activity} />
+                  <ActivityCard
+                    key={idx}
+                    id={activity.id}
+                    name={activity.name}
+                    imageUrl={activity.imageUrl}
+                    content={activity.content}
+                  />
                 ))}
             </GridContainer>
           </Flex>
@@ -71,17 +77,28 @@ const Activity = () => {
       <Mobile>
         <Flex direction="column" data-section="White">
           <Title
-            title="Activity"
+            title="ACTIVITY"
             explain={[
-              'ceos에서는 it 창업과 관련된',
+              'CEOS에서는 it 창업과 관련된',
               '다양한 활동을 진행하고 있습니다.',
             ]}
           />
           <TopMargin />
-          <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
+          <Flex
+            direction="column"
+            mobileGap={20}
+            margin="0 0 36px 0"
+            padding="0 30px"
+          >
             {activityList?.map((activity, idx) => {
               return (
-                <ActivityCard key={`activity_${idx}`} activityCard={activity} />
+                <ActivityCard
+                  key={`activity_${idx}`}
+                  id={activity.id}
+                  name={activity.name}
+                  imageUrl={activity.imageUrl}
+                  content={activity.content}
+                />
               );
             })}
           </Flex>
