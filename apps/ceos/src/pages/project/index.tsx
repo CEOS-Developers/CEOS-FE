@@ -1,4 +1,4 @@
-import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
+import { Flex, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
