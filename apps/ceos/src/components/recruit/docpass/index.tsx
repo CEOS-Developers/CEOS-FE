@@ -2,15 +2,22 @@ import { css } from '@emotion/react';
 import { Text, theme } from '@ceos-fe/ui';
 import { DocPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { PassDataInterface } from '../interface';
+import { useRecoilState } from 'recoil';
+import { ScrollState } from '@ceos/state';
 
 //이름, step
 
 const DocPass = ({ props }: { props: PassDataInterface }) => {
   const [errorText, setErrorText] = useState('');
+  const [, setIsScrolled] = useRecoilState(ScrollState);
+
+  useEffect(() => {
+    setIsScrolled(true);
+  }, []);
 
   return (
     <>

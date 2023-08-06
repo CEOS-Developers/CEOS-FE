@@ -4,6 +4,12 @@ import emotionReset from 'emotion-reset';
 export const globalStyle = css`
   ${emotionReset}
   body {
+    min-height: 100vh;
+
+    @supports (-webkit-touch-callout: none) {
+      height: -webkit-fill-available;
+    }
+
     font-family: 'Pretendard';
   }
   button {
@@ -35,9 +41,5 @@ export const globalStyle = css`
   textarea {
     border: none;
     margin: 0;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
   }
 `;

@@ -1,7 +1,8 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { Text, Flex, RelativeContainer, AbsoluteFlex } from '../common';
+import Image from 'next/image';
 
 export interface ActivityCardProps {
   id: number;
@@ -15,14 +16,21 @@ export interface AdminActivityCardProps extends ActivityCardProps {
   onClickUpdate: () => void;
 }
 
-export const ActivityCard = (props: {
-  activityCard: ActivityCardProps;
-}): EmotionJSX.Element => {
-  const { imageUrl, name, content } = props.activityCard;
+export const ActivityCard = ({
+  id,
+  name,
+  imageUrl,
+  content,
+  ...props
+}: ActivityCardProps) => {
   return (
-    <Flex direction="column" width="auto" height="auto">
-      <ActivityImg src={imageUrl} width={328} height={184} />
-
+    <Wrapper>
+      <ActivityImage
+        alt={`activity ${name} image`}
+        src={imageUrl}
+        width={328}
+        height={184}
+      />
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
           {name}
@@ -31,7 +39,7 @@ export const ActivityCard = (props: {
           {content}
         </Text>
       </Content>
-    </Flex>
+    </Wrapper>
   );
 };
 
@@ -47,7 +55,12 @@ export const AdminActivityCard = ({
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ActivityImg src={imageUrl} width={328} height={184} />
+        <ActivityImage
+          alt={`activity ${name} image`}
+          src={imageUrl}
+          width={328}
+          height={184}
+        />
         <Content>
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -70,15 +83,19 @@ export const AdminActivityCard = ({
   );
 };
 
-const ActivityImg = styled.img`
-  border-radius: 16px;
-  object-fit: cover;
-  background-color: ${theme.palette.Gray5};
+const Wrapper = styled(Flex)`
+  flex-direction: column;
 
-  @media (max-width: 1023px) {
-    width: 346px;
-    height: 194px;
-  }
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+`;
+
+const ActivityImage = styled(Image)`
+  border-radius: 16px;
+  background-color: ${theme.palette.Gray5};
+  object-fit: cover;
+  width: 100%;
 `;
 
 const Content = styled.div`
@@ -93,7 +110,7 @@ const Content = styled.div`
 
   background-color: ${theme.palette.Gray1};
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
   }
 `;

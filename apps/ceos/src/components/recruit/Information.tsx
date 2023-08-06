@@ -28,7 +28,7 @@ const Information = ({ register, setValue }: InformationProps) => {
 
   return (
     <Flex direction="column">
-      <Flex direction="column" webGap={36} mobileGap={28}>
+      <Flex direction="column" webGap={36} mobileGap={28} width={680}>
         <CustomFlex>
           <QuestionFlex>
             <CustomTextField
@@ -143,9 +143,11 @@ const Information = ({ register, setValue }: InformationProps) => {
             />
           </QuestionFlex>
         </CustomFlex>
-        <CustomFlex>
+        <Flex direction="column" align="start" webGap={8} mobileGap={14}>
+          <Text webTypo="Label3">
+            이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
+          </Text>
           <CustomTextField
-            label="이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요."
             {...register('otherActivities')}
             helperText={[
               {
@@ -155,7 +157,7 @@ const Information = ({ register, setValue }: InformationProps) => {
             ]}
             webWidth="680px"
           />
-        </CustomFlex>
+        </Flex>
         <Line />
       </Flex>
     </Flex>

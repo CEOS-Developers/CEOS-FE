@@ -11,6 +11,7 @@ export interface ManagementCardProps {
   university: string;
   major: string;
   explain?: string[];
+  company: string;
 }
 
 export const ManagementCard = (props: {
@@ -48,8 +49,8 @@ export const ManagementCard = (props: {
 export const MentorCard = (props: {
   mentorCard: ManagementCardProps;
 }): EmotionJSX.Element => {
-  const { imageUrl, part, name, university, major, explain } = props.mentorCard;
-  const cName = explain ? 'origin-info' : 'mentor';
+  const { imageUrl, part, name, university, major, company } = props.mentorCard;
+  const cName = company ? 'origin-info' : 'mentor';
 
   return (
     <MentorContainer>
@@ -75,19 +76,12 @@ export const MentorCard = (props: {
           </Text>
         </Content>
       </Wrapper>
-      {explain ? (
+      {company ? (
         <Wrapper className="extra-info">
           <Content className="extra-info">
-            {explain.map((ex, idx) => (
-              <Text
-                key={idx}
-                webTypo="Body3"
-                mobileTypo="Body1"
-                paletteColor="White"
-              >
-                {ex}
-              </Text>
-            ))}
+            <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
+              {company}
+            </Text>
           </Content>
         </Wrapper>
       ) : (
@@ -167,7 +161,7 @@ const Wrapper = styled.div`
   background-color: ${theme.palette.Gray1};
   border-radius: 16px;
 
-  // position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
 
@@ -188,6 +182,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   height: 102px;
+  justify-content: center;
   gap: 8px;
 
   & > * > br {

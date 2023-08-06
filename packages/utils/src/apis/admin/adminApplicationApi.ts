@@ -14,7 +14,6 @@ export interface AdminApplicationListItemInterface {
     explaination: string;
     color: string;
   }[];
-  questionId: number;
 }
 export interface AdminPartQuestionsInterface {
   productQuestions: AdminApplicationListItemInterface[];

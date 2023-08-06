@@ -7,6 +7,7 @@ import { TopMargin } from '../FAQ/index';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '../../state/index';
+import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 
 // TODO: interface 재정의
 interface ActivityResponse {
@@ -20,18 +21,14 @@ interface ActivityResponse {
 }
 
 const Activity = () => {
-  const { data, isLoading, isSuccess } = useQuery<{
-    activityData: ActivityResponse;
-  }>(['ceos', 'activity'], async () => {
-    const activityData = await activityApi.GET_ACTIVITY({
-      pageNum: 0,
-      limit: 10000,
-    });
-    return { activityData: activityData };
+  const { infiniteData, ref } = useInfiniteQueries<ActivityResponse>({
+    queryKey: ['ceos', 'activity'],
+    queryFunction: ({ pageParam = 0 }) =>
+      activityApi.GET_ACTIVITY({ pageNum: pageParam, limit: 12 }),
+    PageItem: ActivityCard,
   });
-  const generation = useRecoilValue(generationState);
 
-  const activityList = data?.activityData.content;
+  const generation = useRecoilValue(generationState);
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -57,12 +54,7 @@ const Activity = () => {
               ]}
             />
             <TopMargin />
-            <GridContainer>
-              {activityList &&
-                activityList.map((activity, idx) => (
-                  <ActivityCard key={idx} activityCard={activity} />
-                ))}
-            </GridContainer>
+            <GridContainer>{infiniteData}</GridContainer>
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
@@ -78,12 +70,13 @@ const Activity = () => {
             ]}
           />
           <TopMargin />
-          <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
-            {activityList?.map((activity, idx) => {
-              return (
-                <ActivityCard key={`activity_${idx}`} activityCard={activity} />
-              );
-            })}
+          <Flex
+            direction="column"
+            mobileGap={20}
+            margin="0 0 36px 0"
+            padding="0 30px"
+          >
+            {infiniteData}
           </Flex>
           <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
         </Flex>
