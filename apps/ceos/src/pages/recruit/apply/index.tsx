@@ -94,48 +94,48 @@ const Apply = () => {
 
   const generation = useRecoilValue(generationState);
 
-  // useEffect(() => {
-  //   setQuestionList(data);
+  useEffect(() => {
+    setQuestionList(data);
 
-  //   // 공통 질문 수만큼 초기화 값 세팅
-  //   const commons = data?.commonQuestions.map((common) => ({
-  //     questionId: common.questionId,
-  //     answer: '',
-  //   }));
-  //   if (commons) setValue('commonAnswers', commons);
+    // 공통 질문 수만큼 초기화 값 세팅
+    const commons = data?.commonQuestions.map((common) => ({
+      questionId: common.questionId,
+      answer: '',
+    }));
+    if (commons) setValue('commonAnswers', commons);
 
-  //   // 각 파트 질문수만큼 초기화 값 세팅
-  //   const partNameList: PartName[] = [
-  //     'productQuestions',
-  //     'designQuestions',
-  //     'frontendQuestions',
-  //     'backendQuestions',
-  //   ];
-  //   setValue('partAnswers', []);
-  //   for (const PartName of partNameList) {
-  //     const productObj = data?.[PartName].map((product) => ({
-  //       questionId: product.questionId,
-  //       answer: '',
-  //     }));
+    // 각 파트 질문수만큼 초기화 값 세팅
+    const partNameList: PartName[] = [
+      'productQuestions',
+      'designQuestions',
+      'frontendQuestions',
+      'backendQuestions',
+    ];
+    setValue('partAnswers', []);
+    for (const PartName of partNameList) {
+      const productObj = data?.[PartName].map((product) => ({
+        questionId: product.questionId,
+        answer: '',
+      }));
 
-  //     productObj
-  //       ? setValue('partAnswers', [...getValues('partAnswers'), productObj])
-  //       : setValue('partAnswers', [...getValues('partAnswers'), []]);
-  //   }
+      productObj
+        ? setValue('partAnswers', [...getValues('partAnswers'), productObj])
+        : setValue('partAnswers', [...getValues('partAnswers'), []]);
+    }
 
-  //   const times = data?.times;
-  //   let setTimes = [] as number[][];
+    const times = data?.times;
+    let setTimes = [] as number[][];
 
-  //   times?.forEach((time) => {
-  //     let temp = [] as number[];
-  //     time.durations.forEach((dur) => {
-  //       temp.push(0);
-  //     });
-  //     setTimes.push(temp);
-  //   });
+    times?.forEach((time) => {
+      let temp = [] as number[];
+      time.durations.forEach((dur) => {
+        temp.push(0);
+      });
+      setTimes.push(temp);
+    });
 
-  //   setValue('unableTimes', setTimes);
-  // }, [data]);
+    setValue('unableTimes', setTimes);
+  }, [data]);
 
   const keyList = [
     'name',
@@ -157,23 +157,42 @@ const Apply = () => {
   const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
     [key: string]: number;
   };
-  useEffect(() => {
+
+  const isAllAnswer = () => {
     for (const key of keyList) {
       if (key === 'commonAnswers') {
         for (const item of getValues(key)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (key === 'partAnswers') {
         let num = partInfo[getValues('part')];
         for (const item of getValues(`partAnswers.${num}`)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (!getValues(key)) {
-        return setSubmitBtn(false);
+        return false;
       }
     }
-    setSubmitBtn(true);
-  }, [watch()]);
+    return true;
+  };
+
+  // useEffect(() => {
+  //   for (const key of keyList) {
+  //     if (key === 'commonAnswers') {
+  //       for (const item of getValues(key)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (key === 'partAnswers') {
+  //       let num = partInfo[getValues('part')];
+  //       for (const item of getValues(`partAnswers.${num}`)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (!getValues(key)) {
+  //       return setSubmitBtn(false);
+  //     }
+  //   }
+  //   setSubmitBtn(true);
+  // }, [watch()]);
 
   const submitForm = async () => {
     let body = getValues();
@@ -208,6 +227,10 @@ const Apply = () => {
   };
 
   const onSubmit = () => {
+    if (!isAllAnswer()) {
+      setError('모든 문항에 답변해주세요!!');
+      return;
+    }
     const [birth, email, phoneNumber, semestersLeftNumber] = [
       getValues('birth'),
       getValues('email'),
@@ -267,7 +290,7 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
-        <Button variant="default" disabled={!submitBtn} onClick={onSubmit}>
+        <Button variant="default" onClick={onSubmit}>
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
@@ -286,7 +309,7 @@ const Apply = () => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
