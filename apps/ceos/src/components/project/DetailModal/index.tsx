@@ -36,6 +36,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   return (
     <Flex css={containerCss}>
       <div css={backCss} onClick={setClose}></div>
+
       {!isLoading && isSuccess && (
         <>
           <Desktop css={iconCss} onClick={setClose}>
@@ -188,9 +189,9 @@ const containerCss = () => css`
   justify-content: center;
   align-items: flex-start;
 
-  padding: 100px 0;
+  padding: 70px 50px;
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     padding: 64px 22px;
   }
 `;
@@ -208,10 +209,15 @@ export const backCss = () => css`
 
 const iconCss = () => css`
   position: relative;
-  right: -1070px;
-  z-index: 15;
+  right: -1055px;
 
-  @media (max-width: 1023px) {
+  z-index: 20;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
+  ${media.mobile} {
+    display: block;
     position: fixed;
     top: 79px;
     right: 32px;
@@ -220,13 +226,16 @@ const iconCss = () => css`
 
 const Container = styled.div`
   position: relative;
+  right: 15px;
 
   width: 1032px;
   height: auto;
-  max-height: 85vh;
+  max-height: 90vh;
 
   border-radius: 20px;
   background: #fff;
+
+  z-index: 15;
 
   /* 팝업창그림자 */
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
@@ -237,10 +246,9 @@ const Container = styled.div`
     display: none;
   }
 
-  z-index: 15;
-
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
+    right: 0px;
   }
 `;
 
@@ -268,7 +276,7 @@ const DetailImageContainer = styled.div`
 `;
 
 const TeamWrapper = styled.div`
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     display: flex;
     flex-direction: column;
     justify-content: center;
