@@ -212,8 +212,11 @@ const iconCss = () => css`
   right: -1055px;
 
   z-index: 20;
-  @media (max-width: 1200px) {
-    display: none;
+
+  @media (max-width: 1160px) {
+    position: fixed;
+    top: 80px;
+    right: 75px;
   }
 
   ${media.mobile} {
