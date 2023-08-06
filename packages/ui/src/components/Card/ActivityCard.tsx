@@ -82,17 +82,6 @@ export const AdminActivityCard = ({
   );
 };
 
-const ActivityImg = styled.img`
-  border-radius: 16px;
-  object-fit: cover;
-  background-color: ${theme.palette.Gray5};
-
-  @media (max-width: 1023px) {
-    width: 346px;
-    height: 194px;
-  }
-`;
-
 const ActivityImage = styled(Image)`
   border-radius: 16px;
   background-color: ${theme.palette.Gray5};

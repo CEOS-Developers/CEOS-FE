@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { Desktop, Flex, Mobile, Text } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, Text, media } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
 import { DetailPrejectInterface, projectApi } from 'packages/utils';
 import { Shortcut } from '@ceos/components/Shortcut';
-import { useRef } from 'react';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
+import Image from 'next/image';
 
 interface ModalProps {
   id: number;
@@ -39,15 +39,23 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
         <WhiteCloseIcon />
       </Desktop>
       <Container>
-        <Mobile css={iconCss} onClick={setClose} style={{ width: 'auto' }}>
+        <Mobile
+          css={iconCss}
+          onClick={setClose}
+          style={{ width: 'auto', zIndex: 10 }}
+        >
           <WhiteCloseIcon fillColor="#232527" />
         </Mobile>
         {projectInfo && (
-          <DetailImg
-            alt="mainImage"
-            src={projectInfo.projectImages[0].imageUrl}
-            isMain={true}
-          />
+          <DetailThumbnailImageContainer>
+            <Image
+              alt="mainImage"
+              src={projectInfo.projectImages[0].imageUrl}
+              layout="fill"
+              objectFit="cover"
+              priority
+            />
+          </DetailThumbnailImageContainer>
         )}
 
         <Desktop style={{ width: '100%' }}>
@@ -134,10 +142,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
         </Mobile>
 
         {projectInfo && (
-          <DetailImg
+          <DetailImage
             alt="mainImage"
             src={projectInfo.projectImages[1].imageUrl}
-            isMain={false}
           />
         )}
       </Container>
@@ -178,12 +185,9 @@ const iconCss = () => css`
   }
 `;
 
-const Container = styled(Flex)`
+const Container = styled.div`
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 1032px;
   height: auto;
 
@@ -205,9 +209,23 @@ const Container = styled(Flex)`
   }
 `;
 
-const DetailImg = styled.img<{ isMain: boolean }>`
-  width: 100%;
+const DetailThumbnailImageContainer = styled.div`
+  width: 1032px;
+  height: 541px;
+  position: relative;
   border-radius: 20px;
+  aspect-ratio: 1032 / 541;
+
+  ${media.mobile} {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const DetailImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 `;
 
 const TeamWrapper = styled.div`

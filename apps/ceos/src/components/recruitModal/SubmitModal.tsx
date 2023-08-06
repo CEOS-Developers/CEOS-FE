@@ -16,7 +16,7 @@ export const SubmitModal = ({ submitForm, onClose }: ModalProps) => {
   return (
     <>
       <div css={backCss} onClick={onClose} ref={modalRef}></div>
-      <div div css={containerCss}>
+      <div css={containerCss}>
         <ModalBgImage />
 
         <TextContainer>
