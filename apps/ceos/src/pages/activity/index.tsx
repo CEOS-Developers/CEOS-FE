@@ -60,7 +60,13 @@ const Activity = () => {
             <GridContainer>
               {activityList &&
                 activityList.map((activity, idx) => (
-                  <ActivityCard key={idx} activityCard={activity} />
+                  <ActivityCard
+                    key={idx}
+                    id={activity.id}
+                    name={activity.name}
+                    imageUrl={activity.imageUrl}
+                    content={activity.content}
+                  />
                 ))}
             </GridContainer>
           </Flex>
@@ -78,10 +84,21 @@ const Activity = () => {
             ]}
           />
           <TopMargin />
-          <Flex direction="column" mobileGap={20} margin="0 0 36px 0">
+          <Flex
+            direction="column"
+            mobileGap={20}
+            margin="0 0 36px 0"
+            padding="0 30px"
+          >
             {activityList?.map((activity, idx) => {
               return (
-                <ActivityCard key={`activity_${idx}`} activityCard={activity} />
+                <ActivityCard
+                  key={`activity_${idx}`}
+                  id={activity.id}
+                  name={activity.name}
+                  imageUrl={activity.imageUrl}
+                  content={activity.content}
+                />
               );
             })}
           </Flex>

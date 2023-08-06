@@ -15,12 +15,15 @@ export interface AdminActivityCardProps extends ActivityCardProps {
   onClickUpdate: () => void;
 }
 
-export const ActivityCard = (props: {
-  activityCard: ActivityCardProps;
-}): EmotionJSX.Element => {
-  const { imageUrl, name, content } = props.activityCard;
+export const ActivityCard = ({
+  id,
+  name,
+  imageUrl,
+  content,
+  ...props
+}: ActivityCardProps) => {
   return (
-    <Flex direction="column" width="auto" height="auto">
+    <Flex direction="column" height="auto" padding="">
       <ActivityImg src={imageUrl} width={328} height={184} />
 
       <Content>
@@ -75,9 +78,8 @@ const ActivityImg = styled.img`
   object-fit: cover;
   background-color: ${theme.palette.Gray5};
 
-  @media (max-width: 1023px) {
-    width: 346px;
-    height: 194px;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -93,7 +95,7 @@ const Content = styled.div`
 
   background-color: ${theme.palette.Gray1};
 
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
 `;
