@@ -87,14 +87,11 @@ export const AdminActivityCard = ({
 const ActivityImage = styled(Image)`
   border-radius: 16px;
   background-color: ${theme.palette.Gray5};
-<<<<<<< HEAD
   object-fit: cover;
-=======
 
   @media (max-width: 768px) {
     width: 100%;
   }
->>>>>>> dev
 `;
 
 const Content = styled.div`
