@@ -45,8 +45,6 @@ const Apply = () => {
       : false;
   }
 
-  const router = useRouter();
-
   useEffect(() => {
     const checkValid = async () => {
       if (!isValid()) {
@@ -96,48 +94,48 @@ const Apply = () => {
 
   const generation = useRecoilValue(generationState);
 
-  useEffect(() => {
-    setQuestionList(data);
+  // useEffect(() => {
+  //   setQuestionList(data);
 
-    // 공통 질문 수만큼 초기화 값 세팅
-    const commons = data?.commonQuestions.map((common) => ({
-      questionId: common.questionId,
-      answer: '',
-    }));
-    if (commons) setValue('commonAnswers', commons);
+  //   // 공통 질문 수만큼 초기화 값 세팅
+  //   const commons = data?.commonQuestions.map((common) => ({
+  //     questionId: common.questionId,
+  //     answer: '',
+  //   }));
+  //   if (commons) setValue('commonAnswers', commons);
 
-    // 각 파트 질문수만큼 초기화 값 세팅
-    const partNameList: PartName[] = [
-      'productQuestions',
-      'designQuestions',
-      'frontendQuestions',
-      'backendQuestions',
-    ];
-    setValue('partAnswers', []);
-    for (const PartName of partNameList) {
-      const productObj = data?.[PartName].map((product) => ({
-        questionId: product.questionId,
-        answer: '',
-      }));
+  //   // 각 파트 질문수만큼 초기화 값 세팅
+  //   const partNameList: PartName[] = [
+  //     'productQuestions',
+  //     'designQuestions',
+  //     'frontendQuestions',
+  //     'backendQuestions',
+  //   ];
+  //   setValue('partAnswers', []);
+  //   for (const PartName of partNameList) {
+  //     const productObj = data?.[PartName].map((product) => ({
+  //       questionId: product.questionId,
+  //       answer: '',
+  //     }));
 
-      productObj
-        ? setValue('partAnswers', [...getValues('partAnswers'), productObj])
-        : setValue('partAnswers', [...getValues('partAnswers'), []]);
-    }
+  //     productObj
+  //       ? setValue('partAnswers', [...getValues('partAnswers'), productObj])
+  //       : setValue('partAnswers', [...getValues('partAnswers'), []]);
+  //   }
 
-    const times = data?.times;
-    let setTimes = [] as number[][];
+  //   const times = data?.times;
+  //   let setTimes = [] as number[][];
 
-    times?.forEach((time) => {
-      let temp = [] as number[];
-      time.durations.forEach((dur) => {
-        temp.push(0);
-      });
-      setTimes.push(temp);
-    });
+  //   times?.forEach((time) => {
+  //     let temp = [] as number[];
+  //     time.durations.forEach((dur) => {
+  //       temp.push(0);
+  //     });
+  //     setTimes.push(temp);
+  //   });
 
-    setValue('unableTimes', setTimes);
-  }, [data]);
+  //   setValue('unableTimes', setTimes);
+  // }, [data]);
 
   const keyList = [
     'name',
