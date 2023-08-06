@@ -183,7 +183,11 @@ const Apply = () => {
     body.university = body.university.trim();
 
     if (questionList) {
-      const res: any = await recruitApi.POST_APPLY(questionList?.times, body);
+      const res: any = await recruitApi.POST_APPLY(
+        questionList?.times,
+        body,
+        setError,
+      );
       setIsOpen(false);
 
       if (res?.status === 200) {

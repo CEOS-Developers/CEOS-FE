@@ -133,6 +133,7 @@ export const recruitApi = {
   POST_APPLY: async (
     times: { date: string; durations: string[] }[],
     body: RecruitApplyValuesInterface,
+    setError: (text: string) => void,
   ) => {
     type PartMap = { [key: string]: number };
     let partMap = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as PartMap;
@@ -180,7 +181,7 @@ export const recruitApi = {
       return response;
     } catch (error: any) {
       console.error(error);
-      alert(error.response.data.reason);
+      setError(error.response.data.reason);
     }
   },
 };
