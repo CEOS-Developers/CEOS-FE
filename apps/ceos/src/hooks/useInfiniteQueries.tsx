@@ -64,7 +64,7 @@ const useInfiniteQueries = <T,>({
     const isLast = getBoard.pages[currentPage].pageInfo.pageNum === totalPage;
 
     if (inView) {
-      console.log('next');
+      // console.log('next');
     }
 
     if (inView && !isLast) {

@@ -80,7 +80,7 @@ export default function SignUp() {
   };
 
   return (
-    <Flex direction="column" webGap={36}>
+    <Flex direction="column" webGap={36} mobileGap={36}>
       <Text webTypo="Heading2">ADMIN 회원가입</Text>
       <StyledForm onSubmit={handleSubmit(onSubmit)} webGap={24}>
         <Dropdown
@@ -94,7 +94,7 @@ export default function SignUp() {
 
         <TextField label="이름" isAdmin {...register('name')} />
         <TextField type="email" label="이메일" isAdmin {...register('email')} />
-        <Flex webGap={8} align="flex-end">
+        <Flex webGap={8} mobileGap={8} align="flex-end">
           <TextField label="ID" isAdmin width={236} {...register('username')} />
           <Flex height={40} width={84} onClick={handleSubmit(CheckID)}>
             <Button variant="admin_stroke">중복 확인</Button>
@@ -108,7 +108,12 @@ export default function SignUp() {
         />
 
         <div className="button-container">
-          <Button variant="admin" webWidth={324} type="submit">
+          <Button
+            variant="admin"
+            webWidth={324}
+            mobileWidth={324}
+            type="submit"
+          >
             가입하기
           </Button>
         </div>

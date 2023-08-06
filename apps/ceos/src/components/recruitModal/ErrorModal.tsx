@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Flex, Text } from '@ceos-fe/ui';
 import { useRef } from 'react';
+import { backCss, containerCss } from './SubmitModal';
 
 export const ErrorModal = ({
   text,
@@ -13,28 +14,18 @@ export const ErrorModal = ({
   const modalRef = useRef(null);
 
   return (
-    <div css={backCss} onClick={onClose} ref={modalRef}>
-      <Container>
-        <Text webTypo="Body1" mobileTypo="Body1" paletteColor="Blue">
-          {text}
-        </Text>
-      </Container>
-    </div>
+    <>
+      <div css={backCss} onClick={onClose} ref={modalRef}></div>
+      <div css={containerCss}>
+        <Container>
+          <Text webTypo="Body1" mobileTypo="Body1" paletteColor="Blue">
+            {text}
+          </Text>
+        </Container>
+      </div>
+    </>
   );
 };
-
-export const backCss = () => css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Container = styled.div`
   position: fixed;

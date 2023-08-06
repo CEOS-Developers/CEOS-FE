@@ -8,21 +8,13 @@ import { DropModal } from '../Modals/dropModal';
 import { TimeModal } from '../Modals/timeModal';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useMutation } from '@tanstack/react-query';
+import Link from 'next/link';
+import { PassDataInterface } from '../recruit/interface';
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
 
 interface PassQueryType {
-  query: {
-    uuid: string;
-    generation: number;
-    email: string;
-    pass: string;
-    name: string;
-    date: string;
-    otDate: string;
-    duration: string;
-    attendanceStatus: boolean;
-  };
+  query: PassDataInterface;
   setErrorText: Dispatch<string>;
 }
 const dateToDay: Record<number, string> = {
@@ -162,10 +154,15 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
           <p>- 인터뷰는 최대 4인 1조로 약 30분간 진행됩니다.</p>
           <p>서류 합격을 다시 한번 축하드리며, 면접일에 뵙겠습니다 :)</p>
           <p>CEOS {query.generation}기 운영진 드림</p>
-          <Button variant="white" webWidth={218}>
-            <ArrowUpRight color={theme.palette.Blue} />
-            &nbsp;오픈 채팅방 링크
-          </Button>
+          <Link
+            href={query.openChatUrl}
+            style={{ textDecoration: 'none', width: '218px' }}
+          >
+            <Button variant="white" webWidth={218}>
+              <ArrowUpRight color={theme.palette.Blue} />
+              &nbsp;오픈 채팅방 링크
+            </Button>
+          </Link>
         </>
       )}
       {isOpen && (

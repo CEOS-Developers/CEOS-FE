@@ -1,23 +1,17 @@
 import { ProjectCard, ProjectCardProps } from '@ceos-fe/ui';
-import DetailModal from '@ceos/pages/project/DetailModal';
-import { useState } from 'react';
+import { projectId } from '@ceos/state';
+import { useRecoilState } from 'recoil';
 
 export const ProjectCardContainer = (props: ProjectCardProps) => {
-  const [modalNumber, setModalNumber] = useState(-1);
-  const setClose = () => {
-    setModalNumber(-1);
-  };
+  const [id, setId] = useRecoilState<number>(projectId);
   const openModal = () => {
-    setModalNumber(props.id);
+    setId(props.id);
   };
   return (
     <>
       <div onClick={openModal}>
         <ProjectCard {...props} />
       </div>
-      {modalNumber !== -1 && (
-        <DetailModal id={modalNumber} setClose={setClose} />
-      )}
     </>
   );
 };

@@ -1,14 +1,15 @@
-import { Flex, ProjectCard, ProjectCardProps, Space, media } from '@ceos-fe/ui';
+import { Flex, Space, media } from '@ceos-fe/ui';
 import { Title } from '@ceos/components/Title';
 import { ProjectListInterface, projectApi } from '@ceos-fe/utils';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Footer from '@ceos/components/Footer';
 import styled from '@emotion/styled';
-import { useRecoilValue } from 'recoil';
-import { generationState } from '@ceos/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { generationState, projectId } from '@ceos/state';
 import useInfiniteQueries from '@ceos/hooks/useInfiniteQueries';
 import { css } from '@emotion/react';
 import { ProjectCardContainer } from '@ceos/components/project/ProjectCardContainer';
+import DetailModal from '@ceos/components/project/DetailModal';
 
 const Project = () => {
   const generation = useRecoilValue(generationState);
@@ -19,6 +20,11 @@ const Project = () => {
       projectApi.GET_ALL_PROJECTS({ pageNum: pageParam, limit: 12 }),
     PageItem: ProjectCardContainer,
   });
+
+  const [modalNumber, setModalNumber] = useRecoilState<number>(projectId);
+  const setClose = () => {
+    setModalNumber(-1);
+  };
 
   const leftBtn = {
     title: '더 궁금한 것이 있다면',
@@ -32,7 +38,11 @@ const Project = () => {
   };
 
   return (
-    <div>
+    <div
+      css={css`
+        position: relative;
+      `}
+    >
       <Flex direction="column" data-section="White">
         <Title
           title="PROJECT"
@@ -47,10 +57,8 @@ const Project = () => {
           webGap={24}
           mobileGap={24}
           css={css`
-            width: 1032px;
-            ${media.mobile} {
-              width: 100%;
-            }
+            width: 100%;
+            max-width: 1032px;
           `}
         >
           <ScrollWrapper webGap={48} mobileGap={20} direction="column" line={1}>
@@ -65,6 +73,9 @@ const Project = () => {
         </Flex>
         <div ref={ref}></div>
       </Flex>
+      {modalNumber !== -1 && (
+        <DetailModal id={modalNumber} setClose={setClose} />
+      )}
       <Space height={100} mobileHeight={60} />
       <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
     </div>
