@@ -1,7 +1,8 @@
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { media, theme } from '../../styles';
 import { Text, Flex, RelativeContainer, AbsoluteFlex } from '../common';
+import Image from 'next/image';
 
 export interface ActivityCardProps {
   id: number;
@@ -23,9 +24,13 @@ export const ActivityCard = ({
   ...props
 }: ActivityCardProps) => {
   return (
-    <Flex direction="column" height="auto" padding="">
-      <ActivityImg src={imageUrl} width={328} height={184} />
-
+    <Flex direction="column" height="auto">
+      <ActivityImage
+        alt={`activity ${name} image`}
+        src={imageUrl}
+        width={328}
+        height={184}
+      />
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
           {name}
@@ -50,7 +55,13 @@ export const AdminActivityCard = ({
   return (
     <RelativeContainer width={328} height={290}>
       <AbsoluteFlex direction="column">
-        <ActivityImg src={imageUrl} width={328} height={184} />
+        <ActivityImage
+          alt={`activity ${name} image`}
+          src={imageUrl}
+          width={328}
+          height={184}
+        />
+
         <Content>
           <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -73,10 +84,10 @@ export const AdminActivityCard = ({
   );
 };
 
-const ActivityImg = styled.img`
+const ActivityImage = styled(Image)`
   border-radius: 16px;
-  object-fit: cover;
   background-color: ${theme.palette.Gray5};
+  object-fit: cover;
 
   @media (max-width: 768px) {
     width: 100%;
