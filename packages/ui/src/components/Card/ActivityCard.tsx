@@ -31,7 +31,6 @@ export const ActivityCard = ({
         width={328}
         height={184}
       />
-
       <Content>
         <Text webTypo="Heading4" mobileTypo="Heading3" paletteColor="Black">
           {name}
@@ -86,22 +85,17 @@ export const AdminActivityCard = ({
 
 const Wrapper = styled(Flex)`
   flex-direction: column;
+
+  width: 100%;
+  max-width: 400px;
   height: auto;
-
-  ${media.mobile} {
-    max-width: 400px;
-
-    width: 100%;
-    height: auto;
-  }
 `;
 
 const ActivityImage = styled(Image)`
   border-radius: 16px;
-  width: 100%;
-  height: 184px;
-  object-fit: cover;
   background-color: ${theme.palette.Gray5};
+  object-fit: cover;
+  width: 100%;
 `;
 
 const Content = styled.div`

@@ -33,7 +33,8 @@ export const WhiteCloseIcon = (props: CloseProps) => {
 
 const Container = styled.div`
   width: 26px;
-  hiegh: 26px;
+  height: 26px;
+
   :hover {
     cursor: pointer;
   }

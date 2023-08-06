@@ -41,7 +41,7 @@ export interface PostApplyValuesInterface extends RecruitApplyInterface {
 }
 
 export const recruitApi = {
-  GER_RECRUITMENTS: async () => {
+  GET_RECRUITMENTS: async () => {
     try {
       const response = await ceosInstance.get(`/recruitments`).then((res) => {
         return res.data.data;
