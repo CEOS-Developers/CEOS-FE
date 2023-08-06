@@ -46,7 +46,12 @@ export const Rewards = () => {
   const awardList = data?.content;
 
   return (
-    <Wrapper direction="column">
+    <Wrapper
+      direction="column"
+      css={css`
+        user-select: none;
+      `}
+    >
       <Space height={80} mobileHeight={60} />
       <Flex direction="row" webGap={24} mobileGap={14} className="intro">
         <CardFlex backgroundColor="Gray1">

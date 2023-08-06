@@ -48,6 +48,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100vw;
   overflow: hidden;
+  user-select: none;
 
   .shortcut-image {
     overflow: hidden;
