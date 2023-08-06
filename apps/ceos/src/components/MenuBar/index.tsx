@@ -29,7 +29,7 @@ export const MenuBar = (props: MenuProps) => {
         ref={modalRef}
         className={isOpen ? 'open' : 'close'}
       >
-        <Flex width={308} height={844} direction="column">
+        <Flex width={308} direction="column">
           <CloseIcon
             margin="67px 22px 41px 265px"
             isOpen={isOpen}
