@@ -37,7 +37,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
 
   projectInfo?.participants.forEach((person) => {
     const key = person.part as PartKey;
-    Part[key].name = [...Part[key].name, person.name];
+    if (person.name !== '') {
+      Part[key].name = [...Part[key].name, person.name];
+    }
   });
 
   return (
@@ -102,8 +104,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                       <Text paletteColor="Gray5" webTypo="Label2">
                         {val.eng}
                       </Text>
-                      <Flex width="auto" webGap={5}>
-                        {val.name.map((item) => (
+                      <Flex width="auto" webGap={val.name.length > 1 ? 5 : 0}>
+                        {val.name.map((item, idx) => (
                           <Text paletteColor="Black" webTypo="Body3">
                             {item}
                           </Text>
@@ -137,7 +139,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                       <Text paletteColor="Gray5" mobileTypo="Label1">
                         {val.eng}
                       </Text>
-                      <Flex width="auto" mobileGap={5}>
+                      <Flex width="auto">
                         {val.name.map((item) => (
                           <Text paletteColor="Black" mobileTypo="Body1">
                             {item}
