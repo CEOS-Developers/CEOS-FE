@@ -14,7 +14,7 @@ interface ModalProps {
 
 const LINK: Record<string, string> = {
   서비스: 'Link',
-  깃허브: 'GiuHub',
+  깃허브: 'GitHub',
   비핸스: 'Behance',
   인스타: 'Instagram',
 };
