@@ -224,8 +224,8 @@ const iconCss = () => css`
 
   @media (max-width: 1160px) {
     position: fixed;
-    top: 80px;
-    right: 75px;
+    top: 85px;
+    right: 90px;
   }
 
   ${media.mobile} {
