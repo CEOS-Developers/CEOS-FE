@@ -61,7 +61,7 @@ const StyledCheckBox = styled.div`
   background-color: ${theme.palette.Gray2};
 
   @media (max-width: 1023px) {
-    background-color: ${theme.palette.White};
+    background-color: ${theme.palette.Gray2};
     border-radius: 2px;
   }
 `;
