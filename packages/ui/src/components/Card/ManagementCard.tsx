@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { theme, media } from '../../styles';
 import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { media } from '../../styles';
 
 export interface ManagementCardProps {
   imageUrl?: string;
