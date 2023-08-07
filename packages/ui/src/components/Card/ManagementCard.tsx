@@ -57,7 +57,7 @@ export const MentorCard = (props: {
       <Wrapper className={cName}>
         <Content className={cName}>
           <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-            {part}
+            {part} 멘토
           </Text>
           <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
             {name}
