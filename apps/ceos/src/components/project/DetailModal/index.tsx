@@ -64,9 +64,18 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 <Image
                   alt="mainImage"
                   src={projectInfo.projectImages[0].imageUrl}
-                  layout="fill"
+                  layout="responsive"
                   objectFit="cover"
                   priority
+                  width={1032}
+                  height={0}
+                  css={css`
+                    width: 1032px;
+                    height: auto;
+                    // ${media.mobile} {
+                    //   width: 100%;
+                    // }
+                  `}
                 />
               </DetailThumbnailImageContainer>
             )}
@@ -258,18 +267,26 @@ const Container = styled.div`
     display: none;
   }
 
+  @media (max-width: 1160px) {
+    margin-left: 26px;
+  }
+
   ${media.mobile} {
+    margin-left: 0px;
     width: 100%;
     right: 0px;
   }
 `;
 
 const DetailThumbnailImageContainer = styled.div`
-  width: 1032px;
+  width: 100%;
+  max-width: 1032px;
   height: 541px;
   position: relative;
   border-radius: 20px;
   aspect-ratio: 1032 / 541;
+
+  margin-bottom: 50px;
 
   ${media.mobile} {
     width: 100%;
