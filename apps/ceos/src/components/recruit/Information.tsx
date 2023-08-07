@@ -8,7 +8,6 @@ import {
   Question,
   QuestionFlex,
 } from './style';
-import css from 'styled-jsx/css';
 
 interface InformationProps {
   register: RecruitApplyFormInterface['register'];
@@ -28,8 +27,8 @@ const Information = ({ register, setValue }: InformationProps) => {
   const univ = ['연세대학교', '서강대학교', '이화여자대학교', '홍익대학교'];
 
   return (
-    <Section>
-      <Flex direction="column" webGap={36} mobileGap={28}>
+    <Section webGap={36} mobileGap={28}>
+      <Section>
         <CustomFlex>
           <QuestionFlex>
             <CustomTextField label="이름" {...register('name')} />
@@ -54,14 +53,29 @@ const Information = ({ register, setValue }: InformationProps) => {
         </CustomFlex>
         <CustomFlex>
           <CustomTextField
-            label="생년월일"
-            {...register('birth')}
-            placeholder="yyyy.mm.dd"
+            label="전공(학과)"
+            {...register('major')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*복수전공 및 부전공까지 포함하여 입력',
+              },
+              {
+                type: 'normal',
+                text: 'ex. 컴퓨터공학과 / 경영학과',
+              },
+            ]}
             webWidth="328px"
           />
           <CustomTextField
-            label="이메일"
-            {...register('email')}
+            label="졸업까지 남은 학기 수"
+            {...register('semestersLeftNumber')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*ex. 2',
+              },
+            ]}
             webWidth="328px"
           />
         </CustomFlex>
@@ -73,10 +87,10 @@ const Information = ({ register, setValue }: InformationProps) => {
             webWidth="328px"
           />
         </CustomFlex>
-      </Flex>
+      </Section>
 
       <Line />
-      <Flex direction="column" webGap={36} mobileGap={28}>
+      <Section>
         <CustomFlex>
           <QuestionFlex>
             <Question>재학 중인 학교</Question>
@@ -121,10 +135,10 @@ const Information = ({ register, setValue }: InformationProps) => {
             webWidth="328px"
           />
         </CustomFlex>
-      </Flex>
+      </Section>
 
       <Line />
-      <Flex direction="column" webGap={36} mobileGap={28}>
+      <Section>
         <CustomFlex direction="column" webGap={36} mobileGap={28}>
           <QuestionFlex>
             <Question>CEOS OT 날짜는?</Question>
@@ -143,22 +157,24 @@ const Information = ({ register, setValue }: InformationProps) => {
             />
           </QuestionFlex>
         </CustomFlex>
-        <AFlex>
-          <Text webTypo="Label3">
-            이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
-          </Text>
-          <CustomTextField
-            {...register('otherActivities')}
-            helperText={[
-              {
-                type: 'normal',
-                text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
-              },
-            ]}
-            webWidth="680px"
-          />
-        </AFlex>
-      </Flex>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>
+              이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
+            </Question>
+            <CustomTextField
+              {...register('otherActivities')}
+              helperText={[
+                {
+                  type: 'normal',
+                  text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
+                },
+              ]}
+              webWidth="680px"
+            />
+          </QuestionFlex>
+        </CustomFlex>
+      </Section>
 
       <Line />
     </Section>
@@ -170,7 +186,7 @@ export default Information;
 const Section = styled(Flex)`
   flex-direction: column;
   justify-contents: center;
-  align-items: start;
+  align-items: center;
   width: 856px;
   gap: 36px;
   margin: 24px 0 0 0;
@@ -200,17 +216,6 @@ const Grid = styled(Flex)`
     gap: 14px;
   }
 `;
-
-// direction="column"
-// align="start"
-// webGap={8}
-// mobileGap={14}
-// width={680}
-// css={css`
-//   @media (max-width: 1023px) {
-//     width: 100%;
-//   }
-// `}
 
 const AFlex = styled(Flex)`
   flex-direction: column;
