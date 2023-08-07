@@ -49,7 +49,7 @@ const Activity = () => {
             <Title
               title="ACTIVITY"
               explain={[
-                'CEOS에서는 it 창업과 관련된',
+                'CEOS에서는 IT 창업과 관련된',
                 '다양한 활동을 진행하고 있습니다.',
               ]}
             />
@@ -65,7 +65,7 @@ const Activity = () => {
           <Title
             title="ACTIVITY"
             explain={[
-              'CEOS에서는 it 창업과 관련된',
+              'CEOS에서는 IT 창업과 관련된',
               '다양한 활동을 진행하고 있습니다.',
             ]}
           />
