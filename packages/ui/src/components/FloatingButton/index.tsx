@@ -4,13 +4,14 @@ import { Email } from '../../assets/FloatingButton/Email';
 import { Instagram } from '../../assets/FloatingButton/Instagram';
 
 export interface FloatingProps {
+  className?: string;
   direction?: string;
 }
 
 export const FloatingButton = (props: FloatingProps) => {
   const { direction } = props;
   return (
-    <FloatingBtnContainer direction={direction}>
+    <FloatingBtnContainer direction={direction} className={props.className}>
       <FloatingBtnCircle
         onClick={() => window.open('https://www.instagram.com/ceos.sinchon/')}
       >

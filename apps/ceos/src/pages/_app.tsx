@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </ThemeProvider>
             <Desktop css={FloatingCss}>
-              <FloatingButton />
+              <FloatingButton className="floating-button" />
             </Desktop>
           </Hydrate>
         </Layout>

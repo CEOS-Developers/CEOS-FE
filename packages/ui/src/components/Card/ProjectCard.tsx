@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { media, theme } from '../../styles';
 import { RelativeContainer, AbsoluteFlex, Text } from '../common';
 import Image from 'next/image';
+import React from 'react';
 
 export interface ProjectImageProps {
   category: string;
@@ -151,6 +152,7 @@ const ProjectImageContainer = styled.div`
 const ProjectImage = styled(Image)`
   border-radius: 16px;
   background-color: ${theme.palette.Gray5};
+  object-fit: cover !important;
 `;
 
 const ExplainBox = styled.div`

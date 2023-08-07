@@ -12,6 +12,13 @@ interface ModalProps {
   setClose: () => void;
 }
 
+const LINK: Record<string, string> = {
+  서비스: 'Link',
+  깃허브: 'GiuHub',
+  비핸스: 'Behance',
+  인스타: 'Instagram',
+};
+
 const DetailModal = ({ id, setClose }: ModalProps) => {
   const { data, isLoading, isSuccess } = useQuery<DetailProjectInterface>(
     ['ceos', 'project', 'modal', id],
@@ -24,8 +31,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   const Part: Record<PartKey, { eng: string; name: string[] }> = {
     기획: { eng: 'PRODUCT', name: [] as string[] },
     디자인: { eng: 'DESIGN', name: [] as string[] },
-    프론트엔드: { eng: 'FRONT_END', name: [] as string[] },
-    백엔드: { eng: 'BACK_END', name: [] as string[] },
+    프론트엔드: { eng: 'FRONT-END', name: [] as string[] },
+    백엔드: { eng: 'BACK-END', name: [] as string[] },
   };
 
   projectInfo?.participants.forEach((person) => {
@@ -36,6 +43,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
   return (
     <Flex css={containerCss}>
       <div css={backCss} onClick={setClose}></div>
+
       {!isLoading && isSuccess && (
         <>
           <Desktop css={iconCss} onClick={setClose}>
@@ -83,7 +91,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   >
                     {projectInfo?.projectUrls.map((url) => (
                       <a href={url.linkUrl}>
-                        <Shortcut>{url.category}</Shortcut>
+                        <Shortcut>{LINK[url.category]}</Shortcut>
                       </a>
                     ))}
                   </Flex>
@@ -147,7 +155,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 >
                   {projectInfo?.projectUrls.map((url) => (
                     <a href={url.linkUrl}>
-                      <Shortcut>{url.category}</Shortcut>
+                      <Shortcut>{LINK[url.category]}</Shortcut>
                     </a>
                   ))}
                 </Flex>
@@ -188,9 +196,9 @@ const containerCss = () => css`
   justify-content: center;
   align-items: flex-start;
 
-  padding: 100px 0;
+  padding: 70px 50px;
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     padding: 64px 22px;
   }
 `;
@@ -208,10 +216,18 @@ export const backCss = () => css`
 
 const iconCss = () => css`
   position: relative;
-  right: -1070px;
-  z-index: 15;
+  right: -1055px;
 
-  @media (max-width: 1023px) {
+  z-index: 20;
+
+  @media (max-width: 1160px) {
+    position: fixed;
+    top: 80px;
+    right: 75px;
+  }
+
+  ${media.mobile} {
+    display: block;
     position: fixed;
     top: 79px;
     right: 32px;
@@ -220,13 +236,16 @@ const iconCss = () => css`
 
 const Container = styled.div`
   position: relative;
+  right: 15px;
 
   width: 1032px;
   height: auto;
-  max-height: 85vh;
+  max-height: 90vh;
 
   border-radius: 20px;
   background: #fff;
+
+  z-index: 15;
 
   /* 팝업창그림자 */
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
@@ -237,10 +256,9 @@ const Container = styled.div`
     display: none;
   }
 
-  z-index: 15;
-
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
+    right: 0px;
   }
 `;
 
@@ -258,7 +276,7 @@ const DetailThumbnailImageContainer = styled.div`
 `;
 
 const DetailImage = styled(Image)`
-  position: relative !important;
+  /* position: relative !important; */
   height: auto !important;
 `;
 
@@ -268,7 +286,7 @@ const DetailImageContainer = styled.div`
 `;
 
 const TeamWrapper = styled.div`
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     display: flex;
     flex-direction: column;
     justify-content: center;

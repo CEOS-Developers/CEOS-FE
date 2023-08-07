@@ -11,6 +11,7 @@ import { StyledForm } from '@admin/styles/common';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { adminInstance } from '@ceos-fe/utils';
+import { Loading } from '@admin/components/Loading';
 
 export default function SignIn() {
   const router = useRouter();
@@ -65,7 +66,7 @@ export default function SignIn() {
     if (appCookies['LOGIN_EXPIRES']) return;
   }, []);
 
-  return (
+  return !login ? (
     <p>
       <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
@@ -84,7 +85,6 @@ export default function SignIn() {
           </Button>
         </div>
       </StyledForm>
-
       <Text webTypo="Label3" paletteColor="Gray5">
         <Flex webGap={24} mobileGap={24}>
           <StyledLink href="/auth/findID">아이디 찾기</StyledLink>|
@@ -93,6 +93,8 @@ export default function SignIn() {
         </Flex>
       </Text>
     </p>
+  ) : (
+    <Loading />
   );
 }
 

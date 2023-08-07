@@ -53,6 +53,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (login && router.pathname.includes('/auth')) {
       router.push('/applyStatement');
+      getNewAccessToken();
     }
 
     if (
@@ -62,6 +63,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       router.push('/auth');
     }
   }, [login, cookies]);
+
   useEffect(() => {
     if (appCookies['LOGIN_EXPIRES']) {
       if (accessToken === '') {

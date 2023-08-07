@@ -5,11 +5,10 @@ export const globalStyle = css`
   ${emotionReset}
   body {
     min-height: 100vh;
-
-    @supports (-webkit-touch-callout: none) {
-      height: -webkit-fill-available;
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      min-height: -webkit-fill-available;
+      scroll: smooth;
     }
-
     font-family: 'Pretendard';
   }
   button {

@@ -1,8 +1,9 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, Flex, Text } from 'packages/ui';
 import { adminApplyStatementApi } from 'packages/utils/src/apis/admin/adminApplyStatementApi';
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Loading } from '../Loading';
+import { useRouter } from 'next/router';
 
 interface interviewtimeInterface {
   date?: string;
@@ -21,6 +22,9 @@ export const InterviewTimeModal = ({
   idx: number;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { data, isSuccess, isLoading, isError } = useQuery(
     ['interviewTime'],
     () => adminApplyStatementApi.GET_INTERVIEWTIME(idx),
@@ -40,12 +44,19 @@ export const InterviewTimeModal = ({
   ];
   const [interviewTime, setInterviewTime] = useState<interviewtimeInterface>();
 
-  const { mutate: patchInterviewTime } = useMutation(() =>
-    adminApplyStatementApi.PATCH_INTERVIEWTIME(
-      idx,
-      interviewTime?.date,
-      interviewTime?.duration,
-    ),
+  const { mutate: patchInterviewTime } = useMutation(
+    () =>
+      adminApplyStatementApi.PATCH_INTERVIEWTIME(
+        idx,
+        interviewTime?.date,
+        interviewTime?.duration,
+      ),
+    {
+      onSuccess: async () => {
+        queryClient.invalidateQueries(['applicantData']);
+        router.push('/applyStatement');
+      },
+    },
   );
 
   useEffect(() => {
