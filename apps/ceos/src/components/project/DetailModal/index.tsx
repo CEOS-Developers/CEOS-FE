@@ -250,8 +250,8 @@ const Container = styled.div`
   right: 15px;
 
   width: 1032px;
-  height: auto;
-  max-height: 90vh;
+  height: 90vh;
+  // max-height: 90vh;
 
   border-radius: 20px;
   background: #fff;
