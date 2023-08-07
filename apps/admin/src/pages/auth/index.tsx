@@ -6,17 +6,18 @@ import { adminAuthApi, signInInterface } from '@ceos-fe/utils';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { accessToken, loginState } from '@admin/store/recoil';
+import { accessTokenState, loginState } from '@admin/store/recoil';
 import { StyledForm } from '@admin/styles/common';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { adminInstance } from '@ceos-fe/utils';
+import { Loading } from '@admin/components/Loading';
 
 export default function SignIn() {
   const router = useRouter();
   const { mutate: postSignInMutation } = useMutation(adminAuthApi.SIGN_IN);
   const { register, handleSubmit } = useForm();
-  const [token, setToken] = useRecoilState<string>(accessToken);
+  const [token, setToken] = useRecoilState<string>(accessTokenState);
   const [login, setLogin] = useRecoilState<boolean>(loginState);
   const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
 
@@ -65,11 +66,11 @@ export default function SignIn() {
     if (appCookies['LOGIN_EXPIRES']) return;
   }, []);
 
-  return (
-    <>
+  return !login ? (
+    <p>
       <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
-        <Flex direction="column" webGap={24}>
+        <Flex direction="column" webGap={24} mobileGap={24}>
           <TextField label="ID" isAdmin {...register('username')} />
           <TextField
             type="password"
@@ -84,15 +85,16 @@ export default function SignIn() {
           </Button>
         </div>
       </StyledForm>
-
       <Text webTypo="Label3" paletteColor="Gray5">
-        <Flex webGap={24}>
+        <Flex webGap={24} mobileGap={24}>
           <StyledLink href="/auth/findID">아이디 찾기</StyledLink>|
           <StyledLink href="/auth/findPW">비밀번호 찾기</StyledLink>|
           <StyledLink href="/auth/signUp">회원가입</StyledLink>
         </Flex>
       </Text>
-    </>
+    </p>
+  ) : (
+    <Loading />
   );
 }
 

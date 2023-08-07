@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
 import {
+  DateProps,
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
+  RecruitStudyResponse,
 } from '@ceos/components/recruit/interface';
 import { useEffect, useState } from 'react';
 import Information from '@ceos/components/recruit/Information';
@@ -19,22 +21,46 @@ import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
+import { useRouter } from 'next/router';
 
 const Apply = () => {
+  /* 정해진 기간 아닐 때, 접근 불가 로직 */
+  const { data: dateData } = useQuery<RecruitStudyResponse>(
+    ['ceos', 'recruit', 'study'],
+    () => recruitApi.GET_RECRUITMENTS(),
+  );
+
+  const date = {
+    startDateDoc: dateData ? new Date(dateData.startDateDoc) : '',
+    endDateDoc: dateData
+      ? new Date(new Date(dateData.endDateDoc).setHours(24))
+      : '',
+  } as DateProps;
+
+  const curDate = new Date();
+
+  function isValid() {
+    return date.startDateDoc <= curDate && curDate <= date.endDateDoc
+      ? true
+      : false;
+  }
+
+  useEffect(() => {
+    const checkValid = async () => {
+      if (!isValid()) {
+        window.location.href = '/'; // 페이지로 리로드
+      }
+    };
+    checkValid();
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [submitBtn, setSubmitBtn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
 
-  const {
-    register,
-    watch,
-    setValue,
-    getValues,
-    handleSubmit,
-    formState: { errors, dirtyFields },
-  } = useForm({
+  const { register, watch, setValue, getValues } = useForm({
     defaultValues: {
       name: '',
       gender: '',
@@ -58,7 +84,7 @@ const Apply = () => {
   }) as RecruitApplyFormInterface;
 
   const { data, isLoading, isSuccess } = useQuery<RecruitApplyResponse>(
-    ['ceos', 'recuit', 'apply'],
+    ['ceos', 'recruit', 'apply'],
     () => recruitApi.GET_QUESTION(),
   );
 
@@ -123,7 +149,6 @@ const Apply = () => {
     'otDate',
     'demodayDate',
     'otherActivities',
-
     'commonAnswers',
     'partAnswers',
   ] as const;
@@ -132,23 +157,42 @@ const Apply = () => {
   const partInfo = { 기획: 0, 디자인: 1, 프론트엔드: 2, 백엔드: 3 } as {
     [key: string]: number;
   };
-  useEffect(() => {
+
+  const isAllAnswer = () => {
     for (const key of keyList) {
       if (key === 'commonAnswers') {
         for (const item of getValues(key)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (key === 'partAnswers') {
         let num = partInfo[getValues('part')];
         for (const item of getValues(`partAnswers.${num}`)) {
-          if (!item.answer) return setSubmitBtn(false);
+          if (!item.answer) return false;
         }
       } else if (!getValues(key)) {
-        return setSubmitBtn(false);
+        return false;
       }
     }
-    setSubmitBtn(true);
-  }, [watch()]);
+    return true;
+  };
+
+  // useEffect(() => {
+  //   for (const key of keyList) {
+  //     if (key === 'commonAnswers') {
+  //       for (const item of getValues(key)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (key === 'partAnswers') {
+  //       let num = partInfo[getValues('part')];
+  //       for (const item of getValues(`partAnswers.${num}`)) {
+  //         if (!item.answer) return setSubmitBtn(false);
+  //       }
+  //     } else if (!getValues(key)) {
+  //       return setSubmitBtn(false);
+  //     }
+  //   }
+  //   setSubmitBtn(true);
+  // }, [watch()]);
 
   const submitForm = async () => {
     let body = getValues();
@@ -156,7 +200,11 @@ const Apply = () => {
     body.university = body.university.trim();
 
     if (questionList) {
-      const res: any = await recruitApi.POST_APPLY(questionList?.times, body);
+      const res: any = await recruitApi.POST_APPLY(
+        questionList?.times,
+        body,
+        setError,
+      );
       setIsOpen(false);
 
       if (res?.status === 200) {
@@ -238,7 +286,7 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
-        <Button variant="default" disabled={!submitBtn} onClick={onSubmit}>
+        <Button variant="default" disabled={!isAllAnswer()} onClick={onSubmit}>
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
@@ -261,7 +309,7 @@ export const getStaticProps = async () => {
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(['ceos', 'recuit', 'apply'], () => {
+    await queryClient.prefetchQuery(['ceos', 'recruit', 'apply'], () => {
       recruitApi.GET_QUESTION;
     });
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 export interface MenuProps {
   isOpen: boolean;
@@ -37,40 +38,64 @@ export const MenuBar = (props: MenuProps) => {
           />
           <div css={contentCss}>
             <p>
-              <CustomLink
+              <StyledLink
                 href="/project"
                 onClick={toggleModal}
                 isSelected={router.pathname === '/project'}
               >
+                <StyledLinkContainer
+                  alt="project link"
+                  src="/header/project.svg"
+                  width={130}
+                  height={45}
+                />
                 PROJECT
-              </CustomLink>
+              </StyledLink>
             </p>
             <p>
-              <CustomLink
+              <StyledLink
                 href="/activity"
                 onClick={toggleModal}
                 isSelected={router.pathname === '/activity'}
               >
+                <StyledLinkContainer
+                  alt="project link"
+                  src="/header/activity.svg"
+                  width={130}
+                  height={45}
+                />
                 ACTIVITY
-              </CustomLink>
+              </StyledLink>
             </p>
             <p>
-              <CustomLink
+              <StyledLink
                 href="/FAQ"
                 onClick={toggleModal}
                 isSelected={router.pathname === '/FAQ'}
               >
+                <StyledLinkContainer
+                  alt="project link"
+                  src="/header/faq.svg"
+                  width={130}
+                  height={45}
+                />
                 FAQ
-              </CustomLink>
+              </StyledLink>
             </p>
             <p>
-              <CustomLink
+              <StyledLink
                 href="/recruit"
                 onClick={toggleModal}
                 isSelected={router.pathname === '/recruit'}
               >
+                <StyledLinkContainer
+                  alt="project link"
+                  src="/header/recruit.svg"
+                  width={130}
+                  height={45}
+                />
                 RECRUIT
-              </CustomLink>
+              </StyledLink>
             </p>
           </div>
           <Flex align="flex-end" margin="0px 0px 100px 0px">
@@ -93,7 +118,7 @@ export const backCss = () => css`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
   }
-  justiy-content: center;
+  justify-content: center;
   align-items: center;
   display: flex;
 `;
@@ -124,6 +149,26 @@ export const contentCss = () => css`
   > :hover {
     cursor: pointer;
     color: ${theme.palette.Green};
+  }
+`;
+
+const StyledLinkContainer = styled(Image)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+
+  transition: opacity 0.2s;
+`;
+
+const StyledLink = styled(Link)<{ isSelected?: boolean }>`
+  position: relative;
+  text-decoration: none;
+  color: ${({ isSelected }) =>
+    isSelected ? theme.palette.Green : theme.palette.Gray4};
+  ${StyledLinkContainer} {
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0)};
   }
 `;
 

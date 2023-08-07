@@ -8,6 +8,7 @@ export const Creative = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        className="diamond"
         d="M42.8891 7.1111L50 10.9993L42.8891 14.8894L38.999 22.0002L35.1109 14.8894L28 10.9993L35.1109 7.1111L38.999 0.000244141L42.8891 7.1111Z"
         fill="white"
       />
@@ -29,6 +30,7 @@ export const Entrepreneurship = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        className="diamond"
         d="M80.8891 7.11086L88 10.999L80.8891 14.8891L76.999 22L73.1109 14.8891L66 10.999L73.1109 7.11086L76.999 0L80.8891 7.11086Z"
         fill="white"
       />
@@ -50,6 +52,7 @@ export const Openness = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        className="diamond"
         d="M49.8891 7.1111L57 10.9993L49.8891 14.8894L45.999 22.0002L42.1109 14.8894L35 10.9993L42.1109 7.1111L45.999 0.000244141L49.8891 7.1111Z"
         fill="white"
       />
@@ -71,6 +74,7 @@ export const Sustainability = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        className="diamond"
         d="M64.8891 7.1111L72 10.9993L64.8891 14.8894L60.999 22.0002L57.1109 14.8894L50 10.9993L57.1109 7.1111L60.999 0.000244141L64.8891 7.1111Z"
         fill="white"
       />

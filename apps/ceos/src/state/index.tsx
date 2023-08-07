@@ -11,3 +11,6 @@ export const ScrollState = atom<boolean>({
   key: 'isScroll',
   default: false,
 });
+
+export const projectId = atom<number>({ key: 'projectId', default: -1 });
+

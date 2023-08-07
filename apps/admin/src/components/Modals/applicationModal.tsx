@@ -5,6 +5,7 @@ import {
   applicationInfoInterface,
   adminApplyStatementApi,
 } from 'packages/utils/src/apis/admin/adminApplyStatementApi';
+import { Loading } from '../Loading';
 
 interface questionInterface {
   questionIndex: number;
@@ -42,7 +43,7 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (isError || !data) {
     return <div>Error: Failed to fetch data</div>;

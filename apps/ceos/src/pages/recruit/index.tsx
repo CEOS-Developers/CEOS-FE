@@ -8,7 +8,7 @@ import {
 } from '@ceos/components/recruit/recruitBox';
 import {
   BtnWrapper,
-  DesginBtn,
+  DesignBtn,
   DevBtn,
   PMBtn,
 } from '@ceos/components/recruit/recruitBtn';
@@ -20,38 +20,19 @@ import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
 import { useState } from 'react';
-import { PassDataInterface } from '@ceos/components/recruit/interface';
+import {
+  DateProps,
+  PassDataInterface,
+  RecruitStudyResponse,
+} from '@ceos/components/recruit/interface';
 import NonPass from '@ceos/components/recruit/nonpass';
 import DocPass from '@ceos/components/recruit/docpass';
 import FinPass from '@ceos/components/recruit/finpass';
 
-interface RecruitStudyResponse {
-  generation: number;
-  prodStudyUrl: string;
-  designStudyUrl: string;
-  devStudyUrl: string;
-  startDateDoc: string;
-  endDateDoc: string;
-  resultDateDoc: string;
-  startDateInterview: string;
-  endDateInterview: string;
-  resultDateFinal: string;
-  openChatUrl: string;
-  otDate: string;
-  demoDayDate: string;
-}
-
-export interface DateProps {
-  startDateDoc: Date;
-  endDateDoc: Date;
-  resultDateDoc: Date;
-  resultDateFinal: Date;
-}
-
 const Recruit = () => {
   const { data, isLoading, isSuccess } = useQuery<RecruitStudyResponse>(
     ['ceos', 'recruit', 'study'],
-    () => recruitApi.GER_RECRUITMENTS(),
+    () => recruitApi.GET_RECRUITMENTS(),
   );
   const [passData, setPassData] = useState<PassDataInterface>({
     uuid: '',
@@ -62,6 +43,7 @@ const Recruit = () => {
     attendanceStatus: false,
     date: '',
     otDate: '',
+    openChatUrl: '',
     duration: '',
   });
   const [step, setStep] = useState('');
@@ -77,6 +59,7 @@ const Recruit = () => {
     content: ['CEOS 프로젝트', '보러가기'],
     link: '/project',
   };
+
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
     endDateDoc: new Date(data ? data.endDateDoc : ''),
@@ -126,7 +109,7 @@ const Recruit = () => {
                     <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
                   </CustomLink>
                   <CustomLink href={data?.designStudyUrl} style={{ flex: 1 }}>
-                    <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
+                    <DesignBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
                   </CustomLink>
                   <CustomLink href={data?.devStudyUrl} style={{ flex: 1 }}>
                     <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
@@ -135,7 +118,7 @@ const Recruit = () => {
               ) : (
                 <>
                   <PMBtn text="시장에 필요한 창업 아이템을 기획하고 개발자와 디자이너가 서비스를 구현할 수 있도록 매니징합니다." />
-                  <DesginBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
+                  <DesignBtn text="기획된 아이디어를 서비스 방향성과 맞게 시각적으로 구체화하고 개발자에게 가이드를 전달합니다." />
                   <DevBtn text="팀의 창업 아이템을 서비스로 구현해내기 위해 웹/앱 클라이언트 또는 서버를 개발합니다." />
                 </>
               )}
@@ -213,7 +196,7 @@ export const getStaticProps = async () => {
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(['ceos', 'recruit', 'study'], () => {
-      recruitApi.GER_RECRUITMENTS;
+      recruitApi.GET_RECRUITMENTS;
     });
 
     return {

@@ -10,8 +10,7 @@ import { CheckModal } from '@ceos/components/Modals/checkModal';
 import { ModalPortal } from '@ceos-fe/utils/';
 import { Dispatch, useState } from 'react';
 import Link from 'next/link';
-import { DateProps } from '@ceos/pages/recruit';
-import { PassDataInterface } from './interface';
+import { DateProps, PassDataInterface } from './interface';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -43,7 +42,7 @@ export const RecruitSubHeader = ({
   ] = [
     newDate,
     date.startDateDoc,
-    date.endDateDoc,
+    new Date(new Date(date.endDateDoc).setHours(24)),
     date.resultDateDoc,
     date.resultDateFinal,
     new Date(
@@ -70,56 +69,61 @@ export const RecruitSubHeader = ({
         </Text>
         <>
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
-            <div style={{ width: '182px', display: 'flex' }}>
-              <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
+            <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
+              <div style={{ width: '100%', display: 'flex' }}>
                 <Button variant="glass" webWidth={182} css={BtnCss}>
                   {generation}기 지원하기
                 </Button>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ) : (
             <div>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <div style={{ width: '249px', display: 'flex' }}>
-                  <Button
-                    variant="glass"
-                    webWidth={249}
-                    mobileWidth={249}
-                    css={BtnCss}
-                    onClick={() => {
-                      toggleModal();
-                      setStep('서류');
-                    }}
-                  >
-                    서류 합격 여부 확인하기
-                  </Button>
+                <div>
+                  <div style={{ width: '100%', display: 'flex' }}>
+                    <Button
+                      variant="glass"
+                      webWidth={249}
+                      css={BtnCss}
+                      onClick={() => {
+                        toggleModal();
+                        setStep('서류');
+                      }}
+                    >
+                      서류 합격 여부 확인하기
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <div>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
-                    <div style={{ width: '249px', display: 'flex' }}>
-                      <Button
-                        variant="glass"
-                        webWidth={249}
-                        css={BtnCss}
-                        onClick={() => {
-                          toggleModal();
-                          setStep('최종');
-                        }}
-                      >
-                        최종 합격 여부 확인하기
-                      </Button>
+                    <div>
+                      <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="glass"
+                          webWidth={249}
+                          css={BtnCss}
+                          onClick={() => {
+                            toggleModal();
+                            setStep('최종');
+                          }}
+                        >
+                          최종 합격 여부 확인하기
+                        </Button>
+                      </div>
                     </div>
                   ) : (
-                    <div style={{ width: '234px', display: 'flex' }}>
-                      <Button
-                        variant="glass"
-                        webWidth={234}
-                        css={BtnCss}
-                        disabled
-                      >
-                        지원 기간이 아닙니다.
-                      </Button>
+                    <div>
+                      <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="glass"
+                          webWidth={234}
+                          css={BtnCss}
+                          disabled
+                        >
+                          지원 기간이 아닙니다.
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>
