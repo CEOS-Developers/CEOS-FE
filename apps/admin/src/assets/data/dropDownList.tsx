@@ -51,10 +51,6 @@ export const ManagementDropdownList: DropdownItemInterface[] = [
     value: 'guest',
   },
   {
-    label: '루트',
-    value: 'root',
-  },
-  {
     label: '운영진',
     value: 'management',
   },
