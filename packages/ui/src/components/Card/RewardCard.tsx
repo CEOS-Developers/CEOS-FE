@@ -8,12 +8,12 @@ import { css } from '@emotion/react';
 interface AwardsInterface {
   generation: number;
   content: string;
-  startDate?: string;
+  startDate: string;
 }
 
 export interface RewardCardProps {
   generation: number;
-  startDate?: string;
+  startDate: string;
   projects?: { name: string; description: string; generation?: number }[];
   awards?: AwardsInterface[];
 }
