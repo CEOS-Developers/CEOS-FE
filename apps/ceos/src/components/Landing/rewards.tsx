@@ -21,6 +21,7 @@ export interface ProjectInterface {
 
 export interface AwardCardInterface {
   generation: number;
+  startDate: string;
   awards: AwardInterface[];
   projects: ProjectInterface[];
 }
@@ -115,6 +116,7 @@ export const Rewards = () => {
                   generation={a.generation}
                   projects={a.projects}
                   awards={a.awards}
+                  startDate={a.startDate}
                 />
               ))}
         </Flex>
@@ -128,6 +130,7 @@ export const Rewards = () => {
                   generation={a.generation}
                   projects={a.projects}
                   awards={a.awards}
+                  startDate={a.startDate}
                 />
               ))}
         </Flex>
