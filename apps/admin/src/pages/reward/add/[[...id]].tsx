@@ -26,7 +26,7 @@ export default function AddReward() {
   const getRewardMutation = useMutation(adminRewardApi.GET_ONE_REWARD, {
     onSuccess: async (data: RewardDTO) => {
       setValue('generation', data.generation);
-      setValue('startDate', data.awards[0]?.startDate);
+      setValue('startDate', data.startDate);
       data.awards.map((_, index) => {
         update(index, { content: data.awards[index]?.content });
       });
@@ -49,6 +49,9 @@ export default function AddReward() {
       alert('추가 완료');
       router.push('/reward');
     },
+    onError: (error: any) => {
+      console.log(error);
+    },
   });
 
   // 수상 내역 수정 api
@@ -60,26 +63,30 @@ export default function AddReward() {
   });
 
   const onSubmit = (data: any) => {
+    console.log({
+      ...data,
+      content: Array.isArray(data?.content)
+        ? data?.content.map((item: { content: string }) => item?.content)
+        : data?.content,
+    });
     if (router.query.id) {
       putRewardCreateMutation.mutate({
         id: Number(router.query.id),
-        payload: data.content.map((element: { content: string }) => {
-          return {
-            generation: data.generation,
-            content: element.content,
-            startDate: data.startDate,
-          };
-        }),
+        payload: {
+          ...data,
+          content: Array.isArray(data?.content)
+            ? data?.content.map((item: { content: string }) => item?.content)
+            : data?.content,
+        },
       });
     } else {
       postRewardCreateMutation.mutate({
-        payload: data.content.map((element: { content: string }) => {
-          return {
-            generation: data.generation,
-            content: element.content,
-            startDate: data.startDate,
-          };
-        }),
+        payload: {
+          ...data,
+          content: Array.isArray(data?.content)
+            ? data?.content.map((item: { content: string }) => item?.content)
+            : data?.content,
+        },
       });
     }
   };
