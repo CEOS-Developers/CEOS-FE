@@ -26,8 +26,6 @@ export const CustomTextField = styled(TextField)<{
   @media (max-width: 1023px) {
     width: ${({ mobileWidth }) => mobileWidth ?? '100%'};
   }
-  // flex-shrink: 0;
-  // border: 0px solid black;
 `;
 
 export const QuestionFlex = styled(Flex)`

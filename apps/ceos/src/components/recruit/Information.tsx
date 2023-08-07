@@ -1,4 +1,4 @@
-import { Flex, Text, DatePicker, SelectButton } from '@ceos-fe/ui';
+import { Flex, Text, DatePicker, SelectButton, media } from '@ceos-fe/ui';
 import styled from '@emotion/styled';
 import { RecruitApplyFormInterface } from './interface';
 import {
@@ -27,15 +27,11 @@ const Information = ({ register, setValue }: InformationProps) => {
   const univ = ['연세대학교', '서강대학교', '이화여자대학교', '홍익대학교'];
 
   return (
-    <Flex direction="column">
-      <Flex direction="column" webGap={36} mobileGap={28} width={680}>
+    <Section webGap={36} mobileGap={28}>
+      <Section>
         <CustomFlex>
           <QuestionFlex>
-            <CustomTextField
-              label="이름"
-              {...register('name')}
-              webWidth="328px"
-            />
+            <CustomTextField label="이름" {...register('name')} />
           </QuestionFlex>
           <QuestionFlex>
             <Question>성별</Question>
@@ -57,14 +53,29 @@ const Information = ({ register, setValue }: InformationProps) => {
         </CustomFlex>
         <CustomFlex>
           <CustomTextField
-            label="생년월일"
-            {...register('birth')}
-            placeholder="yyyy.mm.dd"
+            label="전공(학과)"
+            {...register('major')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*복수전공 및 부전공까지 포함하여 입력',
+              },
+              {
+                type: 'normal',
+                text: 'ex. 컴퓨터공학과 / 경영학과',
+              },
+            ]}
             webWidth="328px"
           />
           <CustomTextField
-            label="이메일"
-            {...register('email')}
+            label="졸업까지 남은 학기 수"
+            {...register('semestersLeftNumber')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*ex. 2',
+              },
+            ]}
             webWidth="328px"
           />
         </CustomFlex>
@@ -76,56 +87,59 @@ const Information = ({ register, setValue }: InformationProps) => {
             webWidth="328px"
           />
         </CustomFlex>
-        <Line />
-        <Flex direction="column" webGap={36} mobileGap={28}>
-          <CustomFlex>
-            <QuestionFlex>
-              <Question>재학 중인 학교</Question>
-              <Grid>
-                {univ.map((uni) => (
-                  <SelectButton
-                    variant="ceos"
-                    value={uni}
-                    webWidth={161}
-                    {...register('university')}
-                  />
-                ))}
-              </Grid>
-              <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
-            </QuestionFlex>
-          </CustomFlex>
-          <CustomFlex>
-            <CustomTextField
-              label="전공(학과)"
-              {...register('major')}
-              helperText={[
-                {
-                  type: 'normal',
-                  text: '*복수전공 및 부전공까지 포함하여 입력',
-                },
-                {
-                  type: 'normal',
-                  text: 'ex. 컴퓨터공학과 / 경영학과',
-                },
-              ]}
-              webWidth="328px"
-            />
-            <CustomTextField
-              label="졸업까지 남은 학기 수"
-              {...register('semestersLeftNumber')}
-              helperText={[
-                {
-                  type: 'normal',
-                  text: '*ex. 2',
-                },
-              ]}
-              webWidth="328px"
-            />
-          </CustomFlex>
-        </Flex>
+      </Section>
 
-        <Line />
+      <Line />
+      <Section>
         <CustomFlex>
+          <QuestionFlex>
+            <Question>재학 중인 학교</Question>
+            <Grid>
+              {univ.map((uni) => (
+                <SelectButton
+                  variant="ceos"
+                  value={uni}
+                  webWidth={161}
+                  {...register('university')}
+                />
+              ))}
+            </Grid>
+            <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
+          </QuestionFlex>
+        </CustomFlex>
+        <CustomFlex>
+          <CustomTextField
+            label="전공(학과)"
+            {...register('major')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*복수전공 및 부전공까지 포함하여 입력',
+              },
+              {
+                type: 'normal',
+                text: 'ex. 컴퓨터공학과 / 경영학과',
+              },
+            ]}
+            webWidth="328px"
+          />
+          <CustomTextField
+            label="졸업까지 남은 학기 수"
+            {...register('semestersLeftNumber')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*ex. 2',
+              },
+            ]}
+            webWidth="328px"
+          />
+        </CustomFlex>
+      </Section>
+
+      <Line />
+      <Section>
+        <CustomFlex direction="column" webGap={36} mobileGap={28}>
           <QuestionFlex>
             <Question>CEOS OT 날짜는?</Question>
             <DatePicker
@@ -143,28 +157,45 @@ const Information = ({ register, setValue }: InformationProps) => {
             />
           </QuestionFlex>
         </CustomFlex>
-        <Flex direction="column" align="start" webGap={8} mobileGap={14}>
-          <Text webTypo="Label3">
-            이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
-          </Text>
-          <CustomTextField
-            {...register('otherActivities')}
-            helperText={[
-              {
-                type: 'normal',
-                text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
-              },
-            ]}
-            webWidth="680px"
-          />
-        </Flex>
-        <Line />
-      </Flex>
-    </Flex>
+        <CustomFlex>
+          <QuestionFlex>
+            <Question>
+              이번 학기 세오스 활동 외 어떤 활동을 하는지 간략히 적어주세요.
+            </Question>
+            <CustomTextField
+              {...register('otherActivities')}
+              helperText={[
+                {
+                  type: 'normal',
+                  text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
+                },
+              ]}
+              webWidth="680px"
+            />
+          </QuestionFlex>
+        </CustomFlex>
+      </Section>
+
+      <Line />
+    </Section>
   );
 };
 
 export default Information;
+
+const Section = styled(Flex)`
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+  width: 856px;
+  gap: 36px;
+  margin: 24px 0 0 0;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    gap: 28px;
+  }
+`;
 
 const Line = styled.div`
   width: 856px;
@@ -182,6 +213,18 @@ const Grid = styled(Flex)`
   @media (max-width: 1023px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+`;
+
+const AFlex = styled(Flex)`
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 680px;
+
+  @media (max-width: 1023px) {
+    width: 100%;
     gap: 14px;
   }
 `;
