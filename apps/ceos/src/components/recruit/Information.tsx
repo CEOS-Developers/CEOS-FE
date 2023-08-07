@@ -53,29 +53,13 @@ const Information = ({ register, setValue }: InformationProps) => {
         </CustomFlex>
         <CustomFlex>
           <CustomTextField
-            label="전공(학과)"
-            {...register('major')}
-            helperText={[
-              {
-                type: 'normal',
-                text: '*복수전공 및 부전공까지 포함하여 입력',
-              },
-              {
-                type: 'normal',
-                text: 'ex. 컴퓨터공학과 / 경영학과',
-              },
-            ]}
+            label="생년월일"
+            {...register('birth')}
             webWidth="328px"
           />
           <CustomTextField
-            label="졸업까지 남은 학기 수"
-            {...register('semestersLeftNumber')}
-            helperText={[
-              {
-                type: 'normal',
-                text: '*ex. 2',
-              },
-            ]}
+            label="이메일"
+            {...register('email')}
             webWidth="328px"
           />
         </CustomFlex>
