@@ -71,7 +71,12 @@ export const RecruitSubHeader = ({
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
             <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
               <div style={{ width: '100%', display: 'flex' }}>
-                <Button variant="glass" webWidth={182} css={BtnCss}>
+                <Button
+                  variant="glass"
+                  webWidth={182}
+                  mobileWidth={346}
+                  css={BtnCss}
+                >
                   {generation}기 지원하기
                 </Button>
               </div>
@@ -84,6 +89,7 @@ export const RecruitSubHeader = ({
                     <Button
                       variant="glass"
                       webWidth={249}
+                      mobileWidth={346}
                       css={BtnCss}
                       onClick={() => {
                         toggleModal();
@@ -102,6 +108,7 @@ export const RecruitSubHeader = ({
                         <Button
                           variant="glass"
                           webWidth={249}
+                          mobileWidth={346}
                           css={BtnCss}
                           onClick={() => {
                             toggleModal();
@@ -118,6 +125,7 @@ export const RecruitSubHeader = ({
                         <Button
                           variant="glass"
                           webWidth={234}
+                          mobileWidth={346}
                           css={BtnCss}
                           disabled
                         >

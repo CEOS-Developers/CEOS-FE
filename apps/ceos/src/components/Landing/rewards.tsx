@@ -109,7 +109,8 @@ export const Rewards = () => {
         <Flex direction="column" webGap={24} mobileGap={14}>
           {awardList &&
             awardList
-              .slice(0, 2)
+              .slice(0, 3)
+              .filter((_, index) => index === 0 || index === 2)
               .map((a: AwardCardInterface) => (
                 <RewardCard
                   key={a.generation}
@@ -123,7 +124,8 @@ export const Rewards = () => {
         <Flex direction="column" webGap={24} mobileGap={14}>
           {awardList &&
             awardList
-              .slice(2, 4)
+              .slice(1, 4)
+              .filter((_, index) => index === 0 || index === 2)
               .map((a: AwardCardInterface) => (
                 <RewardCard
                   key={a.generation}

@@ -13,7 +13,7 @@ export const TimeModal = forwardRef<HTMLDivElement, { generation: number }>(
       if (opacity === 100) {
         setTimeout(() => {
           setOpacity(opacity - 1);
-        }, 1000);
+        }, 500);
       } else if (opacity > 0) {
         setTimeout(() => {
           setOpacity(opacity - 2);
