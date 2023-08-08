@@ -1,4 +1,4 @@
-import { theme } from '@ceos-fe/ui';
+import { media, theme } from '@ceos-fe/ui';
 import { useWindowResize } from '@ceos-fe/utils';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
@@ -320,10 +320,11 @@ const BtnCss = css`
 export const BtnWrapper = css`
   display: flex;
   gap: 24px;
-  margin-bottom: 36px;
+  margin-bottom: 80px;
 
-  @media (max-width: 768px) {
+  ${media.mobile} {
     width: 100%;
     flex-direction: column;
+    margin-bottom: 48px;
   }
 `;

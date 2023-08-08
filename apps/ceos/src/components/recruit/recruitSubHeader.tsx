@@ -3,7 +3,7 @@ import {
   RecruitTextCss,
   RecruitBgText,
 } from '@ceos/styles/recruit';
-import { Button, Text } from '@ceos-fe/ui';
+import { Button, Flex, Text } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
@@ -71,72 +71,58 @@ export const RecruitSubHeader = ({
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
             <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
               <div style={{ width: '100%', display: 'flex' }}>
-                <Button
-                  variant="glass"
-                  webWidth={182}
-                  mobileWidth={346}
-                  css={BtnCss}
-                >
+                <Button variant="glass" webWidth={182} css={BtnCss}>
                   {generation}기 지원하기
                 </Button>
               </div>
             </Link>
           ) : (
-            <div>
+            <>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <div>
-                  <div style={{ width: '100%', display: 'flex' }}>
-                    <Button
-                      variant="glass"
-                      webWidth={249}
-                      mobileWidth={346}
-                      css={BtnCss}
-                      onClick={() => {
-                        toggleModal();
-                        setStep('서류');
-                      }}
-                    >
-                      서류 합격 여부 확인하기
-                    </Button>
-                  </div>
-                </div>
+                <Flex>
+                  <Button
+                    variant="glass"
+                    webWidth={249}
+                    css={BtnCss}
+                    onClick={() => {
+                      toggleModal();
+                      setStep('서류');
+                    }}
+                  >
+                    서류 합격 여부 확인하기
+                  </Button>
+                </Flex>
               ) : (
-                <div>
+                <>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
-                    <div>
-                      <div style={{ width: '100%', display: 'flex' }}>
-                        <Button
-                          variant="glass"
-                          webWidth={249}
-                          mobileWidth={346}
-                          css={BtnCss}
-                          onClick={() => {
-                            toggleModal();
-                            setStep('최종');
-                          }}
-                        >
-                          최종 합격 여부 확인하기
-                        </Button>
-                      </div>
-                    </div>
+                    <Flex>
+                      <Button
+                        variant="glass"
+                        webWidth={249}
+                        css={BtnCss}
+                        onClick={() => {
+                          toggleModal();
+                          setStep('최종');
+                        }}
+                      >
+                        최종 합격 여부 확인하기
+                      </Button>
+                    </Flex>
                   ) : (
-                    <div>
-                      <div style={{ width: '100%', display: 'flex' }}>
-                        <Button
-                          variant="glass"
-                          webWidth={234}
-                          mobileWidth={346}
-                          css={BtnCss}
-                          disabled
-                        >
-                          지원 기간이 아닙니다.
-                        </Button>
-                      </div>
-                    </div>
+                    <Flex>
+                      <Button
+                        variant="glass"
+                        webWidth={234}
+                        css={BtnCss}
+                        disabled
+                      >
+                        지원 기간이 아닙니다.
+                      </Button>
+                    </Flex>
                   )}
-                </div>
+                </>
               )}
-            </div>
+            </>
           )}
         </>
       </div>
@@ -161,8 +147,10 @@ export const BtnCss = css`
   box-sizing: border-box;
 
   @media (max-width: 1023px) {
-    margin-top: 90px;
-    width: 346px;
+    box-sizing: content-box;
+
+    margin: 108px 22px 0px 22px;
     height: 59px;
+    max-width: 767px;
   }
 `;

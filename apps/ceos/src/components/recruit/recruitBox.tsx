@@ -1,4 +1,4 @@
-import { Text, theme } from '@ceos-fe/ui';
+import { Text, media, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
 interface MiniBoxProps {
@@ -27,12 +27,8 @@ export const RecruitBoxCss = ({
   text-align: center;
   ${theme.typo.Web.Body1};
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
-  }
-
-  @media (max-width: 390px) {
-    width: 347px;
     height: 219px;
     ${theme.typo.Mobile.Body1};
     margin-bottom: 48px;
@@ -66,11 +62,7 @@ export const MiniBoxCss = css`
   word-break: keep-all;
   text-align: center;
 
-  @media (max-width: 1023px) {
-    width: 200px;
-  }
-
-  @media (max-width: 768px) {
+  ${media.mobile} {
     width: 100%;
     height: 97px;
   }

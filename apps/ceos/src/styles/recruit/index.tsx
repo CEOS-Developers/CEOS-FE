@@ -1,4 +1,4 @@
-import { theme } from '@ceos-fe/ui';
+import { media, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 
 export const RecruitCss = css`
@@ -8,16 +8,12 @@ export const RecruitCss = css`
   background-repeat: no-repeat;
   background-color: ${theme.palette.Blue};
   height: 600px;
-  width: 100vw;
+  width: 100%;
 
   z-index: 1;
-  margin-bottom: 120px;
+  margin-bottom: 80px;
 
-  @media (max-width: 1023px) {
-    margin-bottom: 60px;
-  }
-
-  @media (max-width: 768px) {
+  ${media.mobile} {
     background-image: url('/recruit/banner-mobile.png');
     background-size: 687px;
     height: 630px;
@@ -37,17 +33,14 @@ export const RecruitBgText = css`
     display: none;
   }
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     .subText {
       ${theme.typo.Mobile.Body1};
     }
-  }
-
-  @media (max-width: 768px) {
     .mobile {
       display: block;
     }
-    margin-top: 206px;
+    margin-top: 250px;
   }
 `;
 
@@ -64,9 +57,6 @@ export const RecruitTextCss = css`
     font-size: 2.5rem;
     line-height: 130%;
     margin-bottom: 8px;
-  }
-
-  @media (max-width: 768px) {
     margin-bottom: 24px;
   }
 `;
@@ -77,11 +67,8 @@ export const RecruitMainCss = css`
   justify-content: flex-start;
   margin-bottom: 100px;
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 90%;
-  }
-
-  @media (max-width: 768px) {
     margin-bottom: 48px;
     margin-top: 0px;
   }
