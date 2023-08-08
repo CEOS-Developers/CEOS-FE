@@ -49,29 +49,9 @@ export const adminAuthApi = {
     return response.data;
   },
   POST_REFRESHTOKEN: async (refreshToken: string) => {
-    try {
-      const response = await adminInstance.post(`/admin/reissue`, {
-        refreshToken: refreshToken,
-      });
-      return response.data;
-    } catch {
-      console.log('error');
-    }
+    const response = await adminInstance.post(`/admin/reissue`, {
+      refreshToken: refreshToken,
+    });
+    return response.data;
   },
 };
-
-// const Login = async ({
-//   username,
-//   password,
-// }: {
-//   username: string;
-//   password: string;
-// }) => {
-//   const { accessToken, refreshToken } = await loginApi.SIGN_IN({
-//     username,
-//     password,
-//   });
-//   adminInstance.defaults.headers.common[
-//     'Authorization'
-//   ] = `Bearer ${accessToken}`;
-// };

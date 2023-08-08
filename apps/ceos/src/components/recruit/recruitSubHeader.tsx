@@ -162,7 +162,7 @@ export const BtnCss = css`
     box-sizing: content-box;
     margin-top: 108px;
     height: 59px;
-    max-width: 766px;
+    max-width: 767px;
     width: 100%;
   }
 `;

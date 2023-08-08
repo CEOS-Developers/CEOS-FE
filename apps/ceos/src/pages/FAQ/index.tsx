@@ -47,7 +47,7 @@ const FAQ = () => {
     <Flex direction="column" padding="0 22px" data-section="White">
       <Title
         title="FAQ"
-        explain={['ceos에 대해 자주 묻는 질문들에', '대한 답변입니다.']}
+        explain={['CEOS에 대해 자주 묻는 질문들에', '대한 답변입니다.']}
       />
       <TopMargin />
       <CustomFlex width={680} direction="column" webGap={36}>

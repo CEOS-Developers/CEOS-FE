@@ -14,7 +14,7 @@ interface ModalProps {
 
 const LINK: Record<string, string> = {
   서비스: 'Link',
-  깃허브: 'GiuHub',
+  깃허브: 'GitHub',
   비핸스: 'Behance',
   인스타: 'Instagram',
 };
@@ -37,7 +37,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
 
   projectInfo?.participants.forEach((person) => {
     const key = person.part as PartKey;
-    Part[key].name = [...Part[key].name, person.name];
+    if (person.name !== '') {
+      Part[key].name = [...Part[key].name, person.name];
+    }
   });
 
   return (
@@ -62,9 +64,18 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 <Image
                   alt="mainImage"
                   src={projectInfo.projectImages[0].imageUrl}
-                  layout="fill"
+                  layout="responsive"
                   objectFit="cover"
                   priority
+                  width={1032}
+                  height={0}
+                  css={css`
+                    width: 1032px;
+                    height: auto;
+                    // ${media.mobile} {
+                    //   width: 100%;
+                    // }
+                  `}
                 />
               </DetailThumbnailImageContainer>
             )}
@@ -103,7 +114,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                         {val.eng}
                       </Text>
                       <Flex width="auto" webGap={5}>
-                        {val.name.map((item) => (
+                        {val.name.map((item, idx) => (
                           <Text paletteColor="Black" webTypo="Body3">
                             {item}
                           </Text>
@@ -151,7 +162,11 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   width="auto"
                   height="auto"
                   margin="20px 0 0 0"
+                  justify="flex-start"
                   mobileGap={8}
+                  style={{
+                    flexWrap: 'wrap',
+                  }}
                 >
                   {projectInfo?.projectUrls.map((url) => (
                     <a href={url.linkUrl}>
@@ -222,8 +237,8 @@ const iconCss = () => css`
 
   @media (max-width: 1160px) {
     position: fixed;
-    top: 80px;
-    right: 75px;
+    top: 85px;
+    right: 90px;
   }
 
   ${media.mobile} {
@@ -239,8 +254,8 @@ const Container = styled.div`
   right: 15px;
 
   width: 1032px;
-  height: auto;
-  max-height: 90vh;
+  height: 90vh;
+  // max-height: 90vh;
 
   border-radius: 20px;
   background: #fff;
@@ -256,18 +271,26 @@ const Container = styled.div`
     display: none;
   }
 
+  @media (max-width: 1160px) {
+    margin-left: 26px;
+  }
+
   ${media.mobile} {
+    margin-left: 0px;
     width: 100%;
     right: 0px;
   }
 `;
 
 const DetailThumbnailImageContainer = styled.div`
-  width: 1032px;
+  width: 100%;
+  max-width: 1032px;
   height: 541px;
   position: relative;
   border-radius: 20px;
   aspect-ratio: 1032 / 541;
+
+  margin-bottom: 50px;
 
   ${media.mobile} {
     width: 100%;
