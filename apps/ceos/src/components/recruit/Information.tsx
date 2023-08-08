@@ -8,6 +8,8 @@ import {
   Question,
   QuestionFlex,
 } from './style';
+import { useState } from 'react';
+import { css } from '@emotion/react';
 
 interface InformationProps {
   register: RecruitApplyFormInterface['register'];
@@ -25,6 +27,48 @@ const Information = ({ register, setValue }: InformationProps) => {
   };
 
   const univ = ['연세대학교', '서강대학교', '이화여자대학교', '홍익대학교'];
+
+  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState('');
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawPhoneNumber = e.target.value.replace(/-/g, '');
+    setFormattedPhoneNumber(formatPhoneNumber(rawPhoneNumber));
+    setValue('phoneNumber', rawPhoneNumber, { shouldValidate: true }); // 실제 값은 하이픈 제거한 값
+  };
+
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (phoneNumber.length <= 3) {
+      return phoneNumber;
+    } else if (phoneNumber.length <= 7) {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    } else {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+        3,
+        7,
+      )}-${phoneNumber.slice(7, 11)}`;
+    }
+  };
+
+  const [formattedBirthDay, setFormattedBirthDay] = useState('');
+
+  const handleBirthDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawBirthDay = e.target.value.replace(/\./g, '');
+    setFormattedBirthDay(formatBirthDay(rawBirthDay));
+    setValue('birth', rawBirthDay, { shouldValidate: true });
+  };
+
+  const formatBirthDay = (birthDay: string) => {
+    if (birthDay.length <= 4) {
+      return birthDay;
+    } else if (birthDay.length <= 6) {
+      return `${birthDay.slice(0, 4)}.${birthDay.slice(4)}`;
+    } else {
+      return `${birthDay.slice(0, 4)}.${birthDay.slice(4, 6)}.${birthDay.slice(
+        6,
+        8,
+      )}`;
+    }
+  };
 
   return (
     <Section webGap={36} mobileGap={28}>
@@ -56,6 +100,8 @@ const Information = ({ register, setValue }: InformationProps) => {
             label="생년월일"
             {...register('birth')}
             webWidth="328px"
+            value={formattedBirthDay}
+            onChange={handleBirthDayChange}
           />
           <CustomTextField
             label="이메일"
@@ -67,30 +113,36 @@ const Information = ({ register, setValue }: InformationProps) => {
           <CustomTextField
             label="전화번호"
             {...register('phoneNumber')}
-            placeholder="000-0000-0000"
             webWidth="328px"
+            value={formattedPhoneNumber}
+            onChange={handlePhoneNumberChange}
           />
         </CustomFlex>
       </Section>
 
       <Line />
       <Section>
-        <CustomFlex>
-          <QuestionFlex>
-            <Question>재학 중인 학교</Question>
-            <Grid>
-              {univ.map((uni) => (
-                <SelectButton
-                  variant="ceos"
-                  value={uni}
-                  webWidth={161}
-                  {...register('university')}
-                />
-              ))}
-            </Grid>
-            <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
-          </QuestionFlex>
-        </CustomFlex>
+        <QuestionFlex
+          css={css`
+            width: 680px;
+            @media (max-width: 1023px) {
+              width: 100%;
+            }
+          `}
+        >
+          <Question>재학 중인 학교</Question>
+          <Grid>
+            {univ.map((uni) => (
+              <SelectButton
+                variant="ceos"
+                value={uni}
+                webWidth={161}
+                {...register('university')}
+              />
+            ))}
+          </Grid>
+          <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
+        </QuestionFlex>
         <CustomFlex>
           <CustomTextField
             label="전공(학과)"
@@ -197,18 +249,6 @@ const Grid = styled(Flex)`
   @media (max-width: 1023px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-`;
-
-const AFlex = styled(Flex)`
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 680px;
-
-  @media (max-width: 1023px) {
-    width: 100%;
     gap: 14px;
   }
 `;
