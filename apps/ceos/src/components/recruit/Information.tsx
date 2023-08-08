@@ -9,6 +9,7 @@ import {
   QuestionFlex,
 } from './style';
 import { useState } from 'react';
+import { css } from '@emotion/react';
 
 interface InformationProps {
   register: RecruitApplyFormInterface['register'];
@@ -121,22 +122,27 @@ const Information = ({ register, setValue }: InformationProps) => {
 
       <Line />
       <Section>
-        <CustomFlex>
-          <QuestionFlex>
-            <Question>재학 중인 학교</Question>
-            <Grid>
-              {univ.map((uni) => (
-                <SelectButton
-                  variant="ceos"
-                  value={uni}
-                  webWidth={161}
-                  {...register('university')}
-                />
-              ))}
-            </Grid>
-            <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
-          </QuestionFlex>
-        </CustomFlex>
+        <QuestionFlex
+          css={css`
+            width: 680px;
+            @media (max-width: 1023px) {
+              width: 100%;
+            }
+          `}
+        >
+          <Question>재학 중인 학교</Question>
+          <Grid>
+            {univ.map((uni) => (
+              <SelectButton
+                variant="ceos"
+                value={uni}
+                webWidth={161}
+                {...register('university')}
+              />
+            ))}
+          </Grid>
+          <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
+        </QuestionFlex>
         <CustomFlex>
           <CustomTextField
             label="전공(학과)"
@@ -243,18 +249,6 @@ const Grid = styled(Flex)`
   @media (max-width: 1023px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-`;
-
-const AFlex = styled(Flex)`
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 680px;
-
-  @media (max-width: 1023px) {
-    width: 100%;
     gap: 14px;
   }
 `;
