@@ -16,7 +16,7 @@ const FinPass = ({ props }: { props: PassDataInterface }) => {
 
   useEffect(() => {
     setIsScrolled(true);
-  }, []);
+  });
 
   return (
     <>
