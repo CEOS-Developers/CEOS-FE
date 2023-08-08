@@ -21,7 +21,6 @@ import { SuccessModal } from '@ceos/components/recruitModal/SuccessModal';
 import { ErrorModal } from '../../../components/recruitModal/ErrorModal';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
-import { useRouter } from 'next/router';
 
 const Apply = () => {
   /* 정해진 기간 아닐 때, 접근 불가 로직 */
@@ -45,6 +44,7 @@ const Apply = () => {
       : false;
   }
 
+  // 지원기간 아닐 때 페이지 접근 시 루트로 리다이렉트
   useEffect(() => {
     const checkValid = async () => {
       if (!isValid()) {
@@ -176,24 +176,6 @@ const Apply = () => {
     return true;
   };
 
-  // useEffect(() => {
-  //   for (const key of keyList) {
-  //     if (key === 'commonAnswers') {
-  //       for (const item of getValues(key)) {
-  //         if (!item.answer) return setSubmitBtn(false);
-  //       }
-  //     } else if (key === 'partAnswers') {
-  //       let num = partInfo[getValues('part')];
-  //       for (const item of getValues(`partAnswers.${num}`)) {
-  //         if (!item.answer) return setSubmitBtn(false);
-  //       }
-  //     } else if (!getValues(key)) {
-  //       return setSubmitBtn(false);
-  //     }
-  //   }
-  //   setSubmitBtn(true);
-  // }, [watch()]);
-
   const submitForm = async () => {
     let body = getValues();
     body.gender = body.gender.trim();
@@ -286,6 +268,7 @@ const Apply = () => {
           getValues={getValues}
           questionList={questionList}
         />
+
         <Button variant="default" disabled={!isAllAnswer()} onClick={onSubmit}>
           제출하기
         </Button>
