@@ -9,7 +9,11 @@ import {
 import { managementApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
-import { ListCss, MentorListCss } from '@ceos/styles/landing';
+import {
+  ListCss,
+  MentorListCss,
+  MentorListWrapper,
+} from '@ceos/styles/landing';
 import Footer from '@ceos/components/Footer';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
@@ -60,6 +64,7 @@ export const getStaticProps = async () => {
 };
 
 const Management = () => {
+  const order = ['기획', '디자인', '개발', '프론트엔드', '백엔드'];
   const { data } = useQuery(['ceos', 'mentor'], async () => {
     const manageData = await managementApi.GET_MENTOR({
       pageNum: 0,
@@ -113,10 +118,36 @@ const Management = () => {
           ))}
         </div>
         <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
-        <div css={MentorListCss}>
-          {mentors?.map((mentor: ManagerInterface) => (
-            <MentorCard key={mentor.id} mentorCard={mentor} />
-          ))}
+        <div css={MentorListWrapper}>
+          <div css={MentorListCss}>
+            {mentors
+              ?.filter((m: ManagerInterface) => m.part === '기획')
+              .map((mentor: ManagerInterface) => (
+                <MentorCard key={mentor.id} mentorCard={mentor} />
+              ))}
+          </div>
+          <div css={MentorListCss}>
+            {mentors
+              ?.filter((m: ManagerInterface) => m.part === '디자인')
+              .map((mentor: ManagerInterface) => (
+                <MentorCard key={mentor.id} mentorCard={mentor} />
+              ))}
+          </div>
+
+          <div css={MentorListCss}>
+            {mentors
+              ?.filter((m: ManagerInterface) => m.part === '프론트엔드')
+              .map((mentor: ManagerInterface) => (
+                <MentorCard key={mentor.id} mentorCard={mentor} />
+              ))}
+          </div>
+          <div css={MentorListCss}>
+            {mentors
+              ?.filter((m: ManagerInterface) => m.part === '백엔드')
+              .map((mentor: ManagerInterface) => (
+                <MentorCard key={mentor.id} mentorCard={mentor} />
+              ))}
+          </div>
         </div>
         <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
