@@ -132,18 +132,28 @@ export const MentorListCss = css`
   flex-wrap: wrap;
   column-gap: 264px;
   row-gap: 186px;
-  margin-top: 80px;
-  margin-bottom: 231px;
+  margin-bottom: 186px;
 
   ${media.mobile} {
     width: 100vw;
-    margin-top: 36px;
-    margin-bottom: 212px;
+    margin-bottom: 166px;
 
     box-sizing: border-box;
     padding: 0px 22px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 166px 14px;
+  }
+`;
+
+export const MentorListWrapper = css`
+  margin-top: 80px;
+  margin-bottom: 76px;
+  display: flex;
+  flex-direction: column;
+
+  ${media.mobile} {
+    margin-top: 36px;
+    margin-bottom: 46px;
   }
 `;

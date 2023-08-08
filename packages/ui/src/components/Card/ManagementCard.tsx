@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { theme } from '../../styles';
+import { theme, media } from '../../styles';
 import { Text } from '../common';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { css } from '@emotion/react';
+import Image from 'next/image';
 
 export interface ManagementCardProps {
   imageUrl?: string;
@@ -21,7 +22,18 @@ export const ManagementCard = (props: {
 
   return (
     <ManageWapper>
-      {imageUrl ? <Profile src={imageUrl} /> : <></>}
+      {imageUrl ? (
+        <Profile>
+          <Image
+            alt={`management ${name}`}
+            src={imageUrl}
+            layout="fill"
+            objectFit="cover"
+          />
+        </Profile>
+      ) : (
+        <></>
+      )}
       <Content>
         <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
           {part}
@@ -57,7 +69,7 @@ export const MentorCard = (props: {
       <Wrapper className={cName}>
         <Content className={cName}>
           <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-            {part}
+            {part} 멘토
           </Text>
           <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
             {name}
@@ -97,7 +109,7 @@ export const EmptyCard = () => {
       css={css`
         width: 240px;
 
-        @media (max-width: 1023px) {
+        ${media.mobile} {
           width: 166px;
           display: flex;
           gap: 14px;
@@ -139,7 +151,7 @@ const ManageWapper = styled.div`
   gap: 12px;
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
 
     display: flex;
@@ -166,7 +178,7 @@ const Wrapper = styled.div`
   left: 0;
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     width: 100%;
 
     display: flex;
@@ -193,7 +205,7 @@ const Content = styled.div`
     gap: 0;
   }
 
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     height: 112px;
     & > * > br {
       display: inline;
@@ -201,11 +213,13 @@ const Content = styled.div`
   }
 `;
 
-const Profile = styled.img`
+const Profile = styled.div`
+  position: relative;
+
   width: 140px;
   height: 140px;
   margin-bottom: 12px;
-  @media (max-width: 1023px) {
+  ${media.mobile} {
     margin-bottom: 14px;
     width: 90px;
     height: 90px;

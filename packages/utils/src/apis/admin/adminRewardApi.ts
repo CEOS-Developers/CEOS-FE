@@ -2,9 +2,7 @@ import { adminInstance } from '../axiosConfig';
 
 export interface RewardInterface {
   id: number;
-  generation: number;
   content: string;
-  startDate: string;
 }
 
 export interface ProjectInterface {
@@ -15,6 +13,7 @@ export interface ProjectInterface {
 
 export interface RewardDTO {
   generation: number;
+  startDate: string;
   awards: RewardInterface[];
   projects: ProjectInterface[];
 }
