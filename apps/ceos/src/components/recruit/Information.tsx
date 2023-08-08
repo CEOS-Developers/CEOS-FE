@@ -131,7 +131,22 @@ const Information = ({ register, setValue }: InformationProps) => {
           `}
         >
           <Question>재학 중인 학교</Question>
-          <Grid>
+          <div
+            css={css`
+              display: flex;
+              gap: 24px;
+              justify-content: space-between;
+              @media (max-width: 1023px) {
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
+                width: 100%;
+
+                flex-wrap: wrap;
+                gap: 14px;
+              }
+            `}
+          >
             {univ.map((uni) => (
               <SelectButton
                 variant="ceos"
@@ -140,7 +155,17 @@ const Information = ({ register, setValue }: InformationProps) => {
                 {...register('university')}
               />
             ))}
-          </Grid>
+          </div>
+          {/* <Grid>
+            {univ.map((uni) => (
+              <SelectButton
+                variant="ceos"
+                value={uni}
+                webWidth={161}
+                {...register('university')}
+              />
+            ))}
+          </Grid> */}
           <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
         </QuestionFlex>
         <CustomFlex>
@@ -241,14 +266,15 @@ const Line = styled.div`
 
   @media (max-width: 1023px) {
     width: 100%;
+    margin: 18px 0;
   }
 `;
 
-const Grid = styled(Flex)`
-  gap: 12px;
-  @media (max-width: 1023px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-`;
+// const Grid = styled(Flex)`
+//   gap: 12px;
+//   @media (max-width: 1023px) {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     gap: 14px;
+//   }
+// `;
