@@ -113,7 +113,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                       <Text paletteColor="Gray5" webTypo="Label2">
                         {val.eng}
                       </Text>
-                      <Flex width="auto" webGap={val.name.length > 1 ? 5 : 0}>
+                      <Flex width="auto" webGap={5}>
                         {val.name.map((item, idx) => (
                           <Text paletteColor="Black" webTypo="Body3">
                             {item}
@@ -148,7 +148,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                       <Text paletteColor="Gray5" mobileTypo="Label1">
                         {val.eng}
                       </Text>
-                      <Flex width="auto">
+                      <Flex width="auto" mobileGap={5}>
                         {val.name.map((item) => (
                           <Text paletteColor="Black" mobileTypo="Body1">
                             {item}
@@ -162,7 +162,11 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   width="auto"
                   height="auto"
                   margin="20px 0 0 0"
+                  justify="flex-start"
                   mobileGap={8}
+                  style={{
+                    flexWrap: 'wrap',
+                  }}
                 >
                   {projectInfo?.projectUrls.map((url) => (
                     <a href={url.linkUrl}>
