@@ -79,11 +79,7 @@ export const RecruitSubHeader = ({
           ) : (
             <>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <Flex
-                  css={css`
-                    padding: 0px 22px 0px 22px;
-                  `}
-                >
+                <Flex>
                   <Button
                     variant="glass"
                     webWidth={249}
@@ -99,11 +95,7 @@ export const RecruitSubHeader = ({
               ) : (
                 <>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
-                    <Flex
-                      css={css`
-                        padding: 0px 22px 0px 22px;
-                      `}
-                    >
+                    <Flex>
                       <Button
                         variant="glass"
                         webWidth={249}
@@ -117,11 +109,7 @@ export const RecruitSubHeader = ({
                       </Button>
                     </Flex>
                   ) : (
-                    <Flex
-                      css={css`
-                        padding: 0px 22px 0px 22px;
-                      `}
-                    >
+                    <Flex>
                       <Button
                         variant="glass"
                         webWidth={234}
@@ -160,9 +148,9 @@ export const BtnCss = css`
 
   @media (max-width: 1023px) {
     box-sizing: content-box;
-    margin-top: 108px;
+
+    margin: 108px 22px 0px 22px;
     height: 59px;
     max-width: 767px;
-    width: 100%;
   }
 `;
