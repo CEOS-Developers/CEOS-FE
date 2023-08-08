@@ -1,4 +1,4 @@
-import { Desktop, Flex, Mobile, theme } from '@ceos-fe/ui';
+import { Desktop, Flex, Mobile, media, theme } from '@ceos-fe/ui';
 import { RecruitSubHeader } from '@ceos/components/recruit/recruitSubHeader';
 import { RecruitMainCss } from '@ceos/styles/recruit';
 import { Text } from '@ceos-fe/ui';
@@ -92,7 +92,7 @@ const Recruit = () => {
               css={{
                 ...RecruitBoxCss({
                   width: 1032,
-                  margin: '0 0 124px 0',
+                  margin: '0 0 80px 0',
                 }),
               }}
             >
@@ -132,7 +132,7 @@ const Recruit = () => {
                 gap: 24px;
                 margin: 0 0 12px 0;
                 justify-content: space-between;
-                @media (max-width: 768px) {
+                ${media.mobile} {
                   display: grid;
                   grid-template-rows: 1fr 1fr;
                   grid-template-columns: 1fr 1fr;
@@ -160,7 +160,7 @@ const Recruit = () => {
                 content={`${data?.resultDateFinal}`}
               />
             </div>
-            <Text webTypo="Body3" paletteColor="Gray5" margin="14px 0 0 0">
+            <Text webTypo="Body3" paletteColor="Gray5">
               *서류 제출 후 온라인으로 면접을 진행합니다.
             </Text>
           </div>

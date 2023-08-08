@@ -50,16 +50,16 @@ export default function SignIn() {
   };
 
   // login cookie
-  const getExpiredDate = (time: number) => {
+  const getUTCExpiredDate = (time: number) => {
     const date = new Date();
-    date.setMinutes(date.getMinutes() + time);
-    return date;
+    date.setTime(date.getTime() + time * 60 * 1000);
+    return date.toISOString();
   };
   const LoginUntilExpires = (refreshToken: string) => {
-    const expires = getExpiredDate(720);
+    const expires = getUTCExpiredDate(720);
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
-      expires,
+      expires: new Date(expires),
     });
   };
   useEffect(() => {

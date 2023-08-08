@@ -38,7 +38,7 @@ const DocPass = ({ props }: { props: PassDataInterface }) => {
               >
                 서류 합격
               </p>
-              &nbsp; 입니다.
+              &nbsp;입니다.
             </Text>
 
             <Text webTypo="Body1" mobileTypo="Body1" paletteColor="White">

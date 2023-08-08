@@ -29,6 +29,7 @@ export interface ProjectInterface {
 
 export interface AwardCardInterface {
   generation: number;
+  startDate: string;
   awards: AwardInterface[];
   projects: ProjectInterface[];
 }
@@ -60,7 +61,6 @@ export const Rewards = () => {
         user-select: none;
       `}
     >
-      <Space height={80} mobileHeight={60} />
       <Flex direction="row" webGap={24} mobileGap={14} className="intro">
         <CardFlex backgroundColor="Gray1">
           CEOS는 신촌 유일의 IT 창업 동아리로,
@@ -126,6 +126,7 @@ export const Rewards = () => {
                     generation={a.generation}
                     projects={a.projects}
                     awards={a.awards}
+                    startDate={a.startDate}
                   />
                 ))}
           </Flex>
@@ -140,6 +141,7 @@ export const Rewards = () => {
                     generation={a.generation}
                     projects={a.projects}
                     awards={a.awards}
+                    startDate={a.startDate}
                   />
                 ))}
           </Flex>
@@ -157,6 +159,7 @@ export const Rewards = () => {
                   generation={a.generation}
                   projects={a.projects}
                   awards={a.awards}
+                  startDate={a.startDate}
                 />
               ))}
         </Flex>

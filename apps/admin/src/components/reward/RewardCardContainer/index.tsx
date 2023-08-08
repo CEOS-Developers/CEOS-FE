@@ -11,7 +11,7 @@ export const RewardCardContainer = (props: RewardCardProps) => {
   const rewardDeleteMutation = useMutation(adminRewardApi.DELETE_REWARD, {
     onSuccess: async () => {
       alert('삭제 완료');
-      queryClient.invalidateQueries(['management']);
+      queryClient.invalidateQueries();
     },
   });
 
