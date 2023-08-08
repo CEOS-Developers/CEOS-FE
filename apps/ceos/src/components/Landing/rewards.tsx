@@ -53,7 +53,6 @@ export const Rewards = () => {
         user-select: none;
       `}
     >
-      <Space height={80} mobileHeight={60} />
       <Flex direction="row" webGap={24} mobileGap={14} className="intro">
         <CardFlex backgroundColor="Gray1">
           CEOS는 신촌 유일의 IT 창업 동아리로,

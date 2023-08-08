@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { KeyOfPalette } from '@ceos-fe/ui';
+import { KeyOfPalette, theme } from '@ceos-fe/ui';
 
 //props를 color만 남기고 다 뺴도 될 거같은뎀... 헤더에서만 쓰니까... 걍 헤더 안에서 관리...ㅠ
 export const Logo = ({
@@ -21,7 +21,7 @@ export const Logo = ({
       css={css`
         width: ${width}px;
         height: ${height}px;
-        color: ${backColor};
+        color: ${theme.palette[backColor]};
         margin-left: ${marginLeft}vw;
 
         &.small {
