@@ -1,4 +1,12 @@
-import { Flex, RewardCard, Space, Text, media } from '@ceos-fe/ui';
+import {
+  Desktop,
+  Flex,
+  Mobile,
+  RewardCard,
+  Space,
+  Text,
+  media,
+} from '@ceos-fe/ui';
 import { CardFlex } from '@ceos/styles/landing';
 import { css } from '@emotion/react';
 import { awardApi } from '@ceos-fe/utils';
@@ -98,18 +106,51 @@ export const Rewards = () => {
         </Text>
       </Flex>
       <Space height={32} mobileHeight={24} />
-      <Flex
-        className="award-list"
-        webGap={24}
-        mobileGap={14}
-        justify="flex-start"
-        align="flex-start"
-      >
+
+      <Desktop>
+        <Flex
+          className="award-list"
+          webGap={24}
+          mobileGap={14}
+          justify="flex-start"
+          align="flex-start"
+        >
+          <Flex direction="column" webGap={24} mobileGap={14}>
+            {awardList &&
+              awardList
+                .slice(0, 3)
+                .filter((_, index) => index === 0 || index === 2)
+                .map((a: AwardCardInterface) => (
+                  <RewardCard
+                    key={a.generation}
+                    generation={a.generation}
+                    projects={a.projects}
+                    awards={a.awards}
+                  />
+                ))}
+          </Flex>
+          <Flex direction="column" webGap={24} mobileGap={14}>
+            {awardList &&
+              awardList
+                .slice(1, 4)
+                .filter((_, index) => index === 0 || index === 2)
+                .map((a: AwardCardInterface) => (
+                  <RewardCard
+                    key={a.generation}
+                    generation={a.generation}
+                    projects={a.projects}
+                    awards={a.awards}
+                  />
+                ))}
+          </Flex>
+        </Flex>
+      </Desktop>
+
+      <Mobile>
         <Flex direction="column" webGap={24} mobileGap={14}>
           {awardList &&
             awardList
-              .slice(0, 3)
-              .filter((_, index) => index === 0 || index === 2)
+              .slice(0, 4)
               .map((a: AwardCardInterface) => (
                 <RewardCard
                   key={a.generation}
@@ -119,21 +160,7 @@ export const Rewards = () => {
                 />
               ))}
         </Flex>
-        <Flex direction="column" webGap={24} mobileGap={14}>
-          {awardList &&
-            awardList
-              .slice(1, 4)
-              .filter((_, index) => index === 0 || index === 2)
-              .map((a: AwardCardInterface) => (
-                <RewardCard
-                  key={a.generation}
-                  generation={a.generation}
-                  projects={a.projects}
-                  awards={a.awards}
-                />
-              ))}
-        </Flex>
-      </Flex>
+      </Mobile>
       <Space height={80} mobileHeight={60} />
     </Wrapper>
   );
