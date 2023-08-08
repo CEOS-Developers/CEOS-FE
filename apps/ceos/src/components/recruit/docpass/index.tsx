@@ -125,6 +125,8 @@ export const PassContentCss = css`
     padding-left: 22px;
     padding-right: 22px;
     margin-top: 160px;
+    box-sizing: border-box;
+
     width: 100%;
     gap: 60px;
     white-space: normal;
