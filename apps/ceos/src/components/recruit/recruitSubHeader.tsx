@@ -71,7 +71,12 @@ export const RecruitSubHeader = ({
           {startDateDoc <= curDate && curDate <= endDateDoc ? (
             <Link href={'recruit/apply'} style={{ textDecoration: 'none' }}>
               <div style={{ width: '100%', display: 'flex' }}>
-                <Button variant="glass" webWidth={182} css={BtnCss}>
+                <Button
+                  variant="glass"
+                  webWidth={182}
+                  mobileWidth={346}
+                  css={BtnCss}
+                >
                   {generation}기 지원하기
                 </Button>
               </div>
@@ -79,46 +84,55 @@ export const RecruitSubHeader = ({
           ) : (
             <>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
-                <Flex>
-                  <Button
-                    variant="glass"
-                    webWidth={249}
-                    css={BtnCss}
-                    onClick={() => {
-                      toggleModal();
-                      setStep('서류');
-                    }}
-                  >
-                    서류 합격 여부 확인하기
-                  </Button>
-                </Flex>
+                <div>
+                  <div style={{ width: '100%', display: 'flex' }}>
+                    <Button
+                      variant="glass"
+                      webWidth={249}
+                      mobileWidth={346}
+                      css={BtnCss}
+                      onClick={() => {
+                        toggleModal();
+                        setStep('서류');
+                      }}
+                    >
+                      서류 합격 여부 확인하기
+                    </Button>
+                  </div>
+                </div>
               ) : (
                 <>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
-                    <Flex>
-                      <Button
-                        variant="glass"
-                        webWidth={249}
-                        css={BtnCss}
-                        onClick={() => {
-                          toggleModal();
-                          setStep('최종');
-                        }}
-                      >
-                        최종 합격 여부 확인하기
-                      </Button>
-                    </Flex>
+                    <div>
+                      <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="glass"
+                          webWidth={249}
+                          mobileWidth={346}
+                          css={BtnCss}
+                          onClick={() => {
+                            toggleModal();
+                            setStep('최종');
+                          }}
+                        >
+                          최종 합격 여부 확인하기
+                        </Button>
+                      </div>
+                    </div>
                   ) : (
-                    <Flex>
-                      <Button
-                        variant="glass"
-                        webWidth={234}
-                        css={BtnCss}
-                        disabled
-                      >
-                        지원 기간이 아닙니다.
-                      </Button>
-                    </Flex>
+                    <div>
+                      <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="glass"
+                          webWidth={234}
+                          mobileWidth={346}
+                          css={BtnCss}
+                          disabled
+                        >
+                          지원 기간이 아닙니다.
+                        </Button>
+                      </div>
+                    </div>
                   )}
                 </>
               )}

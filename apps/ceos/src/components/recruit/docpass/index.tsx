@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Text, theme } from '@ceos-fe/ui';
+import { Text, media, theme } from '@ceos-fe/ui';
 import { DocPassGlassBox } from '@ceos/components/GlassBox';
 import { FooterText } from '@ceos/components/FooterText';
 import { useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ const DocPass = ({ props }: { props: PassDataInterface }) => {
 
   useEffect(() => {
     setIsScrolled(true);
-  }, []);
+  });
 
   return (
     <>
@@ -107,10 +107,11 @@ export const PassContentCss = css`
   text-align: center;
   display: flex;
   left: 50%;
-  top: 8.2vw;
   gap: 48px;
   width: 1032px;
   overflow-x: hidden;
+  padding-bottom: 80px;
+  margin-top: 150px;
 
   .mobile {
     display: none;
@@ -119,17 +120,15 @@ export const PassContentCss = css`
   transform: translateX(-50%);
   white-space: nowrap;
 
-  @media (max-width: 1023px) {
-    width: 100%;
+  ${media.mobile} {
+    padding-bottom: 30px;
+    padding-left: 22px;
+    padding-right: 22px;
+    margin-top: 160px;
     box-sizing: border-box;
-    padding: 0 22px;
-    gap: 60px;
-    top: 23.2vw;
-  }
 
-  @media (max-width: 390px) {
-    width: 346px;
-    top: 40vw;
+    width: 100%;
+    gap: 60px;
     white-space: normal;
     word-break: keep-all;
 

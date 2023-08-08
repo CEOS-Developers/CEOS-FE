@@ -27,7 +27,7 @@ export const Sponsors = () => {
     async () =>
       await sponsorApi.GET_SPONSORS({
         pageNum: 0,
-        limit: 4,
+        limit: 20,
       }),
   );
 
@@ -61,16 +61,17 @@ export const Sponsors = () => {
       <div
         css={css`
           display: flex;
+          width: 1032px;
           ${media.mobile} {
             display: none;
           }
           gap: 24px;
-          margin-top: 32px;
+          overflow-x: auto;
         `}
       >
         {sponsorList &&
           sponsorList
-            .slice(0, 3)
+            // .slice(0, 3)
             .map((s: SponsorInterface) => (
               <SponsorCard key={s.id} sponsorCard={s} />
             ))}
@@ -85,11 +86,9 @@ export const Sponsors = () => {
         `}
       >
         {sponsorList &&
-          sponsorList
-            .slice(0, 4)
-            .map((s: SponsorInterface) => (
-              <SponsorCard key={s.id} sponsorCard={s} />
-            ))}
+          sponsorList.map((s: SponsorInterface) => (
+            <SponsorCard key={s.id} sponsorCard={s} />
+          ))}
       </Mobile>
       <Space height={80} mobileHeight={60} />
     </div>

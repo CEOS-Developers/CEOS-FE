@@ -39,6 +39,11 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
           setTimeout(() => {
             props.setErrorText('');
           }, 3000);
+        } else {
+          props.setErrorText('제출해주셔서 감사합니다.');
+          setTimeout(() => {
+            props.setErrorText('');
+          }, 3000);
         }
         props.toggleModal();
       },
@@ -47,6 +52,11 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
       onSuccess: (res) => {
         if (res === '면접 참여 여부를 이미 선택했습니다.') {
           props.setErrorText('면접 참여 여부를 이미 선택했습니다.');
+          setTimeout(() => {
+            props.setErrorText('');
+          }, 3000);
+        } else {
+          props.setErrorText('제출해주셔서 감사합니다.');
           setTimeout(() => {
             props.setErrorText('');
           }, 3000);
@@ -135,9 +145,6 @@ export const ModalBoxCss = css`
   border-radius: 20px;
   shadow: ${theme.shadow.PopUp};
   position: relative;
-
-  left: 50%;
-  transform: translateX(-50%);
 
   @media (max-width: 1023px) {
     width: 346px;

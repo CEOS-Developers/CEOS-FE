@@ -59,6 +59,20 @@ export const HomeFlex = styled(Flex)`
   }
 `;
 
+export const SponsorFlex = styled(Flex)`
+  width: 1032px;
+
+  @media (max-width: 1023px) {
+    width: 100vw;
+  }
+
+  margin-top: 80px;
+
+  @media (max-width: 1023px) {
+    margin-top: 60px;
+  }
+`;
+
 export const CardFlex = styled(Flex)`
   width: 504px;
   height: 213px;

@@ -67,6 +67,7 @@ const Wrapper = styled.div`
   justify-content: center;
 
   width: 328px;
+  min-width: 328px;
   height: 203px;
   border-radius: 16px;
   background-color: ${theme.palette.Gray1};

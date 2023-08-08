@@ -15,7 +15,7 @@ const NonPass = ({ props }: { props: PassDataInterface }) => {
 
   useEffect(() => {
     setIsScrolled(true);
-  }, []);
+  });
   return (
     <div css={NonPassMainCss} data-section="Blue">
       <Container>
