@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { SubHeader } from '@ceos/components/Landing/subHeader';
 import { Rewards } from '@ceos/components/Landing/rewards';
-import { HomeFlex } from '@ceos/styles/landing';
+import { HomeFlex, SponsorFlex } from '@ceos/styles/landing';
 import { Buttons } from '@ceos/components/Landing/buttons';
 import { Text, media } from '@ceos-fe/ui';
 import { Sponsors } from '@ceos/components/Landing/sponsor';
@@ -22,9 +22,9 @@ export default function Home() {
       {/* section2 => white */}
       <Buttons dataSection="Blue" />
       {/* section3 => blue */}
-      <HomeFlex margin="0 auto 0 auto" data-section="White">
+      <SponsorFlex margin="0 auto 0 auto" data-section="White">
         <Sponsors />
-      </HomeFlex>
+      </SponsorFlex>
       {/* section4 => white */}
       <div css={FooterTextCss}>
         <FooterText />

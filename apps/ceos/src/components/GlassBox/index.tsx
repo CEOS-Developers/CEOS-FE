@@ -48,6 +48,11 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       if (res === '면접 참여 여부를 이미 선택했습니다.') {
         if (query.attendanceStatus) {
           setIsPossible(true);
+        } else {
+          setErrorText('면접 참여 여부를 이미 선택했습니다.');
+          setTimeout(() => {
+            setErrorText('');
+          }, 3000);
         }
       }
     },
@@ -61,6 +66,7 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
         available: true,
         reason: null,
       });
+      setIsPossible(true);
     } catch (e) {
       console.log(e);
     }

@@ -58,7 +58,6 @@ export const SubHeader = (props: SubHeaderProps) => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
   width: 100vw;
   overflow: hidden;
   user-select: none;
@@ -85,6 +84,9 @@ const Wrapper = styled.div`
   .typo {
     position: absolute;
     top: 219px;
+    ${media.mobile} {
+      top: 176px;
+    }
   }
 
   .glass-button {

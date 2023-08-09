@@ -5,8 +5,9 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useQueryClient } from '@tanstack/react-query';
-import { Dispatch, forwardRef } from 'react';
+import { Dispatch, forwardRef, useState } from 'react';
 import { PassDataInterface } from '../recruit/interface';
+import styled from '@emotion/styled';
 
 /**
  * @param step '서류' | '최종'
@@ -27,7 +28,6 @@ interface FormInterface {
 export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
     const queryClient = useQueryClient();
-
     const { getValues, register, reset } = useForm<FormInterface>({
       defaultValues: {
         uuid: '',
@@ -60,7 +60,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           props.toggleModal();
         } catch (e) {
-          console.log(e);
+          alert('지원 정보를 확인해주세요.');
         }
       } else if (props.step === '최종') {
         try {
@@ -85,7 +85,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           props.toggleModal();
         } catch (e) {
-          console.log(e);
+          alert('지원 정보를 확인해주세요.');
         }
       }
     };
@@ -193,5 +193,27 @@ export const InputCss = css`
 
   @media (max-width: 1023px) {
     gap: 12px;
+  }
+`;
+
+const ErrorTextContainer = styled.div`
+  position: fixed;
+  top: 409px;
+  display: flex;
+  width: 504px;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  border-radius: 20px;
+  background: #fff;
+
+  /* 팝업창그림자 */
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1023px) {
+    top: 300px;
+    width: 80%;
   }
 `;

@@ -3,7 +3,7 @@ import {
   RecruitTextCss,
   RecruitBgText,
 } from '@ceos/styles/recruit';
-import { Button, Text } from '@ceos-fe/ui';
+import { Button, Flex, Text } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { useModal } from '@ceos-fe/utils';
 import { CheckModal } from '@ceos/components/Modals/checkModal';
@@ -82,7 +82,7 @@ export const RecruitSubHeader = ({
               </div>
             </Link>
           ) : (
-            <div>
+            <>
               {resultDateDoc <= curDate && curDate < resultDateFinal ? (
                 <div>
                   <div style={{ width: '100%', display: 'flex' }}>
@@ -101,7 +101,7 @@ export const RecruitSubHeader = ({
                   </div>
                 </div>
               ) : (
-                <div>
+                <>
                   {resultDateFinal <= curDate && curDate <= endDate ? (
                     <div>
                       <div style={{ width: '100%', display: 'flex' }}>
@@ -134,9 +134,9 @@ export const RecruitSubHeader = ({
                       </div>
                     </div>
                   )}
-                </div>
+                </>
               )}
-            </div>
+            </>
           )}
         </>
       </div>
@@ -161,8 +161,10 @@ export const BtnCss = css`
   box-sizing: border-box;
 
   @media (max-width: 1023px) {
-    margin-top: 90px;
-    width: 346px;
+    box-sizing: content-box;
+
+    margin: 108px 22px 0px 22px;
     height: 59px;
+    max-width: 767px;
   }
 `;
