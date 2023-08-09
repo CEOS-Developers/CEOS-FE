@@ -2,8 +2,6 @@ import { Text, SponsorCard, media, Space } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { sponsorApi } from '@ceos-fe/utils';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import styled from '@emotion/styled';
 
 interface SponsorInterface {
   id: number;
@@ -63,42 +61,25 @@ export const Sponsors = () => {
           display: flex;
           width: 1032px;
           ${media.mobile} {
-            display: none;
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr;
+            gap: 14px;
+            justify-content: center;
+            overflow-x: hidden;
           }
           gap: 24px;
           overflow-x: auto;
         `}
       >
         {sponsorList &&
-          sponsorList
-            // .slice(0, 3)
-            .map((s: SponsorInterface) => (
-              <SponsorCard key={s.id} sponsorCard={s} />
-            ))}
-      </div>
-      <Mobile
-        css={css`
-          width: 100%;
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: auto 1fr;
-          gap: 14px;
-          justify-content: center;
-        `}
-      >
-        {sponsorList &&
           sponsorList.map((s: SponsorInterface) => (
             <SponsorCard key={s.id} sponsorCard={s} />
           ))}
-      </Mobile>
+      </div>
+
       <Space height={80} mobileHeight={60} />
     </div>
   );
 };
-
-const Mobile = styled.div`
-  display: none;
-  @media (max-width: 1023px) {
-    width: 100%;
-    display: grid;
-  }
-`;

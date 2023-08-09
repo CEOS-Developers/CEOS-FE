@@ -159,7 +159,6 @@ export const backCss = () => css`
 
 const ErrorTextContainer = styled.div`
   position: fixed;
-  top: 409px;
   display: flex;
   width: 504px;
   padding: 40px 24px;
