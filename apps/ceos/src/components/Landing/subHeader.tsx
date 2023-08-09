@@ -25,6 +25,7 @@ export const SubHeader = (props: SubHeaderProps) => {
         className="typo"
         direction="column"
         justify="flex-start"
+        height={165}
         webGap={36}
         mobileGap={24}
       >
@@ -39,7 +40,12 @@ export const SubHeader = (props: SubHeaderProps) => {
           className="small"
         />
       </Flex>
-      <Flex className="glass-button" align="flex-start" webGap={24}>
+      <Flex
+        className="glass-button"
+        align="flex-start"
+        webGap={24}
+        height={204}
+      >
         <GlassText>
           <Creative />
         </GlassText>
