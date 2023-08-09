@@ -5,7 +5,7 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useQueryClient } from '@tanstack/react-query';
-import { Dispatch, forwardRef, useState } from 'react';
+import { Dispatch, MouseEventHandler, forwardRef, useState } from 'react';
 import { PassDataInterface } from '../recruit/interface';
 import styled from '@emotion/styled';
 
@@ -34,6 +34,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
         email: '',
       },
     });
+    const [isError, setIsError] = useState(false);
 
     const handleSubmit = async () => {
       //서류 체크
@@ -60,7 +61,10 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           props.toggleModal();
         } catch (e) {
-          alert('지원 정보를 확인해주세요.');
+          setIsError(true);
+          setTimeout(() => {
+            setIsError(false);
+          }, 1500);
         }
       } else if (props.step === '최종') {
         try {
@@ -85,9 +89,16 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           props.toggleModal();
         } catch (e) {
-          alert('지원 정보를 확인해주세요.');
+          setIsError(true);
+          setTimeout(() => {
+            setIsError(false);
+          }, 1500);
         }
       }
+    };
+
+    const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
     };
 
     return (
@@ -152,6 +163,15 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             </Button>
           </div>
         </div>
+        {isError && (
+          <div css={backCss} className="open">
+            <ErrorTextContainer onClick={handleClickInnerModal}>
+              <Text webTypo="Body1" mobileTypo="Body1" paletteColor="Blue">
+                지원 정보를 확인해주세요.
+              </Text>
+            </ErrorTextContainer>
+          </div>
+        )}
       </div>
     );
   },
@@ -198,7 +218,6 @@ export const InputCss = css`
 
 const ErrorTextContainer = styled.div`
   position: fixed;
-  top: 409px;
   display: flex;
   width: 504px;
   padding: 40px 24px;
