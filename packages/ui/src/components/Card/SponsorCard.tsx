@@ -75,6 +75,7 @@ const Wrapper = styled.div`
   /* 브라우저 크기에 따라 가로 크기 변경 */
   ${media.mobile} {
     width: 100%;
+    min-width: 166px;
     height: 171px;
   }
 `;
