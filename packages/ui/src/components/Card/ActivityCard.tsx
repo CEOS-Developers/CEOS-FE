@@ -95,7 +95,11 @@ const ActivityImage = styled(Image)`
   border-radius: 16px;
   background-color: ${theme.palette.Gray5};
   object-fit: cover;
-  width: 100%;
+  width: 328px;
+
+  ${media.mobile}{
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
