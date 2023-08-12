@@ -44,8 +44,7 @@ export default function SignIn() {
         if (res.refreshToken !== undefined) LoginUntilExpires(res.refreshToken);
       },
       onError: (err: any) => {
-        if (err.response.data.reason === '토큰이 존재하지 않습니다')
-          alert('접근 권한이 없습니다');
+        if (err.response.status === 403) alert('접근 권한이 없습니다');
         else alert('아이디와 비밀번호를 다시 확인해주세요');
       },
     });

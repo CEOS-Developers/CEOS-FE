@@ -87,6 +87,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     }
   }, [accessToken, cookies]);
 
+  useEffect(() => {
+    if (!appCookies['LOGIN_EXPIRES']) {
+      setLogin(false);
+      setLoading(false);
+    }
+  }, [appCookies['LOGIN_EXPIRES']]);
+
   if (loading) {
     return <Loading />;
   }

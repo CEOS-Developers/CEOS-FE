@@ -5,6 +5,12 @@ import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 import { Text, theme } from '@ceos-fe/ui';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import { adminAuthApi } from 'packages/utils';
+import { useRecoilState } from 'recoil';
+import { loginState } from '@admin/store/recoil';
 
 export type subMenuListInterface = {
   subMenuName: string;
@@ -20,60 +26,97 @@ export type sidebarInterface = {
 
 const Sidebar = () => {
   const [clickMenuNum, setClickMenuNum] = useState(100);
+  const [, , removeCookie] = useCookies(['LOGIN_EXPIRES']);
+  const [login, setLogin] = useRecoilState(loginState);
+  const router = useRouter();
+
+  const { refetch: SignOut, isSuccess } = useQuery(
+    ['signOut'],
+    adminAuthApi.SIGN_OUT,
+    {
+      enabled: false,
+    },
+  );
+
+  if (isSuccess) {
+    removeCookie('LOGIN_EXPIRES');
+    setLogin(false);
+    router.push('/auth');
+  }
 
   return (
     <Container>
-      <SidebarTitle>
-        <CEOS />
-        <Text paletteColor="White" webTypo="Heading3">
-          ADMIN
-        </Text>
-      </SidebarTitle>
-      fi
-      {SidebarMenuList.map((sidebarMenu: sidebarInterface, index: number) => (
-        <Fragment key={index}>
-          <SidebarMenuContainer
-            href={{ pathname: sidebarMenu.path }}
-            onClick={() => setClickMenuNum(index)}
-            click={index === clickMenuNum ? true : false}
-            submenuopen={sidebarMenu.submenuopen}
-          >
-            <div className="left-menu">
-              {sidebarMenu.icon}
-              <Text paletteColor="White" webTypo="Label2">
-                {sidebarMenu.menu}
-              </Text>
-            </div>
-            <div
-              onClick={() => {
-                sidebarMenu.submenuopen = !sidebarMenu.submenuopen;
-              }}
-            >
-              {sidebarMenu.submenu.length != 0 ? (
-                <SidebarArrow click={sidebarMenu.submenuopen} />
-              ) : (
-                <></>
-              )}
-            </div>
-          </SidebarMenuContainer>
-          {/* 하위 메뉴 */}
-          <SidebarSubMenuContainer submenuopen={sidebarMenu.submenuopen}>
-            {sidebarMenu.submenu.length != 0 ? (
-              sidebarMenu.submenu.map(
-                (submenu: subMenuListInterface, index: number) => (
-                  <SidebarSubMenu href={{ pathname: submenu.path }} key={index}>
-                    <Text paletteColor="White" webTypo="Body3">
-                      {submenu.subMenuName}
+      <div>
+        <SidebarTitle>
+          <CEOS />
+          <Text paletteColor="White" webTypo="Heading3">
+            ADMIN
+          </Text>
+        </SidebarTitle>
+        <div>
+          {SidebarMenuList.map(
+            (sidebarMenu: sidebarInterface, index: number) => (
+              <Fragment key={index}>
+                <SidebarMenuContainer
+                  href={{ pathname: sidebarMenu.path }}
+                  onClick={() => setClickMenuNum(index)}
+                  click={index === clickMenuNum ? true : false}
+                  submenuopen={sidebarMenu.submenuopen}
+                >
+                  <div className="left-menu">
+                    {sidebarMenu.icon}
+                    <Text paletteColor="White" webTypo="Label2">
+                      {sidebarMenu.menu}
                     </Text>
-                  </SidebarSubMenu>
-                ),
-              )
-            ) : (
-              <></>
-            )}
-          </SidebarSubMenuContainer>
-        </Fragment>
-      ))}
+                  </div>
+                  <div
+                    onClick={() => {
+                      sidebarMenu.submenuopen = !sidebarMenu.submenuopen;
+                    }}
+                  >
+                    {sidebarMenu.submenu.length != 0 ? (
+                      <SidebarArrow click={sidebarMenu.submenuopen} />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                </SidebarMenuContainer>
+                {/* 하위 메뉴 */}
+                <SidebarSubMenuContainer submenuopen={sidebarMenu.submenuopen}>
+                  {sidebarMenu.submenu.length != 0 ? (
+                    sidebarMenu.submenu.map(
+                      (submenu: subMenuListInterface, index: number) => (
+                        <SidebarSubMenu
+                          href={{ pathname: submenu.path }}
+                          key={index}
+                        >
+                          <Text paletteColor="White" webTypo="Body3">
+                            {submenu.subMenuName}
+                          </Text>
+                        </SidebarSubMenu>
+                      ),
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </SidebarSubMenuContainer>
+              </Fragment>
+            ),
+          )}
+        </div>
+      </div>
+      <SidebarMenuContainer
+        href=""
+        onClick={() => {
+          SignOut();
+        }}
+      >
+        <div className="left-menu">
+          <Text paletteColor="White" webTypo="Label2">
+            로그아웃
+          </Text>
+        </div>
+      </SidebarMenuContainer>
     </Container>
   );
 };
@@ -87,6 +130,9 @@ const Container = styled.div`
   position: fixed;
   min-width: 200px;
   z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   // 이미지 및 텍스트 드래그 방지
   -webkit-user-select: none;
