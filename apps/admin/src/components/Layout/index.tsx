@@ -37,13 +37,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 
   // login cookie
-  const getUTCExpiredDate = (time: number) => {
+  const getUTCExpiredDate = (weeks: number) => {
     const date = new Date();
-    date.setTime(date.getTime() + time * 60 * 1000);
+    date.setTime(date.getTime() + weeks * 7 * 24 * 60 * 60 * 1000);
     return date.toISOString();
   };
   const LoginUntilExpires = (refreshToken: string) => {
-    const expires = getUTCExpiredDate(720);
+    const expires = getUTCExpiredDate(2);
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
       expires: new Date(expires),
@@ -56,7 +56,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (login && router.pathname.includes('/auth')) {
       getNewAccessToken();
-      router.push('/applyStatement');
+      // router.push('/applyStatement');
     }
 
     if (
@@ -68,12 +68,16 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   }, [login, cookies]);
 
   useEffect(() => {
+    if (accessToken !== '' && router.pathname.includes('/auth')) {
+      router.push('/applyStatement');
+    }
+  }, [accessToken, router.pathname]);
+
+  useEffect(() => {
     if (appCookies['LOGIN_EXPIRES']) {
       if (accessToken === '') {
-        console.log('accesstoken 없음');
         getNewAccessToken();
       } else {
-        console.log('accesstoken 있음');
         setLogin(true);
         setLoading(false);
       }

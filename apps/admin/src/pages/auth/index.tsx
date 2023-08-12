@@ -50,13 +50,13 @@ export default function SignIn() {
   };
 
   // login cookie
-  const getUTCExpiredDate = (time: number) => {
+  const getUTCExpiredDate = (weeks: number) => {
     const date = new Date();
-    date.setTime(date.getTime() + time * 60 * 1000);
+    date.setTime(date.getTime() + weeks * 7 * 24 * 60 * 60 * 1000);
     return date.toISOString();
   };
   const LoginUntilExpires = (refreshToken: string) => {
-    const expires = getUTCExpiredDate(720);
+    const expires = getUTCExpiredDate(2);
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
       expires: new Date(expires),
