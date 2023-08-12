@@ -34,6 +34,10 @@ export const adminAuthApi = {
     const response = await adminInstance.post(`/admin/signin`, signInData);
     return response.data.data;
   },
+  SIGN_OUT: async () => {
+    const response = await adminInstance.post(`/admin/logout`);
+    return response.data;
+  },
   CHECK_ID: async (userid: string) => {
     const response = await adminInstance.post(`/admin/username`, {
       username: userid,

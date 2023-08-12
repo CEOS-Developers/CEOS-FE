@@ -43,8 +43,9 @@ export default function SignIn() {
         setLogin(true);
         if (res.refreshToken !== undefined) LoginUntilExpires(res.refreshToken);
       },
-      onError: () => {
-        alert('아이디와 비밀번호를 다시 확인해주세요');
+      onError: (err: any) => {
+        if (err.response.status === 403) alert('접근 권한이 없습니다');
+        else alert('아이디와 비밀번호를 다시 확인해주세요');
       },
     });
   };
