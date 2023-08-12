@@ -29,6 +29,7 @@ const Sidebar = () => {
           ADMIN
         </Text>
       </SidebarTitle>
+      fi
       {SidebarMenuList.map((sidebarMenu: sidebarInterface, index: number) => (
         <Fragment key={index}>
           <SidebarMenuContainer
