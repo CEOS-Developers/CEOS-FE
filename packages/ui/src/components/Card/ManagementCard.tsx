@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { theme, media } from '../../styles';
 import { Text } from '../common';
@@ -91,9 +92,11 @@ export const MentorCard = (props: {
       {company ? (
         <Wrapper className="extra-info">
           <Content className="extra-info">
-            <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
-              {company}
+            {company.split('\\n').map((item)=>(
+              <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
+              {item}
             </Text>
+            ))}
           </Content>
         </Wrapper>
       ) : (
