@@ -1,3 +1,4 @@
+// Plus
 export const Plus = () => {
   return (
     <svg
