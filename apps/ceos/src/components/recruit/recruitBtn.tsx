@@ -21,8 +21,8 @@ export const PMBtn = (props: BtnProps) => {
           <g clip-path="url(#clip0_620_9254)">
             <rect width="346" height="160" rx="10" fill="#5ED8FF" />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M192.145 151.881C192.145 145.069 190.057 138.744 186.486 133.51C188.324 133.83 190.215 133.997 192.145 133.997C210.211 133.997 224.856 119.371 224.856 101.328C224.856 83.2862 210.211 68.6601 192.145 68.6601C184.093 68.6601 176.721 71.5654 171.022 76.3836C171.095 75.4881 171.133 74.5823 171.133 73.6678C171.133 55.6257 156.488 40.9996 138.422 40.9996C120.356 40.9996 105.711 55.6257 105.711 73.6678C105.711 80.0225 107.528 85.9534 110.671 90.9707C109.054 90.7251 107.397 90.5976 105.711 90.5976C87.6453 90.5976 73 105.224 73 123.266C73 141.308 87.6453 155.934 105.711 155.934C113.811 155.934 121.223 152.994 126.936 148.124C126.795 149.357 126.723 150.61 126.723 151.881C126.723 169.923 141.368 184.549 159.434 184.549C177.499 184.549 192.145 169.923 192.145 151.881Z"
               fill="white"
             />
@@ -30,13 +30,13 @@ export const PMBtn = (props: BtnProps) => {
             <path
               d="M287.5 112.781L309.375 112.781"
               stroke="#5ED8FF"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
               d="M301.595 102.234L311.946 112.586L301.595 122.937"
               stroke="#5ED8FF"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
@@ -59,8 +59,8 @@ export const PMBtn = (props: BtnProps) => {
           <g clip-path="url(#clip0_2836_13157)">
             <rect width="328" height="198" rx="20" fill="#5ED8FF" />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M184.638 194.619C184.638 187.042 182.315 180.007 178.34 174.184C180.386 174.54 182.49 174.726 184.638 174.726C204.747 174.726 221.048 158.457 221.048 138.387C221.048 118.318 204.747 102.048 184.638 102.048C175.676 102.048 167.47 105.28 161.127 110.639C161.209 109.643 161.251 108.636 161.251 107.619C161.251 87.5494 144.95 71.28 124.841 71.28C104.733 71.28 88.4313 87.5494 88.4313 107.619C88.4313 114.688 90.4536 121.285 93.9523 126.866C92.1519 126.593 90.3082 126.451 88.4313 126.451C68.3227 126.451 52.0215 142.72 52.0215 162.79C52.0215 182.859 68.3227 199.129 88.4313 199.129C97.4472 199.129 105.698 195.858 112.057 190.441C111.899 191.812 111.819 193.206 111.819 194.619C111.819 214.689 128.12 230.958 148.228 230.958C168.337 230.958 184.638 214.689 184.638 194.619Z"
               fill="white"
             />
@@ -75,13 +75,13 @@ export const PMBtn = (props: BtnProps) => {
             <path
               d="M259.226 139.92L283.914 139.92"
               stroke="#5ED8FF"
-              stroke-width="7.40408"
+              strokeWidth="7.40408"
               stroke-linecap="round"
             />
             <path
               d="M275.133 128.04L286.816 139.7L275.133 151.36"
               stroke="#5ED8FF"
-              stroke-width="6.30952"
+              strokeWidth="6.30952"
               stroke-linecap="round"
             />
             <path
@@ -128,13 +128,13 @@ export const DesignBtn = (props: BtnProps) => {
             <path
               d="M287.5 112.781L309.375 112.781"
               stroke="#FFC466"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
               d="M301.595 102.234L311.946 112.586L301.595 122.937"
               stroke="#FFC466"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
@@ -171,13 +171,13 @@ export const DesignBtn = (props: BtnProps) => {
             <path
               d="M259.226 139.92L283.914 139.92"
               stroke="#FFC466"
-              stroke-width="7.40408"
+              strokeWidth="7.40408"
               stroke-linecap="round"
             />
             <path
               d="M275.133 128.04L286.816 139.7L275.133 151.36"
               stroke="#FFC466"
-              stroke-width="6.30952"
+              strokeWidth="6.30952"
               stroke-linecap="round"
             />
             <path
@@ -223,13 +223,13 @@ export const DevBtn = (props: BtnProps) => {
             <path
               d="M287.5 112.781L309.375 112.781"
               stroke="#01D1A8"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
               d="M301.595 102.234L311.946 112.586L301.595 122.937"
               stroke="#01D1A8"
-              stroke-width="5"
+              strokeWidth="5"
               stroke-linecap="round"
             />
             <path
@@ -266,13 +266,13 @@ export const DevBtn = (props: BtnProps) => {
             <path
               d="M259.226 139.92L283.914 139.92"
               stroke="#01D1A8"
-              stroke-width="7.40408"
+              strokeWidth="7.40408"
               stroke-linecap="round"
             />
             <path
               d="M275.133 128.04L286.816 139.7L275.133 151.36"
               stroke="#01D1A8"
-              stroke-width="6.30952"
+              strokeWidth="6.30952"
               stroke-linecap="round"
             />
             <path
