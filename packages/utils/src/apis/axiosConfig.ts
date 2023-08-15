@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://www.ceos-sinchon.com';
+const config = require('../../../../config.json');
+
+export const BASE_URL = config.NEXT_PUBLIC_API_URL;
 
 export const ceosInstance = axios.create({
   baseURL: BASE_URL,
