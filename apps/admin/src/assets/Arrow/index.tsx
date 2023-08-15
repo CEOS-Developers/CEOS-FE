@@ -1,3 +1,4 @@
+// Arrow
 export const LargeArrowDown = ({ color }: { color: string }) => {
   return (
     <svg
