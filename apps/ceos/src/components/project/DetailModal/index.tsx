@@ -285,7 +285,7 @@ const Container = styled.div`
 const DetailThumbnailImageContainer = styled.div`
   width: 100%;
   max-width: 1032px;
-  height: 541px;
+  height: auto;
   position: relative;
   border-radius: 20px;
   aspect-ratio: 1032 / 541;
