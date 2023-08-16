@@ -14,12 +14,14 @@ export interface ManagementCardProps {
   major: string;
   explain?: string[];
   company: string;
+  role: string;
 }
 
 export const ManagementCard = (props: {
   managementCard: ManagementCardProps;
 }): EmotionJSX.Element => {
-  const { imageUrl, part, name, university, major } = props.managementCard;
+  const { imageUrl, part, name, university, major, role } =
+    props.managementCard;
 
   return (
     <ManageWapper>
@@ -37,7 +39,11 @@ export const ManagementCard = (props: {
       )}
       <Content>
         <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-          {part}
+          {part === '회장' || part === '부회장' || part === '공동회장'
+            ? `${part}`
+            : role === '총무'
+            ? `${role} / ${part}`
+            : `${part} ${role}`}
         </Text>
         <Text webTypo="Heading3" mobileTypo="Heading3" paletteColor="Black">
           {name}
@@ -92,10 +98,10 @@ export const MentorCard = (props: {
       {company ? (
         <Wrapper className="extra-info">
           <Content className="extra-info">
-            {company.split('\\n').map((item)=>(
+            {company.split('\\n').map((item) => (
               <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
-              {item}
-            </Text>
+                {item}
+              </Text>
             ))}
           </Content>
         </Wrapper>

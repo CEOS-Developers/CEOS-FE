@@ -119,35 +119,57 @@ const Management = () => {
         </div>
         <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
         <div css={MentorListWrapper}>
-          <div css={MentorListCss}>
-            {mentors
-              ?.filter((m: ManagerInterface) => m.part === '기획')
-              .map((mentor: ManagerInterface) => (
-                <MentorCard key={mentor.id} mentorCard={mentor} />
-              ))}
-          </div>
-          <div css={MentorListCss}>
-            {mentors
-              ?.filter((m: ManagerInterface) => m.part === '디자인')
-              .map((mentor: ManagerInterface) => (
-                <MentorCard key={mentor.id} mentorCard={mentor} />
-              ))}
-          </div>
+          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+            0 && (
+            <div css={MentorListCss}>
+              {mentors
+                ?.filter((m: ManagerInterface) => m.part === '기획')
+                .map((mentor: ManagerInterface) => (
+                  <MentorCard key={mentor.id} mentorCard={mentor} />
+                ))}
+            </div>
+          )}
+          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+            0 && (
+            <div css={MentorListCss}>
+              {mentors
+                ?.filter((m: ManagerInterface) => m.part === '디자인')
+                .map((mentor: ManagerInterface) => (
+                  <MentorCard key={mentor.id} mentorCard={mentor} />
+                ))}
+            </div>
+          )}
+          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+            0 && (
+            <div css={MentorListCss}>
+              {mentors
+                ?.filter((m: ManagerInterface) => m.part === '개발')
+                .map((mentor: ManagerInterface) => (
+                  <MentorCard key={mentor.id} mentorCard={mentor} />
+                ))}
+            </div>
+          )}
 
-          <div css={MentorListCss}>
-            {mentors
-              ?.filter((m: ManagerInterface) => m.part === '프론트엔드')
-              .map((mentor: ManagerInterface) => (
-                <MentorCard key={mentor.id} mentorCard={mentor} />
-              ))}
-          </div>
-          <div css={MentorListCss}>
-            {mentors
-              ?.filter((m: ManagerInterface) => m.part === '백엔드')
-              .map((mentor: ManagerInterface) => (
-                <MentorCard key={mentor.id} mentorCard={mentor} />
-              ))}
-          </div>
+          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+            0 && (
+            <div css={MentorListCss}>
+              {mentors
+                ?.filter((m: ManagerInterface) => m.part === '프론트엔드')
+                .map((mentor: ManagerInterface) => (
+                  <MentorCard key={mentor.id} mentorCard={mentor} />
+                ))}
+            </div>
+          )}
+          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+            0 && (
+            <div css={MentorListCss}>
+              {mentors
+                ?.filter((m: ManagerInterface) => m.part === '백엔드')
+                .map((mentor: ManagerInterface) => (
+                  <MentorCard key={mentor.id} mentorCard={mentor} />
+                ))}
+            </div>
+          )}
         </div>
         <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
