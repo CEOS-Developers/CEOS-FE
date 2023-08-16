@@ -383,13 +383,7 @@ export default function ProjectDetail() {
           webHeight={46}
           mobileHeight={46}
           onClick={handleSaveProject}
-          disabled={
-            !(
-              isValid &&
-              getValues('projectImages.0.imageUrl') &&
-              getValues('projectImages.1.imageUrl')
-            )
-          }
+          disabled={!(isValid && getValues('projectImages.0.imageUrl'))}
           css={css`
             flex-shrink: 0;
           `}
