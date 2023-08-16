@@ -60,7 +60,13 @@ export const RewardCard = ({
                   >
                     {item.name}
                   </Text>
-                  <Text webTypo="Body2" paletteColor="Black">
+                  <Text
+                    webTypo="Body2"
+                    paletteColor="Black"
+                    css={css`
+                      width: 314px;
+                    `}
+                  >
                     {item.description}
                   </Text>
                 </Flex>
