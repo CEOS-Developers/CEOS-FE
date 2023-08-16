@@ -129,8 +129,8 @@ const Management = () => {
                 ))}
             </div>
           )}
-          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
-            0 && (
+          {mentors?.filter((m: ManagerInterface) => m.part === '디자인')
+            .length > 0 && (
             <div css={MentorListCss}>
               {mentors
                 ?.filter((m: ManagerInterface) => m.part === '디자인')
@@ -139,7 +139,7 @@ const Management = () => {
                 ))}
             </div>
           )}
-          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
+          {mentors?.filter((m: ManagerInterface) => m.part === '개발').length >
             0 && (
             <div css={MentorListCss}>
               {mentors
@@ -150,8 +150,8 @@ const Management = () => {
             </div>
           )}
 
-          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
-            0 && (
+          {mentors?.filter((m: ManagerInterface) => m.part === '프론트엔드')
+            .length > 0 && (
             <div css={MentorListCss}>
               {mentors
                 ?.filter((m: ManagerInterface) => m.part === '프론트엔드')
@@ -160,8 +160,8 @@ const Management = () => {
                 ))}
             </div>
           )}
-          {mentors?.filter((m: ManagerInterface) => m.part === '기획').length >
-            0 && (
+          {mentors?.filter((m: ManagerInterface) => m.part === '백엔드')
+            .length > 0 && (
             <div css={MentorListCss}>
               {mentors
                 ?.filter((m: ManagerInterface) => m.part === '백엔드')
