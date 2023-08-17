@@ -11,7 +11,7 @@ export const FooterText = () => {
         justify-content: center;
       `}
     >
-      © 2016-2023 CEOS ALL RIGHTS RESERVED.
+      © 2015-2023 CEOS ALL RIGHTS RESERVED.
     </Text>
   );
 };

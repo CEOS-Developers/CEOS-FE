@@ -37,7 +37,7 @@ export const RewardCard = ({
         <Box>
           <TitleWrapper>
             <Text webTypo="Heading4" paletteColor="Black">
-              {generation}기
+              {generation === 0 ? '1~9' : generation}기
             </Text>
             <Text webTypo="Label3" paletteColor="Gray5">
               {startDate}
@@ -100,7 +100,7 @@ export const RewardCard = ({
         <Box>
           <TitleWrapper>
             <Text mobileTypo="Heading4" paletteColor="Black">
-              {generation}기
+              {generation === 0 ? '1~9' : generation}기
             </Text>
             <Text mobileTypo="Body2" paletteColor="Gray5">
               {startDate}
