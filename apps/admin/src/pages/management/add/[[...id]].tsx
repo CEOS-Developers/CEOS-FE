@@ -50,25 +50,35 @@ export default function AddManagement() {
     handleSubmit,
     formState: { isValid },
   } = useForm();
-  const [valid, setValid] = useState(
-    isValid &&
-      getValues('role') &&
-      getValues('part') &&
-      getValues('university') &&
-      getValues('imageUrl'),
-  );
 
-  // 드롭다운 포함 유효성 확인
-  useEffect(() => {
-    setValid(
-      isValid &&
+  const checkValid = () => {
+    if (getValues('category') === '운영진') {
+      return (
+        isValid &&
         getValues('role') &&
         getValues('part') &&
         getValues('university') &&
-        getValues('imageUrl'),
-    );
+        getValues('imageUrl')
+      );
+    } else {
+      return (
+        isValid &&
+        getValues('role') &&
+        getValues('part') &&
+        getValues('university')
+      );
+    }
+  };
+
+  const [valid, setValid] = useState(checkValid());
+
+  // 드롭다운 포함 유효성 확인
+  useEffect(() => {
+    const isValid = checkValid();
+    setValid(isValid);
   }, [
     isValid,
+    watch('category'),
     watch('role'),
     watch('part'),
     watch('university'),
