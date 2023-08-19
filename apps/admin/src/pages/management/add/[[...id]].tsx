@@ -23,6 +23,7 @@ const PART: Record<string, string> = {
   회장: 'chairman',
   부회장: 'viceChairman',
   공동회장: 'coChairman',
+  개발: 'develop',
 };
 
 const ROLE: Record<string, string> = {
@@ -278,6 +279,10 @@ export default function AddManagement() {
                   {
                     label: '공동회장',
                     value: 'coChairman',
+                  },
+                  {
+                    label: '개발',
+                    value: 'develop',
                   },
                 ]}
                 label="part"
