@@ -215,6 +215,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
         available: true,
         reason: null,
       });
+      setIsPossible(true);
     } catch (e) {
       console.log(e);
     }
