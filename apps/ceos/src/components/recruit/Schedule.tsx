@@ -135,7 +135,9 @@ const Schedule = ({
 
           {questionList?.times.map((time, timeIdx) => {
             const questionDate = new Date(time.date);
-            const questionMonthDay = `${questionDate.getMonth()}/${questionDate.getDate()}`;
+            const questionMonthDay = `${
+              questionDate.getMonth() + 1
+            }/${questionDate.getDate()}`;
             const questionDay = dateToDay[questionDate.getDay() as number];
 
             return (
