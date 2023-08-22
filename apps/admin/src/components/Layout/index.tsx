@@ -18,7 +18,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [appCookies, setAppCookies] = useCookies(['LOGIN_EXPIRES']);
+  const [appCookies, setAppCookies, removeAppCookies] = useCookies([
+    'LOGIN_EXPIRES',
+  ]);
 
   const { mutate: getNewAccessToken } = useMutation(
     () => adminAuthApi.POST_REFRESHTOKEN(cookies),
@@ -32,6 +34,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         ] = `Bearer ${data.data.accessToken}`;
         if (data.data.refreshToken !== undefined)
           LoginUntilExpires(data.data.refreshToken);
+      },
+      onError: (err: any) => {
+        // 일단 404에 대해서만 로그아웃 처리
+        if (err.response.status === 404) {
+          setLogin(false);
+          setLoading(false);
+          setAccessToken('');
+          removeAppCookies('LOGIN_EXPIRES', { path: '/' });
+        }
       },
     },
   );
