@@ -100,12 +100,24 @@ const Information = ({ register, setValue }: InformationProps) => {
             label="생년월일"
             {...register('birth')}
             webWidth="328px"
+            helperText={[
+              {
+                type: 'normal',
+                text: 'ex. 2000.00.00',
+              },
+            ]}
             value={formattedBirthDay}
             onChange={handleBirthDayChange}
           />
           <CustomTextField
             label="이메일"
             {...register('email')}
+            helperText={[
+              {
+                type: 'normal',
+                text: '*제출 즉시 입력하신 주소로 메일이 전송되니 확인 바랍니다.',
+              },
+            ]}
             webWidth="328px"
           />
         </CustomFlex>
@@ -166,7 +178,7 @@ const Information = ({ register, setValue }: InformationProps) => {
               />
             ))}
           </Grid> */}
-          <Explain>*학부생, 대학원생, 휴학생 모두 해당</Explain>
+          <Explain>*학부생, 대학원생, 휴학생, 졸업생 모두 해당</Explain>
         </QuestionFlex>
         <CustomFlex>
           <CustomTextField
@@ -188,6 +200,10 @@ const Information = ({ register, setValue }: InformationProps) => {
             label="졸업까지 남은 학기 수"
             {...register('semestersLeftNumber')}
             helperText={[
+              {
+                type: 'normal',
+                text: '*졸업자는 남은 학기 수를 0으로 입력해주세요.',
+              },
               {
                 type: 'normal',
                 text: '*ex. 2',
@@ -246,7 +262,7 @@ export default Information;
 
 const Section = styled(Flex)`
   flex-direction: column;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
   width: 856px;
   gap: 36px;
