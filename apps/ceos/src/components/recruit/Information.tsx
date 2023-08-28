@@ -244,7 +244,7 @@ const Information = ({ register, setValue }: InformationProps) => {
               helperText={[
                 {
                   type: 'normal',
-                  text: '*다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
+                  text: '*재학 여부, 다른 동아리/학회, 인턴십, 프로젝트, 대외활동 등',
                 },
               ]}
               webWidth="680px"

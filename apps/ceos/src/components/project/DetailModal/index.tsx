@@ -6,6 +6,7 @@ import { DetailProjectInterface, projectApi } from 'packages/utils';
 import { Shortcut } from '@ceos/components/Shortcut';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ModalProps {
   id: number;
@@ -101,9 +102,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                     webGap={12}
                   >
                     {projectInfo?.projectUrls.map((url) => (
-                      <a href={url.linkUrl}>
+                      <Link href={url.linkUrl} target="_blank">
                         <Shortcut>{LINK[url.category]}</Shortcut>
-                      </a>
+                      </Link>
                     ))}
                   </Flex>
                 </Flex>
@@ -169,9 +170,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   }}
                 >
                   {projectInfo?.projectUrls.map((url) => (
-                    <a href={url.linkUrl}>
+                    <Link href={url.linkUrl} target="_blank">
                       <Shortcut>{LINK[url.category]}</Shortcut>
-                    </a>
+                    </Link>
                   ))}
                 </Flex>
               </Flex>
