@@ -20,7 +20,7 @@ export interface RecruitInterface extends RecruitBaseInterface {
 
 export const adminRecruitApi = {
   GET_RECRUIT: async () => {
-    const response = await adminInstance.get(`/recruitments`);
+    const response = await adminInstance.get(`/recruitments/all`);
 
     return response.data.data;
   },
