@@ -113,7 +113,9 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
               {question.questionIndex}. &nbsp;
               {question.question}
             </Text>
-            <Text webTypo="Body3">{question.answer}</Text>
+            <Text webTypo="Body3">
+              {question.answer} / {`[${question.answer.length}자]`}
+            </Text>
           </Flex>
         ),
       )}
@@ -135,7 +137,9 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
               {question.questionIndex}. &nbsp;
               {question.question}
             </Text>
-            <Text webTypo="Body3">{question.answer}</Text>
+            <Text webTypo="Body3">
+              {question.answer} / {`[${question.answer.length}자]`}
+            </Text>
           </Flex>
         ),
       )}

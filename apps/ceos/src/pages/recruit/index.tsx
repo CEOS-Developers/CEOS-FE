@@ -149,7 +149,8 @@ const Recruit = () => {
               />
               <RecruitMiniBox
                 header="서류 발표"
-                content={`${data?.resultDateDoc}`}
+                // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
+                content={'2023-09-01'}
               />
               <RecruitMiniBox
                 header="면접"
