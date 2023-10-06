@@ -14,3 +14,7 @@ export const ScrollState = atom<boolean>({
 
 export const projectId = atom<number>({ key: 'projectId', default: -1 });
 
+export const projectModalOpen = atom<boolean>({
+  key: 'projectModalOpen',
+  default: false,
+});
