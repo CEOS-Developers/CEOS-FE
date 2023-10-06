@@ -41,6 +41,7 @@ const Project = () => {
     <div
       css={css`
         position: relative;
+        ${modalNumber !== -1 && 'overflow: hidden;'}
       `}
     >
       <Flex direction="column" data-section="White">

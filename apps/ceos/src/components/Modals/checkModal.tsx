@@ -44,6 +44,11 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             uuid: getValues('uuid'),
             email: getValues('email'),
           });
+          if (passCheck === undefined) {
+            //에러처리
+            // 400_8 : 면접시간이 정해지지 않은 error
+            throw new Error();
+          }
 
           queryClient.setQueryData(['ceos', 'passCheck'], passCheck);
           props.setPassData({
@@ -61,6 +66,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
 
           props.toggleModal();
         } catch (e) {
+          console.log(e);
           setIsError(true);
           setTimeout(() => {
             setIsError(false);
