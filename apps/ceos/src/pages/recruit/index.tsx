@@ -164,6 +164,41 @@ const Recruit = () => {
             <Text webTypo="Body3" paletteColor="Gray5">
               *서류 제출 후 온라인으로 면접을 진행합니다.
             </Text>
+            <Text webTypo="Heading3" margin="80px 0 12px 0">
+              필참 행사
+            </Text>
+            <div
+              css={css`
+                display: flex;
+                gap: 24px;
+                margin: 0 0 12px 0;
+                justify-content: space-between;
+                ${media.mobile} {
+                  display: grid;
+                  grid-template-rows: 1fr 1fr;
+                  grid-template-columns: 1fr 1fr;
+                  width: 100%;
+
+                  flex-wrap: wrap;
+                  gap: 14px;
+                }
+              `}
+            >
+              <RecruitMiniBox header="OT" content={`${data?.otDate}`} />
+              <RecruitMiniBox
+                header="아이디어톤"
+                // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
+                content={'2023-10-04'}
+              />
+              <RecruitMiniBox header="해커톤" content={`2024-01-27`} />
+              <RecruitMiniBox
+                header="데모데이"
+                content={`${data?.demoDayDate}`}
+              />
+            </div>
+            <Text webTypo="Body3" paletteColor="Gray5">
+              *필참 행사에 참여하지 않을 경우 수료 자격을 상실합니다.
+            </Text>
           </div>
           <Mobile
             css={css`
