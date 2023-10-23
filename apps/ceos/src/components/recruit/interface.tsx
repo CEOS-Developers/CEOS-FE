@@ -70,7 +70,7 @@ export interface RecruitStudyResponse {
   resultDateFinal: string;
   openChatUrl: string;
   otDate: string;
-  demoDayDate: string;
+  demodayDate: string;
 }
 
 export interface DateProps {

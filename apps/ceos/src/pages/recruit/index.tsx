@@ -67,13 +67,12 @@ const Recruit = () => {
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;
 
-  const resultMid = '2023-09-01';
   const ideaton = '2023-10-04';
   const hackerton = '2024-01-27';
 
   const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
   const varEndDateDoc = data ? data.endDateDoc.split('-') : '';
-  const varResultMid = resultMid.split('-');
+  const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
   const varStartDateInterview = data ? data.startDateInterview.split('-') : '';
   const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
   const varResultDateFinal = data ? data.resultDateFinal.split('-') : '';
@@ -86,7 +85,7 @@ const Recruit = () => {
 
   const startDateDoc = new Date(data ? data.startDateDoc : '').getDay();
   const endDateDoc = new Date(data ? data.endDateDoc : '').getDay();
-  const resultMidDate = new Date(resultMid).getDay();
+  const resultDateMid = new Date(data ? data.resultDateDoc : '').getDay();
   const startDateInterview = new Date(
     data ? data.startDateInterview : '',
   ).getDay();
@@ -198,9 +197,9 @@ const Recruit = () => {
                 header="서류 발표"
                 // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
                 content={dateForm(
-                  resultMidDate,
-                  varResultMid[1],
-                  varResultMid[2],
+                  resultDateMid,
+                  varResultDateMid[1],
+                  varResultDateMid[2],
                 )}
               />
               <RecruitMiniBox
