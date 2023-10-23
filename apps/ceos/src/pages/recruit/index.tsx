@@ -85,44 +85,25 @@ const Recruit = () => {
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
   const startDateDoc = new Date(data ? data.startDateDoc : '').getDay();
-  const startDateDocLabel = week[startDateDoc];
-
   const endDateDoc = new Date(data ? data.endDateDoc : '').getDay();
-  const endDateDocLabel = week[endDateDoc];
-
-  const resultDateMidDate = new Date(resultMid).getDay();
-  const resultDateMidLabel = week[resultDateMidDate];
-
+  const resultMidDate = new Date(resultMid).getDay();
   const startDateInterview = new Date(
     data ? data.startDateInterview : '',
   ).getDay();
-  const startDateInterviewLabel = week[startDateInterview];
-
   const endDateInterview = new Date(data ? data.endDateInterview : '').getDay();
-  const endDateInterviewLabel = week[endDateInterview];
-
   const resultDateFinal = new Date(data ? data.resultDateFinal : '').getDay();
-  const resultDateFinalLabel = week[resultDateFinal];
-
   const otDate = new Date(data ? data.otDate : '').getDay();
-  const otDateLabel = week[otDate];
-
   const ideatonDate = new Date(ideaton).getDay();
-  const ideatonDateLabel = week[ideatonDate];
-
   const hackertonDate = new Date(hackerton).getDay();
-  const hackertonDateLabel = week[hackertonDate];
-
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
-  const demoDayDateLabel = week[demoDayDate];
 
-  const dateForm = (dayLabel: any, varDateFir: any, varDateSec: any) => {
+  const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
     const month =
       varDateFir?.substring(0, 1) == '0' ? varDateFir.substr(1, 1) : varDateFir;
     const date =
       varDateSec?.substring(0, 1) == '0' ? varDateSec.substr(1, 1) : varDateSec;
 
-    return month + '월 ' + date + '일' + ' (' + dayLabel + ')';
+    return month + '월 ' + date + '일' + ' (' + week[day] + ')';
   };
 
   return (
@@ -205,19 +186,19 @@ const Recruit = () => {
                 header="서류 접수"
                 content={
                   dateForm(
-                    startDateDocLabel,
+                    startDateDoc,
                     varStartDateDoc[1],
                     varStartDateDoc[2],
                   ) +
                   ' ~ ' +
-                  dateForm(endDateDocLabel, varEndDateDoc[1], varEndDateDoc[2])
+                  dateForm(endDateDoc, varEndDateDoc[1], varEndDateDoc[2])
                 }
               />
               <RecruitMiniBox
                 header="서류 발표"
                 // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
                 content={dateForm(
-                  resultDateMidLabel,
+                  resultMidDate,
                   varResultMid[1],
                   varResultMid[2],
                 )}
@@ -226,13 +207,13 @@ const Recruit = () => {
                 header="면접"
                 content={
                   dateForm(
-                    startDateInterviewLabel,
+                    startDateInterview,
                     varStartDateInterview[1],
                     varStartDateInterview[2],
                   ) +
                   ' ~ ' +
                   dateForm(
-                    endDateInterviewLabel,
+                    endDateInterview,
                     varEndDateInterview[1],
                     varEndDateInterview[2],
                   )
@@ -241,7 +222,7 @@ const Recruit = () => {
               <RecruitMiniBox
                 header="합격 발표"
                 content={dateForm(
-                  resultDateFinalLabel,
+                  resultDateFinal,
                   varResultDateFinal[1],
                   varResultDateFinal[2],
                 )}
@@ -272,21 +253,17 @@ const Recruit = () => {
             >
               <RecruitMiniBox
                 header="OT"
-                content={dateForm(otDateLabel, varOtDate[1], varOtDate[2])}
+                content={dateForm(otDate, varOtDate[1], varOtDate[2])}
               />
               <RecruitMiniBox
                 header="아이디어톤"
                 // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
-                content={dateForm(
-                  ideatonDateLabel,
-                  varIdeaton[1],
-                  varIdeaton[2],
-                )}
+                content={dateForm(ideatonDate, varIdeaton[1], varIdeaton[2])}
               />
               <RecruitMiniBox
                 header="해커톤"
                 content={dateForm(
-                  hackertonDateLabel,
+                  hackertonDate,
                   varHackerton[1],
                   varHackerton[2],
                 )}
@@ -294,7 +271,7 @@ const Recruit = () => {
               <RecruitMiniBox
                 header="데모데이"
                 content={dateForm(
-                  demoDayDateLabel,
+                  demoDayDate,
                   varDemodayDate[1],
                   varDemodayDate[2],
                 )}
