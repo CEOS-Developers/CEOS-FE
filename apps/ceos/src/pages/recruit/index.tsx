@@ -19,7 +19,7 @@ import { CustomLink } from '@ceos/components/Header';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DateProps,
   PassDataInterface,
@@ -67,6 +67,10 @@ const Recruit = () => {
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;
 
+  useEffect(() => {
+    console.log(data ? data.startDateDoc : '');
+    console.log(data ? data.startDateInterview : '');
+  });
   const ideaton = '2023-10-04';
   const hackerton = '2024-01-27';
 
@@ -100,7 +104,9 @@ const Recruit = () => {
     const month =
       varDateFir?.substring(0, 1) == '0' ? varDateFir.substr(1, 1) : varDateFir;
     const date =
-      varDateSec?.substring(0, 1) == '0' ? varDateSec.substr(1, 1) : varDateSec;
+      varDateSec?.substring(0, 1) == '0'
+        ? varDateSec.substr(1, 1)
+        : varDateSec?.substr(0, 2);
 
     return month + '월 ' + date + '일' + ' (' + week[day] + ')';
   };
