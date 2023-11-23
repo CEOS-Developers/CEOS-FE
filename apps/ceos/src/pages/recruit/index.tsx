@@ -67,13 +67,6 @@ const Recruit = () => {
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;
 
-  useEffect(() => {
-    console.log(data ? data.startDateDoc : '');
-    console.log(data ? data.startDateInterview : '');
-  });
-  const ideaton = '2023-10-04';
-  const hackerton = '2024-01-27';
-
   const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
   const varEndDateDoc = data ? data.endDateDoc.split('-') : '';
   const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
@@ -81,9 +74,9 @@ const Recruit = () => {
   const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
   const varResultDateFinal = data ? data.resultDateFinal.split('-') : '';
   const varOtDate = data ? data.otDate.split('-') : '';
-  const varIdeaton = ideaton.split('-');
-  const varHackerton = hackerton.split('-');
-  const varDemodayDate = data ? data.demodayDate?.split('-') : '';
+  const varIdeaton = data ? data.ideathonDate.split('-') : '';
+  const varHackerton = data ? data.hackathonDate.split('-') : '';
+  const varDemodayDate = data ? data.demodayDate.split('-') : '';
 
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
@@ -96,8 +89,8 @@ const Recruit = () => {
   const endDateInterview = new Date(data ? data.endDateInterview : '').getDay();
   const resultDateFinal = new Date(data ? data.resultDateFinal : '').getDay();
   const otDate = new Date(data ? data.otDate : '').getDay();
-  const ideatonDate = new Date(ideaton).getDay();
-  const hackertonDate = new Date(hackerton).getDay();
+  const ideatonDate = new Date(data ? data.ideathonDate : '').getDay();
+  const hackertonDate = new Date(data ? data.hackathonDate : '').getDay();
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
 
   const dateForm = (day: any, varDateFir: any, varDateSec: any) => {

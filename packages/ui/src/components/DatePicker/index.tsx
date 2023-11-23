@@ -39,8 +39,10 @@ export const DatePicker = (props: DatePickerProps) => {
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
         disabledKeyboardNavigation
-        dateFormat="yyyy년 MM월 dd일"
+        dateFormat="yyyy년 MM월 dd일 HH:mm"
         placeholderText={props.placeholder}
+        showTimeSelect
+        timeIntervals={10}
         customInput={
           <CustomTextField isAdmin={props.isAdmin} right={<Calendar />} />
         }
@@ -87,7 +89,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
   }
 
   .react-datepicker__navigation {
-    margin: 20px 16px 0px 16px;
+    margin: 24px 29px 0px 16px;
     width: 18px;
     height: 14px;
     overflow: visible;
@@ -109,7 +111,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
   }
 
   .react-datepicker__month-container {
-    width: 296px !important;
+    width: 198px !important;
     height: 100%;
   }
 
@@ -186,7 +188,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
     text-align: center;
     line-height: 0.75rem;
 
-    width: 35.43px;
+    width: 21.43px;
     height: 24px;
 
     margin: 0;
@@ -231,5 +233,25 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
 
   .react-datepicker__day--outside-month {
     color: ${theme.palette.Gray3}!important;
+  }
+
+  .react-datepicker__time-container {
+    height: 100%;
+    border-left: none;
+  }
+
+  .react-datepicker__time-list {
+    color: ${theme.palette.Gray5};
+  }
+
+  .react-datepicker__time-list-item:hover,
+  .react-datepicker__time-list-item--selected {
+    background: ${({ isAdmin }) =>
+      isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue} !important;
+    color: ${theme.palette.White}!important;
+  }
+
+  .react-datepicker__time-list::-webkit-scrollbar {
+    display: none;
   }
 `;

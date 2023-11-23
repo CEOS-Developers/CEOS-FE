@@ -15,6 +15,8 @@ export interface RecruitInterface extends RecruitBaseInterface {
   endDateInterview: string;
   resultDateFinal: string;
   otDate: string;
+  ideathonDate: string;
+  hackathonDate: string;
   demodayDate: string;
 }
 
