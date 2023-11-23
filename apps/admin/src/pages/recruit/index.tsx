@@ -73,16 +73,16 @@ export default function Recruit() {
   const handleSave = () => {
     const recruitData = {
       ...getValues(),
-      startDateDoc: getFormattedDate(getValues().startDateDoc),
-      endDateDoc: getFormattedDate(getValues().endDateDoc),
-      resultDateDoc: getFormattedDate(getValues().resultDateDoc),
-      startDateInterview: getFormattedDate(getValues().startDateInterview),
-      endDateInterview: getFormattedDate(getValues().endDateInterview),
-      resultDateFinal: getFormattedDate(getValues().resultDateFinal),
-      otDate: getFormattedDate(getValues().otDate),
-      ideathonDate: getFormattedDate(getValues().ideathonDate),
-      hackathonDate: getFormattedDate(getValues().hackathonDate),
-      demodayDate: getFormattedDate(getValues().demodayDate),
+      startDateDoc: getValues().startDateDoc,
+      endDateDoc: getValues().endDateDoc,
+      resultDateDoc: getValues().resultDateDoc,
+      startDateInterview: getValues().startDateInterview,
+      endDateInterview: getValues().endDateInterview,
+      resultDateFinal: getValues().resultDateFinal,
+      otDate: getValues().otDate,
+      ideathonDate: getValues().ideathonDate,
+      hackathonDate: getValues().hackathonDate,
+      demodayDate: getValues().demodayDate,
     };
     postRecruitments(recruitData);
   };
