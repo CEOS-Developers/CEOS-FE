@@ -127,6 +127,7 @@ export default function Recruit() {
           <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('startDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -136,6 +137,7 @@ export default function Recruit() {
             <Line />
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('endDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -156,6 +158,7 @@ export default function Recruit() {
           <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('startDateInterview')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -165,6 +168,7 @@ export default function Recruit() {
             <Line />
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('endDateInterview')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -185,6 +189,7 @@ export default function Recruit() {
             <Text webTypo="Label3">서류 발표</Text>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('resultDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -202,6 +207,7 @@ export default function Recruit() {
             <Text webTypo="Label3">합격 발표</Text>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('resultDateFinal')}
               onChange={(date: Date | null) => {
                 if (!date) return;
