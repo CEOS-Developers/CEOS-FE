@@ -74,8 +74,8 @@ const Recruit = () => {
   const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
   const varResultDateFinal = data ? data.resultDateFinal.split('-') : '';
   const varOtDate = data ? data.otDate.split('-') : '';
-  const varIdeaton = data ? data.ideathonDate.split('-') : '';
-  const varHackerton = data ? data.hackathonDate.split('-') : '';
+  const varIdeathon = data ? data.ideathonDate.split('-') : '';
+  const varHackathon = data ? data.hackathonDate.split('-') : '';
   const varDemodayDate = data ? data.demodayDate.split('-') : '';
 
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
@@ -89,8 +89,8 @@ const Recruit = () => {
   const endDateInterview = new Date(data ? data.endDateInterview : '').getDay();
   const resultDateFinal = new Date(data ? data.resultDateFinal : '').getDay();
   const otDate = new Date(data ? data.otDate : '').getDay();
-  const ideatonDate = new Date(data ? data.ideathonDate : '').getDay();
-  const hackertonDate = new Date(data ? data.hackathonDate : '').getDay();
+  const ideathonDate = new Date(data ? data.ideathonDate : '').getDay();
+  const hackathonDate = new Date(data ? data.hackathonDate : '').getDay();
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
 
   const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
@@ -255,15 +255,14 @@ const Recruit = () => {
               />
               <RecruitMiniBox
                 header="아이디어톤"
-                // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
-                content={dateForm(ideatonDate, varIdeaton[1], varIdeaton[2])}
+                content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
               <RecruitMiniBox
                 header="해커톤"
                 content={dateForm(
-                  hackertonDate,
-                  varHackerton[1],
-                  varHackerton[2],
+                  hackathonDate,
+                  varHackathon[1],
+                  varHackathon[2],
                 )}
               />
               <RecruitMiniBox
