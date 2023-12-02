@@ -14,7 +14,7 @@ export interface DatePickerProps {
   onChange: (date: Date | null) => void;
   initialValue?: Date | null;
   isAdmin?: boolean;
-  isTime?:boolean;
+  isTime?: boolean;
 }
 
 /**
@@ -41,9 +41,11 @@ export const DatePicker = (props: DatePickerProps) => {
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
         disabledKeyboardNavigation
-        dateFormat={props.isTime?"yyyy년 MM월 dd일 HH:mm":"yyyy년 MM월 dd일"}
+        dateFormat={
+          props.isTime ? 'yyyy년 MM월 dd일 HH:mm' : 'yyyy년 MM월 dd일'
+        }
         placeholderText={props.placeholder}
-        showTimeSelect = {props.isTime}
+        showTimeSelect={props.isTime}
         timeIntervals={1}
         timeFormat="HH:mm"
         customInput={
@@ -62,7 +64,7 @@ const CustomTextField = styled(TextField)`
   }
 `;
 
-const DatePickerStyles = styled.div<{ isAdmin?: boolean, isTime?:boolean }>`
+const DatePickerStyles = styled.div<{ isAdmin?: boolean; isTime?: boolean }>`
   width: 100%;
 
   .react-datepicker-wrapper {
@@ -92,7 +94,8 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean, isTime?:boolean }>`
   }
 
   .react-datepicker__navigation {
-    margin: ${({isTime}) => isTime?'24px 32px 0px 16px' : '24px 16px 0px 16px'};
+    margin: ${({ isTime }) =>
+      isTime ? '24px 32px 0px 16px' : '24px 16px 0px 16px'};
     width: 18px;
     height: 14px;
     overflow: visible;
@@ -114,7 +117,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean, isTime?:boolean }>`
   }
 
   .react-datepicker__month-container {
-    width: ${({isTime}) => isTime?'196px' : '296px'}!important;
+    width: ${({ isTime }) => (isTime ? '196px' : '296px')};
     height: 100%;
   }
 
@@ -191,7 +194,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean, isTime?:boolean }>`
     text-align: center;
     line-height: 0.75rem;
 
-    width: ${({isTime}) => isTime?'21.43px' : '35.43px'};
+    width: ${({ isTime }) => (isTime ? '21.43px' : '35.43px')};
     height: 24px;
 
     margin: 0;
@@ -237,7 +240,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean, isTime?:boolean }>`
   .react-datepicker__day--outside-month {
     color: ${theme.palette.Gray3}!important;
   }
-  
+
   .react-datepicker__time-container {
     height: 100%;
     border-left: none;
