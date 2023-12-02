@@ -6,6 +6,7 @@ import { theme } from '../../styles';
 import ReactDatePicker from 'react-datepicker';
 import { TextField } from '../TextField/index';
 import { Calendar } from '../../assets/Calender/index';
+import React from 'react';
 
 export interface DatePickerProps {
   width?: number;
@@ -13,6 +14,7 @@ export interface DatePickerProps {
   onChange: (date: Date | null) => void;
   initialValue?: Date | null;
   isAdmin?: boolean;
+  isTime?: boolean;
 }
 
 /**
@@ -34,13 +36,18 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [startDate]);
 
   return (
-    <DatePickerStyles isAdmin={props.isAdmin}>
+    <DatePickerStyles isAdmin={props.isAdmin} isTime={props.isTime}>
       <ReactDatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
         disabledKeyboardNavigation
-        dateFormat="yyyy년 MM월 dd일"
+        dateFormat={
+          props.isTime ? 'yyyy년 MM월 dd일 HH:mm' : 'yyyy년 MM월 dd일'
+        }
         placeholderText={props.placeholder}
+        showTimeSelect={props.isTime}
+        timeIntervals={1}
+        timeFormat="HH:mm"
         customInput={
           <CustomTextField isAdmin={props.isAdmin} right={<Calendar />} />
         }
@@ -57,7 +64,7 @@ const CustomTextField = styled(TextField)`
   }
 `;
 
-const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
+const DatePickerStyles = styled.div<{ isAdmin?: boolean; isTime?: boolean }>`
   width: 100%;
 
   .react-datepicker-wrapper {
@@ -87,7 +94,8 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
   }
 
   .react-datepicker__navigation {
-    margin: 20px 16px 0px 16px;
+    margin: ${({ isTime }) =>
+      isTime ? '24px 32px 0px 16px' : '24px 16px 0px 16px'};
     width: 18px;
     height: 14px;
     overflow: visible;
@@ -109,7 +117,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
   }
 
   .react-datepicker__month-container {
-    width: 296px !important;
+    width: ${({ isTime }) => (isTime ? '196px' : '296px')};
     height: 100%;
   }
 
@@ -186,7 +194,7 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
     text-align: center;
     line-height: 0.75rem;
 
-    width: 35.43px;
+    width: ${({ isTime }) => (isTime ? '21.43px' : '35.43px')};
     height: 24px;
 
     margin: 0;
@@ -231,5 +239,25 @@ const DatePickerStyles = styled.div<{ isAdmin?: boolean }>`
 
   .react-datepicker__day--outside-month {
     color: ${theme.palette.Gray3}!important;
+  }
+
+  .react-datepicker__time-container {
+    height: 100%;
+    border-left: none;
+  }
+
+  .react-datepicker__time-list {
+    color: ${theme.palette.Gray5};
+  }
+
+  .react-datepicker__time-list-item:hover,
+  .react-datepicker__time-list-item--selected {
+    background: ${({ isAdmin }) =>
+      isAdmin ? theme.palette.Admin.Navy : theme.palette.Blue} !important;
+    color: ${theme.palette.White}!important;
+  }
+
+  .react-datepicker__time-list::-webkit-scrollbar {
+    display: none;
   }
 `;
