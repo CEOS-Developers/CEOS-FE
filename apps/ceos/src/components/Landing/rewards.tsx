@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CustomLink } from '../Header';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
-import { generationState } from '@ceos/state';
+/*import { generationState } from '@ceos/state';*/
 
 export interface AwardInterface {
   generation: number;
@@ -50,7 +50,7 @@ export const Rewards = () => {
     return awardData;
   });
 
-  const generation = useRecoilValue(generationState);
+  /*const generation = useRecoilValue(generationState);*/
 
   const awardList = data?.content;
 
