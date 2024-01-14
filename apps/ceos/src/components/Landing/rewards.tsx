@@ -65,7 +65,7 @@ export const Rewards = () => {
         <CardFlex backgroundColor="Gray1">
           CEOS는 신촌 유일의 IT 창업 동아리로,
           <br /> 2015년 3월을 1기로 시작하여
-          <br /> 올해 {new Date().getFullYear()}년에 {generation}기를
+          <br /> 올해 {new Date().getFullYear()}년에 {/** {generation}*/}19기를
           맞이합니다.
         </CardFlex>
         <CardFlex backgroundColor="Gray1">
