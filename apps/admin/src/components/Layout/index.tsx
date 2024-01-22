@@ -61,49 +61,21 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     });
   };
   useEffect(() => {
-    if (appCookies['LOGIN_EXPIRES']) return;
-  }, []);
-
-  useEffect(() => {
-    if (login && router.pathname.includes('/auth')) {
+    // 쿠키가 있고 엑세스 토큰이 없는 경우 새 토큰 요청
+    if (appCookies['LOGIN_EXPIRES'] && !accessToken) {
       getNewAccessToken();
-      // router.push('/applyStatement');
-    }
-
-    if (
-      !login ||
-      (login && accessToken === '' && !router.pathname.includes('/auth'))
-    ) {
-      router.push('/auth');
-    }
-  }, [login, cookies]);
-
-  useEffect(() => {
-    if (accessToken !== '' && router.pathname.includes('/auth')) {
-      router.push('/applyStatement');
-    }
-  }, [accessToken, router.pathname]);
-
-  useEffect(() => {
-    if (appCookies['LOGIN_EXPIRES']) {
-      if (accessToken === '') {
-        getNewAccessToken();
-      } else {
-        setLogin(true);
-        setLoading(false);
-      }
     } else {
-      setLogin(false);
+      setLogin(!!appCookies['LOGIN_EXPIRES']);
       setLoading(false);
-    }
-  }, [accessToken, cookies]);
 
-  useEffect(() => {
-    if (!appCookies['LOGIN_EXPIRES']) {
-      setLogin(false);
-      setLoading(false);
+      // 로그인 상태에 따른 리디렉션 처리
+      if (login && accessToken && router.pathname.includes('/auth')) {
+        router.push('/applyStatement');
+      } else if (!login && !router.pathname.includes('/auth')) {
+        router.push('/auth');
+      }
     }
-  }, [appCookies['LOGIN_EXPIRES']]);
+  }, [accessToken, appCookies, getNewAccessToken, login, router]);
 
   if (loading) {
     return <Loading />;

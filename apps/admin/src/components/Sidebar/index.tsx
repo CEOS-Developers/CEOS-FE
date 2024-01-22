@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { adminAuthApi } from 'packages/utils';
 import { useRecoilState } from 'recoil';
-import { loginState } from '@admin/store/recoil';
+import { accessTokenState, loginState } from '@admin/store/recoil';
 
 export type subMenuListInterface = {
   subMenuName: string;
@@ -28,21 +28,22 @@ const Sidebar = () => {
   const [clickMenuNum, setClickMenuNum] = useState(100);
   const [, , removeCookie] = useCookies(['LOGIN_EXPIRES']);
   const [login, setLogin] = useRecoilState(loginState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
 
-  const { refetch: SignOut, isSuccess } = useQuery(
-    ['signOut'],
-    adminAuthApi.SIGN_OUT,
-    {
-      enabled: false,
+  const logoutMutation = useMutation(adminAuthApi.SIGN_OUT, {
+    onSuccess: () => {
+      removeCookie('LOGIN_EXPIRES');
+      setLogin(false);
+      setAccessToken('');
+      router.push('/auth');
+      router.reload();
     },
-  );
+  });
 
-  if (isSuccess) {
-    removeCookie('LOGIN_EXPIRES');
-    setLogin(false);
-    router.push('/auth');
-  }
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   return (
     <Container>
@@ -105,12 +106,7 @@ const Sidebar = () => {
           )}
         </div>
       </div>
-      <SidebarMenuContainer
-        href=""
-        onClick={() => {
-          SignOut();
-        }}
-      >
+      <SidebarMenuContainer href="" onClick={handleLogout}>
         <div className="left-menu">
           <Text paletteColor="White" webTypo="Label2">
             로그아웃
