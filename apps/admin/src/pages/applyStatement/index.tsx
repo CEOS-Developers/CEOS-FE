@@ -312,8 +312,11 @@ export default function ApplyStatement() {
   ) => {
     setSearchingName(event.target.value);
   };
-  const handleKeyUp = () => {
-    getApplicantsList();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      getApplicantsList();
+    }
   };
   // 테이블
   const columns = [
@@ -458,7 +461,7 @@ export default function ApplyStatement() {
             type="text"
             placeholder="지원자 이름"
             onChange={handleInputNameChange}
-            onKeyUp={handleKeyUp}
+            onKeyDown={handleKeyDown}
             value={searchingName}
           />
           <div onClick={() => getApplicantsList()}>
