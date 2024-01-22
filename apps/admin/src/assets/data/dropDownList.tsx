@@ -2,6 +2,10 @@ import { DropdownItemInterface } from '@admin/utils/dropdown';
 
 export const PartDropdownList: DropdownItemInterface[] = [
   {
+    label: '선택안함',
+    value: '',
+  },
+  {
     label: '기획',
     value: 'product',
   },
@@ -20,6 +24,10 @@ export const PartDropdownList: DropdownItemInterface[] = [
 ];
 
 export const PassDropdownList: DropdownItemInterface[] = [
+  {
+    label: '선택안함',
+    value: '',
+  },
   {
     label: '합격',
     value: 'pass',

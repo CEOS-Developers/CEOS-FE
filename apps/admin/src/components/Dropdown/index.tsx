@@ -48,7 +48,7 @@ export const Dropdown = ({
       <DropdownList background={backgroundColor} color={color}>
         <DropdownButton width={width} borderRadius={8} justify="space-between">
           <DropdownLabel color={color}>
-            {value && !isOpen ? value.label : placeholder}
+            {value && value.value !== '' && !isOpen ? value.label : placeholder}
           </DropdownLabel>
           <ArrowContainer>
             {isOpen ? (
