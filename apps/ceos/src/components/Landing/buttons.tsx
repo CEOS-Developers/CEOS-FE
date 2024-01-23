@@ -32,8 +32,8 @@ export const Buttons = (props: ButtonsProps) => {
           <GlassShortcut onClick={() => router.push('/project')}>
             프로젝트 확인하기
           </GlassShortcut>
-          <GlassShortcut onClick={() => router.push('/management')}>
-            운영진 보러가기
+          <GlassShortcut onClick={() => router.push('/startups')}>
+            창업한 서비스 보러가기
           </GlassShortcut>
           <GlassShortcut onClick={() => router.push('/recruit')}>
             지원하기
