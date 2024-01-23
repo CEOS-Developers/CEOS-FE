@@ -1,7 +1,7 @@
 import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { Button, Flex, Text } from 'packages/ui';
+import { Button, Flex, Text, TextField, theme } from 'packages/ui';
 import { Dropdown } from '@admin/components/Dropdown';
 import { PageInterface } from '@admin/components/DataGrid/Pagination';
 import { DataGrid } from '@admin/components/DataGrid';
@@ -59,9 +59,12 @@ export default function ApplyStatement() {
   // 지원자 엑셀 업데이트 시간
   const [createAt, setCreateAt] = useState('생성되지 않음');
   // 지원자 목록 필터링
-  const [sortingPart, setSortingPart] = useState('ALL');
-  const [sortingDocPass, setSortingDocPass] = useState('ALL');
-  const [sortingFinalPass, setSortingFinalPass] = useState('ALL');
+  const [sortingPart, setSortingPart] = useState('');
+  const [sortingDocPass, setSortingDocPass] = useState('');
+  const [sortingFinalPass, setSortingFinalPass] = useState('');
+
+  // 지원자 이름
+  const [searchingName, setSearchingName] = useState('');
 
   const { setValue, watch, getValues } = useForm();
 
@@ -79,6 +82,7 @@ export default function ApplyStatement() {
       sortingPart,
       sortingDocPass,
       sortingFinalPass,
+      searchingName,
     ),
   );
 
@@ -145,7 +149,7 @@ export default function ApplyStatement() {
     setSorting: Dispatch<SetStateAction<string>>,
   ) => {
     const dropdownValue = getValues(dropdownName);
-    setSorting(dropdownValue ? dropdownValue.value.toUpperCase() : 'ALL');
+    setSorting(dropdownValue ? dropdownValue.value.toUpperCase() : '');
   };
 
   useEffect(() => {
@@ -302,6 +306,18 @@ export default function ApplyStatement() {
     setPagination({ ...pagination, page: newPage });
   };
 
+  // 입력 창 핸들러
+  const handleInputNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSearchingName(event.target.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      getApplicantsList();
+    }
+  };
   // 테이블
   const columns = [
     // {
@@ -441,6 +457,18 @@ export default function ApplyStatement() {
               width={152}
             />
           ))}
+          <InputName
+            type="text"
+            placeholder="지원자 이름"
+            onChange={handleInputNameChange}
+            onKeyDown={handleKeyDown}
+            value={searchingName}
+          />
+          <div onClick={() => getApplicantsList()}>
+            <Button webWidth={82} mobileWidth={82} variant="admin_navy">
+              검색
+            </Button>
+          </div>
         </Flex>
 
         <Flex
@@ -532,7 +560,7 @@ export default function ApplyStatement() {
 
 const Container = styled.div<{ modalOpen?: boolean }>`
   position: ${({ modalOpen }) => (modalOpen ? 'fixed' : 'auto')};
-  width: 1032px;
+  width: 1096px;
   display: flex;
   flex-direction: column;
 
@@ -540,5 +568,18 @@ const Container = styled.div<{ modalOpen?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+`;
+
+const InputName = styled.input`
+  width: 78px;
+  height: 13px;
+  padding: 10px;
+  border: 1px solid #b0b5bd;
+  border-radius: 8px;
+
+  ${theme.typo.Web.Body3};
+  ::placeholder {
+    color: ${theme.palette.Gray4};
   }
 `;
