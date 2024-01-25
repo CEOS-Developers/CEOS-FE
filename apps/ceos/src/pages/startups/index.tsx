@@ -4,6 +4,16 @@ import Footer from '@ceos/components/Footer';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
 import { ListCss } from '@ceos/styles/landing';
+import { StartupsCard } from '@ceos-fe/ui/src/components/Card/StartupsCard';
+
+export interface StartupsInterface {
+  imageUrl: any;
+  company: string;
+  service: string;
+  url: string;
+  name: string;
+  generation: number;
+}
 
 export default function Startups() {
   const generation = useRecoilValue(generationState);
@@ -25,7 +35,11 @@ export default function Startups() {
           title="START-UPS"
           explain={['CEOS 출신 창업가들을 소개합니다.']}
         />
-        <div css={ListCss}></div>
+        <div css={ListCss}>
+          {Data.startups.map((startups: StartupsInterface) => (
+            <StartupsCard startupsCard={startups} />
+          ))}
+        </div>
         <Footer leftBtn={leftBtn} rightBtn={rightBtn} />
       </Flex>
     </div>
