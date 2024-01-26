@@ -171,3 +171,23 @@ export const MentorListWrapper = css`
     margin-bottom: 46px;
   }
 `;
+
+export const StartupsListCss = css`
+  width: 1032px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 80px 0 168px 0;
+
+  ${media.mobile} {
+    width: 100vw;
+
+    box-sizing: border-box;
+    padding: 0px 22px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 14px;
+    margin: 36px 0;
+  }
+`;

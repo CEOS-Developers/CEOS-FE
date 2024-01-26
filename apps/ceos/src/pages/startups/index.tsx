@@ -3,8 +3,54 @@ import { Flex } from 'packages/ui';
 import Footer from '@ceos/components/Footer';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
-import { ListCss } from '@ceos/styles/landing';
+import { ListCss, StartupsListCss } from '@ceos/styles/landing';
 import { StartupsCard } from '@ceos-fe/ui/src/components/Card/StartupsCard';
+import Toss from '../../../public/toss.png';
+
+const Data = {
+  startups: [
+    {
+      imageUrl: Toss,
+      company: '비바리퍼블리카',
+      service: '토스',
+      url: 'https://toss.im/',
+      name: '노수진',
+      generation: 17,
+    },
+    {
+      imageUrl: Toss,
+      company: '비바리퍼블리카',
+      service: '토스',
+      url: 'https://toss.im/',
+      name: '노수진',
+      generation: 17,
+    },
+    {
+      imageUrl: Toss,
+      company: '비바리퍼블리카',
+      service: '토스',
+      url: 'https://toss.im/',
+      name: '노수진',
+      generation: 17,
+    },
+    {
+      imageUrl: Toss,
+      company: '비바리퍼블리카',
+      service: '토스',
+      url: 'https://toss.im/',
+      name: '노수진',
+      generation: 17,
+    },
+    {
+      imageUrl: Toss,
+      company: '비바리퍼블리카',
+      service: '토스',
+      url: 'https://toss.im/',
+      name: '노수진',
+      generation: 17,
+    },
+  ],
+};
 
 export interface StartupsInterface {
   imageUrl: any;
@@ -35,7 +81,7 @@ export default function Startups() {
           title="START-UPS"
           explain={['CEOS 출신 창업가들을 소개합니다.']}
         />
-        <div css={ListCss}>
+        <div css={StartupsListCss}>
           {Data.startups.map((startups: StartupsInterface) => (
             <StartupsCard startupsCard={startups} />
           ))}

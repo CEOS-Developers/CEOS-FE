@@ -228,6 +228,7 @@ const Profile = styled.div`
   width: 140px;
   height: 140px;
   margin-bottom: 12px;
+
   ${media.mobile} {
     margin-bottom: 14px;
     width: 90px;
