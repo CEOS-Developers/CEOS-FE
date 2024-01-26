@@ -25,6 +25,7 @@ export const SidebarMenuList: sidebarInterface[] = [
       { subMenuName: 'ACTIVITY', path: '/activity' },
       { subMenuName: 'MANAGEMENT', path: '/management' },
       { subMenuName: 'SPONSORED BY', path: '/sponsoredby' },
+      { subMenuName: 'START-UPS', path: '/startups' },
     ],
   },
   {

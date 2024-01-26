@@ -101,6 +101,12 @@ export const typo = {
       font-size: ${calcRem(16)};
       line-height: 150%;
     `,
+    Heading5: css`
+      font-family: 'Pretendard', 'Apple SD Gothic Neo';
+      font-weight: 600;
+      font-size: ${calcRem(16.6)};
+      line-height: 150%;
+    `,
     Body1: css`
       font-family: 'Pretendard', 'Apple SD Gothic Neo';
       font-weight: 500;
@@ -123,6 +129,12 @@ export const typo = {
       font-family: 'Pretendard', 'Apple SD Gothic Neo';
       font-weight: 600;
       font-size: ${calcRem(14)};
+      line-height: 150%;
+    `,
+    Label3: css`
+      font-family: 'Pretendard', 'Apple SD Gothic Neo';
+      font-weight: 600;
+      font-size: ${calcRem(13.833)};
       line-height: 150%;
     `,
   },

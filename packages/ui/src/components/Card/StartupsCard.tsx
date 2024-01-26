@@ -1,24 +1,29 @@
-import React from 'react';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import { media } from '../../styles';
+import { Mobile, media } from '../../styles';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { Text } from '../common';
 
 export interface StartUpsCardProps {
-  imageUrl: any;
-  company?: string;
-  service: string;
-  url: string;
-  name: string;
+  serviceName: string;
+  companyName: string;
+  imageUrl: string;
+  serviceUrl: string;
   generation: number;
+  founder: string;
 }
 
 export const StartupsCard = (props: {
   startupsCard: StartUpsCardProps;
 }): EmotionJSX.Element => {
-  const { imageUrl, company, service, url, name, generation } =
-    props.startupsCard;
+  const {
+    serviceName,
+    companyName,
+    imageUrl,
+    serviceUrl,
+    generation,
+    founder,
+  } = props.startupsCard;
   return (
     <StartupsWrapper>
       <Logo>
@@ -26,23 +31,39 @@ export const StartupsCard = (props: {
           src={imageUrl}
           layout="fill"
           objectFit="cover"
-          alt={service}
+          alt={serviceName}
           className="logo"
         />
         <Content className="extra-info">
-          <Text webTypo="Heading2" mobileTypo="Label1" paletteColor="White">
-            {service}
-          </Text>
-          <Text webTypo="Heading2" mobileTypo="Label1" paletteColor="White">
-            {company}
-          </Text>
-          <Text webTypo="Heading3" mobileTypo="Label1" paletteColor="White">
-            {generation} {name}
+          <Company>
+            <Text webTypo="Heading2" mobileTypo="Heading5" paletteColor="White">
+              {companyName}
+            </Text>
+            <Text webTypo="Heading2" mobileTypo="Heading5" paletteColor="White">
+              {serviceName}
+            </Text>
+          </Company>
+          <Text webTypo="Heading3" mobileTypo="Label3" paletteColor="White">
+            {generation} {founder}
           </Text>
         </Content>
       </Logo>
     </StartupsWrapper>
   );
+};
+
+export const AdminStartupsCard = (props: {
+  startupsCard: StartUpsCardProps;
+}): EmotionJSX.Element => {
+  const {
+    serviceName,
+    companyName,
+    imageUrl,
+    serviceUrl,
+    generation,
+    founder,
+  } = props.startupsCard;
+  return <div>{serviceName}</div>;
 };
 
 const StartupsWrapper = styled.div`
@@ -81,8 +102,7 @@ const Logo = styled.div`
       height: 100%;
       align-items: center;
       justify-content: center;
-      background-color: #3e4cf7;
-      opacity: 0.8;
+      background-color: rgba(62, 76, 247, 0.8);
     }
   }
 `;
@@ -93,4 +113,18 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const Company = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: -3px;
+  margin-bottom: 4px;
+
+  ${media.mobile} {
+    gap: -2.08px;
+    margin-bottom: 2.77px;
+  }
 `;

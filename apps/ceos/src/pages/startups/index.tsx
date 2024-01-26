@@ -3,62 +3,68 @@ import { Flex } from 'packages/ui';
 import Footer from '@ceos/components/Footer';
 import { useRecoilValue } from 'recoil';
 import { generationState } from '@ceos/state';
-import { ListCss, StartupsListCss } from '@ceos/styles/landing';
+import { StartupsListCss } from '@ceos/styles/landing';
 import { StartupsCard } from '@ceos-fe/ui/src/components/Card/StartupsCard';
 import Toss from '../../../public/toss.png';
 
 const Data = {
   startups: [
     {
+      startupId: 0,
+      serviceName: '토스',
+      companyName: '비바리퍼블리카',
       imageUrl: Toss,
-      company: '비바리퍼블리카',
-      service: '토스',
-      url: 'https://toss.im/',
-      name: '노수진',
+      serviceUrl: 'https://toss.im/',
       generation: 17,
+      founder: '노수진',
     },
     {
+      startupId: 0,
+      serviceName: '토스',
+      companyName: '비바리퍼블리카',
       imageUrl: Toss,
-      company: '비바리퍼블리카',
-      service: '토스',
-      url: 'https://toss.im/',
-      name: '노수진',
+      serviceUrl: 'https://toss.im/',
       generation: 17,
+      founder: '노수진',
     },
     {
+      startupId: 0,
+      serviceName: '토스',
+      companyName: '비바리퍼블리카',
       imageUrl: Toss,
-      company: '비바리퍼블리카',
-      service: '토스',
-      url: 'https://toss.im/',
-      name: '노수진',
+      serviceUrl: 'https://toss.im/',
       generation: 17,
+      founder: '노수진',
     },
     {
+      startupId: 0,
+      serviceName: '토스',
+      companyName: '비바리퍼블리카',
       imageUrl: Toss,
-      company: '비바리퍼블리카',
-      service: '토스',
-      url: 'https://toss.im/',
-      name: '노수진',
+      serviceUrl: 'https://toss.im/',
       generation: 17,
+      founder: '노수진',
     },
     {
+      startupId: 0,
+      serviceName: '토스',
+      companyName: '비바리퍼블리카',
       imageUrl: Toss,
-      company: '비바리퍼블리카',
-      service: '토스',
-      url: 'https://toss.im/',
-      name: '노수진',
+      serviceUrl: 'https://toss.im/',
       generation: 17,
+      founder: '노수진',
     },
   ],
 };
 
 export interface StartupsInterface {
+  startupId: number;
+  serviceName: string;
+  companyName: string;
   imageUrl: any;
-  company: string;
-  service: string;
-  url: string;
-  name: string;
+  serviceUrl: string;
   generation: number;
+  founder: string;
 }
 
 export default function Startups() {
