@@ -87,6 +87,7 @@ export default function SponsoredBy() {
     if (Number(router.query[''])) {
       getSponsorMutation.mutate(Number(router.query['']));
     }
+    console.log(infiniteData);
   }, [router]);
 
   return (

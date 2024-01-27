@@ -8,10 +8,12 @@ import useInfiniteQueries from '@admin/hooks/useInfiniteQueries';
 import {
   StartupsResponse,
   adminStartupsApi,
+  StartupsDTO,
 } from '@ceos-fe/utils/src/apis/admin/adminStartupsApi';
 import { AdminStartupsCard } from '@ceos-fe/ui/src/components/Card/StartupsCard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Startups() {
   const queryClient = useQueryClient();
@@ -26,7 +28,7 @@ export default function Startups() {
     formState: { isValid },
   } = useForm();
 
-  // 스폰서 생성 api
+  // start-ups 생성 api
   const postStartupsCreateMutation = useMutation(
     adminStartupsApi.POST_STARTUPS,
     {
@@ -37,13 +39,63 @@ export default function Startups() {
     },
   );
 
-  const onSubmit = (data: any) => {
-    postStartupsCreateMutation.mutate({
-      payload: {
-        ...data,
+  // start-ups 수정 api
+  const patchStartupsCreateMutation = useMutation(
+    adminStartupsApi.PAPTCH_STARTUPS,
+    {
+      onSuccess: () => {
+        alert('수정 완료');
+        queryClient.invalidateQueries([['startups']]);
+        router.push('/startups');
       },
-    });
+    },
+  );
+
+  // 수정 시 정보 가져오기 api
+  const getStartupsMutation = useMutation(adminStartupsApi.GET_ONE_STARTUPS, {
+    onSuccess: async (data: StartupsDTO) => {
+      setValue('serviceName', data.serviceName);
+      setValue('companyName', data.companyName);
+      setValue('imageUrl', data.imageUrl);
+      setValue('serviceUrl', data.serviceUrl);
+      setValue('generation', data.generation);
+      setValue('founder', data.founder);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    if (Number(router.query[''])) {
+      patchStartupsCreateMutation.mutate({
+        id: Number(Number(router.query[''])),
+        payload: {
+          ...data,
+        },
+      });
+    } else {
+      postStartupsCreateMutation.mutate({
+        payload: {
+          ...data,
+        },
+      });
+    }
   };
+
+  const { infiniteData, ref } = useInfiniteQueries<StartupsResponse>({
+    queryKey: ['startups'],
+    queryFunction: ({ pageParam = 0 }) =>
+      adminStartupsApi.GET_STARTUPS({ pageNum: pageParam, limit: 100 }),
+    PageItem: AdminStartupsCard,
+  });
+
+  useEffect(() => {
+    if (Number(router.query[''])) {
+      getStartupsMutation.mutate(Number(router.query['']));
+    }
+    console.log(adminStartupsApi.GET_STARTUPS({ pageNum: 0, limit: 100 }));
+  }, [router]);
 
   return (
     <Flex direction="column" align="flex-start" justify="flex-start">
@@ -77,14 +129,19 @@ export default function Startups() {
               webGap={24}
               mobileGap={24}
               direction="column"
-            ></InfiniteElement>
+            >
+              {infiniteData}
+            </InfiniteElement>
             <InfiniteElement
               isLeft={false}
               webGap={24}
               mobileGap={24}
               direction="column"
-            ></InfiniteElement>
+            >
+              {infiniteData}
+            </InfiniteElement>
           </Flex>
+          <div ref={ref}></div>
         </div>
         <div>
           <div>

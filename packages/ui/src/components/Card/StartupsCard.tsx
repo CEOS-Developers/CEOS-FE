@@ -52,18 +52,20 @@ export const StartupsCard = (props: {
   );
 };
 
-export const AdminStartupsCard = (props: {
-  startupsCard: StartUpsCardProps;
-}): EmotionJSX.Element => {
-  const {
-    serviceName,
-    companyName,
-    imageUrl,
-    serviceUrl,
-    generation,
-    founder,
-  } = props.startupsCard;
-  return <div>{serviceName}</div>;
+export const AdminStartupsCard = ({
+  serviceName,
+  companyName,
+  imageUrl,
+  serviceUrl,
+  generation,
+  founder,
+  ...props
+}: StartUpsCardProps) => {
+  return (
+    <div>
+      <p>{serviceName}</p>
+    </div>
+  );
 };
 
 const StartupsWrapper = styled.div`

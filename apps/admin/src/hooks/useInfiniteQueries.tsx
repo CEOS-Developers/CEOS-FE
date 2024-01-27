@@ -73,7 +73,7 @@ const useInfiniteQueries = <T,>({
   }, [inView, currentPage, ref]);
 
   const pageData: ReactNode[] | undefined = getBoard?.pages.map((page_data) => {
-    return page_data.content.map((data: any, index: number) => (
+    return page_data.content?.map((data: any, index: number) => (
       <PageItem {...data} {...props} key={index} />
     ));
   });
