@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // TODO : 환경변수로 변경
-export const BASE_URL = 'https://dev.ceos-sinchon.com';
+export const BASE_URL = 'https://dev.ceos-sinchon.store';
 
 export const ceosInstance = axios.create({
   baseURL: BASE_URL,
