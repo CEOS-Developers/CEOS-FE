@@ -16,6 +16,7 @@ interface DropdownProps {
   setValue: UseFormSetValue<FieldValues>;
   placeholder?: string;
   width?: number;
+  onClick?: () => void;
 }
 
 /**
@@ -33,6 +34,7 @@ export const Dropdown = ({
   setValue,
   placeholder = '선택',
   width = 89,
+  onClick,
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
   const color = setColor(value, isOpen);
@@ -41,14 +43,18 @@ export const Dropdown = ({
   return (
     <Container
       ref={modalRef}
-      onClick={toggleModal}
+      onClick={() => {
+        // dropdown 열려 있는 상태에서 item 클릭 시 page초기화
+        if (isOpen && onClick) onClick();
+        toggleModal();
+      }}
       width={width}
       isOpen={isOpen}
     >
       <DropdownList background={backgroundColor} color={color}>
         <DropdownButton width={width} borderRadius={8} justify="space-between">
           <DropdownLabel color={color}>
-            {value && !isOpen ? value.label : placeholder}
+            {value && value.value !== '' && !isOpen ? value.label : placeholder}
           </DropdownLabel>
           <ArrowContainer>
             {isOpen ? (
