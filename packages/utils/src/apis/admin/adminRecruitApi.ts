@@ -8,19 +8,21 @@ export interface RecruitBaseInterface {
   openChatUrl: string;
 }
 export interface RecruitInterface extends RecruitBaseInterface {
-  startDateDoc: string;
-  endDateDoc: string;
-  resultDateDoc: string;
-  startDateInterview: string;
-  endDateInterview: string;
-  resultDateFinal: string;
-  otDate: string;
-  demodayDate: string;
+  startDateDoc: Date;
+  endDateDoc: Date;
+  resultDateDoc: Date;
+  startDateInterview: Date;
+  endDateInterview: Date;
+  resultDateFinal: Date;
+  otDate: Date;
+  ideathonDate: Date;
+  hackathonDate: Date;
+  demodayDate: Date;
 }
 
 export const adminRecruitApi = {
   GET_RECRUIT: async () => {
-    const response = await adminInstance.get(`/recruitments`);
+    const response = await adminInstance.get(`/recruitments/all`);
 
     return response.data.data;
   },

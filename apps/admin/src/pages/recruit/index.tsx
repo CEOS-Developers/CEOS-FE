@@ -25,6 +25,8 @@ interface RecruitDateInterface extends RecruitBaseInterface {
   endDateInterview: Date;
   resultDateFinal: Date;
   otDate: Date;
+  ideathonDate: Date;
+  hackathonDate: Date;
   demodayDate: Date;
 }
 
@@ -60,6 +62,8 @@ export default function Recruit() {
         endDateInterview: new Date(data.endDateInterview),
         resultDateFinal: new Date(data.resultDateFinal),
         otDate: new Date(data.otDate),
+        ideathonDate: new Date(data.ideathonDate),
+        hackathonDate: new Date(data.hackathonDate),
         demodayDate: new Date(data.demodayDate),
       };
       reset(recruitData);
@@ -69,14 +73,16 @@ export default function Recruit() {
   const handleSave = () => {
     const recruitData = {
       ...getValues(),
-      startDateDoc: getFormattedDate(getValues().startDateDoc),
-      endDateDoc: getFormattedDate(getValues().endDateDoc),
-      resultDateDoc: getFormattedDate(getValues().resultDateDoc),
-      startDateInterview: getFormattedDate(getValues().startDateInterview),
-      endDateInterview: getFormattedDate(getValues().endDateInterview),
-      resultDateFinal: getFormattedDate(getValues().resultDateFinal),
-      otDate: getFormattedDate(getValues().otDate),
-      demodayDate: getFormattedDate(getValues().demodayDate),
+      startDateDoc: getValues().startDateDoc,
+      endDateDoc: getValues().endDateDoc,
+      resultDateDoc: getValues().resultDateDoc,
+      startDateInterview: getValues().startDateInterview,
+      endDateInterview: getValues().endDateInterview,
+      resultDateFinal: getValues().resultDateFinal,
+      otDate: getValues().otDate,
+      ideathonDate: getValues().ideathonDate,
+      hackathonDate: getValues().hackathonDate,
+      demodayDate: getValues().demodayDate,
     };
     postRecruitments(recruitData);
   };
@@ -121,6 +127,7 @@ export default function Recruit() {
           <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('startDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -130,6 +137,7 @@ export default function Recruit() {
             <Line />
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('endDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -150,6 +158,7 @@ export default function Recruit() {
           <Flex justify="flex-start" width={680} webGap={8} mobileGap={8}>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('startDateInterview')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -159,6 +168,7 @@ export default function Recruit() {
             <Line />
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('endDateInterview')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -179,6 +189,7 @@ export default function Recruit() {
             <Text webTypo="Label3">서류 발표</Text>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('resultDateDoc')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -196,6 +207,7 @@ export default function Recruit() {
             <Text webTypo="Label3">합격 발표</Text>
             <DatePicker
               isAdmin
+              isTime
               initialValue={getValues('resultDateFinal')}
               onChange={(date: Date | null) => {
                 if (!date) return;
@@ -220,6 +232,43 @@ export default function Recruit() {
               onChange={(date: Date | null) => {
                 if (!date) return;
                 setValue('otDate', date);
+              }}
+            />
+          </Flex>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
+            <Text webTypo="Label3">아이디어톤</Text>
+            <DatePicker
+              isAdmin
+              initialValue={getValues('ideathonDate')}
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('ideathonDate', date);
+              }}
+            />
+          </Flex>
+        </Flex>
+
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
+            <Text webTypo="Label3">해커톤</Text>
+            <DatePicker
+              isAdmin
+              initialValue={getValues('hackathonDate')}
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('hackathonDate', date);
               }}
             />
           </Flex>

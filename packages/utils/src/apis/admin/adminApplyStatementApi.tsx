@@ -24,9 +24,10 @@ export const adminApplyStatementApi = {
     part: string,
     docPass: string,
     finalPass: string,
+    applicantName: string,
   ) => {
     const response = await adminInstance.get(
-      `applications?part=${part}&docPass=${docPass}&finalPass=${finalPass}&pageNum=${pageNum}&limit=${limit}`,
+      `applications?part=${part}&docPass=${docPass}&finalPass=${finalPass}&applicantName=${applicantName}&pageNum=${pageNum}&limit=${limit}`,
     );
     return response.data;
   },

@@ -19,7 +19,7 @@ import { CustomLink } from '@ceos/components/Header';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DateProps,
   PassDataInterface,
@@ -66,6 +66,43 @@ const Recruit = () => {
     resultDateDoc: new Date(data ? data.resultDateDoc : ''),
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;
+
+  const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
+  const varEndDateDoc = data ? data.endDateDoc.split('-') : '';
+  const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
+  const varStartDateInterview = data ? data.startDateInterview.split('-') : '';
+  const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
+  const varResultDateFinal = data ? data.resultDateFinal.split('-') : '';
+  const varOtDate = data ? data.otDate.split('-') : '';
+  const varIdeathon = data ? data.ideathonDate.split('-') : '';
+  const varHackathon = data ? data.hackathonDate.split('-') : '';
+  const varDemodayDate = data ? data.demodayDate.split('-') : '';
+
+  var week = new Array('일', '월', '화', '수', '목', '금', '토');
+
+  const startDateDoc = new Date(data ? data.startDateDoc : '').getDay();
+  const endDateDoc = new Date(data ? data.endDateDoc : '').getDay();
+  const resultDateMid = new Date(data ? data.resultDateDoc : '').getDay();
+  const startDateInterview = new Date(
+    data ? data.startDateInterview : '',
+  ).getDay();
+  const endDateInterview = new Date(data ? data.endDateInterview : '').getDay();
+  const resultDateFinal = new Date(data ? data.resultDateFinal : '').getDay();
+  const otDate = new Date(data ? data.otDate : '').getDay();
+  const ideathonDate = new Date(data ? data.ideathonDate : '').getDay();
+  const hackathonDate = new Date(data ? data.hackathonDate : '').getDay();
+  const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
+
+  const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
+    const month =
+      varDateFir?.substring(0, 1) == '0' ? varDateFir.substr(1, 1) : varDateFir;
+    const date =
+      varDateSec?.substring(0, 1) == '0'
+        ? varDateSec.substr(1, 1)
+        : varDateSec?.substr(0, 2);
+
+    return month + '월 ' + date + '일' + ' (' + week[day] + ')';
+  };
 
   return (
     <>
@@ -145,24 +182,100 @@ const Recruit = () => {
             >
               <RecruitMiniBox
                 header="서류 접수"
-                content={`${data?.startDateDoc} ~ ${data?.endDateDoc}`}
+                content={
+                  dateForm(
+                    startDateDoc,
+                    varStartDateDoc[1],
+                    varStartDateDoc[2],
+                  ) +
+                  ' ~ ' +
+                  dateForm(endDateDoc, varEndDateDoc[1], varEndDateDoc[2])
+                }
               />
               <RecruitMiniBox
                 header="서류 발표"
                 // content={`${data?.resultDateDoc}`} // 일단 하드코딩으로 대체 후 나중에 대체할 에정
-                content={'2023-09-01'}
+                content={dateForm(
+                  resultDateMid,
+                  varResultDateMid[1],
+                  varResultDateMid[2],
+                )}
               />
               <RecruitMiniBox
                 header="면접"
-                content={`${data?.startDateInterview} ~ ${data?.endDateInterview}`}
+                content={
+                  dateForm(
+                    startDateInterview,
+                    varStartDateInterview[1],
+                    varStartDateInterview[2],
+                  ) +
+                  ' ~ ' +
+                  dateForm(
+                    endDateInterview,
+                    varEndDateInterview[1],
+                    varEndDateInterview[2],
+                  )
+                }
               />
               <RecruitMiniBox
                 header="합격 발표"
-                content={`${data?.resultDateFinal}`}
+                content={dateForm(
+                  resultDateFinal,
+                  varResultDateFinal[1],
+                  varResultDateFinal[2],
+                )}
               />
             </div>
             <Text webTypo="Body3" paletteColor="Gray5">
               *서류 제출 후 온라인으로 면접을 진행합니다.
+            </Text>
+            <Text webTypo="Heading3" margin="80px 0 12px 0">
+              필참 행사
+            </Text>
+            <div
+              css={css`
+                display: flex;
+                gap: 24px;
+                margin: 0 0 12px 0;
+                justify-content: space-between;
+                ${media.mobile} {
+                  display: grid;
+                  grid-template-rows: 1fr 1fr;
+                  grid-template-columns: 1fr 1fr;
+                  width: 100%;
+
+                  flex-wrap: wrap;
+                  gap: 14px;
+                }
+              `}
+            >
+              <RecruitMiniBox
+                header="OT"
+                content={dateForm(otDate, varOtDate[1], varOtDate[2])}
+              />
+              <RecruitMiniBox
+                header="아이디어톤"
+                content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
+              />
+              <RecruitMiniBox
+                header="해커톤"
+                content={dateForm(
+                  hackathonDate,
+                  varHackathon[1],
+                  varHackathon[2],
+                )}
+              />
+              <RecruitMiniBox
+                header="데모데이"
+                content={dateForm(
+                  demoDayDate,
+                  varDemodayDate[1],
+                  varDemodayDate[2],
+                )}
+              />
+            </div>
+            <Text webTypo="Body3" paletteColor="Gray5">
+              *필참 행사에 참여하지 않을 경우 수료 자격을 상실합니다.
             </Text>
           </div>
           <Mobile
