@@ -57,24 +57,12 @@ export default function Recruit() {
     if (!isFetching && isSuccess) {
       const recruitData = {
         ...data,
-        startDateDoc: new Date(
-          new Date(data.startDateDoc).getTime() + timeDifference,
-        ),
-        endDateDoc: new Date(
-          new Date(data.endDateDoc).getTime() + timeDifference,
-        ),
-        resultDateDoc: new Date(
-          new Date(data.resultDateDoc).getTime() + timeDifference,
-        ),
-        startDateInterview: new Date(
-          new Date(data.startDateInterview).getTime() + timeDifference,
-        ),
-        endDateInterview: new Date(
-          new Date(data.endDateInterview).getTime() + timeDifference,
-        ),
-        resultDateFinal: new Date(
-          new Date(data.resultDateFinal).getTime() + timeDifference,
-        ),
+        startDateDoc: new Date(data.startDateDoc),
+        endDateDoc: new Date(data.endDateDoc),
+        resultDateDoc: new Date(data.resultDateDoc),
+        startDateInterview: new Date(data.startDateInterview),
+        endDateInterview: new Date(data.endDateInterview),
+        resultDateFinal: new Date(data.resultDateFinal),
         otDate: new Date(data.otDate),
         ideathonDate: new Date(data.ideathonDate),
         hackathonDate: new Date(data.hackathonDate),
@@ -87,12 +75,24 @@ export default function Recruit() {
   const handleSave = () => {
     const recruitData = {
       ...getValues(),
-      startDateDoc: getValues().startDateDoc,
-      endDateDoc: getValues().endDateDoc,
-      resultDateDoc: getValues().resultDateDoc,
-      startDateInterview: getValues().startDateInterview,
-      endDateInterview: getValues().endDateInterview,
-      resultDateFinal: getValues().resultDateFinal,
+      startDateDoc: new Date(
+        new Date(getValues().startDateDoc).getTime() + timeDifference,
+      ),
+      endDateDoc: new Date(
+        new Date(getValues().endDateDoc).getTime() + timeDifference,
+      ),
+      resultDateDoc: new Date(
+        new Date(getValues().resultDateDoc).getTime() + timeDifference,
+      ),
+      startDateInterview: new Date(
+        new Date(getValues().startDateInterview).getTime() + timeDifference,
+      ),
+      endDateInterview: new Date(
+        new Date(getValues().endDateInterview).getTime() + timeDifference,
+      ),
+      resultDateFinal: new Date(
+        new Date(getValues().resultDateFinal).getTime() + timeDifference,
+      ),
       otDate: getValues().otDate,
       ideathonDate: getValues().ideathonDate,
       hackathonDate: getValues().hackathonDate,
