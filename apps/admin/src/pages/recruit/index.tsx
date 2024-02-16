@@ -51,16 +51,30 @@ export default function Recruit() {
       defaultValues: {},
     });
 
+  const timeDifference = 9 * 60 * 60 * 1000;
+
   useEffect(() => {
     if (!isFetching && isSuccess) {
       const recruitData = {
         ...data,
-        startDateDoc: new Date(data.startDateDoc),
-        endDateDoc: new Date(data.endDateDoc),
-        resultDateDoc: new Date(data.resultDateDoc),
-        startDateInterview: new Date(data.startDateInterview),
-        endDateInterview: new Date(data.endDateInterview),
-        resultDateFinal: new Date(data.resultDateFinal),
+        startDateDoc: new Date(
+          new Date(data.startDateDoc).getTime() + timeDifference,
+        ),
+        endDateDoc: new Date(
+          new Date(data.endDateDoc).getTime() + timeDifference,
+        ),
+        resultDateDoc: new Date(
+          new Date(data.resultDateDoc).getTime() + timeDifference,
+        ),
+        startDateInterview: new Date(
+          new Date(data.startDateInterview).getTime() + timeDifference,
+        ),
+        endDateInterview: new Date(
+          new Date(data.endDateInterview).getTime() + timeDifference,
+        ),
+        resultDateFinal: new Date(
+          new Date(data.resultDateFinal).getTime() + timeDifference,
+        ),
         otDate: new Date(data.otDate),
         ideathonDate: new Date(data.ideathonDate),
         hackathonDate: new Date(data.hackathonDate),
