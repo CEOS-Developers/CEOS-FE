@@ -315,6 +315,7 @@ export default function ApplyStatement() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      setPagination({ ...pagination, page: 1 });
       getApplicantsList();
     }
   };
@@ -455,6 +456,7 @@ export default function ApplyStatement() {
               value={watch(dropdown.label)}
               placeholder={dropdown.placeholder}
               width={152}
+              onClick={() => setPagination({ ...pagination, page: 1 })}
             />
           ))}
           <InputName
@@ -464,7 +466,11 @@ export default function ApplyStatement() {
             onKeyDown={handleKeyDown}
             value={searchingName}
           />
-          <div onClick={() => getApplicantsList()}>
+          <div
+            onClick={() => {
+              getApplicantsList();
+            }}
+          >
             <Button webWidth={82} mobileWidth={82} variant="admin_navy">
               검색
             </Button>

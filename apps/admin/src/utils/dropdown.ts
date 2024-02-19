@@ -11,7 +11,7 @@ export const setColor = (
   value: DropdownItemInterface,
   isOpen: boolean,
 ): string => {
-  if (!value && !isOpen) {
+  if ((!value || value.value === '') && !isOpen) {
     return theme.palette.Gray4;
   } else if (value && value.color && !isOpen) {
     return value.color;

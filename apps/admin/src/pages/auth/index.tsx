@@ -68,13 +68,14 @@ export default function SignIn() {
   }, []);
 
   return !login ? (
-    <p>
+    <div>
       <StyledForm onSubmit={handleSubmit(onSubmit)} padding="0 0 24px 0">
         <Text webTypo="Heading1_Eng">CEOS ADMIN</Text>
         <Flex direction="column" webGap={24} mobileGap={24}>
           <TextField label="ID" isAdmin {...register('username')} />
           <TextField
             type="password"
+            autoComplete="off"
             label="PW"
             isAdmin
             {...register('password')}
@@ -93,7 +94,7 @@ export default function SignIn() {
           <StyledLink href="/auth/signUp">회원가입</StyledLink>
         </Flex>
       </Text>
-    </p>
+    </div>
   ) : (
     <Loading />
   );

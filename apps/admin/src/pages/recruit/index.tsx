@@ -51,6 +51,8 @@ export default function Recruit() {
       defaultValues: {},
     });
 
+  const timeDifference = 9 * 60 * 60 * 1000;
+
   useEffect(() => {
     if (!isFetching && isSuccess) {
       const recruitData = {
@@ -73,12 +75,24 @@ export default function Recruit() {
   const handleSave = () => {
     const recruitData = {
       ...getValues(),
-      startDateDoc: getValues().startDateDoc,
-      endDateDoc: getValues().endDateDoc,
-      resultDateDoc: getValues().resultDateDoc,
-      startDateInterview: getValues().startDateInterview,
-      endDateInterview: getValues().endDateInterview,
-      resultDateFinal: getValues().resultDateFinal,
+      startDateDoc: new Date(
+        new Date(getValues().startDateDoc).getTime() + timeDifference,
+      ),
+      endDateDoc: new Date(
+        new Date(getValues().endDateDoc).getTime() + timeDifference,
+      ),
+      resultDateDoc: new Date(
+        new Date(getValues().resultDateDoc).getTime() + timeDifference,
+      ),
+      startDateInterview: new Date(
+        new Date(getValues().startDateInterview).getTime() + timeDifference,
+      ),
+      endDateInterview: new Date(
+        new Date(getValues().endDateInterview).getTime() + timeDifference,
+      ),
+      resultDateFinal: new Date(
+        new Date(getValues().resultDateFinal).getTime() + timeDifference,
+      ),
       otDate: getValues().otDate,
       ideathonDate: getValues().ideathonDate,
       hackathonDate: getValues().hackathonDate,
