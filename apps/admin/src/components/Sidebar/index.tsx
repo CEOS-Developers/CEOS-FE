@@ -60,7 +60,10 @@ const Sidebar = () => {
               <Fragment key={index}>
                 <SidebarMenuContainer
                   href={{ pathname: sidebarMenu.path }}
-                  onClick={() => setClickMenuNum(index)}
+                  onClick={() => {
+                    setClickMenuNum(index);
+                    sidebarMenu.submenuopen = !sidebarMenu.submenuopen;
+                  }}
                   click={index === clickMenuNum ? true : false}
                   submenuopen={sidebarMenu.submenuopen}
                 >
@@ -70,11 +73,7 @@ const Sidebar = () => {
                       {sidebarMenu.menu}
                     </Text>
                   </div>
-                  <div
-                    onClick={() => {
-                      sidebarMenu.submenuopen = !sidebarMenu.submenuopen;
-                    }}
-                  >
+                  <div>
                     {sidebarMenu.submenu.length != 0 ? (
                       <SidebarArrow click={sidebarMenu.submenuopen} />
                     ) : (

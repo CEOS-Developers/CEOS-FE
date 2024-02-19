@@ -239,6 +239,20 @@ export default function Application() {
       }),
     });
   };
+  const customRemoveFunction = (idx: number) => {
+    const newPartQuestions = partQuestions.filter((_, index) => index !== idx);
+
+    const reorderedQuestions = newPartQuestions.map((question, index) => ({
+      ...question,
+      questionIndex: index + 1,
+    }));
+    console.log(reorderedQuestions);
+    replacePartQuestions(reorderedQuestions);
+    setAllPartQuestions((prev) => ({
+      ...prev,
+      [allPartQuestions.selectedPart]: reorderedQuestions,
+    }));
+  };
 
   return (
     <>
@@ -457,7 +471,7 @@ export default function Application() {
                 </Button>
                 <Button
                   variant="admin_navy"
-                  onClick={() => removePartQuestions(idx)}
+                  onClick={() => customRemoveFunction(idx)}
                 >
                   삭제
                 </Button>
