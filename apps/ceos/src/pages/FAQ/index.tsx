@@ -39,7 +39,7 @@ const FAQ = () => {
 
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
+    content: ['CEOS 19기', '지원하기'],
     link: '/recruit',
   };
 
