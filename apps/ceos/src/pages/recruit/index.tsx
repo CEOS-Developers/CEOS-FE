@@ -68,7 +68,16 @@ const Recruit = () => {
   } as DateProps;
 
   const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
-  const varEndDateDoc = data ? data.endDateDoc.split('-') : '';
+  let endDateFix = new Date(data ? data.endDateDoc : '');
+  endDateFix.setSeconds(0);
+  endDateFix.setMinutes(endDateFix.getMinutes() - 1);
+  let fixYear = endDateFix.getFullYear();
+  let fixMonth = endDateFix.getMonth() + 1;
+  let fixDate = endDateFix.getDate();
+  let fixVarEndDateDoc = `${fixYear}-${
+    fixMonth < 10 ? '0' + fixMonth : fixMonth
+  }-${fixDate < 10 ? '0' + fixDate : fixDate}`;
+  const varEndDateDoc = fixVarEndDateDoc.split('-');
   const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
   const varStartDateInterview = data ? data.startDateInterview.split('-') : '';
   const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
@@ -81,7 +90,7 @@ const Recruit = () => {
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
   const startDateDoc = new Date(data ? data.startDateDoc : '').getDay();
-  const endDateDoc = new Date(data ? data.endDateDoc : '').getDay();
+  const endDateDoc = endDateFix.getDay();
   const resultDateMid = new Date(data ? data.resultDateDoc : '').getDay();
   const startDateInterview = new Date(
     data ? data.startDateInterview : '',
