@@ -273,7 +273,7 @@ const Apply = () => {
           제출하기
         </Button>
         <Text webTypo="Label3" paletteColor="Gray3" margin="80px 0 56px 0">
-          © 2015-2023 CEOS ALL RIGHTS RESERVED.
+          © 2015-2024 CEOS ALL RIGHTS RESERVED.
         </Text>
       </Flex>
 
