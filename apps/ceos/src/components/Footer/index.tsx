@@ -36,7 +36,7 @@ const Footer = ({
               </CustomLink>
             </Flex>
             <Text paletteColor="White" webTypo="Label3">
-              © 2015-2023 CEOS ALL RIGHTS RESERVED.
+              © 2015-2024 CEOS ALL RIGHTS RESERVED.
             </Text>
           </Flex>
         </Container>
@@ -59,7 +59,7 @@ const Footer = ({
               </Link>
             </Flex>
             <Text paletteColor="White" webTypo="Label3">
-              © 2015-2023 CEOS ALL RIGHTS RESERVED.
+              © 2015-2024 CEOS ALL RIGHTS RESERVED.
             </Text>
           </Flex>
         </Container>
