@@ -60,14 +60,8 @@ const Recruit = () => {
     link: '/project',
   };
 
-  const date = {
-    startDateDoc: new Date(data ? data.startDateDoc : ''),
-    endDateDoc: new Date(data ? data.endDateDoc : ''),
-    resultDateDoc: new Date(data ? data.resultDateDoc : ''),
-    resultDateFinal: new Date(data ? data.resultDateFinal : ''),
-  } as DateProps;
-
-  const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
+  // endDate에서 1분 빼서 마감 날짜 23시 59분까지 작성 가능하도록 조정
+  // admin에서 설정할 때 마감날짜가 28일이면 29일 00시로 설정
   let endDateFix = new Date(data ? data.endDateDoc : '');
   endDateFix.setSeconds(0);
   endDateFix.setMinutes(endDateFix.getMinutes() - 1);
@@ -77,6 +71,16 @@ const Recruit = () => {
   let fixVarEndDateDoc = `${fixYear}-${
     fixMonth < 10 ? '0' + fixMonth : fixMonth
   }-${fixDate < 10 ? '0' + fixDate : fixDate}`;
+  console.log(fixVarEndDateDoc);
+
+  const date = {
+    startDateDoc: new Date(data ? data.startDateDoc : ''),
+    endDateDoc: new Date(data ? fixVarEndDateDoc : ''),
+    resultDateDoc: new Date(data ? data.resultDateDoc : ''),
+    resultDateFinal: new Date(data ? data.resultDateFinal : ''),
+  } as DateProps;
+
+  const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
   const varEndDateDoc = fixVarEndDateDoc.split('-');
   const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
   const varStartDateInterview = data ? data.startDateInterview.split('-') : '';
