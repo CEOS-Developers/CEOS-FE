@@ -31,10 +31,10 @@ const Apply = () => {
 
   const date = {
     startDateDoc: dateData ? new Date(dateData.startDateDoc) : '',
-    endDateDoc: dateData
-      ? new Date(new Date(dateData.endDateDoc).setHours(24))
-      : '',
+    endDateDoc: dateData ? new Date(dateData.endDateDoc) : '',
   } as DateProps;
+
+  console.log(date);
 
   const curDate = new Date();
 
