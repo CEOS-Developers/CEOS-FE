@@ -89,16 +89,30 @@ const Container = styled.div<{ width: number; isOpen: boolean }>`
 
   width: ${({ width }) => width}px;
   height: 34px;
+  white-space: nowrap;
+
+  @media (max-width: 524px) {
+    width: fit-content;
+  }
 `;
 const ArrowContainer = styled.div`
   position: absolute;
   right: 32px;
+
+  @media (max-width: 524px) {
+    position: relative;
+    right: -8px;
+  }
 `;
 const DropdownButton = styled(Flex)`
   position: relative;
 
   box-sizing: border-box;
   cursor: pointer;
+
+  @media (max-width: 524px) {
+    width: fit-content;
+  }
 `;
 const DropdownLabel = styled.p<{ color: string }>`
   ${theme.typo.Web.Label3}

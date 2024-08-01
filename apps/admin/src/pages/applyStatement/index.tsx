@@ -329,12 +329,12 @@ export default function ApplyStatement() {
     {
       title: '이름',
       dataIndex: 'name',
-      // width: '7%', //70px
+      // width: '70px',
     },
     {
       title: '이메일',
       dataIndex: 'email',
-      // width: '12.7%', //'177px',
+      // width: '177px',
       responsive: ['xl'],
     },
     {
@@ -487,7 +487,7 @@ export default function ApplyStatement() {
           align="flex-end"
           style={{ width: 'auto' }}
         >
-          <Text webTypo="Body3" paletteColor="Gray4">
+          <Text webTypo="Body3" paletteColor="Gray4" className="createAt">
             생성일시 :&nbsp;{createAt}
           </Text>
           <Button
@@ -587,7 +587,8 @@ const FlexBox = styled(Flex)`
   }
 
   @media (max-width: 680px) {
-    .search {
+    .search,
+    .createAt {
       display: none;
     }
   }
