@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { CEOS } from '@admin/assets/CEOS';
-import { SidebarArrow, ToggleArrow } from '@admin/assets/Sidebar';
+import { SidebarArrow } from '@admin/assets/Sidebar';
+import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
 import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 import { Text, theme } from '@ceos-fe/ui';
 import Link from 'next/link';
@@ -118,7 +119,7 @@ const Sidebar = () => {
         </div>
       </SidebarMenuContainer>
       <ToggleBtn onClick={handleToggle}>
-        <ToggleArrow click={isSidebarOpen} />
+        {isSidebarOpen ? <ArrowLeft /> : <ArrowRight />}
       </ToggleBtn>
     </Container>
   );
