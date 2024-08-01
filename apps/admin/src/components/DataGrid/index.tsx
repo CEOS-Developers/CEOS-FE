@@ -27,7 +27,7 @@ export const DataGrid = ({
   onChangePage,
 }: DataGridProps) => {
   return (
-    <>
+    <Container>
       <StyledTable
         dataSource={dataSource}
         columns={columns}
@@ -36,9 +36,13 @@ export const DataGrid = ({
       />
       <Space height={48} />
       <Pagination pagination={pagination} onChangePage={onChangePage} />
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 90vw;
+`;
 
 const StyledTable = styled(Table)`
   .ant-table-thead .ant-table-cell {

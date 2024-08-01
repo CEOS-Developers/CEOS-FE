@@ -58,7 +58,7 @@ export const Pagination = ({ pagination, onChangePage }: PaginationProps) => {
 };
 
 const Container = styled.div`
-  width: 1032px;
+  width: 100%; //1032px;
 
   display: flex;
   align-items: center;
