@@ -87,16 +87,42 @@ const SidebarArrow = ({ click }: { click: boolean }) => {
   );
 };
 
+const ToggleArrow = ({ click }: { click: boolean }) => {
+  return (
+    <ToggleContainer clickMenu={click}>
+      <svg
+        width="18"
+        height="19"
+        viewBox="0 0 18 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.35593 11.4781L8.44327 4.11469C8.59683 3.95515 8.79841 3.875 9 3.875C9.2016 3.875 9.40317 3.95515 9.55673 4.11469L16.6441 11.4781C16.952 11.798 16.952 12.3152 16.6441 12.6351C16.3362 12.955 15.8385 12.955 15.5306 12.6351L9 5.85009L2.46938 12.6351C2.16148 12.955 1.66384 12.955 1.35593 12.6351C1.04802 12.3152 1.04802 11.798 1.35593 11.4781Z"
+          fill="#F4F6F9"
+        />
+      </svg>
+    </ToggleContainer>
+  );
+};
+
 export {
   SidebarApply,
   SidebarPageEdit,
   SidebarRecruiting,
   SidebarUser,
   SidebarArrow,
+  ToggleArrow,
 };
 
 const ArrowContainer = styled.div<{ clickMenu?: any }>`
   margin: 0;
   padding: 0;
   rotate: ${(props) => (props.clickMenu ? '0deg' : '180deg')};
+`;
+
+const ToggleContainer = styled.div<{ clickMenu?: any }>`
+  margin: 0 -5px;
+  padding: 0;
+  rotate: ${(props) => (props.clickMenu ? '270deg' : '90deg')};
 `;
