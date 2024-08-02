@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { CEOS } from '@admin/assets/CEOS';
 import { SidebarArrow } from '@admin/assets/Sidebar';
+import { ArrowLeft, ArrowRight } from '@admin/assets/Arrow';
 import { SidebarMenuList } from '@admin/assets/data/sidebarMenuList';
 import { Text, theme } from '@ceos-fe/ui';
 import Link from 'next/link';
@@ -26,6 +27,7 @@ export type sidebarInterface = {
 
 const Sidebar = () => {
   const [clickMenuNum, setClickMenuNum] = useState(100);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [, , removeCookie] = useCookies(['LOGIN_EXPIRES']);
   const [login, setLogin] = useRecoilState(loginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -45,8 +47,12 @@ const Sidebar = () => {
     logoutMutation.mutate();
   };
 
+  const handleToggle = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <Container>
+    <Container isOpen={isSidebarOpen}>
       <div>
         <SidebarTitle>
           <CEOS />
@@ -112,19 +118,24 @@ const Sidebar = () => {
           </Text>
         </div>
       </SidebarMenuContainer>
+      <ToggleBtn onClick={handleToggle}>
+        {isSidebarOpen ? <ArrowLeft /> : <ArrowRight />}
+      </ToggleBtn>
     </Container>
   );
 };
 
 export default Sidebar;
 
-const Container = styled.div`
+const Container = styled.div<{ isOpen: boolean }>`
   height: 100vh;
   width: 16.5%;
   background: ${theme.palette.Admin.DeepNavy};
   position: fixed;
   min-width: 200px;
   z-index: 999;
+  left: ${({ isOpen }) => (isOpen ? '0' : '-200px')};
+  transition: left 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -182,4 +193,19 @@ const SidebarSubMenu = styled(Link)`
   height: 48px;
   padding: 0 0 0 68px;
   text-decoration-line: none;
+`;
+
+const ToggleBtn = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+  z-index: 10;
+  top: 2.4%;
+  left: 100%;
+  background-color: ${theme.palette.Admin.DeepNavy};
+  width: 12px;
+  height: 64px;
+  clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+  cursor: pointer;
 `;

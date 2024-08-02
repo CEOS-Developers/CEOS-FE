@@ -329,27 +329,29 @@ export default function ApplyStatement() {
     {
       title: '이름',
       dataIndex: 'name',
-      width: '70px',
+      // width: '70px',
     },
     {
       title: '이메일',
       dataIndex: 'email',
-      width: '177px',
+      // width: '177px',
+      responsive: ['xl'],
     },
     {
       title: '전화번호',
       dataIndex: 'phone_number',
-      width: '117px',
+      // width: '117px',
+      responsive: ['lg'],
     },
     {
       title: '파트',
       dataIndex: 'part',
-      width: '64px',
+      // width: '64px',
     },
     {
       title: '서류합불',
       dataIndex: 'doc_pass',
-      width: '90px',
+      // width: '90px',
       render: (_text: string, record: any) => {
         return (
           <Dropdown
@@ -365,7 +367,8 @@ export default function ApplyStatement() {
     {
       title: '면접시간',
       dataIndex: 'interview_time',
-      width: '250px',
+      // width: '250px',
+      responsive: ['md'],
       render: (_text: string, record: any) => (
         <Flex justify="space-between" webGap={5} mobileGap={5}>
           {record.doc_pass === '합격' ? (
@@ -391,7 +394,7 @@ export default function ApplyStatement() {
     {
       title: '최종합불',
       dataIndex: 'final_pass',
-      width: '90px',
+      // width: '90px',
       render: (_text: string, record: any) => {
         return (
           <Dropdown
@@ -407,7 +410,7 @@ export default function ApplyStatement() {
     {
       title: '지원서',
       dataIndex: 'cv',
-      width: '61px',
+      // width: '61px',
       render: (_text: string, record: any) => (
         <Button
           variant="admin_stroke"
@@ -445,7 +448,7 @@ export default function ApplyStatement() {
         </Text>
       </div>
 
-      <Flex justify="space-between" align="flex-end" padding="24px 0">
+      <FlexBox justify="space-between" align="flex-end" padding="24px 0">
         <Flex webGap={8} mobileGap={8} style={{ width: 'auto' }}>
           {DropdownList.map((dropdown: DropdownInterface, index: number) => (
             <Dropdown
@@ -467,6 +470,7 @@ export default function ApplyStatement() {
             value={searchingName}
           />
           <div
+            className="search"
             onClick={() => {
               getApplicantsList();
             }}
@@ -483,7 +487,7 @@ export default function ApplyStatement() {
           align="flex-end"
           style={{ width: 'auto' }}
         >
-          <Text webTypo="Body3" paletteColor="Gray4">
+          <Text webTypo="Body3" paletteColor="Gray4" className="createAt">
             생성일시 :&nbsp;{createAt}
           </Text>
           <Button
@@ -503,7 +507,7 @@ export default function ApplyStatement() {
             파일 다운로드
           </Button>
         </Flex>
-      </Flex>
+      </FlexBox>
 
       <DataGrid
         pagination={pagination}
@@ -525,8 +529,7 @@ export default function ApplyStatement() {
           },
           content: {
             margin: 'auto',
-            marginLeft: '20%',
-            width: '1032px',
+            width: '80%',
             height: modalSubject == 'interview' ? '60%' : '80%',
             background: '#ffffff',
             display: 'flex',
@@ -566,7 +569,7 @@ export default function ApplyStatement() {
 
 const Container = styled.div<{ modalOpen?: boolean }>`
   position: ${({ modalOpen }) => (modalOpen ? 'fixed' : 'auto')};
-  width: 1096px;
+  width: 100%; //1096px
   display: flex;
   flex-direction: column;
 
@@ -574,6 +577,20 @@ const Container = styled.div<{ modalOpen?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+`;
+
+const FlexBox = styled(Flex)`
+  @media (max-width: 1200px) {
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  @media (max-width: 680px) {
+    .search,
+    .createAt {
+      display: none;
+    }
   }
 `;
 
@@ -587,5 +604,9 @@ const InputName = styled.input`
   ${theme.typo.Web.Body3};
   ::placeholder {
     color: ${theme.palette.Gray4};
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;

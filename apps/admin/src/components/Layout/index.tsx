@@ -108,7 +108,9 @@ const Container = styled.div<{ path?: string }>`
 
 const ChildrenContainer = styled.div<{ path?: string }>`
   margin-left: ${({ path }) =>
-    path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'};
+    path?.includes('/auth') || path?.includes('/applyStatement') || path === '/'
+      ? 0
+      : 'max(16.5%, 200px)'};
   display: flex;
   flex-direction: column;
   align-items: center;
