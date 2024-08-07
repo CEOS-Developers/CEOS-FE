@@ -121,7 +121,7 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
       )}
       {/* 파트별 질문 */}
       <Text webTypo="Heading4" style={{ padding: '30px 0 0 0' }}>
-        {data?.data.part} {data?.data.partQuestions[0].question}
+        {data?.data.part} 파트 질문
       </Text>
       {data?.data.partQuestions.map(
         (question: questionInterface, index: number) => (
