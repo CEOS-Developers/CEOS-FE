@@ -107,7 +107,7 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
             align="flex-start"
             justify="flex-start"
             padding="24px 0 0 0"
-            style={{ height: 'fit-content' }}
+            style={{ height: 'fit-content', whiteSpace: 'pre-wrap' }}
           >
             <Text webTypo="Label3">
               {question.questionIndex}. &nbsp;
@@ -131,7 +131,7 @@ export const ApplicationModal = ({ idx }: { idx: number }) => {
             align="flex-start"
             justify="flex-start"
             padding="24px 0 0 0"
-            style={{ height: 'fit-content' }}
+            style={{ height: 'fit-content', whiteSpace: 'pre-wrap' }}
           >
             <Text webTypo="Label3">
               {question.questionIndex}. &nbsp;
