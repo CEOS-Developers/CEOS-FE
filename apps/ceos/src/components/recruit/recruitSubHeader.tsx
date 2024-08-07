@@ -132,6 +132,7 @@ export const RecruitSubHeader = ({
                           지원 기간이 아닙니다.
                         </Button>
                       </div>
+                      {/* <div>이메일 작성하기</div> */}
                     </div>
                   )}
                 </>
