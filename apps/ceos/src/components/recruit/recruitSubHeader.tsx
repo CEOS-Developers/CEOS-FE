@@ -11,6 +11,8 @@ import { ModalPortal } from '@ceos-fe/utils/';
 import { Dispatch, useState } from 'react';
 import Link from 'next/link';
 import { DateProps, PassDataInterface } from './interface';
+import { TopMargin } from '@ceos/pages/FAQ';
+import { EmailModal } from '../Modals/emailModal';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -30,6 +32,13 @@ export const RecruitSubHeader = ({
   setStep,
 }: RecruitSubHeaderProps) => {
   const { modalRef, isOpen, toggleModal } = useModal();
+  const {
+    modalRef: emailModalRef,
+    isOpen: isEmailModalOpen,
+    toggleModal: toggleEmailModal,
+    openModal: openEmailModal,
+    closeModal: closeEmailModal,
+  } = useModal();
   const newDate = new Date();
 
   const [
@@ -132,7 +141,18 @@ export const RecruitSubHeader = ({
                           지원 기간이 아닙니다.
                         </Button>
                       </div>
-                      {/* <div>이메일 작성하기</div> */}
+                      <div
+                        style={{
+                          marginTop: 18,
+                          textAlign: 'center',
+                          fontSize: 14,
+                        }}
+                        onClick={() => {
+                          toggleEmailModal();
+                        }}
+                      >
+                        이메일으로 알림받기
+                      </div>
                     </div>
                   )}
                 </>
@@ -149,6 +169,16 @@ export const RecruitSubHeader = ({
             toggleModal={toggleModal}
             setPassData={setPassData}
             ref={modalRef}
+          />
+        </ModalPortal>
+      )}
+
+      {isEmailModalOpen && (
+        <ModalPortal>
+          <EmailModal
+            isOpen={isEmailModalOpen}
+            toggleModal={toggleEmailModal}
+            ref={emailModalRef}
           />
         </ModalPortal>
       )}
