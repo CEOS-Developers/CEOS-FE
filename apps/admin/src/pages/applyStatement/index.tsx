@@ -529,6 +529,7 @@ export default function ApplyStatement() {
           },
           content: {
             margin: 'auto',
+            marginLeft: '20%',
             width: '80%',
             height: modalSubject == 'interview' ? '60%' : '80%',
             background: '#ffffff',
