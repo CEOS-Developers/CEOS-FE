@@ -143,11 +143,7 @@ export const RecruitSubHeader = ({
                         </Button>
                       </div>
                       <div
-                        style={{
-                          marginTop: 18,
-                          textAlign: 'center',
-                          fontSize: 14,
-                        }}
+                        css={EmailTextCss}
                         onClick={() => {
                           toggleEmailModal();
                         }}
@@ -198,5 +194,22 @@ export const BtnCss = css`
     margin: 108px 22px 0px 22px;
     height: 59px;
     max-width: 767px;
+  }
+`;
+
+export const EmailTextCss = css`
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+
+  @media (max-width: 1023px) {
+    margin-top: 8px;
+    font-size: 12px;
+    max-width: 767px;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;

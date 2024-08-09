@@ -5,9 +5,10 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { emailApi } from '@ceos-fe/utils/src/apis/ceos/emailApi';
 import { useQueryClient } from '@tanstack/react-query';
-import { forwardRef, useState, useEffect } from 'react';
+import { forwardRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
+import { gap } from '../recruit/Schedule';
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,7 +21,6 @@ interface EmailFormInterface {
 
 export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
-    const queryClient = useQueryClient();
     const [isError, setIsError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const { getValues, register, reset } = useForm<EmailFormInterface>({
@@ -29,14 +29,8 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       },
     });
 
-    useEffect(() => {
-      console.log(isError);
-      console.log(errorText);
-    }, [isError, errorText]);
-
     const { mutate: emailDoc } = useMutation(emailApi.POST_EMAIL, {
       onSuccess: (res) => {
-        console.log(res);
         setIsError(true);
         if (res === '이미 존재하는 데이터입니다') {
           setErrorText('이미 등록된 이메일입니다.');
@@ -76,39 +70,47 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 15,
             }}
           >
-            <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
+            <Text webTypo="Heading2" mobileTypo="Heading3" margin="0 0 24px 0">
               알림받을 이메일을 입력해주세요.
             </Text>
 
-            <TextField
-              {...register('email', {
-                required: true,
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                  message: '이메일 형식이 아닙니다.',
-                },
-              })}
-              label="이메일"
-              placeholder="ceos@ceos-sinchon.com"
-              width={376}
-              css={css`
-                @media (max-width: 1023px) {
-                  width: 306px;
-                }
-              `}
-            />
-
-            <Button
-              variant="default"
-              webWidth={376}
-              mobileWidth={306}
-              onClick={handleSubmit}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 170,
+              }}
             >
-              등록하기
-            </Button>
+              <TextField
+                {...register('email', {
+                  required: true,
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                    message: '이메일 형식이 아닙니다.',
+                  },
+                })}
+                label="이메일"
+                placeholder="ceos@ceos-sinchon.com"
+                width={376}
+                css={css`
+                  @media (max-width: 1023px) {
+                    width: 306px;
+                  }
+                `}
+              />
+
+              <Button
+                variant="default"
+                webWidth={376}
+                mobileWidth={306}
+                onClick={handleSubmit}
+              >
+                등록하기
+              </Button>
+            </div>
           </div>
         </div>
         {isError && (
