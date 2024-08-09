@@ -5,8 +5,7 @@ import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { emailApi } from '@ceos-fe/utils/src/apis/ceos/emailApi';
 import { useQueryClient } from '@tanstack/react-query';
-import { Dispatch, MouseEventHandler, forwardRef, useState } from 'react';
-import { PassDataInterface } from '../recruit/interface';
+import { forwardRef, useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
 
@@ -22,45 +21,41 @@ interface EmailFormInterface {
 export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
     const queryClient = useQueryClient();
-
+    const [isError, setIsError] = useState(false);
+    const [errorText, setErrorText] = useState('');
     const { getValues, register, reset } = useForm<EmailFormInterface>({
       defaultValues: {
         email: '',
       },
     });
 
-    const [isError, setIsError] = useState(false);
-    const [errorText, setErrorText] = useState('');
+    useEffect(() => {
+      console.log(isError);
+      console.log(errorText);
+    }, [isError, errorText]);
 
     const { mutate: emailDoc } = useMutation(emailApi.POST_EMAIL, {
       onSuccess: (res) => {
+        console.log(res);
         setIsError(true);
-
-        let message = '';
         if (res === '이미 존재하는 데이터입니다') {
-          message = '이미 등록된 이메일입니다.';
+          setErrorText('이미 등록된 이메일입니다.');
         } else if (res === '요청에 성공하였습니다.') {
-          message = '이메일이 등록되었습니다.';
-          // 이메일 등록 성공 시 에러 상태를 false로 설정할 수도 있지만,
-          // 여기서는 메시지를 표시하기 위해 true로 유지함.
+          setErrorText('이메일이 등록되었습니다.');
         } else {
-          message = '다시 시도해주세요.';
+          setErrorText('다시 시도해주세요.');
         }
-        setErrorText(message);
 
-        // 에러 메시지 표시 후 3초 후에 초기화
         setTimeout(() => {
           setErrorText('');
-        }, 3000);
-
-        props.toggleModal();
+          setIsError(false);
+          props.toggleModal();
+        }, 2000);
       },
     });
 
     const handleSubmit = async () => {
-      // emailDoc({ email: getValues('email') });
-      const email = getValues('email');
-      emailDoc({ email });
+      emailDoc({ email: getValues('email') });
     };
 
     const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -81,6 +76,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              gap: 15,
             }}
           >
             <Text webTypo="Body2" mobileTypo="Body2" margin="0 0 24px 0">
