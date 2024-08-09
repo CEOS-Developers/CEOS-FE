@@ -378,16 +378,18 @@ export default function ApplyStatement() {
           ) : (
             <>&nbsp;</>
           )}
-          <Button
-            variant="admin_stroke"
-            onClick={() => {
-              setModalOpen(true);
-              setApplicantId(record.id);
-              setModalSubject('interview');
-            }}
-          >
-            시간 지정
-          </Button>
+          {record.doc_pass === '합격' && (
+            <Button
+              variant="admin_stroke"
+              onClick={() => {
+                setModalOpen(true);
+                setApplicantId(record.id);
+                setModalSubject('interview');
+              }}
+            >
+              시간 지정
+            </Button>
+          )}
         </Flex>
       ),
     },
@@ -529,7 +531,6 @@ export default function ApplyStatement() {
           },
           content: {
             margin: 'auto',
-            marginLeft: '20%',
             width: '80%',
             height: modalSubject == 'interview' ? '60%' : '80%',
             background: '#ffffff',
