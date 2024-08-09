@@ -39,6 +39,7 @@ export const RecruitSubHeader = ({
     openModal: openEmailModal,
     closeModal: closeEmailModal,
   } = useModal();
+
   const newDate = new Date();
 
   const [

@@ -71,7 +71,6 @@ const Recruit = () => {
   let fixVarEndDateDoc = `${fixYear}-${
     fixMonth < 10 ? '0' + fixMonth : fixMonth
   }-${fixDate < 10 ? '0' + fixDate : fixDate}`;
-  console.log(fixVarEndDateDoc);
 
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
