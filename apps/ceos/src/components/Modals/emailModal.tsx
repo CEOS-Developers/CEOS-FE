@@ -4,7 +4,6 @@ import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { emailApi } from '@ceos-fe/utils/src/apis/ceos/emailApi';
-import { useQueryClient } from '@tanstack/react-query';
 import { forwardRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
@@ -23,7 +22,13 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
     const [isError, setIsError] = useState(false);
     const [errorText, setErrorText] = useState('');
-    const { getValues, register, reset } = useForm<EmailFormInterface>({
+    const {
+      getValues,
+      register,
+      formState: { errors },
+    } = useForm<EmailFormInterface>({
+      mode: 'onSubmit',
+      reValidateMode: 'onChange',
       defaultValues: {
         email: '',
       },
@@ -39,7 +44,6 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
         } else {
           setErrorText('다시 시도해주세요.');
         }
-
         setTimeout(() => {
           setErrorText('');
           setIsError(false);
@@ -64,26 +68,17 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
             toggleModal={props.toggleModal}
             margin="0 0 auto auto"
           />
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Text webTypo="Heading2" mobileTypo="Heading3" margin="0 0 24px 0">
+          <div css={ModalContentCss}>
+            <Text
+              webTypo="Heading2"
+              mobileTypo="Heading2"
+              paletteColor="Blue"
+              margin="0 0 12px 0"
+            >
               알림받을 이메일을 입력해주세요.
             </Text>
 
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 170,
-              }}
-            >
+            <div css={InputCss}>
               <TextField
                 {...register('email', {
                   required: true,
@@ -92,6 +87,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                     message: '이메일 형식이 아닙니다.',
                   },
                 })}
+                type="email"
                 label="이메일"
                 placeholder="ceos@ceos-sinchon.com"
                 width={376}
@@ -101,7 +97,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                   }
                 `}
               />
-
+              {errors.email && <span>{errors.email.message}</span>}
               <Button
                 variant="default"
                 webWidth={376}
@@ -129,7 +125,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
 
 export const ModalBoxCss = css`
   width: 504px;
-  height: 498px;
+  height: 300px;
   background-color: #ffffff;
   box-sizing: border-box;
   padding: 1.5rem 1.5rem 60px 1.5rem;
@@ -138,12 +134,12 @@ export const ModalBoxCss = css`
 
   @media (max-width: 1023px) {
     width: 346px;
-    height: 451px;
+    height: 300px;
     padding: 1.25rem 1.25rem 1.44rem 1.25rem;
   }
 `;
 
-export const ModalContentCss = css`
+const ModalContentCss = css`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -151,18 +147,19 @@ export const ModalContentCss = css`
   align-items: center;
 `;
 
-export const InputCss = css`
+const InputCss = css`
   display: flex;
   flex-direction: column;
-  gap: 24px;
   align-items: center;
+  margin-top: 16px;
 
   button {
-    margin-top: 16px;
+    margin-top: 32px;
+    height: 48px;
   }
 
   @media (max-width: 1023px) {
-    gap: 12px;
+    margin-top: 16px;
   }
 `;
 
@@ -183,6 +180,6 @@ const ErrorTextContainer = styled.div`
 
   @media (max-width: 1023px) {
     top: 300px;
-    width: 80%;
+    width: 60%;
   }
 `;

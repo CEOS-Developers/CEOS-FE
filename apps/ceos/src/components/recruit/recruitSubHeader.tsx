@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { DateProps, PassDataInterface } from './interface';
 import { TopMargin } from '@ceos/pages/FAQ';
 import { EmailModal } from '../Modals/emailModal';
+import { palette } from 'packages/ui';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -133,22 +134,16 @@ export const RecruitSubHeader = ({
                     <div>
                       <div style={{ width: '100%', display: 'flex' }}>
                         <Button
-                          variant="glass"
+                          variant="white"
                           webWidth={234}
                           mobileWidth={346}
                           css={BtnCss}
-                          disabled
+                          onClick={() => {
+                            toggleEmailModal();
+                          }}
                         >
-                          지원 기간이 아닙니다.
+                          20기 모집 알림받기
                         </Button>
-                      </div>
-                      <div
-                        css={EmailTextCss}
-                        onClick={() => {
-                          toggleEmailModal();
-                        }}
-                      >
-                        이메일으로 알림받기
                       </div>
                     </div>
                   )}
