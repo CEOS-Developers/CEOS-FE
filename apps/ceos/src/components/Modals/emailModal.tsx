@@ -40,9 +40,9 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
         if (res === '이미 존재하는 데이터입니다') {
           setErrorText('이미 등록된 이메일입니다.');
         } else if (res === '요청에 성공하였습니다.') {
-          setErrorText('이메일이 등록되었습니다.');
+          setErrorText('작성해주신 이메일로 알림신청이 완료되었습니다.');
         } else {
-          setErrorText('다시 시도해주세요.');
+          setErrorText('오류가 발생했습니다. 다시 시도해주세요.');
         }
         setTimeout(() => {
           setErrorText('');
@@ -75,7 +75,17 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
               paletteColor="Blue"
               margin="0 0 12px 0"
             >
-              알림받을 이메일을 입력해주세요.
+              모집 기간 알림받기
+            </Text>
+            <Text
+              webTypo="Body2"
+              mobileTypo="Body2"
+              paletteColor="Black"
+              margin="0 0 12px 0"
+            >
+              작성해주신 이메일로
+              <br />
+              모집기간이 되면 알려드립니다!
             </Text>
 
             <div css={InputCss}>
@@ -89,7 +99,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                 })}
                 type="email"
                 label="이메일"
-                placeholder="ceos@ceos-sinchon.com"
+                placeholder="내용을 입력하세요."
                 width={376}
                 css={css`
                   @media (max-width: 1023px) {
@@ -104,7 +114,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                 mobileWidth={306}
                 onClick={handleSubmit}
               >
-                등록하기
+                신청하기
               </Button>
             </div>
           </div>
@@ -112,7 +122,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
         {isError && (
           <div css={backCss} className="open">
             <ErrorTextContainer onClick={handleClickInnerModal}>
-              <Text webTypo="Body1" mobileTypo="Body1" paletteColor="Blue">
+              <Text webTypo="Body2" mobileTypo="Body2" paletteColor="Blue">
                 {errorText}
               </Text>
             </ErrorTextContainer>
@@ -125,7 +135,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
 
 export const ModalBoxCss = css`
   width: 504px;
-  height: 300px;
+  height: 404px;
   background-color: #ffffff;
   box-sizing: border-box;
   padding: 1.5rem 1.5rem 60px 1.5rem;
@@ -134,7 +144,7 @@ export const ModalBoxCss = css`
 
   @media (max-width: 1023px) {
     width: 346px;
-    height: 300px;
+    height: 404px;
     padding: 1.25rem 1.25rem 1.44rem 1.25rem;
   }
 `;
@@ -151,15 +161,15 @@ const InputCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 24px;
 
   button {
-    margin-top: 32px;
-    height: 48px;
-  }
+    margin-top: 40px;
+    height: 45px;
 
-  @media (max-width: 1023px) {
-    margin-top: 16px;
+    @media (max-width: 1023px) {
+      margin-top: 48px;
+    }
   }
 `;
 

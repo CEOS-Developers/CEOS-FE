@@ -13,7 +13,6 @@ import Link from 'next/link';
 import { DateProps, PassDataInterface } from './interface';
 import { TopMargin } from '@ceos/pages/FAQ';
 import { EmailModal } from '../Modals/emailModal';
-import { palette } from 'packages/ui';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -132,6 +131,17 @@ export const RecruitSubHeader = ({
                     </div>
                   ) : (
                     <div>
+                      {/* <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="glass"
+                          webWidth={234}
+                          mobileWidth={346}
+                          css={BtnCss}
+                          disabled
+                        >
+                          지원 기간이 아닙니다.
+                        </Button>
+                      </div> */}
                       <div style={{ width: '100%', display: 'flex' }}>
                         <Button
                           variant="white"
