@@ -41,7 +41,7 @@ export const DataGrid = ({
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 90vw;
 `;
 
 const StyledTable = styled(Table)`

@@ -25,14 +25,9 @@ export type sidebarInterface = {
   submenu: subMenuListInterface[];
 };
 
-export type openInterface = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Sidebar = ({ isOpen, setIsOpen }: openInterface) => {
+const Sidebar = () => {
   const [clickMenuNum, setClickMenuNum] = useState(100);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [, , removeCookie] = useCookies(['LOGIN_EXPIRES']);
   const [login, setLogin] = useRecoilState(loginState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -53,11 +48,11 @@ const Sidebar = ({ isOpen, setIsOpen }: openInterface) => {
   };
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <Container isOpen={isOpen}>
+    <Container isOpen={isSidebarOpen}>
       <div>
         <SidebarTitle>
           <CEOS />
@@ -124,7 +119,7 @@ const Sidebar = ({ isOpen, setIsOpen }: openInterface) => {
         </div>
       </SidebarMenuContainer>
       <ToggleBtn onClick={handleToggle}>
-        {isOpen ? <ArrowLeft /> : <ArrowRight />}
+        {isSidebarOpen ? <ArrowLeft /> : <ArrowRight />}
       </ToggleBtn>
     </Container>
   );
@@ -134,12 +129,12 @@ export default Sidebar;
 
 const Container = styled.div<{ isOpen: boolean }>`
   height: 100vh;
-  width: max(16.5%, 200px);
+  width: 16.5%;
   background: ${theme.palette.Admin.DeepNavy};
   position: fixed;
   min-width: 200px;
   z-index: 999;
-  left: ${({ isOpen }) => (isOpen ? '0' : 'calc(-1 * (max(16.5%, 200px)))')};
+  left: ${({ isOpen }) => (isOpen ? '0' : '-200px')};
   transition: left 0.3s ease-in-out;
   display: flex;
   flex-direction: column;

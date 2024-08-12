@@ -14,7 +14,6 @@ const cookies = new Cookies().get('LOGIN_EXPIRES');
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [login, setLogin] = useRecoilState<boolean>(loginState);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -87,10 +86,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       {router.pathname.includes('/auth') || router.pathname === '/' ? (
         <></>
       ) : (
-        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Sidebar />
       )}
 
-      <ChildrenContainer path={router.pathname} isOpen={isOpen}>
+      <ChildrenContainer path={router.pathname}>
         <FlexBox path={router.pathname}>{children}</FlexBox>
       </ChildrenContainer>
     </Container>
@@ -100,22 +99,21 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 const Container = styled.div<{ path?: string }>`
   height: 100vh;
   display: flex;
-  flex-direction: ${({ path }) =>
-    path?.includes('/auth') || path === '/' ? 'column' : 'row-reverse'};
+  flex-direction: column;
   align-items: ${({ path }) =>
     path?.includes('/auth') || path === '/' ? 'center' : 'auto'};
   justify-content: ${({ path }) =>
     path?.includes('/auth') || path === '/' ? 'center' : ''};
 `;
 
-const ChildrenContainer = styled.div<{ path?: string; isOpen: boolean }>`
-  /* margin-left: ${({ path }) =>
-    path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'}; */
-  width: ${({ isOpen }) => (isOpen ? '83%' : '100%')};
+const ChildrenContainer = styled.div<{ path?: string }>`
+  margin-left: ${({ path }) =>
+    path?.includes('/auth') || path?.includes('/applyStatement') || path === '/'
+      ? 0
+      : 'max(16.5%, 200px)'};
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: width 0.3s ease-in-out;
 `;
 
 const FlexBox = styled.div<{ path?: string }>`
