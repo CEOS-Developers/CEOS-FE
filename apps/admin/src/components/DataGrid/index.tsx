@@ -65,6 +65,9 @@ const StyledTable = styled(Table)`
     font-weight: 400;
     font-size: 15px;
     line-height: 160%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .ant-table-row .ant-table-cell {
     padding: 10px;
