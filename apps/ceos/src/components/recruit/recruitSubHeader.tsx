@@ -11,6 +11,8 @@ import { ModalPortal } from '@ceos-fe/utils/';
 import { Dispatch, useState } from 'react';
 import Link from 'next/link';
 import { DateProps, PassDataInterface } from './interface';
+import { TopMargin } from '@ceos/pages/FAQ';
+import { EmailModal } from '../Modals/emailModal';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -30,6 +32,14 @@ export const RecruitSubHeader = ({
   setStep,
 }: RecruitSubHeaderProps) => {
   const { modalRef, isOpen, toggleModal } = useModal();
+  const {
+    modalRef: emailModalRef,
+    isOpen: isEmailModalOpen,
+    toggleModal: toggleEmailModal,
+    openModal: openEmailModal,
+    closeModal: closeEmailModal,
+  } = useModal();
+
   const newDate = new Date();
 
   const [
@@ -121,7 +131,8 @@ export const RecruitSubHeader = ({
                     </div>
                   ) : (
                     <div>
-                      <div style={{ width: '100%', display: 'flex' }}>
+                      {/* 지원기간 + 이메일 등록 기간 아닐땐 이 버튼
+                       <div style={{ width: '100%', display: 'flex' }}>
                         <Button
                           variant="glass"
                           webWidth={234}
@@ -131,8 +142,20 @@ export const RecruitSubHeader = ({
                         >
                           지원 기간이 아닙니다.
                         </Button>
+                      </div> */}
+                      <div style={{ width: '100%', display: 'flex' }}>
+                        <Button
+                          variant="white"
+                          webWidth={234}
+                          mobileWidth={346}
+                          css={BtnCss}
+                          onClick={() => {
+                            toggleEmailModal();
+                          }}
+                        >
+                          20기 모집 알림받기
+                        </Button>
                       </div>
-                      {/* <div>이메일 작성하기</div> */}
                     </div>
                   )}
                 </>
@@ -152,6 +175,16 @@ export const RecruitSubHeader = ({
           />
         </ModalPortal>
       )}
+
+      {isEmailModalOpen && (
+        <ModalPortal>
+          <EmailModal
+            isOpen={isEmailModalOpen}
+            toggleModal={toggleEmailModal}
+            ref={emailModalRef}
+          />
+        </ModalPortal>
+      )}
     </div>
   );
 };
@@ -167,5 +200,22 @@ export const BtnCss = css`
     margin: 108px 22px 0px 22px;
     height: 59px;
     max-width: 767px;
+  }
+`;
+
+export const EmailTextCss = css`
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+
+  @media (max-width: 1023px) {
+    margin-top: 8px;
+    font-size: 12px;
+    max-width: 767px;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
