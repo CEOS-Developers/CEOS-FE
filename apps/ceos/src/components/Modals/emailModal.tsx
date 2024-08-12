@@ -173,6 +173,7 @@ const InputCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 24px;
 
   button {
     position: absolute;
@@ -180,7 +181,7 @@ const InputCss = css`
     bottom: 60px;
 
     @media (max-width: 1023px) {
-      bottom: 50px;
+      bottom: 45px;
     }
   }
 `;
