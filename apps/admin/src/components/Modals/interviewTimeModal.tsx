@@ -79,9 +79,9 @@ export const InterviewTimeModal = ({
   return (
     <Flex direction="column">
       {isLoading ? (
-        <div>데이터를 불러오는 중입니다</div>
+        <div>데이터를 불러오는 중입니다.</div>
       ) : isError ? (
-        <div> 서류합격 상태가 아닙니다 </div>
+        <div>오류가 발생했습니다.</div>
       ) : isSuccess ? (
         <>
           <Flex width={640}>
