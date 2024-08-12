@@ -49,6 +49,7 @@ export const RecruitSubHeader = ({
     resultDateDoc,
     resultDateFinal,
     endDate,
+    emailStart,
   ] = [
     newDate,
     date.startDateDoc,
@@ -61,6 +62,9 @@ export const RecruitSubHeader = ({
       ),
     ),
     // 일주일 뒤를 합격 확인 마감기간으로 설정
+
+    new Date(date.startDateDoc.getDate() - 14),
+    // 시작 전 이주일 동안 이메일 알림 모집
   ];
 
   return (
