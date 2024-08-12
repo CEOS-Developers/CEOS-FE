@@ -147,6 +147,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
 export const ModalBoxCss = css`
   width: 504px;
   height: 404px;
+  position: relative;
   background-color: #ffffff;
   box-sizing: border-box;
   padding: 1.5rem 1.5rem 60px 1.5rem;
@@ -179,7 +180,7 @@ const InputCss = css`
     bottom: 60px;
 
     @media (max-width: 1023px) {
-      bottom: 40px;
+      bottom: 50px;
     }
   }
 `;
