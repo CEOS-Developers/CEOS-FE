@@ -4,7 +4,7 @@ import { theme, Text, TextField, Button } from '@ceos-fe/ui';
 import { CloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon';
 import { useForm } from 'react-hook-form';
 import { emailApi } from '@ceos-fe/utils/src/apis/ceos/emailApi';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
 import { gap } from '../recruit/Schedule';
@@ -27,7 +27,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       register,
       formState: { errors },
     } = useForm<EmailFormInterface>({
-      mode: 'onSubmit',
+      mode: 'onChange',
       reValidateMode: 'onChange',
       defaultValues: {
         email: '',
@@ -48,9 +48,18 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
           setErrorText('');
           setIsError(false);
           props.toggleModal();
-        }, 2000);
+        }, 2500);
       },
     });
+
+    const helperText = errors.email
+      ? [
+          {
+            type: 'normal',
+            text: errors.email.message || '',
+          },
+        ]
+      : [];
 
     const handleSubmit = async () => {
       emailDoc({ email: getValues('email') });
@@ -62,63 +71,65 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
 
     return (
       <div css={backCss} className="open">
-        <div css={ModalBoxCss} ref={ref}>
-          <CloseIcon
-            isOpen={props.isOpen}
-            toggleModal={props.toggleModal}
-            margin="0 0 auto auto"
-          />
-          <div css={ModalContentCss}>
-            <Text
-              webTypo="Heading2"
-              mobileTypo="Heading2"
-              paletteColor="Blue"
-              margin="0 0 12px 0"
-            >
-              모집 기간 알림받기
-            </Text>
-            <Text
-              webTypo="Body2"
-              mobileTypo="Body2"
-              paletteColor="Black"
-              margin="0 0 12px 0"
-            >
-              작성해주신 이메일로
-              <br />
-              모집기간이 되면 알려드립니다!
-            </Text>
-
-            <div css={InputCss}>
-              <TextField
-                {...register('email', {
-                  required: true,
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-                    message: '이메일 형식이 아닙니다.',
-                  },
-                })}
-                type="email"
-                label="이메일"
-                placeholder="내용을 입력하세요."
-                width={376}
-                css={css`
-                  @media (max-width: 1023px) {
-                    width: 306px;
-                  }
-                `}
-              />
-              {errors.email && <span>{errors.email.message}</span>}
-              <Button
-                variant="default"
-                webWidth={376}
-                mobileWidth={306}
-                onClick={handleSubmit}
+        {!isError && (
+          <div css={ModalBoxCss} ref={ref}>
+            <CloseIcon
+              isOpen={props.isOpen}
+              toggleModal={props.toggleModal}
+              margin="0 0 auto auto"
+            />
+            <div css={ModalContentCss}>
+              <Text
+                webTypo="Heading2"
+                mobileTypo="Heading2"
+                paletteColor="Blue"
+                margin="0 0 12px 0"
               >
-                신청하기
-              </Button>
+                모집 기간 알림받기
+              </Text>
+              <Text
+                webTypo="Body2"
+                mobileTypo="Body2"
+                paletteColor="Black"
+                margin="0 0 12px 0"
+              >
+                작성해주신 이메일로
+                <br />
+                모집기간이 되면 알려드립니다!
+              </Text>
+
+              <div css={InputCss}>
+                <TextField
+                  {...register('email', {
+                    required: true,
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                      message: '이메일 형식이 아닙니다.',
+                    },
+                  })}
+                  label="이메일"
+                  placeholder="내용을 입력하세요."
+                  helperText={helperText}
+                  width={376}
+                  css={css`
+                    @media (max-width: 1023px) {
+                      width: 306px;
+                    }
+                  `}
+                />
+
+                <Button
+                  variant="default"
+                  webWidth={376}
+                  mobileWidth={306}
+                  onClick={handleSubmit}
+                >
+                  신청하기
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         {isError && (
           <div css={backCss} className="open">
             <ErrorTextContainer onClick={handleClickInnerModal}>
@@ -161,14 +172,14 @@ const InputCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 24px;
 
   button {
-    margin-top: 40px;
+    position: absolute;
     height: 45px;
+    bottom: 60px;
 
     @media (max-width: 1023px) {
-      margin-top: 48px;
+      bottom: 40px;
     }
   }
 `;

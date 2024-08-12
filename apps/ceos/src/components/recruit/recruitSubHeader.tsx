@@ -131,7 +131,8 @@ export const RecruitSubHeader = ({
                     </div>
                   ) : (
                     <div>
-                      {/* <div style={{ width: '100%', display: 'flex' }}>
+                      {/* 지원기간 + 이메일 등록 기간 아닐땐 이 버튼
+                       <div style={{ width: '100%', display: 'flex' }}>
                         <Button
                           variant="glass"
                           webWidth={234}
