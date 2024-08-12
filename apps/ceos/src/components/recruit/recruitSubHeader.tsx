@@ -153,7 +153,7 @@ export const RecruitSubHeader = ({
                             toggleEmailModal();
                           }}
                         >
-                          20기 모집 알림받기
+                          {generation}기 모집 알림받기
                         </Button>
                       </div>
                     </div>
