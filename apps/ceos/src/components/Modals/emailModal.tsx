@@ -18,6 +18,11 @@ interface EmailFormInterface {
   email: string;
 }
 
+type HelperTextType = {
+  type: 'normal' | 'important';
+  text: string;
+};
+
 export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
   (props, ref) => {
     const [isError, setIsError] = useState(false);
@@ -52,13 +57,8 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       },
     });
 
-    const helperText = errors.email
-      ? [
-          {
-            type: 'normal',
-            text: errors.email.message || '',
-          },
-        ]
+    const helperText: HelperTextType[] = errors.email
+      ? [{ type: 'normal', text: errors.email.message || '' }]
       : [];
 
     const handleSubmit = async () => {
