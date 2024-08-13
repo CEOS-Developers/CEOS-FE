@@ -19,6 +19,8 @@ interface ActivityResponse {
 }
 
 const FAQ = () => {
+  const generation = useRecoilValue(generationState);
+
   const { data, isLoading, isSuccess } = useQuery<{
     recruitData: ActivityResponse;
     activityData: ActivityResponse;
@@ -32,7 +34,6 @@ const FAQ = () => {
   });
 
   let questionColor: KeyOfPalette[] = ['Green', 'Skyblue', 'Yellow'];
-  const generation = useRecoilValue(generationState);
 
   const leftBtn = {
     title: '이전 활동들이 궁금하다면',
@@ -45,8 +46,6 @@ const FAQ = () => {
     content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
   };
-
-  console.log(data?.recruitData);
 
   return (
     <Flex direction="column" padding="0 22px" data-section="White">
