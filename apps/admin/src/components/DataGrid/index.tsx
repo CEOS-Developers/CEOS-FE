@@ -34,7 +34,7 @@ export const DataGrid = ({
         pagination={false}
         //rowKey={'uuid'}
       />
-      <Space height={48} />
+
       <Pagination pagination={pagination} onChangePage={onChangePage} />
     </Container>
   );

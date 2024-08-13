@@ -67,7 +67,7 @@ const Container = styled.div`
 
   //position: absolute;
   // bottom: 102px;
-  padding-top: 48px;
+  padding: 48px 0 24px;
 `;
 const Button = styled.button<{ isSelected: boolean }>`
   width: 26px;
