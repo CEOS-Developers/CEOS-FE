@@ -206,7 +206,7 @@ const ToggleBtn = styled.div`
   align-items: center;
   padding: 0 3px;
   z-index: 10;
-  top: 2.4%;
+  bottom: 2.4%;
   left: 100%;
   background-color: ${theme.palette.Admin.DeepNavy};
   width: 12px;
