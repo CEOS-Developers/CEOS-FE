@@ -487,7 +487,7 @@ export default function ApplyStatement() {
           webGap={8}
           mobileGap={8}
           align="flex-end"
-          style={{ width: 'auto' }}
+          style={{ width: 'auto', marginLeft: 5 }}
         >
           <Text webTypo="Body3" paletteColor="Gray4" className="createAt">
             생성일시 :&nbsp;{createAt}
