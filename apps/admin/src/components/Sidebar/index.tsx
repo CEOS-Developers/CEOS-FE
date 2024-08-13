@@ -185,7 +185,6 @@ const SidebarMenuContainer = styled(Link)<{
     align-items: center;
   }
 `;
-
 const SidebarSubMenuContainer = styled.div<{ submenuopen: boolean }>`
   max-height: 300px;
   max-height: ${(props) => (props.submenuopen ? 'auto' : '0px')};
@@ -199,14 +198,13 @@ const SidebarSubMenu = styled(Link)`
   padding: 0 0 0 68px;
   text-decoration-line: none;
 `;
-
 const ToggleBtn = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
   padding: 0 3px;
   z-index: 10;
-  top: 2.4%;
+  bottom: 2.4%;
   left: 100%;
   background-color: ${theme.palette.Admin.DeepNavy};
   width: 12px;
