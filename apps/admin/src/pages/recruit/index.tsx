@@ -144,7 +144,7 @@ export default function Recruit() {
   return (
     <Flex width={1032} direction="column" align="flex-start">
       <Flex width={680} direction="column" align="flex-start">
-        <Flex dirction="row" align="flex-start" justify="space-between">
+        <Flex direction="row" align="flex-start" justify="space-between">
           <Text webTypo="Heading2" paletteColor="Black">
             RECRUIT
           </Text>
