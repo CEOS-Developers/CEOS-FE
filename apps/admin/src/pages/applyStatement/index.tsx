@@ -210,7 +210,9 @@ export default function ApplyStatement() {
         adminInterviewAvailabilityApi.GET_INTERVIEW_AVAILABILITY(data.id)
           .then((response) => {
             if (!response.reason) {
-              response.reason = "면접 참여 불가";
+              response.reason = "면접 불가";
+            } else if (response.reason) {
+              response.reason = `면접 불가 (${response.reason})`;
             }
             setInterviewAvailabilityData(prev => new Map(prev).set(data.id, response));
           })
