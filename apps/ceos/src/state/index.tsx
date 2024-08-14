@@ -18,5 +18,3 @@ export const projectModalOpen = atom<boolean>({
   key: 'projectModalOpen',
   default: false,
 });
-
-export const generation = atom<number>({ key: 'generation', default: -1 });
