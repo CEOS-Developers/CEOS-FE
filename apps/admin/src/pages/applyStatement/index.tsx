@@ -209,6 +209,9 @@ export default function ApplyStatement() {
       if (data.documentPass === "합격" && data.id) {
         adminInterviewAvailabilityApi.GET_INTERVIEW_AVAILABILITY(data.id)
           .then((response) => {
+            if (!response.reason) {
+              response.reason = "면접 참여 불가";
+            }
             setInterviewAvailabilityData(prev => new Map(prev).set(data.id, response));
           })
           .catch((error) => {
@@ -394,29 +397,29 @@ export default function ApplyStatement() {
       responsive: ['md'],
       render: (_text: string, record: any) => {
         const availability = interviewAvailabilityData.get(record.id);
-        return (
-          <Flex justify="space-between" webGap={5} mobileGap={5}>
+      return (
+        <Flex justify="space-between" webGap={5} mobileGap={5}>
             {availability?.interviewAvailability ? (
-              <div style={{ width: '146px' }}>
+          <div style={{ width: '146px' }}>
                 {record.date?.slice(5, 10)} &nbsp; {record.duration}
-              </div>
+          </div>
             ) : (
               <div style={{ width: '146px' }}>
                 {availability?.reason}
               </div>
             )}
-              <Button
-                variant="admin_stroke"
-                onClick={() => {
-                  setModalOpen(true);
-                  setApplicantId(record.id);
-                  setModalSubject('interview');
-                }}
-              >
-                시간 지정
-              </Button>
-          </Flex>
-        );
+          <Button
+            variant="admin_stroke"
+            onClick={() => {
+              setModalOpen(true);
+              setApplicantId(record.id);
+              setModalSubject('interview');
+            }}
+          >
+            시간 지정
+          </Button>
+        </Flex>
+      );
       },
     },
     {
