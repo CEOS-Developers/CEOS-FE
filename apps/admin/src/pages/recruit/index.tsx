@@ -16,6 +16,7 @@ import {
 } from '@tanstack/react-query';
 import { useAlert } from '@admin/hooks/useAlert';
 import { Alert } from '@admin/components/Alert';
+import { sendEmailApi } from '@ceos-fe/utils/src/apis/admin/sendEmailApi';
 
 interface RecruitDateInterface extends RecruitBaseInterface {
   startDateDoc: Date;
@@ -28,6 +29,14 @@ interface RecruitDateInterface extends RecruitBaseInterface {
   ideathonDate: Date;
   hackathonDate: Date;
   demodayDate: Date;
+}
+
+interface SendEmailInterface {
+  timestamp: Date;
+  success: boolean;
+  code: string;
+  status: string;
+  reason: string | null;
 }
 
 export default function Recruit() {
@@ -101,12 +110,53 @@ export default function Recruit() {
     postRecruitments(recruitData);
   };
 
+  const {
+    data: sendData,
+    error,
+    isLoading,
+    refetch,
+  } = useQuery<SendEmailInterface>(
+    ['sendData'],
+    async () => await sendEmailApi.GET_SEND_EMAIL(),
+    {
+      enabled: false, // 쿼리 자동 실행 방지
+      onSuccess: (data: SendEmailInterface) => {
+        if (data.reason === '리쿠르팅 시작 전입니다.') {
+          alert('리쿠르팅 시작 전입니다.');
+        } else if (data.reason === '리쿠르팅 마감 후입니다.') {
+          alert('리쿠르팅 마감 후입니다.');
+        } else if (data.reason === '권한이 부여되지 않은 사용자입니다') {
+          alert('권한이 부여되지 않은 사용자입니다');
+        } else {
+          alert('메일이 성공적으로 전송되었습니다.');
+        }
+      },
+      onError: (err: any) => {
+        alert('문제가 발생했습니다: ' + err.message);
+      },
+    },
+  );
+
+  const onClickSendMail = () => {
+    refetch();
+  };
+
   return (
     <Flex width={1032} direction="column" align="flex-start">
       <Flex width={680} direction="column" align="flex-start">
-        <Text webTypo="Heading2" paletteColor="Black">
-          RECRUIT
-        </Text>
+        <Flex dirction="row" align="flex-start" justify="space-between">
+          <Text webTypo="Heading2" paletteColor="Black">
+            RECRUIT
+          </Text>
+          <Button
+            webWidth={108}
+            mobileWidth={108}
+            variant="admin_navy"
+            onClick={onClickSendMail}
+          >
+            알림 메일 전송
+          </Button>
+        </Flex>
         <Text
           webTypo="Body3"
           paletteColor="Gray5"
