@@ -259,7 +259,7 @@ export default function ApplyStatement() {
               name: data?.name,
               part: data?.part?.slice(0, 3),
               email: data?.email,
-              phone_number: data?.phoneNumber.replaceAll('-', ''),
+              phone_number: data?.phoneNumber?.replaceAll('-', ''),
               doc_pass: data?.documentPass,
               date: data?.date,
               duration: data?.duration,
