@@ -5,7 +5,7 @@ export const sendEmailApi = {
     try {
       const response = await adminInstance.get(`/subscribe/mail`);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return error.response.data;
     }
   },
