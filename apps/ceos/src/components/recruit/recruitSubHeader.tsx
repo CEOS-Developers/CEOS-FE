@@ -135,8 +135,8 @@ export const RecruitSubHeader = ({
                     </div>
                   ) : (
                     <div>
-                      {/* 지원기간 + 이메일 등록 기간 아닐땐 이 버튼
-                       <div style={{ width: '100%', display: 'flex' }}>
+                      {/* 지원기간 + 이메일 등록 기간 아닐땐 이 버튼 */}
+                      <div style={{ width: '100%', display: 'flex' }}>
                         <Button
                           variant="glass"
                           webWidth={234}
@@ -146,8 +146,8 @@ export const RecruitSubHeader = ({
                         >
                           지원 기간이 아닙니다.
                         </Button>
-                      </div> */}
-                      <div style={{ width: '100%', display: 'flex' }}>
+                      </div>
+                      {/* <div style={{ width: '100%', display: 'flex' }}>
                         <Button
                           variant="white"
                           webWidth={234}
@@ -159,7 +159,7 @@ export const RecruitSubHeader = ({
                         >
                           20기 모집 알림받기
                         </Button>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </>
