@@ -13,7 +13,10 @@ import {
 } from '@admin/assets/data/dropDownList';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { adminApplyStatementApi } from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
-import { adminInterviewAvailabilityApi } from '@ceos-fe/utils/src/apis/admin/adminInterviewAvailabilityApi';
+import {
+  InterviewAvailabilityInterface,
+  adminInterviewAvailabilityApi,
+} from '@ceos-fe/utils/src/apis/admin/adminInterviewAvailabilityApi';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from '../../components/Modals/applicationModal';
 import { CloseBtn } from '@admin/assets/CloseBtn';
@@ -69,7 +72,9 @@ export default function ApplyStatement() {
 
   const { setValue, watch, getValues } = useForm();
 
-  const [interviewAvailabilityData, setInterviewAvailabilityData] = useState<Map<number, InterviewAvailabilityInterface>>(new Map());
+  const [interviewAvailabilityData, setInterviewAvailabilityData] = useState<
+    Map<number, InterviewAvailabilityInterface>
+  >(new Map());
 
   //지원자 목록 가져오기
   const {
@@ -205,23 +210,25 @@ export default function ApplyStatement() {
   useEffect(() => {
     // 면접 참여 여부 확인
     applicantData?.data?.content.forEach((data: any) => {
-      if (data.documentPass === "합격" && data.id) {
-        adminInterviewAvailabilityApi.GET_INTERVIEW_AVAILABILITY(data.id)
+      if (data.documentPass === '합격' && data.id) {
+        adminInterviewAvailabilityApi
+          .GET_INTERVIEW_AVAILABILITY(data.id)
           .then((response) => {
-            setInterviewAvailabilityData(prev => new Map(prev).set(data.id, response));
+            setInterviewAvailabilityData((prev) =>
+              new Map(prev).set(data.id, response),
+            );
           })
           .catch((error) => {
             console.error('면접 가능 여부 가져오기 실패:', error);
           });
       }
 
-    // 최종 합격 여부 확인
-      if (data.finalPass === "합격") {
+      // 최종 합격 여부 확인
+      if (data.finalPass === '합격') {
         //console.log(`지원자 ${data.id}는 최종 합격입니다.`);
       }
     });
   }, [applicantData]);
-
 
   // 지원자 엑셀 생성 get 요청
   const {
@@ -402,20 +409,18 @@ export default function ApplyStatement() {
                 {record.date?.slice(5, 10)} &nbsp; {record.duration}
               </div>
             ) : (
-              <div style={{ width: '146px' }}>
-                {availability?.reason}
-              </div>
+              <div style={{ width: '146px' }}>{availability?.reason}</div>
             )}
-              <Button
-                variant="admin_stroke"
-                onClick={() => {
-                  setModalOpen(true);
-                  setApplicantId(record.id);
-                  setModalSubject('interview');
-                }}
-              >
-                시간 지정
-              </Button>
+            <Button
+              variant="admin_stroke"
+              onClick={() => {
+                setModalOpen(true);
+                setApplicantId(record.id);
+                setModalSubject('interview');
+              }}
+            >
+              시간 지정
+            </Button>
           </Flex>
         );
       },
