@@ -409,7 +409,9 @@ export default function ApplyStatement() {
                 {record.date?.slice(5, 10)} &nbsp; {record.duration}
               </div>
             ) : (
-              <div style={{ width: '146px' }}>{availability?.reason}</div>
+              <div style={{ width: '146px' }}>
+                {availability?.reason ? availability.reason : '-'}
+              </div>
             )}
             {record.doc_pass === '합격' && (
               <Button
