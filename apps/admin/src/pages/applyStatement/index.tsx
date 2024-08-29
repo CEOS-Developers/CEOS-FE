@@ -402,9 +402,13 @@ export default function ApplyStatement() {
       responsive: ['md'],
       render: (_text: string, record: any) => {
         const availability = interviewAvailabilityData.get(record.id);
+        /**
+         * TODO 면접 불가능 사유 확인
+         * availability?.interviewAvailability
+         */
         return (
           <Flex justify="space-between" webGap={5} mobileGap={5}>
-            {availability?.interviewAvailability ? (
+            {record.doc_pass === '합격' && record.date ? (
               <div style={{ width: '146px' }}>
                 {record.date?.slice(5, 10)} &nbsp; {record.duration}
               </div>
