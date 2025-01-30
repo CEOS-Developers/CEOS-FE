@@ -28,6 +28,16 @@ yarn admin
 yarn ceos
 ```
 
+### Typescript 버전 맞춰주기
+
+여러분의 로컬 환경 혹은 vscode와 같은 편집기가 가지고 있는 타입스크립트 버전이 본 프로젝트의 것과 호환되지 않을 수도 있습니다. 따라서 이를 맞춰줄 필요가 있습니다.
+
+1. 루트 경로에서 `.pnp.cjs ` 파일에 포커싱 합니다.
+2. cmd + shift + p 를 누르고 setting 설정 창을 킨 뒤 `Select Typescript version` 을 누릅니다.
+3. vscode 의 타입 스크립트 버전이 아니라, 본 프로젝트 workspace 의 버전을 이용합니다.
+
+> 이 설정을 안 해주면 typescript와 린팅 에러가 많이 날겁니다.
+
 ### 프로젝트 구성
 
 1. 본 프로젝트는 메타 프레임워크로는 nextJS를 이용합니다. 루트 package.json에 기술된 버전은 13 메이저 버전(app route 방식)이지만, 실제 프로젝트의 라우팅 구성을 보면 app 디렉터리가 아닌, page 디렉터리를 이용하는 페이지 라우팅 구성을 활용하고 있습니다. 본 문서를 보시는 운영진 분들께서 원하신다면 app routing으로 마이그레이션하는 작업을 진행하셔도 좋습니다(As you wish...)
