@@ -41,3 +41,9 @@ yarn ceos
 ### 프로젝트 구성
 
 1. 본 프로젝트는 메타 프레임워크로는 nextJS를 이용합니다. 루트 package.json에 기술된 버전은 13 메이저 버전(app route 방식)이지만, 실제 프로젝트의 라우팅 구성을 보면 app 디렉터리가 아닌, page 디렉터리를 이용하는 페이지 라우팅 구성을 활용하고 있습니다. 본 문서를 보시는 운영진 분들께서 원하신다면 app routing으로 마이그레이션하는 작업을 진행하셔도 좋습니다(As you wish...)
+
+<br /><br />
+
+---
+
+<h6>Written by Seungwan Kim, Tonkatsu Lover</h6>
