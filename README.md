@@ -42,6 +42,12 @@ yarn ceos
 
 1. 본 프로젝트는 메타 프레임워크로는 nextJS를 이용합니다. 루트 package.json에 기술된 버전은 13 메이저 버전(app route 방식)이지만, 실제 프로젝트의 라우팅 구성을 보면 app 디렉터리가 아닌, page 디렉터리를 이용하는 페이지 라우팅 구성을 활용하고 있습니다. 본 문서를 보시는 운영진 분들께서 원하신다면 app routing으로 마이그레이션하는 작업을 진행하셔도 좋습니다(As you wish...)
 
+### 참고 문헌
+
+1. [yarn berry와 turbo로 모노 레포 구성하기](https://medium.com/lbox-team/humans-in-lbox-%EC%97%98%EB%B0%95%EC%8A%A4%EC%9D%98-%EC%9D%B8%ED%84%B4%EC%9D%80-%EB%AC%B4%EC%8A%A8-%EC%9D%BC%EC%9D%84-%ED%95%A0%EA%B9%8C-8d4d008da2ca)
+2. [nextJS를 turbo로 구성하기](https://www.youtube.com/watch?v=9RSNWt3AU-M&t=1599s)
+3. [nextJS migration from page router to app router way](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#nextjs-version)
+
 <br /><br />
 
 ---
