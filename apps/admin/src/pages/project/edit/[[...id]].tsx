@@ -123,7 +123,7 @@ export default function ProjectDetail() {
     if (router.query.id) {
       getProject(Number(router.query.id));
     }
-  }, [router.query.id]);
+  }, [getProject, router.query.id]);
 
   const handleAppendUrl = () => {
     appendProjectUrls({

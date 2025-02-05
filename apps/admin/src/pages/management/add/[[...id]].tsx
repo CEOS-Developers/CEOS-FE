@@ -13,7 +13,7 @@ import { ImageUploader } from '@admin/components/ImageUploader';
 import { BackButton } from '@admin/components/Common/BackButton';
 import { useMutation } from '@tanstack/react-query';
 import { adminManagementApi, ManagementDTO } from '@ceos-fe/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const PART: Record<string, string> = {
   기획: 'strategy',
@@ -52,7 +52,7 @@ export default function AddManagement() {
     formState: { isValid },
   } = useForm();
 
-  const checkValid = () => {
+  const checkValid = useCallback(() => {
     if (getValues('category') === '운영진') {
       return (
         isValid &&
@@ -69,9 +69,15 @@ export default function AddManagement() {
         getValues('university')
       );
     }
-  };
+  }, [getValues, isValid]);
 
   const [valid, setValid] = useState(checkValid());
+
+  const categoryWatchValue = useMemo(() => watch('category'), [watch]);
+  const categoryRoleValue = useMemo(() => watch('role'), [watch]);
+  const categoryPartValue = useMemo(() => watch('part'), [watch]);
+  const categoryUniversityValue = useMemo(() => watch('university'), [watch]);
+  const categoryImageUrlValue = useMemo(() => watch('imageUrl'), [watch]);
 
   // 드롭다운 포함 유효성 확인
   useEffect(() => {
@@ -79,11 +85,12 @@ export default function AddManagement() {
     setValid(isValid);
   }, [
     isValid,
-    watch('category'),
-    watch('role'),
-    watch('part'),
-    watch('university'),
-    watch('imageUrl'),
+    categoryWatchValue,
+    categoryRoleValue,
+    categoryPartValue,
+    categoryUniversityValue,
+    categoryImageUrlValue,
+    checkValid,
   ]);
 
   // 수정 시 정보 가져오기 api
@@ -121,7 +128,7 @@ export default function AddManagement() {
     if (router.query.id) {
       getManagementMutation.mutate(Number(router.query.id));
     }
-  }, [router.query.id]);
+  }, [getManagementMutation, router.query.id]);
 
   // 운영진 생성 api
   const postManagementCreateMutation = useMutation(

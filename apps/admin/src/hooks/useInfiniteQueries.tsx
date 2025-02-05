@@ -70,7 +70,7 @@ const useInfiniteQueries = <T,>({
     if (inView && !isLast) {
       getNextPage();
     }
-  }, [inView, currentPage, ref]);
+  }, [inView, currentPage, ref, getBoard, getNextPage]);
 
   const pageData: ReactNode[] | undefined = getBoard?.pages.map((page_data) => {
     return page_data.content.map((data: any, index: number) => (

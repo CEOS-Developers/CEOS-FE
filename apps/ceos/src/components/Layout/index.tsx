@@ -24,6 +24,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     if (isLoaded) {
       setGeneration(data.generation);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   return (

@@ -9,12 +9,6 @@ const usePresignedUrl = (apiType: ImageApiType) => {
   const [pUrl, setPUrl] = useState('');
   const [url, setUrl] = useState('');
 
-  useEffect(() => {
-    if (image) {
-      getPresignedUrlMutation.mutate();
-    }
-  }, [image]);
-
   const getPresignedUrlMutation = useMutation(
     imageApi[`GET_${apiType}_IMAGE`],
     {
@@ -36,6 +30,12 @@ const usePresignedUrl = (apiType: ImageApiType) => {
       console.log(error);
     },
   });
+
+  useEffect(() => {
+    if (image) {
+      getPresignedUrlMutation.mutate();
+    }
+  }, [getPresignedUrlMutation, image]);
 
   return {
     presignedUrl: url,

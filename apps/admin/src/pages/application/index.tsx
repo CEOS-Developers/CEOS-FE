@@ -116,7 +116,15 @@ export default function Application() {
       selectedPart: '기획',
     });
     replacePartQuestions(data[PART_MAP[getValues('selectedPart')]]);
-  }, [isFetching, isSuccess]);
+  }, [
+    data,
+    getValues,
+    isFetching,
+    isSuccess,
+    replaceCommonQuestions,
+    replacePartQuestions,
+    setValue,
+  ]);
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
@@ -126,7 +134,7 @@ export default function Application() {
       selectedPart: getValues('selectedPart'),
     });
     replacePartQuestions(allPartQuestions[PART_MAP[getValues('selectedPart')]]);
-  }, [watch('selectedPart')]);
+  }, [allPartQuestions, getValues, replacePartQuestions]);
 
   const handleAppendCommonQuestion = () => {
     appendCommonQuestions({

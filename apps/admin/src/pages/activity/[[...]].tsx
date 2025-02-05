@@ -86,7 +86,7 @@ export default function Activity() {
     if (Number(router.query[''])) {
       getActivityMutation.mutate(Number(router.query['']));
     }
-  }, [router]);
+  }, [getActivityMutation, router]);
 
   return (
     <Flex direction="column" align="flex-start" justify="flex-start">

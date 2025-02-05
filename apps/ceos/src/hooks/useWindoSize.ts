@@ -26,7 +26,8 @@ function useWindowSize() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [getWindowSize, isClient]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return windowSize;
 }

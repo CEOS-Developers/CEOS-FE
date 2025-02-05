@@ -87,7 +87,7 @@ export default function SponsoredBy() {
     if (Number(router.query[''])) {
       getSponsorMutation.mutate(Number(router.query['']));
     }
-  }, [router]);
+  }, [getSponsorMutation, router]);
 
   return (
     <Flex direction="column" align="flex-start" justify="flex-start">

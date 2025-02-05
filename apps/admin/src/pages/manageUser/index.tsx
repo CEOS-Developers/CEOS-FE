@@ -105,7 +105,7 @@ export default function ManageUser() {
         total: data.data.pageInfo.totalPages,
       });
     }
-  }, [isFetching, isSuccess]);
+  }, [data.data.pageInfo.totalPages, isFetching, isSuccess, pagination]);
 
   // 페이지 변경
   const onChangePage = (newPage: number) => {
@@ -169,7 +169,7 @@ export default function ManageUser() {
       deleteManagement();
       setManagementId(0);
     }
-  }, [managementId]);
+  }, [deleteManagement, managementId]);
 
   // 지원자 합불 여부에 따른 dropdown 상태
   useEffect(() => {
@@ -192,7 +192,7 @@ export default function ManageUser() {
         });
       }
     });
-  }, [dataSource]);
+  }, [dataSource, setValue]);
 
   if (data && data.data && data.data.adminBriefInfoVos) {
     let value = 'root';

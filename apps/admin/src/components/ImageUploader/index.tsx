@@ -23,13 +23,13 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       if (value) {
         setUrl(value);
       }
-    }, [value]);
+    }, [setUrl, value]);
 
     useEffect(() => {
       if (presignedUrl) {
         setValue(label, presignedUrl);
       }
-    }, [presignedUrl]);
+    }, [label, presignedUrl, setValue]);
 
     const handleImageChange = async (
       e: React.ChangeEvent<HTMLInputElement>,

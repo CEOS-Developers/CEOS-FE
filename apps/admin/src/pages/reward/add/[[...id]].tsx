@@ -41,7 +41,7 @@ export default function AddReward() {
     if (router.query.id) {
       getRewardMutation.mutate(Number(router.query.id));
     }
-  }, [router.query.id]);
+  }, [getRewardMutation, router.query.id]);
 
   // 수상 내역 생성 api
   const postRewardCreateMutation = useMutation(adminRewardApi.POST_REWARD, {

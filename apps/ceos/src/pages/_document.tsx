@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* eslint-disable-next-line @next/next/no-title-in-document-head */}
         <title>CEOS | 세오스</title>
         <link rel="icon" href="ceos-favicon.svg" />
         <link

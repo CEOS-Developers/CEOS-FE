@@ -6,6 +6,7 @@ export default function Home() {
 
   useEffect(() => {
     router.push('/auth');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

@@ -1,4 +1,11 @@
-import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import {
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { Button, Flex, Text, TextField, theme } from 'packages/ui';
@@ -132,15 +139,40 @@ export default function ApplyStatement() {
       },
     );
 
+  // updateSorting 함수 정의
+  const updateSorting = useCallback(
+    (dropdownName: string, setSorting: Dispatch<SetStateAction<string>>) => {
+      const dropdownValue = getValues(dropdownName);
+      setSorting(dropdownValue ? dropdownValue.value.toUpperCase() : '');
+    },
+    [getValues],
+  );
+
+  const partDropDownValue = useMemo(
+    () => getValues('partDropdown'),
+    [getValues],
+  );
+
+  const docPassDropdownValue = useMemo(
+    () => getValues('docPassDropdown'),
+    [getValues],
+  );
+
+  const finalPassDropDownValue = useMemo(
+    () => getValues('finalPassDropdown'),
+    [getValues],
+  );
+
   // 파트 sorting
   useEffect(() => {
     updateSorting('partDropdown', setSortingPart);
     updateSorting('docPassDropdown', setSortingDocPass);
     updateSorting('finalPassDropdown', setSortingFinalPass);
   }, [
-    getValues('partDropdown'),
-    getValues('docPassDropdown'),
-    getValues('finalPassDropdown'),
+    partDropDownValue,
+    docPassDropdownValue,
+    finalPassDropDownValue,
+    updateSorting,
   ]);
   useEffect(() => {
     if (!isFetching && isSuccess) {
@@ -149,20 +181,16 @@ export default function ApplyStatement() {
         total: applicantData.data.pageInfo.totalPages,
       });
     }
-  }, [isFetching, isSuccess]);
-
-  // updateSorting 함수 정의
-  const updateSorting = (
-    dropdownName: string,
-    setSorting: Dispatch<SetStateAction<string>>,
-  ) => {
-    const dropdownValue = getValues(dropdownName);
-    setSorting(dropdownValue ? dropdownValue.value.toUpperCase() : '');
-  };
+  }, [
+    applicantData.data.pageInfo.totalPages,
+    isFetching,
+    isSuccess,
+    pagination,
+  ]);
 
   useEffect(() => {
     getApplicantsList();
-  }, [sortingPart, sortingDocPass, sortingFinalPass]);
+  }, [sortingPart, sortingDocPass, sortingFinalPass, getApplicantsList]);
 
   //합격 불합격 여부 변경
   if (applicantData && applicantData.data && applicantData.data.content) {
@@ -247,7 +275,7 @@ export default function ApplyStatement() {
     if (getCreatedTimeSuccess) {
       setCreateAt(excelCreatedTime?.data.createAt);
     }
-  }, [excelCreatedTime]);
+  }, [excelCreatedTime, getCreatedTimeSuccess]);
 
   // 지원자 엑셀 다운로드 get 요청
   const { refetch: getApplicantExcel, data: getExceldata } = useQuery(
@@ -326,7 +354,7 @@ export default function ApplyStatement() {
         );
       }
     });
-  }, [dataSource, applicantData]);
+  }, [dataSource, applicantData, setValue]);
 
   if (isLoading) {
     return <Loading />;

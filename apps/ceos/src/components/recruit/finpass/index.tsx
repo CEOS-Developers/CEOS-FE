@@ -16,6 +16,7 @@ const FinPass = ({ props }: { props: PassDataInterface }) => {
 
   useEffect(() => {
     setIsScrolled(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

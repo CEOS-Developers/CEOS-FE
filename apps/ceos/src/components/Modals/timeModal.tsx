@@ -1,7 +1,7 @@
 import { Text, theme } from '@ceos-fe/ui';
 import { css } from '@emotion/react';
 import { backCss } from '../MenuBar';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export const TimeModal = forwardRef<HTMLDivElement, { generation: number }>(
@@ -9,7 +9,7 @@ export const TimeModal = forwardRef<HTMLDivElement, { generation: number }>(
     const [opacity, setOpacity] = useState(100);
     const router = useRouter();
 
-    const fadeOut = () => {
+    const fadeOut = useCallback(() => {
       if (opacity === 100) {
         setTimeout(() => {
           setOpacity(opacity - 1);
@@ -21,7 +21,7 @@ export const TimeModal = forwardRef<HTMLDivElement, { generation: number }>(
       } else {
         router.push('/');
       }
-    };
+    }, [opacity, router]);
 
     useEffect(() => {
       fadeOut();

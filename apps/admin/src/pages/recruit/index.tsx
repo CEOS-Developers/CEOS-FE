@@ -79,7 +79,7 @@ export default function Recruit() {
       };
       reset(recruitData);
     }
-  }, [isFetching, isSuccess]);
+  }, [data, isFetching, isSuccess, reset]);
 
   const handleSave = () => {
     const recruitData = {

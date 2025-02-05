@@ -65,7 +65,8 @@ export default function SignIn() {
   };
   useEffect(() => {
     if (appCookies['LOGIN_EXPIRES']) return;
-  }, [appCookies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return !login ? (
     <div>

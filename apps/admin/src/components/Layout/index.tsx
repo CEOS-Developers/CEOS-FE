@@ -76,7 +76,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         router.push('/auth');
       }
     }
-  }, [accessToken, appCookies, getNewAccessToken, login, router]);
+  }, [accessToken, appCookies, getNewAccessToken, login, router, setLogin]);
 
   if (loading) {
     return <Loading />;

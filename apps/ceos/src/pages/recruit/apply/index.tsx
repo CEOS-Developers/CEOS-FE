@@ -52,6 +52,7 @@ const Apply = () => {
       }
     };
     checkValid();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -135,7 +136,7 @@ const Apply = () => {
     });
 
     setValue('unableTimes', setTimes);
-  }, [data]);
+  }, [data, getValues, setValue]);
 
   const keyList = [
     'name',

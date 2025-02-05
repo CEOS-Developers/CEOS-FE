@@ -6,7 +6,6 @@ import { theme } from '../../styles';
 import ReactDatePicker from 'react-datepicker';
 import { TextField } from '../TextField/index';
 import { Calendar } from '../../assets/Calender/index';
-import React from 'react';
 
 export interface DatePickerProps {
   width?: number;
@@ -33,7 +32,7 @@ export const DatePicker = (props: DatePickerProps) => {
 
   useEffect(() => {
     props.onChange(startDate);
-  }, [startDate]);
+  }, [props, startDate]);
 
   return (
     <DatePickerStyles isAdmin={props.isAdmin} isTime={props.isTime}>
