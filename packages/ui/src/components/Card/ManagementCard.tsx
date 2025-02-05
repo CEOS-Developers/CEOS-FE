@@ -98,8 +98,8 @@ export const MentorCard = (props: {
       {company ? (
         <Wrapper className="extra-info">
           <Content className="extra-info">
-            {company.split('\\n').map((item) => (
-              <Text webTypo="Body3" mobileTypo="Body1" paletteColor="White">
+            {company.split('\\n').map((item, idx) => (
+              <Text key={idx} webTypo="Body3" mobileTypo="Body1" paletteColor="White">
                 {item}
               </Text>
             ))}

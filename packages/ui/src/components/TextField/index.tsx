@@ -104,6 +104,8 @@ export const TextField = forwardRef<
   },
 );
 
+TextField.displayName = 'TextField';
+
 const Container = styled(Flex)<{ width: number; isAdmin: boolean }>`
   width: ${({ width }) => width}px;
 
