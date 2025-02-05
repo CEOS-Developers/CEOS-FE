@@ -28,7 +28,7 @@ export const SubmitModal = ({ submitForm, onClose }: ModalProps) => {
               제출 후 수정은 불가능합니다.
             </Text>
             <Text paletteColor="Black" webTypo="Body2" mobileTypo="Body2">
-              면접 날짜를 '불가능한 시간'에 체크했는지 확인해주세요.
+              {`면접 날짜를 '불가능한 시간'에 체크했는지 확인해주세요.`}
             </Text>
           </Flex>
           <Flex>

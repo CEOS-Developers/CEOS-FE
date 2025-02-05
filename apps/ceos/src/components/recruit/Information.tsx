@@ -159,12 +159,13 @@ const Information = ({ register, setValue }: InformationProps) => {
               }
             `}
           >
-            {univ.map((uni) => (
+            {univ.map((uni, idx) => (
               <SelectButton
                 variant="ceos"
                 value={uni}
                 webWidth={161}
                 {...register('university')}
+                key={idx}
               />
             ))}
           </div>

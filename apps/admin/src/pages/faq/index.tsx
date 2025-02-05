@@ -83,7 +83,7 @@ export default function Faq() {
     if (!isFetching && isSuccess) {
       replace(data.categoryFaqList);
     }
-  }, [isFetching, isSuccess]);
+  }, [data?.categoryFaqList, isFetching, isSuccess, replace]);
 
   const handleAppendQuestion = () => {
     append({

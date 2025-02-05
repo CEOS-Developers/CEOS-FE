@@ -85,8 +85,13 @@ export const InterviewTimeModal = ({
       ) : isSuccess ? (
         <>
           <Flex width={640}>
-            {InterviewArray.map((interview: interviewArrayInterface) => (
-              <Flex direction="column" webGap={16} justify="flex-start">
+            {InterviewArray.map((interview: interviewArrayInterface, idx) => (
+              <Flex
+                direction="column"
+                webGap={16}
+                justify="flex-start"
+                key={idx}
+              >
                 <Text webTypo="Label2">
                   {interview.interviewTimeList != undefined
                     ? interview.interviewTimeList[0].date
@@ -103,8 +108,9 @@ export const InterviewTimeModal = ({
                 >
                   {interview.interviewTimeList != undefined ? (
                     interview.interviewTimeList.map(
-                      (time: interviewtimeInterface) => (
+                      (time: interviewtimeInterface, idx) => (
                         <Button
+                          key={idx}
                           variant={
                             time === interviewTime
                               ? 'admin_navy'

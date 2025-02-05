@@ -26,7 +26,7 @@ function useWindowSize() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [getWindowSize, isClient]);
 
   return windowSize;
 }

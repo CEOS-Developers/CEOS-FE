@@ -65,7 +65,7 @@ export default function SignIn() {
   };
   useEffect(() => {
     if (appCookies['LOGIN_EXPIRES']) return;
-  }, []);
+  }, [appCookies]);
 
   return !login ? (
     <div>
