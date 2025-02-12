@@ -44,6 +44,8 @@ export const TimeModal = forwardRef<HTMLDivElement, { generation: number }>(
   },
 );
 
+TimeModal.displayName = 'TimeModal';
+
 const TimeModalCss = (opacity: number) => css`
   width: 504px;
   z-index: 10;

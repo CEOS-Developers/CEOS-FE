@@ -159,8 +159,9 @@ const Information = ({ register, setValue }: InformationProps) => {
               }
             `}
           >
-            {univ.map((uni) => (
+            {univ.map((uni, idx) => (
               <SelectButton
+                key={idx}
                 variant="ceos"
                 value={uni}
                 webWidth={161}

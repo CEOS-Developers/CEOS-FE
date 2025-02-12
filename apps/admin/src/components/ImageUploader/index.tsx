@@ -93,6 +93,8 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
   },
 );
 
+ImageUploader.displayName = 'ImageUploader';
+
 const Img = styled(Image)<{
   src: string;
   height?: number;

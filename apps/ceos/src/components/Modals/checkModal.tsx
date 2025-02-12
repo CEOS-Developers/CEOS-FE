@@ -183,6 +183,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
   },
 );
 
+CheckModal.displayName = 'CheckModal';
+
 export const ModalBoxCss = css`
   width: 504px;
   height: 498px;

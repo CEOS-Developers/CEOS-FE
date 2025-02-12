@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
 import { PartDropdownList } from '@admin/assets/data/dropDownList';
 
-export default function findPW() {
+export default function FindPW() {
   const [sentEmail, setSentEmail] = useState(false);
   const { setValue, watch, register, handleSubmit } = useForm();
   const { mutate: findPwMutation } = useMutation(adminAuthApi.FIND_PW);

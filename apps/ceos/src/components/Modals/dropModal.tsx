@@ -121,10 +121,10 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
               placeholder="내용을 입력해주세요."
               width={376}
               css={css`
-              @media (max-width: 1023px) {
-                width: 306px; !important;
-              }
-            `}
+                @media (max-width: 1023px) {
+                  width: 306px !important;
+                }
+              `}
             />
             <Button variant="default" webWidth={376} onClick={handleClick}>
               확인하기
@@ -135,6 +135,8 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
     );
   },
 );
+
+DropModal.displayName = 'DropModal';
 
 export const ModalBoxCss = css`
   width: 504px;

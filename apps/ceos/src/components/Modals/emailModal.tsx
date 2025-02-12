@@ -144,6 +144,8 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
   },
 );
 
+EmailModal.displayName = 'EmailModal';
+
 export const ModalBoxCss = css`
   width: 504px;
   height: 404px;

@@ -101,22 +101,22 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                     margin="28px 0 0 0"
                     webGap={12}
                   >
-                    {projectInfo?.projectUrls.map((url) => (
-                      <Link href={url.linkUrl} target="_blank">
+                    {projectInfo?.projectUrls.map((url, idx) => (
+                      <Link href={url.linkUrl} target="_blank" key={idx}>
                         <Shortcut>{LINK[url.category]}</Shortcut>
                       </Link>
                     ))}
                   </Flex>
                 </Flex>
                 <Flex direction="column" width={300}>
-                  {Object.values(Part).map((val) => (
-                    <Flex justify="space-between">
+                  {Object.values(Part).map((val, idx) => (
+                    <Flex justify="space-between" key={idx}>
                       <Text paletteColor="Gray5" webTypo="Label2">
                         {val.eng}
                       </Text>
                       <Flex width="auto" webGap={5}>
                         {val.name.map((item, idx) => (
-                          <Text paletteColor="Black" webTypo="Body3">
+                          <Text paletteColor="Black" webTypo="Body3" key={idx}>
                             {item}
                           </Text>
                         ))}
@@ -144,14 +144,18 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   {projectInfo?.description}
                 </Text>
                 <TeamWrapper>
-                  {Object.values(Part).map((val) => (
-                    <Flex justify="space-between">
+                  {Object.values(Part).map((val, idx) => (
+                    <Flex justify="space-between" key={idx}>
                       <Text paletteColor="Gray5" mobileTypo="Label1">
                         {val.eng}
                       </Text>
                       <Flex width="auto" mobileGap={5}>
-                        {val.name.map((item) => (
-                          <Text paletteColor="Black" mobileTypo="Body1">
+                        {val.name.map((item, idx) => (
+                          <Text
+                            paletteColor="Black"
+                            mobileTypo="Body1"
+                            key={idx}
+                          >
                             {item}
                           </Text>
                         ))}
@@ -169,8 +173,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                     flexWrap: 'wrap',
                   }}
                 >
-                  {projectInfo?.projectUrls.map((url) => (
-                    <Link href={url.linkUrl} target="_blank">
+                  {projectInfo?.projectUrls.map((url, idx) => (
+                    <Link href={url.linkUrl} target="_blank" key={idx}>
                       <Shortcut>{LINK[url.category]}</Shortcut>
                     </Link>
                   ))}
