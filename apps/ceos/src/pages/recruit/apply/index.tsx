@@ -340,7 +340,7 @@ export const RowLine = styled.div`
 
 export const ColumnLine = styled.div`
   width: 2px;
-  height: 70px;
+  height: 150px;
   background-color: ${theme.palette.Gray2};
   flex-shrink: 0;
 `;
