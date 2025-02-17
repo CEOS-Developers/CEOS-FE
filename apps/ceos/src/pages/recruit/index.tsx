@@ -239,7 +239,7 @@ const Recruit = () => {
               />
             </div>
             <Text webTypo="Body3" paletteColor="Gray5">
-              *서류 제출 후 온라인으로 면접을 진행합니다.
+              *서류 제출 후 온/오프라인으로 면접을 진행합니다.
             </Text>
             <Text webTypo="Heading3" margin="80px 0 12px 0">
               필참 행사
