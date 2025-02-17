@@ -60,13 +60,13 @@ const Schedule = ({
               면접 날짜
             </Text>
 
-            <Text webTypo="Body3" paletteColor="Gray5" margin="8px 0 0 0">
+            <Text webTypo="Body3" paletteColor="Blue" margin="8px 0 0 0">
               *불가능한 날짜와 시간에 체크해주세요. 가능한 날짜가 아니라,
               불가능한 날짜입니다.
             </Text>
             <Text webTypo="Body3" paletteColor="Gray5">
-              *모든 면접은 화상(ZOOM)으로 이루어지며, 면접 시작 10분 전에 대기실
-              참가 안내를 드리니 이를 고려하여 선택 부탁드립니다.
+              *면접은 화상(ZOOM) 혹은 대면으로 이루어지며, 면접 시작 전에 대기
+              시간을 고려하여 선택 부탁드립니다.
             </Text>
           </div>
 
@@ -90,7 +90,7 @@ const Schedule = ({
                   type="column"
                 />
                 <ColumnLine />
-                <Flex webGap={12} justify="flex-start">
+                <Flex webGap={12} justify="flex-start" wrap>
                   {time.durations.map((duration, durIdx) => {
                     const [start, end] = duration.split('-');
                     return (
