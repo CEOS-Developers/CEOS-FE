@@ -9,7 +9,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
-      'ceos-web-17.s3.ap-northeast-2.amazonaws.com',
+      'ceos-web-20.s3.ap-northeast-2.amazonaws.com',
       's3.ap-northeast-2.amazonaws.com',
       'github.com',
     ],
