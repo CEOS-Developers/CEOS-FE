@@ -88,7 +88,7 @@ export const InterviewTimeModal = ({
             {InterviewArray.map((interview: interviewArrayInterface, idx) => (
               <Flex
                 direction="column"
-                webGap={16}
+                webGap={12}
                 justify="flex-start"
                 key={idx}
               >
@@ -103,7 +103,7 @@ export const InterviewTimeModal = ({
                   width={244}
                   webGap={8}
                   justify="flex-start"
-                  height={238}
+                  height={405}
                   style={{ flexWrap: 'wrap' }}
                 >
                   {interview.interviewTimeList != undefined ? (
