@@ -39,7 +39,10 @@ export const ManagementCard = (props: {
       )}
       <Content>
         <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
-          {part === '회장' || part === '부회장' || part === '공동회장'
+          {part === '회장' ||
+          part === '부회장' ||
+          part === '공동회장' ||
+          part === '고문'
             ? `${part}`
             : role === '총무'
             ? `${role} / ${part}`
@@ -99,7 +102,12 @@ export const MentorCard = (props: {
         <Wrapper className="extra-info">
           <Content className="extra-info">
             {company.split('\\n').map((item, idx) => (
-              <Text key={idx} webTypo="Body3" mobileTypo="Body1" paletteColor="White">
+              <Text
+                key={idx}
+                webTypo="Body3"
+                mobileTypo="Body1"
+                paletteColor="White"
+              >
                 {item}
               </Text>
             ))}
