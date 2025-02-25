@@ -110,6 +110,9 @@ const Management = () => {
           {managers?.generalAffairs.map((manager: ManagerInterface) => (
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
+          {managers?.advisors.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
           {managers?.partLeaders.map((manager: ManagerInterface) => (
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
