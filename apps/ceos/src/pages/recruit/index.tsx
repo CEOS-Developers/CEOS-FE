@@ -41,6 +41,7 @@ const Recruit = () => {
     pass: '',
     name: '',
     attendanceStatus: false,
+    part: '',
     date: '',
     otDate: '',
     openChatUrl: '',
