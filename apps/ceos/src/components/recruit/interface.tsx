@@ -50,6 +50,7 @@ export interface PassDataInterface {
   email: string;
   pass: string;
   name: string;
+  part?: string;
   attendanceStatus: boolean;
   date: string;
   otDate: string;
