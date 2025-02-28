@@ -370,7 +370,7 @@ export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
 const PRODUCT_INTERVIEW_NOTI = () => {
   return (
     <p>
-      - 기획 파트 인터뷰는 오프라인으로 진행됩니다.
+      - 기획 파트 면접은 오프라인으로 진행됩니다.
       <br />
       - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
       <br />
@@ -389,9 +389,9 @@ const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
   return (
     <p>
       <p>
-        - 디자인 파트 인터뷰는 ZOOM을 통해 이루어집니다.
+        - 디자인 파트 면접은 ZOOM을 통해 이루어집니다.
         <br />
-        인터뷰 전 ZOOM이 가능한 계정이 있는지 확인해 주세요.
+        면접 전 ZOOM이 가능한 계정이 있는지 확인해 주세요.
       </p>
       <p>
         - 화상 면접이 가능한 노트북과
@@ -403,7 +403,7 @@ const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
         없는지 확인 부탁드립니다
       </p>
       <p>
-        - 배정된 인터뷰 시간 15분 전에, <br />
+        - 배정된 면접 시간 15분 전에, <br />
         하단 링크를 통해 오픈 채팅방에 접속해 주세요.
         <br />
         프로필 설정은 [이름(전화번호 뒷 4자리)]로
@@ -412,7 +412,7 @@ const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
         <br />
         시간이 되면 줌 링크를 오픈 채팅방에 공유드릴 예정입니다.
       </p>
-      <p>- 인터뷰는 최대 4인 1조로 약 30분간 진행됩니다.</p>
+      <p>- 면접은 최대 4인 1조로 약 30분간 진행됩니다.</p>
       <Link
         href={query.openChatUrl}
         style={{ textDecoration: 'none', width: '218px' }}
@@ -429,7 +429,7 @@ const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
 const FRONTEND_INTERVIEW_NOTI = () => {
   return (
     <p>
-      - 프론트엔드 파트 인터뷰는 오프라인으로 진행됩니다.
+      - 프론트엔드 파트 면접은 오프라인으로 진행됩니다.
       <br />
       - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
       <br />
@@ -444,7 +444,7 @@ const FRONTEND_INTERVIEW_NOTI = () => {
 const BACKEND_INTERVIEW_NOTI = () => {
   return (
     <p>
-      - 백엔드 파트 인터뷰는 오프라인으로 진행됩니다.
+      - 백엔드 파트 면접은 오프라인으로 진행됩니다.
       <br />
       - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
       <br />
