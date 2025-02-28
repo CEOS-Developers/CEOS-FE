@@ -58,7 +58,6 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       }
     },
   });
-
   const handleClick = async () => {
     try {
       patchDoc({
@@ -89,7 +88,10 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       </Text>
       <p>
         {query.name}님의 면접 타임은 <br className="mobile" /> {month}월 {day}일
-        오후 {hour && parseInt(hour) - 12}시 {minute}분 입니다.
+        {hour && parseInt(hour) < 12 ? ' 오전 ' : ' 오후 '}
+        {hour && parseInt(hour) <= 12
+          ? hour
+          : hour && parseInt(hour) - 12}시 {minute}분 입니다.
         <br />
         해당 면접 시간에 참여 가능하신지
         <br className="mobile" /> 꼭 확인 부탁드립니다.
