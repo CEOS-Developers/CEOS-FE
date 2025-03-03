@@ -217,7 +217,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       </Text>
       <p>
         - OT 일정 : {parsedOtDate.getMonth() + 1}월 {parsedOtDate.getDate()}일 (
-        {dateToDay[parsedOtDate.getDay()]}) 오후 7시, ZOOM으로 진행
+        {dateToDay[parsedOtDate.getDay()]}) 오후 7시, 신촌에서 대면으로 진행
       </p>
       <p>
         - 최종 합격자에게는 활동 일정 안내를 위해
@@ -240,7 +240,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
             parsedOtDate.getDay() - 1 === -1 ? 6 : parsedOtDate.getDay() - 1
           ]
         }
-        요일 중으로
+        요일 내로
         <br className="mobile" /> CEOS {query.generation}기 단톡방 초대
         예정입니다.
       </p>
