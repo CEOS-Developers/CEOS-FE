@@ -64,15 +64,11 @@ export const RecruitSubHeader = ({
     new Date(new Date(date.endDateDoc).setHours(24)),
     date.resultDateDoc,
     date.resultDateFinal,
-    new Date(
-      new Date(date.resultDateFinal).setDate(
-        date.resultDateFinal.getDate() + 3,
-      ),
-    ),
+    date.resultDateFinal,
     // 서합 확인 마감일이 지난 뒤 3일 후부터 최종 합격 확인 시작
     new Date(
       new Date(date.resultDateFinal).setDate(
-        date.resultDateFinal.getDate() + 7,
+        date.resultDateFinal.getDate() + 3,
       ),
     ),
     // 일주일 뒤를 최종 합격 확인 마감기간으로 설정
