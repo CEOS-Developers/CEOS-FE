@@ -12,7 +12,7 @@ const nextConfig = {
     emotion: true,
   },
   images: {
-    domains: ['ceos-web-20.s3.ap-northeast-2.amazonaws.com'],
+    domains: ['ceos—bucket-20.s3.ap-northeast-2.amazonaws.com'],
   },
   async redirects() {
     return [
