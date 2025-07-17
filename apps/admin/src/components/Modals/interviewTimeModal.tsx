@@ -79,14 +79,19 @@ export const InterviewTimeModal = ({
   return (
     <Flex direction="column">
       {isLoading ? (
-        <div>데이터를 불러오는 중입니다</div>
+        <div>데이터를 불러오는 중입니다.</div>
       ) : isError ? (
-        <div> 서류합격 상태가 아닙니다 </div>
+        <div>오류가 발생했습니다.</div>
       ) : isSuccess ? (
         <>
           <Flex width={640}>
-            {InterviewArray.map((interview: interviewArrayInterface) => (
-              <Flex direction="column" webGap={16} justify="flex-start">
+            {InterviewArray.map((interview: interviewArrayInterface, idx) => (
+              <Flex
+                direction="column"
+                webGap={12}
+                justify="flex-start"
+                key={idx}
+              >
                 <Text webTypo="Label2">
                   {interview.interviewTimeList != undefined
                     ? interview.interviewTimeList[0].date
@@ -98,13 +103,14 @@ export const InterviewTimeModal = ({
                   width={244}
                   webGap={8}
                   justify="flex-start"
-                  height={238}
+                  height={405}
                   style={{ flexWrap: 'wrap' }}
                 >
                   {interview.interviewTimeList != undefined ? (
                     interview.interviewTimeList.map(
-                      (time: interviewtimeInterface) => (
+                      (time: interviewtimeInterface, idx) => (
                         <Button
+                          key={idx}
                           variant={
                             time === interviewTime
                               ? 'admin_navy'

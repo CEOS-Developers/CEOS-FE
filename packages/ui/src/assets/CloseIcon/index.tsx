@@ -15,7 +15,7 @@ export const CloseIcon = (props: CloseProps) => {
     <div
       css={css`
         width: ${width || '21'}px;
-        hiegh: ${height || '21'}px;
+        height: ${height || '21'}px;
         margin: ${margin || ''};
         :hover {
           cursor: pointer;

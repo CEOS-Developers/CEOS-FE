@@ -6,6 +6,8 @@ import { FAQIcon } from '@ceos/assets/FAQIcon';
 import { FAQBox } from '@ceos/components/FAQBox';
 import styled from '@emotion/styled';
 import Footer from '@ceos/components/Footer';
+import { useRecoilValue } from 'recoil';
+import { generationState } from '@ceos/state';
 
 interface ActivityResponse {
   categoryFaqList: {
@@ -17,6 +19,8 @@ interface ActivityResponse {
 }
 
 const FAQ = () => {
+  const generation = useRecoilValue(generationState);
+
   const { data, isLoading, isSuccess } = useQuery<{
     recruitData: ActivityResponse;
     activityData: ActivityResponse;
@@ -39,7 +43,7 @@ const FAQ = () => {
 
   const rightBtn = {
     title: 'CEOS에 참여하고 싶다면',
-    content: ['CEOS 18기', '지원하기'],
+    content: [`CEOS ${generation}기`, '지원하기'],
     link: '/recruit',
   };
 

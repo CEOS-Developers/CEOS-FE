@@ -110,6 +110,9 @@ const Management = () => {
           {managers?.generalAffairs.map((manager: ManagerInterface) => (
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
+          {managers?.advisors.map((manager: ManagerInterface) => (
+            <ManagementCard key={manager.id} managementCard={manager} />
+          ))}
           {managers?.partLeaders.map((manager: ManagerInterface) => (
             <ManagementCard key={manager.id} managementCard={manager} />
           ))}
@@ -120,10 +123,10 @@ const Management = () => {
         <Title title="MENTORS" explain={['CEOS의 멘토분들을 소개합니다.']} />
         <div css={MentorListWrapper}>
           {order.map(
-            (part) =>
+            (part, idx) =>
               mentors?.filter((m: ManagerInterface) => m.part === part).length >
                 0 && (
-                <div css={MentorListCss}>
+                <div css={MentorListCss} key={idx}>
                   {mentors
                     ?.filter((m: ManagerInterface) => m.part === part)
                     .map((mentor: ManagerInterface) => (

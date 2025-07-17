@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { StyledForm } from '@admin/styles/common';
 import { PartDropdownList } from '@admin/assets/data/dropDownList';
 
-export default function findID() {
+export default function FindID() {
   const [id, setId] = useState<string>('');
   const { setValue, watch, register, handleSubmit } = useForm();
   const { mutate: findIdMutation } = useMutation(adminAuthApi.FIND_ID);

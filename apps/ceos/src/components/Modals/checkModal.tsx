@@ -58,6 +58,7 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
             pass: passCheck.data.pass,
             name: passCheck.data.name,
             date: passCheck.data.date,
+            part: passCheck.data.part,
             duration: passCheck.data.duration,
             otDate: passCheck.data.otDate,
             openChatUrl: passCheck.data.openChatUrl,
@@ -182,6 +183,8 @@ export const CheckModal = forwardRef<HTMLDivElement, ModalProps>(
     );
   },
 );
+
+CheckModal.displayName = 'CheckModal';
 
 export const ModalBoxCss = css`
   width: 504px;

@@ -41,6 +41,7 @@ const Recruit = () => {
     pass: '',
     name: '',
     attendanceStatus: false,
+    part: '',
     date: '',
     otDate: '',
     openChatUrl: '',
@@ -60,15 +61,27 @@ const Recruit = () => {
     link: '/project',
   };
 
+  // endDate에서 1분 빼서 마감 날짜 23시 59분까지 작성 가능하도록 조정
+  // admin에서 설정할 때 마감날짜가 28일이면 29일 00시로 설정
+  let endDateFix = new Date(data ? data.endDateDoc : '');
+  endDateFix.setSeconds(0);
+  endDateFix.setMinutes(endDateFix.getMinutes() - 1);
+  let fixYear = endDateFix.getFullYear();
+  let fixMonth = endDateFix.getMonth() + 1;
+  let fixDate = endDateFix.getDate();
+  let fixVarEndDateDoc = `${fixYear}-${
+    fixMonth < 10 ? '0' + fixMonth : fixMonth
+  }-${fixDate < 10 ? '0' + fixDate : fixDate}`;
+
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
-    endDateDoc: new Date(data ? data.endDateDoc : ''),
+    endDateDoc: new Date(data ? fixVarEndDateDoc : ''),
     resultDateDoc: new Date(data ? data.resultDateDoc : ''),
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;
 
   const varStartDateDoc = data ? data.startDateDoc.split('-') : '';
-  const varEndDateDoc = data ? data.endDateDoc.split('-') : '';
+  const varEndDateDoc = fixVarEndDateDoc.split('-');
   const varResultDateMid = data ? data.resultDateDoc.split('-') : '';
   const varStartDateInterview = data ? data.startDateInterview.split('-') : '';
   const varEndDateInterview = data ? data.endDateInterview.split('-') : '';
@@ -77,11 +90,13 @@ const Recruit = () => {
   const varIdeathon = data ? data.ideathonDate.split('-') : '';
   const varHackathon = data ? data.hackathonDate.split('-') : '';
   const varDemodayDate = data ? data.demodayDate.split('-') : '';
+  const varStartMTDate = ['2025', '03', '22']; // 하드코딩:MT 시작 날짜
+  const varEndMTDate = ['2025', '03', '23']; // 하드코딩:MT 종료 날짜
 
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
   const startDateDoc = new Date(data ? data.startDateDoc : '').getDay();
-  const endDateDoc = new Date(data ? data.endDateDoc : '').getDay();
+  const endDateDoc = endDateFix.getDay();
   const resultDateMid = new Date(data ? data.resultDateDoc : '').getDay();
   const startDateInterview = new Date(
     data ? data.startDateInterview : '',
@@ -92,6 +107,8 @@ const Recruit = () => {
   const ideathonDate = new Date(data ? data.ideathonDate : '').getDay();
   const hackathonDate = new Date(data ? data.hackathonDate : '').getDay();
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
+  const startMTDate = new Date('2025-03-22').getDay(); // 하드코딩:MT 시작 날짜
+  const endMTDate = new Date('2025-03-23').getDay(); // 하드코딩:MT 종료 날짜
 
   const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
     const month =
@@ -227,7 +244,7 @@ const Recruit = () => {
               />
             </div>
             <Text webTypo="Body3" paletteColor="Gray5">
-              *서류 제출 후 온라인으로 면접을 진행합니다.
+              *서류 제출 후 온/오프라인으로 면접을 진행합니다.
             </Text>
             <Text webTypo="Heading3" margin="80px 0 12px 0">
               필참 행사
@@ -252,6 +269,14 @@ const Recruit = () => {
               <RecruitMiniBox
                 header="OT"
                 content={dateForm(otDate, varOtDate[1], varOtDate[2])}
+              />
+              <RecruitMiniBox
+                header="MT"
+                content={
+                  dateForm(startMTDate, varStartMTDate[1], varStartMTDate[2]) +
+                  ' ~ ' +
+                  dateForm(endMTDate, varEndMTDate[1], varEndMTDate[2])
+                }
               />
               <RecruitMiniBox
                 header="아이디어톤"

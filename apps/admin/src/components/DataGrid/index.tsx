@@ -27,18 +27,22 @@ export const DataGrid = ({
   onChangePage,
 }: DataGridProps) => {
   return (
-    <>
+    <Container>
       <StyledTable
         dataSource={dataSource}
         columns={columns}
         pagination={false}
         //rowKey={'uuid'}
       />
-      <Space height={48} />
+
       <Pagination pagination={pagination} onChangePage={onChangePage} />
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 const StyledTable = styled(Table)`
   .ant-table-thead .ant-table-cell {
@@ -61,6 +65,9 @@ const StyledTable = styled(Table)`
     font-weight: 400;
     font-size: 15px;
     line-height: 160%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .ant-table-row .ant-table-cell {
     padding: 10px;

@@ -14,6 +14,7 @@ const cookies = new Cookies().get('LOGIN_EXPIRES');
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [login, setLogin] = useRecoilState<boolean>(loginState);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -61,49 +62,21 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     });
   };
   useEffect(() => {
-    if (appCookies['LOGIN_EXPIRES']) return;
-  }, []);
-
-  useEffect(() => {
-    if (login && router.pathname.includes('/auth')) {
+    // 쿠키가 있고 엑세스 토큰이 없는 경우 새 토큰 요청
+    if (appCookies['LOGIN_EXPIRES'] && !accessToken) {
       getNewAccessToken();
-      // router.push('/applyStatement');
-    }
-
-    if (
-      !login ||
-      (login && accessToken === '' && !router.pathname.includes('/auth'))
-    ) {
-      router.push('/auth');
-    }
-  }, [login, cookies]);
-
-  useEffect(() => {
-    if (accessToken !== '' && router.pathname.includes('/auth')) {
-      router.push('/applyStatement');
-    }
-  }, [accessToken, router.pathname]);
-
-  useEffect(() => {
-    if (appCookies['LOGIN_EXPIRES']) {
-      if (accessToken === '') {
-        getNewAccessToken();
-      } else {
-        setLogin(true);
-        setLoading(false);
-      }
     } else {
-      setLogin(false);
+      setLogin(!!appCookies['LOGIN_EXPIRES']);
       setLoading(false);
-    }
-  }, [accessToken, cookies]);
 
-  useEffect(() => {
-    if (!appCookies['LOGIN_EXPIRES']) {
-      setLogin(false);
-      setLoading(false);
+      // 로그인 상태에 따른 리디렉션 처리
+      if (login && accessToken && router.pathname.includes('/auth')) {
+        router.push('/applyStatement');
+      } else if (!login && !router.pathname.includes('/auth')) {
+        router.push('/auth');
+      }
     }
-  }, [appCookies['LOGIN_EXPIRES']]);
+  }, [accessToken, appCookies, getNewAccessToken, login, router]);
 
   if (loading) {
     return <Loading />;
@@ -114,10 +87,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       {router.pathname.includes('/auth') || router.pathname === '/' ? (
         <></>
       ) : (
-        <Sidebar />
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       )}
 
-      <ChildrenContainer path={router.pathname}>
+      <ChildrenContainer path={router.pathname} isOpen={isOpen}>
         <FlexBox path={router.pathname}>{children}</FlexBox>
       </ChildrenContainer>
     </Container>
@@ -127,19 +100,22 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 const Container = styled.div<{ path?: string }>`
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ path }) =>
+    path?.includes('/auth') || path === '/' ? 'column' : 'row-reverse'};
   align-items: ${({ path }) =>
     path?.includes('/auth') || path === '/' ? 'center' : 'auto'};
   justify-content: ${({ path }) =>
     path?.includes('/auth') || path === '/' ? 'center' : ''};
 `;
 
-const ChildrenContainer = styled.div<{ path?: string }>`
-  margin-left: ${({ path }) =>
-    path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'};
+const ChildrenContainer = styled.div<{ path?: string; isOpen: boolean }>`
+  /* margin-left: ${({ path }) =>
+    path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'}; */
+  width: ${({ isOpen }) => (isOpen ? '83%' : '100%')};
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: width 0.3s ease-in-out;
 `;
 
 const FlexBox = styled.div<{ path?: string }>`

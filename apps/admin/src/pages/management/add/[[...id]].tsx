@@ -281,6 +281,10 @@ export default function AddManagement() {
                     value: 'coChairman',
                   },
                   {
+                    label: '고문',
+                    value: 'advisor',
+                  },
+                  {
                     label: '개발',
                     value: 'develop',
                   },
@@ -316,6 +320,10 @@ export default function AddManagement() {
                   {
                     label: '멘토',
                     value: 'mentor',
+                  },
+                  {
+                    label: '고문',
+                    value: 'advisor',
                   },
                 ]}
                 label="role"

@@ -58,7 +58,7 @@ export const Pagination = ({ pagination, onChangePage }: PaginationProps) => {
 };
 
 const Container = styled.div`
-  width: 1032px;
+  width: 100%; //1032px;
 
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ const Container = styled.div`
 
   //position: absolute;
   // bottom: 102px;
-  padding-top: 48px;
+  padding: 48px 0 24px;
 `;
 const Button = styled.button<{ isSelected: boolean }>`
   width: 26px;

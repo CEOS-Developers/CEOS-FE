@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CustomLink } from '../Header';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
-/*import { generationState } from '@ceos/state';*/
+import { generationState } from '@ceos/state';
 
 export interface AwardInterface {
   generation: number;
@@ -50,7 +50,7 @@ export const Rewards = () => {
     return awardData;
   });
 
-  /*const generation = useRecoilValue(generationState);*/
+  const generation = useRecoilValue(generationState);
 
   const awardList = data?.content;
 
@@ -65,7 +65,7 @@ export const Rewards = () => {
         <CardFlex backgroundColor="Gray1">
           CEOS는 신촌 유일의 IT 창업 동아리로,
           <br /> 2015년 3월을 1기로 시작하여
-          <br /> 올해 {new Date().getFullYear()}년에 {/** {generation}*/}19기를
+          <br /> 올해 {new Date().getFullYear()}년에 {generation}기를
           맞이합니다.
         </CardFlex>
         <CardFlex backgroundColor="Gray1">

@@ -23,6 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Ignore all .env files in the apps directory and its subdirectories
+apps/**/.env
+
 # local env files
 .env.local
 .env.development.local

@@ -17,6 +17,7 @@ interface PassQueryType {
   query: PassDataInterface;
   setErrorText: Dispatch<string>;
 }
+
 const dateToDay: Record<number, string> = {
   0: '일',
   1: '월',
@@ -57,7 +58,6 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       }
     },
   });
-
   const handleClick = async () => {
     try {
       patchDoc({
@@ -88,7 +88,10 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       </Text>
       <p>
         {query.name}님의 면접 타임은 <br className="mobile" /> {month}월 {day}일
-        오후 {hour && parseInt(hour) - 12}시 {minute}분 입니다.
+        {hour && parseInt(hour) < 12 ? ' 오전 ' : ' 오후 '}
+        {hour && parseInt(hour) <= 12
+          ? hour
+          : hour && parseInt(hour) - 12}시 {minute}분 입니다.
         <br />
         해당 면접 시간에 참여 가능하신지
         <br className="mobile" /> 꼭 확인 부탁드립니다.
@@ -133,42 +136,14 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       ) : (
         <>
           <Text webTypo="Label1">[안내 사항]</Text>
-          <p>
-            - 인터뷰는 ZOOM을 통해 이루어집니다.
-            <br />
-            인터뷰 전 ZOOM이 가능한 계정이 있는지 확인해 주세요.
-          </p>
-          <p>
-            - 화상 면접이 가능한 노트북과
-            <br className="mobile" /> 이어폰을 준비해 주시고,
-            <br />
-            조용한 환경에서 면접에 참여해 주시길 부탁드리겠습니다.
-            <br />
-            면접 전에 미리 이어폰 및 마이크에 <br className="mobile" /> 문제가
-            없는지 확인 부탁드립니다
-          </p>
-          <p>
-            - 배정된 인터뷰 시간 15분 전에, <br />
-            하단 링크를 통해 오픈 채팅방에 접속해 주세요.
-            <br />
-            프로필 설정은 [이름(전화번호 뒷 4자리)]로
-            <br />
-            설정해 주시면 됩니다. (ex) 홍길동(4921)
-            <br />
-            시간이 되면 줌 링크를 오픈 채팅방에 공유드릴 예정입니다.
-          </p>
-          <p>- 인터뷰는 최대 4인 1조로 약 30분간 진행됩니다.</p>
+
+          {query.part === '기획' && <PRODUCT_INTERVIEW_NOTI />}
+          {query.part === '디자인' && <DESIGN_INTERVIEW_NOTI query={query} />}
+          {query.part === '프론트엔드' && <FRONTEND_INTERVIEW_NOTI />}
+          {query.part === '백엔드' && <BACKEND_INTERVIEW_NOTI />}
+
           <p>서류 합격을 다시 한번 축하드리며, 면접일에 뵙겠습니다 :)</p>
           <p>CEOS {query.generation}기 운영진 드림</p>
-          <Link
-            href={query.openChatUrl}
-            style={{ textDecoration: 'none', width: '218px' }}
-          >
-            <Button variant="white" webWidth={218}>
-              <ArrowUpRight color={theme.palette.Blue} />
-              &nbsp;오픈 채팅방 링크
-            </Button>
-          </Link>
         </>
       )}
       {isOpen && (
@@ -242,7 +217,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       </Text>
       <p>
         - OT 일정 : {parsedOtDate.getMonth() + 1}월 {parsedOtDate.getDate()}일 (
-        {dateToDay[parsedOtDate.getDay()]}) 오후 7시, ZOOM으로 진행
+        {dateToDay[parsedOtDate.getDay()]}) 오후 7시, 신촌에서 대면으로 진행
       </p>
       <p>
         - 최종 합격자에게는 활동 일정 안내를 위해
@@ -265,7 +240,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
             parsedOtDate.getDay() - 1 === -1 ? 6 : parsedOtDate.getDay() - 1
           ]
         }
-        요일 중으로
+        요일 내로
         <br className="mobile" /> CEOS {query.generation}기 단톡방 초대
         예정입니다.
       </p>
@@ -393,3 +368,92 @@ export const GlassBoxCss = ({ width = 552 }: { width?: number }) => css`
     }
   }
 `;
+
+const PRODUCT_INTERVIEW_NOTI = () => {
+  return (
+    <p>
+      - 기획 파트 면접은 오프라인으로 진행됩니다.
+      <br />
+      - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
+      <br />
+      <br />
+      [기획 면접 장소]
+      <br />
+      3월 1일, 3월 2일 - 연세대학교 경영관 2층 209호 이글루
+    </p>
+  );
+};
+
+interface DesignNotiProps {
+  query: PassDataInterface;
+}
+const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
+  return (
+    <p>
+      <p>
+        - 디자인 파트 면접은 ZOOM을 통해 이루어집니다.
+        <br />
+        면접 전 ZOOM이 가능한 계정이 있는지 확인해 주세요.
+      </p>
+      <p>
+        - 화상 면접이 가능한 노트북과
+        <br className="mobile" /> 이어폰을 준비해 주시고,
+        <br />
+        조용한 환경에서 면접에 참여해 주시길 부탁드리겠습니다.
+        <br />
+        면접 전에 미리 이어폰 및 마이크에 <br className="mobile" /> 문제가
+        없는지 확인 부탁드립니다
+      </p>
+      <p>
+        - 배정된 면접 시간 15분 전에, <br />
+        하단 링크를 통해 오픈 채팅방에 접속해 주세요.
+        <br />
+        프로필 설정은 [이름(전화번호 뒷 4자리)]로
+        <br />
+        설정해 주시면 됩니다. (ex) 홍길동(4921)
+        <br />
+        시간이 되면 줌 링크를 오픈 채팅방에 공유드릴 예정입니다.
+      </p>
+      <p>- 면접은 최대 4인 1조로 약 30분간 진행됩니다.</p>
+      <Link
+        href={query.openChatUrl}
+        style={{ textDecoration: 'none', width: '218px' }}
+      >
+        <Button variant="white" webWidth={218}>
+          <ArrowUpRight color={theme.palette.Blue} />
+          &nbsp;오픈 채팅방 링크
+        </Button>
+      </Link>
+    </p>
+  );
+};
+
+const FRONTEND_INTERVIEW_NOTI = () => {
+  return (
+    <p>
+      - 프론트엔드 파트 면접은 오프라인으로 진행됩니다.
+      <br />
+      - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
+      <br />
+      <br />
+      [프론트엔드 면접 장소]
+      <br />
+      3월 2일 - 신촌 마커닷 스터디룸 (비밀번호 : 0403#)
+    </p>
+  );
+};
+
+const BACKEND_INTERVIEW_NOTI = () => {
+  return (
+    <p>
+      - 백엔드 파트 면접은 오프라인으로 진행됩니다.
+      <br />
+      - 가능한 면접 10분 전까지 장소에 도착해 주시길 바랍니다.
+      <br />
+      <br />
+      [백엔드 면접 장소]
+      <br />
+      3월 1일, 3월 2일 - 홍대 카페나무 세미나실
+    </p>
+  );
+};

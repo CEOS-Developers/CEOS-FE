@@ -15,6 +15,7 @@ export const Flex = styled.div<{
   height?: number | string;
   borderRadius?: number;
   backgroundColor?: KeyOfPalette;
+  wrap?: boolean;
 }>`
   display: flex;
   flex-direction: ${({ direction }) => (direction ? `${direction}` : 'row')};
@@ -33,6 +34,8 @@ export const Flex = styled.div<{
 
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? theme.palette[backgroundColor] : `transparent`};
+
+  flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
   @media (max-width: 1023px) {

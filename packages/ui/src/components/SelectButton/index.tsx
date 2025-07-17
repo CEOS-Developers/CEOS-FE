@@ -45,6 +45,8 @@ export const SelectButton = forwardRef<HTMLInputElement, SelectButtonProps>(
   },
 );
 
+SelectButton.displayName = 'SelectButton';
+
 const Wrapper = styled.div<{ variant: SelectButtonVariant }>`
   @media (max-width: 1023px) {
     ${({ variant }) =>

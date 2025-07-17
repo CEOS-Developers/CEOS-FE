@@ -41,7 +41,7 @@ export const RecruitMiniBox = (props: MiniBoxProps) => {
       <Text webTypo="Heading4" mobileTypo="Heading4">
         {props.header}
       </Text>
-      <Text webTypo="Body3" mobileTypo="Body2">
+      <Text webTypo="Body3" mobileTypo="Body2" style={{ whiteSpace: 'nowrap' }}>
         {props.content}
       </Text>
     </div>
