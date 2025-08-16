@@ -105,7 +105,7 @@ export const RecruitSubHeader = ({
                       toggleEmailModal();
                     }}
                   >
-                    20기 모집 알림받기
+                    22기 모집 알림받기
                   </Button>
                 </div>
               </div>
