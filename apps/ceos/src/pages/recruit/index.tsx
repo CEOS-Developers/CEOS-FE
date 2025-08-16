@@ -90,8 +90,8 @@ const Recruit = () => {
   const varIdeathon = data ? data.ideathonDate.split('-') : '';
   const varHackathon = data ? data.hackathonDate.split('-') : '';
   const varDemodayDate = data ? data.demodayDate.split('-') : '';
-  const varStartMTDate = ['2025', '03', '22']; // 하드코딩:MT 시작 날짜
-  const varEndMTDate = ['2025', '03', '23']; // 하드코딩:MT 종료 날짜
+  const varStartMTDate = ['2025', '09', '20']; // 하드코딩:MT 시작 날짜
+  const varEndMTDate = ['2025', '09', '21']; // 하드코딩:MT 종료 날짜
 
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
@@ -107,8 +107,8 @@ const Recruit = () => {
   const ideathonDate = new Date(data ? data.ideathonDate : '').getDay();
   const hackathonDate = new Date(data ? data.hackathonDate : '').getDay();
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
-  const startMTDate = new Date('2025-03-22').getDay(); // 하드코딩:MT 시작 날짜
-  const endMTDate = new Date('2025-03-23').getDay(); // 하드코딩:MT 종료 날짜
+  const startMTDate = new Date('2025-09-20').getDay(); // 하드코딩:MT 시작 날짜
+  const endMTDate = new Date('2025-09-21').getDay(); // 하드코딩:MT 종료 날짜
 
   const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
     const month =
@@ -282,14 +282,15 @@ const Recruit = () => {
                 header="아이디어톤"
                 content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
-              <RecruitMiniBox
+              {/* 22기 해커톤 필참행사 삭제 */}
+              {/* <RecruitMiniBox
                 header="해커톤"
                 content={dateForm(
                   hackathonDate,
                   varHackathon[1],
                   varHackathon[2],
                 )}
-              />
+              /> */}
               <RecruitMiniBox
                 header="데모데이"
                 content={dateForm(

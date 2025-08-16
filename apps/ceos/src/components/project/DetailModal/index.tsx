@@ -25,6 +25,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
     ['ceos', 'project', 'modal', id],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
+  console.log(data);
 
   const projectInfo = data;
 
@@ -60,6 +61,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             >
               <WhiteCloseIcon fillColor="#232527" />
             </Mobile>
+
+            {/* MAIN 이미지 */}
             {projectInfo && (
               <DetailThumbnailImageContainer>
                 <Image
@@ -182,6 +185,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
               </Flex>
             </Mobile>
 
+            {/* 추가 상세 정보 이미지 - 이미지로딩용 blur 처리 */}
             {projectInfo && (
               <DetailImageContainer>
                 <DetailImage
@@ -189,6 +193,9 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                   src={projectInfo.projectImages[1].imageUrl}
                   layout="fill"
                   objectFit="cover"
+                  quality={85}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   priority
                 />
               </DetailImageContainer>
