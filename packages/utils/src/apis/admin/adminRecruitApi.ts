@@ -18,6 +18,8 @@ export interface RecruitInterface extends RecruitBaseInterface {
   ideathonDate: Date;
   hackathonDate: Date;
   demodayDate: Date;
+  startMTDate: Date;
+  endMTDate: Date;
 }
 
 export const adminRecruitApi = {

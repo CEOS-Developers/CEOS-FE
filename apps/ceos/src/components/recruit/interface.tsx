@@ -74,6 +74,8 @@ export interface RecruitStudyResponse {
   ideathonDate: string;
   hackathonDate: string;
   demodayDate: string;
+  startMTDate: string;
+  endMTDate: string;
 }
 
 export interface DateProps {
