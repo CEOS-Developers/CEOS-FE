@@ -78,7 +78,7 @@ export const RecruitSubHeader = ({
     <div css={RecruitCss} data-section={dataSection}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
-          CEOS {generation}th <br /> Recruit
+          CEOS {generation}nd <br /> Recruit
         </p>
         <Text
           webTypo="Heading4"
