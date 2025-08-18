@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { CardImage } from 'react-bootstrap-icons';
 import Image from 'next/image';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { compressImage } from '@admin/utils/compress-image';
 
 export interface ImageUploaderProps {
   height?: number;
@@ -37,7 +38,8 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       e.preventDefault();
       if (e.target.files) {
         const file = e.target.files[0];
-        setImage(file);
+        const compressedFile = await compressImage(file);
+        setImage(compressedFile);
       }
     };
 
@@ -45,7 +47,8 @@ export const ImageUploader = forwardRef<HTMLInputElement, ImageUploaderProps>(
       e.preventDefault();
       if (e.dataTransfer.files) {
         const file = e.dataTransfer.files[0];
-        setImage(file);
+        const compressedFile = await compressImage(file);
+        setImage(compressedFile);
       }
     };
 

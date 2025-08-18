@@ -72,6 +72,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.62.0"],\
           ["axios", "npm:1.4.0"],\
           ["babel-plugin-emotion", "npm:11.0.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["date-fns", "npm:2.30.0"],\
           ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
           ["eslint", "npm:8.46.0"],\
@@ -2792,6 +2793,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-modal", "npm:3.16.0"],\
           ["antd", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:5.8.1"],\
           ["axios", "npm:1.4.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["eslint", "npm:8.39.0"],\
           ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
           ["next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
@@ -5862,6 +5864,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["browser-image-compression", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/browser-image-compression-npm-2.0.2-21a831f9cb-5be112b14d.zip/node_modules/browser-image-compression/",\
+        "packageDependencies": [\
+          ["browser-image-compression", "npm:2.0.2"],\
+          ["uzip", "npm:0.20201231.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["browserslist", [\
       ["npm:4.21.10", {\
         "packageLocation": "./.yarn/cache/browserslist-npm-4.21.10-e2170a875b-cdb9272433.zip/node_modules/browserslist/",\
@@ -5980,6 +5992,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.62.0"],\
           ["axios", "npm:1.4.0"],\
           ["babel-plugin-emotion", "npm:11.0.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["date-fns", "npm:2.30.0"],\
           ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
           ["eslint", "npm:8.46.0"],\
@@ -12830,6 +12843,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/react",\
           "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["uzip", [\
+      ["npm:0.20201231.0", {\
+        "packageLocation": "./.yarn/cache/uzip-npm-0.20201231.0-122f770c6a-dcc7e678cd.zip/node_modules/uzip/",\
+        "packageDependencies": [\
+          ["uzip", "npm:0.20201231.0"]\
         ],\
         "linkType": "HARD"\
       }]\
