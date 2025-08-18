@@ -32,7 +32,12 @@ export const ManagementCard = (props: {
             src={imageUrl}
             layout="fill"
             objectFit="cover"
+            style={{
+              borderTopLeftRadius: '16px',
+              borderTopRightRadius: '16px',
+            }}
           />
+          <div className="fade" />
         </Profile>
       ) : (
         <></>
@@ -159,7 +164,7 @@ const ManageWapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 0;
+  padding-bottom: 24px;
   box-sizing: border-box;
   width: 240px;
 
@@ -207,6 +212,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
+  padding-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -233,12 +239,25 @@ const Content = styled.div`
 const Profile = styled.div`
   position: relative;
 
-  width: 140px;
-  height: 140px;
-  margin-bottom: 12px;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  .fade {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 48px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      ${theme.palette.Gray1} 100%
+    );
+    pointer-events: none;
+  }
   ${media.mobile} {
     margin-bottom: 14px;
-    width: 90px;
-    height: 90px;
+    width: 100%;
+    height: 120px;
   }
 `;
