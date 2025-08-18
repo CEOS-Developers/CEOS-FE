@@ -31,7 +31,7 @@ export const ManagementCard = (props: {
             alt={`management ${name}`}
             src={imageUrl}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             style={{
               borderTopLeftRadius: '16px',
               borderTopRightRadius: '16px',
@@ -249,9 +249,9 @@ const Profile = styled.div`
     inset: auto 0 0 0;
     height: 48px;
     background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      ${theme.palette.Gray1} 100%
+      180deg,
+      rgba(12, 12, 112, 0) 63.93%,
+      rgba(23, 24, 70, 0.6) 100%
     );
     pointer-events: none;
   }
