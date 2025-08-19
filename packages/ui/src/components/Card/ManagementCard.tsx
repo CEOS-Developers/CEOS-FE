@@ -31,7 +31,7 @@ export const ManagementCard = (props: {
             alt={`management ${name}`}
             src={imageUrl}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
             style={{
               borderTopLeftRadius: '16px',
               borderTopRightRadius: '16px',
@@ -43,7 +43,12 @@ export const ManagementCard = (props: {
         <></>
       )}
       <Content>
-        <Text webTypo="Label3" mobileTypo="Label2" paletteColor="Gray5">
+        <Text
+          webTypo="Label3"
+          mobileTypo="Label2"
+          paletteColor="Gray5"
+          style={{ fontSize: '12px' }}
+        >
           {part === '회장' ||
           part === '부회장' ||
           part === '공동회장' ||
@@ -179,7 +184,7 @@ const ManageWapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    /* padding: 20px; */
     gap: 14px;
   }
 `;
@@ -191,6 +196,7 @@ const Wrapper = styled.div`
   padding: 30px 26px;
   box-sizing: border-box;
   width: 240px;
+  gap: 12px;
 
   background-color: ${theme.palette.Gray1};
   border-radius: 16px;
@@ -212,7 +218,6 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  padding-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -240,24 +245,23 @@ const Profile = styled.div`
   position: relative;
 
   width: 100%;
-  height: 160px;
+  height: 209px;
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   .fade {
     position: absolute;
     inset: auto 0 0 0;
-    height: 48px;
+    height: 100%;
     background: linear-gradient(
       180deg,
-      rgba(12, 12, 112, 0) 63.93%,
-      rgba(23, 24, 70, 0.6) 100%
+      rgba(54, 60, 71, 0) 63.93%,
+      rgba(54, 60, 71, 0.6) 100%
     );
     pointer-events: none;
   }
   ${media.mobile} {
-    margin-bottom: 14px;
     width: 100%;
-    height: 120px;
+    height: 209px;
   }
 `;
