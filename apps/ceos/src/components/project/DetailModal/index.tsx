@@ -7,6 +7,8 @@ import { Shortcut } from '@ceos/components/Shortcut';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { LoadingIcon } from '@ceos/assets/Loading';
 
 interface ModalProps {
   id: number;
@@ -25,7 +27,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
     ['ceos', 'project', 'modal', id],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
-  console.log(data);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const projectInfo = data;
 
@@ -191,13 +193,30 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
                 <DetailImage
                   alt="mainImage"
                   src={projectInfo.projectImages[1].imageUrl}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
                   quality={85}
-                  // placeholder="blur"
-                  // blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  priority
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  onLoad={() => {
+                    setIsImageLoading(false);
+                  }}
+                  onError={() => {
+                    setIsImageLoading(false);
+                  }}
                 />
+                {isImageLoading && (
+                  <LoadingContainer>
+                    <LoadingIcon />
+                    <Text
+                      webTypo="Heading2"
+                      mobileTypo="Heading2"
+                      margin="16px 0 0 0"
+                    >
+                      로딩중입니다
+                    </Text>
+                  </LoadingContainer>
+                )}
               </DetailImageContainer>
             )}
           </Container>
@@ -259,6 +278,18 @@ const iconCss = () => css`
     top: 79px;
     right: 32px;
   }
+`;
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  position: fixed;
+  z-index: 1000;
+
+  width: 100vw;
+  height: 100vh;
 `;
 
 const Container = styled.div`

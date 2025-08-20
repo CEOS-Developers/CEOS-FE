@@ -1585,6 +1585,7 @@ __metadata:
     emotion: "npm:^11.0.0"
     eslint: "npm:8.39.0"
     eslint-config-next: "npm:13.3.4"
+    lucide-react: "npm:^0.540.0"
     next: "npm:13.3.4"
     next-transpile-modules: "npm:^10.0.0"
     react: "npm:18.2.0"
@@ -3864,6 +3865,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.27.5"
     eslint-plugin-react: "npm:^7.32.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
+    lucide-react: "npm:^0.540.0"
     next: "npm:13.4.4"
     next-images: "npm:^1.8.5"
     prettier: "npm:^2.8.8"
@@ -6225,6 +6227,15 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10/fc1fe2ee205f7c8855fa0f34c1ab0bcf14b6229e35579ec1fd1079f31d6fc8ef8eb6fd17f2f4d99788d7e339f50e047555551ebd5e434dda503696e7c6591825
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.540.0":
+  version: 0.540.0
+  resolution: "lucide-react@npm:0.540.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/a9753db5d8f552f0409d0ee288961355024d08d1d8242e151c51ed534c8b518de0eb4065643d7c58fbbe35f4b789c256005c5cf89acac274408d3fa7cdf2c5a6
   languageName: node
   linkType: hard
 
