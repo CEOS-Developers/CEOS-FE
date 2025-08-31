@@ -23,7 +23,7 @@ const FinPass = ({ props }: { props: PassDataInterface }) => {
       <div css={PassMainCss} data-section="Blue">
         <Container>
           <div css={PassContentCss}>
-            <p css={WelcomeText}>Welcome CEOS {props.generation}th</p>
+            <p css={WelcomeText}>Welcome CEOS {props.generation}nd</p>
             <Text
               webTypo="Heading1_Kor"
               mobileTypo="Heading1_Kor"
