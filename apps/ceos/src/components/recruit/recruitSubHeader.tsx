@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { DateProps, PassDataInterface } from './interface';
 import { TopMargin } from '@ceos/pages/FAQ';
 import { EmailModal } from '../Modals/emailModal';
+import { getOrdinalSuffix } from '@ceos-fe/utils';
 
 interface RecruitSubHeaderProps {
   dataSection?: string;
@@ -78,7 +79,8 @@ export const RecruitSubHeader = ({
     <div css={RecruitCss} data-section={dataSection}>
       <div css={RecruitBgText}>
         <p css={RecruitTextCss}>
-          CEOS {generation}nd <br /> Recruit
+          CEOS {generation}
+          {getOrdinalSuffix(generation ?? 0)} <br /> Recruit
         </p>
         <Text
           webTypo="Heading4"
@@ -90,26 +92,26 @@ export const RecruitSubHeader = ({
         </Text>
 
         <>
-          {/* 이메일 기간 ~ 서류 접수 시작 */}
+          {/* 리크루팅(서류 접수 기간 ~ 최종 결과확인 마감) 제외 모든 기간 */}
 
-          {emailReceivingStartDate <= currentDate &&
-            currentDate <= applyStartDate && (
-              <div>
-                <div style={{ width: '100%', display: 'flex' }}>
-                  <Button
-                    variant="white"
-                    webWidth={234}
-                    mobileWidth={346}
-                    css={BtnCss}
-                    onClick={() => {
-                      toggleEmailModal();
-                    }}
-                  >
-                    22기 모집 알림받기
-                  </Button>
-                </div>
+          {(currentDate <= applyStartDate ||
+            currentDate > finalResultConfirmEndDate) && (
+            <div>
+              <div style={{ width: '100%', display: 'flex' }}>
+                <Button
+                  variant="white"
+                  webWidth={234}
+                  mobileWidth={346}
+                  css={BtnCss}
+                  onClick={() => {
+                    toggleEmailModal();
+                  }}
+                >
+                  {generation}기 모집 알림받기
+                </Button>
               </div>
-            )}
+            </div>
+          )}
 
           {/* 서류 접수 시작 ~ 서류 접수 마감 */}
 
