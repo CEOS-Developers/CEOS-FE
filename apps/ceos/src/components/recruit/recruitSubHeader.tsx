@@ -50,7 +50,7 @@ export const RecruitSubHeader = ({
   */
   const [
     currentDate,
-    emailReceivingStartDate,
+    // emailReceivingStartDate,
     applyStartDate,
     applyEndDate,
     applyDocumentResultConfirmStartDate,
@@ -59,7 +59,7 @@ export const RecruitSubHeader = ({
     finalResultConfirmEndDate,
   ] = [
     newDate,
-    new Date(date.startDateDoc.getDate() - 14),
+    // new Date(date.startDateDoc.getDate() - 14),
     // 시작 전 이주일 동안 이메일 알림 모집
     date.startDateDoc,
     new Date(new Date(date.endDateDoc).setHours(24)),
@@ -213,7 +213,7 @@ export const RecruitSubHeader = ({
             )}
 
           {/* 이메일 수신가능 시작일 이전 + 최종 결과확인 마감일 이후 */}
-          {(currentDate < emailReceivingStartDate ||
+          {/* {(currentDate < emailReceivingStartDate ||
             currentDate > finalResultConfirmEndDate) && (
             <div>
               <div style={{ width: '100%', display: 'flex' }}>
@@ -228,7 +228,7 @@ export const RecruitSubHeader = ({
                 </Button>
               </div>
             </div>
-          )}
+          )} */}
         </>
       </div>
       {isOpen && (
