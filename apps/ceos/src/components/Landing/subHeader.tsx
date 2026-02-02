@@ -30,7 +30,7 @@ export const SubHeader = (props: SubHeaderProps) => {
         mobileGap={24}
       >
         <Text webTypo="Heading2" mobileTypo="Heading1_Kor" paletteColor="White">
-          대학생 연합 IT 창업동아리
+          신촌 연합 IT 창업동아리
         </Text>
         <Logo
           backColor="White"
