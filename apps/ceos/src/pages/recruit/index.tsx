@@ -282,15 +282,14 @@ const Recruit = () => {
                 header="아이디어톤"
                 content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
-              {/* 22기 해커톤 필참행사 삭제 */}
-              {/* <RecruitMiniBox
-                header="해커톤"
+              <RecruitMiniBox
+                header="백만톤"
                 content={dateForm(
                   hackathonDate,
                   varHackathon[1],
                   varHackathon[2],
                 )}
-              /> */}
+              />
               <RecruitMiniBox
                 header="데모데이"
                 content={dateForm(
