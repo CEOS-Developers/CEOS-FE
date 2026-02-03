@@ -1548,6 +1548,7 @@ __metadata:
     "@types/react-modal": "npm:^3"
     antd: "npm:^5.5.2"
     axios: "npm:^1.4.0"
+    browser-image-compression: "npm:^2.0.2"
     eslint: "npm:8.39.0"
     eslint-config-next: "npm:13.3.4"
     next: "npm:13.3.4"
@@ -1584,6 +1585,7 @@ __metadata:
     emotion: "npm:^11.0.0"
     eslint: "npm:8.39.0"
     eslint-config-next: "npm:13.3.4"
+    lucide-react: "npm:^0.540.0"
     next: "npm:13.3.4"
     next-transpile-modules: "npm:^10.0.0"
     react: "npm:18.2.0"
@@ -3734,6 +3736,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browser-image-compression@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "browser-image-compression@npm:2.0.2"
+  dependencies:
+    uzip: "npm:0.20201231.0"
+  checksum: 10/5be112b14dca03adb48b691b0a64181a746c201c63e9729de9eb961f95c70022778678a4453ec284be66173a6d524c60116ca878c9a520b78d1bb6d10939e2d9
+  languageName: node
+  linkType: hard
+
 "browserslist@npm:^4.21.9":
   version: 4.21.10
   resolution: "browserslist@npm:4.21.10"
@@ -3844,6 +3855,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.59.2"
     axios: "npm:^1.4.0"
     babel-plugin-emotion: "npm:^11.0.0"
+    browser-image-compression: "npm:^2.0.2"
     date-fns: "npm:^2.30.0"
     emotion-reset: "npm:^3.0.1"
     eslint: "npm:^8.40.0"
@@ -3853,6 +3865,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.27.5"
     eslint-plugin-react: "npm:^7.32.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
+    lucide-react: "npm:^0.540.0"
     next: "npm:13.4.4"
     next-images: "npm:^1.8.5"
     prettier: "npm:^2.8.8"
@@ -6214,6 +6227,15 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10/fc1fe2ee205f7c8855fa0f34c1ab0bcf14b6229e35579ec1fd1079f31d6fc8ef8eb6fd17f2f4d99788d7e339f50e047555551ebd5e434dda503696e7c6591825
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.540.0":
+  version: 0.540.0
+  resolution: "lucide-react@npm:0.540.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/a9753db5d8f552f0409d0ee288961355024d08d1d8242e151c51ed534c8b518de0eb4065643d7c58fbbe35f4b789c256005c5cf89acac274408d3fa7cdf2c5a6
   languageName: node
   linkType: hard
 
@@ -8737,6 +8759,13 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10/a676216affc203876bd47981103f201f28c2731361bb186367e12d287a7566763213a8816910c6eb88265eccd4c230426eb783d64c373c4a180905be8820ed8e
+  languageName: node
+  linkType: hard
+
+"uzip@npm:0.20201231.0":
+  version: 0.20201231.0
+  resolution: "uzip@npm:0.20201231.0"
+  checksum: 10/dcc7e678cd36e129819fd817184bf9276bfd8d84fc653fc07f0e5665dba86648bd35c087001104247d6ea63539524d051e0fa7abf11e7c7239298303a55085f8
   languageName: node
   linkType: hard
 

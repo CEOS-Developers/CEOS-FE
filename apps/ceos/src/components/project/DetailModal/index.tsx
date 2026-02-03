@@ -7,6 +7,8 @@ import { Shortcut } from '@ceos/components/Shortcut';
 import { WhiteCloseIcon } from '@ceos-fe/ui/src/assets/CloseIcon/WhiteCloseIcon';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { LoadingIcon } from '@ceos/assets/Loading';
 
 interface ModalProps {
   id: number;
@@ -25,6 +27,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
     ['ceos', 'project', 'modal', id],
     () => projectApi.GET_A_PROJECT({ id: id }),
   );
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const projectInfo = data;
 
@@ -60,6 +63,8 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             >
               <WhiteCloseIcon fillColor="#232527" />
             </Mobile>
+
+            {/* MAIN 이미지 */}
             {projectInfo && (
               <DetailThumbnailImageContainer>
                 <Image
@@ -182,15 +187,36 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
               </Flex>
             </Mobile>
 
+            {/* 추가 상세 정보 이미지 - 이미지로딩용 blur 처리 */}
             {projectInfo && (
               <DetailImageContainer>
                 <DetailImage
                   alt="mainImage"
                   src={projectInfo.projectImages[1].imageUrl}
-                  layout="fill"
-                  objectFit="cover"
-                  priority
+                  fill
+                  quality={85}
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  onLoad={() => {
+                    setIsImageLoading(false);
+                  }}
+                  onError={() => {
+                    setIsImageLoading(false);
+                  }}
                 />
+                {isImageLoading && (
+                  <LoadingContainer>
+                    <LoadingIcon />
+                    <Text
+                      webTypo="Heading2"
+                      mobileTypo="Heading2"
+                      margin="16px 0 0 0"
+                    >
+                      로딩중입니다
+                    </Text>
+                  </LoadingContainer>
+                )}
               </DetailImageContainer>
             )}
           </Container>
@@ -252,6 +278,18 @@ const iconCss = () => css`
     top: 79px;
     right: 32px;
   }
+`;
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  position: fixed;
+  z-index: 1000;
+
+  width: 100vw;
+  height: 100vh;
 `;
 
 const Container = styled.div`

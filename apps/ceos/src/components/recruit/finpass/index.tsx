@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { PassDataInterface } from '../interface';
 import { ScrollState } from '@ceos/state';
 import { useRecoilState } from 'recoil';
+import { getOrdinalSuffix } from '@ceos-fe/utils';
 
 //이름, step
 
@@ -23,7 +24,10 @@ const FinPass = ({ props }: { props: PassDataInterface }) => {
       <div css={PassMainCss} data-section="Blue">
         <Container>
           <div css={PassContentCss}>
-            <p css={WelcomeText}>Welcome CEOS {props.generation}th</p>
+            <p css={WelcomeText}>
+              Welcome CEOS {props.generation}
+              {getOrdinalSuffix(props.generation)}
+            </p>
             <Text
               webTypo="Heading1_Kor"
               mobileTypo="Heading1_Kor"

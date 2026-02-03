@@ -29,6 +29,8 @@ interface RecruitDateInterface extends RecruitBaseInterface {
   ideathonDate: Date;
   hackathonDate: Date;
   demodayDate: Date;
+  startMTDate: Date;
+  endMTDate: Date;
 }
 
 interface SendEmailInterface {
@@ -44,6 +46,7 @@ export default function Recruit() {
     ['admin', 'recruit'],
     async () => await adminRecruitApi.GET_RECRUIT(),
   );
+  console.log(data);
 
   const { isOpen, type, openAlert } = useAlert();
 
@@ -76,6 +79,8 @@ export default function Recruit() {
         ideathonDate: new Date(data.ideathonDate),
         hackathonDate: new Date(data.hackathonDate),
         demodayDate: new Date(data.demodayDate),
+        startMTDate: new Date(data.startMTDate),
+        endMTDate: new Date(data.endMTDate),
       };
       reset(recruitData);
     }
@@ -92,6 +97,12 @@ export default function Recruit() {
       ),
       resultDateDoc: new Date(
         new Date(getValues().resultDateDoc).getTime() + timeDifference,
+      ),
+      startMTDate: new Date(
+        new Date(getValues().startMTDate).getTime() + timeDifference,
+      ),
+      endMTDate: new Date(
+        new Date(getValues().endMTDate).getTime() + timeDifference,
       ),
       startDateInterview: new Date(
         new Date(getValues().startDateInterview).getTime() + timeDifference,
@@ -276,6 +287,44 @@ export default function Recruit() {
               onChange={(date: Date | null) => {
                 if (!date) return;
                 setValue('resultDateFinal', new Date(date));
+              }}
+            />
+          </Flex>
+        </Flex>
+        <Flex justify="flex-start" align="flex-end" webGap={24} mobileGap={24}>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
+            <Text webTypo="Label3">MT 시작날짜</Text>
+            <DatePicker
+              isAdmin
+              isTime
+              initialValue={getValues('startMTDate')}
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('startMTDate', date);
+              }}
+            />
+          </Flex>
+          <Flex
+            direction="column"
+            align="flex-start"
+            webGap={8}
+            mobileGap={8}
+            width={328}
+          >
+            <Text webTypo="Label3">MT 종료날짜</Text>
+            <DatePicker
+              isAdmin
+              isTime
+              initialValue={getValues('endMTDate')}
+              onChange={(date: Date | null) => {
+                if (!date) return;
+                setValue('endMTDate', new Date(date));
               }}
             />
           </Flex>

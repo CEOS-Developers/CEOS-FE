@@ -72,6 +72,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.62.0"],\
           ["axios", "npm:1.4.0"],\
           ["babel-plugin-emotion", "npm:11.0.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["date-fns", "npm:2.30.0"],\
           ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
           ["eslint", "npm:8.46.0"],\
@@ -81,6 +82,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-import", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:2.28.0"],\
           ["eslint-plugin-react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:7.33.1"],\
           ["eslint-plugin-react-hooks", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:4.6.0"],\
+          ["lucide-react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.540.0"],\
           ["next", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:13.4.4"],\
           ["next-images", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:1.8.5"],\
           ["prettier", "npm:2.8.8"],\
@@ -2792,6 +2794,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-modal", "npm:3.16.0"],\
           ["antd", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:5.8.1"],\
           ["axios", "npm:1.4.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["eslint", "npm:8.39.0"],\
           ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
           ["next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
@@ -2830,6 +2833,7 @@ const RAW_RUNTIME_STATE =
           ["emotion", "npm:11.0.0"],\
           ["eslint", "npm:8.39.0"],\
           ["eslint-config-next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
+          ["lucide-react", "virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.540.0"],\
           ["next", "virtual:042db5f8afcad2eaabb1e316ffc605aeebe07a0d151d1432a8af6c0f4f017cafa87a3e01d700b0d48bd5f18eef8a8459a7c8651fa2bc342fd22287f301e29abc#npm:13.3.4"],\
           ["next-transpile-modules", "npm:10.0.1"],\
           ["react", "npm:18.2.0"],\
@@ -5862,6 +5866,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["browser-image-compression", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/browser-image-compression-npm-2.0.2-21a831f9cb-5be112b14d.zip/node_modules/browser-image-compression/",\
+        "packageDependencies": [\
+          ["browser-image-compression", "npm:2.0.2"],\
+          ["uzip", "npm:0.20201231.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["browserslist", [\
       ["npm:4.21.10", {\
         "packageLocation": "./.yarn/cache/browserslist-npm-4.21.10-e2170a875b-cdb9272433.zip/node_modules/browserslist/",\
@@ -5980,6 +5994,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:5.62.0"],\
           ["axios", "npm:1.4.0"],\
           ["babel-plugin-emotion", "npm:11.0.0"],\
+          ["browser-image-compression", "npm:2.0.2"],\
           ["date-fns", "npm:2.30.0"],\
           ["emotion-reset", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:3.0.1"],\
           ["eslint", "npm:8.46.0"],\
@@ -5989,6 +6004,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-import", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:2.28.0"],\
           ["eslint-plugin-react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:7.33.1"],\
           ["eslint-plugin-react-hooks", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:4.6.0"],\
+          ["lucide-react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.540.0"],\
           ["next", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:13.4.4"],\
           ["next-images", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:1.8.5"],\
           ["prettier", "npm:2.8.8"],\
@@ -9163,6 +9179,41 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["lru-cache", "npm:6.0.0"],\
           ["yallist", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lucide-react", [\
+      ["npm:0.540.0", {\
+        "packageLocation": "./.yarn/cache/lucide-react-npm-0.540.0-ebf40b4da6-a9753db5d8.zip/node_modules/lucide-react/",\
+        "packageDependencies": [\
+          ["lucide-react", "npm:0.540.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.540.0", {\
+        "packageLocation": "./.yarn/__virtual__/lucide-react-virtual-2632d61917/0/cache/lucide-react-npm-0.540.0-ebf40b4da6-a9753db5d8.zip/node_modules/lucide-react/",\
+        "packageDependencies": [\
+          ["lucide-react", "virtual:ba36fa9d40e1f490c806a320a6ac94b63298cff3b4f5a9d9d59a0710741c2ad658540d12dd33fc1107f0abbc26564cade3bbc2cd2401765a616d5a9fbe21079a#npm:0.540.0"],\
+          ["@types/react", "npm:18.2.18"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.540.0", {\
+        "packageLocation": "./.yarn/__virtual__/lucide-react-virtual-e6e2eca862/0/cache/lucide-react-npm-0.540.0-ebf40b4da6-a9753db5d8.zip/node_modules/lucide-react/",\
+        "packageDependencies": [\
+          ["lucide-react", "virtual:c5005237f77573425091feffea924a65172f69d41bc4e43db862908a80f10d34bc0dce4c4008f06b335c01ee66cd0983b781f9d1024ca6d82710ba253ed3628a#npm:0.540.0"],\
+          ["@types/react", "npm:18.2.3"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12830,6 +12881,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/react",\
           "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["uzip", [\
+      ["npm:0.20201231.0", {\
+        "packageLocation": "./.yarn/cache/uzip-npm-0.20201231.0-122f770c6a-dcc7e678cd.zip/node_modules/uzip/",\
+        "packageDependencies": [\
+          ["uzip", "npm:0.20201231.0"]\
         ],\
         "linkType": "HARD"\
       }]\

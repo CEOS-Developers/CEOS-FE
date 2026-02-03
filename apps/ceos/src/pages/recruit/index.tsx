@@ -90,8 +90,8 @@ const Recruit = () => {
   const varIdeathon = data ? data.ideathonDate.split('-') : '';
   const varHackathon = data ? data.hackathonDate.split('-') : '';
   const varDemodayDate = data ? data.demodayDate.split('-') : '';
-  const varStartMTDate = ['2025', '03', '22']; // 하드코딩:MT 시작 날짜
-  const varEndMTDate = ['2025', '03', '23']; // 하드코딩:MT 종료 날짜
+  const varStartMTDate = data ? data.startMTDate.split('-') : '';
+  const varEndMTDate = data ? data.endMTDate.split('-') : '';
 
   var week = new Array('일', '월', '화', '수', '목', '금', '토');
 
@@ -107,8 +107,8 @@ const Recruit = () => {
   const ideathonDate = new Date(data ? data.ideathonDate : '').getDay();
   const hackathonDate = new Date(data ? data.hackathonDate : '').getDay();
   const demoDayDate = new Date(data ? data.demodayDate : '').getDay();
-  const startMTDate = new Date('2025-03-22').getDay(); // 하드코딩:MT 시작 날짜
-  const endMTDate = new Date('2025-03-23').getDay(); // 하드코딩:MT 종료 날짜
+  const startMTDate = new Date(data ? data.startMTDate : '').getDay();
+  const endMTDate = new Date(data ? data.endMTDate : '').getDay();
 
   const dateForm = (day: any, varDateFir: any, varDateSec: any) => {
     const month =
@@ -283,7 +283,7 @@ const Recruit = () => {
                 content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
               <RecruitMiniBox
-                header="해커톤"
+                header="백만톤"
                 content={dateForm(
                   hackathonDate,
                   varHackathon[1],
