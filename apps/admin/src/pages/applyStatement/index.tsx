@@ -164,48 +164,48 @@ export default function ApplyStatement() {
     getApplicantsList();
   }, [sortingPart, sortingDocPass, sortingFinalPass]);
 
-  //합격 불합격 여부 변경
-  if (applicantData && applicantData.data && applicantData.data.content) {
-    applicantData.data.content.forEach((data: any) => {
-      //document
-      if (
-        getValues(`DocPassDropdown_${data.uuid}`) &&
-        data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
-      ) {
-        // 서버 데이터와 로컬 데이터 업데이트
-        data.documentPass = getValues(`DocPassDropdown_${data.uuid}`).label;
+  // 합격 불합격 여부 변경
+  // if (applicantData && applicantData.data && applicantData.data.content) {
+  //   applicantData.data.content.forEach((data: any) => {
+  //     //document
+  //     if (
+  //       getValues(`DocPassDropdown_${data.uuid}`) &&
+  //       data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
+  //     ) {
+  //       // 서버 데이터와 로컬 데이터 업데이트
+  //       data.documentPass = getValues(`DocPassDropdown_${data.uuid}`).label;
 
-        // 뮤테이션 호출하여 서버 데이터 업데이트
-        if (data.id !== 0 && data.id !== undefined) {
-          updateDocumentPassMutation({
-            applicantId: data.id,
-            pass: getValues(`DocPassDropdown_${data.uuid}`).label,
-          });
-        }
-        // if (!docPassSuccess) {
-        //   if (data.documentPass === '불합격') {
-        //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
-        //   }
-        // }
-      }
+  //       // 뮤테이션 호출하여 서버 데이터 업데이트
+  //       if (data.id !== 0 && data.id !== undefined) {
+  //         updateDocumentPassMutation({
+  //           applicantId: data.id,
+  //           pass: getValues(`DocPassDropdown_${data.uuid}`).label,
+  //         });
+  //       }
+  //       // if (!docPassSuccess) {
+  //       //   if (data.documentPass === '불합격') {
+  //       //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
+  //       //   }
+  //       // }
+  //     }
 
-      //final
-      if (
-        getValues(`FinalPassDropdown_${data.uuid}`) &&
-        data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
-      ) {
-        // 서버 데이터와 로컬 데이터 업데이트
-        data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
-        // 뮤테이션 호출하여 서버 데이터 업데이트
-        if (data.id !== 0 && data.id !== undefined) {
-          updateFinalPassMutation({
-            applicantId: data.id,
-            pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
-          });
-        }
-      }
-    });
-  }
+  //     //final
+  //     if (
+  //       getValues(`FinalPassDropdown_${data.uuid}`) &&
+  //       data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
+  //     ) {
+  //       // 서버 데이터와 로컬 데이터 업데이트
+  //       data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
+  //       // 뮤테이션 호출하여 서버 데이터 업데이트
+  //       if (data.id !== 0 && data.id !== undefined) {
+  //         updateFinalPassMutation({
+  //           applicantId: data.id,
+  //           pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
   useEffect(() => {
     // 면접 참여 여부 확인
@@ -391,6 +391,14 @@ export default function ApplyStatement() {
             setValue={setValue}
             value={watch(`DocPassDropdown_${record.uuid}`)}
             placeholder="선택"
+            onSelect={(opt) => {
+              if (opt.label !== record.doc_pass && record.id) {
+                updateDocumentPassMutation({
+                  applicantId: record.id,
+                  pass: opt.label,
+                });
+              }
+            }}
           />
         );
       },
@@ -445,6 +453,14 @@ export default function ApplyStatement() {
             setValue={setValue}
             value={watch(`FinalPassDropdown_${record.uuid}`)}
             placeholder="선택"
+            onSelect={(opt) => {
+              if (opt.label !== record.final_pass && record.id) {
+                updateFinalPassMutation({
+                  applicantId: record.id,
+                  pass: opt.label,
+                });
+              }
+            }}
           />
         );
       },
