@@ -283,7 +283,7 @@ const Recruit = () => {
                 content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
               <RecruitMiniBox
-                header="백만톤"
+                header="하프톤"
                 content={dateForm(
                   hackathonDate,
                   varHackathon[1],
