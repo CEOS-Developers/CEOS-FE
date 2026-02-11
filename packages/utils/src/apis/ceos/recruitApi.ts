@@ -1,8 +1,7 @@
 import { ceosInstance } from '../axiosConfig';
 
 export type AvailabilityStatus = 'UNDECIDED' | 'AVAILABLE' | 'UNAVAILABLE';
-export type AttendanceStatus = '입력' | '가능' | '불가능';
-export type FinalAvailabilityStatus = '미입력' | '가능' | '불가능';
+export type AttendanceStatus = '미입력' | '가능' | '불가능';
 
 export interface InformationInterface {
   name: string;

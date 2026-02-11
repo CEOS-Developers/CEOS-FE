@@ -103,6 +103,7 @@ const Container = styled.div<{ width: number; isOpen: boolean }>`
 const ArrowContainer = styled.div`
   position: absolute;
   right: 32px;
+  top: 1px;
 
   @media (max-width: 524px) {
     position: relative;

@@ -111,7 +111,7 @@ const Container = styled.div<{ path?: string }>`
 const ChildrenContainer = styled.div<{ path?: string; isOpen: boolean }>`
   /* margin-left: ${({ path }) =>
     path?.includes('/auth') || path === '/' ? 0 : 'max(16.5%, 200px)'}; */
-  width: ${({ isOpen }) => (isOpen ? '83%' : '100%')};
+  width: ${({ isOpen }) => (isOpen ? '83.5%' : '100%')};
   display: flex;
   flex-direction: column;
   align-items: center;

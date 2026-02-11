@@ -1,5 +1,5 @@
 import { adminInstance } from '../axiosConfig';
-import { AttendanceStatus, FinalAvailabilityStatus } from '../ceos/recruitApi';
+import { AttendanceStatus } from '../ceos/recruitApi';
 
 export interface InterviewAvailabilityInterface {
   interviewAvailability: AttendanceStatus;
@@ -7,7 +7,7 @@ export interface InterviewAvailabilityInterface {
 }
 
 export interface FinalAvailabilityInterface {
-  finalAvailability: FinalAvailabilityStatus;
+  finalAvailability: AttendanceStatus;
   reason: string | undefined;
 }
 
