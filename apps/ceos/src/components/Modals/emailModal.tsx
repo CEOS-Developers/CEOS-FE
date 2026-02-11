@@ -31,7 +31,8 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
     const {
       getValues,
       register,
-      formState: { errors },
+      handleSubmit: onSubmit,
+      formState: { errors, isValid },
     } = useForm<EmailFormInterface>({
       mode: 'onChange',
       reValidateMode: 'onChange',
@@ -69,9 +70,9 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       ? [{ type: 'normal', text: errors.phoneNum.message || '' }]
       : [];
 
-    const handleSubmit = async () => {
+    const handleFormSubmit = onSubmit(() => {
       emailDoc({ email: getValues('email'), phoneNum: getValues('phoneNum') });
-    };
+    });
 
     const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
@@ -149,7 +150,8 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                   variant="default"
                   webWidth={376}
                   mobileWidth={306}
-                  onClick={handleSubmit}
+                  disabled={!isValid}
+                  onClick={handleFormSubmit}
                 >
                   신청하기
                 </Button>
