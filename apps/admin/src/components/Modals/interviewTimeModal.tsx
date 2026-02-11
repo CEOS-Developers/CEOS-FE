@@ -30,18 +30,9 @@ export const InterviewTimeModal = ({
     () => adminApplyStatementApi.GET_INTERVIEWTIME(idx),
   );
 
-  const [interviewData, setInterviewData] = useState(data?.data.times); // 면접 1일차
-  const [interviewData2, setInterviewData2] = useState(data?.data.times); // 면접 2일차
-  const InterviewArray: interviewArrayInterface[] = [
-    {
-      interviewTimeList: interviewData,
-      day: '토',
-    },
-    {
-      interviewTimeList: interviewData2,
-      day: '일',
-    },
-  ];
+  const [interviewGroups, setInterviewGroups] = useState<
+    interviewArrayInterface[]
+  >([]);
   const [interviewTime, setInterviewTime] = useState<interviewtimeInterface>();
 
   const { mutate: patchInterviewTime } = useMutation(
@@ -61,18 +52,27 @@ export const InterviewTimeModal = ({
 
   useEffect(() => {
     if (isSuccess) {
-      // 면접 날짜 기준으로 구분
-      let index = 0;
-      for (let i = 0; i < data.data.times.length; i++) {
-        if (data.data.times[i].date !== data.data.times[0].date) {
-          index = i;
-          break;
+      setInterviewTime(undefined); 
+      
+      const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+      const grouped = new Map<string, interviewtimeInterface[]>();
+
+      for (const time of data.data.times) {
+        const date = time.date ?? '';
+        if (!grouped.has(date)) {
+          grouped.set(date, []);
         }
+        grouped.get(date)!.push(time);
       }
 
-      setInterviewTime(undefined); // 선택한 시간 초기화
-      setInterviewData(data.data.times.slice(0, index));
-      setInterviewData2(data.data.times.slice(index));
+      const groups: interviewArrayInterface[] = Array.from(
+        grouped.entries(),
+      ).map(([date, times]) => ({
+        interviewTimeList: times,
+        day: dayNames[new Date(date).getDay()],
+      }));
+
+      setInterviewGroups(groups);
     }
   }, [isSuccess, data]);
 
@@ -84,8 +84,8 @@ export const InterviewTimeModal = ({
         <div>오류가 발생했습니다.</div>
       ) : isSuccess ? (
         <>
-          <Flex width={640}>
-            {InterviewArray.map((interview: interviewArrayInterface, idx) => (
+          <Flex width={880} webGap={8}>
+            {interviewGroups.map((interview: interviewArrayInterface, idx) => (
               <Flex
                 direction="column"
                 webGap={12}
