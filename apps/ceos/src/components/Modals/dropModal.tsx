@@ -70,14 +70,14 @@ export const DropModal = forwardRef<HTMLDivElement, ModalProps>(
         patchDoc({
           uuid: props.uuid,
           email: props.email,
-          available: false,
+          available: 'UNAVAILABLE',
           reason: getValues('reason'),
         });
       } else if (props.step === '최종') {
         patchFin({
           uuid: props.uuid,
           email: props.email,
-          available: false,
+          available: 'UNAVAILABLE',
           reason: getValues('reason'),
         });
       }

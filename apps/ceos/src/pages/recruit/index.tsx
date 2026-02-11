@@ -40,7 +40,7 @@ const Recruit = () => {
     email: '',
     pass: '',
     name: '',
-    attendanceStatus: false,
+    attendanceStatus: '입력',
     part: '',
     date: '',
     otDate: '',
