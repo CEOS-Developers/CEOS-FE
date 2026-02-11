@@ -46,7 +46,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       onSuccess: (res) => {
         setIsError(true);
         if (res === '이미 존재하는 데이터입니다') {
-          setErrorText('이미 등록된 정보입니다.');
+          setErrorText('이미 등록된 이메일입니다.');
         } else if (res === '요청에 성공하였습니다.') {
           setErrorText(
             '작성해주신 이메일과 전화번호로 알림신청이 완료되었습니다.',
