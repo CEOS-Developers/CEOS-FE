@@ -16,6 +16,7 @@ interface ModalProps {
 
 interface EmailFormInterface {
   email: string;
+  phoneNum: string;
 }
 
 type HelperTextType = {
@@ -36,6 +37,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       reValidateMode: 'onChange',
       defaultValues: {
         email: '',
+        phoneNum: '',
       },
     });
 
@@ -43,9 +45,11 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       onSuccess: (res) => {
         setIsError(true);
         if (res === '이미 존재하는 데이터입니다') {
-          setErrorText('이미 등록된 이메일입니다.');
+          setErrorText('이미 등록된 정보입니다.');
         } else if (res === '요청에 성공하였습니다.') {
-          setErrorText('작성해주신 이메일로 알림신청이 완료되었습니다.');
+          setErrorText(
+            '작성해주신 이메일과 전화번호로 알림신청이 완료되었습니다.',
+          );
         } else {
           setErrorText('오류가 발생했습니다. 다시 시도해주세요.');
         }
@@ -61,8 +65,12 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
       ? [{ type: 'normal', text: errors.email.message || '' }]
       : [];
 
+    const phoneHelperText: HelperTextType[] = errors.phoneNum
+      ? [{ type: 'normal', text: errors.phoneNum.message || '' }]
+      : [];
+
     const handleSubmit = async () => {
-      emailDoc({ email: getValues('email') });
+      emailDoc({ email: getValues('email'), phoneNum: getValues('phoneNum') });
     };
 
     const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -93,7 +101,7 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                 paletteColor="Black"
                 margin="0 0 12px 0"
               >
-                작성해주신 이메일로
+                작성해주신 이메일과 전화번호로
                 <br />
                 모집기간이 되면 알려드립니다!
               </Text>
@@ -110,6 +118,25 @@ export const EmailModal = forwardRef<HTMLDivElement, ModalProps>(
                   label="이메일"
                   placeholder="내용을 입력하세요."
                   helperText={helperText}
+                  width={376}
+                  css={css`
+                    @media (max-width: 1023px) {
+                      width: 306px;
+                    }
+                  `}
+                />
+
+                <TextField
+                  {...register('phoneNum', {
+                    required: true,
+                    pattern: {
+                      value: /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/,
+                      message: '전화번호 형식이 올바르지 않습니다.',
+                    },
+                  })}
+                  label="전화번호"
+                  placeholder="010-0000-0000"
+                  helperText={phoneHelperText}
                   width={376}
                   css={css`
                     @media (max-width: 1023px) {
@@ -148,7 +175,7 @@ EmailModal.displayName = 'EmailModal';
 
 export const ModalBoxCss = css`
   width: 504px;
-  height: 404px;
+  height: 528px;
   position: relative;
   background-color: #ffffff;
   box-sizing: border-box;
@@ -158,7 +185,7 @@ export const ModalBoxCss = css`
 
   @media (max-width: 1023px) {
     width: 346px;
-    height: 404px;
+    height: 540px;
     padding: 1.25rem 1.25rem 1.44rem 1.25rem;
   }
 `;
@@ -175,6 +202,7 @@ const InputCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
   margin-top: 24px;
 
   button {
