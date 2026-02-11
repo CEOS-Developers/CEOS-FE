@@ -1,4 +1,4 @@
-import { RecruitApplyValuesInterface } from '@ceos-fe/utils';
+import { RecruitApplyValuesInterface, AttendanceStatus } from '@ceos-fe/utils';
 import {
   FormState,
   UseFormGetValues,
@@ -51,7 +51,7 @@ export interface PassDataInterface {
   pass: string;
   name: string;
   part?: string;
-  attendanceStatus: boolean;
+  attendanceStatus: AttendanceStatus;
   date: string;
   otDate: string;
   openChatUrl: string;

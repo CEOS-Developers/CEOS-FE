@@ -47,7 +47,7 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const { mutate: patchDoc } = useMutation(recruitApi.PATCH_DOC, {
     onSuccess: (res) => {
       if (res === '면접 참여 여부를 이미 선택했습니다.') {
-        if (query.attendanceStatus) {
+        if (query.attendanceStatus !== '미입력') {
           setIsPossible(true);
         } else {
           setErrorText('면접 참여 여부를 이미 선택했습니다.');
@@ -63,7 +63,7 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       patchDoc({
         uuid: query.uuid,
         email: query.email,
-        available: true,
+        available: 'AVAILABLE',
         reason: null,
       });
       setIsPossible(true);
@@ -120,7 +120,7 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
               }
             `}
             onClick={() => {
-              if (query.attendanceStatus) {
+              if (query.attendanceStatus !== '미입력') {
                 setErrorText('면접 참여 여부를 이미 선택하셨습니다.');
                 setTimeout(() => {
                   setErrorText('');
@@ -171,7 +171,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
   const { mutate: patchFin } = useMutation(recruitApi.PATCH_FIN, {
     onSuccess: (res) => {
       if (res === '활동 여부를 이미 선택했습니다.') {
-        if (query.attendanceStatus) setIsPossible(true);
+        if (query.attendanceStatus !== '미입력') setIsPossible(true);
         else {
           setErrorText('활동 여부를 이미 선택했습니다.');
           setTimeout(() => {
@@ -187,7 +187,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
       patchFin({
         uuid: query.uuid,
         email: query.email,
-        available: true,
+        available: 'AVAILABLE',
         reason: null,
       });
       setIsPossible(true);
@@ -275,7 +275,7 @@ export const FinPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
             }
           `}
           onClick={() => {
-            if (query.attendanceStatus) {
+            if (query.attendanceStatus !== '미입력') {
               setErrorText('활동 가능 여부를 이미 제출하셨습니다.');
               setTimeout(() => {
                 setErrorText('');

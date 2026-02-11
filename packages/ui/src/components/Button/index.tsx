@@ -10,7 +10,8 @@ export type ButtonVariant =
   | 'white'
   | 'admin'
   | 'admin_stroke'
-  | 'admin_navy';
+  | 'admin_navy'
+  | 'admin_reason';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
@@ -31,6 +32,7 @@ const BUTTON_FIGURE = {
     admin: 328,
     admin_stroke: 84,
     admin_navy: 57,
+    admin_reason: 40,
   },
   height: {
     default: 46,
@@ -39,6 +41,7 @@ const BUTTON_FIGURE = {
     admin: 46,
     admin_stroke: 33,
     admin_navy: 33,
+    admin_reason: 33,
   },
   mobile_height: {
     default: 59,
@@ -47,6 +50,7 @@ const BUTTON_FIGURE = {
     admin: 46,
     admin_stroke: 33,
     admin_navy: 33,
+    admin_reason: 33,
   },
 };
 
@@ -58,6 +62,7 @@ const TEXT_COLOR = {
     admin: `${theme.palette.White}`,
     admin_stroke: `${theme.palette.Admin.DeepNavy}`,
     admin_navy: `${theme.palette.White}`,
+    admin_reason: `${theme.palette.Admin.DeepNavy}`,
   },
   disabled: {
     default: `${theme.palette.White}`,
@@ -66,6 +71,7 @@ const TEXT_COLOR = {
     admin: `${theme.palette.Gray2}`,
     admin_stroke: `${theme.palette.White}`,
     admin_navy: `${theme.palette.White}`,
+    admin_reason: `${theme.palette.Gray4}`,
   },
 };
 
@@ -77,6 +83,7 @@ const BUTTON_COLOR = {
     admin: `${theme.palette.Admin.Navy}`,
     admin_stroke: `${theme.palette.Gray1}`,
     admin_navy: `${theme.palette.Admin.Navy}`,
+    admin_reason: 'transparent',
   },
   disabled: {
     default: `${theme.palette.Gray3}`,
@@ -85,6 +92,7 @@ const BUTTON_COLOR = {
     admin: `${theme.palette.Gray3}`,
     admin_stroke: `${theme.palette.Gray2}`,
     admin_navy: `${theme.palette.Gray2}`,
+    admin_reason: 'transparent',
   },
 };
 
@@ -96,6 +104,7 @@ const BUTTON_TYPO = {
     admin: theme.typo.Web.Label1,
     admin_stroke: theme.typo.Web.Label3,
     admin_navy: theme.typo.Web.Label3,
+    admin_reason: theme.typo.Web.Label3,
   },
   mobile: {
     default: theme.typo.Mobile.Heading3,
@@ -104,6 +113,7 @@ const BUTTON_TYPO = {
     admin: theme.typo.Web.Label1,
     admin_stroke: theme.typo.Web.Label3,
     admin_navy: theme.typo.Web.Label3,
+    admin_reason: theme.typo.Web.Label3,
   },
 };
 
@@ -191,6 +201,16 @@ const StyledButton = styled.button<{
   ${({ variant }) =>
     variant === 'admin_stroke'
       ? css`
+          border: 1px solid ${theme.palette.Admin.DeepNavy};
+        `
+      : ''};
+
+  ${({ variant }) =>
+    variant === 'admin_reason'
+      ? css`
+          width: fit-content;
+          padding: 0 10px;
+          background-color: transparent;
           border: 1px solid ${theme.palette.Admin.DeepNavy};
         `
       : ''};
