@@ -17,6 +17,7 @@ interface DropdownProps {
   placeholder?: string;
   width?: number;
   onClick?: () => void;
+  onSelect?: (opt: DropdownItemInterface) => void;
 }
 
 /**
@@ -35,6 +36,7 @@ export const Dropdown = ({
   placeholder = '선택',
   width = 89,
   onClick,
+  onSelect,
 }: DropdownProps) => {
   const { isOpen, modalRef, toggleModal } = useModal();
   const color = setColor(value, isOpen);
@@ -70,7 +72,10 @@ export const Dropdown = ({
             {options.map((opt, idx) => (
               <DropdownItem
                 key={idx}
-                onClick={() => setValue(label, opt)}
+                onClick={() => {
+                  setValue(label, opt);
+                  onSelect?.(opt);
+                }}
                 isSelected={value ? value.value === opt.value : false}
               >
                 {opt.label}
@@ -98,6 +103,7 @@ const Container = styled.div<{ width: number; isOpen: boolean }>`
 const ArrowContainer = styled.div`
   position: absolute;
   right: 32px;
+  top: 1px;
 
   @media (max-width: 524px) {
     position: relative;

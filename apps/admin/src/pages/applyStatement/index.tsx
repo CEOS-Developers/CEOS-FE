@@ -14,8 +14,8 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { adminApplyStatementApi } from '@ceos-fe/utils/src/apis/admin/adminApplyStatementApi';
 import {
-  InterviewAvailabilityInterface,
   adminInterviewAvailabilityApi,
+  adminFinalAvailabilityApi,
 } from '@ceos-fe/utils/src/apis/admin/adminInterviewAvailabilityApi';
 import ReactModal from 'react-modal';
 import { ApplicationModal } from '../../components/Modals/applicationModal';
@@ -57,7 +57,9 @@ export default function ApplyStatement() {
   });
   // 모달창 open 여부
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalSubject, setModalSubject] = useState(''); // option: interview, application
+  const [modalSubject, setModalSubject] = useState(''); // option: interview, application, reason
+  const [reasonText, setReasonText] = useState('');
+
   // 지원자 id
   const [applicantId, setApplicantId] = useState(0);
   // 지원자 엑셀 업데이트 시간
@@ -71,10 +73,6 @@ export default function ApplyStatement() {
   const [searchingName, setSearchingName] = useState('');
 
   const { setValue, watch, getValues } = useForm();
-
-  const [interviewAvailabilityData, setInterviewAvailabilityData] = useState<
-    Map<number, InterviewAvailabilityInterface>
-  >(new Map());
 
   //지원자 목록 가져오기
   const {
@@ -164,71 +162,48 @@ export default function ApplyStatement() {
     getApplicantsList();
   }, [sortingPart, sortingDocPass, sortingFinalPass]);
 
-  //합격 불합격 여부 변경
-  if (applicantData && applicantData.data && applicantData.data.content) {
-    applicantData.data.content.forEach((data: any) => {
-      //document
-      if (
-        getValues(`DocPassDropdown_${data.uuid}`) &&
-        data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
-      ) {
-        // 서버 데이터와 로컬 데이터 업데이트
-        data.documentPass = getValues(`DocPassDropdown_${data.uuid}`).label;
+  // 합격 불합격 여부 변경
+  // if (applicantData && applicantData.data && applicantData.data.content) {
+  //   applicantData.data.content.forEach((data: any) => {
+  //     //document
+  //     if (
+  //       getValues(`DocPassDropdown_${data.uuid}`) &&
+  //       data.documentPass !== getValues(`DocPassDropdown_${data.uuid}`).label
+  //     ) {
+  //       // 서버 데이터와 로컬 데이터 업데이트
+  //       data.documentPass = getValues(`DocPassDropdown_${data.uuid}`).label;
 
-        // 뮤테이션 호출하여 서버 데이터 업데이트
-        if (data.id !== 0 && data.id !== undefined) {
-          updateDocumentPassMutation({
-            applicantId: data.id,
-            pass: getValues(`DocPassDropdown_${data.uuid}`).label,
-          });
-        }
-        // if (!docPassSuccess) {
-        //   if (data.documentPass === '불합격') {
-        //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
-        //   }
-        // }
-      }
+  //       // 뮤테이션 호출하여 서버 데이터 업데이트
+  //       if (data.id !== 0 && data.id !== undefined) {
+  //         updateDocumentPassMutation({
+  //           applicantId: data.id,
+  //           pass: getValues(`DocPassDropdown_${data.uuid}`).label,
+  //         });
+  //       }
+  //       // if (!docPassSuccess) {
+  //       //   if (data.documentPass === '불합격') {
+  //       //     setValue(`DocPassDropdown_${data.uuid}`, ColorPassDropdownList[0]);
+  //       //   }
+  //       // }
+  //     }
 
-      //final
-      if (
-        getValues(`FinalPassDropdown_${data.uuid}`) &&
-        data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
-      ) {
-        // 서버 데이터와 로컬 데이터 업데이트
-        data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
-        // 뮤테이션 호출하여 서버 데이터 업데이트
-        if (data.id !== 0 && data.id !== undefined) {
-          updateFinalPassMutation({
-            applicantId: data.id,
-            pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
-          });
-        }
-      }
-    });
-  }
-
-  useEffect(() => {
-    // 면접 참여 여부 확인
-    applicantData?.data?.content.forEach((data: any) => {
-      if (data.documentPass === '합격' && data.id) {
-        adminInterviewAvailabilityApi
-          .GET_INTERVIEW_AVAILABILITY(data.id)
-          .then((response) => {
-            setInterviewAvailabilityData((prev) =>
-              new Map(prev).set(data.id, response),
-            );
-          })
-          .catch((error) => {
-            console.error('면접 가능 여부 가져오기 실패:', error);
-          });
-      }
-
-      // 최종 합격 여부 확인
-      if (data.finalPass === '합격') {
-        //console.log(`지원자 ${data.id}는 최종 합격입니다.`);
-      }
-    });
-  }, [applicantData]);
+  //     //final
+  //     if (
+  //       getValues(`FinalPassDropdown_${data.uuid}`) &&
+  //       data.finalPass !== getValues(`FinalPassDropdown_${data.uuid}`).label
+  //     ) {
+  //       // 서버 데이터와 로컬 데이터 업데이트
+  //       data.finalPass = getValues(`FinalPassDropdown_${data.uuid}`).label;
+  //       // 뮤테이션 호출하여 서버 데이터 업데이트
+  //       if (data.id !== 0 && data.id !== undefined) {
+  //         updateFinalPassMutation({
+  //           applicantId: data.id,
+  //           pass: getValues(`FinalPassDropdown_${data.uuid}`).label,
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
   // 지원자 엑셀 생성 get 요청
   const {
@@ -294,7 +269,9 @@ export default function ApplyStatement() {
               doc_pass: data?.documentPass,
               date: data?.date,
               duration: data?.duration,
+              interview_check: data?.interviewCheck,
               final_pass: data?.finalPass,
+              final_check: data?.finalCheck,
             };
           }),
         );
@@ -382,6 +359,7 @@ export default function ApplyStatement() {
     {
       title: '서류합불',
       dataIndex: 'doc_pass',
+      align: 'center',
       // width: '90px',
       render: (_text: string, record: any) => {
         return (
@@ -391,6 +369,14 @@ export default function ApplyStatement() {
             setValue={setValue}
             value={watch(`DocPassDropdown_${record.uuid}`)}
             placeholder="선택"
+            onSelect={(opt) => {
+              if (opt.label !== record.doc_pass && record.id) {
+                updateDocumentPassMutation({
+                  applicantId: record.id,
+                  pass: opt.label,
+                });
+              }
+            }}
           />
         );
       },
@@ -398,14 +384,8 @@ export default function ApplyStatement() {
     {
       title: '면접시간',
       dataIndex: 'interview_time',
-      // width: '250px',
       responsive: ['md'],
       render: (_text: string, record: any) => {
-        const availability = interviewAvailabilityData.get(record.id);
-        /**
-         * TODO 면접 불가능 사유 확인
-         * availability?.interviewAvailability
-         */
         return (
           <Flex justify="space-between" webGap={5} mobileGap={5}>
             {record.doc_pass === '합격' && record.date ? (
@@ -413,9 +393,7 @@ export default function ApplyStatement() {
                 {record.date?.slice(5, 10)} &nbsp; {record.duration}
               </div>
             ) : (
-              <div style={{ width: '146px' }}>
-                {availability?.reason ? availability.reason : '-'}
-              </div>
+              <div style={{ width: '146px' }}>-</div>
             )}
             {record.doc_pass === '합격' && (
               <Button
@@ -434,9 +412,42 @@ export default function ApplyStatement() {
       },
     },
     {
+      title: '면접 가능 여부',
+      dataIndex: 'interview_check',
+      responsive: ['md'],
+      render: (_text: string, record: any) => {
+        if (record.doc_pass !== '합격') return <Center>-</Center>;
+
+        if (record.interview_check === '불가능') {
+          return (
+            <Center>
+              <Button
+                variant="admin_reason"
+                onClick={() => {
+                  adminInterviewAvailabilityApi
+                    .GET_INTERVIEW_AVAILABILITY(record.id)
+                    .then((res) => {
+                      setReasonText(res.reason ?? '사유 미기재');
+                      setModalSubject('reason');
+                      setModalOpen(true);
+                    });
+                }}
+              >
+                불가능
+              </Button>
+            </Center>
+          );
+        }
+
+        return <Center>{record.interview_check ?? '-'}</Center>;
+      },
+    },
+
+    {
       title: '최종합불',
       dataIndex: 'final_pass',
       // width: '90px',
+      align: 'center',
       render: (_text: string, record: any) => {
         return (
           <Dropdown
@@ -445,10 +456,52 @@ export default function ApplyStatement() {
             setValue={setValue}
             value={watch(`FinalPassDropdown_${record.uuid}`)}
             placeholder="선택"
+            onSelect={(opt) => {
+              if (opt.label !== record.final_pass && record.id) {
+                updateFinalPassMutation({
+                  applicantId: record.id,
+                  pass: opt.label,
+                });
+              }
+            }}
           />
         );
       },
     },
+    {
+      title: '활동 가능 여부',
+      dataIndex: 'final_check',
+      responsive: ['md'],
+      render: (_text: string, record: any) => {
+        if (record.final_pass !== '합격') {
+          return <Center>-</Center>;
+        }
+
+        if (record.final_check === '불가능') {
+          return (
+            <Center>
+              <Button
+                variant="admin_reason"
+                onClick={() => {
+                  adminFinalAvailabilityApi
+                    .GET_FINAL_AVAILABILITY(record.id)
+                    .then((res) => {
+                      setReasonText(res.reason ?? '사유 미기재');
+                      setModalSubject('reason');
+                      setModalOpen(true);
+                    });
+                }}
+              >
+                불가능
+              </Button>
+            </Center>
+          );
+        }
+
+        return <Center>{record.final_check ?? '-'}</Center>;
+      },
+    },
+
     {
       title: '지원서',
       dataIndex: 'cv',
@@ -572,7 +625,12 @@ export default function ApplyStatement() {
           content: {
             margin: 'auto',
             width: '80%',
-            height: modalSubject == 'interview' ? '60%' : '80%',
+            height:
+              modalSubject === 'reason'
+                ? '30%'
+                : modalSubject === 'interview'
+                ? '65%'
+                : '80%',
             background: '#ffffff',
             display: 'flex',
             flexDirection: 'column',
@@ -590,8 +648,24 @@ export default function ApplyStatement() {
         >
           <CloseBtn />
         </Flex>
-        {modalSubject == 'interview' ? (
+        {modalSubject === 'interview' ? (
           <InterviewTimeModal idx={applicantId} setModalOpen={setModalOpen} />
+        ) : modalSubject === 'reason' ? (
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            webGap={16}
+            mobileGap={16}
+            style={{ padding: '20px', flex: 1 }}
+          >
+            <Text webTypo="Heading3" mobileTypo="Heading3">
+              불가능 사유
+            </Text>
+            <Text webTypo="Body2" mobileTypo="Body2">
+              {reasonText}
+            </Text>
+          </Flex>
         ) : (
           <ApplicationModal idx={applicantId} />
         )}
@@ -651,4 +725,23 @@ const InputName = styled.input`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const ReasonButton = styled.span`
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+`;
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

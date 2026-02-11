@@ -1,4 +1,5 @@
 import { adminInstance } from '../axiosConfig';
+import { AttendanceStatus } from '../ceos/recruitApi';
 
 export interface applicationInfoInterface {
   birth?: string;
@@ -16,6 +17,8 @@ export interface applicationInfoInterface {
   university?: string;
   uuid: string;
   part?: string;
+  interviewCheck: AttendanceStatus;
+  finalCheck: AttendanceStatus;
 }
 export const adminApplyStatementApi = {
   GET_APPLYCANT: async (

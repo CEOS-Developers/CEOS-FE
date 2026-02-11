@@ -101,7 +101,7 @@ export const InterviewTimeModal = ({
                 <Flex
                   direction="column"
                   width={244}
-                  webGap={8}
+                  webGap={12}
                   justify="flex-start"
                   height={405}
                   style={{ flexWrap: 'wrap' }}

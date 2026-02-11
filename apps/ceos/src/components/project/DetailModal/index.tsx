@@ -65,7 +65,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             </Mobile>
 
             {/* MAIN 이미지 */}
-            {projectInfo && (
+            {projectInfo && projectInfo.projectImages?.[0] && (
               <DetailThumbnailImageContainer>
                 <Image
                   alt="mainImage"
@@ -188,7 +188,7 @@ const DetailModal = ({ id, setClose }: ModalProps) => {
             </Mobile>
 
             {/* 추가 상세 정보 이미지 - 이미지로딩용 blur 처리 */}
-            {projectInfo && (
+            {projectInfo && projectInfo.projectImages?.[1] && (
               <DetailImageContainer>
                 <DetailImage
                   alt="mainImage"

@@ -249,6 +249,9 @@ const Profile = styled.div`
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+  img {
+    image-orientation: none;
+  }
   .fade {
     position: absolute;
     inset: auto 0 0 0;

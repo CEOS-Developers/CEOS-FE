@@ -19,7 +19,7 @@ import { CustomLink } from '@ceos/components/Header';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { recruitApi } from 'packages/utils';
 import Footer from '@ceos/components/Footer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   DateProps,
   PassDataInterface,
@@ -40,7 +40,7 @@ const Recruit = () => {
     email: '',
     pass: '',
     name: '',
-    attendanceStatus: false,
+    attendanceStatus: '미입력',
     part: '',
     date: '',
     otDate: '',
@@ -283,7 +283,7 @@ const Recruit = () => {
                 content={dateForm(ideathonDate, varIdeathon[1], varIdeathon[2])}
               />
               <RecruitMiniBox
-                header="백만톤"
+                header="하프톤"
                 content={dateForm(
                   hackathonDate,
                   varHackathon[1],

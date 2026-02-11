@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     domains: [
       'ceos-bucket-20.s3.ap-northeast-2.amazonaws.com',
+      'ceos-storage-dev.s3.ap-northeast-2.amazonaws.com',
       's3.ap-northeast-2.amazonaws.com',
       'github.com',
     ],
