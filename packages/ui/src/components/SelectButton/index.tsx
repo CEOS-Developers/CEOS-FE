@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { InputHTMLAttributes, forwardRef } from 'react';
 import { theme } from '@ceos-fe/ui';
-import React from 'react';
 import { css } from '@emotion/react';
 
 export type SelectButtonVariant = 'ceos' | 'admin';

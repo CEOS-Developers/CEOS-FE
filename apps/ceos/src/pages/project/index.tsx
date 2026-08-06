@@ -108,19 +108,19 @@ const ScrollWrapper = styled(Flex)<{
 }>`
   height: auto;
 
-  & > :nth-child(3n) {
+  & > :nth-of-type(3n) {
     ${media.pc} {
       display: ${({ line }) => (line !== 3 ? 'none' : '')};
     }
   }
 
-  & > :nth-child(3n - 1) {
+  & > :nth-of-type(3n - 1) {
     ${media.pc} {
       display: ${({ line }) => (line !== 2 ? 'none' : '')};
     }
   }
 
-  & > :nth-child(3n - 2) {
+  & > :nth-of-type(3n - 2) {
     ${media.pc} {
       display: ${({ line }) => (line !== 1 ? 'none' : '')};
     }

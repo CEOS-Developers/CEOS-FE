@@ -1,13 +1,8 @@
-// @ceos-fe/ui, @ceos-fe/utils 패키지를 tranpile 시킨다.
-const withTM = require('next-transpile-modules')([
-  '@ceos-fe/ui',
-  '@ceos-fe/utils',
-]);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
+  transpilePackages: ['@ceos-fe/ui', '@ceos-fe/utils'],
   compiler: {
     emotion: true,
   },
@@ -43,4 +38,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withTM(nextConfig);
+module.exports = nextConfig;

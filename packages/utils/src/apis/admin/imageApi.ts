@@ -6,23 +6,23 @@ export interface uploadImageProps {
 }
 
 export const imageApi = {
-  GET_ACTIVITY_IMAGE: async (): Promise<string> => {
-    const response = await adminInstance.get(`/activities/image`);
+  POST_ACTIVITY_IMAGE: async (): Promise<string> => {
+    const response = await adminInstance.post(`/activities/image`);
 
     return response.data.data.url;
   },
-  GET_SPONSOR_IMAGE: async (): Promise<string> => {
-    const response = await adminInstance.get(`/sponsors/image`);
+  POST_SPONSOR_IMAGE: async (): Promise<string> => {
+    const response = await adminInstance.post(`/sponsors/image`);
 
     return response.data.data.url;
   },
-  GET_MANAGEMENT_IMAGE: async (): Promise<string> => {
-    const response = await adminInstance.get(`/managements/image`);
+  POST_MANAGEMENT_IMAGE: async (): Promise<string> => {
+    const response = await adminInstance.post(`/managements/image`);
 
     return response.data.data.url;
   },
-  GET_PROJECTS_IMAGE: async (): Promise<string> => {
-    const response = await adminInstance.get(`/projects/image`);
+  POST_PROJECTS_IMAGE: async (): Promise<string> => {
+    const response = await adminInstance.post(`/projects/image`);
 
     return response.data.data.url;
   },

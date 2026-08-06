@@ -16,7 +16,7 @@ const usePresignedUrl = (apiType: ImageApiType) => {
   }, [image]);
 
   const getPresignedUrlMutation = useMutation(
-    imageApi[`GET_${apiType}_IMAGE`],
+    imageApi[`POST_${apiType}_IMAGE`],
     {
       onSuccess: async (data: string) => {
         uploadImageMutation.mutate({ url: data, file: image! });

@@ -162,7 +162,9 @@ const StyledLinkContainer = styled(Image)`
   transition: opacity 0.2s;
 `;
 
-const StyledLink = styled(Link)<{ isSelected?: boolean }>`
+const StyledLink = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'isSelected',
+})<{ isSelected?: boolean }>`
   position: relative;
   text-decoration: none;
   color: ${({ isSelected }) =>
@@ -172,7 +174,9 @@ const StyledLink = styled(Link)<{ isSelected?: boolean }>`
   }
 `;
 
-export const CustomLink = styled(Link)<{ isSelected?: boolean }>`
+export const CustomLink = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'isSelected',
+})<{ isSelected?: boolean }>`
   text-decoration: none;
   color: inherit;
   color: ${({ isSelected }) =>
