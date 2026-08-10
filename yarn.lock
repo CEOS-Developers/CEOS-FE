@@ -1714,27 +1714,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.11.0":
-  version: 11.11.0
-  resolution: "@emotion/react@npm:11.11.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.18.3"
-    "@emotion/babel-plugin": "npm:^11.11.0"
-    "@emotion/cache": "npm:^11.11.0"
-    "@emotion/serialize": "npm:^1.1.2"
-    "@emotion/use-insertion-effect-with-fallbacks": "npm:^1.0.1"
-    "@emotion/utils": "npm:^1.2.1"
-    "@emotion/weak-memoize": "npm:^0.3.1"
-    hoist-non-react-statics: "npm:^3.3.1"
-  peerDependencies:
-    react: ">=16.8.0"
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10/c326e8befc9c09c416f2c0c9d99c6b5b5632774d31bee911ebe619e8d21fef237c2efa0923b4a983f4ef3865ab394154be02b496146859dc48c8b55d98dc3493
-  languageName: node
-  linkType: hard
-
 "@emotion/react@npm:^11.11.0":
   version: 11.11.1
   resolution: "@emotion/react@npm:11.11.1"
@@ -4518,7 +4497,7 @@ __metadata:
   resolution: "ceos-fe@workspace:."
   dependencies:
     "@emotion/babel-plugin": "npm:^11.11.0"
-    "@emotion/react": "npm:11.11.0"
+    "@emotion/react": "npm:^11.11.0"
     "@emotion/styled": "npm:^11.11.0"
     "@next/font": "npm:^13.4.1"
     "@svgr/webpack": "npm:^8.0.1"
