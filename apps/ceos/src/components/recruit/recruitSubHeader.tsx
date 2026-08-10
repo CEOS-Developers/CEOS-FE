@@ -62,7 +62,7 @@ export const RecruitSubHeader = ({
     // new Date(date.startDateDoc.getDate() - 14),
     // 시작 전 이주일 동안 이메일 알림 모집
     date.startDateDoc,
-    new Date(new Date(date.endDateDoc).setHours(24)),
+    date.endDateDoc,
     date.resultDateDoc,
     date.resultDateFinal,
     date.resultDateFinal,
