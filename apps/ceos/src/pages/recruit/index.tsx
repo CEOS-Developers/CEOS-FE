@@ -75,7 +75,7 @@ const Recruit = () => {
 
   const date = {
     startDateDoc: new Date(data ? data.startDateDoc : ''),
-    endDateDoc: new Date(data ? fixVarEndDateDoc : ''),
+    endDateDoc: new Date(data ? data.endDateDoc : ''),
     resultDateDoc: new Date(data ? data.resultDateDoc : ''),
     resultDateFinal: new Date(data ? data.resultDateFinal : ''),
   } as DateProps;

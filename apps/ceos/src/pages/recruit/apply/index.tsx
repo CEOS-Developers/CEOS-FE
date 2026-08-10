@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RecruitApplyValuesInterface, recruitApi } from '@ceos-fe/utils';
 import {
-  DateProps,
   PartName,
   RecruitApplyFormInterface,
   RecruitApplyResponse,
@@ -29,30 +28,18 @@ const Apply = () => {
     () => recruitApi.GET_RECRUITMENTS(),
   );
 
-  const date = {
-    startDateDoc: dateData ? new Date(dateData.startDateDoc) : '',
-    endDateDoc: dateData ? new Date(dateData.endDateDoc) : '',
-  } as DateProps;
-
-  console.log(date);
-
-  const curDate = new Date();
-
-  function isValid() {
-    return date.startDateDoc <= curDate && curDate <= date.endDateDoc
-      ? true
-      : false;
-  }
-
   // 지원기간 아닐 때 페이지 접근 시 루트로 리다이렉트
   useEffect(() => {
-    const checkValid = async () => {
-      if (!isValid()) {
-        window.location.href = '/'; // 페이지로 리로드
-      }
-    };
-    checkValid();
-  }, []);
+    if (!dateData) return;
+
+    const currentDate = new Date();
+    const startDate = new Date(dateData.startDateDoc);
+    const endDate = new Date(dateData.endDateDoc);
+
+    if (currentDate < startDate || currentDate > endDate) {
+      window.location.href = '/'; // 페이지로 리로드
+    }
+  }, [dateData]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
