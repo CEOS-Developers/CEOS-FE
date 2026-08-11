@@ -20,7 +20,7 @@ export const RewardCardContainer = (props: RewardCardProps) => {
   };
 
   const onClickUpdateHandler = (generation: number) => {
-    router.push(`/reward/add/${generation}`);
+    router.push({ pathname: '/reward/add', query: { id: generation } });
   };
 
   return (

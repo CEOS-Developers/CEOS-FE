@@ -21,7 +21,7 @@ export const ProjectCardContainer = (props: ProjectCardProps) => {
   };
 
   const onClickUpdateHandler = (id: number) => {
-    router.push(`/project/edit/${id}`);
+    router.push({ pathname: '/project/edit', query: { id } });
   };
 
   return (

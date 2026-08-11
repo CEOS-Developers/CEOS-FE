@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { Plus } from '@admin/assets/Plus';
 import { css } from '@emotion/react';
 
-export default function AddReward() {
+export default function RewardForm() {
   const router = useRouter();
   const {
     control,
