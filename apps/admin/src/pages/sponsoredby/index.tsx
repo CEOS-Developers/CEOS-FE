@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Flex, Button, Space, TextField, Text } from '@ceos-fe/ui';
-import { RewardResponse, adminActivityApi } from '@ceos-fe/utils';
+import {
+  RewardResponse,
+  SponsoredByDTO,
+  adminSponsoredByApi,
+} from '@ceos-fe/utils';
 import styled from '@emotion/styled';
 import { SponsoredByContainer } from '../../components/sponsoredBy/SponsoredByContainer/index';
 import useInfiniteQueries from '../../hooks/useInfiniteQueries';
@@ -9,55 +13,52 @@ import { PageTitle } from '../../components/Common/PageTitle';
 import { useForm } from 'react-hook-form';
 import { ImageUploader } from '../../components/ImageUploader/index';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ActivityCardContainer } from '../../components/activity/ActivityCardContainer/indext';
-import {
-  ActivityDTO,
-  ActivityResponse,
-} from '../../../../../packages/utils/src/apis/admin/adminActivityApi';
 
-export default function Activity() {
+export default function SponsoredBy() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const {
     watch,
     register,
     setValue,
-    getValues,
     handleSubmit,
+    getValues,
     formState: { isValid },
   } = useForm();
-  const { infiniteData, ref } = useInfiniteQueries<ActivityResponse>({
-    queryKey: ['activity'],
+  const { infiniteData, ref } = useInfiniteQueries<RewardResponse>({
+    queryKey: ['sponsor'],
     queryFunction: ({ pageParam = 0 }) =>
-      adminActivityApi.GET_ACTIVITY({ pageNum: pageParam, limit: 12 }),
-    PageItem: ActivityCardContainer,
+      adminSponsoredByApi.GET_SPONSOR({ pageNum: pageParam, limit: 12 }),
+    PageItem: SponsoredByContainer,
   });
 
-  // 활동 생성 api
-  const postActivityCreateMutation = useMutation(
-    adminActivityApi.POST_ACTIVITY,
+  // 스폰서 생성 api
+  const postSponsorCreateMutation = useMutation(
+    adminSponsoredByApi.POST_SPONSOR,
     {
       onSuccess: () => {
         alert('추가 완료');
-        queryClient.invalidateQueries([['activity']]);
+        queryClient.invalidateQueries([['sponsor']]);
       },
     },
   );
 
-  // 활동 수정 api
-  const putActivityCreateMutation = useMutation(adminActivityApi.PUT_ACTIVITY, {
-    onSuccess: () => {
-      alert('수정 완료');
-      queryClient.invalidateQueries([['activity']]);
-      router.push('/activity');
+  // 스폰서 수정 api
+  const patchSponsorCreateMutation = useMutation(
+    adminSponsoredByApi.PAPTCH_SPONSOR,
+    {
+      onSuccess: () => {
+        alert('수정 완료');
+        queryClient.invalidateQueries([['sponsor']]);
+        router.replace('/sponsoredby');
+      },
     },
-  });
+  );
 
   // 수정 시 정보 가져오기 api
-  const getActivityMutation = useMutation(adminActivityApi.GET_ONE_ACTIVITY, {
-    onSuccess: async (data: ActivityDTO) => {
+  const getSponsorMutation = useMutation(adminSponsoredByApi.GET_ONE_SPONSOR, {
+    onSuccess: async (data: SponsoredByDTO) => {
       setValue('name', data.name);
-      setValue('content', data.content);
       setValue('imageUrl', data.imageUrl);
     },
     onError: (error: any) => {
@@ -66,15 +67,15 @@ export default function Activity() {
   });
 
   const onSubmit = (data: any) => {
-    if (Number(router.query[''])) {
-      putActivityCreateMutation.mutate({
-        id: Number(Number(router.query[''])),
+    if (Number(router.query.id)) {
+      patchSponsorCreateMutation.mutate({
+        id: Number(router.query.id),
         payload: {
           ...data,
         },
       });
     } else {
-      postActivityCreateMutation.mutate({
+      postSponsorCreateMutation.mutate({
         payload: {
           ...data,
         },
@@ -83,22 +84,20 @@ export default function Activity() {
   };
 
   useEffect(() => {
-    if (Number(router.query[''])) {
-      getActivityMutation.mutate(Number(router.query['']));
+    if (Number(router.query.id)) {
+      getSponsorMutation.mutate(Number(router.query.id));
     }
-  }, [router]);
+  }, [router.query.id]);
 
   return (
     <Flex direction="column" align="flex-start" justify="flex-start">
       <Flex align="flex-end" justify="space-between" width={1032}>
         <PageTitle
-          title={'ACTIVITY'}
-          description={'세오스 활동 목록을 관리합니다.'}
+          title={'SPONSORED BY'}
+          description={'세오스 후원 단체의 목록을 관리합니다.'}
         />
       </Flex>
-      <div>
-        <Space height={48} />
-      </div>
+      <Space height={48} />
       <Flex
         direction="row"
         align="flex-start"
@@ -135,21 +134,10 @@ export default function Activity() {
         </div>
         <div>
           <TextField
-            label="활동 제목"
+            label="후원 단체명"
             placeholder="내용을 입력하세요."
             isAdmin
             {...register('name', {
-              required: true,
-            })}
-          />
-          <Space height={24} />
-          <TextField
-            label="활동 설명"
-            placeholder="내용을 입력하세요."
-            height={64}
-            multiline
-            isAdmin
-            {...register('content', {
               required: true,
             })}
           />
@@ -158,7 +146,7 @@ export default function Activity() {
             <Text webTypo="Label3">썸네일 이미지</Text>
             <Space height={8} />
             <ImageUploader
-              imageApiType="ACTIVITY"
+              imageApiType="SPONSOR"
               label="imageUrl"
               value={watch('imageUrl')}
               setValue={setValue}

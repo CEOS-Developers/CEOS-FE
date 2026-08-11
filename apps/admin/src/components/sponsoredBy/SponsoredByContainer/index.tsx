@@ -14,7 +14,7 @@ export const SponsoredByContainer = (props: SponsorCardProps) => {
       onSuccess: async () => {
         alert('삭제 완료');
         queryClient.invalidateQueries([['sponsor']]);
-        router.push('/sponsoredby');
+        router.replace('/sponsoredby');
       },
     },
   );
@@ -24,7 +24,7 @@ export const SponsoredByContainer = (props: SponsorCardProps) => {
   };
 
   const onClickUpdateHandler = (id: number) => {
-    router.push(`/sponsoredby/${id}`);
+    router.push({ pathname: '/sponsoredby', query: { id } });
   };
 
   return (
