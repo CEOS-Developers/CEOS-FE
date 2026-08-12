@@ -31,6 +31,8 @@ import { getFormattedDate } from '@admin/utils/date';
 import { useAlert } from '@admin/hooks/useAlert';
 import { Alert } from '@admin/components/Alert';
 
+type ListFieldName = 'commonQuestions' | 'partQuestions';
+
 interface ApplicationFormInterface {
   commonQuestions: AdminApplicationListItemInterface[];
   partQuestions: AdminApplicationListItemInterface[];
@@ -86,7 +88,6 @@ export default function Application() {
     fields: commonQuestions,
     replace: replaceCommonQuestions,
     append: appendCommonQuestions,
-    remove: removeCommonQuestions,
   } = useFieldArray({
     control,
     name: 'commonQuestions',
@@ -95,7 +96,6 @@ export default function Application() {
     fields: partQuestions,
     replace: replacePartQuestions,
     append: appendPartQuestions,
-    remove: removePartQuestions,
   } = useFieldArray({
     control,
     name: 'partQuestions',
@@ -105,7 +105,6 @@ export default function Application() {
     if (isFetching || !isSuccess) return;
 
     replaceCommonQuestions(data.commonQuestions);
-
     setValue('times', data.times);
 
     setAllPartQuestions({
@@ -117,6 +116,7 @@ export default function Application() {
     });
     replacePartQuestions(data[PART_MAP[getValues('selectedPart')]]);
   }, [isFetching, isSuccess]);
+
   useEffect(() => {
     setAllPartQuestions({
       ...allPartQuestions,
@@ -128,53 +128,75 @@ export default function Application() {
     replacePartQuestions(allPartQuestions[PART_MAP[getValues('selectedPart')]]);
   }, [watch('selectedPart')]);
 
-  const handleAppendCommonQuestion = () => {
-    appendCommonQuestions({
-      questionIndex:
-        commonQuestions[commonQuestions.length - 1].questionIndex + 1,
-      question: '',
-      multiline: true,
-      questionDetail: [],
-    });
-  };
-
-  const handleAppendPartQuestion = () => {
-    appendPartQuestions({
-      questionIndex: partQuestions[partQuestions.length - 1].questionIndex + 1,
-      question: '',
-      multiline: true,
-      questionDetail: [],
-    });
-  };
-
-  const handleAppendDetailCommon = (idx: number) => {
-    replaceCommonQuestions(
-      getValues('commonQuestions').map((question, questionIndex) => {
-        if (questionIndex !== idx) return question;
-        return {
+  const createListHandlers = (
+    fieldName: ListFieldName,
+    append: (item: AdminApplicationListItemInterface) => void,
+    replace: (items: AdminApplicationListItemInterface[]) => void,
+  ) => ({
+    appendQuestion: () => {
+      append({
+        questionIndex: getValues(fieldName).length + 1,
+        question: '',
+        multiline: true,
+        questionDetail: [],
+      });
+    },
+    appendDetail: (idx: number) => {
+      replace(
+        getValues(fieldName).map((question, questionIndex) => {
+          if (questionIndex !== idx) return question;
+          return {
+            ...question,
+            questionDetail: [
+              ...question.questionDetail,
+              { explaination: '', color: 'gray' },
+            ],
+          };
+        }),
+      );
+    },
+    removeDetail: (idx: number, detailIdx: number) => {
+      replace(
+        getValues(fieldName).map((question, questionIndex) => {
+          if (questionIndex !== idx) return question;
+          return {
+            ...question,
+            questionDetail: question.questionDetail.filter(
+              (_, detail) => detail !== detailIdx,
+            ),
+          };
+        }),
+      );
+    },
+    removeQuestion: (idx: number) => {
+      const reorderedQuestions = getValues(fieldName)
+        .filter((_, index) => index !== idx)
+        .map((question, index) => ({
           ...question,
-          questionDetail: [
-            ...question.questionDetail,
-            { explaination: '', color: 'gray' },
-          ],
-        };
-      }),
-    );
-  };
+          questionIndex: index + 1,
+        }));
+      replace(reorderedQuestions);
+      return reorderedQuestions;
+    },
+  });
 
-  const handleAppendDetailPart = (idx: number) => {
-    replacePartQuestions(
-      getValues('partQuestions').map((question, questionIndex) => {
-        if (questionIndex !== idx) return question;
-        return {
-          ...question,
-          questionDetail: [
-            ...question.questionDetail,
-            { explaination: '', color: 'gray' },
-          ],
-        };
-      }),
-    );
+  const commonHandlers = createListHandlers(
+    'commonQuestions',
+    appendCommonQuestions,
+    replaceCommonQuestions,
+  );
+  const partHandlers = createListHandlers(
+    'partQuestions',
+    appendPartQuestions,
+    replacePartQuestions,
+  );
+
+  const handleRemovePartQuestion = (idx: number) => {
+    const reorderedQuestions = partHandlers.removeQuestion(idx);
+    setAllPartQuestions((prev) => ({
+      ...prev,
+      [PART_MAP[prev.selectedPart]]: reorderedQuestions,
+    }));
   };
 
   const handleAppendDate = (dateIdx: number) => {
@@ -182,34 +204,6 @@ export default function Application() {
       ...getValues(`times.${dateIdx}.durations`),
       '',
     ]);
-  };
-
-  const handleRemoveDetailCommon = (idx: number, detailIdx: number) => {
-    replaceCommonQuestions(
-      getValues('commonQuestions').map((question, questionIndex) => {
-        if (questionIndex !== idx) return question;
-        return {
-          ...question,
-          questionDetail: question.questionDetail.filter(
-            (_, detail) => detail !== detailIdx,
-          ),
-        };
-      }),
-    );
-  };
-
-  const handleRemoveDetailPart = (idx: number, detailIdx: number) => {
-    replacePartQuestions(
-      getValues('partQuestions').map((question, questionIndex) => {
-        if (questionIndex !== idx) return question;
-        return {
-          ...question,
-          questionDetail: question.questionDetail.filter(
-            (_, detail) => detail !== detailIdx,
-          ),
-        };
-      }),
-    );
   };
 
   const handleRemoveDate = (dateIdx: number, idx: number) => {
@@ -239,20 +233,49 @@ export default function Application() {
       }),
     });
   };
-  const customRemoveFunction = (idx: number) => {
-    const newPartQuestions = partQuestions.filter((_, index) => index !== idx);
 
-    const reorderedQuestions = newPartQuestions.map((question, index) => ({
-      ...question,
-      questionIndex: index + 1,
-    }));
-    console.log(reorderedQuestions);
-    replacePartQuestions(reorderedQuestions);
-    setAllPartQuestions((prev) => ({
-      ...prev,
-      [allPartQuestions.selectedPart]: reorderedQuestions,
-    }));
-  };
+  const renderQuestionDetail = (
+    fieldName: ListFieldName,
+    idx: number,
+    detailIdx: number,
+    onRemove: () => void,
+  ) => (
+    <Flex
+      key={detailIdx}
+      justify="flex-start"
+      webGap={8}
+      mobileGap={8}
+      margin="0 0 0 8px"
+    >
+      <TextField
+        {...register(
+          `${fieldName}.${idx}.questionDetail.${detailIdx}.explaination`,
+        )}
+        onChange={(e) => {
+          setValue(
+            `${fieldName}.${idx}.questionDetail.${detailIdx}.explaination`,
+            e.target.value,
+          );
+          setValue(
+            `${fieldName}.${idx}.questionDetail.${detailIdx}.color`,
+            e.target.value.startsWith('*') ? 'blue' : 'gray',
+          );
+        }}
+        isSubTextField
+        isAdmin
+        fontColor={
+          watch(`${fieldName}.${idx}.questionDetail.${detailIdx}.color`) ===
+          'gray'
+            ? theme.palette.Black
+            : theme.palette.Blue
+        }
+        width={923}
+      />
+      <Button variant="admin_navy" onClick={onRemove}>
+        삭제
+      </Button>
+    </Flex>
+  );
 
   return (
     <>
@@ -319,58 +342,22 @@ export default function Application() {
                 />
                 <Button
                   variant="admin_stroke"
-                  onClick={() => handleAppendDetailCommon(idx)}
+                  onClick={() => commonHandlers.appendDetail(idx)}
                 >
                   설명 추가
                 </Button>
                 <Button
                   variant="admin_navy"
-                  onClick={() => removeCommonQuestions(idx)}
+                  onClick={() => commonHandlers.removeQuestion(idx)}
                 >
                   삭제
                 </Button>
               </Flex>
-              {question.questionDetail.map((_, detailIdx) => (
-                <Flex
-                  key={detailIdx}
-                  justify="flex-start"
-                  webGap={8}
-                  mobileGap={8}
-                  margin="0 0 0 8px"
-                >
-                  <TextField
-                    {...register(
-                      `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
-                    )}
-                    onChange={(e) => {
-                      setValue(
-                        `commonQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
-                        e.target.value,
-                      );
-                      setValue(
-                        `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                        e.target.value.startsWith('*') ? 'blue' : 'gray',
-                      );
-                    }}
-                    isSubTextField
-                    isAdmin
-                    fontColor={
-                      watch(
-                        `commonQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                      ) === 'gray'
-                        ? theme.palette.Black
-                        : theme.palette.Blue
-                    }
-                    width={923}
-                  />
-                  <Button
-                    variant="admin_navy"
-                    onClick={() => handleRemoveDetailCommon(idx, detailIdx)}
-                  >
-                    삭제
-                  </Button>
-                </Flex>
-              ))}
+              {question.questionDetail.map((_, detailIdx) =>
+                renderQuestionDetail('commonQuestions', idx, detailIdx, () =>
+                  commonHandlers.removeDetail(idx, detailIdx),
+                ),
+              )}
             </Flex>
           ))}
           <Flex>
@@ -378,7 +365,7 @@ export default function Application() {
               variant="admin_stroke"
               webWidth={128}
               style={{ alignSelf: 'center' }}
-              onClick={handleAppendCommonQuestion}
+              onClick={commonHandlers.appendQuestion}
             >
               <Flex webGap={4} mobileGap={4}>
                 <Plus />
@@ -465,59 +452,23 @@ export default function Application() {
                 />
                 <Button
                   variant="admin_stroke"
-                  onClick={() => handleAppendDetailPart(idx)}
+                  onClick={() => partHandlers.appendDetail(idx)}
                 >
                   설명 추가
                 </Button>
                 <Button
                   variant="admin_navy"
-                  onClick={() => customRemoveFunction(idx)}
+                  onClick={() => handleRemovePartQuestion(idx)}
                 >
                   삭제
                 </Button>
               </Flex>
 
-              {question.questionDetail.map((_, detailIdx) => (
-                <Flex
-                  key={detailIdx}
-                  justify="flex-start"
-                  webGap={8}
-                  mobileGap={8}
-                  margin="0 0 0 8px"
-                >
-                  <TextField
-                    {...register(
-                      `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
-                    )}
-                    isSubTextField
-                    isAdmin
-                    onChange={(e) => {
-                      setValue(
-                        `partQuestions.${idx}.questionDetail.${detailIdx}.explaination`,
-                        e.target.value,
-                      );
-                      setValue(
-                        `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                        e.target.value.startsWith('*') ? 'blue' : 'gray',
-                      );
-                    }}
-                    fontColor={
-                      watch(
-                        `partQuestions.${idx}.questionDetail.${detailIdx}.color`,
-                      ) === 'gray'
-                        ? theme.palette.Black
-                        : theme.palette.Blue
-                    }
-                    width={923}
-                  />
-                  <Button
-                    variant="admin_navy"
-                    onClick={() => handleRemoveDetailPart(idx, detailIdx)}
-                  >
-                    삭제
-                  </Button>
-                </Flex>
-              ))}
+              {question.questionDetail.map((_, detailIdx) =>
+                renderQuestionDetail('partQuestions', idx, detailIdx, () =>
+                  partHandlers.removeDetail(idx, detailIdx),
+                ),
+              )}
             </Flex>
           ))}
 
@@ -526,7 +477,7 @@ export default function Application() {
               variant="admin_stroke"
               webWidth={128}
               style={{ alignSelf: 'center' }}
-              onClick={handleAppendPartQuestion}
+              onClick={partHandlers.appendQuestion}
             >
               <Flex webGap={4} mobileGap={4}>
                 <Plus />
