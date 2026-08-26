@@ -106,7 +106,7 @@ export const InterviewTimeModal = ({
                     : null}
                   ({interview.day})
                 </Text>
-              <Flex
+                <Flex
                   direction="column"
                   wrap
                   justify="flex-start"
