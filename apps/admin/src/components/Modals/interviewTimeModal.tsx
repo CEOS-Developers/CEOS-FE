@@ -52,8 +52,8 @@ export const InterviewTimeModal = ({
 
   useEffect(() => {
     if (isSuccess) {
-      setInterviewTime(undefined); 
-      
+      setInterviewTime(undefined);
+
       const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
       const grouped = new Map<string, interviewtimeInterface[]>();
 
@@ -84,13 +84,21 @@ export const InterviewTimeModal = ({
         <div>오류가 발생했습니다.</div>
       ) : isSuccess ? (
         <>
-          <Flex width={880} webGap={8}>
+          <Flex
+            widthPer={100}
+            webGap={24}
+            mobileGap={24}
+            justify="safe center"
+            style={{ overflowX: 'auto', alignItems: 'flex-start' }}
+          >
             {interviewGroups.map((interview: interviewArrayInterface, idx) => (
               <Flex
                 direction="column"
                 webGap={12}
+                mobileGap={12}
                 justify="flex-start"
                 key={idx}
+                style={{ flexShrink: 0, width: 'fit-content' }}
               >
                 <Text webTypo="Label2">
                   {interview.interviewTimeList != undefined
@@ -100,11 +108,12 @@ export const InterviewTimeModal = ({
                 </Text>
                 <Flex
                   direction="column"
-                  width={244}
-                  webGap={12}
+                  wrap
                   justify="flex-start"
-                  height={405}
-                  style={{ flexWrap: 'wrap' }}
+                  align="flex-start"
+                  webGap={12}
+                  mobileGap={12}
+                  height={438}
                 >
                   {interview.interviewTimeList != undefined ? (
                     interview.interviewTimeList.map(
