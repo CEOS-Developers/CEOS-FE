@@ -1,5 +1,4 @@
 import { Button, Text, theme } from '@ceos-fe/ui';
-import { ArrowUpRight } from '@ceos/assets/ArrowUpRight';
 import { Diamond } from '@ceos/assets/Diamond';
 import { css } from '@emotion/react';
 import { Dispatch, useState } from 'react';
@@ -8,7 +7,6 @@ import { DropModal } from '../Modals/dropModal';
 import { TimeModal } from '../Modals/timeModal';
 import { recruitApi } from '@ceos-fe/utils/src/apis/ceos/recruitApi';
 import { useMutation } from '@tanstack/react-query';
-import Link from 'next/link';
 import { PassDataInterface } from '../recruit/interface';
 // step : 서류 합격 , 면접 합격
 // 서류 => 이름 , 면접 시간
@@ -138,7 +136,7 @@ export const DocPassGlassBox = ({ query, setErrorText }: PassQueryType) => {
           <Text webTypo="Label1">[안내 사항]</Text>
 
           {query.part === '기획' && <PRODUCT_INTERVIEW_NOTI />}
-          {query.part === '디자인' && <DESIGN_INTERVIEW_NOTI query={query} />}
+          {query.part === '디자인' && <DESIGN_INTERVIEW_NOTI />}
           {query.part === '프론트엔드' && <FRONTEND_INTERVIEW_NOTI />}
           {query.part === '백엔드' && <BACKEND_INTERVIEW_NOTI />}
 
@@ -380,45 +378,40 @@ const PRODUCT_INTERVIEW_NOTI = () => {
       [기획 면접 장소]
       <br />
       <br />
-      기획 파트 면접 장소는 서류 합격자분들에 한해
+      8/29 (토) 서강대 정하상관 1층 J110
       <br />
-      개별적으로 문자로 안내드릴 예정입니다.
+      8/30 (일) 서강대 정하상관 6층 J602
       <br />
+      <br />
+      개인별 면접 시간은 상단 안내 확인 바랍니다.
+      <br />
+      <br />
+      자세한 사항은 서류 합격자분들에 한해 <br />
+      개별적으로 문자로 안내드릴 예정입니다. <br />
       확인 후 회신해주시길 부탁드립니다.
     </p>
   );
 };
 
-interface DesignNotiProps {
-  query: PassDataInterface;
-}
-const DESIGN_INTERVIEW_NOTI = ({ query }: DesignNotiProps) => {
+const DESIGN_INTERVIEW_NOTI = () => {
   return (
     <p>
-      <p>- 디자인 파트 면접은 Google meets를 통해 이루어집니다.</p>
-      <p>
-        - 배정된 면접 시간 15분 전에, <br />
-        하단 링크를 통해 오픈 채팅방에 접속해 주세요.
-        <br />
-        <br />
-        프로필 설정은 [이름(전화번호 뒷 4자리)]로
-        <br />
-        설정해 주시면 됩니다. (ex) 홍길동(4921)
-        <br />
-        시간이 되면 Google meets 링크를 오픈 채팅방에 공유드릴 예정입니다.
-      </p>
+      - 디자인 파트 면접은 오프라인으로 진행됩니다.
       <br />
-      <p>- 면접은 최대 4인 1조로 약 30분간 진행됩니다.</p>
-      {/* <Link
-        href={query.openChatUrl}
-        style={{ textDecoration: 'none', width: '218px' }}
-      >
-        <Button variant="white" webWidth={218}>
-          <ArrowUpRight color={theme.palette.Blue} />
-          &nbsp;오픈 채팅방 링크
-        </Button>
-      </Link> */}
-      <p>- 오픈 채팅방 링크 : https://open.kakao.com/o/gLjgZvii</p>
+      - 가능한 면접 10분 전까지 장소에 도착해주시길 바랍니다.
+      <br />
+      <br />
+      [디자인 면접 장소]
+      <br />
+      <br />
+      8/29 (토) 서강대학교 정하상관 6층 J602
+      <br /> <br />
+      개인별 면접 시간은 상단 안내 확인 바랍니다.
+      <br />
+      <br />
+      자세한 사항은 서류 합격자분들에 한해 <br />
+      개별적으로 문자로 안내드릴 예정입니다. <br />
+      확인 후 회신해주시길 부탁드립니다.
     </p>
   );
 };
@@ -434,14 +427,14 @@ const FRONTEND_INTERVIEW_NOTI = () => {
       [프론트엔드 면접 장소]
       <br />
       <br />
-      3/1(일) 10:00~12:00 홍익대학교 학생회관(G동) B1층,
+      8/30 (일) 이화여자대학교 스터디룸 (자세한 위치 추후공지)
       <br />
-      Reading Lounge 그룹 스터디룸8 (B110)
+      8/31 (월) 홍익대학교 법학도서관 공동 학습실 R824-1
       <br />
       <br />
-      3/1(일) 12:00~16:00 홍익대학교 홍문관(R동) 로비층, <br />
-      카페나무 세미나실1
-      <br /> <br />
+      개인별 면접 시간은 상단 안내 확인 바랍니다.
+      <br />
+      <br />
       자세한 사항은 서류 합격자분들에 한해 <br />
       개별적으로 문자로 안내드릴 예정입니다. <br />
       확인 후 회신해주시길 부탁드립니다.
@@ -459,12 +452,15 @@ const BACKEND_INTERVIEW_NOTI = () => {
       <br />
       [백엔드 면접 장소]
       <br /> <br />
-      2/28(토) 홍익대학교 홍문관 로비층, 카페나무 세미나실 1
+      8/29 (토) 홍익대학교 카페나무 세미나실
       <br />
-      3/1(일) 연세대학교 학생회관 4층, 409-2
+      8/30 (일) 홍익대학교 카페나무 세미나실
       <br />
-      3/2(월) 서강대학교 정하상관 1층, J117
+      8/31 (월) 홍익대학교 카페나무 세미나실
       <br /> <br />
+      개인별 면접 시간은 상단 안내 확인 바랍니다.
+      <br />
+      <br />
       자세한 사항은 서류 합격자분들에 한해 <br />
       개별적으로 문자로 안내드릴 예정입니다. <br />
       확인 후 회신해주시길 부탁드립니다.
