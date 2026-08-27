@@ -1,3 +1,5 @@
+const path = require('path');
+
 // @ceos-fe/ui, @ceos-fe/utils 패키지를 tranpile 시킨다.
 const withTM = require('next-transpile-modules')([
   '@ceos-fe/ui',
@@ -7,6 +9,9 @@ const withTM = require('next-transpile-modules')([
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   images: {
     domains: [
       'ceos-bucket-20.s3.ap-northeast-2.amazonaws.com',

@@ -629,7 +629,7 @@ export default function ApplyStatement() {
               modalSubject === 'reason'
                 ? '30%'
                 : modalSubject === 'interview'
-                ? '65%'
+                ? '75%'
                 : '80%',
             background: '#ffffff',
             display: 'flex',

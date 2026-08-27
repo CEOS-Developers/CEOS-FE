@@ -67,7 +67,12 @@ export default function Management() {
             <Button
               variant="admin_stroke"
               webWidth={81}
-              onClick={() => router.push(`/management/add/${record.id}`)}
+              onClick={() =>
+                router.push({
+                  pathname: '/management/add',
+                  query: { id: record.id },
+                })
+              }
             >
               수정하기
             </Button>

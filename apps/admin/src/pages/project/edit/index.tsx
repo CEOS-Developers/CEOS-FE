@@ -17,7 +17,7 @@ const UrlCategoryMap = {
   인스타: 'Instagram',
 };
 
-export default function ProjectDetail() {
+export default function ProjectForm() {
   const router = useRouter();
 
   const postProjectMutation = useMutation(adminProjectApi.POST_PROJECT, {

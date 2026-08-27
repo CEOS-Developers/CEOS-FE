@@ -13,7 +13,7 @@ export const ActivityCardContainer = (props: ActivityCardProps) => {
     onSuccess: async () => {
       alert('삭제 완료');
       queryClient.invalidateQueries([['activity']]);
-      router.push('/activity');
+      router.replace('/activity');
     },
   });
 
@@ -22,7 +22,7 @@ export const ActivityCardContainer = (props: ActivityCardProps) => {
   };
 
   const onClickUpdateHandler = (id: number) => {
-    router.push(`/activity/${id}`);
+    router.push({ pathname: '/activity', query: { id } });
   };
 
   return (

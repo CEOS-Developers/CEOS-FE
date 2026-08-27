@@ -166,16 +166,17 @@ export const recruitApi = {
       });
     });
 
-    newUnableTimes.forEach((newTime, idx) => {
-      if (newTime.durations.length === 0) {
-        newUnableTimes.splice(idx);
-      }
-    });
+    // 불가능 시간을 선택하지 않은 날짜만 제거 (뒤 날짜는 그대로 유지)
+    const filteredUnableTimes = newUnableTimes.filter(
+      (newTime) => newTime.durations.length > 0,
+    );
+
+    console.log('[POST_APPLY] unableTimes (API 요청 값):', filteredUnableTimes);
 
     let newBody = {
       ...body,
       partAnswers: newPartAnswer,
-      unableTimes: newUnableTimes,
+      unableTimes: filteredUnableTimes,
       semestersLeftNumber: Number(body.semestersLeftNumber),
     };
 

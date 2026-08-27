@@ -41,7 +41,7 @@ const UNIVERSITY: Record<string, string> = {
   홍익대학교: 'hongik',
 };
 
-export default function AddManagement() {
+export default function ManagementForm() {
   const router = useRouter();
   const {
     register,
